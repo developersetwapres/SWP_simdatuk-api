@@ -1,0 +1,48 @@
+version: '3.9'
+services:
+  simdatuk-api:
+    build: .
+    container_name: simdatuk-api
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+       - ${APP_VOLUME}:/app
+    networks:
+      - simdatuk_network
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    restart: always
+    ports:
+      - 3306:3306
+    command: --default-authentication-plugin=caching_sha2_password
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - ${DB_VOLUME}:/var/lib/mysql
+    depends_on:
+      - simdatuk-api
+    networks:
+      - simdatuk_network
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      UPLOAD_LIMIT: 300M
+      MEMORY_LIMIT: 512M
+      MAX_EXECUTION_TIME: 60000
+    depends_on:
+      - mysql
+    networks:
+      - simdatuk_network
+networks:
+  simdatuk_network:
+    name: simdatuk_network
