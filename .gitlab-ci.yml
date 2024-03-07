@@ -50,7 +50,7 @@ deploy:
     - chmod 400 $SSH_SERVER_PROJECTS_PRIVATE_KEY
     - ssh -o StrictHostKeyChecking=no -i $SSH_SERVER_PROJECTS_PRIVATE_KEY root@$IP_PROJECTS_SERVER "docker pull registry.ekuator.id/project/setneg/simdatuk/api:latest"
     - ssh -o StrictHostKeyChecking=no -i $SSH_SERVER_PROJECTS_PRIVATE_KEY root@$IP_PROJECTS_SERVER "docker stop simdatuk-api || true && docker rm simdatuk-api || true"
-    - ssh -o StrictHostKeyChecking=no -i $SSH_SERVER_PROJECTS_PRIVATE_KEY root@$IP_PROJECTS_SERVER "docker run --network=project_network -p 5007:8080 -d --name simdatuk-api --restart=always registry.ekuator.id/project/setneg/simdatuk/api:latest"
+    - ssh -o StrictHostKeyChecking=no -i $SSH_SERVER_PROJECTS_PRIVATE_KEY root@$IP_PROJECTS_SERVER "docker run --network=project_network -p 3003:80 -d --name simdatuk-api --restart=always registry.ekuator.id/project/setneg/simdatuk/api:latest"
   only:
     - tags
   except:
