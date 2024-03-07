@@ -49,8 +49,8 @@ For a list of used endpoints, you can download the Postman API collection [here]
 
 To adhere to good coding standards, follow the references below:
 
--   [PSR-2](https://www.php-fig.org/psr/psr-2/)
--   [Laravel best practices](http://www.laravelbestpractices.com/)
+-   [PSR-12](https://www.php-fig.org/psr/psr-12/)
+-   [Laravel best practices](https://github.com/alexeymezenin/laravel-best-practices)
 
 ## GIT Style
 
