@@ -38,7 +38,7 @@ docker-compose up -d
 
 7. Access PhpMyAdmin at [http://localhost:8080](http://localhost:8080).
 8. Create a database with the same name as specified in the **.env** file.
-9. Your local SIMDATUK application is now ready to use on [http://locahost](http://localhost).
+9. Your local SIMDATUK application is now ready to use on [http://localhost](http://localhost).
 10. Happy coding! 🎉🎉🎉 Keep up the great work! 🚀
 
 ## API Collection
