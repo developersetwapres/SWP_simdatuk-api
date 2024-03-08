@@ -59,4 +59,4 @@ CMD ["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
 EXPOSE 80
 
 # Health check command
-HEALTHCHECK --interval=30s --timeout=3s CMD curl -f http://127.0.0.1:9000/ping || exit 1
+HEALTHCHECK --interval=300s --timeout=60s CMD curl -f http://127.0.0.1:9000/ping || exit 1
