@@ -45,6 +45,10 @@ docker-compose up -d
 
 For a list of used endpoints, you can download the Postman API collection [here](http://google.com).
 
+## Database Diagram
+
+To see database diagram, copy data on [**diagram.txt**](/dbdiagram.txt) file and paste on [https://dbdiagram.io](https://dbdiagram.io)
+
 ## Code Style
 
 To adhere to good coding standards, follow the references below:

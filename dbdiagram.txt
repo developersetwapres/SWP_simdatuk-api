@@ -1,0 +1,406 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+// ACCESS CONTROL LIST
+
+Table users {
+  id bigint [pk]
+  role_id bigint [ref: < roles.id]
+  name varchar(160) [not null]
+  email varchar(160) [not null, unique]
+  username varchar(160) [not null, unique]
+  password varchar(255) [not null]
+  nip varchar(13) [not null]
+  status boolean [default: true, note: '0=deactive, 1=active']
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`, note: 'ON UPDATE CURRENT_TIMESTAMP']
+}
+
+Table roles {
+  id bigint [pk]
+  name varchar(160) [not null, unique]
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`, note: 'ON UPDATE CURRENT_TIMESTAMP']
+}
+
+Table permissions {
+  id bigint [pk]
+  name varchar(160) [not null, unique]
+  group varchar(160) [not null]
+  sort int(13) [not null]
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`, note: 'ON UPDATE CURRENT_TIMESTAMP']
+}
+
+Table role_permissions {
+  id bigint [pk]
+  role_id bigint [ref: < roles.id]
+  permission_id bigint [ref: < permissions.id]
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`, note: 'ON UPDATE CURRENT_TIMESTAMP']
+}
+
+// PEGAWAI
+
+Table pegawai {
+  id bigint [pk]
+  file_foto_profil varchar(160)
+  nama varchar(160)
+  nip varchar(160)
+  nrp varchar(160)
+  tempat_lahir varchar(160)
+  tanggal_lahir varchar(160)
+  agama varchar(160)
+  jenis_kelamin varchar(160)
+  status_perkawinan varchar(160)
+  golongan varchar(160)
+  tmt_golongan varchar(160)
+  jabatan varchar(160)
+  eselon varchar(160)
+  tmt_eselon varchar(160)
+  instansi_induk varchar(160)
+  satuan_organisasi varchar(160)
+  unit_kerja varchar(160)
+  no_karpeg varchar(160)
+  no_karis varchar(160)
+  no_karsu varchar(160)
+  npwp varchar(160)
+  status_pegawai varchar(160)
+  komplek varchar(160)
+  alamat_tempat_tinggal_saat_ini varchar(160)
+  no_telepon_rumah varchar(160)
+  no_hp varchar(160)
+  alamat_kantor varchar(160)
+  no_telepon_kantor varchar(160)
+  email varchar(160)
+  type varchar(160) // 1 = ASN, 2 = NON ASN, 3 = OUTSOURCE
+  status int(5) [default: `1`, note: '1 = aktif, 2 = tidak aktif']
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`, note: 'ON UPDATE CURRENT_TIMESTAMP']
+}
+
+Table pendidikan {
+  id bigint [pk]
+  pegawai_id bigint [ref: < pegawai.id]
+  tingkat varchar(160)
+  nama_sekolah varchar(160)
+  fakultas varchar(160)
+  jurusan varchar(160)
+  status varchar(160)
+  tahun_lulus varchar(160)
+  keterangan_sekolah varchar(160)
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`, note: 'ON UPDATE CURRENT_TIMESTAMP']
+}
+
+Table jabatan {
+  id bigint [pk]
+  user_id varchar(160)
+  jabatan varchar(160)
+  rumpun varchar(160)
+  tmt_menjabat varchar(160)
+  sk_menjabat varchar(160)
+  jenis_sk_jabatan varchar(160)
+  no_sk_jabatan varchar(160)
+  tanggal_sk_jabatan varchar(160)
+  keterangan_eselon varchar(160)
+  ketarangan_jabatan varchar(160)
+  tmt_selesai varchar(160)
+  sk_selesai varchar(160)
+  jenis_sk_sls varchar(160)
+  no_sk_sls varchar(160)
+  tanggal_sk_sls varchar(160)
+  status_jabatan varchar(160)
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`, note: 'ON UPDATE CURRENT_TIMESTAMP']
+}
+
+Table golongan {
+  id bigint [pk]
+  user_id varchar(160)
+  golongan varchar(160)
+  tmt_golongan varchar(160)
+  sk_golongan varchar(160)
+  jenis_sk_golongan varchar(160)
+  no_sk_golongan varchar(160)
+  tanggal_sk_golongan varchar(160)
+  keterangan_golongan varchar(160)
+  status_golongan varchar(160)
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`, note: 'ON UPDATE CURRENT_TIMESTAMP']
+}
+
+Table gaji {
+  id bigint [pk]
+  user_id varchar(160)
+  golongan varchar(160)
+  tmt_golongan varchar(160)
+  no_sk varchar(160)
+  mk_golongan_tahun varchar(160)
+  mk_golongan_bulan varchar(160)
+  gaji_pokok_lama varchar(160)
+  gaji_pokok_baru varchar(160)
+  keterangan varchar(160)
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`, note: 'ON UPDATE CURRENT_TIMESTAMP']
+}
+
+Table pelatihan {
+  id bigint [pk]
+  user_id varchar(160)
+  nama_diklat varchar(160)
+  no_surat_perintah varchar(160)
+  jenjang varchar(160)
+  tanggal_pelaksanaan varchar(160)
+  durasi_pelatihan_hari varchar(160)
+  penyelenggara varchar(160)
+  file_sertifikat varchar(160)
+  type varchar(160) // 1 struktural, 2 fungsional, 3 teknis
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`, note: 'ON UPDATE CURRENT_TIMESTAMP']
+}
+
+Table penghargaan {
+  id bigint [pk]
+  user_id varchar(160)
+  nama_penghargaan varchar(160)
+  keterangan_penghargaan varchar(160)
+  jenis_sk varchar(160)
+  tanggal_sk varchar(160)
+  no_sk_penghargaan varchar(160)
+  tahun_sk varchar(160)
+  instansi_pemberi_penghargaan varchar(160)
+  tanggal_terima varchar(160)
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`, note: 'ON UPDATE CURRENT_TIMESTAMP']
+}
+
+Table skp {
+  id bigint [pk]
+  user_id varchar(160)
+  nilai_skp varchar(160)
+  nilai_perilaku varchar(160)
+  nilai_prestasi varchar(160)
+  periode varchar(160)
+  tahun varchar(160)
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`, note: 'ON UPDATE CURRENT_TIMESTAMP']
+}
+
+Table penilaian_prestasi_kerja {
+  id bigint [pk]
+  user_id varchar(160)
+  periode_ppk varchar(160)
+  nilai_prestasi_kerja varchar(160)
+  keterangan varchar(160)
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`, note: 'ON UPDATE CURRENT_TIMESTAMP']
+}
+
+Table hukuman_disiplin {
+  id bigint [pk]
+  user_id varchar(160)
+  golongan varchar(160)
+  jabatan varchar(160)
+  hukuman_disiplin varchar(160)
+  no_sk_hukuman_disiplin varchar(160)
+  tanggal_sk_hukuman_disiplin varchar(160)
+  tanggal_sk_hukuman_disiplin_mulai varchar(160)
+  tanggal_sk_hukuman_disiplin_akhir varchar(160)
+  status varchar(160)
+  uraian varchar(160)
+  pejabat_berwenang varchar(160)
+  tingkat_hukuman varchar(160)
+  jenis_hukuman varchar(160)
+  masa_berlaku varchar(160)
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`, note: 'ON UPDATE CURRENT_TIMESTAMP']
+}
+
+Table keluarga {
+  id bigint [pk]
+  user_id varchar(160)
+  no_kartu_keluarga varchar(160)
+  nama_anggota_keluarga varchar(160)
+  no_nik varchar(160)
+  jenis_kelamin varchar(160)
+  agama varchar(160)
+  tempat_lahir varchar(160)
+  tanggal_lahir varchar(160)
+  nama_bapak varchar(160)
+  nama_ibu varchar(160)
+  hubungan_keluarga varchar(160)
+  pendidikan varchar(160)
+  jenis_pekerjaan varchar(160)
+  keterangan_pekerjaan varchar(160)
+  status_perkawinan varchar(160)
+  no_hp varchar(160)
+  urut_keluarga varchar(160)
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`, note: 'ON UPDATE CURRENT_TIMESTAMP']
+}
+
+Table cuti {
+  id bigint [pk]
+  user_id varchar(160)
+  golongan varchar(160)
+  jabatan varchar(160)
+  periode_mulai varchar(160)
+  periode_akhir varchar(160)
+  alasan varchar(160)
+  no_cuti varchar(160)
+  tujuan varchar(160)
+  file_surat_cuti varchar(160)
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`, note: 'ON UPDATE CURRENT_TIMESTAMP']
+}
+
+Table catatan {
+  id bigint [pk]
+  user_id bigint
+  created_by bigint
+  catatan text
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`, note: 'ON UPDATE CURRENT_TIMESTAMP']
+}
+
+// RIWAYAT
+
+Table riwayat {
+  id bigint [pk]
+  nama varchar(160) [not null, unique]
+  type int [default: 1, note: '1=jabatan, 2=golongan, 3=gaji, 4=pelatihan, 5=penghargaan, 6=skp, 7=penilaian prestasi kerja, 8=hukuman disiplin']
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`, note: 'ON UPDATE CURRENT_TIMESTAMP']
+}
+
+Table riwayat_jabatan {
+  id bigint [pk]
+  riwayat_id bigint
+  jabatan_id bigint
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`, note: 'ON UPDATE CURRENT_TIMESTAMP']
+}
+
+Table riwayat_golongan {
+  id bigint [pk]
+  riwayat_id bigint
+  golongan_id bigint
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`, note: 'ON UPDATE CURRENT_TIMESTAMP']
+}
+
+Table riwayat_gaji {
+  id bigint [pk]
+  riwayat_id bigint
+  gaji_id bigint
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`, note: 'ON UPDATE CURRENT_TIMESTAMP']
+}
+
+Table riwayat_pelatihan {
+  id bigint [pk]
+  riwayat_id bigint
+  pelatihan_id bigint
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`, note: 'ON UPDATE CURRENT_TIMESTAMP']
+}
+
+Table riwayat_penghargaan {
+  id bigint [pk]
+  riwayat_id bigint
+  pelatihan_id bigint
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`, note: 'ON UPDATE CURRENT_TIMESTAMP']
+}
+
+Table riwayat_skp {
+  id bigint [pk]
+  riwayat_id bigint
+  skp_id bigint
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`, note: 'ON UPDATE CURRENT_TIMESTAMP']
+}
+
+Table riwayat_penilaian_prestasi_kerja {
+  id bigint [pk]
+  riwayat_id bigint
+  penilaian_prestasi_kerja_id bigint
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`, note: 'ON UPDATE CURRENT_TIMESTAMP']
+}
+
+Table riwayat_hukuman_disiplin {
+  id bigint [pk]
+  riwayat_id bigint
+  hukuman_disiplin_id bigint
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`, note: 'ON UPDATE CURRENT_TIMESTAMP']
+}
+
+// MASTER DATA
+
+Table eselon {
+  id bigint [pk]
+  nama varchar(160) [not null, unique]
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`, note: 'ON UPDATE CURRENT_TIMESTAMP']
+}
+
+Table deputi {
+  id bigint [pk]
+  nama varchar(160) [not null, unique]
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`, note: 'ON UPDATE CURRENT_TIMESTAMP']
+}
+
+Table biro {
+  id bigint [pk]
+  nama varchar(160) [not null, unique]
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`, note: 'ON UPDATE CURRENT_TIMESTAMP']
+}
+
+Table bagian {
+  id bigint [pk]
+  nama varchar(160) [not null, unique]
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`, note: 'ON UPDATE CURRENT_TIMESTAMP']
+}
+
+Table subbagian {
+  id bigint [pk]
+  nama varchar(160) [not null, unique]
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`, note: 'ON UPDATE CURRENT_TIMESTAMP']
+}
+
+Table master_jabatan {
+  id bigint [pk]
+  nama varchar(160) [not null, unique]
+  jumlah_yang_diperlukan bigint [default: 0]
+  eselon_id bigint
+  deputi_id bigint
+  biro_id bigint
+  bagian_id bigint
+  subbagian bigint
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`, note: 'ON UPDATE CURRENT_TIMESTAMP']
+}
+
+Table instansi {
+  id bigint [pk]
+  nama varchar(160) [not null, unique]
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`, note: 'ON UPDATE CURRENT_TIMESTAMP']
+}
+
+Table perguruan_tinggi {
+  id bigint [pk]
+  nama varchar(160) [not null, unique]
+  wilayah boolean [default: true, note: 'true=dalam negeri, false=luar negeri']
+  alamat text [default: null]
+  akreditas varchar(5) [default: null]
+  created_at timestamp [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamp [default: `CURRENT_TIMESTAMP`, note: 'ON UPDATE CURRENT_TIMESTAMP']
+}
