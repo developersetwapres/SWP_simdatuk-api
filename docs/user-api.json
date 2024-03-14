@@ -1,0 +1,1288 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "SIMDATUK - User API",
+        "description": "User API Documentation",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://simdatuk-api.ekuator.id"
+        }
+    ],
+    "paths": {
+        "/api/users" : {
+            "post": {
+                "description": "Create new user",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "username": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "nip": {
+                                        "type": "string"
+                                    },
+                                    "nrp": {
+                                        "type": "string"
+                                    },
+                                    "role_id": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "username empty": {
+                                        "description": "Username on request payload is empty",
+                                        "value": {
+                                            "code": 400,
+                                            "status": "bad request",
+                                            "errors": "username cannot empty",
+                                            "data": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "create new user",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "success" : {
+                                        "description": "Success create new user",
+                                        "value": {
+                                            "code": 201,
+                                            "status": "created",
+                                            "errors": null,
+                                            "data": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "description": "User list",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "401" : {
+                        "description": "User unauthorized",
+                        "content": {
+                            "application/json": {
+                                "examples": {
+                                    "unauthorized": {
+                                        "description": "User unauthorized",
+                                        "value": {
+                                            "code": 401,
+                                            "status": "unauthorized",
+                                            "errors": "session token not found",
+                                            "data": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404" : {
+                        "description": "User not found",
+                        "content": {
+                            "application/json" : {
+                                "examples": {
+                                    "not found" : {
+                                        "description": "User not found",
+                                        "value": {
+                                            "code" : 404,
+                                            "status": "not found",
+                                            "errors" : "empty user record",
+                                            "data": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success retrive user list",
+                        "content": {
+                            "application/json" : {
+                                "examples": {
+                                    "success" : {
+                                        "description": "Success retrive user list",
+                                        "value": {
+                                            "code": 200,
+                                            "status": "ok",
+                                            "errors": null,
+                                            "data": [{
+                                                "id" : 1,
+                                                "username" : "example",
+                                                "password" : "hashing_password",
+                                                "nip": "1800000xxx",
+                                                "nrp": "1800000xxx",
+                                                "role": "Administrator",
+                                                "status": "aktif"
+                                            }]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/{userId}" : {
+            "patch": {
+                "description": "Update user data",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "username": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "nip": {
+                                        "type": "string"
+                                    },
+                                    "nrp": {
+                                        "type": "string"
+                                    },
+                                    "role_id": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 400
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "bad request"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "example error message"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 401
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "unauthorized"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "example error message"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "ok"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": null
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get" : {
+                "description": "Get user detail",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "401": {
+                        "description": "User unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 401
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "unauthorized"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "session token is missing"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 404
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "not found"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "user with id xxx not found"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                   "200": {
+                    "description": "Get user detail",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "code": {
+                                        "type": "integer",
+                                        "example": 200
+                                    },
+                                    "status": {
+                                        "type": "string",
+                                        "example": "ok"
+                                    },
+                                    "errors": {
+                                        "type": "string",
+                                        "example": null
+                                    },
+                                    "data": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "number"
+                                            },
+                                            "username": {
+                                                "type": "string"
+                                            },
+                                            "password": {
+                                                "type": "string"
+                                            },
+                                            "email": {
+                                                "type": "string"
+                                            },
+                                            "nip": {
+                                                "type": "string"
+                                            },
+                                            "nrp": {
+                                                "type": "string"
+                                            },
+                                            "role_name": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                   }
+                }
+            }
+        },
+        "/api/users/{userId}/status": {
+            "patch": {
+                "description": "Updating user status",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "status": {
+                                        "type": "boolean",
+                                        "example": false
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 400
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "bad request"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "example error message"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 401
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "unauthorized"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "example error message"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 404
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "not found"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "example error message"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "ok"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": null
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/{userId}/role": {
+            "get": {
+                "description": "Get user role detail",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "401": {
+                        "description": "User unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 401
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "unauthorized"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "example error message"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "User ID not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 404
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "not found"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "example error message"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "ok"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": null
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "role": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        },
+                                                        "name": {
+                                                            "type": "string",
+                                                            "example": "Administrator"
+                                                        }
+                                                    }
+                                                },
+                                                "permission": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "integer",
+                                                                "example": 1
+                                                            },
+                                                            "group": {
+                                                                "type": "string",
+                                                                "example": "Rekapitulasi"
+                                                            },
+                                                            "name": {
+                                                                "type": "string",
+                                                                "example": "Pegawai ASN"
+                                                            },
+                                                            "action": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                    "read": {
+                                                                        "type": "boolean",
+                                                                        "example": "true"
+                                                                    },
+                                                                    "create": {
+                                                                        "type": "boolean",
+                                                                        "example": "true"
+                                                                    },
+                                                                    "update": {
+                                                                        "type": "boolean",
+                                                                        "example": "true"
+                                                                    },
+                                                                    "delete": {
+                                                                        "type": "boolean",
+                                                                        "example": "true"
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }             
+            },
+            "put": {
+                "description": "Update user role",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "role_name": {
+                                        "type": "string",
+                                        "example": "Administrator"
+                                    },
+                                    "permission": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "actions": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "read": {
+                                                            "type": "boolean",
+                                                            "example": true
+                                                        },
+                                                        "create": {
+                                                            "type": "boolean",
+                                                            "example": true
+                                                        },
+                                                        "update": {
+                                                            "type": "boolean",
+                                                            "example": true
+                                                        },
+                                                        "delete": {
+                                                            "type": "boolean",
+                                                            "example": true
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 400
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "bad request"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "example error message"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 401
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "unauthorized"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "example error message"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 404
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "not found"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "example error message"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "ok"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": null
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "description": "Change user role (delete and change)",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "role_name": {
+                                        "type": "string",
+                                        "example": "Administrator"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 400
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "bad request"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "example error message"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 401
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "unauthorized"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "example error message"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 404
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "not found"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "example error message"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "ok"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": null
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/role": {
+            "get": {
+                "description": "List of user role",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "401": {
+                        "description": "User unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 401
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "unauthorized"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "example error message"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Role empty",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 404
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "not found"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "example error message"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "ok"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": null
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Administrator"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create new role",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "role_name": {
+                                        "type": "string",
+                                        "example": "Administrator"
+                                    },
+                                    "permission": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "create": {
+                                                    "type": "boolean",
+                                                    "example": "true"
+                                                },
+                                                "read": {
+                                                    "type": "boolean",
+                                                    "example": "true"
+                                                },
+                                                "update": {
+                                                    "type": "boolean",
+                                                    "example": "true"
+                                                },
+                                                "delete": {
+                                                    "type": "boolean",
+                                                    "example": "true"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 400
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "bad request"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "example error message"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 401
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "unauthorized"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "example error message"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 404
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "not found"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "example error message"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "ok"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": null
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/users/permission": {}
+    }
+}
