@@ -14,6 +14,7 @@
         "/api/users" : {
             "post": {
                 "description": "Create new user",
+                "tags": ["Users"],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -36,8 +37,8 @@
                                     "nrp": {
                                         "type": "string"
                                     },
-                                    "role_id": {
-                                        "type": "integer"
+                                    "role_name": {
+                                        "type": "string"
                                     }
                                 }
                             }
@@ -85,10 +86,14 @@
             },
             "get": {
                 "description": "User list",
+                "tags": ["Users"],
                 "parameters": [
                     {
                         "name": "Authorization",
-                        "in": "header"
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
@@ -104,6 +109,34 @@
                                             "status": "unauthorized",
                                             "errors": "session token not found",
                                             "data": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "User not allowed to access the source",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 403
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "forbidden"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "example error message"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": null
                                         }
                                     }
                                 }
@@ -160,10 +193,14 @@
         "/api/users/{userId}" : {
             "patch": {
                 "description": "Update user data",
+                "tags": ["Users"],
                 "parameters": [
                     {
                         "name": "Authorization",
-                        "in": "header"
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "requestBody": {
@@ -253,6 +290,62 @@
                             }
                         }
                     },
+                    "403": {
+                        "description": "User not allowed to access the source",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 403
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "forbidden"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "example error message"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Record not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 404
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "not found"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "example error message"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
                     "200": {
                         "description": "Success",
                         "content": {
@@ -285,6 +378,7 @@
             },
             "get" : {
                 "description": "Get user detail",
+                "tags": ["Users"],
                 "parameters": [
                     {
                         "name": "Authorization",
@@ -310,6 +404,34 @@
                                         "errors": {
                                             "type": "string",
                                             "example": "session token is missing"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "User not allowed to access the source",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 403
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "forbidden"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "example error message"
                                         },
                                         "data": {
                                             "type": "string",
@@ -404,6 +526,7 @@
         "/api/users/{userId}/status": {
             "patch": {
                 "description": "Updating user status",
+                "tags": ["Users"],
                 "parameters": [
                     {
                         "name": "Authorization",
@@ -483,6 +606,34 @@
                             }
                         }
                     },
+                    "403": {
+                        "description": "User not allowed to access the source",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 403
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "forbidden"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "example error message"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
                     "404": {
                         "description": "Not Found",
                         "content": {
@@ -545,10 +696,14 @@
         "/api/users/{userId}/role": {
             "get": {
                 "description": "Get user role detail",
+                "tags": ["Users"],
                 "parameters": [
                     {
                         "name": "Authorization",
-                        "in": "header"
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
@@ -566,6 +721,34 @@
                                         "status": {
                                             "type": "string",
                                             "example": "unauthorized"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "example error message"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "User not allowed to access the source",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 403
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "forbidden"
                                         },
                                         "errors": {
                                             "type": "string",
@@ -696,10 +879,14 @@
             },
             "put": {
                 "description": "Update user role",
+                "tags": ["Users"],
                 "parameters": [
                     {
                         "name": "Authorization",
-                        "in": "header"
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "requestBody": {
@@ -808,6 +995,34 @@
                             }
                         }
                     },
+                    "403": {
+                        "description": "User not allowed to access the source",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 403
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "forbidden"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "example error message"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
                     "404": {
                         "description": "Not Found",
                         "content": {
@@ -868,10 +1083,14 @@
             },
             "patch": {
                 "description": "Change user role (delete and change)",
+                "tags": ["Users"],
                 "parameters": [
                     {
                         "name": "Authorization",
-                        "in": "header"
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "requestBody": {
@@ -933,6 +1152,34 @@
                                         "status": {
                                             "type": "string",
                                             "example": "unauthorized"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "example error message"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "User not allowed to access the source",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 403
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "forbidden"
                                         },
                                         "errors": {
                                             "type": "string",
@@ -1009,10 +1256,14 @@
         "/api/users/role": {
             "get": {
                 "description": "List of user role",
+                "tags": ["Users"],
                 "parameters": [
                     {
                         "name": "Authorization",
-                        "in": "header"
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
@@ -1044,8 +1295,36 @@
                             }
                         }
                     },
+                    "403": {
+                        "description": "User not allowed to access the source",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 403
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "forbidden"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "example error message"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
                     "404": {
-                        "description": "Role empty",
+                        "description": "Record not found",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1117,10 +1396,14 @@
             },
             "post": {
                 "description": "Create new role",
+                "tags": ["Users"],
                 "parameters": [
                     {
                         "name": "Authorization",
-                        "in": "header"
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "requestBody": {
@@ -1224,6 +1507,34 @@
                             }
                         }
                     },
+                    "403": {
+                        "description": "User not allowed to access the source",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 403
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "forbidden"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "example error message"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
                     "404": {
                         "description": "Not Found",
                         "content": {
@@ -1283,6 +1594,163 @@
                 }
             }
         },
-        "/api/users/permission": {}
+        "/api/permissions": {
+            "get": {
+                "description": "List of permission",
+                "tags": ["Permission"],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "filter",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "401": {
+                        "description": "User unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 401
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "unauthorized"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "example error message"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "User not allowed to access the source",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 403
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "forbidden"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "example error message"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Record not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 404
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "not found"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": "example error message"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "integer",
+                                            "example": 200
+                                        },
+                                        "status": {
+                                            "type": "string",
+                                            "example": "ok"
+                                        },
+                                        "errors": {
+                                            "type": "string",
+                                            "example": null
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Pegawai ASN"
+                                                    },
+                                                    "group": {
+                                                        "type": "string",
+                                                        "example": "Rekapitulasi"
+                                                    },
+                                                    "permitted_actions": {
+                                                        "type": "array",
+                                                        "example": ["read", "create", "update", "delete"]
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/jabatan": {}
     }
 }
