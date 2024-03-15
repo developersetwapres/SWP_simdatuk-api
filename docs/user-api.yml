@@ -62,6 +62,7 @@ paths:
       parameters:
         - name: Authorization
           in: header
+          required: true
           schema:
             type: string
       responses:
@@ -127,7 +128,7 @@ paths:
                     status: not found
                     errors: empty user record
                     data: null
-  /api/users/:userId:
+  /api/users/{userId}:
     patch:
       description: Update user data
       tags:
@@ -135,8 +136,14 @@ paths:
       parameters:
         - name: Authorization
           in: header
+          required: true
           schema:
             type: string
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
       requestBody:
         required: true
         content:
@@ -259,8 +266,14 @@ paths:
       parameters:
         - name: Authorization
           in: header
+          required: true
           schema:
             type: string
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
       responses:
         '200':
           description: Get user detail
@@ -352,7 +365,7 @@ paths:
                   data:
                     type: string
                     example: null
-  /api/users/:userId/status:
+  /api/users/{userId}/status:
     patch:
       description: Updating user status
       tags:
@@ -360,8 +373,14 @@ paths:
       parameters:
         - name: Authorization
           in: header
+          required: true
           schema:
             type: string
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
       requestBody:
         required: true
         content:
@@ -476,6 +495,7 @@ paths:
       parameters:
         - name: Authorization
           in: header
+          required: true
           schema:
             type: string
         - name: userId
@@ -605,6 +625,7 @@ paths:
       parameters:
         - name: Authorization
           in: header
+          required: true
           schema:
             type: string
         - name: userId
@@ -748,6 +769,7 @@ paths:
       parameters:
         - name: Authorization
           in: header
+          required: true
           schema:
             type: string
         - name: userId
@@ -869,6 +891,7 @@ paths:
       parameters:
         - name: Authorization
           in: header
+          required: true
           schema:
             type: string
       responses:
@@ -963,6 +986,7 @@ paths:
       parameters:
         - name: Authorization
           in: header
+          required: true
           schema:
             type: string
       requestBody:
@@ -1099,6 +1123,7 @@ paths:
       parameters:
         - name: Authorization
           in: header
+          required: true
           schema:
             type: string
         - name: filter
