@@ -18,7 +18,7 @@ Route::get('/', function () {
     return 'api enabled!';
 });
 
+Route::post('login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::delete('logout', [AuthController::class, 'logout']);
 });
-Route::post('login', [AuthController::class, 'login']);
