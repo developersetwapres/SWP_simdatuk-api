@@ -1,6 +1,6 @@
 ## About Simdatuk
 
-![Simdatuk](/logo.svg)
+![Simdatuk](/public/img/logo.svg)
 
 SIMDATUK is an acronym for Aplikasi Sistem Informasi Manajemen Data Tata Usaha Kepegawaian. This application serves as a tool for profiling employee data, ensuring efficiency, measurability, and comprehensiveness.
 
