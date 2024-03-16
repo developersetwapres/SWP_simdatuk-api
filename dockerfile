@@ -47,6 +47,9 @@ RUN composer install --no-scripts --no-autoloader
 # Generate the optimized autoload files
 RUN composer clear-cache && composer dump-autoload --no-scripts --optimize
 
+# Generate api documentation
+RUN php artisan scribe:generate
+
 # Nginx configuration
 COPY docker/nginx.conf /etc/nginx/http.d/default.conf
 
