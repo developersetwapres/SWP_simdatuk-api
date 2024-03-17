@@ -40,6 +40,9 @@ COPY .env .env
 # Change ownership for application code
 RUN chown -R www-data:www-data /app
 
+# Install PHP extensions
+RUN docker-php-ext-install pdo pdo_mysql
+
 # Install application dependencies
 RUN composer install --no-scripts --no-autoloader
 
