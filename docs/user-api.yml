@@ -28,8 +28,8 @@ paths:
                   type: string
                 nrp:
                   type: string
-                role_name:
-                  type: string
+                role_id:
+                  type: integer
       responses:
         '201':
           description: create new user
