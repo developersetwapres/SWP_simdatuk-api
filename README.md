@@ -43,7 +43,7 @@ docker-compose up -d
 
 ## API Collection
 
-For a list of used endpoints, you can download the Postman API collection [here](http://google.com).
+For a list of used endpoints, you can use this api documentation [here](https://simdatuk-api.ekuator.id/docs).
 
 ## Database Diagram
 
