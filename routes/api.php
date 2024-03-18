@@ -20,3 +20,4 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::post('/users', [UserController::class, 'createNewUser']);
+Route::get('/users', [UserController::class, 'userList']);

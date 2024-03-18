@@ -66,4 +66,23 @@ class UserController extends Controller
             'data' => null
         ], 201);
     }
+
+    public function userList()
+    {
+        try {
+            $user = $this->userRepo->list();
+            if (!$user) {
+                return response()->json(ResponseHelper::errResponse(404, 'no record found'), 404);
+            }
+        } catch (QueryException $e) {
+            return response()->json(ResponseHelper::errResponse(500, ''), 500);
+        }
+
+        return response()->json([
+            'code' => 200,
+            'status' => 'ok',
+            'errors' => null,
+            'data' => $user
+        ], 201);
+    }
 }
