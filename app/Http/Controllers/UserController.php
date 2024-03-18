@@ -8,6 +8,7 @@ use App\Repositories\RoleRepository;
 use App\Repositories\UserRepository;
 use App\Helpers\ResponseHelper;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -35,7 +36,7 @@ class UserController extends Controller
             $this->userRepo->save([
                 'pegawai_id' => $request['pegawai_id'],
                 'username' => $request['username'],
-                'password' => $request['password'],
+                'password' => Hash::make($request['password']),
                 'email' => $request['email'],
                 'role_id' => $request['role_id'],
             ]);
