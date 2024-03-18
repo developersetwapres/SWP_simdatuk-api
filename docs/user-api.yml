@@ -24,10 +24,8 @@ paths:
                   type: string
                 email:
                   type: string
-                nip:
-                  type: string
-                nrp:
-                  type: string
+                pegawai_id:
+                  type: integer
                 role_id:
                   type: integer
       responses:
@@ -55,6 +53,25 @@ paths:
                     status: bad request
                     errors: username cannot empty
                     data: null
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 404
+                  status:
+                    type: string
+                    example: not found
+                  errors:
+                    type: string
+                    example: example error message
+                  data:
+                    type: string
+                    example: null
     get:
       description: User list
       tags:
