@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class User extends Model
 {
@@ -13,14 +14,17 @@ class User extends Model
     public $incrementing = true;
 
     protected $fillable = [
-        'name',
         'email',
         'username',
         'password',
-        'nip',
-        'nrp',
-        'status'
+        'pegawai_id',
+        'role_id'
     ];
+
+    public function pegawai(): HasOne
+    {
+        return $this->hasOne(Pegawai::class, 'pegawai_id');
+    }
 
     public function role(): BelongsTo
     {

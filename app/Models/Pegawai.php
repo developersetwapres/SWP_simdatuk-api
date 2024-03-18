@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pegawai extends Model
 {
-    protected $table = "users";
+    protected $table = "pegawai";
     protected $primaryKey = "id";
     protected $keyType = "int";
     public $incrementing = true;
