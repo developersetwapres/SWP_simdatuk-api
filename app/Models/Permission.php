@@ -11,7 +11,7 @@ class Permission extends Model
     protected $table = "permissions";
     protected $primaryKey = "id";
     protected $keyType = "int";
-    protected $incrementing = "true";
+    public $incrementing = "true";
 
     protected $fillable = [
         'name',
