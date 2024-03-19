@@ -85,7 +85,7 @@ class UserController extends Controller
             'status' => 'ok',
             'errors' => null,
             'data' => $user
-        ], 201);
+        ], 200);
     }
 
     public function update(int $userId, UserUpdateRequest $request)
@@ -122,6 +122,25 @@ class UserController extends Controller
             'status' => 'ok',
             'errors' => null,
             'data' => null,
+        ], 200);
+    }
+
+    public function userDetail(int $userId)
+    {
+        try {
+            $user = $this->userRepo->userDetail($userId);
+            if (!$user) {
+                return response()->json(ResponseHelper::errResponse(404, "user with id: {$userId}, not found"), 404);
+            }
+        } catch (QueryException $e) {
+            return response()->json(ResponseHelper::errResponse(500, 'something went wrong'), 500);
+        }
+
+        return response()->json([
+            'code' => 200,
+            'status' => 'ok',
+            'errors' => null,
+            'data' => $user
         ], 200);
     }
 }
