@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,3 +25,5 @@ Route::get('/users', [UserController::class, 'userList']);
 Route::patch('/users/{userId}', [UserController::class, 'update'])->where('userId', '[0-9]+');
 Route::get('/users/{userId}', [UserController::class, 'userDetail'])->where('userId', '[0-9]+');
 Route::delete('/users/{userId}/deactivate', [UserController::class, 'deactivate'])->where('userId', '[0-9]+');
+
+Route::get('/roles', [RoleController::class, 'list']);

@@ -15,4 +15,12 @@ class RoleRepository
     {
         return Role::where('name', $name)->first();
     }
+
+    public function list()
+    {
+        return Role::get([
+            'id',
+            'name'
+        ]);
+    }
 }
