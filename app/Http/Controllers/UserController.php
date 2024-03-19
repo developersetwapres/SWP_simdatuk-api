@@ -143,4 +143,29 @@ class UserController extends Controller
             'data' => $user
         ], 200);
     }
+
+    public function deactivate(int $userId)
+    {
+        try {
+            $user = User::where('status', true)->find($userId);
+            if (!$user) {
+                return response()->json(
+                    ResponseHelper::errResponse(404, "user with id: {$userId} not found"),
+                    404
+                );
+            }
+
+            $user->status = false;
+            $user->save();
+        } catch (QueryException $e) {
+            return response()->json(ResponseHelper::errResponse(500, 'something went wrong'), 500);
+        }
+
+        return response()->json([
+            'code' => 200,
+            'status' => 'ok',
+            'errors' => null,
+            'data' => null,
+        ], 200);
+    }
 }
