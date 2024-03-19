@@ -7,6 +7,8 @@ use App\Repositories\PegawaiRepository;
 use App\Repositories\RoleRepository;
 use App\Repositories\UserRepository;
 use App\Helpers\ResponseHelper;
+use App\Http\Requests\UserUpdateRequest;
+use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Hash;
 
@@ -84,5 +86,42 @@ class UserController extends Controller
             'errors' => null,
             'data' => $user
         ], 201);
+    }
+
+    public function update(int $userId, UserUpdateRequest $request)
+    {
+        try {
+            $user = User::find($userId);
+            if (!$user) {
+                return response()->json(
+                    ResponseHelper::errResponse(404, "user with id: {$userId} not found"),
+                    404
+                );
+            }
+
+            if ($request['username']) {
+                $user->username = $request['username'];
+            }
+            if ($request['email']) {
+                $user->email = $request['email'];
+            }
+            if ($request['role_id']) {
+                $user->role_id = $request['role_id'];
+            }
+            if ($request['pegawai_id']) {
+                $user->pegawai_id = $request['pegawai_id'];
+            }
+
+            $user->save();
+        } catch (QueryException $e) {
+            return response()->json(ResponseHelper::errResponse(500, 'something went wrong'), 500);
+        }
+
+        return response()->json([
+            'code' => 200,
+            'status' => 'ok',
+            'errors' => null,
+            'data' => null,
+        ], 200);
     }
 }

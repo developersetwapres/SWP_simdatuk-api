@@ -21,3 +21,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/users', [UserController::class, 'createNewUser']);
 Route::get('/users', [UserController::class, 'userList']);
+Route::patch('/users/{userId}', [UserController::class, 'update'])->where('userId', '[0-9]+');

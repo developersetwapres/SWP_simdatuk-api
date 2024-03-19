@@ -8,8 +8,8 @@ use Illuminate\Foundation\Http\FormRequest;
 interface UserRepositoryInterface
 {
     public function save(array $data);
-    public function findByUsername(string $username);
     public function list();
+    public function findByUsername(string $username);
 }
 
 class UserRepository implements UserRepositoryInterface
