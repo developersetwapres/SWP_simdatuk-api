@@ -378,9 +378,9 @@ paths:
                   data:
                     type: string
                     example: null
-  /api/users/{userId}/status:
-    patch:
-      description: Updating user status
+  /api/users/{userId}/deactivate:
+    delete:
+      description: Deactivate user status
       tags:
         - Users
       parameters:
@@ -394,16 +394,6 @@ paths:
           required: true
           schema:
             type: integer
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                status:
-                  type: boolean
-                  example: false
       responses:
         '200':
           description: Success
@@ -421,25 +411,6 @@ paths:
                   errors:
                     type: string
                     example: null
-                  data:
-                    type: string
-                    example: null
-        '400':
-          description: Bad request
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                    example: 400
-                  status:
-                    type: string
-                    example: bad request
-                  errors:
-                    type: string
-                    example: example error message
                   data:
                     type: string
                     example: null
