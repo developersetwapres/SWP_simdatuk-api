@@ -170,14 +170,10 @@ paths:
               properties:
                 username:
                   type: string
-                password:
-                  type: string
                 email:
                   type: string
-                nip:
-                  type: string
-                nrp:
-                  type: string
+                pegawai_id:
+                  type: integer
                 role_id:
                   type: integer
       responses:
