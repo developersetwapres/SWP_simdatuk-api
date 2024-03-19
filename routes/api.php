@@ -27,3 +27,4 @@ Route::get('/users/{userId}', [UserController::class, 'userDetail'])->where('use
 Route::delete('/users/{userId}/deactivate', [UserController::class, 'deactivate'])->where('userId', '[0-9]+');
 
 Route::get('/roles', [RoleController::class, 'list']);
+Route::get('/roles/{roleId}', [RoleController::class, 'detail'])->where('roleId', '[0-9]+');
