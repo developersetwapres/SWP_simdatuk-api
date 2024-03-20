@@ -33,4 +33,22 @@ class ResponseHelper
 
         return $resp;
     }
+
+    public static function successResponse(int $code, mixed $data): array
+    {
+        $resp = [
+            'code' => $code,
+            'status' => '',
+            'errors' => null,
+            'data' => $data
+        ];
+
+        if ($code == 201) {
+            $resp['status'] = 'created';
+        } else {
+            $resp['status'] = 'ok';
+        }
+
+        return $resp;
+    }
 }
