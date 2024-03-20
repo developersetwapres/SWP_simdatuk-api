@@ -47,10 +47,12 @@ class RoleController extends Controller
         $role = $this->roleRepo->roleDetail($roleId);
         if (!$role) {
             return response()->json(
-                ResponseHelper::errResponse(404, "role is empty"),
+                ResponseHelper::errResponse(404, "role tidak ditemukan"),
                 404
             );
         }
+
+        $p = $this->permissionRepo->list();
 
         $result = [
             'role' => [
@@ -60,16 +62,12 @@ class RoleController extends Controller
             'permission' => []
         ];
 
-        $p = $this->permissionRepo->list();
-
         foreach ($role as $value) {
             $permission = [
                 'id' => $value['permission_id'],
                 'group' => $value['permission_group'],
                 'name' => $value['permission_name'],
             ];
-
-            $action = [];
 
             foreach ($p as $item) {
                 if ($item['id'] == $value['permission_id']) {
@@ -89,21 +87,20 @@ class RoleController extends Controller
                             case 'd':
                                 $action['delete'] = $value['action_delete'];
                                 break;
+                            default:
+                                break;
                         }
                     }
                 }
             }
 
             $permission['action'] = $action;
-
             array_push($result['permission'], $permission);
         }
 
-        return response()->json([
-            'code' => 200,
-            'status' => 'ok',
-            'errors' => null,
-            'data' => $result,
-        ], 200);
+        return response()->json(
+            ResponseHelper::successResponse(200, $result),
+            200
+        );
     }
 }
