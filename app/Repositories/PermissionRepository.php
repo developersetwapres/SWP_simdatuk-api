@@ -13,13 +13,11 @@ class PermissionRepository implements PermissionRepositoryInterface
 {
     public function list()
     {
-        $permission = Permission::get([
+        return Permission::get([
             'id',
             'group',
             'name',
             'permitted_actions'
         ]);
-
-        return $permission;
     }
 }
