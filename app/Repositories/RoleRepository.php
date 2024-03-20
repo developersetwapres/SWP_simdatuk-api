@@ -9,6 +9,7 @@ interface RoleRepositoryInterface
     public function findByName(string $name);
     public function list();
     public function roleDetail(int $roleId);
+    public function save(string $data);
 }
 
 class RoleRepository implements RoleRepositoryInterface
@@ -44,5 +45,14 @@ class RoleRepository implements RoleRepositoryInterface
                 'role_permissions.update AS action_update',
                 'role_permissions.delete AS action_delete',
             ]);
+    }
+
+    public function save(string $name)
+    {
+        $role = Role::create(['name' => $name]);
+
+        return $role->id;
+
+        // return $lastInsertedId;
     }
 }

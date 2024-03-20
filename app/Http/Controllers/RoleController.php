@@ -3,21 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\ResponseHelper;
+use App\Http\Requests\CreateNewRoleRequest;
 use App\Models\Permission;
 use App\Repositories\PermissionRepository;
+use App\Repositories\RolePermissionRepository;
 use App\Repositories\RoleRepository;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RoleController extends Controller
 {
     protected $roleRepo;
     protected $permissionRepo;
+    protected $rolePermissionRepo;
 
-    public function __construct(RoleRepository $roleRepo, PermissionRepository $permissionRepo)
+    public function __construct(
+        RoleRepository $roleRepo,
+        PermissionRepository $permissionRepo,
+        RolePermissionRepository $rolePermissionRepo
+        )
     {
         $this->roleRepo = $roleRepo;
         $this->permissionRepo = $permissionRepo;
+        $this->rolePermissionRepo = $rolePermissionRepo;
     }
 
     public function list()
@@ -101,6 +110,69 @@ class RoleController extends Controller
         return response()->json(
             ResponseHelper::successResponse(200, $result),
             200
+        );
+    }
+
+    public function createNewRole(CreateNewRoleRequest $request)
+    {
+        $roleName = $request['role_name'];
+
+        try {
+            DB::beginTransaction();
+            
+            $roleId = $this->roleRepo->save($roleName);
+
+            $rolePermission = [];
+            foreach ($request['permission'] as $item) {
+                $rp = [
+                    'permission_id' => $item['id'],
+                    'role_id' => $roleId
+                ];
+
+                if (isset($item['read'])) {
+                    $rp['read'] = $item['read'];
+                }
+                if (isset($item['create'])) {
+                    $rp['create'] = $item['create'];
+                }
+                if (isset($item['update'])) {
+                    $rp['update'] = $item['update'];
+                }
+                if (isset($item['delete'])) {
+                    $rp['delete'] = $item['delete'];
+                }
+
+                array_push($rolePermission, $rp);
+            }
+
+            foreach ($rolePermission as $i) {
+                $this->rolePermissionRepo->save($i);
+            }
+
+            DB::commit();
+        } catch (QueryException $e) {
+            DB::rollBack();
+
+            $resp = [];
+            $errorCode = $e->errorInfo[1];
+            switch ($errorCode) {
+                case 1062:
+                    $resp = ResponseHelper::errResponse(400, 'role sudah terdaftar');
+                    break;
+                case 1452:
+                    $resp = ResponseHelper::errResponse(404, "permission id tidak tersedia");
+                    break;
+                default:
+                    $resp = ResponseHelper::errResponse(500, 'internal server error');
+                    break;
+            }
+
+            return response()->json($resp, $resp['code']);
+        }
+
+        return response()->json(
+            ResponseHelper::successResponse(201, null),
+            201
         );
     }
 }
