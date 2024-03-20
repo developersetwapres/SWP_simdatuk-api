@@ -52,7 +52,5 @@ class RoleRepository implements RoleRepositoryInterface
         $role = Role::create(['name' => $name]);
 
         return $role->id;
-
-        // return $lastInsertedId;
     }
 }
