@@ -17,6 +17,7 @@ class CreateNewRoleRequest extends FormRequest
     {
         return [
             'role_name' => ['required', 'min:3'],
+            'permission' => ['array']
         ];
     }
 

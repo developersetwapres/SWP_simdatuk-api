@@ -121,32 +121,35 @@ class RoleController extends Controller
             DB::beginTransaction();
             
             $roleId = $this->roleRepo->save($roleName);
+            
+            if (isset($request['permission'])) {
+                $rolePermission = [];
 
-            $rolePermission = [];
-            foreach ($request['permission'] as $item) {
-                $rp = [
-                    'permission_id' => $item['id'],
-                    'role_id' => $roleId
-                ];
-
-                if (isset($item['read'])) {
-                    $rp['read'] = $item['read'];
+                foreach ($request['permission'] as $item) {
+                    $rp = [
+                        'permission_id' => $item['id'],
+                        'role_id' => $roleId
+                    ];
+    
+                    if (isset($item['read'])) {
+                        $rp['read'] = $item['read'];
+                    }
+                    if (isset($item['create'])) {
+                        $rp['create'] = $item['create'];
+                    }
+                    if (isset($item['update'])) {
+                        $rp['update'] = $item['update'];
+                    }
+                    if (isset($item['delete'])) {
+                        $rp['delete'] = $item['delete'];
+                    }
+    
+                    array_push($rolePermission, $rp);
                 }
-                if (isset($item['create'])) {
-                    $rp['create'] = $item['create'];
+    
+                foreach ($rolePermission as $i) {
+                    $this->rolePermissionRepo->save($i);
                 }
-                if (isset($item['update'])) {
-                    $rp['update'] = $item['update'];
-                }
-                if (isset($item['delete'])) {
-                    $rp['delete'] = $item['delete'];
-                }
-
-                array_push($rolePermission, $rp);
-            }
-
-            foreach ($rolePermission as $i) {
-                $this->rolePermissionRepo->save($i);
             }
 
             DB::commit();
