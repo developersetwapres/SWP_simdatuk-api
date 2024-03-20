@@ -1,6 +1,6 @@
 ## About Simdatuk
 
-![Simdatuk](/logo.svg)
+![Simdatuk](/public/img/logo.svg)
 
 SIMDATUK is an acronym for Aplikasi Sistem Informasi Manajemen Data Tata Usaha Kepegawaian. This application serves as a tool for profiling employee data, ensuring efficiency, measurability, and comprehensiveness.
 
@@ -43,7 +43,7 @@ docker-compose up -d
 
 ## API Collection
 
-For a list of used endpoints, you can download the Postman API collection [here](http://google.com).
+For a list of used endpoints, you can use this api documentation [here](https://simdatuk-api.ekuator.id/docs).
 
 ## Database Diagram
 

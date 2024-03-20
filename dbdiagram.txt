@@ -11,6 +11,7 @@ Table users {
   username varchar(160) [not null, unique]
   password varchar(255) [not null]
   nip varchar(13) [not null]
+  nrp varchar(13) [not null]
   status boolean [default: true, note: '0=deactive, 1=active']
   created_at timestamp [default: `CURRENT_TIMESTAMP`]
   updated_at timestamp [default: `CURRENT_TIMESTAMP`, note: 'ON UPDATE CURRENT_TIMESTAMP']

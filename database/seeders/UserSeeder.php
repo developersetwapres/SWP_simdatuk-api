@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
@@ -14,13 +14,15 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('users')->insert([
-            'username' => 'super.admin',
-            'password'=> Hash::make('password123'),
-            'email' => 'super@admin.com',
-            'role_id' => 1,
-            'pegawai_id' => 1,
-            'status' => true
-        ]);
+        $faker = Faker::create('id_ID');
+        DB::table('users')->delete();
+        $users = [
+            [
+                'name' => 'admin',
+                'email' => 'admin' . config('mail.domain'),
+                'password' => Hash::make('admin'),
+            ],
+        ];
+        DB::table('users')->insert($users, false);
     }
 }
