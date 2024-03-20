@@ -11,9 +11,11 @@ class RolePermission extends Model
     protected $table = 'role_permissions';
     protected $primaryKey = 'id';
     protected $keyType = 'int';
-    protected $incrementing = "true";
+    public $incrementing = "true";
 
     protected $fillable = [
+        'role_id',
+        'permission_id',
         'read',
         'create',
         'update',
