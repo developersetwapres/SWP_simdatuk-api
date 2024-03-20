@@ -10,6 +10,8 @@ interface RoleRepositoryInterface
     public function list();
     public function roleDetail(int $roleId);
     public function save(string $data);
+    public function update(int $roleId, string $name);
+    public function findById(int $roleId);
 }
 
 class RoleRepository implements RoleRepositoryInterface
@@ -52,5 +54,21 @@ class RoleRepository implements RoleRepositoryInterface
         $role = Role::create(['name' => $name]);
 
         return $role->id;
+    }
+
+    public function update(int $roleId, string $name)
+    {
+        $role = Role::findOrFail($roleId);
+        
+        $role->name = $name;
+
+        $role->save();
+
+        return $role;
+    }
+
+    public function findById(int $roleId)
+    {
+        return Role::findOrFail($roleId);
     }
 }

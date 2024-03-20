@@ -29,3 +29,4 @@ Route::delete('/users/{userId}/deactivate', [UserController::class, 'deactivate'
 Route::get('/roles', [RoleController::class, 'list']);
 Route::post('/roles', [RoleController::class, 'createNewRole']);
 Route::get('/roles/{roleId}', [RoleController::class, 'detail'])->where('roleId', '[0-9]+');
+Route::put('/roles/{roleId}', [RoleController::class, 'updateRole'])->where('roleId', '[0-9]+');
