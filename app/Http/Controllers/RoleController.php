@@ -267,21 +267,17 @@ class RoleController extends Controller
             $roles = $this->roleRepo->findByMultipleId([$roleId, $request['role_id']]);
             if (count($roles) < 2) {
                 return response()->json(
-                    ResponseHelper::errResponse(404, "role id tidak di temukan"),
+                    ResponseHelper::errResponse(404, "role tidak di temukan"),
                     404
                 );
             }
 
-            // TODO: start transaction
             DB::beginTransaction();
 
-            // TODO: ganti role_id yang ada di table users
             $this->userRepo->changeRoleId($roleId, $request['role_id']);
 
-            // TODO: ganti role_id yang ada di table role_permissions
             $this->rolePermissionRepo->deleteByRoleId($roleId);
 
-            // TODO: delete role dari table roles
             $this->roleRepo->delete($roleId);
 
             DB::commit();
