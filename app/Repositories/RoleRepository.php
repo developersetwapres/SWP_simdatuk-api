@@ -12,6 +12,8 @@ interface RoleRepositoryInterface
     public function save(string $data);
     public function update(int $roleId, string $name);
     public function findById(int $roleId);
+    public function findByMultipleId(array $ids);
+    public function delete(int $roleId);
 }
 
 class RoleRepository implements RoleRepositoryInterface
@@ -70,5 +72,15 @@ class RoleRepository implements RoleRepositoryInterface
     public function findById(int $roleId)
     {
         return Role::findOrFail($roleId);
+    }
+
+    public function findByMultipleId(array $ids)
+    {
+        return Role::find($ids);
+    }
+
+    public function delete(int $roleId)
+    {
+        return Role::where('id', $roleId)->delete();
     }
 }

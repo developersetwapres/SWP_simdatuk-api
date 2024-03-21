@@ -11,6 +11,7 @@ interface UserRepositoryInterface
     public function list();
     public function findByUsername(string $username);
     public function userDetail(int $userId);
+    public function changeRoleId(int $from, int $to);
 }
 
 class UserRepository implements UserRepositoryInterface
@@ -55,5 +56,10 @@ class UserRepository implements UserRepositoryInterface
                 'roles.name AS role_name',
             ])
             ->first();
+    }
+
+    public function changeRoleId(int $from, int $to)
+    {
+        return User::where('role_id', $from)->update(['role_id' => $to]);
     }
 }

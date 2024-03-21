@@ -9,6 +9,7 @@ interface RolePermissionRepositoryInterface
     public function save(array $data);
     public function updatePermissionAction(mixed $rolePermission, array $action);
     public function findByRoleAndPermissionId(int $roleId, int $permissionId);
+    public function deleteByRoleId(int $roleId);
 }
 
 class RolePermissionRepository implements RolePermissionRepositoryInterface
@@ -45,5 +46,10 @@ class RolePermissionRepository implements RolePermissionRepositoryInterface
     public function findByRoleAndPermissionId(int $roleId, int $permissionId)
     {
         return RolePermission::where('permission_id', $permissionId)->where('role_id', $roleId)->first();
+    }
+
+    public function deleteByRoleId(int $roleId)
+    {
+        return RolePermission::where('role_id', $roleId)->delete();
     }
 }

@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Helpers\ResponseHelper;
 use App\Http\Requests\CreateNewRoleRequest;
+use App\Http\Requests\RoleDeleteRequest;
 use App\Http\Requests\UpdateRoleRequest;
-use App\Models\Permission;
 use App\Repositories\PermissionRepository;
 use App\Repositories\RolePermissionRepository;
 use App\Repositories\RoleRepository;
+use App\Repositories\UserRepository;
 use Illuminate\Database\QueryException;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class RoleController extends Controller
@@ -18,16 +18,19 @@ class RoleController extends Controller
     protected $roleRepo;
     protected $permissionRepo;
     protected $rolePermissionRepo;
+    protected $userRepo;
 
     public function __construct(
         RoleRepository $roleRepo,
         PermissionRepository $permissionRepo,
-        RolePermissionRepository $rolePermissionRepo
+        RolePermissionRepository $rolePermissionRepo,
+        UserRepository $userRepo
         )
     {
         $this->roleRepo = $roleRepo;
         $this->permissionRepo = $permissionRepo;
         $this->rolePermissionRepo = $rolePermissionRepo;
+        $this->userRepo = $userRepo;
     }
 
     public function list()
@@ -252,6 +255,45 @@ class RoleController extends Controller
             return response()->json($resp, $resp['code']);
         }
 
+        return response()->json(
+            ResponseHelper::successResponse(200, null),
+            200
+        );
+    }
+
+    public function delete(int $roleId, RoleDeleteRequest $request)
+    {
+        try {
+            $roles = $this->roleRepo->findByMultipleId([$roleId, $request['role_id']]);
+            if (count($roles) < 2) {
+                return response()->json(
+                    ResponseHelper::errResponse(404, "role id tidak di temukan"),
+                    404
+                );
+            }
+
+            // TODO: start transaction
+            DB::beginTransaction();
+
+            // TODO: ganti role_id yang ada di table users
+            $this->userRepo->changeRoleId($roleId, $request['role_id']);
+
+            // TODO: ganti role_id yang ada di table role_permissions
+            $this->rolePermissionRepo->deleteByRoleId($roleId);
+
+            // TODO: delete role dari table roles
+            $this->roleRepo->delete($roleId);
+
+            DB::commit();
+        } catch (QueryException $e) {
+            DB::rollBack();
+
+            return response()->json(
+                ResponseHelper::errResponse(500, 'something went wrong'),
+                500
+            );
+        }
+        
         return response()->json(
             ResponseHelper::successResponse(200, null),
             200
