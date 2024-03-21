@@ -1117,19 +1117,15 @@ paths:
                   data:
                     type: string
                     example: null
-  /api/permissions:
+  /api/permissions/group:
     get:
-      description: List of permission
+      description: List of permission group
       tags:
         - Permission
       parameters:
         - name: Authorization
           in: header
           required: true
-          schema:
-            type: string
-        - name: filter
-          in: query
           schema:
             type: string
       responses:
@@ -1152,25 +1148,9 @@ paths:
                   data:
                     type: array
                     items:
-                      type: object
-                      properties:
-                        id:
-                          type: integer
-                          example: 1
-                        name:
-                          type: string
-                          example: Pegawai ASN
-                        group:
-                          type: string
-                          example: Rekapitulasi
-                        permitted_actions:
-                          type: array
-                          items: {}
-                          example:
-                            - read
-                            - create
-                            - update
-                            - delete
+                      type: string
+                      example: Rekapitulasi
+                    
         '401':
           description: User unauthorized
           content:
