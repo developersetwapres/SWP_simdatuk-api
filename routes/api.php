@@ -40,5 +40,6 @@ Route::get('/roles/{roleId}', [RoleController::class, 'detail'])->where('roleId'
 Route::put('/roles/{roleId}', [RoleController::class, 'updateRole'])->where('roleId', '[0-9]+');
 Route::patch('/roles/{roleId}', [RoleController::class, 'delete'])->where('roleId', '[0-9]+');
 
+Route::get('/permissions', [PermissionController::class, 'list']);
 Route::get('/permissions/group', [PermissionController::class, 'listGroup']);
 

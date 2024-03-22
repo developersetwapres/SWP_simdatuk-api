@@ -16,6 +16,29 @@ class PermissionController extends Controller
         $this->permissionRepo = $permissionRepo;
     }
 
+    public function list() {
+        try {
+            $permissions = $this->permissionRepo->list();
+            if (!$permissions) {
+                return response()->json(
+                    ResponseHelper::errResponse(404, 'permission tidak di temukan'),
+                    404
+                );
+            }
+
+        } catch (\Exception $e) {
+            return response()->json(
+                ResponseHelper::errResponse(500, $e),
+                500
+            );
+        }
+
+        return response()->json(
+            ResponseHelper::successResponse(200, $permissions),
+            200
+        );
+    }
+
     public function listGroup()
     {
         try {
