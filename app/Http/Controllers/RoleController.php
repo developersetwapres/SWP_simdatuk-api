@@ -194,49 +194,44 @@ class RoleController extends Controller
         try {
             DB::beginTransaction();
 
+            // Check apakah role id ada di database
+            $role = $this->roleRepo->findById($roleId);
+            if (!$role) {
+                DB::rollBack();
+                return response()->json(
+                    ResponseHelper::errResponse(404, 'role tidak ditemukan')
+                );
+            }
+
+            // Update role name pada table roles
             if (isset($request['role_name'])) {
-                $role = $this->roleRepo->update($roleId, $request['role_name']);
-                if (!$role) {
-                    DB::rollBack();
-                    return response()->json(
-                        ResponseHelper::errResponse(404, 'role tidak ditemukan')
-                    );
-                }
-            } else {
-                $role = $this->roleRepo->findById($roleId);
-                if (!$role) {
-                    DB::rollBack();
-                    return response()->json(
-                        ResponseHelper::errResponse(404, 'role tidak ditemukan')
-                    );
-                }
+                $this->roleRepo->update($roleId, $request['role_name']);
             }
     
+            // update role permission
             if (isset($request['permission'])) {
 
-                foreach ($request['permission'] as $item) {
-                    if (isset($item['id'])) {
-                        $rolePermission = $this->rolePermissionRepo->findByRoleAndPermissionId($role->id, $item['id']);
-                        
-                        if (!$rolePermission) {
-                            DB::rollBack();
-                            return response()->json(
-                                ResponseHelper::errResponse(404, 'permission id tidak ditemukan')
-                            );
-                        }
-                    } else {
+                foreach($request['permission'] as $permission) {
+                    // check apakah id dan actions ada di permission request payload
+                    if (!isset($permission['id']) || !isset($permission['actions'])) {
                         DB::rollBack();
                         return response()->json(
-                            ResponseHelper::errResponse(404, 'permission id tidak ditemukan')
+                            ResponseHelper::errResponse(404, 'id dan actions pada permission tidak boleh kosong')
                         );
                     }
 
-                    if (isset($item['actions'])) {
-                        $this->rolePermissionRepo->updatePermissionAction(
-                            $rolePermission,
-                            $item['actions']
-                        );
+                    $data = [
+                        'role_id' => $roleId,
+                        'permission_id' => $permission['id']
+                    ];
+
+                    // looping permission actions
+                    foreach($permission['actions'] as $key => $value) {
+                        $data[$key] = $value;
                     }
+
+                    // update role_permissions action
+                    $this->rolePermissionRepo->update($data);
                 }
 
             }
@@ -254,7 +249,7 @@ class RoleController extends Controller
                     $resp = ResponseHelper::errResponse(404, "permission id tidak di temukan");
                     break;
                 default:
-                    $resp = ResponseHelper::errResponse(500, 'internal server error');
+                    $resp = ResponseHelper::errResponse(500, $e);
                     break;
             }
 
