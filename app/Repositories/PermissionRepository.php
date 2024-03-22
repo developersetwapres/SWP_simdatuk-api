@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\Permission;
+use Illuminate\Support\Facades\DB;
 
 interface PermissionRepositoryInterface
 {
@@ -12,9 +12,11 @@ interface PermissionRepositoryInterface
 
 class PermissionRepository implements PermissionRepositoryInterface
 {
-    public function list(mixed $filter = null, bool $groupBy = false)
+    private $table = 'permissions';
+
+    public function list()
     {
-        return Permission::get([
+        return DB::table($this->table)->get([
             'id',
             'group',
             'name',
@@ -24,7 +26,6 @@ class PermissionRepository implements PermissionRepositoryInterface
 
     public function listGroup()
     {
-        return Permission::get()
-            ->groupBy('group');
+        return DB::table($this->table)->get('group')->groupBy('group');
     }
 }

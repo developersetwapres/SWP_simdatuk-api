@@ -3,53 +3,49 @@
 namespace App\Repositories;
 
 use App\Models\RolePermission;
+use Illuminate\Support\Facades\DB;
 
 interface RolePermissionRepositoryInterface
 {
     public function save(array $data);
-    public function updatePermissionAction(mixed $rolePermission, array $action);
-    public function findByRoleAndPermissionId(int $roleId, int $permissionId);
     public function deleteByRoleId(int $roleId);
+    public function update($data);
 }
 
 class RolePermissionRepository implements RolePermissionRepositoryInterface
 {
+    private $table = 'role_permissions';
+
     public function save(array $data)
     {
-        return RolePermission::insert($data);
-    }
+        return DB::table($this->table)->insert($data);
 
-    public function updatePermissionAction(mixed $rolePermission, array $action)
-    {
-        if (isset($action['read']))
-        {
-            $rolePermission->read = $action['read'];
-        }
-        if (isset($action['create']))
-        {
-            $rolePermission->create = $action['create'];
-        }
-        if (isset($action['update']))
-        {
-            $rolePermission->update = $action['update'];
-        }
-        if (isset($action['delete']))
-        {
-            $rolePermission->delete = $action['delete'];
-        }
-
-        $rolePermission->save();
-
-        return $rolePermission;
-    }
-
-    public function findByRoleAndPermissionId(int $roleId, int $permissionId)
-    {
-        return RolePermission::where('permission_id', $permissionId)->where('role_id', $roleId)->first();
+        // return RolePermission::insert($data);
     }
 
     public function deleteByRoleId(int $roleId)
     {
         return RolePermission::where('role_id', $roleId)->delete();
+    }
+
+    public function update($data)
+    {
+        if (isset($data['read'])) {
+            $actions['read'] = $data['read'];
+        }
+        if (isset($data['create'])) {
+            $actions['create'] = $data['create'];
+        }
+        if (isset($data['update'])) {
+            $actions['update'] = $data['update'];
+        }
+        if (isset($data['delete'])) {
+            $actions['delete'] = $data['delete'];
+        }
+
+        return DB::table($this->table)
+            ->where('role_id', '=', $data['role_id'])
+            ->where('permission_id', '=', $data['permission_id'])
+            ->update($actions);
     }
 }
