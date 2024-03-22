@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\Pegawai;
+use Illuminate\Support\Facades\DB;
 
 interface PegawaiRepositoryInterface
 {
@@ -11,8 +11,10 @@ interface PegawaiRepositoryInterface
 
 class PegawaiRepository implements PegawaiRepositoryInterface
 {
+    private $table = "pegawai";
+
     public function findByNip(string $nip)
     {
-        return Pegawai::where('nip', $nip)->first();
+        return DB::table($this->table)->where('nip', $nip)->first();
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Models\RolePermission;
 use Illuminate\Support\Facades\DB;
 
 interface RolePermissionRepositoryInterface
@@ -19,13 +18,11 @@ class RolePermissionRepository implements RolePermissionRepositoryInterface
     public function save(array $data)
     {
         return DB::table($this->table)->insert($data);
-
-        // return RolePermission::insert($data);
     }
 
     public function deleteByRoleId(int $roleId)
     {
-        return RolePermission::where('role_id', $roleId)->delete();
+        return DB::table($this->table)->where('role_id', $roleId)->delete();
     }
 
     public function update($data)
