@@ -57,48 +57,54 @@ class RoleController extends Controller
 
     public function detail(int $roleId)
     {
-        $role = $this->roleRepo->roleDetail($roleId);
-        if (!$role) {
+        // mengambil detail role menggunakan roleId dari table roles
+        $roles = $this->roleRepo->roleDetail($roleId);
+        if ($roles->count() == 0) {
             return response()->json(
                 ResponseHelper::errResponse(404, "role tidak ditemukan"),
                 404
             );
         }
 
-        $p = $this->permissionRepo->list();
-
+        // format data response
         $result = [
             'role' => [
-                'id' => $role[0]->role_id,
-                'name' => $role[0]->role_name
+                'id' => $roles[0]->role_id,
+                'name' => $roles[0]->role_name
             ],
             'permission' => []
         ];
 
-        foreach ($role as $value) {
-            $permission = [
-                'id' => $value['permission_id'],
-                'group' => $value['permission_group'],
-                'name' => $value['permission_name'],
+        // mengambil permission dari table permissions
+        $permissions = $this->permissionRepo->list();
+
+        // mapping permissions untuk dimasukkan ke result
+        foreach ($roles as $role) {
+            $p = [
+                'id' => $role->permission_id,
+                'group' => $role->permission_group,
+                'name' => $role->permission_name,
             ];
 
-            foreach ($p as $item) {
-                if ($item['id'] == $value['permission_id']) {
-                    $splitStr = str_split($item['permitted_actions']);
+            // menyesuaikan permission action yang akan di kirim sebagai response dengan permitted_action yang ada di table permissions
+            foreach ($permissions as $permission) {
+                $splitStr = str_split($permission->permitted_actions);
+                
+                if ($permission->id == $role->permission_id) {
                     
                     foreach ($splitStr as $i) {
                         switch ($i) {
                             case 'r':
-                                $action['read'] = $value['action_read'];
+                                $action['read'] = $role->action_read;
                                 break;
                             case 'c':
-                                $action['create'] = $value['action_create'];
+                                $action['create'] = $role->action_create;
                                 break;
                             case 'u':
-                                $action['update'] = $value['action_update'];
+                                $action['update'] = $role->action_update;
                                 break;
                             case 'd':
-                                $action['delete'] = $value['action_delete'];
+                                $action['delete'] = $role->action_delete;
                                 break;
                             default:
                                 break;
@@ -107,8 +113,8 @@ class RoleController extends Controller
                 }
             }
 
-            $permission['action'] = $action;
-            array_push($result['permission'], $permission);
+            $p['action'] = $action;
+            array_push($result['permission'], $p);
         }
 
         return response()->json(
