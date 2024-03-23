@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\User;
-use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\DB;
 
 interface UserRepositoryInterface
 {
@@ -16,14 +16,17 @@ interface UserRepositoryInterface
 
 class UserRepository implements UserRepositoryInterface
 {
+    private $table = 'users';
+
     public function save(array $data)
     {
-        return User::create($data);
+        return DB::table($this->table)->insert($data);
     }
 
     public function list()
     {
-        return User::join('roles', 'roles.id', '=', 'users.role_id')
+        return DB::table($this->table)
+            ->join('roles', 'roles.id', '=', 'users.role_id')
             ->join('pegawai', 'pegawai.id', '=', 'users.pegawai_id')
             ->get([
                 'users.id',
@@ -38,12 +41,13 @@ class UserRepository implements UserRepositoryInterface
 
     public function findByUsername(string $username)
     {
-        return User::where('username', $username)->first();
+        return DB::table($this->table)->where('username', $username)->first();
     }
 
     public function userDetail(int $userId)
     {
-        return User::where('users.id', $userId)
+        return DB::table($this->table)
+            ->where('users.id', $userId)
             ->join('roles', 'roles.id', '=', 'users.role_id')
             ->join('pegawai', 'pegawai.id', '=', 'users.pegawai_id')
             ->get([
@@ -60,6 +64,8 @@ class UserRepository implements UserRepositoryInterface
 
     public function changeRoleId(int $from, int $to)
     {
-        return User::where('role_id', $from)->update(['role_id' => $to]);
+        return DB::table($this->table)
+            ->where('role_id', $from)
+            ->update(['role_id' => $to]);
     }
 }
