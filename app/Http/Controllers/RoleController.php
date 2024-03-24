@@ -13,6 +13,11 @@ use App\Repositories\UserRepository;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * @group Role
+ *
+ * APIs for role
+ */
 class RoleController extends Controller
 {
     protected $roleRepo;
@@ -33,6 +38,18 @@ class RoleController extends Controller
         $this->userRepo = $userRepo;
     }
 
+    /**
+     * List of Roles
+     * @header Authorization 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e
+     * @response 200 {"code": 200, "message": "ok", "data": [{
+     * "id": 1,
+     * "name": "administrator"
+     * }]}
+     * @response 401 {"code": 401,"message": "unauthorized", "data": null}
+     * @response 403 {"code": 403,"message": "forbidden", "data": null}
+     * @response 404 {"code": 404,"message": "not found", "data": null}
+     * @response 500 {"code": 500,"message": "internal server error","data": null}
+     */
     public function list()
     {
         try {
@@ -55,6 +72,23 @@ class RoleController extends Controller
         ], 200);
     }
 
+    /**
+     * Role Details
+     * @header Authorization 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e
+     * @response 200 {"code": 200, "message": "ok", "data": {
+     * "role": {"id": 1, "name": "administrator"},
+     * "permission": [{
+     *      "id": 1,
+     *      "group": "Rekapitulasi",
+     *      "name": "Pegawai ASN",
+     *      "action": {"read": true, "create": true, "update": true, "delete": true}
+     *  }]
+     * }}
+     * @response 401 {"code": 401,"message": "unauthorized", "data": null}
+     * @response 403 {"code": 403,"message": "forbidden", "data": null}
+     * @response 404 {"code": 404,"message": "not found", "data": null}
+     * @response 500 {"code": 500,"message": "internal server error","data": null}
+     */
     public function detail(int $roleId)
     {
         // mengambil detail role menggunakan roleId dari table roles
@@ -123,6 +157,32 @@ class RoleController extends Controller
         );
     }
 
+    /**
+     * Create new Role
+     * @header Authorization 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e
+     * @bodyParam role_name string Role name. Example: Administrator
+     * @bodyParam permission object[] Permission. Example: [{"id": 1, "create": true, "read": true, "update": true, "delete": true}]
+     * @bodyParam permission.id integer Permission ID.
+     * @bodyParam permission.actions object Permission actions.
+     * @bodyParam permission.actions.read boolean Read.
+     * @bodyParam permission.actions.create boolean Create.
+     * @bodyParam permission.actions.update boolean Update.
+     * @bodyParam permission.actions.delete boolean Delete.
+     * @response 200 {"code": 200, "message": "ok", "data": {
+     * "role": {"id": 1, "name": "administrator"},
+     * "permission": [{
+     *      "id": 1,
+     *      "group": "Rekapitulasi",
+     *      "name": "Pegawai ASN",
+     *      "action": {"read": true, "create": true, "update": true, "delete": true}
+     *  }]
+     * }}
+     * @response 400 {"code": 400,"message": "bad request", "data": null}
+     * @response 401 {"code": 401,"message": "unauthorized", "data": null}
+     * @response 403 {"code": 403,"message": "forbidden", "data": null}
+     * @response 404 {"code": 404,"message": "not found", "data": null}
+     * @response 500 {"code": 500,"message": "internal server error","data": null}
+     */
     public function createNewRole(CreateNewRoleRequest $request)
     {
         $roleName = $request['role_name'];
@@ -189,6 +249,24 @@ class RoleController extends Controller
         );
     }
 
+    /**
+     * Update Role by ID
+     * @header Authorization 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e
+     * @bodyParam role_name string Role name. Example: Administrator
+     * @bodyParam permission object[] Permission. Example: [{"id": 1, "create": true, "read": true, "update": true, "delete": true}]
+     * @bodyParam permission.id integer Permission ID.
+     * @bodyParam permission.actions object Permission actions.
+     * @bodyParam permission.actions.read boolean Read.
+     * @bodyParam permission.actions.create boolean Create.
+     * @bodyParam permission.actions.update boolean Update.
+     * @bodyParam permission.actions.delete boolean Delete.
+     * @response 200 {"code": 200, "message": "ok", "data": null}
+     * @response 400 {"code": 400,"message": "bad request", "data": null}
+     * @response 401 {"code": 401,"message": "unauthorized", "data": null}
+     * @response 403 {"code": 403,"message": "forbidden", "data": null}
+     * @response 404 {"code": 404,"message": "not found", "data": null}
+     * @response 500 {"code": 500,"message": "internal server error","data": null}
+     */
     public function updateRole(int $roleId, UpdateRoleRequest $request)
     {
         try {
@@ -262,6 +340,17 @@ class RoleController extends Controller
         );
     }
 
+    /**
+     * Hapus Role dan memberikan role pengganti ke users
+     * @header Authorization 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e
+     * @bodyParam role_id integer Role pengganti. Example: 1
+     * @response 200 {"code": 200, "message": "ok", "data": null}
+     * @response 400 {"code": 400,"message": "bad request", "data": null}
+     * @response 401 {"code": 401,"message": "unauthorized", "data": null}
+     * @response 403 {"code": 403,"message": "forbidden", "data": null}
+     * @response 404 {"code": 404,"message": "not found", "data": null}
+     * @response 500 {"code": 500,"message": "internal server error","data": null}
+     */
     public function delete(int $roleId, RoleDeleteRequest $request)
     {
         try {

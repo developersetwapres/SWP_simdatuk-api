@@ -5,8 +5,12 @@ namespace App\Http\Controllers;
 use App\Helpers\ResponseHelper;
 use App\Repositories\PermissionRepository;
 use Illuminate\Database\QueryException;
-use Illuminate\Http\Request;
 
+/**
+ * @group Permission
+ *
+ * APIs for permission
+ */
 class PermissionController extends Controller
 {
     protected $permissionRepo;
@@ -16,6 +20,20 @@ class PermissionController extends Controller
         $this->permissionRepo = $permissionRepo;
     }
 
+    /**
+     * List of Permissions
+     * @header Authorization 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e
+     * @response 200 {"code": 200, "message": "ok", "data": [{
+     * "id": 1,
+     * "group": "Rekapitulasi",
+     * "name": "Komposisi Pegawai"
+     * "permitted_actions": "r"
+     * }]}
+     * @response 401 {"code": 401,"message": "unauthorized", "data": null}
+     * @response 403 {"code": 403,"message": "forbidden", "data": null}
+     * @response 404 {"code": 404,"message": "not found", "data": null}
+     * @response 500 {"code": 500,"message": "internal server error","data": null}
+     */
     public function list() {
         try {
             $permissions = $this->permissionRepo->list();
@@ -39,6 +57,15 @@ class PermissionController extends Controller
         );
     }
 
+    /**
+     * List of Permissions
+     * @header Authorization 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e
+     * @response 200 {"code": 200, "message": "ok", "data": ["Rekapitulasi", "Data Pegawai"]}
+     * @response 401 {"code": 401,"message": "unauthorized", "data": null}
+     * @response 403 {"code": 403,"message": "forbidden", "data": null}
+     * @response 404 {"code": 404,"message": "not found", "data": null}
+     * @response 500 {"code": 500,"message": "internal server error","data": null}
+     */
     public function listGroup()
     {
         try {
