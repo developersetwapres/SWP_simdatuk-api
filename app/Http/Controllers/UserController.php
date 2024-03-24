@@ -54,8 +54,6 @@ class UserController extends Controller
      */
     public function createNewUser(CreateUserRequest $request)
     {
-        $resp = [];
-
         try {
             $this->userRepo->save([
                 'pegawai_id' => $request['pegawai_id'],
@@ -68,27 +66,15 @@ class UserController extends Controller
             $errorCode = $e->errorInfo[1];
             switch ($errorCode) {
                 case 1062:
-                    $resp = ResponseHelper::errResponse(400, 'unique constraint, username already exists');
-                    break;
+                    return $this->response(400, 'username sudah terdaftar');
                 case 1452:
-                    $resp = ResponseHelper::errResponse(404, "pegawai or role doesn't exists");
-                    break;
+                    return $this->response(404, "pegawai atau role tidak tersedia");
                 default:
-                    $resp = ResponseHelper::errResponse(500, 'internal server error');
-                    break;
+                    return $this->internalServerErrorResponse();
             }
         }
 
-        if ($resp) {
-            return response()->json($resp, $resp['code']);
-        }
-
-        return response()->json([
-            'code' => 201,
-            'status' => 'created',
-            'errors' => null,
-            'data' => null
-        ], 201);
+        return $this->response(201, 'created');
     }
 
     /**
@@ -118,7 +104,7 @@ class UserController extends Controller
             return $this->internalServerErrorResponse();
         }
 
-        return $this->response(200, 'ok', $user);
+        return $this->response(200, 'success', $user);
     }
 
     /**
@@ -137,38 +123,31 @@ class UserController extends Controller
     public function update(int $userId, UserUpdateRequest $request)
     {
         try {
-            $user = User::find($userId);
+            $user = $this->userRepo->findById($userId);
             if (!$user) {
-                return response()->json(
-                    ResponseHelper::errResponse(404, "user with id: {$userId} not found"),
-                    404
-                );
+                return $this->response(404, "user dengan id: {$userId}, tidak ditemukan");
             }
 
+            $data = [];
             if ($request['username']) {
-                $user->username = $request['username'];
+                $data['username'] = $request['username'];
             }
             if ($request['email']) {
-                $user->email = $request['email'];
+                $data['email'] = $request['email'];
             }
             if ($request['role_id']) {
-                $user->role_id = $request['role_id'];
+                $data['role_id'] = $request['role_id'];
             }
             if ($request['pegawai_id']) {
-                $user->pegawai_id = $request['pegawai_id'];
+                $data['pegawai_id'] = $request['pegawai_id'];
             }
 
-            $user->save();
+            $this->userRepo->update($userId, $data);
         } catch (QueryException $e) {
-            return response()->json(ResponseHelper::errResponse(500, 'something went wrong'), 500);
+            return $this->internalServerErrorResponse();
         }
 
-        return response()->json([
-            'code' => 200,
-            'status' => 'ok',
-            'errors' => null,
-            'data' => null,
-        ], 200);
+        return $this->response();
     }
 
     /**
@@ -194,18 +173,13 @@ class UserController extends Controller
         try {
             $user = $this->userRepo->userDetail($userId);
             if (!$user) {
-                return response()->json(ResponseHelper::errResponse(404, "user with id: {$userId}, not found"), 404);
+                return $this->response(404, "user dengan id: {$userId}, tidak di temukan");
             }
         } catch (QueryException $e) {
-            return response()->json(ResponseHelper::errResponse(500, 'something went wrong'), 500);
+            return $this->internalServerErrorResponse();
         }
 
-        return response()->json([
-            'code' => 200,
-            'status' => 'ok',
-            'errors' => null,
-            'data' => $user
-        ], 200);
+        return $this->response(200, 'success', $user);
     }
 
     /**
@@ -220,25 +194,22 @@ class UserController extends Controller
     public function deactivate(int $userId)
     {
         try {
-            $user = User::where('status', true)->find($userId);
+            $data = [
+                'id' => $userId,
+                'status' => true
+            ];
+
+            $user = $this->userRepo->findWithConditions($data);
             if (!$user) {
-                return response()->json(
-                    ResponseHelper::errResponse(404, "user with id: {$userId} not found"),
-                    404
-                );
+                return $this->response(404, "user dengan id: {$userId}, tidak di temukan atau status tidak aktif");
             }
 
-            $user->status = false;
-            $user->save();
+            $this->userRepo->update($userId, ['status' => false]);
+
         } catch (QueryException $e) {
-            return response()->json(ResponseHelper::errResponse(500, 'something went wrong'), 500);
+            return $this->internalServerErrorResponse();
         }
 
-        return response()->json([
-            'code' => 200,
-            'status' => 'ok',
-            'errors' => null,
-            'data' => null,
-        ], 200);
+        return $this->response();
     }
 }
