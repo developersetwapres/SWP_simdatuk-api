@@ -7,7 +7,7 @@ use App\Repositories\PermissionRepository;
 use Illuminate\Database\QueryException;
 
 /**
- * @group Permission
+ * @group ACL - Access Control List
  *
  * APIs for permission
  */
@@ -23,7 +23,9 @@ class PermissionController extends Controller
     }
 
     /**
-     * List of Permissions
+     * Get List of Permissions
+     * @group ACL - Access Control List
+     * @subgroup Permission
      * @header Authorization 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e
      * @response 200 {"code": 200, "message": "ok", "data": [{
      * "id": 1,
@@ -36,7 +38,8 @@ class PermissionController extends Controller
      * @response 404 {"code": 404,"message": "not found", "data": null}
      * @response 500 {"code": 500,"message": "internal server error","data": null}
      */
-    public function list() {
+    public function list()
+    {
         try {
             $permissions = $this->permissionRepo->list();
             if (!$permissions) {
@@ -51,7 +54,9 @@ class PermissionController extends Controller
     }
 
     /**
-     * Permissions Group
+     * Get List of Permission Group
+     * @group ACL - Access Control List
+     * @subgroup Permission
      * @header Authorization 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e
      * @response 200 {"code": 200, "message": "ok", "data": ["Rekapitulasi", "Data Pegawai"]}
      * @response 401 {"code": 401,"message": "unauthorized", "data": null}
@@ -69,7 +74,7 @@ class PermissionController extends Controller
 
             // mengambil hanya data group
             $result = [];
-            foreach($permissions as $key => $value) {
+            foreach ($permissions as $key => $value) {
                 array_push($result, $key);
             }
 

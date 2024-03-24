@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Helpers\Responser;
 use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UserUpdateRequest;
 use App\Repositories\PegawaiRepository;
 use App\Repositories\RoleRepository;
 use App\Repositories\UserRepository;
-use App\Helpers\Responser;
-use App\Http\Requests\UserUpdateRequest;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Hash;
 
 /**
- * @group User
+ * @group ACL - Access Control List
  *
  * APIs for user management
  */
@@ -30,15 +29,48 @@ class UserController extends Controller
     public function __construct(
         UserRepository $userRepo,
         PegawaiRepository $pegawaiRepo,
-        RoleRepository $roleRepo)
-    {
+        RoleRepository $roleRepo) {
         $this->userRepo = $userRepo;
         $this->pegawaiRepo = $pegawaiRepo;
         $this->roleRepo = $roleRepo;
     }
 
     /**
+     * Get List of Users
+     * @group ACL - Access Control List
+     * @subgroup User
+     * @header Authorization 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e
+     * @response 200 {"code": 200,"message": "ok","data": [{
+     * "id": 1,
+     * "username":
+     * "admin",
+     * "password": "voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e",
+     * "nip": "example123",
+     * "nrp": "123example",
+     * "name": "admin",
+     * "status": 1
+     * }]}
+     * @response 404 {"code": 404,"message": "tidak ada data","data": null}
+     * @response 500 {"code": 500,"message": "internal server error","data": null}
+     */
+    public function userList()
+    {
+        try {
+            $user = $this->userRepo->list();
+            if (!$user) {
+                return $this->response(404, 'data user tidak tersedia');
+            }
+        } catch (\Exception $e) {
+            return $this->internalServerErrorResponse();
+        }
+
+        return $this->response(200, 'success', $user);
+    }
+
+    /**
      * Create new User
+     * @group ACL - Access Control List
+     * @subgroup User
      * @header Authorization 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e
      * @bodyParam username string required username for user login. Example: admin123
      * @bodyParam password string required password for user login. Example: password
@@ -76,37 +108,9 @@ class UserController extends Controller
     }
 
     /**
-     * List of Users
-     * @header Authorization 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e
-     * @response 200 {"code": 200,"message": "ok","data": [{
-     * "id": 1,
-     * "username":
-     * "admin",
-     * "password": "voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e",
-     * "nip": "example123",
-     * "nrp": "123example",
-     * "name": "admin",
-     * "status": 1
-     * }]}
-     * @response 404 {"code": 404,"message": "tidak ada data","data": null}
-     * @response 500 {"code": 500,"message": "internal server error","data": null}
-     */
-    public function userList()
-    {
-        try {
-            $user = $this->userRepo->list();
-            if (!$user) {
-                return $this->response(404, 'data user tidak tersedia');
-            }
-        } catch (\Exception $e) {
-            return $this->internalServerErrorResponse();
-        }
-
-        return $this->response(200, 'success', $user);
-    }
-
-    /**
-     * Update
+     * Update User by ID
+     * @group ACL - Access Control List
+     * @subgroup User
      * @header Authorization 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e
      * @bodyParam username string New username. Example: admin123
      * @bodyParam email string New email. Example: example@domain.com
@@ -149,7 +153,9 @@ class UserController extends Controller
     }
 
     /**
-     * User Detail
+     * Get Detail User by ID
+     * @group ACL - Access Control List
+     * @subgroup User
      * @header Authorization 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e
      * @response 200 {"code": 200,"message": "ok", "data": {
      *  "id": 1,
@@ -181,7 +187,9 @@ class UserController extends Controller
     }
 
     /**
-     * User Deactivate
+     * Deativate User by ID
+     * @group ACL - Access Control List
+     * @subgroup User
      * @header Authorization 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e
      * @response 200 {"code": 200,"message": "ok", "data": null}
      * @response 401 {"code": 401,"message": "unauthorized", "data": null}
@@ -194,7 +202,7 @@ class UserController extends Controller
         try {
             $data = [
                 'id' => $userId,
-                'status' => true
+                'status' => true,
             ];
 
             $user = $this->userRepo->findWithConditions($data);

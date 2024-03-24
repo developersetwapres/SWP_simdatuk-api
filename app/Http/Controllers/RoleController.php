@@ -14,7 +14,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 
 /**
- * @group Role
+ * @group ACL - Access Control List
  *
  * APIs for role
  */
@@ -32,8 +32,7 @@ class RoleController extends Controller
         PermissionRepository $permissionRepo,
         RolePermissionRepository $rolePermissionRepo,
         UserRepository $userRepo
-        )
-    {
+    ) {
         $this->roleRepo = $roleRepo;
         $this->permissionRepo = $permissionRepo;
         $this->rolePermissionRepo = $rolePermissionRepo;
@@ -41,7 +40,9 @@ class RoleController extends Controller
     }
 
     /**
-     * List of Roles
+     * Get List of Roles
+     * @group ACL - Access Control List
+     * @subgroup Role
      * @header Authorization 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e
      * @response 200 {"code": 200, "message": "ok", "data": [{
      * "id": 1,
@@ -67,7 +68,96 @@ class RoleController extends Controller
     }
 
     /**
-     * Role Details
+     * Create new Role
+     * @group ACL - Access Control List
+     * @subgroup Role
+     * @header Authorization 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e
+     * @bodyParam role_name string Role name. Example: Administrator
+     * @bodyParam permission object[] Permission. Example: [{"id": 1, "create": true, "read": true, "update": true, "delete": true}]
+     * @bodyParam permission.id integer Permission ID.
+     * @bodyParam permission.actions object Permission actions.
+     * @bodyParam permission.actions.read boolean Read.
+     * @bodyParam permission.actions.create boolean Create.
+     * @bodyParam permission.actions.update boolean Update.
+     * @bodyParam permission.actions.delete boolean Delete.
+     * @response 200 {"code": 200, "message": "ok", "data": {
+     * "role": {"id": 1, "name": "administrator"},
+     * "permission": [{
+     *      "id": 1,
+     *      "group": "Rekapitulasi",
+     *      "name": "Pegawai ASN",
+     *      "action": {"read": true, "create": true, "update": true, "delete": true}
+     *  }]
+     * }}
+     * @response 400 {"code": 400,"message": "bad request", "data": null}
+     * @response 401 {"code": 401,"message": "unauthorized", "data": null}
+     * @response 403 {"code": 403,"message": "forbidden", "data": null}
+     * @response 404 {"code": 404,"message": "not found", "data": null}
+     * @response 500 {"code": 500,"message": "internal server error","data": null}
+     */
+    public function createNewRole(CreateNewRoleRequest $request)
+    {
+        $roleName = $request['role_name'];
+
+        try {
+            DB::beginTransaction();
+
+            $roleId = $this->roleRepo->save($roleName);
+
+            if (isset($request['permission'])) {
+                $rolePermission = [];
+
+                // menyiapkan data untuk di simpan ke role_permissions table
+                foreach ($request['permission'] as $item) {
+                    $rp = [
+                        'permission_id' => $item['id'],
+                        'role_id' => $roleId,
+                    ];
+
+                    if (isset($item['read'])) {
+                        $rp['read'] = $item['read'];
+                    }
+                    if (isset($item['create'])) {
+                        $rp['create'] = $item['create'];
+                    }
+                    if (isset($item['update'])) {
+                        $rp['update'] = $item['update'];
+                    }
+                    if (isset($item['delete'])) {
+                        $rp['delete'] = $item['delete'];
+                    }
+
+                    array_push($rolePermission, $rp);
+                }
+
+                // simpan ke role_permissions table
+                foreach ($rolePermission as $i) {
+                    $this->rolePermissionRepo->save($i);
+                }
+            }
+
+            DB::commit();
+        } catch (QueryException $e) {
+            DB::rollBack();
+
+            $errorCode = $e->errorInfo[1];
+            switch ($errorCode) {
+                case 1062:
+                    return $this->response(400, 'role sudah terdaftar');
+                case 1452:
+                    return $this->response(404, 'pemission id tidak di temukan');
+                default:
+                    return $this->internalServerErrorResponse();
+            }
+        }
+
+        return $this->response(201, 'created');
+    }
+
+    /**
+     * Get Detail Role by ID
+     * @group ACL - Access Control List
+     * @subgroup Role
      * @header Authorization 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e
      * @response 200 {"code": 200, "message": "ok", "data": {
      * "role": {"id": 1, "name": "administrator"},
@@ -95,9 +185,9 @@ class RoleController extends Controller
             $result = [
                 'role' => [
                     'id' => $roles->id,
-                    'name' => $roles->name
+                    'name' => $roles->name,
                 ],
-                'permission' => []
+                'permission' => [],
             ];
 
             // mengambil detail role menggunakan roleId dari table roles
@@ -121,9 +211,9 @@ class RoleController extends Controller
                 // menyesuaikan permission action yang akan di kirim sebagai response dengan permitted_action yang ada di table permissions
                 foreach ($permissions as $permission) {
                     $splitStr = str_split($permission->permitted_actions);
-                    
+
                     if ($permission->id == $role->permission_id) {
-                        
+
                         foreach ($splitStr as $i) {
                             switch ($i) {
                                 case 'r':
@@ -156,92 +246,9 @@ class RoleController extends Controller
     }
 
     /**
-     * Create new Role
-     * @header Authorization 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e
-     * @bodyParam role_name string Role name. Example: Administrator
-     * @bodyParam permission object[] Permission. Example: [{"id": 1, "create": true, "read": true, "update": true, "delete": true}]
-     * @bodyParam permission.id integer Permission ID.
-     * @bodyParam permission.actions object Permission actions.
-     * @bodyParam permission.actions.read boolean Read.
-     * @bodyParam permission.actions.create boolean Create.
-     * @bodyParam permission.actions.update boolean Update.
-     * @bodyParam permission.actions.delete boolean Delete.
-     * @response 200 {"code": 200, "message": "ok", "data": {
-     * "role": {"id": 1, "name": "administrator"},
-     * "permission": [{
-     *      "id": 1,
-     *      "group": "Rekapitulasi",
-     *      "name": "Pegawai ASN",
-     *      "action": {"read": true, "create": true, "update": true, "delete": true}
-     *  }]
-     * }}
-     * @response 400 {"code": 400,"message": "bad request", "data": null}
-     * @response 401 {"code": 401,"message": "unauthorized", "data": null}
-     * @response 403 {"code": 403,"message": "forbidden", "data": null}
-     * @response 404 {"code": 404,"message": "not found", "data": null}
-     * @response 500 {"code": 500,"message": "internal server error","data": null}
-     */
-    public function createNewRole(CreateNewRoleRequest $request)
-    {
-        $roleName = $request['role_name'];
-
-        try {
-            DB::beginTransaction();
-            
-            $roleId = $this->roleRepo->save($roleName);
-            
-            if (isset($request['permission'])) {
-                $rolePermission = [];
-
-                // menyiapkan data untuk di simpan ke role_permissions table
-                foreach ($request['permission'] as $item) {
-                    $rp = [
-                        'permission_id' => $item['id'],
-                        'role_id' => $roleId
-                    ];
-    
-                    if (isset($item['read'])) {
-                        $rp['read'] = $item['read'];
-                    }
-                    if (isset($item['create'])) {
-                        $rp['create'] = $item['create'];
-                    }
-                    if (isset($item['update'])) {
-                        $rp['update'] = $item['update'];
-                    }
-                    if (isset($item['delete'])) {
-                        $rp['delete'] = $item['delete'];
-                    }
-    
-                    array_push($rolePermission, $rp);
-                }
-    
-                // simpan ke role_permissions table
-                foreach ($rolePermission as $i) {
-                    $this->rolePermissionRepo->save($i);
-                }
-            }
-
-            DB::commit();
-        } catch (QueryException $e) {
-            DB::rollBack();
-
-            $errorCode = $e->errorInfo[1];
-            switch ($errorCode) {
-                case 1062:
-                    return $this->response(400, 'role sudah terdaftar');
-                case 1452:
-                    return $this->response(404, 'pemission id tidak di temukan');
-                default:
-                    return $this->internalServerErrorResponse();
-            }
-        }
-
-        return $this->response(201, 'created');
-    }
-
-    /**
      * Update Role by ID
+     * @group ACL - Access Control List
+     * @subgroup Role
      * @header Authorization 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e
      * @bodyParam role_name string Role name. Example: Administrator
      * @bodyParam permission object[] Permission. Example: [{"id": 1, "create": true, "read": true, "update": true, "delete": true}]
@@ -274,11 +281,11 @@ class RoleController extends Controller
             if (isset($request['role_name'])) {
                 $this->roleRepo->update($roleId, $request['role_name']);
             }
-    
+
             // update role permission
             if (isset($request['permission'])) {
 
-                foreach($request['permission'] as $permission) {
+                foreach ($request['permission'] as $permission) {
                     // check apakah id dan actions ada di permission request payload
                     if (!isset($permission['id']) || !isset($permission['actions'])) {
                         DB::rollBack();
@@ -287,11 +294,11 @@ class RoleController extends Controller
 
                     $data = [
                         'role_id' => $roleId,
-                        'permission_id' => $permission['id']
+                        'permission_id' => $permission['id'],
                     ];
 
                     // looping permission actions
-                    foreach($permission['actions'] as $key => $value) {
+                    foreach ($permission['actions'] as $key => $value) {
                         $data[$key] = $value;
                     }
 
@@ -320,7 +327,12 @@ class RoleController extends Controller
     }
 
     /**
-     * Hapus Role dan memberikan role pengganti ke users
+     * Delete Role by ID
+     *
+     * <strong>Note:</strong> memberikan role pengganti ke users
+     *
+     * @group ACL - Access Control List
+     * @subgroup Role
      * @header Authorization 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e
      * @bodyParam role_id integer Role pengganti. Example: 1
      * @response 200 {"code": 200, "message": "ok", "data": null}
@@ -352,7 +364,7 @@ class RoleController extends Controller
 
             return $this->internalServerErrorResponse();
         }
-        
+
         return $this->response();
     }
 }
