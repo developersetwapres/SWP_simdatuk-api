@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Models\Role;
 use Illuminate\Support\Facades\DB;
 
 interface RoleRepositoryInterface

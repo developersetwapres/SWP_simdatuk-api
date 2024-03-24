@@ -7,10 +7,8 @@ use App\Http\Requests\CreateUserRequest;
 use App\Repositories\PegawaiRepository;
 use App\Repositories\RoleRepository;
 use App\Repositories\UserRepository;
-use App\Helpers\ResponseHelper;
 use App\Helpers\Responser;
 use App\Http\Requests\UserUpdateRequest;
-use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Hash;
 

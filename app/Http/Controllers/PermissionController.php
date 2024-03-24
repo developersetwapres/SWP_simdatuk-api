@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\ResponseHelper;
 use App\Helpers\Responser;
 use App\Repositories\PermissionRepository;
 use Illuminate\Database\QueryException;
