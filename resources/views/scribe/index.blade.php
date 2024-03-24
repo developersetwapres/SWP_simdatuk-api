@@ -369,10 +369,10 @@
                                                                     <div class="expandable">
                                         <div class="sl-flex sl-items-center sl-h-md sl-pr-4 sl-pl-8 sl-bg-canvas-100 hover:sl-bg-canvas-200 sl-cursor-pointer sl-select-none"
                                              id="toc-item-permission-GETapi-permissions-group">
-                                            <div class="sl-flex-1 sl-items-center sl-truncate sl-mr-1.5 sl-p-0" title="List of Permissions">
+                                            <div class="sl-flex-1 sl-items-center sl-truncate sl-mr-1.5 sl-p-0" title="Permissions Group">
                                                 <a class="ElementsTableOfContentsItem sl-block sl-no-underline"
                                                    href="#permission-GETapi-permissions-group">
-                                                    List of Permissions
+                                                    Permissions Group
                                                 </a>
                                             </div>
                                                                                     </div>
@@ -1734,7 +1734,7 @@ fetch(url, {
             <div class="sl-stack sl-stack--horizontal sl-stack--5 sl-flex sl-flex-row sl-items-center">
                 <h2 class="sl-text-3xl sl-leading-tight sl-font-prose sl-text-heading sl-mt-5 sl-mb-1"
                     id="permission-GETapi-permissions-group">
-                    List of Permissions
+                    Permissions Group
                 </h2>
             </div>
         </div>
@@ -2685,7 +2685,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        5
+                        2
                     </div>
                 </div>
             </div>
@@ -2731,7 +2731,15 @@ fetch(url, {
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Read.</p>
         </div>
-                                    </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        1
+                    </div>
+                </div>
+            </div>
+            </div>
 </div>
 
             </div>
@@ -2748,7 +2756,15 @@ fetch(url, {
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Create.</p>
         </div>
-                                    </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        1
+                    </div>
+                </div>
+            </div>
+            </div>
 </div>
 
             </div>
@@ -2898,10 +2914,10 @@ fetch(url, {
     "role_name": "Administrator",
     "permission": [
         {
-            "id": 5,
+            "id": 2,
             "actions": {
-                "read": false,
-                "create": false,
+                "read": true,
+                "create": true,
                 "update": true,
                 "delete": false
             }
@@ -3013,8 +3029,8 @@ You can check the Dev Tools console for debugging information.</p>
             \"delete\": true
         },
         \"actions\": {
-            \"read\": false,
-            \"create\": false,
+            \"read\": true,
+            \"create\": true,
             \"update\": true,
             \"delete\": false
         }
@@ -3048,8 +3064,8 @@ let body = {
             "delete": true
         },
         "actions": {
-            "read": false,
-            "create": false,
+            "read": true,
+            "create": true,
             "update": true,
             "delete": false
         }
@@ -3309,7 +3325,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        21092
+                        5
                     </div>
                 </div>
             </div>
@@ -3417,7 +3433,7 @@ fetch(url, {
                                         <input aria-label="roleId" name="roleId"
                                                id="urlparam-GETapi-roles--roleId--roleId"
                                                placeholder=""
-                                               value="21092" data-component="url"
+                                               value="5" data-component="url"
                                                class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
                                     </div>
                                 </div>
@@ -3513,7 +3529,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/roles/21092" \
+    --get "http://localhost/api/roles/5" \
     --header "Authorization: 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -3524,7 +3540,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/roles/21092"
+    "http://localhost/api/roles/5"
 );
 
 const headers = {
@@ -3772,7 +3788,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        61
+                        8
                     </div>
                 </div>
             </div>
@@ -3875,7 +3891,15 @@ fetch(url, {
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Read.</p>
         </div>
-                                    </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        1
+                    </div>
+                </div>
+            </div>
+            </div>
 </div>
 
             </div>
@@ -3892,15 +3916,7 @@ fetch(url, {
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Create.</p>
         </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        1
-                    </div>
-                </div>
-            </div>
-            </div>
+                                    </div>
 </div>
 
             </div>
@@ -3965,7 +3981,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        15
+                        2
                     </div>
                 </div>
             </div>
@@ -4074,7 +4090,7 @@ fetch(url, {
                                         <input aria-label="roleId" name="roleId"
                                                id="urlparam-PUTapi-roles--roleId--roleId"
                                                placeholder=""
-                                               value="61" data-component="url"
+                                               value="8" data-component="url"
                                                class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
                                     </div>
                                 </div>
@@ -4109,12 +4125,12 @@ fetch(url, {
     "permission": [
         {
             "actions": {
-                "read": false,
-                "create": true,
+                "read": true,
+                "create": false,
                 "update": false,
                 "delete": true
             },
-            "id": 15
+            "id": 2
         }
     ]
 }</div>
@@ -4208,7 +4224,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/roles/61" \
+    "http://localhost/api/roles/8" \
     --header "Authorization: 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -4223,8 +4239,8 @@ You can check the Dev Tools console for debugging information.</p>
             \"delete\": true
         },
         \"actions\": {
-            \"read\": false,
-            \"create\": true,
+            \"read\": true,
+            \"create\": false,
             \"update\": false,
             \"delete\": true
         }
@@ -4238,7 +4254,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/roles/61"
+    "http://localhost/api/roles/8"
 );
 
 const headers = {
@@ -4258,8 +4274,8 @@ let body = {
             "delete": true
         },
         "actions": {
-            "read": false,
-            "create": true,
+            "read": true,
+            "create": false,
             "update": false,
             "delete": true
         }
@@ -4501,7 +4517,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        44
+                        27155
                     </div>
                 </div>
             </div>
@@ -4640,7 +4656,7 @@ fetch(url, {
                                         <input aria-label="roleId" name="roleId"
                                                id="urlparam-PATCHapi-roles--roleId--roleId"
                                                placeholder=""
-                                               value="44" data-component="url"
+                                               value="27155" data-component="url"
                                                class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
                                     </div>
                                 </div>
@@ -4763,7 +4779,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request PATCH \
-    "http://localhost/api/roles/44" \
+    "http://localhost/api/roles/27155" \
     --header "Authorization: 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -4778,7 +4794,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/roles/44"
+    "http://localhost/api/roles/27155"
 );
 
 const headers = {
@@ -5964,7 +5980,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        724
+                        63
                     </div>
                 </div>
             </div>
@@ -6178,7 +6194,7 @@ fetch(url, {
                                         <input aria-label="userId" name="userId"
                                                id="urlparam-PATCHapi-users--userId--userId"
                                                placeholder=""
-                                               value="724" data-component="url"
+                                               value="63" data-component="url"
                                                class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
                                     </div>
                                 </div>
@@ -6304,7 +6320,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request PATCH \
-    "http://localhost/api/users/724" \
+    "http://localhost/api/users/63" \
     --header "Authorization: 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -6322,7 +6338,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/users/724"
+    "http://localhost/api/users/63"
 );
 
 const headers = {
@@ -6560,7 +6576,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        81
+                        809815
                     </div>
                 </div>
             </div>
@@ -6668,7 +6684,7 @@ fetch(url, {
                                         <input aria-label="userId" name="userId"
                                                id="urlparam-GETapi-users--userId--userId"
                                                placeholder=""
-                                               value="81" data-component="url"
+                                               value="809815" data-component="url"
                                                class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
                                     </div>
                                 </div>
@@ -6764,7 +6780,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/users/81" \
+    --get "http://localhost/api/users/809815" \
     --header "Authorization: 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -6775,7 +6791,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/users/81"
+    "http://localhost/api/users/809815"
 );
 
 const headers = {
@@ -7013,7 +7029,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        216
+                        0676
                     </div>
                 </div>
             </div>
@@ -7121,7 +7137,7 @@ fetch(url, {
                                         <input aria-label="userId" name="userId"
                                                id="urlparam-DELETEapi-users--userId--deactivate-userId"
                                                placeholder=""
-                                               value="216" data-component="url"
+                                               value="0676" data-component="url"
                                                class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
                                     </div>
                                 </div>
@@ -7217,7 +7233,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/users/216/deactivate" \
+    "http://localhost/api/users/0676/deactivate" \
     --header "Authorization: 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -7228,7 +7244,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/users/216/deactivate"
+    "http://localhost/api/users/0676/deactivate"
 );
 
 const headers = {

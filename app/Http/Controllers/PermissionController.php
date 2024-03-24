@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\ResponseHelper;
+use App\Helpers\Responser;
 use App\Repositories\PermissionRepository;
 use Illuminate\Database\QueryException;
 
@@ -13,6 +14,8 @@ use Illuminate\Database\QueryException;
  */
 class PermissionController extends Controller
 {
+    use Responser;
+
     protected $permissionRepo;
 
     public function __construct(PermissionRepository $permissionRepo)
@@ -38,27 +41,18 @@ class PermissionController extends Controller
         try {
             $permissions = $this->permissionRepo->list();
             if (!$permissions) {
-                return response()->json(
-                    ResponseHelper::errResponse(404, 'permission tidak di temukan'),
-                    404
-                );
+                return $this->response(404, 'permission tidak di temukan');
             }
 
         } catch (\Exception $e) {
-            return response()->json(
-                ResponseHelper::errResponse(500, $e),
-                500
-            );
+            return $this->internalServerErrorResponse();
         }
 
-        return response()->json(
-            ResponseHelper::successResponse(200, $permissions),
-            200
-        );
+        return $this->response(200, 'ok', $permissions);
     }
 
     /**
-     * List of Permissions
+     * Permissions Group
      * @header Authorization 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e
      * @response 200 {"code": 200, "message": "ok", "data": ["Rekapitulasi", "Data Pegawai"]}
      * @response 401 {"code": 401,"message": "unauthorized", "data": null}
@@ -71,27 +65,19 @@ class PermissionController extends Controller
         try {
             $permissions = $this->permissionRepo->listGroup();
             if (!$permissions) {
-                return response()->json(
-                    ResponseHelper::errResponse(404, 'permission tidak di temukan'),
-                    404
-                );
+                return $this->response(404, 'permission group tidak ditemukan');
             }
 
+            // mengambil hanya data group
             $result = [];
             foreach($permissions as $key => $value) {
                 array_push($result, $key);
             }
 
         } catch (QueryException $e) {
-            return response()->json(
-                ResponseHelper::errResponse(500, $e),
-                500
-            );
+            return $this->internalServerErrorResponse();
         }
 
-        return response()->json(
-            ResponseHelper::successResponse(200, $result),
-            200
-        );
+        return $this->response(200, 'ok', $result);
     }
 }

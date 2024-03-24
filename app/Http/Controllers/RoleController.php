@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\ResponseHelper;
+use App\Helpers\Responser;
 use App\Http\Requests\CreateNewRoleRequest;
 use App\Http\Requests\RoleDeleteRequest;
 use App\Http\Requests\UpdateRoleRequest;
@@ -20,6 +21,8 @@ use Illuminate\Support\Facades\DB;
  */
 class RoleController extends Controller
 {
+    use Responser;
+
     protected $roleRepo;
     protected $permissionRepo;
     protected $rolePermissionRepo;
@@ -55,21 +58,13 @@ class RoleController extends Controller
         try {
             $roles = $this->roleRepo->list();
             if (!$roles) {
-                return response()->json(
-                    ResponseHelper::errResponse(404, "role is empty"),
-                    404
-                );
+                return $this->response(404, 'role tidak di temukan');
             }
-        } catch (QueryException $e) {
-            return response()->json(ResponseHelper::errResponse(500, 'something went wrong'), 500);
+        } catch (\Exception $e) {
+            return $this->internalServerErrorResponse();
         }
 
-        return response()->json([
-            'code' => 200,
-            'status' => 'ok',
-            'errors' => null,
-            'data' => $roles,
-        ], 200);
+        return $this->response(200, 'success', $roles);
     }
 
     /**
@@ -91,70 +86,74 @@ class RoleController extends Controller
      */
     public function detail(int $roleId)
     {
-        // mengambil detail role menggunakan roleId dari table roles
-        $roles = $this->roleRepo->roleDetail($roleId);
-        if ($roles->count() == 0) {
-            return response()->json(
-                ResponseHelper::errResponse(404, "role tidak ditemukan"),
-                404
-            );
-        }
+        try {
+            $roles = $this->roleRepo->findById($roleId);
+            if (!$roles) {
+                return $this->response(404, 'role tidak ditemukan');
+            }
 
-        // format data response
-        $result = [
-            'role' => [
-                'id' => $roles[0]->role_id,
-                'name' => $roles[0]->role_name
-            ],
-            'permission' => []
-        ];
-
-        // mengambil permission dari table permissions
-        $permissions = $this->permissionRepo->list();
-
-        // mapping permissions untuk dimasukkan ke result
-        foreach ($roles as $role) {
-            $p = [
-                'id' => $role->permission_id,
-                'group' => $role->permission_group,
-                'name' => $role->permission_name,
+            // format response data
+            $result = [
+                'role' => [
+                    'id' => $roles->id,
+                    'name' => $roles->name
+                ],
+                'permission' => []
             ];
 
-            // menyesuaikan permission action yang akan di kirim sebagai response dengan permitted_action yang ada di table permissions
-            foreach ($permissions as $permission) {
-                $splitStr = str_split($permission->permitted_actions);
-                
-                if ($permission->id == $role->permission_id) {
+            // mengambil detail role menggunakan roleId dari table roles
+            $roles = $this->roleRepo->roleDetail($roleId);
+            if ($roles->count() == 0) {
+                $result['permission'] = null;
+                return $this->response(200, 'tidak ada permission yang terdaftar', $result);
+            }
+
+            // mengambil permission dari table permissions
+            $permissions = $this->permissionRepo->list();
+
+            // mapping permissions untuk dimasukkan ke result
+            foreach ($roles as $role) {
+                $p = [
+                    'id' => $role->permission_id,
+                    'group' => $role->permission_group,
+                    'name' => $role->permission_name,
+                ];
+
+                // menyesuaikan permission action yang akan di kirim sebagai response dengan permitted_action yang ada di table permissions
+                foreach ($permissions as $permission) {
+                    $splitStr = str_split($permission->permitted_actions);
                     
-                    foreach ($splitStr as $i) {
-                        switch ($i) {
-                            case 'r':
-                                $action['read'] = $role->action_read;
-                                break;
-                            case 'c':
-                                $action['create'] = $role->action_create;
-                                break;
-                            case 'u':
-                                $action['update'] = $role->action_update;
-                                break;
-                            case 'd':
-                                $action['delete'] = $role->action_delete;
-                                break;
-                            default:
-                                break;
+                    if ($permission->id == $role->permission_id) {
+                        
+                        foreach ($splitStr as $i) {
+                            switch ($i) {
+                                case 'r':
+                                    $action['read'] = $role->action_read;
+                                    break;
+                                case 'c':
+                                    $action['create'] = $role->action_create;
+                                    break;
+                                case 'u':
+                                    $action['update'] = $role->action_update;
+                                    break;
+                                case 'd':
+                                    $action['delete'] = $role->action_delete;
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
                     }
                 }
-            }
 
-            $p['action'] = $action;
-            array_push($result['permission'], $p);
+                $p['action'] = $action;
+                array_push($result['permission'], $p);
+            }
+        } catch (\Exception $e) {
+            return $this->internalServerErrorResponse();
         }
 
-        return response()->json(
-            ResponseHelper::successResponse(200, $result),
-            200
-        );
+        return $this->response(200, 'success', $result);
     }
 
     /**
@@ -195,6 +194,7 @@ class RoleController extends Controller
             if (isset($request['permission'])) {
                 $rolePermission = [];
 
+                // menyiapkan data untuk di simpan ke role_permissions table
                 foreach ($request['permission'] as $item) {
                     $rp = [
                         'permission_id' => $item['id'],
@@ -217,6 +217,7 @@ class RoleController extends Controller
                     array_push($rolePermission, $rp);
                 }
     
+                // simpan ke role_permissions table
                 foreach ($rolePermission as $i) {
                     $this->rolePermissionRepo->save($i);
                 }
@@ -226,27 +227,18 @@ class RoleController extends Controller
         } catch (QueryException $e) {
             DB::rollBack();
 
-            $resp = [];
             $errorCode = $e->errorInfo[1];
             switch ($errorCode) {
                 case 1062:
-                    $resp = ResponseHelper::errResponse(400, 'role sudah terdaftar');
-                    break;
+                    return $this->response(400, 'role sudah terdaftar');
                 case 1452:
-                    $resp = ResponseHelper::errResponse(404, "permission id tidak tersedia");
-                    break;
+                    return $this->response(404, 'pemission id tidak di temukan');
                 default:
-                    $resp = ResponseHelper::errResponse(500, 'internal server error');
-                    break;
+                    return $this->internalServerErrorResponse();
             }
-
-            return response()->json($resp, $resp['code']);
         }
 
-        return response()->json(
-            ResponseHelper::successResponse(201, null),
-            201
-        );
+        return $this->response(201, 'created');
     }
 
     /**
@@ -276,9 +268,7 @@ class RoleController extends Controller
             $role = $this->roleRepo->findById($roleId);
             if (!$role) {
                 DB::rollBack();
-                return response()->json(
-                    ResponseHelper::errResponse(404, 'role tidak ditemukan')
-                );
+                return $this->response(404, 'role tidak ditemukan');
             }
 
             // Update role name pada table roles
@@ -293,9 +283,7 @@ class RoleController extends Controller
                     // check apakah id dan actions ada di permission request payload
                     if (!isset($permission['id']) || !isset($permission['actions'])) {
                         DB::rollBack();
-                        return response()->json(
-                            ResponseHelper::errResponse(404, 'id dan actions pada permission tidak boleh kosong')
-                        );
+                        return $this->response(400, 'id dan actions pada permission tidak boleh kosong');
                     }
 
                     $data = [
@@ -321,23 +309,15 @@ class RoleController extends Controller
             $errorCode = $e->errorInfo[1];
             switch ($errorCode) {
                 case 1062:
-                    $resp = ResponseHelper::errResponse(400, 'role sudah terdaftar');
-                    break;
+                    return $this->response(400, 'role sudah terdaftar');
                 case 1452:
-                    $resp = ResponseHelper::errResponse(404, "permission id tidak di temukan");
-                    break;
+                    return $this->response(404, 'permission id tidak di temukan');
                 default:
-                    $resp = ResponseHelper::errResponse(500, $e);
-                    break;
+                    return $this->internalServerErrorResponse();
             }
-
-            return response()->json($resp, $resp['code']);
         }
 
-        return response()->json(
-            ResponseHelper::successResponse(200, null),
-            200
-        );
+        return $this->response();
     }
 
     /**
@@ -356,10 +336,7 @@ class RoleController extends Controller
         try {
             $roles = $this->roleRepo->findByMultipleId([$roleId, $request['role_id']]);
             if (count($roles) < 2) {
-                return response()->json(
-                    ResponseHelper::errResponse(404, "role tidak di temukan"),
-                    404
-                );
+                return $this->response(404, 'role tidak di temukan');
             }
 
             DB::beginTransaction();
@@ -374,15 +351,9 @@ class RoleController extends Controller
         } catch (QueryException $e) {
             DB::rollBack();
 
-            return response()->json(
-                ResponseHelper::errResponse(500, 'something went wrong'),
-                500
-            );
+            return $this->internalServerErrorResponse();
         }
         
-        return response()->json(
-            ResponseHelper::successResponse(200, null),
-            200
-        );
+        return $this->response();
     }
 }
