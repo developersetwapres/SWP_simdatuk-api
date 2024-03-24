@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use App\Helpers\Responser;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
@@ -48,7 +49,9 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $e)
     {
         if ($request->wantsJson()) {
-            if ($e instanceof ValidationException) {
+            if ($e instanceof QueryException) {
+                return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
+            } else if ($e instanceof ValidationException) {
                 $messages = $e->validator->errors()->all();
                 return $this->response(422, $messages[0], $e->validator->errors());
             } else if ($e instanceof AuthorizationException) {
