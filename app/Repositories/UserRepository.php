@@ -14,6 +14,7 @@ interface UserRepositoryInterface
     public function changeRoleId(int $from, int $to);
     public function findById(int $userId);
     public function update(int $id, array $data);
+    public function findWithConditions(array $conditions);
 }
 
 class UserRepository implements UserRepositoryInterface
@@ -81,5 +82,11 @@ class UserRepository implements UserRepositoryInterface
         return DB::table($this->table)
             ->where('id', $id)
             ->update($data);
+    }
+
+    public function findWithConditions(array $conditions)
+    {
+        return DB::table($this->table)
+            ->where($conditions)->first();
     }
 }
