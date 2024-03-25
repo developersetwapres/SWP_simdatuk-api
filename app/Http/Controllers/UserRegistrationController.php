@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Responser;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\DB;
 use App\Repositories\RoleRepository;
-use App\Repositories\UserRepository;
 use App\Repositories\PegawaiRepository;
 use App\Http\Requests\UserRegistrationRequest;
 use App\Repositories\UserRegistrationRepository;
@@ -18,19 +16,16 @@ class UserRegistrationController extends Controller
     use Responser;
 
     // Repository
-    protected $userRepo;
     protected $roleRepo;
     protected $pegawaiRepo;
     protected $registrationRepo;
 
     public function __construct(
-        UserRepository $userRepo,
         RoleRepository $roleRepo,
         PegawaiRepository $pegawaiRepo,
         UserRegistrationRepository $userRegistrationRepo,
     )
     {
-        $this->userRepo = $userRepo;
         $this->roleRepo = $roleRepo;
         $this->pegawaiRepo = $pegawaiRepo;
         $this->registrationRepo = $userRegistrationRepo;
@@ -44,8 +39,8 @@ class UserRegistrationController extends Controller
         $pegawaiId = $request['pegawai_id'];
 
         try {
-            // check username apakah sudah terdaftar di table users
-            if ($this->userRepo->findByUsername($username)) {
+            // check username apakah sudah terdaftar di table pegawai
+            if ($this->pegawaiRepo->findUserWithConditions(['username' => $username])) {
                 return $this->response(400, 'username sudah terdaftar');
             }
 
@@ -60,8 +55,12 @@ class UserRegistrationController extends Controller
             }
 
             // validasi pegawai_id
-            if (!$this->pegawaiRepo->findById($pegawaiId)) {
+            $pegawai = $this->pegawaiRepo->findById($pegawaiId);
+            if (!$pegawai) {
                 return $this->response(404, 'pegawai tidak di temukan');
+            }
+            if ($pegawai->role_id !== null) {
+                return $this->response(400, "{$pegawai->nama}, sudah terdaftar sebagai user");
             }
 
             // generate uuid

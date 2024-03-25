@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Pegawai extends Model
 {
@@ -13,6 +13,10 @@ class Pegawai extends Model
     public $incrementing = true;
 
     protected $fillable = [
+        'role_id',
+        'username',
+        'password',
+        'role_status',
         'file_foto_profile',
         'nama',
         'nip',
@@ -45,4 +49,9 @@ class Pegawai extends Model
         'type',
         'status'
     ];
+
+    public function role(): BelongsTo
+    {
+        return $this->belongsTo(Role::class, 'role_id');
+    }
 }

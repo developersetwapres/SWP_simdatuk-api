@@ -29,7 +29,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::prefix('users')->group(function () {
     Route::get('/', [UserController::class, 'userList']);
-    Route::post('/', [UserController::class, 'createNewUser']);
     Route::get('/{userId}', [UserController::class, 'userDetail'])->where('userId', '[0-9]+');
     Route::patch('/{userId}', [UserController::class, 'update'])->where('userId', '[0-9]+');
     Route::delete('/{userId}/deactivate', [UserController::class, 'deactivate'])->where('userId', '[0-9]+');

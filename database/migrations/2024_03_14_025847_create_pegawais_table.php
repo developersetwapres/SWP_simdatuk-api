@@ -6,13 +6,16 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('pegawai', function (Blueprint $table) {
             $table->id();
+
+            $table->unsignedBigInteger('role_id')->nullable(true);
+            $table->string('username', 160)->nullable(true)->unique('pegawai_username_unique');
+            $table->string('password', 255)->nullable(true);
+            $table->boolean('role_status')->default(false);
+
             $table->string('file_foto_profile', 160);
             $table->string('nama', 160)->nullable(false);
             $table->string('nip', 160)->nullable(false)->unique('pegawai_nip_unique');
@@ -47,12 +50,11 @@ return new class extends Migration
 
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
+
+            $table->foreign('role_id')->references('id')->on('roles');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('pegawai');

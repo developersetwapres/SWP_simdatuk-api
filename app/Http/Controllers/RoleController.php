@@ -6,10 +6,10 @@ use App\Helpers\Responser;
 use App\Http\Requests\CreateNewRoleRequest;
 use App\Http\Requests\RoleDeleteRequest;
 use App\Http\Requests\UpdateRoleRequest;
+use App\Repositories\PegawaiRepository;
 use App\Repositories\PermissionRepository;
 use App\Repositories\RolePermissionRepository;
 use App\Repositories\RoleRepository;
-use App\Repositories\UserRepository;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 
@@ -25,18 +25,18 @@ class RoleController extends Controller
     protected $roleRepo;
     protected $permissionRepo;
     protected $rolePermissionRepo;
-    protected $userRepo;
+    protected $pegawaiRepo;
 
     public function __construct(
         RoleRepository $roleRepo,
         PermissionRepository $permissionRepo,
         RolePermissionRepository $rolePermissionRepo,
-        UserRepository $userRepo
+        PegawaiRepository $pegawaiRepo
     ) {
         $this->roleRepo = $roleRepo;
         $this->permissionRepo = $permissionRepo;
         $this->rolePermissionRepo = $rolePermissionRepo;
-        $this->userRepo = $userRepo;
+        $this->pegawaiRepo = $pegawaiRepo;
     }
 
     /**
@@ -131,9 +131,7 @@ class RoleController extends Controller
                 }
 
                 // simpan ke role_permissions table
-                foreach ($rolePermission as $i) {
-                    $this->rolePermissionRepo->save($i);
-                }
+                $this->rolePermissionRepo->save($rolePermission);
             }
 
             DB::commit();
@@ -352,7 +350,7 @@ class RoleController extends Controller
 
             DB::beginTransaction();
 
-            $this->userRepo->changeRoleId($roleId, $request['role_id']);
+            $this->pegawaiRepo->changeRoleId($roleId, $request['role_id']);
 
             $this->rolePermissionRepo->deleteByRoleId($roleId);
 

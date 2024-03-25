@@ -3,13 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Responser;
-use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Repositories\PegawaiRepository;
 use App\Repositories\RoleRepository;
-use App\Repositories\UserRepository;
-use Illuminate\Database\QueryException;
-use Illuminate\Support\Facades\Hash;
 
 /**
  * @group ACL - Access Control List
@@ -20,17 +16,12 @@ class UserController extends Controller
 {
     use Responser;
 
-    protected $userRepo;
     protected $pegawaiRepo;
     protected $roleRepo;
 
-    protected $userService;
-
     public function __construct(
-        UserRepository $userRepo,
         PegawaiRepository $pegawaiRepo,
         RoleRepository $roleRepo) {
-        $this->userRepo = $userRepo;
         $this->pegawaiRepo = $pegawaiRepo;
         $this->roleRepo = $roleRepo;
     }
@@ -56,7 +47,7 @@ class UserController extends Controller
     public function userList()
     {
         try {
-            $user = $this->userRepo->list();
+            $user = $this->pegawaiRepo->userList();
             if (!$user) {
                 return $this->response(404, 'data user tidak tersedia');
             }
@@ -68,53 +59,12 @@ class UserController extends Controller
     }
 
     /**
-     * Create new User
-     * @group ACL - Access Control List
-     * @subgroup User
-     * @header Authorization 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e
-     * @bodyParam username string required username for user login. Example: admin123
-     * @bodyParam password string required password for user login. Example: password
-     * @bodyParam email string required email untuk mengirim verifikasi. Example: example@domain.com
-     * @bodyParam pegawai_id integer required id pegawai. Example: 1
-     * @bodyParam role_id integer required role id. Example: 1
-     * @response 201 {"code": 201,"message": "created","data": null}
-     * @response 400 {"code": 400,"message": "Password tidak boleh kosong","data": null}
-     * @response 404 {"code": 404,"message": "tidak ada data","data": null}
-     * @response 500 {"code": 500,"message": "something went wrong","data": null}
-     */
-    public function createNewUser(CreateUserRequest $request)
-    {
-        try {
-            $this->userRepo->save([
-                'pegawai_id' => $request['pegawai_id'],
-                'username' => $request['username'],
-                'password' => Hash::make($request['password']),
-                'email' => $request['email'],
-                'role_id' => $request['role_id'],
-            ]);
-        } catch (QueryException $e) {
-            $errorCode = $e->errorInfo[1];
-            switch ($errorCode) {
-                case 1062:
-                    return $this->response(400, 'username sudah terdaftar');
-                case 1452:
-                    return $this->response(404, "pegawai atau role tidak tersedia");
-                default:
-                    return $this->internalServerErrorResponse();
-            }
-        }
-
-        return $this->response(201, 'created');
-    }
-
-    /**
      * Update User by ID
      * @group ACL - Access Control List
      * @subgroup User
      * @header Authorization 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e
      * @bodyParam username string New username. Example: admin123
      * @bodyParam email string New email. Example: example@domain.com
-     * @bodyParam pegawai_id integer Pegawai ID. Example: 1
      * @bodyParam role_id integer Role ID. Example: 1
      * @response 200 {"code": 200,"message": "ok", "data": null}
      * @response 400 {"code": 400,"message": "bad request", "data": null}
@@ -125,7 +75,7 @@ class UserController extends Controller
     public function update(int $userId, UserUpdateRequest $request)
     {
         try {
-            $user = $this->userRepo->findById($userId);
+            $user = $this->pegawaiRepo->findUserById($userId);
             if (!$user) {
                 return $this->response(404, "user dengan id: {$userId}, tidak ditemukan");
             }
@@ -140,12 +90,9 @@ class UserController extends Controller
             if ($request['role_id']) {
                 $data['role_id'] = $request['role_id'];
             }
-            if ($request['pegawai_id']) {
-                $data['pegawai_id'] = $request['pegawai_id'];
-            }
 
-            $this->userRepo->update($userId, $data);
-        } catch (QueryException $e) {
+            $this->pegawaiRepo->updateUser($userId, $data);
+        } catch (\Exception $e) {
             return $this->internalServerErrorResponse();
         }
 
@@ -175,11 +122,11 @@ class UserController extends Controller
     public function userDetail(int $userId)
     {
         try {
-            $user = $this->userRepo->userDetail($userId);
+            $user = $this->pegawaiRepo->userDetail($userId);
             if (!$user) {
                 return $this->response(404, "user dengan id: {$userId}, tidak di temukan");
             }
-        } catch (QueryException $e) {
+        } catch (\Exception $e) {
             return $this->internalServerErrorResponse();
         }
 
@@ -202,17 +149,16 @@ class UserController extends Controller
         try {
             $data = [
                 'id' => $userId,
-                'status' => true,
+                'role_status' => true,
             ];
 
-            $user = $this->userRepo->findWithConditions($data);
+            $user = $this->pegawaiRepo->findUserWithConditions($data);
             if (!$user) {
-                return $this->response(404, "user dengan id: {$userId}, tidak di temukan atau status tidak aktif");
+                return $this->response(404, "user dengan id: {$userId}, tidak di temukan atau status user tidak aktif");
             }
 
-            $this->userRepo->update($userId, ['status' => false]);
-
-        } catch (QueryException $e) {
+            $this->pegawaiRepo->updateUser($userId, ['role_status' => false]);
+        } catch (\Exception $e) {
             return $this->internalServerErrorResponse();
         }
 

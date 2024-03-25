@@ -18,8 +18,7 @@ class UserUpdateRequest extends FormRequest
         return [
             'username' => ['min:6', 'max:16'],
             'email' => ['email'],
-            'pegawai_id' => ['numeric', 'gt:0'],
-            'role_id' => ['numeric', 'gt:0']
+            'role_id' => ['numeric', 'gt:0'],
         ];
     }
 

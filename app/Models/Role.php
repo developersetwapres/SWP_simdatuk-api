@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -17,9 +16,9 @@ class Role extends Model
         'name',
     ];
 
-    public function user(): HasMany
+    public function pegawai(): HasMany
     {
-        return $this->hasMany(User::class, 'role_id');
+        return $this->hasMany(Pegawai::class, 'role_id');
     }
 
     public function rolePermission(): HasMany
