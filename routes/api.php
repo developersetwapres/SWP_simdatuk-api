@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserRegistrationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,4 +46,8 @@ Route::prefix('roles')->group(function () {
 Route::prefix('permissions')->group(function () {
     Route::get('/', [PermissionController::class, 'list']);
     Route::get('/group', [PermissionController::class, 'listGroup']);
+});
+
+Route::prefix('register')->group(function () {
+    Route::post('/', [UserRegistrationController::class, 'register']);
 });
