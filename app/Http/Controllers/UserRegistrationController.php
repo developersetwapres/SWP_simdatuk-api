@@ -7,9 +7,11 @@ use Illuminate\Support\Str;
 use App\Repositories\RoleRepository;
 use App\Repositories\PegawaiRepository;
 use App\Http\Requests\UserRegistrationRequest;
+use App\Mail\UserRegisterVerification;
 use App\Repositories\UserRegistrationRepository;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class UserRegistrationController extends Controller
 {
@@ -66,7 +68,7 @@ class UserRegistrationController extends Controller
             // generate uuid
             $uuid = Str::uuid();
 
-            // generate verification_key => Hash(uuid)
+            // generate verification_key
             $key = Hash::make($uuid);
 
             // buat expired_at
@@ -86,7 +88,11 @@ class UserRegistrationController extends Controller
             // simpan ke table user_registrations
             $this->registrationRepo->save($data);
 
-            // TODO: kirim email verification
+            // kirim email verifikasi
+            $data['nama'] = ucwords($pegawai->nama);
+            $data['base_url'] = env('FE_BASE_URL') . '/set-password';
+            Mail::to($email)
+                ->send(new UserRegisterVerification($data));
 
         } catch (\Exception $e) {
             return $this->internalServerErrorResponse($e->getMessage());
