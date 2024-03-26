@@ -93,7 +93,7 @@ class UserRegistrationController extends Controller
             $uuid = Str::uuid();
 
             // generate verification_key
-            $key = Hash::make($uuid);
+            $key = md5('salt_secret' . $uuid);
 
             // buat expired_at
             $expired = Carbon::now('Asia/Jakarta')->addHours(4);
@@ -130,5 +130,22 @@ class UserRegistrationController extends Controller
         ];
 
         return $this->response(201, 'created', $resp);
+    }
+
+    /**
+     * Validasi Verification Key
+     * @group ACL - Access Control List
+     * @subgroup Register
+     * @response 200 {"code": 200,"message": "success","data": null}
+     * @response 404 {"code": 404, "message": "not found", "data": null}
+     * @response 500 {"code": 500, "message": "internal server error", "data": null}
+     */
+    public function validateKey(string $key)
+    {
+        if (!$this->registrationRepo->findByKey($key)) {
+            return $this->response(404, 'not found');
+        }
+
+        return $this->response();
     }
 }

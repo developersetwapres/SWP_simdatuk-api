@@ -8,6 +8,7 @@ interface UserRegistrationRepositoryInterface
 {
     public function save(array $data);
     public function findByUsername(string $username);
+    public function findByKey(string $key);
 }
 
 class UserRegistrationRepository implements UserRegistrationRepositoryInterface
@@ -22,5 +23,12 @@ class UserRegistrationRepository implements UserRegistrationRepositoryInterface
     public function findByUsername(string $username)
     {
         return DB::table($this->table)->where('username', $username)->first();
+    }
+
+    public function findByKey(string $key)
+    {
+        return DB::table($this->table)
+            ->where('verification_key', $key)
+            ->first();
     }
 }
