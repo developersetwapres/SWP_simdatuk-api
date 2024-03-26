@@ -542,6 +542,13 @@
                                                             Verifikasi User dan Set Password Baru
                                                         </div>
                                                     </a>
+                                                                                                    <a class="ElementsTableOfContentsItem sl-block sl-no-underline"
+                                                       href="#acl-access-control-list-GETapi-register-resend-email--key-">
+                                                        <div title="Mengirim ulang email verifikasi" id="toc-item-acl-access-control-list-GETapi-register-resend-email--key-"
+                                                             class="sl-flex sl-items-center sl-h-md sl-pr-4 sl-pl-12 sl-bg-canvas-100 hover:sl-bg-canvas-200 sl-cursor-pointer sl-select-none">
+                                                            Mengirim ulang email verifikasi
+                                                        </div>
+                                                    </a>
                                                                                             </div>
                                                                             </div>
                                                             </div>
@@ -1841,7 +1848,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        5
+                        73
                     </div>
                 </div>
             </div>
@@ -1949,7 +1956,7 @@ fetch(url, {
                                         <input aria-label="userId" name="userId"
                                                id="urlparam-GETapi-users--userId--userId"
                                                placeholder=""
-                                               value="5" data-component="url"
+                                               value="73" data-component="url"
                                                class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
                                     </div>
                                 </div>
@@ -2045,7 +2052,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/users/5" \
+    --get "http://localhost/api/users/73" \
     --header "Authorization: 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -2056,7 +2063,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/users/5"
+    "http://localhost/api/users/73"
 );
 
 const headers = {
@@ -2294,7 +2301,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        3332
+                        169
                     </div>
                 </div>
             </div>
@@ -2483,7 +2490,7 @@ fetch(url, {
                                         <input aria-label="userId" name="userId"
                                                id="urlparam-PATCHapi-users--userId--userId"
                                                placeholder=""
-                                               value="3332" data-component="url"
+                                               value="169" data-component="url"
                                                class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
                                     </div>
                                 </div>
@@ -2608,7 +2615,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request PATCH \
-    "http://localhost/api/users/3332" \
+    "http://localhost/api/users/169" \
     --header "Authorization: 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -2625,7 +2632,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/users/3332"
+    "http://localhost/api/users/169"
 );
 
 const headers = {
@@ -2862,7 +2869,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        543
+                        667258
                     </div>
                 </div>
             </div>
@@ -2970,7 +2977,7 @@ fetch(url, {
                                         <input aria-label="userId" name="userId"
                                                id="urlparam-DELETEapi-users--userId--deactivate-userId"
                                                placeholder=""
-                                               value="543" data-component="url"
+                                               value="667258" data-component="url"
                                                class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
                                     </div>
                                 </div>
@@ -3066,7 +3073,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost/api/users/543/deactivate" \
+    "http://localhost/api/users/667258/deactivate" \
     --header "Authorization: 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -3077,7 +3084,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/users/543/deactivate"
+    "http://localhost/api/users/667258/deactivate"
 );
 
 const headers = {
@@ -3758,7 +3765,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        19
+                        7
                     </div>
                 </div>
             </div>
@@ -3804,15 +3811,7 @@ fetch(url, {
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Read.</p>
         </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        1
-                    </div>
-                </div>
-            </div>
-            </div>
+                                    </div>
 </div>
 
             </div>
@@ -3987,9 +3986,9 @@ fetch(url, {
     "role_name": "Administrator",
     "permission": [
         {
-            "id": 19,
+            "id": 7,
             "actions": {
-                "read": true,
+                "read": false,
                 "create": true,
                 "update": false,
                 "delete": true
@@ -4102,7 +4101,7 @@ You can check the Dev Tools console for debugging information.</p>
             \"delete\": true
         },
         \"actions\": {
-            \"read\": true,
+            \"read\": false,
             \"create\": true,
             \"update\": false,
             \"delete\": true
@@ -4137,7 +4136,7 @@ let body = {
             "delete": true
         },
         "actions": {
-            "read": true,
+            "read": false,
             "create": true,
             "update": false,
             "delete": true
@@ -4398,7 +4397,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        49
+                        68
                     </div>
                 </div>
             </div>
@@ -4506,7 +4505,7 @@ fetch(url, {
                                         <input aria-label="roleId" name="roleId"
                                                id="urlparam-GETapi-roles--roleId--roleId"
                                                placeholder=""
-                                               value="49" data-component="url"
+                                               value="68" data-component="url"
                                                class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
                                     </div>
                                 </div>
@@ -4602,7 +4601,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/roles/49" \
+    --get "http://localhost/api/roles/68" \
     --header "Authorization: 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -4613,7 +4612,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/roles/49"
+    "http://localhost/api/roles/68"
 );
 
 const headers = {
@@ -4861,7 +4860,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        87
+                        861
                     </div>
                 </div>
             </div>
@@ -4964,7 +4963,15 @@ fetch(url, {
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Read.</p>
         </div>
-                                    </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        1
+                    </div>
+                </div>
+            </div>
+            </div>
 </div>
 
             </div>
@@ -5006,7 +5013,15 @@ fetch(url, {
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Update.</p>
         </div>
-                                    </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        1
+                    </div>
+                </div>
+            </div>
+            </div>
 </div>
 
             </div>
@@ -5054,7 +5069,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        13
+                        4
                     </div>
                 </div>
             </div>
@@ -5163,7 +5178,7 @@ fetch(url, {
                                         <input aria-label="roleId" name="roleId"
                                                id="urlparam-PUTapi-roles--roleId--roleId"
                                                placeholder=""
-                                               value="87" data-component="url"
+                                               value="861" data-component="url"
                                                class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
                                     </div>
                                 </div>
@@ -5198,12 +5213,12 @@ fetch(url, {
     "permission": [
         {
             "actions": {
-                "read": false,
+                "read": true,
                 "create": true,
-                "update": false,
+                "update": true,
                 "delete": true
             },
-            "id": 13
+            "id": 4
         }
     ]
 }</div>
@@ -5297,7 +5312,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request PUT \
-    "http://localhost/api/roles/87" \
+    "http://localhost/api/roles/861" \
     --header "Authorization: 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -5312,9 +5327,9 @@ You can check the Dev Tools console for debugging information.</p>
             \"delete\": true
         },
         \"actions\": {
-            \"read\": false,
+            \"read\": true,
             \"create\": true,
-            \"update\": false,
+            \"update\": true,
             \"delete\": true
         }
     }
@@ -5327,7 +5342,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/roles/87"
+    "http://localhost/api/roles/861"
 );
 
 const headers = {
@@ -5347,9 +5362,9 @@ let body = {
             "delete": true
         },
         "actions": {
-            "read": false,
+            "read": true,
             "create": true,
-            "update": false,
+            "update": true,
             "delete": true
         }
     }
@@ -5590,7 +5605,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        3227
+                        86
                     </div>
                 </div>
             </div>
@@ -5729,7 +5744,7 @@ fetch(url, {
                                         <input aria-label="roleId" name="roleId"
                                                id="urlparam-PATCHapi-roles--roleId--roleId"
                                                placeholder=""
-                                               value="3227" data-component="url"
+                                               value="86" data-component="url"
                                                class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
                                     </div>
                                 </div>
@@ -5852,7 +5867,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request PATCH \
-    "http://localhost/api/roles/3227" \
+    "http://localhost/api/roles/86" \
     --header "Authorization: 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -5867,7 +5882,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/roles/3227"
+    "http://localhost/api/roles/86"
 );
 
 const headers = {
@@ -7777,7 +7792,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        eum
+                        sunt
                     </div>
                 </div>
             </div>
@@ -7930,7 +7945,7 @@ fetch(url, {
                                         <input aria-label="key" name="key"
                                                id="urlparam-POSTapi-register--key--key"
                                                placeholder=""
-                                               value="eum" data-component="url"
+                                               value="sunt" data-component="url"
                                                class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
                                     </div>
                                 </div>
@@ -8054,7 +8069,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request POST \
-    "http://localhost/api/register/eum" \
+    "http://localhost/api/register/sunt" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -8069,7 +8084,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/register/eum"
+    "http://localhost/api/register/sunt"
 );
 
 const headers = {
@@ -8159,6 +8174,394 @@ fetch(url, {
                                                                             </div>
                                 </div>
                                                             <div class="sl-panel__content-wrapper sl-bg-canvas-100 example-response-POSTapi-register--key- example-response-POSTapi-register--key--3"
+                                     style=" display: none;"
+                                >
+                                    <div class="sl-panel__content sl-p-0">                                                                                                                                
+                                            <pre><code style="max-height: 300px;"
+                                                       class="language-json sl-overflow-x-auto sl-overflow-y-auto">{
+    &quot;code&quot;: 500,
+    &quot;message&quot;: &quot;internal server error&quot;,
+    &quot;data&quot;: null
+}</code></pre>
+                                                                            </div>
+                                </div>
+                                                    </div>
+                            </div>
+    </div>
+</div>
+
+                    <div class="sl-stack sl-stack--vertical sl-stack--8 HttpOperation sl-flex sl-flex-col sl-items-stretch sl-w-full">
+    <div class="sl-stack sl-stack--vertical sl-stack--5 sl-flex sl-flex-col sl-items-stretch">
+        <div class="sl-relative">
+            <div class="sl-stack sl-stack--horizontal sl-stack--5 sl-flex sl-flex-row sl-items-center">
+                <h2 class="sl-text-3xl sl-leading-tight sl-font-prose sl-text-heading sl-mt-5 sl-mb-1"
+                    id="acl-access-control-list-GETapi-register-resend-email--key-">
+                    Mengirim ulang email verifikasi
+                </h2>
+            </div>
+        </div>
+
+        <div class="sl-relative">
+            <div title="http://localhost/api/register/resend-email/{key}"
+                     class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
+                >
+                                            <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
+                             style="background-color: green;"
+                        >
+                            GET
+                        </div>
+                                        <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
+                        <div dir="rtl"
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
+                        <div class="sl-flex-1 sl-font-semibold">/api/register/resend-email/{key}</div>
+                    </div>
+
+                                    </div>
+        </div>
+
+        
+    </div>
+    <div class="sl-flex">
+        <div data-testid="two-column-left" class="sl-flex-1 sl-w-0">
+            <div class="sl-stack sl-stack--vertical sl-stack--10 sl-flex sl-flex-col sl-items-stretch">
+                <div class="sl-stack sl-stack--vertical sl-stack--8 sl-flex sl-flex-col sl-items-stretch">
+                                            <div class="sl-stack sl-stack--vertical sl-stack--5 sl-flex sl-flex-col sl-items-stretch">
+                            <h3 class="sl-text-2xl sl-leading-snug sl-font-prose">
+                                Headers
+                            </h3>
+                            <div class="sl-text-sm">
+                                                                    <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">Content-Type</div>
+                                    </div>
+                                    </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        application/json
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+                                                                    <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">Accept</div>
+                                    </div>
+                                    </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        application/json
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+                                                            </div>
+                        </div>
+                    
+                                            <div class="sl-stack sl-stack--vertical sl-stack--6 sl-flex sl-flex-col sl-items-stretch">
+                            <h3 class="sl-text-2xl sl-leading-snug sl-font-prose">URL Parameters</h3>
+
+                            <div class="sl-text-sm">
+                                                                    <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">key</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
+                                    </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        quidem
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+                                                            </div>
+                        </div>
+                    
+
+                    
+                    
+                                    </div>
+            </div>
+        </div>
+
+        <div data-testid="two-column-right" class="sl-relative sl-w-2/5 sl-ml-16" style="max-width: 500px;">
+            <div class="sl-stack sl-stack--vertical sl-stack--6 sl-flex sl-flex-col sl-items-stretch">
+
+                                    <div class="sl-inverted">
+    <div class="sl-overflow-y-hidden sl-rounded-lg">
+        <form class="TryItPanel sl-bg-canvas-100 sl-rounded-lg"
+              data-method="GET"
+              data-path="api/register/resend-email/{key}"
+              data-hasfiles="0"
+              data-hasjsonbody="0">
+            
+                            <div class="sl-panel sl-outline-none sl-w-full expandable">
+                    <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
+                         role="button">
+                        <div class="sl-flex sl-flex-1 sl-items-center sl-h-lg">
+                            <div class="sl-flex sl-items-center sl-mr-1.5 expansion-chevrons expansion-chevrons-solid expanded">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                     data-icon="caret-down"
+                                     class="svg-inline--fa fa-caret-down fa-fw sl-icon" role="img"
+                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                    <path fill="currentColor"
+                                          d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"></path>
+                                </svg>
+                            </div>
+                            Headers
+                        </div>
+                    </div>
+                    <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
+                        <div class="ParameterGrid sl-p-4">
+                                                                                            <label aria-hidden="true"
+                                       for="header-GETapi-register-resend-email--key--Content-Type">Content-Type</label>
+                                <span class="sl-mx-3">:</span>
+                                <div class="sl-flex sl-flex-1">
+                                    <div class="sl-input sl-flex-1 sl-relative">
+                                        <input aria-label="Content-Type" name="Content-Type"
+                                               id="header-GETapi-register-resend-email--key--Content-Type"
+                                               value="application/json" data-component="header"
+                                               class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
+                                    </div>
+                                </div>
+                                                                                            <label aria-hidden="true"
+                                       for="header-GETapi-register-resend-email--key--Accept">Accept</label>
+                                <span class="sl-mx-3">:</span>
+                                <div class="sl-flex sl-flex-1">
+                                    <div class="sl-input sl-flex-1 sl-relative">
+                                        <input aria-label="Accept" name="Accept"
+                                               id="header-GETapi-register-resend-email--key--Accept"
+                                               value="application/json" data-component="header"
+                                               class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
+                                    </div>
+                                </div>
+                                                    </div>
+                    </div>
+                </div>
+            
+                            <div class="sl-panel sl-outline-none sl-w-full expandable">
+                    <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
+                         role="button">
+                        <div class="sl-flex sl-flex-1 sl-items-center sl-h-lg">
+                            <div class="sl-flex sl-items-center sl-mr-1.5 expansion-chevrons expansion-chevrons-solid expanded">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                     data-icon="caret-down"
+                                     class="svg-inline--fa fa-caret-down fa-fw sl-icon" role="img"
+                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                    <path fill="currentColor"
+                                          d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"></path>
+                                </svg>
+                            </div>
+                            URL Parameters
+                        </div>
+                    </div>
+                    <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
+                        <div class="ParameterGrid sl-p-4">
+                                                            <label aria-hidden="true"
+                                       for="urlparam-GETapi-register-resend-email--key--key">key</label>
+                                <span class="sl-mx-3">:</span>
+                                <div class="sl-flex sl-flex-1">
+                                    <div class="sl-input sl-flex-1 sl-relative">
+                                        <input aria-label="key" name="key"
+                                               id="urlparam-GETapi-register-resend-email--key--key"
+                                               placeholder=""
+                                               value="quidem" data-component="url"
+                                               class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
+                                    </div>
+                                </div>
+                                                    </div>
+                    </div>
+                </div>
+            
+            
+            
+            <div class="SendButtonHolder sl-mt-4 sl-p-4 sl-pt-0">
+                <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-center">
+                    <button type="button" data-endpoint="GETapi-register-resend-email--key-"
+                            class="tryItOut-btn sl-button sl-h-sm sl-text-base sl-font-medium sl-px-1.5 sl-bg-primary hover:sl-bg-primary-dark active:sl-bg-primary-darker disabled:sl-bg-canvas-100 sl-text-on-primary disabled:sl-text-body sl-rounded sl-border-transparent sl-border disabled:sl-opacity-70"
+                    >
+                        Send Request 💥
+                    </button>
+                </div>
+            </div>
+
+            <div data-endpoint="GETapi-register-resend-email--key-"
+                 class="tryItOut-error expandable sl-panel sl-outline-none sl-w-full" hidden>
+                <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
+                     role="button">
+                    <div class="sl-flex sl-flex-1 sl-items-center sl-h-lg">
+                        <div class="sl-flex sl-items-center sl-mr-1.5 expansion-chevrons expansion-chevrons-solid expanded">
+                            <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                 data-icon="caret-down"
+                                 class="svg-inline--fa fa-caret-down fa-fw sl-icon" role="img"
+                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                <path fill="currentColor"
+                                      d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"></path>
+                            </svg>
+                        </div>
+                        Request failed with error
+                    </div>
+                </div>
+                <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
+                    <div class="sl-panel__content sl-p-4">
+                        <p class="sl-pb-2"><strong class="error-message"></strong></p>
+                        <p class="sl-pb-2">Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</p>
+                    </div>
+                </div>
+            </div>
+
+                <div data-endpoint="GETapi-register-resend-email--key-"
+                     class="tryItOut-response expandable sl-panel sl-outline-none sl-w-full" hidden>
+                    <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
+                         role="button">
+                        <div class="sl-flex sl-flex-1 sl-items-center sl-h-lg">
+                            <div class="sl-flex sl-items-center sl-mr-1.5 expansion-chevrons expansion-chevrons-solid expanded">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                     data-icon="caret-down"
+                                     class="svg-inline--fa fa-caret-down fa-fw sl-icon" role="img"
+                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                    <path fill="currentColor"
+                                          d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"></path>
+                                </svg>
+                            </div>
+                            Received response
+                        </div>
+                    </div>
+                    <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
+                        <div class="sl-panel__content sl-p-4">
+                            <p class="sl-pb-2 response-status"></p>
+                            <pre><code class="sl-pb-2 response-content language-json"
+                                       data-empty-response-text="<Empty response>"
+                                       style="max-height: 300px;"></code></pre>
+                        </div>
+                    </div>
+                </div>
+        </form>
+    </div>
+</div>
+                
+                                            <div class="sl-panel sl-outline-none sl-w-full sl-rounded-lg">
+                            <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-3 sl-pl-4 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-select-none">
+                                <div class="sl-flex sl-flex-1 sl-items-center sl-h-lg">
+                                    <div class="sl--ml-2">
+                                        Example request:
+                                        <select class="example-request-lang-toggle sl-text-base"
+                                                aria-label="Request Sample Language"
+                                                onchange="switchExampleLanguage(event.target.value);">
+                                                                                            <option>bash</option>
+                                                                                            <option>javascript</option>
+                                                                                    </select>
+                                    </div>
+                                </div>
+                            </div>
+                                                            <div class="sl-bg-canvas-100 example-request example-request-bash"
+                                     style="">
+                                    <div class="sl-px-0 sl-py-1">
+                                        <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
+                                            <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/register/resend-email/quidem" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre>                                        </div>
+                                    </div>
+                                </div>
+                                                            <div class="sl-bg-canvas-100 example-request example-request-javascript"
+                                     style="display: none;">
+                                    <div class="sl-px-0 sl-py-1">
+                                        <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
+                                            <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/register/resend-email/quidem"
+);
+
+const headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>                                        </div>
+                                    </div>
+                                </div>
+                                                    </div>
+                    
+                                            <div class="sl-panel sl-outline-none sl-w-full sl-rounded-lg">
+                            <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-3 sl-pl-4 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-select-none">
+                                <div class="sl-flex sl-flex-1 sl-items-center sl-py-2">
+                                    <div class="sl--ml-2">
+                                        <div class="sl-h-sm sl-text-base sl-font-medium sl-px-1.5 sl-text-muted sl-rounded sl-border-transparent sl-border">
+                                            <div class="sl-mb-2 sl-inline-block">Example response:</div>
+                                            <div class="sl-mb-2 sl-inline-block">
+                                                <select
+                                                        class="example-response-GETapi-register-resend-email--key--toggle sl-text-base"
+                                                        aria-label="Response sample"
+                                                        onchange="switchExampleResponse('GETapi-register-resend-email--key-', event.target.value);">
+                                                                                                            <option value="0">200</option>
+                                                                                                            <option value="1">404</option>
+                                                                                                            <option value="2">500</option>
+                                                                                                    </select></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button"
+                                        class="sl-button sl-h-sm sl-text-base sl-font-medium sl-px-1.5 hover:sl-bg-canvas-50 active:sl-bg-canvas-100 sl-text-muted hover:sl-text-body focus:sl-text-body sl-rounded sl-border-transparent sl-border disabled:sl-opacity-70">
+                                    <div class="sl-mx-0">
+                                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="copy"
+                                             class="svg-inline--fa fa-copy fa-fw fa-sm sl-icon" role="img"
+                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <path fill="currentColor"
+                                                  d="M384 96L384 0h-112c-26.51 0-48 21.49-48 48v288c0 26.51 21.49 48 48 48H464c26.51 0 48-21.49 48-48V128h-95.1C398.4 128 384 113.6 384 96zM416 0v96h96L416 0zM192 352V128h-144c-26.51 0-48 21.49-48 48v288c0 26.51 21.49 48 48 48h192c26.51 0 48-21.49 48-48L288 416h-32C220.7 416 192 387.3 192 352z"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                            </div>
+                                                            <div class="sl-panel__content-wrapper sl-bg-canvas-100 example-response-GETapi-register-resend-email--key- example-response-GETapi-register-resend-email--key--0"
+                                     style=" "
+                                >
+                                    <div class="sl-panel__content sl-p-0">                                                                                                                                
+                                            <pre><code style="max-height: 300px;"
+                                                       class="language-json sl-overflow-x-auto sl-overflow-y-auto">{
+    &quot;code&quot;: 200,
+    &quot;message&quot;: &quot;success&quot;,
+    &quot;data&quot;: null
+}</code></pre>
+                                                                            </div>
+                                </div>
+                                                            <div class="sl-panel__content-wrapper sl-bg-canvas-100 example-response-GETapi-register-resend-email--key- example-response-GETapi-register-resend-email--key--1"
+                                     style=" display: none;"
+                                >
+                                    <div class="sl-panel__content sl-p-0">                                                                                                                                
+                                            <pre><code style="max-height: 300px;"
+                                                       class="language-json sl-overflow-x-auto sl-overflow-y-auto">{
+    &quot;code&quot;: 404,
+    &quot;message&quot;: &quot;not found&quot;,
+    &quot;data&quot;: null
+}</code></pre>
+                                                                            </div>
+                                </div>
+                                                            <div class="sl-panel__content-wrapper sl-bg-canvas-100 example-response-GETapi-register-resend-email--key- example-response-GETapi-register-resend-email--key--2"
                                      style=" display: none;"
                                 >
                                     <div class="sl-panel__content sl-p-0">                                                                                                                                

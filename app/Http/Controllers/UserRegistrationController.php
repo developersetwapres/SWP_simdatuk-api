@@ -205,4 +205,44 @@ class UserRegistrationController extends Controller
 
         return $this->response();
     }
+
+    /**
+     * Mengirim ulang email verifikasi
+     * @group ACL - Access Control List
+     * @subgroup Register
+     * @response 200 {"code": 200, "message": "success", "data": null}
+     * @response 404 {"code": 404, "message": "not found", "data": null}
+     * @response 500 {"code": 500, "message": "internal server error", "data": null}
+     */
+    public function resendEmail(string $key)
+    {
+        try {
+            // validasi key
+            $userRegistraion = $this->registrationRepo->findByKey($key);
+            if (!$userRegistraion) {
+                return $this->response(404, 'key tidak valid');
+            }
+
+            $pegawai = $this->pegawaiRepo->findById($userRegistraion->pegawai_id);
+            if (!$pegawai) {
+                return $this->response(404, 'pegawai tidak tersedia');
+            }
+
+            // menyiapkan data yang akan dikirim ke email
+            $data = [
+                'nama' => ucwords($pegawai->nama),
+                'verification_key' => $userRegistraion->verification_key,
+                'expired_at' => $userRegistraion->expired_at,
+                'base_url' => env('FE_BASE_URL') . '/set-password',
+            ];
+
+            // mengirim email
+            Mail::to($userRegistraion->email)
+                ->send(new UserRegisterVerification($data));
+        } catch (\Exception $e) {
+            return $this->internalServerErrorResponse();
+        }
+
+        return $this->response();
+    }
 }
