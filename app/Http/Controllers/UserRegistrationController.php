@@ -13,6 +13,11 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
+/**
+ * @group ACL - Access Control List
+ *
+ * APIs for user management
+ */
 class UserRegistrationController extends Controller
 {
     use Responser;
@@ -33,6 +38,25 @@ class UserRegistrationController extends Controller
         $this->registrationRepo = $userRegistrationRepo;
     }
 
+    /**
+     * Register new User by Admin
+     * @group ACL - Access Control List
+     * @subgroup Register
+     * @bodyParam username string New username. Example: admin123
+     * @bodyParam email string New email. Example: example@domain.com
+     * @bodyParam role_id integer Role ID. Example: 1
+     * @bodyParam pegawai_id integer Pegawai ID. Example: 1
+     * @response 201 {"code": 201,"message": "created","data": {
+     * "username":"admin123",
+     * "email":"example@domain.com",
+     * "verification_key": "voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e",
+     * "expired_at": "2017-07-21 17:32:28",
+     * }}
+     * @response 400 {"code": 400, "message": "bad request", "data": null}
+     * @response 403 {"code": 403, "message": "forbidden", "data": null}
+     * @response 404 {"code": 404, "message": "not found", "data": null}
+     * @response 500 {"code": 500, "message": "internal server error", "data": null}
+     */
     public function register(UserRegistrationRequest $request)
     {
         $username = trim($request['username']);
