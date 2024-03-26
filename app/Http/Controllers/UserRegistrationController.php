@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Responser;
+use App\Http\Requests\RegisterVerificationRequest;
 use Illuminate\Support\Str;
 use App\Repositories\RoleRepository;
 use App\Repositories\PegawaiRepository;
@@ -10,6 +11,7 @@ use App\Http\Requests\UserRegistrationRequest;
 use App\Mail\UserRegisterVerification;
 use App\Repositories\UserRegistrationRepository;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
@@ -46,7 +48,7 @@ class UserRegistrationController extends Controller
      * @bodyParam email string New email. Example: example@domain.com
      * @bodyParam role_id integer Role ID. Example: 1
      * @bodyParam pegawai_id integer Pegawai ID. Example: 1
-     * @response 201 {"code": 201,"message": "created","data": {
+     * @response 201 {"code": 201, "message": "created", "data": {
      * "username":"admin123",
      * "email":"example@domain.com",
      * "verification_key": "voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e",
@@ -119,7 +121,7 @@ class UserRegistrationController extends Controller
                 ->send(new UserRegisterVerification($data));
 
         } catch (\Exception $e) {
-            return $this->internalServerErrorResponse($e->getMessage());
+            return $this->internalServerErrorResponse();
         }
 
         $resp = [
@@ -144,6 +146,61 @@ class UserRegistrationController extends Controller
     {
         if (!$this->registrationRepo->findByKey($key)) {
             return $this->response(404, 'not found');
+        }
+
+        return $this->response();
+    }
+
+    /**
+     * Verifikasi User dan Set Password Baru
+     * @group ACL - Access Control List
+     * @subgroup Register
+     * @bodyParam password string Password. Example: secret123
+     * @bodyParam password_confirm string Password confirm. Example: secret123
+     * @response 200 {"code": 200, "message": "success", "data": null}
+     * @response 400 {"code": 400, "message": "bad request", "data": null}
+     * @response 404 {"code": 404, "message": "not found", "data": null}
+     * @response 500 {"code": 500, "message": "internal server error", "data": null}
+     */
+    public function verification(string $key, RegisterVerificationRequest $request)
+    {
+        // validasi apakah password match
+        if ($request['password'] !== $request['password_confirm']) {
+            return $this->response(400, 'password dan confirmation password tidak cocok');
+        }
+
+        try {
+            DB::beginTransaction();
+
+            // validasi key ke table user_registrations
+            $userRegistraion = $this->registrationRepo->findByKey($key);
+            if (!$userRegistraion) {
+                return $this->response(404, 'not found');
+            }
+
+            // hash password
+            $password = Hash::make($request['password']);
+
+            // siapkan data yang akan di simpan ke table pegawai
+            $pegawaiId = $userRegistraion->pegawai_id;
+            $data = [
+                'role_id' => $userRegistraion->role_id,
+                'username' => $userRegistraion->username,
+                'password' => $password,
+                'role_status' => true,
+                'email' => $userRegistraion->email
+            ];
+
+            // simpan data ke table pegawai
+            $this->pegawaiRepo->update($pegawaiId, $data);
+
+            // hapus data dari user_registrations
+            $this->registrationRepo->deleteByKey($key);
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return $this->internalServerErrorResponse();
         }
 
         return $this->response();

@@ -50,4 +50,5 @@ Route::prefix('permissions')->group(function () {
 Route::prefix('register')->group(function () {
     Route::post('/', [UserRegistrationController::class, 'register']);
     Route::get('/{key}', [UserRegistrationController::class, 'validateKey']);
+    Route::post('/{key}', [UserRegistrationController::class, 'verification']);
 });
