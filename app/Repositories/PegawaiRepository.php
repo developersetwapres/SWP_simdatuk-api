@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 interface PegawaiRepositoryInterface
 {
     public function changeRoleId(int $from, int $to);
+    public function update(int $id, array $data);
     public function userList();
     public function updateUser(int $id, array $data);
     public function userDetail(int $userId);
@@ -29,6 +30,13 @@ class PegawaiRepository implements PegawaiRepositoryInterface
     public function findById(int $pegawaiId)
     {
         return DB::table($this->table)->find($pegawaiId);
+    }
+
+    public function update(int $id, array $data)
+    {
+        return DB::table($this->table)
+            ->where('id', $id)
+            ->update($data);
     }
 
     public function changeRoleId(int $from, int $to)
