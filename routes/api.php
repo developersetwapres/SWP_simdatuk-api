@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
@@ -52,4 +53,8 @@ Route::prefix('register')->group(function () {
     Route::get('/{key}', [UserRegistrationController::class, 'validateKey']);
     Route::post('/{key}', [UserRegistrationController::class, 'verification']);
     Route::get('/resend-email/{key}', [UserRegistrationController::class, 'resendEmail']);
+});
+
+Route::prefix('jabatan')->group(function () {
+    Route::get('/', [JabatanController::class, 'list']);
 });
