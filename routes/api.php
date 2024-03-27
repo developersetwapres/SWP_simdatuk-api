@@ -57,4 +57,5 @@ Route::prefix('register')->group(function () {
 
 Route::prefix('jabatan')->group(function () {
     Route::get('/', [JabatanController::class, 'list']);
+    Route::post('/', [JabatanController::class, 'create']);
 });
