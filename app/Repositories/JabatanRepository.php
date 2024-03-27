@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 interface JabatanRepositoryInterface
 {
     public function list();
+    public function save(array $data);
 }
 
 class JabatanRepository implements JabatanRepositoryInterface
@@ -27,5 +28,10 @@ class JabatanRepository implements JabatanRepositoryInterface
                 'b.nama AS biro'
             ])
             ->get();
+    }
+
+    public function save(array $data)
+    {
+        return DB::table($this->table)->insert($data);
     }
 }
