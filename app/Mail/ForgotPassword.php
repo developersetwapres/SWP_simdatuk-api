@@ -3,24 +3,22 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Http\Request;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class UserRegisterVerification extends Mailable implements ShouldQueue
+class RegisterVerification extends Mailable
 {
     use Queueable, SerializesModels;
-
-    public $data;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(array $data)
+    public function __construct(Request $request)
     {
-        $this->data = $data;
+        $this->request = $request;
     }
 
     /**
@@ -29,7 +27,7 @@ class UserRegisterVerification extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'User Verification',
+            subject: 'Reset Password',
         );
     }
 
@@ -39,7 +37,10 @@ class UserRegisterVerification extends Mailable implements ShouldQueue
     public function content(): Content
     {
         return new Content(
-            view: 'mail.registerVerification',
+            view: 'auth.forgot-password',
+            with: [
+                'redirectUrl' => config('app.fe_url') . '/confirmation-code/forgot-password/' . $this->request->verification_code,
+            ]
         );
     }
 

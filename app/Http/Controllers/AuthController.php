@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\LoginRequest;
+use App\Http\Requests\Auth\CodeVerificationRequest;
+use App\Http\Requests\Auth\ForgotPasswordRequest;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\ResetPasswordRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 /**
@@ -23,33 +27,117 @@ class AuthController extends Controller
 
     /**
      * Login
-     * @bodyParam email string required email for authentication. Example: example@domain.com
-     * @bodyParam password string required password for authentication. Example: password
-     * @response 200 {"code": 200,"message": "Pengguna berhasil login.","token": "10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e"}
-     * @response 422 {"code": 422,"message": "Alamat email tidak boleh kosong.","data": {"email": ["Alamat email tidak boleh kosong."], "password": ["Kata sandi tidak boleh kosong."]}}
+     * @response 200 {"code": 200,"message": "Pengguna berhasil login.","token": "12|Qt9HeTzHAmw5s2fLiRO09eovw1yF3EcSHFR4mU9Ga3cc24ab","user": {"id": 1,"email": "admin@setwapres.go.id","username": "admin","file_foto_profil": null,"nip": "0000000000000","nrp": "0000000000000","role": {"id": 1,"name": "administrator"},"permissions": [{"id": 8,"name": "Data Pegawai - ASN","create": 1,"read": 1,"update": 1,"delete": 0}]}}
+     * @response 422 {"code": 422,"message": "Username tidak boleh kosong.","data": {"username": ["Username email tidak boleh kosong."], "password": ["Kata sandi tidak boleh kosong."]}}
+     * @response 401 {"code": 401,"message": "Kata sandi yang anda masukkan salah.","data": null}
      */
     public function login(LoginRequest $request)
     {
-        $credentials = $request->validated();
-
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('username', $request->username)->first();
 
         if (!$user || !Hash::check($request->password, $user->password)) {
-            return $this->response(422, 'Alamat email atau kata sandi yang digunakan salah.');
+            return $this->response(401, 'Kata sandi yang anda masukkan salah.');
+        } else if (is_null($user->role_id)) {
+            return $this->response(401, 'Anda tidak terdaftar sebagai pengguna, silakan hubungi tim IT.');
+        } else if ($user->status != true) {
+            return $this->response(401, 'Status pengguna tidak aktif.');
+        } else if (!is_null($user->verification_code)) {
+            return $this->response(401, 'Email belum terverifikasi.');
+        } else {
+            $token = $user->createToken('web')->plainTextToken;
         }
-        $token = $user->createToken('web')->plainTextToken;
+
+        $user = DB::table('users');
+        $user->select('users.id', 'users.email', 'users.username', 'users.file_foto_profil', 'users.nip', 'users.nrp');
+        $user = $user->first();
+
+        $role = DB::table('roles');
+        $role->join('users', 'roles.id', 'users.role_id');
+        $role->select('roles.id', 'roles.name');
+        $role->where('users.id', $user->id);
+        $role = $role->first();
+
+        $user->role = $role;
+
+        $permissions = DB::table('permissions');
+        $permissions->join('role_permissions', 'permissions.id', 'role_permissions.permission_id');
+        $permissions->join('roles', 'role_permissions.role_id', 'roles.id');
+        $permissions->join('users', 'roles.id', 'users.role_id');
+        $permissions->select('permissions.id', 'permissions.name', 'role_permissions.create', 'role_permissions.read', 'role_permissions.update', 'role_permissions.delete');
+        $permissions = $permissions->get();
+
+        $user->permissions = $permissions;
 
         return response()->json([
             'code' => 200,
             "message" => "Pengguna berhasil login.",
             "token" => $token,
+            "user" => $user,
         ], 200);
+    }
+
+    /**
+     * Forgot Password
+     * @response 200 {"code": 200,"message": "Email sudah dikirim.","data": null}
+     * @response 422 {"code": 422,"message": "Email tidak boleh kosong.","data": null}
+     * @response 404 {"code": 404,"message": "Email tidak terdaftar sebagai pengguna.","data": null}
+     */
+    public function forgotPassword(ForgotPasswordRequest $request)
+    {
+        $user = DB::table('users');
+        $user->select('role_id');
+        $user->where('email', $this->request->email);
+        $user = $user->first();
+        if (is_null($user->role_id)) {
+            return $this->response(404, 'Email tidak terdaftar sebagai pengguna.');
+        }
+
+        // Generete Token
+
+        // Send Email
+    }
+
+    /**
+     * Code Verification
+     * @response 200 {"code": 200,"message": "Verifikasi kode berhasil.", "data": null}
+     * @response 404 {"code": 404,"message": "Verifikasi kode tidak tersedia.","data": null}
+     * @response 404 {"code": 404,"message": "Verifikasi kode sudah kadaluarsa.","data": null}
+     */
+    public function codeVerification(CodeVerificationRequest $request)
+    {
+        if ($this->request->status == true) {
+            $user = DB::table("user");
+        } else {
+            $user = DB::table("reset_password");
+        }
+        $user->where('verification_code', $this->request->code);
+        $user->select('verification_code', 'expired_at');
+        $user = $user->first();
+
+        if ($user) {
+            return $this->response(404, 'Verifikasi kode tidak tersedia.');
+        } else if ($user->expired_at < date('Y-m-d')) {
+            return $this->response(404, 'Verifikasi kode sudah kadaluarsa.');
+        } else {
+            return $this->response(200, 'Verifikasi kode berhasil.');
+        }
+    }
+
+    /**
+     * Reset Password
+     * @response 200 {"code": 200,"message": "Pengguna berhasil login.","data": null}
+     * @response 422 {"code": 422,"message": "Username tidak boleh kosong.","data": null}
+     * @response 401 {"code": 401,"message": "Kata sandi yang anda masukkan salah.","data": null}
+     */
+    public function resetPassword(ResetPasswordRequest $request)
+    {
     }
 
     /**
      * Logout
      * @authenticated
-     * @header Authorization 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e
+     * @response 200{"code": 200,"message": "Pengguna berhasil logout.","data": null}
+     * @response 401 {"code": 401,"message": "Anda harus login terlebih dahulu!","data": null}
      */
     public function logout()
     {
@@ -57,4 +145,5 @@ class AuthController extends Controller
         $user->tokens()->where('id', auth()->id())->delete();
         return $this->response(200, 'Pengguna berhasil logout.');
     }
+
 }

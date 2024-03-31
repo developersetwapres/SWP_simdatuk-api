@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\Responser;
-use App\Http\Requests\UserUpdateRequest;
-use App\Repositories\PegawaiRepository;
-use App\Repositories\RoleRepository;
+use App\Http\Requests\User\CreateUserRequest;
+use App\Http\Requests\User\UpdateStatusRequest;
+use App\Mail\RegisterVerification;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 /**
  * @group ACL - Access Control List
@@ -14,46 +17,128 @@ use App\Repositories\RoleRepository;
  */
 class UserController extends Controller
 {
-    use Responser;
 
-    protected $pegawaiRepo;
-    protected $roleRepo;
-
-    public function __construct(
-        PegawaiRepository $pegawaiRepo,
-        RoleRepository $roleRepo) {
-        $this->pegawaiRepo = $pegawaiRepo;
-        $this->roleRepo = $roleRepo;
+    public function __construct(Request $request)
+    {
+        $this->request = $request;
+        $this->posted = $request->except('_token', '_method');
     }
 
     /**
      * Get List of Users
      * @group ACL - Access Control List
      * @subgroup User
-     * @header Authorization 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e
-     * @response 200 {"code": 200,"message": "ok","data": [{
-     * "id": 1,
-     * "username":
-     * "admin",
-     * "password": "voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e",
-     * "nip": "example123",
-     * "nrp": "123example",
-     * "name": "admin",
-     * "status": 1
-     * }]}
-     * @response 404 {"code": 404,"message": "tidak ada data","data": null}
-     * @response 500 {"code": 500,"message": "internal server error","data": null}
+     * @subgroupDescription A description for the subgroup
+     * @authenticated
+     * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
+     * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
+     * @queryParam username string The keyword search field for the username. Example: admin
+     * @response 200 {"code": 200, "message": "success", "data": [{"id": 32, "username": "admin", "nip": "0000000000000", "nrp": "0000000000000", "role_name": "administrator", "status": "Aktif"}], "pagination": {"total": 1, "count": 1, "per_page": 1, "current_page": 1, "total_pages": 1, "links": {"first_page": "http://localhost/api/users?page=1", "last_page": "http://localhost/api/users?page=1", "next_page": null, "prev_page": null}}}
      */
-    public function userList()
+    public function index()
     {
-        try {
-            $user = $this->pegawaiRepo->userList();
-            if (!$user) {
-                return $this->response(404, 'data user tidak tersedia');
-            }
-        } catch (\Exception $e) {
-            return $this->internalServerErrorResponse();
+        $messages = [
+            'page.numeric' => 'Page harus berupa angka.',
+            'page.min' => 'Page minimal harus 1 atau lebih.',
+            'limit.numeric' => 'Limit harus berupa angka.',
+            'limit.min' => 'Limit minimal harus 1 atau lebih.',
+        ];
+
+        $validatedData = $this->request->validate([
+            'page' => 'nullable|numeric|min:1',
+            'limit' => 'nullable|numeric|min:1',
+        ], $messages);
+        $this->request->limit = ($this->request->limit) ? $this->request->limit : 10;
+
+        $users = DB::table('users');
+        $users->join('roles', 'users.role_id', 'role_id');
+        $users->select('users.id', 'users.username', 'users.nip', 'users.nrp', 'roles.name as role_name', 'users.status');
+        $users->where('users.username', 'like', '%' . $this->request->username . '%');
+        $users = $users->paginate($this->request->limit);
+        if ($users->isEmpty()) {
+            return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $users);
         }
+        foreach ($users->items() as $key => $item) {
+            $item->status = ($item == true) ? 'Aktif' : 'Nonaktif';
+        }
+        return $this->paginateResponse(200, 'success', $users);
+    }
+
+    /**
+     * Create a New User
+     * @group ACL - Access Control List
+     * @subgroup User
+     * @authenticated
+     * @bodyParam id integer Refers to the ID of Pegawai. Example: 1
+     * @bodyParam username string Refers to username being to stored. Example: administrator
+     * @bodyParam email string Refers to email being to stored. Example: admin@simdatuk.go.id
+     * @bodyParam role_id integer Refers to the ID of Role. Example: 1
+     * @response 422 {"code": 422, "message": "Role tidak ditemukan.", "data": null}
+     * @response 422 {"code": 422, "message": "Pengguna tidak ditemukan.", "data": null}
+     * @response 200 {"code": 200, "message": "Pengguna berhasil ditambah.", "data": null}
+     */
+    public function create(CreateUserRequest $request)
+    {
+        $role = DB::table('roles')->where('id', $this->request->role_id)->first();
+        if (!$role) {
+            return $this->response(422, 'Role tidak ditemukan.');
+        }
+        $user = DB::table('users')->select('name')->where('id', $this->request->id)->first();
+        if (!$user) {
+            return $this->response(422, 'Pengguna tidak ditemukan.');
+        }
+
+        $this->request->verification_code = Str::random(40);
+        $this->request->name = $user->name;
+
+        try {
+            DB::beginTransaction();
+
+            DB::table('users')->where('id', $this->request->id)->updateTs([
+                'username' => $this->request->username,
+                'email' => $this->request->email,
+                'role_id' => $this->request->role_id,
+                'verification_code' => $this->request->verification_code,
+                'expire_at' => date('Y-m-d', strtotime('+7 days', strtotime(date('Y-m-d')))),
+                'status' => true,
+            ]);
+
+            Mail::to($this->request->email)->send(new RegisterVerification($this->request))->render();
+
+            DB::commit();
+            return $this->response(200, 'Pengguna berhasil ditambah.');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
+        }
+    }
+
+    /**
+     * Get Detail User by ID
+     * @group ACL - Access Control List
+     * @subgroup User
+     * @authenticated
+     * @urlParam id Refers to the ID of User. Example: 1
+     * @response 200 {"code": 200,"message": "success","data": {"id": 1,"username": "admin","email": "admin@setwapres.go.id","name": "administrator","nip": "0000000000000","role": {"id": 1,"name": "administrator"}}}
+     * @response 404 {"code": 404,"message": "Pengguna tidak ditemukan.","data": null}
+     */
+    public function show()
+    {
+        $user = DB::table('users');
+        $user->where('id', $this->request->id);
+        $user->where('role_id', '!=', null);
+        $user->select('role_id', 'id', 'username', 'email', 'name', 'nip');
+        $user = $user->first();
+        if (!$user) {
+            return $this->response(404, 'Pengguna tidak ditemukan.');
+        }
+        $role = DB::table('roles');
+        $role->where('id', $user->role_id);
+        $role->select('id', 'name');
+        $role = $role->first();
+
+        unset($user->role_id);
+        $user->role = $role;
 
         return $this->response(200, 'success', $user);
     }
@@ -62,106 +147,41 @@ class UserController extends Controller
      * Update User by ID
      * @group ACL - Access Control List
      * @subgroup User
-     * @header Authorization 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e
-     * @bodyParam username string New username. Example: admin123
-     * @bodyParam email string New email. Example: example@domain.com
-     * @bodyParam role_id integer Role ID. Example: 1
-     * @response 200 {"code": 200,"message": "ok", "data": null}
-     * @response 400 {"code": 400,"message": "bad request", "data": null}
-     * @response 401 {"code": 401,"message": "unauthorized", "data": null}
-     * @response 403 {"code": 403,"message": "forbidden", "data": null}
-     * @response 404 {"code": 404,"message": "not found", "data": null}
+     * @authenticated
+     * @urlParam id Refers to the ID of User. Example: 1
+     * @bodyParam username string Refers to username being to stored. Example: administrator
+     * @bodyParam email string Refers to email being to stored. Example: admin@simdatuk.go.id
+     * @bodyParam role_id integer Refers to the ID of Role. Example: 1
+     * @response 200 {"code": 200, "message": "success", "data": [{"id": 32, "username": "admin", "nip": "0000000000000", "nrp": "0000000000000", "role_name": "administrator", "status": "Aktif"}], "pagination": {"total": 1, "count": 1, "per_page": 1, "current_page": 1, "total_pages": 1, "links": {"first_page": "http://localhost/api/users?page=1", "last_page": "http://localhost/api/users?page=1", "next_page": null, "prev_page": null}}}
      */
-    public function update(int $userId, UserUpdateRequest $request)
+    public function update()
     {
-        try {
-            $user = $this->pegawaiRepo->findUserById($userId);
-            if (!$user) {
-                return $this->response(404, "user dengan id: {$userId}, tidak ditemukan");
-            }
 
-            $data = [];
-            if ($request['username']) {
-                $data['username'] = $request['username'];
-            }
-            if ($request['email']) {
-                $data['email'] = $request['email'];
-            }
-            if ($request['role_id']) {
-                $data['role_id'] = $request['role_id'];
-            }
-
-            $this->pegawaiRepo->updateUser($userId, $data);
-        } catch (\Exception $e) {
-            return $this->internalServerErrorResponse();
-        }
-
-        return $this->response();
     }
 
     /**
-     * Get Detail User by ID
+     * Update Status User by ID
      * @group ACL - Access Control List
      * @subgroup User
-     * @header Authorization 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e
-     * @response 200 {"code": 200,"message": "ok", "data": {
-     *  "id": 1,
-     *  "username": "admin",
-     *  "password": "password",
-     *  "email": "example@domain.com",
-     *  "nip": "nip123",
-     *  "nrp": "nrp123",
-     *  "role_name": "administrator"
-     *  }
-     * }
-     * @response 401 {"code": 401,"message": "unauthorized", "data": null}
-     * @response 403 {"code": 403,"message": "forbidden", "data": null}
-     * @response 404 {"code": 404,"message": "not found", "data": null}
-     * @response 500 {"code": 500,"message": "internal server error", "data": null}
+     * @authenticated
+     * @response 200 {"code": 200,"message": "Pengguna berhasil diaktifkan.","data": null}
+     * @response 404 {"code": 404,"message": "Mohon maaf, pengguna tidak ditemukan.","data": null}
      */
-    public function userDetail(int $userId)
+    public function status(UpdateStatusRequest $request)
     {
-        try {
-            $user = $this->pegawaiRepo->userDetail($userId);
-            if (!$user) {
-                return $this->response(404, "user dengan id: {$userId}, tidak di temukan");
-            }
-        } catch (\Exception $e) {
-            return $this->internalServerErrorResponse();
+        $user = DB::table('users');
+        $user->where('id', $this->request->id);
+        $user->where('role_id', '!=', null);
+        $user = $user->first();
+        if (!$user) {
+            return $this->response(404, 'Mohon maaf, pengguna tidak ditemukan.');
         }
-
-        return $this->response(200, 'success', $user);
-    }
-
-    /**
-     * Deativate User by ID
-     * @group ACL - Access Control List
-     * @subgroup User
-     * @header Authorization 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e
-     * @response 200 {"code": 200,"message": "ok", "data": null}
-     * @response 401 {"code": 401,"message": "unauthorized", "data": null}
-     * @response 403 {"code": 403,"message": "forbidden", "data": null}
-     * @response 404 {"code": 404,"message": "not found", "data": null}
-     * @response 500 {"code": 500,"message": "internal server error", "data": null}
-     */
-    public function deactivate(int $userId)
-    {
-        try {
-            $data = [
-                'id' => $userId,
-                'role_status' => true,
-            ];
-
-            $user = $this->pegawaiRepo->findUserWithConditions($data);
-            if (!$user) {
-                return $this->response(404, "user dengan id: {$userId}, tidak di temukan atau status user tidak aktif");
-            }
-
-            $this->pegawaiRepo->updateUser($userId, ['role_status' => false]);
-        } catch (\Exception $e) {
-            return $this->internalServerErrorResponse();
-        }
-
-        return $this->response();
+        $query = DB::table('users');
+        $query->where('id', $this->request->id);
+        $query->updateTs([
+            'status' => $this->request->status,
+        ]);
+        $message = ($this->request->status == true) ? 'diaktifkan' : 'dinonaktifkan';
+        return $this->response(200, 'Pengguna berhasil ' . $message . '.');
     }
 }

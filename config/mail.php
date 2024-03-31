@@ -142,5 +142,5 @@ return [
     |
      */
 
-    'domain' => env('MAIL_DOMAIN', '@simdatuk.go.id'),
+    'domain' => env('MAIL_DOMAIN', '@setwapres.go.id'),
 ];

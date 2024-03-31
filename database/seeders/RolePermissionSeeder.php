@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -13,21 +12,21 @@ class RolePermissionSeeder extends Seeder
      */
     public function run(): void
     {
-        $data = [];
-
-        for ($i = 1; $i <= 28; $i++) {
-            $d = [
-                'role_id' => 1,
-                'permission_id' => $i,
-                'read' => true,
-                'create' => true,
-                'update' => true,
-                'delete' => true,
+        DB::table('role_permissions')->delete();
+        $role = DB::table('roles')->select('id')->where('name', 'administrator')->first();
+        $permissions = DB::table('permissions')->get();
+        $dataInsert = [];
+        foreach ($permissions as $permission) {
+            $data = [
+                'role_id' => $role->id,
+                'permission_id' => $permission->id,
+                'create' => (str_contains($permission->permitted_actions, 'c')) ? true : false,
+                'read' => (str_contains($permission->permitted_actions, 'r')) ? true : false,
+                'update' => (str_contains($permission->permitted_actions, 'u')) ? true : false,
+                'delete' => (str_contains($permission->permitted_actions, 'd')) ? true : false,
             ];
-
-            array_push($data, $d);
+            array_push($dataInsert, $data);
         }
-
-        DB::table('role_permissions')->insert($data);
+        DB::table('role_permissions')->insertTs($dataInsert);
     }
 }

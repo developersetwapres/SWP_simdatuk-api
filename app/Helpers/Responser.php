@@ -20,19 +20,6 @@ trait Responser
     }
 
     /**
-     * Structuring of JSON single response for API.
-     *
-     * @param integer $code
-     * @param string $message
-     * @param object|array $data
-     * @return void
-     */
-    public function internalServerErrorResponse($message = 'something went wrong')
-    {
-        return response()->json(['code' => 500, 'message' => $message, 'data' => null], 500);
-    }
-
-    /**
      * Structuring of JSON paginate response for API.
      *
      * @param integer $code

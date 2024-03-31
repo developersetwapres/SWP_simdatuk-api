@@ -1,11 +1,11 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\JabatanController;
+use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\UserRegistrationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,38 +24,39 @@ Route::get('/', function () {
 });
 
 Route::post('login', [AuthController::class, 'login']);
+Route::post('forgot-password', [AuthController::class, 'forgotPassword']);
+Route::post('code-verification', [AuthController::class, 'codeVerification']);
+Route::post('reset-password', [AuthController::class, 'resetPassword']);
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::delete('logout', [AuthController::class, 'logout']);
-});
 
-Route::prefix('users')->group(function () {
-    Route::get('/', [UserController::class, 'userList']);
-    Route::get('/{userId}', [UserController::class, 'userDetail'])->where('userId', '[0-9]+');
-    Route::patch('/{userId}', [UserController::class, 'update'])->where('userId', '[0-9]+');
-    Route::delete('/{userId}/deactivate', [UserController::class, 'deactivate'])->where('userId', '[0-9]+');
-});
+    Route::prefix('permissions')->group(function () {
+        Route::get('/', [PermissionController::class, 'index']);
+    });
 
-Route::prefix('roles')->group(function () {
-    Route::get('/', [RoleController::class, 'list']);
-    Route::post('/', [RoleController::class, 'createNewRole']);
-    Route::get('/{roleId}', [RoleController::class, 'detail'])->where('roleId', '[0-9]+');
-    Route::put('/{roleId}', [RoleController::class, 'updateRole'])->where('roleId', '[0-9]+');
-    Route::patch('/{roleId}', [RoleController::class, 'delete'])->where('roleId', '[0-9]+');
-});
+    Route::prefix('roles')->group(function () {
+        Route::get('/', [RoleController::class, 'index']);
+        Route::post('/', [RoleController::class, 'create']);
+        Route::get('/{id}', [RoleController::class, 'show']);
+        Route::post('/{id}', [RoleController::class, 'update']);
+        Route::delete('/{id}', [RoleController::class, 'delete']);
+    });
 
-Route::prefix('permissions')->group(function () {
-    Route::get('/', [PermissionController::class, 'list']);
-    Route::get('/group', [PermissionController::class, 'listGroup']);
-});
+    Route::prefix('users')->group(function () {
+        Route::get('/', [UserController::class, 'index']);
+        Route::post('/', [UserController::class, 'create']);
+        Route::get('/{id}', [UserController::class, 'show']);
+        Route::post('/{id}', [UserController::class, 'update']);
+        Route::post('/status', [UserController::class, 'status']);
+    });
 
-Route::prefix('register')->group(function () {
-    Route::post('/', [UserRegistrationController::class, 'register']);
-    Route::get('/{key}', [UserRegistrationController::class, 'validateKey']);
-    Route::post('/{key}', [UserRegistrationController::class, 'verification']);
-    Route::get('/resend-email/{key}', [UserRegistrationController::class, 'resendEmail']);
-});
+    Route::prefix('pegawais')->group(function () {
+        Route::get('/', [PegawaiController::class, 'index']);
+    });
 
-Route::prefix('jabatan')->group(function () {
-    Route::get('/', [JabatanController::class, 'list']);
-    Route::post('/', [JabatanController::class, 'create']);
+    Route::prefix('profile')->group(function () {
+        Route::get('/', [ProfileController::class, 'show']);
+        Route::post('/', [ProfileController::class, 'update']);
+    });
 });

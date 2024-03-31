@@ -2,86 +2,35 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\Responser;
-use App\Repositories\PermissionRepository;
-use Illuminate\Database\QueryException;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 /**
  * @group ACL - Access Control List
  *
- * APIs for permission
+ * APIs for permissions
  */
 class PermissionController extends Controller
 {
-    use Responser;
 
-    protected $permissionRepo;
-
-    public function __construct(PermissionRepository $permissionRepo)
+    public function __construct(Request $request)
     {
-        $this->permissionRepo = $permissionRepo;
+        $this->request = $request;
+        $this->posted = $request->except('_token', '_method');
     }
 
     /**
      * Get List of Permissions
      * @group ACL - Access Control List
      * @subgroup Permission
-     * @header Authorization 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e
-     * @response 200 {"code": 200, "message": "ok", "data": [{
-     * "id": 1,
-     * "group": "Rekapitulasi",
-     * "name": "Komposisi Pegawai"
-     * "permitted_actions": "r"
-     * }]}
-     * @response 401 {"code": 401,"message": "unauthorized", "data": null}
-     * @response 403 {"code": 403,"message": "forbidden", "data": null}
-     * @response 404 {"code": 404,"message": "not found", "data": null}
-     * @response 500 {"code": 500,"message": "internal server error","data": null}
+     * @authenticated
+     * @response 200 {"code": 200,"message": "success","data": [{"id": 28,"name": "Rekapitulasi - Komposisi Pegawai","permitted_actions": "r"},{"id": 29,"name": "Rekapitulasi - Pegawai ASN","permitted_actions": "r"}]}
      */
-    public function list()
+    public function index()
     {
-        try {
-            $permissions = $this->permissionRepo->list();
-            if (!$permissions) {
-                return $this->response(404, 'permission tidak di temukan');
-            }
-
-        } catch (\Exception $e) {
-            return $this->internalServerErrorResponse();
-        }
-
-        return $this->response(200, 'ok', $permissions);
-    }
-
-    /**
-     * Get List of Permission Group
-     * @group ACL - Access Control List
-     * @subgroup Permission
-     * @header Authorization 10|voZgUvHLO3A0EGV7gWurb1MzeKOidjAKk8wR4tCZaec5e35e
-     * @response 200 {"code": 200, "message": "ok", "data": ["Rekapitulasi", "Data Pegawai"]}
-     * @response 401 {"code": 401,"message": "unauthorized", "data": null}
-     * @response 403 {"code": 403,"message": "forbidden", "data": null}
-     * @response 404 {"code": 404,"message": "not found", "data": null}
-     * @response 500 {"code": 500,"message": "internal server error","data": null}
-     */
-    public function listGroup()
-    {
-        try {
-            $permissions = $this->permissionRepo->listGroup();
-            if (!$permissions) {
-                return $this->response(404, 'permission group tidak ditemukan');
-            }
-
-            // mengambil hanya data group
-            $result = [];
-            foreach ($permissions as $key => $value) {
-                array_push($result, $key);
-            }
-
-        } catch (QueryException $e) {
-            return $this->internalServerErrorResponse();
-        }
-
-        return $this->response(200, 'ok', $result);
+        $permissions = DB::table('permissions');
+        $permissions->select('id', 'name', 'permitted_actions');
+        $permissions = $permissions->get();
+        return $this->response(200, 'success', $permissions);
     }
 }

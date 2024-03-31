@@ -2,32 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
-class User extends Model
+class User extends Authenticatable
 {
-    protected $table = "users";
-    protected $primaryKey = "id";
-    protected $keyType = "int";
-    public $incrementing = true;
-
-    protected $fillable = [
-        'email',
-        'username',
-        'password',
-        'pegawai_id',
-        'role_id'
-    ];
-
-    public function pegawai(): HasOne
-    {
-        return $this->hasOne(Pegawai::class, 'pegawai_id');
-    }
-
-    public function role(): BelongsTo
-    {
-        return $this->belongsTo(Role::class, 'role_id');
-    }
+    use HasApiTokens, HasFactory, Notifiable;
 }
