@@ -35,10 +35,10 @@ class UpdateStatusRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'id.required' => 'Id tidak boleh kosong.',
-            'id.numeric' => 'Tipe data id harus numeric.',
+            'id.required' => 'ID tidak boleh kosong.',
+            'id.numeric' => 'ID harus berupa angka.',
             'status.required' => 'Status tidak boleh kosong.',
-            'status.boolean' => 'Tipe data status harus boolean.',
+            'status.boolean' => 'ID harus berupa boolean.',
         ];
     }
 
