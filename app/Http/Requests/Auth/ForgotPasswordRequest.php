@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LoginRequest extends FormRequest
+class ForgotPasswordRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,17 +23,35 @@ class LoginRequest extends FormRequest
     {
         return [
             'email' => 'required|email|exists:users,email',
-            'password' => 'required',
         ];
     }
 
+    /**
+     * Return error messages
+     *
+     * @return array
+     */
     public function messages(): array
     {
         return [
-            'email.required' => 'Alamat email tidak boleh kosong.',
+            'email.required' => 'Email tidak boleh kosong.',
             'email.email' => 'Format email tidak sesuai.',
-            'email.exists' => 'Alamat email anda tidak terdaftar.',
-            'password.required' => 'Kata sandi tidak boleh kosong.',
+            'email.exists' => 'Email anda tidak terdaftar.',
+        ];
+    }
+
+    /**
+     * Description for scribe
+     *
+     * @return array
+     */
+    public function bodyParameters(): array
+    {
+        return [
+            'email' => [
+                'description' => 'Refers to the Email of User.',
+                'example' => 'admin@simdatuk.go.id',
+            ],
         ];
     }
 }

@@ -1,6 +1,11 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +24,39 @@ Route::get('/', function () {
 });
 
 Route::post('login', [AuthController::class, 'login']);
+Route::post('forgot-password', [AuthController::class, 'forgotPassword']);
+Route::post('code-verification', [AuthController::class, 'codeVerification']);
+Route::post('reset-password', [AuthController::class, 'resetPassword']);
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::delete('logout', [AuthController::class, 'logout']);
+
+    Route::prefix('permissions')->group(function () {
+        Route::get('/', [PermissionController::class, 'index']);
+    });
+
+    Route::prefix('roles')->group(function () {
+        Route::get('/', [RoleController::class, 'index']);
+        Route::post('/', [RoleController::class, 'create']);
+        Route::get('/{id}', [RoleController::class, 'show']);
+        Route::post('/{id}', [RoleController::class, 'update']);
+        Route::delete('/{id}', [RoleController::class, 'delete']);
+    });
+
+    Route::prefix('users')->group(function () {
+        Route::get('/', [UserController::class, 'index']);
+        Route::post('/', [UserController::class, 'create']);
+        Route::get('/{id}', [UserController::class, 'show']);
+        Route::post('/{id}', [UserController::class, 'update']);
+        Route::post('/status', [UserController::class, 'status']);
+    });
+
+    Route::prefix('pegawais')->group(function () {
+        Route::get('/', [PegawaiController::class, 'index']);
+    });
+
+    Route::prefix('profile')->group(function () {
+        Route::get('/', [ProfileController::class, 'show']);
+        Route::post('/', [ProfileController::class, 'update']);
+    });
 });

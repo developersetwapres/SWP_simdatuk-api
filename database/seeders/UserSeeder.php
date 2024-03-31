@@ -16,13 +16,33 @@ class UserSeeder extends Seeder
     {
         $faker = Faker::create('id_ID');
         DB::table('users')->delete();
-        $users = [
+
+        // Added administrator
+        $role = DB::table('roles')->select('id')->where('name', 'administrator')->first();
+        $admin = [
             [
-                'name' => 'admin',
+                'role_id' => $role->id,
                 'email' => 'admin' . config('mail.domain'),
-                'password' => Hash::make('admin'),
+                'username' => 'admin',
+                'password' => Hash::make('password'), // default password
+                'name' => 'administrator',
+                'nip' => '0000000000000',
+                'nrp' => '0000000000000',
+                'status' => true,
             ],
         ];
-        DB::table('users')->insert($users, false);
+        DB::table('users')->insertTs($admin);
+
+        // Sample user
+        $users = [];
+        for ($i = 0; $i < 30; $i++) {
+            $name = $faker->name();
+            $data = [
+                'name' => $name,
+            ];
+            array_push($users, $data);
+        }
+
+        DB::table('users')->insertTs($users);
     }
 }

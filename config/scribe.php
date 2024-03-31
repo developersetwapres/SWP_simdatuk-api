@@ -170,6 +170,8 @@ INTRO
         // You can override this by listing the groups, subgroups and endpoints here in the order you want them.
         // See https://scribe.knuckles.wtf/blog/laravel-v4#easier-sorting and https://scribe.knuckles.wtf/laravel/reference/config#order for details
         'order'=>[
+            'Authentication',
+            'ACL - Access Control List',
         ],
     ],
 

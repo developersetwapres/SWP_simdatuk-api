@@ -1,0 +1,187 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Requests\User\CreateUserRequest;
+use App\Http\Requests\User\UpdateStatusRequest;
+use App\Mail\RegisterVerification;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+
+/**
+ * @group ACL - Access Control List
+ *
+ * APIs for user management
+ */
+class UserController extends Controller
+{
+
+    public function __construct(Request $request)
+    {
+        $this->request = $request;
+        $this->posted = $request->except('_token', '_method');
+    }
+
+    /**
+     * Get List of Users
+     * @group ACL - Access Control List
+     * @subgroup User
+     * @subgroupDescription A description for the subgroup
+     * @authenticated
+     * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
+     * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
+     * @queryParam username string The keyword search field for the username. Example: admin
+     * @response 200 {"code": 200, "message": "success", "data": [{"id": 32, "username": "admin", "nip": "0000000000000", "nrp": "0000000000000", "role_name": "administrator", "status": "Aktif"}], "pagination": {"total": 1, "count": 1, "per_page": 1, "current_page": 1, "total_pages": 1, "links": {"first_page": "http://localhost/api/users?page=1", "last_page": "http://localhost/api/users?page=1", "next_page": null, "prev_page": null}}}
+     */
+    public function index()
+    {
+        $messages = [
+            'page.numeric' => 'Page harus berupa angka.',
+            'page.min' => 'Page minimal harus 1 atau lebih.',
+            'limit.numeric' => 'Limit harus berupa angka.',
+            'limit.min' => 'Limit minimal harus 1 atau lebih.',
+        ];
+
+        $validatedData = $this->request->validate([
+            'page' => 'nullable|numeric|min:1',
+            'limit' => 'nullable|numeric|min:1',
+        ], $messages);
+        $this->request->limit = ($this->request->limit) ? $this->request->limit : 10;
+
+        $users = DB::table('users');
+        $users->join('roles', 'users.role_id', 'role_id');
+        $users->select('users.id', 'users.username', 'users.nip', 'users.nrp', 'roles.name as role_name', 'users.status');
+        $users->where('users.username', 'like', '%' . $this->request->username . '%');
+        $users = $users->paginate($this->request->limit);
+        if ($users->isEmpty()) {
+            return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $users);
+        }
+        foreach ($users->items() as $key => $item) {
+            $item->status = ($item == true) ? 'Aktif' : 'Nonaktif';
+        }
+        return $this->paginateResponse(200, 'success', $users);
+    }
+
+    /**
+     * Create a New User
+     * @group ACL - Access Control List
+     * @subgroup User
+     * @authenticated
+     * @bodyParam id integer Refers to the ID of Pegawai. Example: 1
+     * @bodyParam username string Refers to username being to stored. Example: administrator
+     * @bodyParam email string Refers to email being to stored. Example: admin@simdatuk.go.id
+     * @bodyParam role_id integer Refers to the ID of Role. Example: 1
+     * @response 422 {"code": 422, "message": "Role tidak ditemukan.", "data": null}
+     * @response 422 {"code": 422, "message": "Pengguna tidak ditemukan.", "data": null}
+     * @response 200 {"code": 200, "message": "Pengguna berhasil ditambah.", "data": null}
+     */
+    public function create(CreateUserRequest $request)
+    {
+        $role = DB::table('roles')->where('id', $this->request->role_id)->first();
+        if (!$role) {
+            return $this->response(422, 'Role tidak ditemukan.');
+        }
+        $user = DB::table('users')->select('name')->where('id', $this->request->id)->first();
+        if (!$user) {
+            return $this->response(422, 'Pengguna tidak ditemukan.');
+        }
+
+        $this->request->verification_code = Str::random(40);
+        $this->request->name = $user->name;
+
+        try {
+            DB::beginTransaction();
+
+            DB::table('users')->where('id', $this->request->id)->updateTs([
+                'username' => $this->request->username,
+                'email' => $this->request->email,
+                'role_id' => $this->request->role_id,
+                'verification_code' => $this->request->verification_code,
+                'expire_at' => date('Y-m-d', strtotime('+7 days', strtotime(date('Y-m-d')))),
+                'status' => true,
+            ]);
+
+            Mail::to($this->request->email)->send(new RegisterVerification($this->request))->render();
+
+            DB::commit();
+            return $this->response(200, 'Pengguna berhasil ditambah.');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
+        }
+    }
+
+    /**
+     * Get Detail User by ID
+     * @group ACL - Access Control List
+     * @subgroup User
+     * @authenticated
+     * @urlParam id Refers to the ID of User. Example: 1
+     * @response 200 {"code": 200,"message": "success","data": {"id": 1,"username": "admin","email": "admin@setwapres.go.id","name": "administrator","nip": "0000000000000","role": {"id": 1,"name": "administrator"}}}
+     * @response 404 {"code": 404,"message": "Pengguna tidak ditemukan.","data": null}
+     */
+    public function show()
+    {
+        $user = DB::table('users');
+        $user->where('id', $this->request->id);
+        $user->where('role_id', '!=', null);
+        $user->select('role_id', 'id', 'username', 'email', 'name', 'nip');
+        $user = $user->first();
+        if (!$user) {
+            return $this->response(404, 'Pengguna tidak ditemukan.');
+        }
+        $role = DB::table('roles');
+        $role->where('id', $user->role_id);
+        $role->select('id', 'name');
+        $role = $role->first();
+
+        unset($user->role_id);
+        $user->role = $role;
+
+        return $this->response(200, 'success', $user);
+    }
+
+    /**
+     * Update User by ID
+     * @group ACL - Access Control List
+     * @subgroup User
+     * @authenticated
+     * @urlParam id Refers to the ID of User. Example: 1
+     * @bodyParam username string Refers to username being to stored. Example: administrator
+     * @bodyParam email string Refers to email being to stored. Example: admin@simdatuk.go.id
+     * @bodyParam role_id integer Refers to the ID of Role. Example: 1
+     * @response 200 {"code": 200, "message": "success", "data": [{"id": 32, "username": "admin", "nip": "0000000000000", "nrp": "0000000000000", "role_name": "administrator", "status": "Aktif"}], "pagination": {"total": 1, "count": 1, "per_page": 1, "current_page": 1, "total_pages": 1, "links": {"first_page": "http://localhost/api/users?page=1", "last_page": "http://localhost/api/users?page=1", "next_page": null, "prev_page": null}}}
+     */
+    public function update()
+    {
+
+    }
+
+    /**
+     * Update Status User by ID
+     * @group ACL - Access Control List
+     * @subgroup User
+     * @authenticated
+     * @response 200 {"code": 200,"message": "Pengguna berhasil diaktifkan.","data": null}
+     * @response 404 {"code": 404,"message": "Mohon maaf, pengguna tidak ditemukan.","data": null}
+     */
+    public function status(UpdateStatusRequest $request)
+    {
+        $user = DB::table('users');
+        $user->where('id', $this->request->id);
+        $user->where('role_id', '!=', null);
+        $user = $user->first();
+        if (!$user) {
+            return $this->response(404, 'Mohon maaf, pengguna tidak ditemukan.');
+        }
+        $query = DB::table('users');
+        $query->where('id', $this->request->id);
+        $query->updateTs([
+            'status' => $this->request->status,
+        ]);
+        $message = ($this->request->status == true) ? 'diaktifkan' : 'dinonaktifkan';
+        return $this->response(200, 'Pengguna berhasil ' . $message . '.');
+    }
+}
