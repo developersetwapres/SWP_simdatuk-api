@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\User\CreateUserRequest;
 use App\Http\Requests\User\UpdateStatusRequest;
 use App\Mail\RegisterVerification;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -69,10 +70,6 @@ class UserController extends Controller
      * @group ACL - Access Control List
      * @subgroup User
      * @authenticated
-     * @bodyParam id integer Refers to the ID of Pegawai. Example: 1
-     * @bodyParam username string Refers to username being to stored. Example: administrator
-     * @bodyParam email string Refers to email being to stored. Example: admin@simdatuk.go.id
-     * @bodyParam role_id integer Refers to the ID of Role. Example: 1
      * @response 422 {"code": 422, "message": "Role tidak ditemukan.", "data": null}
      * @response 422 {"code": 422, "message": "Pengguna tidak ditemukan.", "data": null}
      * @response 200 {"code": 200, "message": "Pengguna berhasil ditambah.", "data": null}
@@ -83,18 +80,19 @@ class UserController extends Controller
         if (!$role) {
             return $this->response(422, 'Role tidak ditemukan.');
         }
-        $user = DB::table('users')->select('name')->where('id', $this->request->id)->first();
+        $user = DB::table('users')->select('name')->where('id', $this->request->user_id)->first();
         if (!$user) {
             return $this->response(422, 'Pengguna tidak ditemukan.');
         }
 
-        $this->request->verification_code = Str::random(40);
+        $token = new User();
+        $this->request->verification_code = $token->generateToken(true);
         $this->request->name = $user->name;
 
         try {
             DB::beginTransaction();
 
-            DB::table('users')->where('id', $this->request->id)->updateTs([
+            DB::table('users')->where('id', $this->request->user_id)->updateTs([
                 'username' => $this->request->username,
                 'email' => $this->request->email,
                 'role_id' => $this->request->role_id,
@@ -102,8 +100,7 @@ class UserController extends Controller
                 'expire_at' => date('Y-m-d', strtotime('+7 days', strtotime(date('Y-m-d')))),
                 'status' => true,
             ]);
-
-            Mail::to($this->request->email)->send(new RegisterVerification($this->request))->render();
+            Mail::to($this->request->email)->send(new RegisterVerification($this->request));
 
             DB::commit();
             return $this->response(200, 'Pengguna berhasil ditambah.');

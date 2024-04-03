@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\User;
+namespace App\Http\Requests\Profile;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateUserRequest extends FormRequest
+class UpdateProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +22,12 @@ class CreateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'required|numeric',
             'username' => 'required|min:6|max:30|unique:users,username,' . $this->id,
             'email' => 'required|email|unique:users,email,' . $this->id,
-            'role_id' => 'required|numeric',
+            'old_password' => 'required',
+            'password' => 'required|min:6|confirmed',
+            'password_confirmation' => 'required|min:6',
+            'foto_profil' => 'max: ',
         ];
     }
 
@@ -37,8 +39,6 @@ class CreateUserRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'user_id.required' => 'User ID tidak boleh kosong.',
-            'user_id.numeric' => 'User ID harus berupa angka.',
             'username.required' => 'Username tidak boleh kosong.',
             'username.min' => 'Username tidak boleh kurang dari 6 karakter',
             'username.max' => 'Username tidak boleh lebih dari 30 karakter',
@@ -46,8 +46,12 @@ class CreateUserRequest extends FormRequest
             'email.required' => 'Email tidak boleh kosong',
             'email.email' => 'Format email tidak sesuai.',
             'email.unique' => 'Email sudah digunakan.',
-            'role_id.required' => 'Role id tidak boleh kosong.',
-            'role_id.numeric' => 'Role id harus berupa angka.',
+            'old_password.required' => 'Password saat ini tidak boleh kosong.',
+            'password.required' => 'Password baru tidak boleh kosong.',
+            'password.min' => 'Minimal password baru harus 6 karakter atau lebih.',
+            'password.confirmed' => 'Konfirmasi password baru harus sama.',
+            'password_confirmation.required' => 'Konfirmasi password baru tidak boleh kosong.',
+            'password_confirmation.min' => 'Minimal konfirmasi password baru harus 6 karakter atau lebih.',
         ];
     }
 
@@ -59,10 +63,6 @@ class CreateUserRequest extends FormRequest
     public function bodyParameters(): array
     {
         return [
-            'user_id' => [
-                'description' => 'Refers to the ID of Pegawai.',
-                'example' => 1,
-            ],
             'username' => [
                 'description' => 'Refers to the Username of User.',
                 'example' => 'admin',
@@ -71,9 +71,21 @@ class CreateUserRequest extends FormRequest
                 'description' => 'Refers to the Email of User.',
                 'example' => 'admin@simdatuk.go.id',
             ],
-            'role_id' => [
-                'description' => 'Refers to the ID of Role.',
-                'example' => 1,
+            'old_password' => [
+                'description' => 'Refers to the Current Password of User.',
+                'example' => '******',
+            ],
+            'password' => [
+                'description' => 'Refers to the New Password of User.',
+                'example' => '******',
+            ],
+            'password_confirmation' => [
+                'description' => 'Refers to the Password Confirmation of User.',
+                'example' => '******',
+            ],
+            'foto_profil' => [
+                'description' => 'Refers to the Photo Profile of User.',
+                'example' => '******',
             ],
         ];
     }

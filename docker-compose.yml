@@ -43,6 +43,18 @@ services:
       - mysql
     networks:
       - simdatuk_network
+  maildev:
+    image: maildev/maildev:latest
+    container_name: maildev
+    restart: always
+    ports:
+      - 1025:1025
+      - 1080:1080
+    environment:
+      - MAILDEV_SMTP_PORT=1025
+      - MAILDEV_WEB_PORT=1080
+    networks:
+      - simdatuk_network
 networks:
   simdatuk_network:
     name: simdatuk_network

@@ -6,11 +6,14 @@ use App\Http\Requests\Auth\CodeVerificationRequest;
 use App\Http\Requests\Auth\ForgotPasswordRequest;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\ResetPasswordRequest;
+use App\Mail\ForgotPassword;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 /**
  * @group Authentication
@@ -93,8 +96,19 @@ class AuthController extends Controller
         }
 
         // Generete Token
+        $token = new User();
+        $this->request->verification_code = $token->generateToken(false);
+
+        DB::table('password_reset_tokens')->insert([
+            'email' => $this->request->email,
+            'verification_code' => $this->request->verification_code,
+            'expire_at' => date('Y-m-d', strtotime('+7 days', strtotime(date('Y-m-d')))),
+        ]);
 
         // Send Email
+        Mail::to($this->request->email)->send(new ForgotPassword($this->request));
+
+        return $this->response(200, 'Email sudah dikirim.');
     }
 
     /**
@@ -105,32 +119,52 @@ class AuthController extends Controller
      */
     public function codeVerification(CodeVerificationRequest $request)
     {
-        if ($this->request->status == true) {
-            $user = DB::table("user");
-        } else {
-            $user = DB::table("reset_password");
-        }
-        $user->where('verification_code', $this->request->code);
-        $user->select('verification_code', 'expired_at');
-        $user = $user->first();
-
-        if ($user) {
-            return $this->response(404, 'Verifikasi kode tidak tersedia.');
-        } else if ($user->expired_at < date('Y-m-d')) {
-            return $this->response(404, 'Verifikasi kode sudah kadaluarsa.');
-        } else {
-            return $this->response(200, 'Verifikasi kode berhasil.');
-        }
+        return $this->codeValidation();
     }
 
     /**
      * Reset Password
-     * @response 200 {"code": 200,"message": "Pengguna berhasil login.","data": null}
-     * @response 422 {"code": 422,"message": "Username tidak boleh kosong.","data": null}
-     * @response 401 {"code": 401,"message": "Kata sandi yang anda masukkan salah.","data": null}
+     * @response 200 {"code": 200,"message": "Reset password berhasil disimpan","data": null}
+     * @response 200 {"code": 200,"message": "Password baru berhasil disimpan.","data": null}
      */
     public function resetPassword(ResetPasswordRequest $request)
     {
+        $codeValidation = $this->codeValidation();
+        if ($codeValidation->getStatusCode() !== 200) {
+            return $codeValidation;
+        }
+        if ($request->status == true) {
+            $user = DB::table('users');
+            $user->where('verification_code', $this->request->code);
+            $user->update([
+                'password' => Hash::make($this->request->password),
+                'verification_code' => null,
+                'expire_at' => null,
+            ]);
+            return $this->response(200, 'Password baru berhasil disimpan.');
+        } else {
+            $user = DB::table('password_reset_tokens');
+            $user->where('verification_code', $this->request->code);
+            $user->select('email');
+            $user = $user->first();
+
+            try {
+                // Update password user
+                $user = DB::table('users');
+                $user->where('email', $user->email);
+                $user->update([
+                    'password' => Hash::make($this->request->password),
+                ]);
+
+                $user = DB::table('password_reset_tokens');
+                $user->where('verification_code', $this->request->code);
+                $user->delete();
+
+                return $this->response(200, 'Reset password berhasil disimpan.');
+            } catch (\Throwable $th) {
+                return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
+            }
+        }
     }
 
     /**
@@ -144,6 +178,31 @@ class AuthController extends Controller
         $user = $this->request->user();
         $user->tokens()->where('id', auth()->id())->delete();
         return $this->response(200, 'Pengguna berhasil logout.');
+    }
+
+    /**
+     * Valdation for code token
+     *
+     * @return void
+     */
+    public function codeValidation()
+    {
+        if ($this->request->status == true) {
+            $user = DB::table("users");
+        } else {
+            $user = DB::table("password_reset_tokens");
+        }
+        $user->where('verification_code', $this->request->code);
+        $user->select('verification_code', 'expire_at');
+        $user = $user->first();
+
+        if (!$user) {
+            return $this->response(404, 'Verifikasi kode tidak tersedia.');
+        } else if ($user->expire_at < date('Y-m-d')) {
+            return $this->response(404, 'Verifikasi kode sudah kadaluarsa.');
+        } else {
+            return $this->response(200, 'Verifikasi kode berhasil.');
+        }
     }
 
 }
