@@ -65,11 +65,11 @@ class ResetPasswordRequest extends FormRequest
             ],
             'password' => [
                 'description' => 'Refers to the Password of User.',
-                'example' => '**********',
+                'example' => 'password',
             ],
             'password_confirmation' => [
                 'description' => 'Refers to the Password Confirmation of User.',
-                'example' => '**********',
+                'example' => 'password',
             ],
         ];
     }

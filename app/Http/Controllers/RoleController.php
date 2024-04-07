@@ -104,6 +104,7 @@ class RoleController extends Controller
      * @subgroup Role
      * @authenticated
      * @urlParam id Refers to the ID of Role. Example: 1
+     * @response 404 {"code": 404,"message": "Role tidak ditemukan.","data": null}
      * @response 200 {"code": 200,"message": "success","data": {"id": 1,"name": "administrator","permissions": [{"id": 1,"name": "Rekapitulasi - Komposisi Pegawai","create": 0,"read": 1,"update": 0,"delete": 0}]}}
      */
     public function show()
@@ -133,7 +134,7 @@ class RoleController extends Controller
      * @subgroup Role
      * @authenticated
      * @urlParam id Refers to the ID of Role. Example: 1
-     * @response 422 {"code": 422,"message": "Role tidak ditemukan.","data": null}
+     * @response 404 {"code": 404,"message": "Role tidak ditemukan.","data": null}
      * @response 200 {"code": 200,"message": "Role berhasil diupdate.","data": null}
      */
     public function update(UpdateRoleRequest $request)

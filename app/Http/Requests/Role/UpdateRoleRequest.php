@@ -37,7 +37,7 @@ class UpdateRoleRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => 'Name tidak boleh kosong.',
+            'name.required' => 'Nama tidak boleh kosong.',
             'name.unique' => 'Nama sudah digunakan.',
             'permissions.required' => 'Permission tidak boleh kosong.',
             'permissions.array' => 'Permission harus berupa array.',

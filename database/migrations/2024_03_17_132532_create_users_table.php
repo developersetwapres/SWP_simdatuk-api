@@ -49,7 +49,7 @@ return new class extends Migration
             $table->string('no_telepon_kantor', 20)->nullable();
             $table->tinyInteger('type')->nullable()->default(1)->comment('1=ASN, 2=NON ASN, 3=OUTSOURCING');
             $table->boolean('status')->default(false)->comment('true=active, false=deactivate');
-            $table->text('verification_code')->nullable()->unique();
+            $table->string('verification_code', 160)->nullable()->unique();
             $table->date('expire_at')->nullable();
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
