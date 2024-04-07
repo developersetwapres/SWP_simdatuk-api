@@ -53,6 +53,9 @@ RUN composer clear-cache && composer dump-autoload --no-scripts --optimize
 # Generate api documentation
 RUN php artisan scribe:generate
 
+# Make symlink to from storage path to public path
+RUN php artisan storage:link
+
 # Nginx configuration
 COPY docker/nginx.conf /etc/nginx/http.d/default.conf
 
