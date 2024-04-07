@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CollegeController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
@@ -58,5 +59,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('profile')->group(function () {
         Route::get('/', [ProfileController::class, 'show']);
         Route::post('/', [ProfileController::class, 'update']);
+    });
+
+    Route::prefix('colleges')->group(function () {
+        Route::get('/', [CollegeController::class, 'index']);
+        Route::post('/', [CollegeController::class, 'create']);
+        Route::get('/{id}', [CollegeController::class, 'show']);
+        Route::post('/{id}', [CollegeController::class, 'update']);
+        Route::delete('/{id}', [CollegeController::class, 'delete']);
     });
 });
