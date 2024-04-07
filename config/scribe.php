@@ -172,6 +172,9 @@ INTRO
         'order'=>[
             'Authentication',
             'ACL - Access Control List',
+            'Profile',
+            'College',
+            'Pegawai',
         ],
     ],
 
