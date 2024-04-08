@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CollegeController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\GradeController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
@@ -52,10 +53,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/status', [UserController::class, 'status']);
     });
 
-    Route::prefix('employees')->group(function () {
-        Route::get('/', [EmployeeController::class, 'index']);
-    });
-
     Route::prefix('profile')->group(function () {
         Route::get('/', [ProfileController::class, 'show']);
         Route::post('/', [ProfileController::class, 'update']);
@@ -68,4 +65,13 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/{id}', [CollegeController::class, 'update']);
         Route::delete('/{id}', [CollegeController::class, 'delete']);
     });
+
+    Route::prefix('grades')->group(function () {
+        Route::get('/', [GradeController::class, 'index']);
+    });
+
+    Route::prefix('employees')->group(function () {
+        Route::get('/', [EmployeeController::class, 'index']);
+    });
+
 });
