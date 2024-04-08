@@ -60,7 +60,7 @@ class CreateUserRequest extends FormRequest
     {
         return [
             'user_id' => [
-                'description' => 'Refers to the ID of Pegawai.',
+                'description' => 'Refers to the ID of Employee.',
                 'example' => 1,
             ],
             'username' => [

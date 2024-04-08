@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CollegeController;
-use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
@@ -52,8 +52,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/status', [UserController::class, 'status']);
     });
 
-    Route::prefix('pegawais')->group(function () {
-        Route::get('/', [PegawaiController::class, 'index']);
+    Route::prefix('employees')->group(function () {
+        Route::get('/', [EmployeeController::class, 'index']);
     });
 
     Route::prefix('profile')->group(function () {

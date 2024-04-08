@@ -174,7 +174,7 @@ INTRO
             'ACL - Access Control List',
             'Profile',
             'College',
-            'Pegawai',
+            'Employee',
         ],
     ],
 

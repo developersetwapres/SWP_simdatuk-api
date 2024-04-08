@@ -6,11 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 /**
- * @group Pegawai
+ * @group Employee
  *
- * APIs for pegawai
+ * APIs for employee
  */
-class PegawaiController extends Controller
+class EmployeeController extends Controller
 {
     public function __construct(Request $request)
     {
@@ -19,8 +19,8 @@ class PegawaiController extends Controller
     }
 
     /**
-     * Get List of Pegawai
-     * @group Pegawai
+     * Get List of Employee
+     * @group Employee
      * @authenticated
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
      * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10

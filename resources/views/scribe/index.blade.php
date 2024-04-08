@@ -661,10 +661,10 @@
                                                             </div>
                                             </div>
                                     <div class="expandable">
-                        <div title="Pegawai" id="toc-item-pegawai"
+                        <div title="Employee" id="toc-item-employee"
                              class="sl-flex sl-items-center sl-h-md sl-pr-4 sl-pl-4 sl-bg-canvas-100 hover:sl-bg-canvas-200 sl-cursor-pointer sl-select-none">
-                            <a href="#pegawai"
-                               class="sl-flex-1 sl-items-center sl-truncate sl-mr-1.5 sl-p-0">Pegawai</a>
+                            <a href="#employee"
+                               class="sl-flex-1 sl-items-center sl-truncate sl-mr-1.5 sl-p-0">Employee</a>
                                                             <div class="sl-flex sl-items-center sl-text-xs expansion-chevrons">
                                     <svg aria-hidden="true" focusable="false" data-prefix="fas"
                                          data-icon="chevron-right"
@@ -679,11 +679,11 @@
                                                     <div class="children" style="display: none;">
                                                                     <div class="expandable">
                                         <div class="sl-flex sl-items-center sl-h-md sl-pr-4 sl-pl-8 sl-bg-canvas-100 hover:sl-bg-canvas-200 sl-cursor-pointer sl-select-none"
-                                             id="toc-item-pegawai-GETapi-pegawais">
-                                            <div class="sl-flex-1 sl-items-center sl-truncate sl-mr-1.5 sl-p-0" title="Get List of Pegawai">
+                                             id="toc-item-employee-GETapi-employees">
+                                            <div class="sl-flex-1 sl-items-center sl-truncate sl-mr-1.5 sl-p-0" title="Get List of Employee">
                                                 <a class="ElementsTableOfContentsItem sl-block sl-no-underline"
-                                                   href="#pegawai-GETapi-pegawais">
-                                                    Get List of Pegawai
+                                                   href="#employee-GETapi-employees">
+                                                    Get List of Employee
                                                 </a>
                                             </div>
                                                                                     </div>
@@ -695,7 +695,7 @@
 
         </div>
         <div class="sl-flex sl-items-center sl-px-4 sl-py-3 sl-border-t">
-            Last updated: April 7, 2024
+            Last updated: April 8, 2024
         </div>
 
         <div class="sl-flex sl-items-center sl-px-4 sl-py-3 sl-border-t">
@@ -11734,10 +11734,10 @@ fetch(url, {
     </div>
 </div>
 
-                <h1 id="pegawai"
+                <h1 id="employee"
         class="sl-text-5xl sl-leading-tight sl-font-prose sl-text-heading"
     >
-        Pegawai
+        Employee
     </h1>
 
     
@@ -11747,14 +11747,14 @@ fetch(url, {
         <div class="sl-relative">
             <div class="sl-stack sl-stack--horizontal sl-stack--5 sl-flex sl-flex-row sl-items-center">
                 <h2 class="sl-text-3xl sl-leading-tight sl-font-prose sl-text-heading sl-mt-5 sl-mb-1"
-                    id="pegawai-GETapi-pegawais">
-                    Get List of Pegawai
+                    id="employee-GETapi-employees">
+                    Get List of Employee
                 </h2>
             </div>
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost/api/pegawais"
+            <div title="http://localhost/api/employees"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -11765,7 +11765,7 @@ fetch(url, {
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
                              class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
-                        <div class="sl-flex-1 sl-font-semibold">/api/pegawais</div>
+                        <div class="sl-flex-1 sl-font-semibold">/api/employees</div>
                     </div>
 
                                                     <div class="sl-font-prose sl-font-semibold sl-px-1.5 sl-py-0.5 sl-text-on-primary sl-rounded-lg"
@@ -11930,7 +11930,7 @@ fetch(url, {
     <div class="sl-overflow-y-hidden sl-rounded-lg">
         <form class="TryItPanel sl-bg-canvas-100 sl-rounded-lg"
               data-method="GET"
-              data-path="api/pegawais"
+              data-path="api/employees"
               data-hasfiles="0"
               data-hasjsonbody="0">
                             <div class="sl-panel sl-outline-none sl-w-full expandable">
@@ -11952,13 +11952,13 @@ fetch(url, {
                     <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
                         <div class="ParameterGrid sl-p-4">
                             <label aria-hidden="true"
-                                   for="auth-GETapi-pegawais">Authorization</label>
+                                   for="auth-GETapi-employees">Authorization</label>
                             <span class="sl-mx-3">:</span>
                             <div class="sl-flex sl-flex-1">
                                 <div class="sl-input sl-flex-1 sl-relative">
                                     <code>Bearer </code>
                                     <input aria-label="Authorization"
-                                           id="auth-GETapi-pegawais"
+                                           id="auth-GETapi-employees"
                                            data-component="header"
                                            data-prefix="Bearer "
                                            name="Authorization"
@@ -11989,23 +11989,23 @@ fetch(url, {
                     <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
                         <div class="ParameterGrid sl-p-4">
                                                                                                                             <label aria-hidden="true"
-                                       for="header-GETapi-pegawais-Content-Type">Content-Type</label>
+                                       for="header-GETapi-employees-Content-Type">Content-Type</label>
                                 <span class="sl-mx-3">:</span>
                                 <div class="sl-flex sl-flex-1">
                                     <div class="sl-input sl-flex-1 sl-relative">
                                         <input aria-label="Content-Type" name="Content-Type"
-                                               id="header-GETapi-pegawais-Content-Type"
+                                               id="header-GETapi-employees-Content-Type"
                                                value="application/json" data-component="header"
                                                class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
                                     </div>
                                 </div>
                                                                                             <label aria-hidden="true"
-                                       for="header-GETapi-pegawais-Accept">Accept</label>
+                                       for="header-GETapi-employees-Accept">Accept</label>
                                 <span class="sl-mx-3">:</span>
                                 <div class="sl-flex sl-flex-1">
                                     <div class="sl-input sl-flex-1 sl-relative">
                                         <input aria-label="Accept" name="Accept"
-                                               id="header-GETapi-pegawais-Accept"
+                                               id="header-GETapi-employees-Accept"
                                                value="application/json" data-component="header"
                                                class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
                                     </div>
@@ -12034,12 +12034,12 @@ fetch(url, {
                     <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
                         <div class="ParameterGrid sl-p-4">
                                                                                             <label aria-hidden="true"
-                                       for="queryparam-GETapi-pegawais-page">page</label>
+                                       for="queryparam-GETapi-employees-page">page</label>
                                 <span class="sl-mx-3">:</span>
                                 <div class="sl-flex sl-flex-1">
                                     <div class="sl-input sl-flex-1 sl-relative">
                                                                                     <input aria-label="page" name="page"
-                                                   id="queryparam-GETapi-pegawais-page"
+                                                   id="queryparam-GETapi-employees-page"
                                                    placeholder="Refers to the current page of results being displayed. Default is &#039;1&#039;."
                                                    value="1" data-component="query"
                                                    class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
@@ -12047,12 +12047,12 @@ fetch(url, {
                                                                             </div>
                                 </div>
                                                                                             <label aria-hidden="true"
-                                       for="queryparam-GETapi-pegawais-limit">limit</label>
+                                       for="queryparam-GETapi-employees-limit">limit</label>
                                 <span class="sl-mx-3">:</span>
                                 <div class="sl-flex sl-flex-1">
                                     <div class="sl-input sl-flex-1 sl-relative">
                                                                                     <input aria-label="limit" name="limit"
-                                                   id="queryparam-GETapi-pegawais-limit"
+                                                   id="queryparam-GETapi-employees-limit"
                                                    placeholder="Refers to the maximum number of items to be displayed per page. Defaults is &#039;10&#039;."
                                                    value="10" data-component="query"
                                                    class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
@@ -12060,12 +12060,12 @@ fetch(url, {
                                                                             </div>
                                 </div>
                                                                                             <label aria-hidden="true"
-                                       for="queryparam-GETapi-pegawais-keyword">keyword</label>
+                                       for="queryparam-GETapi-employees-keyword">keyword</label>
                                 <span class="sl-mx-3">:</span>
                                 <div class="sl-flex sl-flex-1">
                                     <div class="sl-input sl-flex-1 sl-relative">
                                                                                     <input aria-label="keyword" name="keyword"
-                                                   id="queryparam-GETapi-pegawais-keyword"
+                                                   id="queryparam-GETapi-employees-keyword"
                                                    placeholder="The keyword search field for the name or nip."
                                                    value="administrator" data-component="query"
                                                    class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
@@ -12079,7 +12079,7 @@ fetch(url, {
             
             <div class="SendButtonHolder sl-mt-4 sl-p-4 sl-pt-0">
                 <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-center">
-                    <button type="button" data-endpoint="GETapi-pegawais"
+                    <button type="button" data-endpoint="GETapi-employees"
                             class="tryItOut-btn sl-button sl-h-sm sl-text-base sl-font-medium sl-px-1.5 sl-bg-primary hover:sl-bg-primary-dark active:sl-bg-primary-darker disabled:sl-bg-canvas-100 sl-text-on-primary disabled:sl-text-body sl-rounded sl-border-transparent sl-border disabled:sl-opacity-70"
                     >
                         Send Request 💥
@@ -12087,7 +12087,7 @@ fetch(url, {
                 </div>
             </div>
 
-            <div data-endpoint="GETapi-pegawais"
+            <div data-endpoint="GETapi-employees"
                  class="tryItOut-error expandable sl-panel sl-outline-none sl-w-full" hidden>
                 <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
                      role="button">
@@ -12114,7 +12114,7 @@ You can check the Dev Tools console for debugging information.</p>
                 </div>
             </div>
 
-                <div data-endpoint="GETapi-pegawais"
+                <div data-endpoint="GETapi-employees"
                      class="tryItOut-response expandable sl-panel sl-outline-none sl-w-full" hidden>
                     <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
                          role="button">
@@ -12163,7 +12163,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/pegawais?page=1&amp;limit=10&amp;keyword=administrator" \
+    --get "http://localhost/api/employees?page=1&amp;limit=10&amp;keyword=administrator" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -12174,7 +12174,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/pegawais"
+    "http://localhost/api/employees"
 );
 
 const params = {
@@ -12207,9 +12207,9 @@ fetch(url, {
                                             <div class="sl-mb-2 sl-inline-block">Example response:</div>
                                             <div class="sl-mb-2 sl-inline-block">
                                                 <select
-                                                        class="example-response-GETapi-pegawais-toggle sl-text-base"
+                                                        class="example-response-GETapi-employees-toggle sl-text-base"
                                                         aria-label="Response sample"
-                                                        onchange="switchExampleResponse('GETapi-pegawais', event.target.value);">
+                                                        onchange="switchExampleResponse('GETapi-employees', event.target.value);">
                                                                                                             <option value="0">200</option>
                                                                                                     </select></div>
                                         </div>
@@ -12227,7 +12227,7 @@ fetch(url, {
                                     </div>
                                 </button>
                             </div>
-                                                            <div class="sl-panel__content-wrapper sl-bg-canvas-100 example-response-GETapi-pegawais example-response-GETapi-pegawais-0"
+                                                            <div class="sl-panel__content-wrapper sl-bg-canvas-100 example-response-GETapi-employees example-response-GETapi-employees-0"
                                      style=" "
                                 >
                                     <div class="sl-panel__content sl-p-0">                                                                                                                                
