@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\User\CreateUserRequest;
 use App\Http\Requests\User\UpdateStatusRequest;
+use App\Http\Requests\User\UpdateUserRequest;
 use App\Mail\RegisterVerification;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -75,13 +76,19 @@ class UserController extends Controller
      */
     public function create(CreateUserRequest $request)
     {
-        $role = DB::table('roles')->where('id', $this->request->role_id)->first();
-        if (!$role) {
-            return $this->response(422, 'Role tidak ditemukan.');
-        }
-        $user = DB::table('users')->select('name')->where('id', $this->request->user_id)->first();
+        $user = DB::table('users');
+        $user->select('name');
+        $user->where('id', $this->request->user_id);
+        $user = $user->first();
         if (!$user) {
             return $this->response(422, 'Pengguna tidak ditemukan.');
+        }
+
+        $role = DB::table('roles');
+        $role->where('id', $this->request->role_id);
+        $role = $role->first();
+        if (!$role) {
+            return $this->response(422, 'Role tidak ditemukan.');
         }
 
         $token = new User();
@@ -128,6 +135,7 @@ class UserController extends Controller
         if (!$user) {
             return $this->response(404, 'Pengguna tidak ditemukan.');
         }
+
         $role = DB::table('roles');
         $role->where('id', $user->role_id);
         $role->select('id', 'name');
@@ -150,9 +158,53 @@ class UserController extends Controller
      * @bodyParam role_id integer Refers to the ID of Role. Example: 1
      * @response 200 {"code": 200, "message": "success", "data": [{"id": 32, "username": "admin", "nip": "0000000000000", "nrp": "0000000000000", "role_name": "administrator", "status": "Aktif"}], "pagination": {"total": 1, "count": 1, "per_page": 1, "current_page": 1, "total_pages": 1, "links": {"first_page": "http://localhost/api/users?page=1", "last_page": "http://localhost/api/users?page=1", "next_page": null, "prev_page": null}}}
      */
-    public function update()
+    public function update(UpdateUserRequest $request)
     {
+        $user = DB::table('users');
+        $user->where('id', $this->request->id);
+        $user->where('role_id', '!=', null);
+        $user->select('role_id', 'id', 'username', 'email', 'name', 'nip');
+        $user = $user->first();
+        if (!$user) {
+            return $this->response(404, 'Pengguna tidak ditemukan.');
+        }
 
+        $role = DB::table('roles');
+        $role->where('id', $this->request->role_id);
+        $role = $role->first();
+        if (!$role) {
+            return $this->response(422, 'Role tidak ditemukan.');
+        }
+
+        try {
+            DB::beginTransaction();
+
+            $token = new User();
+            $this->request->verification_code = $token->generateToken(true);
+            $this->request->name = $user->name;
+
+            if ($user->email !== $this->request->email) {
+                DB::table('users')->where('id', $this->request->id)->updateTs([
+                    'email' => $this->request->email,
+                    'verification_code' => $this->request->verification_code,
+                    'expire_at' => date('Y-m-d', strtotime('+7 days', strtotime(date('Y-m-d')))),
+                ]);
+                Mail::to($this->request->email)->send(new RegisterVerification($this->request));
+            }
+
+            $user = DB::table('users');
+            $user->where('id', $this->request->id);
+            $user->updateTs([
+                'username' => $this->request->username,
+                'role_id' => $this->request->role_id,
+            ]);
+
+            DB::commit();
+            return $this->response(200, 'Pengguna berhasil diupdate.');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
+        }
     }
 
     /**
