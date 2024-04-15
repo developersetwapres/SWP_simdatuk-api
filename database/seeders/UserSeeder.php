@@ -35,10 +35,22 @@ class UserSeeder extends Seeder
 
         // Sample user
         $users = [];
-        for ($i = 0; $i < 30; $i++) {
-            $name = $faker->name();
+        for ($i = 0; $i < 365; $i++) {
+            $items = array("Male", "Female");
+            // Generate a random number (0 or 1) to select one of the items
+            $randomIndex = rand(0, 1);
+            // Select the item based on the random index
+            $gender = $items[$randomIndex];
+
             $data = [
-                'name' => $name,
+                'name' => $faker->name($gender),
+                'nip' => $faker->numberBetween($min = 0000000000000, $max = 9999999999999),
+                'nrp' => $faker->numberBetween($min = 0000000000, $max = 9999999999),
+                'tempat_lahir' => $faker->city(),
+                'tanggal_lahir' => $faker->date($format = 'Y-m-d', $min = '1990-01-01', $max = '1970-01-01'),
+                'agama' => $faker->numberBetween($min = 1, $max = 6),
+                'jenis_kelamin' => ($gender == 'Male') ? 1 : 0,
+                'status_perkawinan' => $faker->numberBetween($min = 1, $max = 5),
             ];
             array_push($users, $data);
         }
