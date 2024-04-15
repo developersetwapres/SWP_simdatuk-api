@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('name', 160)->unique();
             $table->boolean('region')->default(false)->comment('false=dalam negeri, true=luar negeri');
             $table->text('address')->nullable();
+            $table->string('accreditation', 160)->nullable();
+            $table->string('accreditation_certificate', 160)->nullable();
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
         });

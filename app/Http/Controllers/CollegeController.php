@@ -6,6 +6,8 @@ use App\Http\Requests\College\CreateCollegeRequest;
 use App\Http\Requests\College\UpdateCollegeRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 /**
  * @group College
@@ -27,7 +29,7 @@ class CollegeController extends Controller
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
      * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
      * @queryParam keyword string The keyword search field for the name of college. Example: indonesia
-     * @response 200 {"code": 200, "message": "success", "data": [{"id": 32, "username": "admin", "nip": "0000000000000", "nrp": "0000000000000", "role_name": "administrator", "status": "Aktif"}], "pagination": {"total": 1, "count": 1, "per_page": 1, "current_page": 1, "total_pages": 1, "links": {"first_page": "http://localhost/api/users?page=1", "last_page": "http://localhost/api/users?page=1", "next_page": null, "prev_page": null}}}
+     * @response 200 {"code": 200,"message": "success","data": [{"id": 2,"name": "Universitas Indonesia","region": "Luar Negeri","address": "Jawa Barat"}],"pagination": {"total": 10,"count": 1,"per_page": 1,"current_page": 1,"total_pages": 10,"links": {"first_page": "http://localhost/api/colleges?page=1","last_page": "http://localhost/api/colleges?page=10","next_page": "http://localhost/api/colleges?page=2","prev_page": null}}}
      */
     public function index()
     {
@@ -42,18 +44,22 @@ class CollegeController extends Controller
             'page' => 'nullable|numeric|min:1',
             'limit' => 'nullable|numeric|min:1',
         ], $messages);
+
         $this->request->limit = ($this->request->limit) ? $this->request->limit : 10;
 
         $users = DB::table('colleges');
         $users->select('id', 'name', 'region', 'address');
         $users->where('name', 'like', '%' . $this->request->keyword . '%');
         $users = $users->paginate($this->request->limit);
+
         if ($users->isEmpty()) {
             return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $users);
         }
+
         foreach ($users->items() as $key => $item) {
             $item->region = ($item == true) ? 'Luar Negeri' : 'Dalam Negeri';
         }
+
         return $this->paginateResponse(200, 'success', $users);
     }
 
@@ -65,7 +71,15 @@ class CollegeController extends Controller
      */
     public function create(CreateCollegeRequest $request)
     {
+        if ($this->request->hasFile('accreditation_certificate')) {
+            $fileExtension = '.' . $this->request->file('accreditation_certificate')->getClientOriginalExtension();
+            $fileName = Str::random(32) . $fileExtension;
+            Storage::disk('public')->putFileAs('accreditation_certificate/', $this->request->file('accreditation_certificate'), $fileName);
+            $this->posted['accreditation_certificate'] = 'accreditation_certificate/' . $fileName;
+        }
+
         DB::table('colleges')->insertTs($this->posted);
+
         return $this->response(200, 'Perguruan tinggi berhasil ditambah.');
     }
 
@@ -75,18 +89,22 @@ class CollegeController extends Controller
      * @authenticated
      * @urlParam id Refers to the ID of College. Example: 1
      * @response 404 {"code": 404,"message": "Perguruan tinggi tidak ditemukan.","data": null}
-     * @response 200 {"code": 200,"message": "success","data": {"id": 1,"name": "Universitas Gadjah Mada","region": "Dalam negeri","address": "Daerah Istimewa Yogyakarta"}}
+     * @response 200 {"code": 200,"message": "success","data": {"id": 1,"name": "Universitas Gadjah Mada","region": "Dalam negeri","address": "Daerah Istimewa Yogyakarta", "accreditation": "A", "accreditation_certificate": "http://localhost/storage/avatars/8X1kJJ0kP0pg08dC0xTKLzfH88Doaegm.png"}}
      */
     public function show()
     {
         $college = DB::table('colleges');
-        $college->select('id', 'name', 'region', 'address');
+        $college->select('id', 'name', 'region', 'address', 'accreditation', 'accreditation_certificate');
         $college->where('id', $this->request->id);
         $college = $college->first();
+
         if (!$college) {
             return $this->response(404, 'Perguruan tinggi tidak ditemukan.');
         }
+
         $college->region = ($college->region == true) ? 'Luar negeri' : 'Dalam negeri';
+        $college->accreditation_certificate = (is_null($college->accreditation_certificate)) ? null : Storage::disk('public')->url($college->accreditation_certificate);
+
         return $this->response(200, 'success', $college);
     }
 
@@ -102,10 +120,28 @@ class CollegeController extends Controller
     {
         $college = DB::table('colleges');
         $college->where('id', $this->request->id);
-        $college = $college->updateTs($this->posted);
+        $college->select('id', 'accreditation_certificate');
+        $college = $college->first();
+
         if (!$college) {
             return $this->response(404, 'Perguruan tinggi tidak ditemukan.');
         }
+
+        if ($this->request->hasFile('accreditation_certificate')) {
+            $fileExtension = '.' . $this->request->file('accreditation_certificate')->getClientOriginalExtension();
+            $fileName = Str::random(32) . $fileExtension;
+            Storage::disk('public')->putFileAs('accreditation_certificate/', $this->request->file('accreditation_certificate'), $fileName);
+            $this->posted['accreditation_certificate'] = 'accreditation_certificate/' . $fileName;
+
+            if (!is_null($college->accreditation_certificate)) {
+                Storage::disk('public')->delete($college->accreditation_certificate);
+            }
+        }
+
+        $college = DB::table('colleges');
+        $college->where('id', $this->request->id);
+        $college = $college->updateTs($this->posted);
+
         return $this->response(200, 'Perguruan berhasil diupdate.');
     }
 
@@ -121,10 +157,21 @@ class CollegeController extends Controller
     {
         $college = DB::table('colleges');
         $college->where('id', $this->request->id);
-        $college = $college->delete();
+        $college->select('id', 'accreditation_certificate');
+        $college = $college->first();
+
         if (!$college) {
             return $this->response(404, 'Perguruan tinggi tidak ditemukan.');
         }
+
+        if (!is_null($college->accreditation_certificate)) {
+            Storage::disk('public')->delete($college->accreditation_certificate);
+        }
+
+        $college = DB::table('colleges');
+        $college->where('id', $this->request->id);
+        $college = $college->delete();
+
         return $this->response(200, 'Perguruan tinggi berhasil dihapus.');
     }
 }

@@ -25,6 +25,8 @@ class UpdateCollegeRequest extends FormRequest
             'name' => 'required|unique:colleges,name,' . $this->id,
             'region' => 'required|boolean',
             'address' => 'max:160',
+            'accreditation' => 'max:2',
+            'accreditation_certificate' => 'image|max:512',
         ];
     }
 
@@ -41,6 +43,9 @@ class UpdateCollegeRequest extends FormRequest
             'region.required' => 'Region tidak boleh kosong.',
             'region.required' => 'Region harus berupa boolean',
             'adderss.max' => 'Alamat tidak boleh lebih dari 160 karakter',
+            'accreditation.max' => 'Akreditasi tidak boleh lebih dari 2 karakter',
+            'accreditation_certificate.image' => 'Sertifikat harus berupa jpg, jpeg, png, bmp, gif, svg, atau webp.',
+            'accreditation_certificate.max' => 'Ukuran Sertifikat tidak boleh lebih dari 512kb.',
         ];
     }
 
@@ -54,15 +59,23 @@ class UpdateCollegeRequest extends FormRequest
         return [
             'name' => [
                 'description' => 'Refers to the Name of College.',
-                'example' => 'admin',
+                'example' => 'Universitas Indonesia',
             ],
             'region' => [
                 'description' => 'Refers to the Region of College.',
-                'example' => 'false',
+                'example' => false,
             ],
             'address' => [
                 'description' => 'Refers to the Address of College.',
                 'example' => 'Jakarta',
+            ],
+            'accreditation' => [
+                'description' => 'Refers to the Accreditation of College. A | B | C | D',
+                'example' => 'A',
+            ],
+            'accreditation_certificate' => [
+                'description' => 'Refers to the Accreditation Certificate of College.',
+                'example' => public_path('/img/logo.svg'),
             ],
         ];
     }
