@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 /**
- * @group Institution
+ * @group Master Data
  *
  * APIs for institution
  */
@@ -22,7 +22,8 @@ class InstitutionController extends Controller
 
     /**
      * Get List of Institutions
-     * @group Institution
+     * @group Master Data
+     * @subgroup Institution
      * @authenticated
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
      * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
@@ -59,7 +60,8 @@ class InstitutionController extends Controller
 
     /**
      * Create a New Institution
-     * @group Institution
+     * @group Master Data
+     * @subgroup Institution
      * @authenticated
      * @response 200 {"code": 200,"message": "Institusi berhasil ditambah.","data": null}
      */
@@ -71,7 +73,8 @@ class InstitutionController extends Controller
 
     /**
      * Get Detail Institution by ID
-     * @group Institution
+     * @group Master Data
+     * @subgroup Institution
      * @authenticated
      * @urlParam id Refers to the ID of Institution. Example: 1
      * @response 404 {"code": 404,"message": "Institusi tidak ditemukan.","data": null}
@@ -93,7 +96,8 @@ class InstitutionController extends Controller
 
     /**
      * Update Institution by ID
-     * @group Institution
+     * @group Master Data
+     * @subgroup Institution
      * @authenticated
      * @urlParam id Refers to the ID of Institution. Example: 1
      * @response 404 {"code": 404,"message": "Institusi tidak ditemukan.","data": null}
@@ -119,7 +123,8 @@ class InstitutionController extends Controller
 
     /**
      * Delete Institution by ID
-     * @group Institution
+     * @group Master Data
+     * @subgroup Institution
      * @authenticated
      * @urlParam id Refers to the ID of Institution. Example: 1
      * @response 404 {"code": 404,"message": "Institusi tidak ditemukan.","data": null}
