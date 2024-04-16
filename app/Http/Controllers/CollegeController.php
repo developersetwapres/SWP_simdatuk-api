@@ -47,20 +47,20 @@ class CollegeController extends Controller
 
         $this->request->limit = ($this->request->limit) ? $this->request->limit : 10;
 
-        $users = DB::table('colleges');
-        $users->select('id', 'name', 'region', 'address');
-        $users->where('name', 'like', '%' . $this->request->keyword . '%');
-        $users = $users->paginate($this->request->limit);
+        $colleges = DB::table('colleges');
+        $colleges->select('id', 'name', 'region', 'address');
+        $colleges->where('name', 'like', '%' . $this->request->keyword . '%');
+        $colleges = $colleges->paginate($this->request->limit);
 
-        if ($users->isEmpty()) {
-            return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $users);
+        if ($colleges->isEmpty()) {
+            return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $colleges);
         }
 
-        foreach ($users->items() as $key => $item) {
+        foreach ($colleges->items() as $key => $item) {
             $item->region = ($item == true) ? 'Luar Negeri' : 'Dalam Negeri';
         }
 
-        return $this->paginateResponse(200, 'success', $users);
+        return $this->paginateResponse(200, 'success', $colleges);
     }
 
     /**
@@ -142,7 +142,7 @@ class CollegeController extends Controller
         $college->where('id', $this->request->id);
         $college = $college->updateTs($this->posted);
 
-        return $this->response(200, 'Perguruan berhasil diupdate.');
+        return $this->response(200, 'Perguruan tinggi berhasil diupdate.');
     }
 
     /**
