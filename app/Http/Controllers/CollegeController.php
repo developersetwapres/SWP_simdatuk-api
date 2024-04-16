@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 /**
- * @group College
+ * @group Master Data
  *
  * APIs for college
  */
@@ -24,7 +24,8 @@ class CollegeController extends Controller
 
     /**
      * Get List of Colleges
-     * @group College
+     * @group Master Data
+     * @subgroup College
      * @authenticated
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
      * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
@@ -65,7 +66,8 @@ class CollegeController extends Controller
 
     /**
      * Create a New College
-     * @group College
+     * @group Master Data
+     * @subgroup College
      * @authenticated
      * @response 200 {"code": 200,"message": "Perguruan tinggi berhasil ditambah.","data": null}
      */
@@ -85,7 +87,8 @@ class CollegeController extends Controller
 
     /**
      * Get Detail College by ID
-     * @group College
+     * @group Master Data
+     * @subgroup College
      * @authenticated
      * @urlParam id Refers to the ID of College. Example: 1
      * @response 404 {"code": 404,"message": "Perguruan tinggi tidak ditemukan.","data": null}
@@ -110,7 +113,8 @@ class CollegeController extends Controller
 
     /**
      * Update College by ID
-     * @group College
+     * @group Master Data
+     * @subgroup College
      * @authenticated
      * @urlParam id Refers to the ID of College. Example: 1
      * @response 404 {"code": 404,"message": "Perguruan tinggi tidak ditemukan.","data": null}
@@ -147,7 +151,8 @@ class CollegeController extends Controller
 
     /**
      * Delete College by ID
-     * @group College
+     * @group Master Data
+     * @subgroup College
      * @authenticated
      * @urlParam id Refers to the ID of College. Example: 1
      * @response 404 {"code": 404,"message": "Perguruan tinggi tidak ditemukan.","data": null}

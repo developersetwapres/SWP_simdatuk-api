@@ -41,7 +41,7 @@ class CreateCollegeRequest extends FormRequest
             'name.required' => 'Nama tidak boleh kosong.',
             'name.unique' => 'Nama sudah digunakan.',
             'region.required' => 'Region tidak boleh kosong.',
-            'region.required' => 'Region harus berupa boolean',
+            'region.boolean' => 'Region harus berupa boolean',
             'adderss.max' => 'Alamat tidak boleh lebih dari 160 karakter',
             'accreditation.max' => 'Akreditasi tidak boleh lebih dari 2 karakter',
             'accreditation_certificate.image' => 'Sertifikat harus berupa jpg, jpeg, png, bmp, gif, svg, atau webp.',
