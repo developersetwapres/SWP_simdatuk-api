@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CollegeController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\GradeController;
+use App\Http\Controllers\InstitutionController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
@@ -65,6 +66,14 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/{id}', [CollegeController::class, 'show']);
         Route::post('/{id}', [CollegeController::class, 'update']);
         Route::delete('/{id}', [CollegeController::class, 'delete']);
+    });
+
+    Route::prefix('institutions')->group(function () {
+        Route::get('/', [InstitutionController::class, 'index']);
+        Route::post('/', [InstitutionController::class, 'create']);
+        Route::get('/{id}', [InstitutionController::class, 'show']);
+        Route::post('/{id}', [InstitutionController::class, 'update']);
+        Route::delete('/{id}', [InstitutionController::class, 'delete']);
     });
 
     Route::prefix('grades')->group(function () {
