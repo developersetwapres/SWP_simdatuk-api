@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\College\CreateCollegeRequest;
-use App\Http\Requests\College\UpdateCollegeRequest;
+use App\Http\Requests\Institution\CreateInstitutionRequest;
+use App\Http\Requests\Institution\UpdateInstitutionRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 /**
  * @group Institution
@@ -29,7 +27,7 @@ class InstitutionController extends Controller
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
      * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
      * @queryParam keyword string The keyword search field for the name of institution. Example: kementerian
-     * @response 200 {"code": 200,"message": "success","data": [{"id": 2,"name": "Universitas Indonesia","region": "Luar Negeri","address": "Jawa Barat"}],"pagination": {"total": 10,"count": 1,"per_page": 1,"current_page": 1,"total_pages": 10,"links": {"first_page": "http://localhost/api/colleges?page=1","last_page": "http://localhost/api/colleges?page=10","next_page": "http://localhost/api/colleges?page=2","prev_page": null}}}
+     * @response 200 {"code": 200,"message": "success","data": [{"id": 2,"name": "Sekretariat Negara Wakil Presiden"}],"pagination": {"total": 1,"count": 1,"per_page": 10,"current_page": 1,"total_pages": 1,"links": {"first_page": "http://localhost/api/institutions?page=1","last_page": "http://localhost/api/institutions?page=1","next_page": null,"prev_page": null}}}
      */
     public function index()
     {
@@ -65,7 +63,7 @@ class InstitutionController extends Controller
      * @authenticated
      * @response 200 {"code": 200,"message": "Institusi berhasil ditambah.","data": null}
      */
-    public function create(CreateCollegeRequest $request)
+    public function create(CreateInstitutionRequest $request)
     {
         DB::table('institutions')->insertTs($this->posted);
         return $this->response(200, 'Institusi berhasil ditambah.');
@@ -77,7 +75,7 @@ class InstitutionController extends Controller
      * @authenticated
      * @urlParam id Refers to the ID of Institution. Example: 1
      * @response 404 {"code": 404,"message": "Institusi tidak ditemukan.","data": null}
-     * @response 200 {"code": 200,"message": "success","data": {"id": 1,"name": "Universitas Gadjah Mada","region": "Dalam negeri","address": "Daerah Istimewa Yogyakarta", "accreditation": "A", "accreditation_certificate": "http://localhost/storage/avatars/8X1kJJ0kP0pg08dC0xTKLzfH88Doaegm.png"}}
+     * @response 200 {"code": 200,"message": "success","data": {"id": 3,"name": "Sekretariat Negara Wakil Presiden"}}
      */
     public function show()
     {
@@ -101,7 +99,7 @@ class InstitutionController extends Controller
      * @response 404 {"code": 404,"message": "Institusi tidak ditemukan.","data": null}
      * @response 200 {"code": 200,"message": "Institusi berhasil diupdate.","data": null}
      */
-    public function update(UpdateCollegeRequest $request)
+    public function update(UpdateInstitutionRequest $request)
     {
         $institution = DB::table('institutions');
         $institution->where('id', $this->request->id);

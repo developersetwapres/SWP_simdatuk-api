@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('institutions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name', 160);
+            $table->string('name', 160)->unique();
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
         });
