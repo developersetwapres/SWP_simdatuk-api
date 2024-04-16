@@ -22,7 +22,7 @@ class UpdateProfileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'foto_profil' => 'image|max:512',
+            'photo_profile' => 'image|max:512',
             'username' => 'required|min:5|max:30|unique:users,username,' . $this->user()?->id,
             'email' => 'required|email|unique:users,email,' . $this->user()?->id,
             'old_password' => 'required_with:password',
@@ -39,8 +39,8 @@ class UpdateProfileRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'foto_profil.image' => 'Foto profil harus berupa jpg, jpeg, png, bmp, gif, svg, atau webp.',
-            'foto_profil.max' => 'Ukuran foto profil tidak boleh lebih dari 512kb.',
+            'photo_profile.image' => 'Foto profil harus berupa jpg, jpeg, png, bmp, gif, svg, atau webp.',
+            'photo_profile.max' => 'Ukuran foto profil tidak boleh lebih dari 512kb.',
             'username.required' => 'Username tidak boleh kosong.',
             'username.min' => 'Username tidak boleh kurang dari 5 karakter',
             'username.max' => 'Username tidak boleh lebih dari 30 karakter',
@@ -64,7 +64,7 @@ class UpdateProfileRequest extends FormRequest
     public function bodyParameters(): array
     {
         return [
-            'foto_profil' => [
+            'photo_profile' => [
                 'description' => 'Refers to the Photo Profile of User.',
                 'example' => public_path('/img/logo.svg'),
             ],

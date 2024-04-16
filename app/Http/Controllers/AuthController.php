@@ -30,7 +30,7 @@ class AuthController extends Controller
 
     /**
      * Login
-     * @response 200 {"code": 200,"message": "Pengguna berhasil login.","token": "12|Qt9HeTzHAmw5s2fLiRO09eovw1yF3EcSHFR4mU9Ga3cc24ab","user": {"id": 1,"email": "admin@setwapres.go.id","username": "admin","file_foto_profil": null,"nip": "0000000000000","nrp": "0000000000000","role": {"id": 1,"name": "administrator"},"permissions": [{"id": 8,"name": "Data Pegawai - ASN","create": 1,"read": 1,"update": 1,"delete": 0}]}}
+     * @response 200 {"code": 200,"message": "Pengguna berhasil login.","token": "12|Qt9HeTzHAmw5s2fLiRO09eovw1yF3EcSHFR4mU9Ga3cc24ab","user": {"id": 1,"email": "admin@setwapres.go.id","username": "admin","photo_profile": null,"employee_id": "0000000000000","registration_number": "0000000000000","role": {"id": 1,"name": "administrator"},"permissions": [{"id": 8,"name": "Data Pegawai - ASN","create": 1,"read": 1,"update": 1,"delete": 0}]}}
      * @response 422 {"code": 422,"message": "Username tidak boleh kosong.","data": {"username": ["Username email tidak boleh kosong."], "password": ["Kata sandi tidak boleh kosong."]}}
      * @response 401 {"code": 401,"message": "Kata sandi yang anda masukkan salah.","data": null}
      */
@@ -51,10 +51,9 @@ class AuthController extends Controller
         }
 
         $user = DB::table('users');
-        $user->select('users.id', 'users.email', 'users.username', 'users.file_foto_profil', 'users.nip', 'users.nrp');
+        $user->select('users.id', 'users.email', 'users.username', 'users.photo_profile', 'users.employee_id', 'users.registration_number');
         $user = $user->first();
-        $user->foto_profil = (is_null($user->file_foto_profil)) ? asset('img/avatar.jpeg') : Storage::disk('public')->url($user->file_foto_profil);
-        unset($user->file_foto_profil);
+        $user->photo_profile = (is_null($user->photo_profile)) ? asset('img/avatar.jpeg') : Storage::disk('public')->url($user->photo_profile);
 
         $role = DB::table('roles');
         $role->join('users', 'roles.id', 'users.role_id');

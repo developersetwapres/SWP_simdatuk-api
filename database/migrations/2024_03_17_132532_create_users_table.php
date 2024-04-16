@@ -18,35 +18,35 @@ return new class extends Migration
             $table->string('username', 160)->nullable()->unique();
             $table->string('password', 255)->nullable();
             $table->string('name', 160);
-            $table->string('file_foto_profil', 160)->nullable();
-            $table->string('nip', 20)->nullable()->unique();
-            $table->string('nrp', 20)->nullable()->unique();
-            $table->string('tempat_lahir', 30)->nullable();
-            $table->date('tanggal_lahir')->nullable();
-            $table->smallInteger('agama')->default(1)->comment('1=Islam, 2=Kristen, 3=Katolik, 4=Hindu, 5=Buddha, 6=Konghucu');
-            $table->boolean('jenis_kelamin')->default(true)->comment('true=Pria, false=Wanita');
-            $table->smallInteger('status_perkawinan')->default(1)->comment('1=Belum Menikah, 2=Menikah, 3=Cerai, 4=Janda, 5=Duda');
-            $table->unsignedBigInteger('golongan')->nullable(); // Dropdown
-            $table->date('tmt_golongan')->nullable();
-            $table->unsignedBigInteger('jabatan')->nullable(); // Dropdown
-            $table->unsignedBigInteger('eselon')->nullable(); // Dropdown
-            $table->date('tmt_eselon')->nullable();
-            $table->unsignedBigInteger('instansi_induk')->nullable(); // Dropdown
-            $table->unsignedBigInteger('satuan_organisasi')->nullable(); // Dropdown
-            $table->unsignedBigInteger('unit_kerja')->nullable(); // Dropdown
-            $table->string('no_karpeg', 20)->nullable();
-            $table->string('file_kartu_pegawai', 160)->nullable();
-            $table->string('no_karis', 20)->nullable();
-            $table->string('no_karsu', 20)->nullable();
-            $table->string('npwp', 20)->nullable();
-            $table->boolean('status_pegawai')->default(true)->comment('true=aktif, false=tidak aktif');
-            $table->boolean('komplek')->default(true)->comment('true=dalam, false=luar');
-            $table->string('nama_komplek', 160)->nullable();
-            $table->text('alamat_tempat_tinggal_saat_ini')->nullable();
-            $table->string('no_telepon_rumah', 20)->nullable();
-            $table->string('no_hp', 20)->nullable();
-            $table->text('alamat_kantor', 160)->nullable();
-            $table->string('no_telepon_kantor', 20)->nullable();
+            $table->string('photo_profile', 160)->nullable();
+            $table->string('employee_id_number', 20)->nullable()->unique();
+            $table->string('employee_registration_number', 20)->nullable()->unique();
+            $table->string('place_of_birth', 30)->nullable();
+            $table->date('date_of_birth')->nullable();
+            $table->smallInteger('religion')->default(1)->comment('1=Islam, 2=Kristen, 3=Katolik, 4=Hindu, 5=Buddha, 6=Konghucu');
+            $table->boolean('gender')->default(true)->comment('true=Pria, false=Wanita');
+            $table->smallInteger('marital_status')->default(1)->comment('1=Belum Menikah, 2=Menikah, 3=Cerai, 4=Janda, 5=Duda');
+            $table->unsignedBigInteger('grade')->nullable(); // Dropdown
+            $table->date('grade_effective_date')->nullable();
+            $table->unsignedBigInteger('position')->nullable(); // Dropdown
+            $table->unsignedBigInteger('echelon')->nullable(); // Dropdown
+            $table->date('echelon_effective_date')->nullable();
+            $table->unsignedBigInteger('institution')->nullable(); // Dropdown
+            $table->unsignedBigInteger('organization')->nullable(); // Dropdown
+            $table->unsignedBigInteger('work_unit')->nullable(); // Dropdown
+            $table->string('employee_id_card_number', 20)->nullable();
+            $table->string('employee_id_card', 160)->nullable();
+            $table->string('wife_id_card_number', 20)->nullable();
+            $table->string('husband_id_card_number', 20)->nullable();
+            $table->string('tax_id', 20)->nullable();
+            $table->boolean('employment_status')->default(true)->comment('true=aktif, false=tidak aktif');
+            $table->boolean('inner_housing_complex')->default(true)->comment('true=dalam, false=luar');
+            $table->string('housing_complex_name', 160)->nullable();
+            $table->text('current_address')->nullable();
+            $table->string('home_phone_number', 20)->nullable();
+            $table->string('mobile_phone', 20)->nullable();
+            $table->text('office_address', 160)->nullable();
+            $table->string('office_phone_number', 20)->nullable();
             $table->tinyInteger('type')->nullable()->default(1)->comment('1=ASN, 2=NON ASN, 3=OUTSOURCING');
             $table->boolean('status')->default(false)->comment('true=active, false=deactivate');
             $table->string('verification_code', 160)->nullable()->unique();

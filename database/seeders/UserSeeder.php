@@ -26,8 +26,8 @@ class UserSeeder extends Seeder
                 'username' => 'admin',
                 'password' => Hash::make('password'), // default password
                 'name' => 'administrator',
-                'nip' => '0000000000000',
-                'nrp' => '0000000000000',
+                'employee_id_number' => '0000000000000',
+                'employee_registration_number' => '0000000000000',
                 'status' => true,
             ],
         ];
@@ -44,13 +44,13 @@ class UserSeeder extends Seeder
 
             $data = [
                 'name' => $faker->name($gender),
-                'nip' => $faker->numberBetween($min = 0000000000000, $max = 9999999999999),
-                'nrp' => $faker->numberBetween($min = 0000000000, $max = 9999999999),
-                'tempat_lahir' => $faker->city(),
-                'tanggal_lahir' => $faker->date($format = 'Y-m-d', $min = '1990-01-01', $max = '1970-01-01'),
-                'agama' => $faker->numberBetween($min = 1, $max = 6),
-                'jenis_kelamin' => ($gender == 'Male') ? 1 : 0,
-                'status_perkawinan' => $faker->numberBetween($min = 1, $max = 5),
+                'employee_id_number' => $faker->numberBetween($min = 0000000000000, $max = 9999999999999),
+                'employee_registration_number' => $faker->numberBetween($min = 0000000000, $max = 9999999999),
+                'place_of_birth' => $faker->city(),
+                'date_of_birth' => $faker->date($format = 'Y-m-d', $min = '1990-01-01', $max = '1970-01-01'),
+                'religion' => $faker->numberBetween($min = 1, $max = 6),
+                'gender' => ($gender == 'Male') ? 1 : 0,
+                'marital_status' => $faker->numberBetween($min = 1, $max = 5),
             ];
             array_push($users, $data);
         }

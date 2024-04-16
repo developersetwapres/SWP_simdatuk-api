@@ -34,7 +34,7 @@ class UserController extends Controller
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
      * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
      * @queryParam username string The keyword search field for the username. Example: admin
-     * @response 200 {"code": 200, "message": "success", "data": [{"id": 32, "username": "admin", "nip": "0000000000000", "nrp": "0000000000000", "role_name": "administrator", "status": "Aktif"}], "pagination": {"total": 1, "count": 1, "per_page": 1, "current_page": 1, "total_pages": 1, "links": {"first_page": "http://localhost/api/users?page=1", "last_page": "http://localhost/api/users?page=1", "next_page": null, "prev_page": null}}}
+     * @response 200 {"code": 200, "message": "success", "data": [{"id": 32, "username": "admin", "employee_id_number": "0000000000000", "employee_registration_number": "0000000000000", "role_name": "administrator", "status": "Aktif"}], "pagination": {"total": 1, "count": 1, "per_page": 1, "current_page": 1, "total_pages": 1, "links": {"first_page": "http://localhost/api/users?page=1", "last_page": "http://localhost/api/users?page=1", "next_page": null, "prev_page": null}}}
      */
     public function index()
     {
@@ -53,7 +53,7 @@ class UserController extends Controller
 
         $users = DB::table('users');
         $users->join('roles', 'users.role_id', 'role_id');
-        $users->select('users.id', 'users.username', 'users.nip', 'users.nrp', 'roles.name as role_name', 'users.status');
+        $users->select('users.id', 'users.username', 'users.employee_id_number', 'users.employee_registration_number', 'roles.name as role_name', 'users.status');
         $users->where('users.username', 'like', '%' . $this->request->username . '%');
         $users = $users->paginate($this->request->limit);
         if ($users->isEmpty()) {
@@ -122,7 +122,7 @@ class UserController extends Controller
      * @subgroup User
      * @authenticated
      * @urlParam id Refers to the ID of User. Example: 1
-     * @response 200 {"code": 200,"message": "success","data": {"id": 1,"username": "admin","email": "admin@setwapres.go.id","name": "administrator","nip": "0000000000000","role": {"id": 1,"name": "administrator"}}}
+     * @response 200 {"code": 200,"message": "success","data": {"id": 1,"username": "admin","email": "admin@setwapres.go.id","name": "administrator","employee_id_number": "0000000000000","role": {"id": 1,"name": "administrator"}}}
      * @response 404 {"code": 404,"message": "Pengguna tidak ditemukan.","data": null}
      */
     public function show()
@@ -130,7 +130,7 @@ class UserController extends Controller
         $user = DB::table('users');
         $user->where('id', $this->request->id);
         $user->where('role_id', '!=', null);
-        $user->select('role_id', 'id', 'username', 'email', 'name', 'nip');
+        $user->select('role_id', 'id', 'username', 'email', 'name', 'employee_id_number');
         $user = $user->first();
         if (!$user) {
             return $this->response(404, 'Pengguna tidak ditemukan.');
@@ -156,14 +156,14 @@ class UserController extends Controller
      * @bodyParam username string Refers to username being to stored. Example: administrator
      * @bodyParam email string Refers to email being to stored. Example: admin@simdatuk.go.id
      * @bodyParam role_id integer Refers to the ID of Role. Example: 1
-     * @response 200 {"code": 200, "message": "success", "data": [{"id": 32, "username": "admin", "nip": "0000000000000", "nrp": "0000000000000", "role_name": "administrator", "status": "Aktif"}], "pagination": {"total": 1, "count": 1, "per_page": 1, "current_page": 1, "total_pages": 1, "links": {"first_page": "http://localhost/api/users?page=1", "last_page": "http://localhost/api/users?page=1", "next_page": null, "prev_page": null}}}
+     * @response 200 {"code": 200, "message": "success", "data": [{"id": 32, "username": "admin", "employee_id_number": "0000000000000", "employee_registration_number": "0000000000000", "role_name": "administrator", "status": "Aktif"}], "pagination": {"total": 1, "count": 1, "per_page": 1, "current_page": 1, "total_pages": 1, "links": {"first_page": "http://localhost/api/users?page=1", "last_page": "http://localhost/api/users?page=1", "next_page": null, "prev_page": null}}}
      */
     public function update(UpdateUserRequest $request)
     {
         $user = DB::table('users');
         $user->where('id', $this->request->id);
         $user->where('role_id', '!=', null);
-        $user->select('role_id', 'id', 'username', 'email', 'name', 'nip');
+        $user->select('role_id', 'id', 'username', 'email', 'name', 'employee_id_number');
         $user = $user->first();
         if (!$user) {
             return $this->response(404, 'Pengguna tidak ditemukan.');

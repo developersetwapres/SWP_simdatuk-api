@@ -25,7 +25,7 @@ class ProfileController extends Controller
      * Get Profile
      * @group Profile
      * @authenticated
-     * @response 200 {"code": 200,"message": "success","data": {"id": 1,"name": "administrator","nip": "0000000000000","nrp": "0000000000000","username": "admin","email": "admin@setwapres.go.id","role_name": "administrator"}}
+     * @response 200 {"code": 200,"message": "success","data": {"id": 1,"name": "administrator","employee_id_number": "0000000000000","employee_registration_number": "0000000000000","username": "admin","email": "admin@setwapres.go.id","role_name": "administrator"}}
      */
     public function show()
     {
@@ -36,14 +36,14 @@ class ProfileController extends Controller
         $role->select('name');
         $role = $role->first();
 
-        $fotoProfil = (is_null($user->file_foto_profil)) ? asset('img/avatar.jpeg') : Storage::disk('public')->url($user->file_foto_profil);
+        $photoProfile = (is_null($user->photo_profile)) ? asset('img/avatar.jpeg') : Storage::disk('public')->url($user->photo_profile);
 
         $data = [
             'id' => $user->id,
             'name' => $user->name,
-            'nip' => $user->nip,
-            'nrp' => $user->nrp,
-            'foto_profil' => $fotoProfil,
+            'employee_id' => $user->employee_id,
+            'registration_number' => $user->registration_number,
+            'photo_profile' => $photoProfile,
             'username' => $user->username,
             'email' => $user->email,
             'role_name' => $role->name,
@@ -71,12 +71,12 @@ class ProfileController extends Controller
             ]);
 
             // Check if file submitted
-            if ($this->request->hasFile('foto_profil')) {
-                $fileExtension = '.' . $this->request->file('foto_profil')->getClientOriginalExtension();
+            if ($this->request->hasFile('photo_profile')) {
+                $fileExtension = '.' . $this->request->file('photo_profile')->getClientOriginalExtension();
                 $fileName = Str::random(32) . $fileExtension;
-                Storage::disk('public')->putFileAs('avatars/', $this->request->file('foto_profil'), $fileName);
+                Storage::disk('public')->putFileAs('photo_profile/', $this->request->file('photo_profile'), $fileName);
                 DB::table('users')->where('id', $this->request->user()->id)->updateTs([
-                    'file_foto_profil' => 'avatars/' . $fileName,
+                    'photo_profile' => 'photo_profile/' . $fileName,
                 ]);
             }
 

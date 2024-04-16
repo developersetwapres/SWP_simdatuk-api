@@ -757,7 +757,7 @@
 
         </div>
         <div class="sl-flex sl-items-center sl-px-4 sl-py-3 sl-border-t">
-            Last updated: April 15, 2024
+            Last updated: April 16, 2024
         </div>
 
         <div class="sl-flex sl-items-center sl-px-4 sl-py-3 sl-border-t">
@@ -1206,9 +1206,9 @@ fetch(url, {
         &quot;id&quot;: 1,
         &quot;email&quot;: &quot;admin@setwapres.go.id&quot;,
         &quot;username&quot;: &quot;admin&quot;,
-        &quot;file_foto_profil&quot;: null,
-        &quot;nip&quot;: &quot;0000000000000&quot;,
-        &quot;nrp&quot;: &quot;0000000000000&quot;,
+        &quot;photo_profile&quot;: null,
+        &quot;employee_id&quot;: &quot;0000000000000&quot;,
+        &quot;registration_number&quot;: &quot;0000000000000&quot;,
         &quot;role&quot;: {
             &quot;id&quot;: 1,
             &quot;name&quot;: &quot;administrator&quot;
@@ -6276,8 +6276,8 @@ fetch(url, {
         {
             &quot;id&quot;: 32,
             &quot;username&quot;: &quot;admin&quot;,
-            &quot;nip&quot;: &quot;0000000000000&quot;,
-            &quot;nrp&quot;: &quot;0000000000000&quot;,
+            &quot;employee_id_number&quot;: &quot;0000000000000&quot;,
+            &quot;employee_registration_number&quot;: &quot;0000000000000&quot;,
             &quot;role_name&quot;: &quot;administrator&quot;,
             &quot;status&quot;: &quot;Aktif&quot;
         }
@@ -7270,7 +7270,7 @@ fetch(url, {
         &quot;username&quot;: &quot;admin&quot;,
         &quot;email&quot;: &quot;admin@setwapres.go.id&quot;,
         &quot;name&quot;: &quot;administrator&quot;,
-        &quot;nip&quot;: &quot;0000000000000&quot;,
+        &quot;employee_id_number&quot;: &quot;0000000000000&quot;,
         &quot;role&quot;: {
             &quot;id&quot;: 1,
             &quot;name&quot;: &quot;administrator&quot;
@@ -7837,8 +7837,8 @@ fetch(url, {
         {
             &quot;id&quot;: 32,
             &quot;username&quot;: &quot;admin&quot;,
-            &quot;nip&quot;: &quot;0000000000000&quot;,
-            &quot;nrp&quot;: &quot;0000000000000&quot;,
+            &quot;employee_id_number&quot;: &quot;0000000000000&quot;,
+            &quot;employee_registration_number&quot;: &quot;0000000000000&quot;,
             &quot;role_name&quot;: &quot;administrator&quot;,
             &quot;status&quot;: &quot;Aktif&quot;
         }
@@ -8702,8 +8702,8 @@ fetch(url, {
     &quot;data&quot;: {
         &quot;id&quot;: 1,
         &quot;name&quot;: &quot;administrator&quot;,
-        &quot;nip&quot;: &quot;0000000000000&quot;,
-        &quot;nrp&quot;: &quot;0000000000000&quot;,
+        &quot;employee_id_number&quot;: &quot;0000000000000&quot;,
+        &quot;employee_registration_number&quot;: &quot;0000000000000&quot;,
         &quot;username&quot;: &quot;admin&quot;,
         &quot;email&quot;: &quot;admin@setwapres.go.id&quot;,
         &quot;role_name&quot;: &quot;administrator&quot;
@@ -8830,7 +8830,7 @@ fetch(url, {
     <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
         <div class="sl-flex sl-items-center sl-max-w-full">
                                         <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">foto_profil</div>
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">photo_profile</div>
                                             <span class="sl-truncate sl-text-muted">file</span>
                                     </div>
                                     </div>
@@ -9097,12 +9097,12 @@ fetch(url, {
                     <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
                                                     <div class="ParameterGrid sl-p-4">
                                                                                                         <label aria-hidden="true"
-                                           for="bodyparam-POSTapi-profile-foto_profil">foto_profil</label>
+                                           for="bodyparam-POSTapi-profile-photo_profile">photo_profile</label>
                                     <span class="sl-mx-3">:</span>
                                     <div class="sl-flex sl-flex-1">
                                         <div class="sl-input sl-flex-1 sl-relative">
-                                                                                            <input aria-label="foto_profil" name="foto_profil"
-                                                       id="bodyparam-POSTapi-profile-foto_profil"
+                                                                                            <input aria-label="photo_profile" name="photo_profile"
+                                                       id="bodyparam-POSTapi-profile-photo_profile"
                                                        type="file" data-component="body"
                                                        class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
                                                 >
@@ -9272,7 +9272,7 @@ You can check the Dev Tools console for debugging information.</p>
     --form "old_password=current_password"\
     --form "password=new_password"\
     --form "password_confirmation=new_password"\
-    --form "foto_profil=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" </code></pre>                                        </div>
+    --form "photo_profile=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" </code></pre>                                        </div>
                                     </div>
                                 </div>
                                                             <div class="sl-bg-canvas-100 example-request example-request-javascript"
@@ -9295,7 +9295,7 @@ body.append('email', 'admin@simdatuk.go.id');
 body.append('old_password', 'current_password');
 body.append('password', 'new_password');
 body.append('password_confirmation', 'new_password');
-body.append('foto_profil', document.querySelector('input[name="foto_profil"]').files[0]);
+body.append('photo_profile', document.querySelector('input[name="photo_profile"]').files[0]);
 
 fetch(url, {
     method: "POST",
@@ -9854,24 +9854,22 @@ fetch(url, {
     &quot;message&quot;: &quot;success&quot;,
     &quot;data&quot;: [
         {
-            &quot;id&quot;: 32,
-            &quot;username&quot;: &quot;admin&quot;,
-            &quot;nip&quot;: &quot;0000000000000&quot;,
-            &quot;nrp&quot;: &quot;0000000000000&quot;,
-            &quot;role_name&quot;: &quot;administrator&quot;,
-            &quot;status&quot;: &quot;Aktif&quot;
+            &quot;id&quot;: 2,
+            &quot;name&quot;: &quot;Universitas Indonesia&quot;,
+            &quot;region&quot;: &quot;Luar Negeri&quot;,
+            &quot;address&quot;: &quot;Jawa Barat&quot;
         }
     ],
     &quot;pagination&quot;: {
-        &quot;total&quot;: 1,
+        &quot;total&quot;: 10,
         &quot;count&quot;: 1,
         &quot;per_page&quot;: 1,
         &quot;current_page&quot;: 1,
-        &quot;total_pages&quot;: 1,
+        &quot;total_pages&quot;: 10,
         &quot;links&quot;: {
-            &quot;first_page&quot;: &quot;http://localhost/api/users?page=1&quot;,
-            &quot;last_page&quot;: &quot;http://localhost/api/users?page=1&quot;,
-            &quot;next_page&quot;: null,
+            &quot;first_page&quot;: &quot;http://localhost/api/colleges?page=1&quot;,
+            &quot;last_page&quot;: &quot;http://localhost/api/colleges?page=10&quot;,
+            &quot;next_page&quot;: &quot;http://localhost/api/colleges?page=2&quot;,
             &quot;prev_page&quot;: null
         }
     }
@@ -9957,7 +9955,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        application/json
+                        multipart/form-data
                     </div>
                 </div>
             </div>
@@ -10010,7 +10008,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        admin
+                        Universitas Indonesia
                     </div>
                 </div>
             </div>
@@ -10062,6 +10060,56 @@ fetch(url, {
 </div>
 
             </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">accreditation</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Accreditation of College. A | B | C | D. Must not be greater than 2 characters.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        A
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">accreditation_certificate</div>
+                                            <span class="sl-truncate sl-text-muted">file</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Accreditation Certificate of College. Must be an image. Must not be greater than 512 kilobytes.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
                             </div>
                         </div>
                     
@@ -10077,8 +10125,8 @@ fetch(url, {
         <form class="TryItPanel sl-bg-canvas-100 sl-rounded-lg"
               data-method="POST"
               data-path="api/colleges"
-              data-hasfiles="0"
-              data-hasjsonbody="1">
+              data-hasfiles="1"
+              data-hasjsonbody="0">
                             <div class="sl-panel sl-outline-none sl-w-full expandable">
                     <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
                          role="button">
@@ -10141,7 +10189,7 @@ fetch(url, {
                                     <div class="sl-input sl-flex-1 sl-relative">
                                         <input aria-label="Content-Type" name="Content-Type"
                                                id="header-POSTapi-colleges-Content-Type"
-                                               value="application/json" data-component="header"
+                                               value="multipart/form-data" data-component="header"
                                                class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
                                     </div>
                                 </div>
@@ -10179,16 +10227,72 @@ fetch(url, {
                         </div>
                     </div>
                     <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
-                                                    <div class="TextRequestBody sl-p-4">
-                                <div class="code-editor language-json"
-                                     id="json-body-POSTapi-colleges"
-                                     style="font-family: var(--font-code); font-size: 12px; line-height: var(--lh-code);"
-                                >{
-    "name": "admin",
-    "region": false,
-    "address": "Jakarta"
-}</div>
-                            </div>
+                                                    <div class="ParameterGrid sl-p-4">
+                                                                                                        <label aria-hidden="true"
+                                           for="bodyparam-POSTapi-colleges-name">name</label>
+                                    <span class="sl-mx-3">:</span>
+                                    <div class="sl-flex sl-flex-1">
+                                        <div class="sl-input sl-flex-1 sl-relative">
+                                                                                            <input aria-label="name" name="name"
+                                                       id="bodyparam-POSTapi-colleges-name"
+                                                       placeholder="Refers to the Name of College."
+                                                       value="Universitas Indonesia" data-component="body"
+                                                       class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
+                                                >
+                                                                                    </div>
+                                    </div>
+                                                                                                        <label aria-hidden="true"
+                                           for="bodyparam-POSTapi-colleges-region">region</label>
+                                    <span class="sl-mx-3">:</span>
+                                    <div class="sl-flex sl-flex-1">
+                                        <div class="sl-input sl-flex-1 sl-relative">
+                                                                                            <input aria-label="region" name="region"
+                                                       id="bodyparam-POSTapi-colleges-region"
+                                                       placeholder="Refers to the Region of College."
+                                                       value="" data-component="body"
+                                                       class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
+                                                >
+                                                                                    </div>
+                                    </div>
+                                                                                                        <label aria-hidden="true"
+                                           for="bodyparam-POSTapi-colleges-address">address</label>
+                                    <span class="sl-mx-3">:</span>
+                                    <div class="sl-flex sl-flex-1">
+                                        <div class="sl-input sl-flex-1 sl-relative">
+                                                                                            <input aria-label="address" name="address"
+                                                       id="bodyparam-POSTapi-colleges-address"
+                                                       placeholder="Refers to the Address of College. Must not be greater than 160 characters."
+                                                       value="Jakarta" data-component="body"
+                                                       class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
+                                                >
+                                                                                    </div>
+                                    </div>
+                                                                                                        <label aria-hidden="true"
+                                           for="bodyparam-POSTapi-colleges-accreditation">accreditation</label>
+                                    <span class="sl-mx-3">:</span>
+                                    <div class="sl-flex sl-flex-1">
+                                        <div class="sl-input sl-flex-1 sl-relative">
+                                                                                            <input aria-label="accreditation" name="accreditation"
+                                                       id="bodyparam-POSTapi-colleges-accreditation"
+                                                       placeholder="Refers to the Accreditation of College. A | B | C | D. Must not be greater than 2 characters."
+                                                       value="A" data-component="body"
+                                                       class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
+                                                >
+                                                                                    </div>
+                                    </div>
+                                                                                                        <label aria-hidden="true"
+                                           for="bodyparam-POSTapi-colleges-accreditation_certificate">accreditation_certificate</label>
+                                    <span class="sl-mx-3">:</span>
+                                    <div class="sl-flex sl-flex-1">
+                                        <div class="sl-input sl-flex-1 sl-relative">
+                                                                                            <input aria-label="accreditation_certificate" name="accreditation_certificate"
+                                                       id="bodyparam-POSTapi-colleges-accreditation_certificate"
+                                                       type="file" data-component="body"
+                                                       class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
+                                                >
+                                                                                    </div>
+                                    </div>
+                                                            </div>
                                             </div>
                 </div>
             
@@ -10280,14 +10384,13 @@ You can check the Dev Tools console for debugging information.</p>
                                             <pre><code class="language-bash">curl --request POST \
     "http://localhost/api/colleges" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
-    --header "Content-Type: application/json" \
+    --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
-    --data "{
-    \"name\": \"admin\",
-    \"region\": false,
-    \"address\": \"Jakarta\"
-}"
-</code></pre>                                        </div>
+    --form "name=Universitas Indonesia"\
+    --form "region="\
+    --form "address=Jakarta"\
+    --form "accreditation=A"\
+    --form "accreditation_certificate=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" </code></pre>                                        </div>
                                     </div>
                                 </div>
                                                             <div class="sl-bg-canvas-100 example-request example-request-javascript"
@@ -10300,20 +10403,21 @@ You can check the Dev Tools console for debugging information.</p>
 
 const headers = {
     "Authorization": "Bearer {YOUR_AUTH_KEY}",
-    "Content-Type": "application/json",
+    "Content-Type": "multipart/form-data",
     "Accept": "application/json",
 };
 
-let body = {
-    "name": "admin",
-    "region": false,
-    "address": "Jakarta"
-};
+const body = new FormData();
+body.append('name', 'Universitas Indonesia');
+body.append('region', '');
+body.append('address', 'Jakarta');
+body.append('accreditation', 'A');
+body.append('accreditation_certificate', document.querySelector('input[name="accreditation_certificate"]').files[0]);
 
 fetch(url, {
     method: "POST",
     headers,
-    body: JSON.stringify(body),
+    body,
 }).then(response =&gt; response.json());</code></pre>                                        </div>
                                     </div>
                                 </div>
@@ -10783,7 +10887,9 @@ fetch(url, {
         &quot;id&quot;: 1,
         &quot;name&quot;: &quot;Universitas Gadjah Mada&quot;,
         &quot;region&quot;: &quot;Dalam negeri&quot;,
-        &quot;address&quot;: &quot;Daerah Istimewa Yogyakarta&quot;
+        &quot;address&quot;: &quot;Daerah Istimewa Yogyakarta&quot;,
+        &quot;accreditation&quot;: &quot;A&quot;,
+        &quot;accreditation_certificate&quot;: &quot;http://localhost/storage/avatars/8X1kJJ0kP0pg08dC0xTKLzfH88Doaegm.png&quot;
     }
 }</code></pre>
                                                                             </div>
@@ -10879,7 +10985,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        application/json
+                        multipart/form-data
                     </div>
                 </div>
             </div>
@@ -10960,7 +11066,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        admin
+                        Universitas Indonesia
                     </div>
                 </div>
             </div>
@@ -11012,6 +11118,56 @@ fetch(url, {
 </div>
 
             </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">accreditation</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Accreditation of College. A | B | C | D. Must not be greater than 2 characters.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        A
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">accreditation_certificate</div>
+                                            <span class="sl-truncate sl-text-muted">file</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Accreditation Certificate of College. Must be an image. Must not be greater than 512 kilobytes.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
                             </div>
                         </div>
                     
@@ -11027,8 +11183,8 @@ fetch(url, {
         <form class="TryItPanel sl-bg-canvas-100 sl-rounded-lg"
               data-method="POST"
               data-path="api/colleges/{id}"
-              data-hasfiles="0"
-              data-hasjsonbody="1">
+              data-hasfiles="1"
+              data-hasjsonbody="0">
                             <div class="sl-panel sl-outline-none sl-w-full expandable">
                     <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
                          role="button">
@@ -11091,7 +11247,7 @@ fetch(url, {
                                     <div class="sl-input sl-flex-1 sl-relative">
                                         <input aria-label="Content-Type" name="Content-Type"
                                                id="header-POSTapi-colleges--id--Content-Type"
-                                               value="application/json" data-component="header"
+                                               value="multipart/form-data" data-component="header"
                                                class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
                                     </div>
                                 </div>
@@ -11162,16 +11318,72 @@ fetch(url, {
                         </div>
                     </div>
                     <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
-                                                    <div class="TextRequestBody sl-p-4">
-                                <div class="code-editor language-json"
-                                     id="json-body-POSTapi-colleges--id-"
-                                     style="font-family: var(--font-code); font-size: 12px; line-height: var(--lh-code);"
-                                >{
-    "name": "admin",
-    "region": false,
-    "address": "Jakarta"
-}</div>
-                            </div>
+                                                    <div class="ParameterGrid sl-p-4">
+                                                                                                        <label aria-hidden="true"
+                                           for="bodyparam-POSTapi-colleges--id--name">name</label>
+                                    <span class="sl-mx-3">:</span>
+                                    <div class="sl-flex sl-flex-1">
+                                        <div class="sl-input sl-flex-1 sl-relative">
+                                                                                            <input aria-label="name" name="name"
+                                                       id="bodyparam-POSTapi-colleges--id--name"
+                                                       placeholder="Refers to the Name of College."
+                                                       value="Universitas Indonesia" data-component="body"
+                                                       class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
+                                                >
+                                                                                    </div>
+                                    </div>
+                                                                                                        <label aria-hidden="true"
+                                           for="bodyparam-POSTapi-colleges--id--region">region</label>
+                                    <span class="sl-mx-3">:</span>
+                                    <div class="sl-flex sl-flex-1">
+                                        <div class="sl-input sl-flex-1 sl-relative">
+                                                                                            <input aria-label="region" name="region"
+                                                       id="bodyparam-POSTapi-colleges--id--region"
+                                                       placeholder="Refers to the Region of College."
+                                                       value="" data-component="body"
+                                                       class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
+                                                >
+                                                                                    </div>
+                                    </div>
+                                                                                                        <label aria-hidden="true"
+                                           for="bodyparam-POSTapi-colleges--id--address">address</label>
+                                    <span class="sl-mx-3">:</span>
+                                    <div class="sl-flex sl-flex-1">
+                                        <div class="sl-input sl-flex-1 sl-relative">
+                                                                                            <input aria-label="address" name="address"
+                                                       id="bodyparam-POSTapi-colleges--id--address"
+                                                       placeholder="Refers to the Address of College. Must not be greater than 160 characters."
+                                                       value="Jakarta" data-component="body"
+                                                       class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
+                                                >
+                                                                                    </div>
+                                    </div>
+                                                                                                        <label aria-hidden="true"
+                                           for="bodyparam-POSTapi-colleges--id--accreditation">accreditation</label>
+                                    <span class="sl-mx-3">:</span>
+                                    <div class="sl-flex sl-flex-1">
+                                        <div class="sl-input sl-flex-1 sl-relative">
+                                                                                            <input aria-label="accreditation" name="accreditation"
+                                                       id="bodyparam-POSTapi-colleges--id--accreditation"
+                                                       placeholder="Refers to the Accreditation of College. A | B | C | D. Must not be greater than 2 characters."
+                                                       value="A" data-component="body"
+                                                       class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
+                                                >
+                                                                                    </div>
+                                    </div>
+                                                                                                        <label aria-hidden="true"
+                                           for="bodyparam-POSTapi-colleges--id--accreditation_certificate">accreditation_certificate</label>
+                                    <span class="sl-mx-3">:</span>
+                                    <div class="sl-flex sl-flex-1">
+                                        <div class="sl-input sl-flex-1 sl-relative">
+                                                                                            <input aria-label="accreditation_certificate" name="accreditation_certificate"
+                                                       id="bodyparam-POSTapi-colleges--id--accreditation_certificate"
+                                                       type="file" data-component="body"
+                                                       class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
+                                                >
+                                                                                    </div>
+                                    </div>
+                                                            </div>
                                             </div>
                 </div>
             
@@ -11263,14 +11475,13 @@ You can check the Dev Tools console for debugging information.</p>
                                             <pre><code class="language-bash">curl --request POST \
     "http://localhost/api/colleges/1" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
-    --header "Content-Type: application/json" \
+    --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
-    --data "{
-    \"name\": \"admin\",
-    \"region\": false,
-    \"address\": \"Jakarta\"
-}"
-</code></pre>                                        </div>
+    --form "name=Universitas Indonesia"\
+    --form "region="\
+    --form "address=Jakarta"\
+    --form "accreditation=A"\
+    --form "accreditation_certificate=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" </code></pre>                                        </div>
                                     </div>
                                 </div>
                                                             <div class="sl-bg-canvas-100 example-request example-request-javascript"
@@ -11283,20 +11494,21 @@ You can check the Dev Tools console for debugging information.</p>
 
 const headers = {
     "Authorization": "Bearer {YOUR_AUTH_KEY}",
-    "Content-Type": "application/json",
+    "Content-Type": "multipart/form-data",
     "Accept": "application/json",
 };
 
-let body = {
-    "name": "admin",
-    "region": false,
-    "address": "Jakarta"
-};
+const body = new FormData();
+body.append('name', 'Universitas Indonesia');
+body.append('region', '');
+body.append('address', 'Jakarta');
+body.append('accreditation', 'A');
+body.append('accreditation_certificate', document.querySelector('input[name="accreditation_certificate"]').files[0]);
 
 fetch(url, {
     method: "POST",
     headers,
-    body: JSON.stringify(body),
+    body,
 }).then(response =&gt; response.json());</code></pre>                                        </div>
                                     </div>
                                 </div>
@@ -11965,7 +12177,7 @@ fetch(url, {
                                     </div>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>The keyword search field for the name or nip.</p>
+            <p>The keyword search field for the name or employee id number.</p>
         </div>
                                             <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
@@ -12128,7 +12340,7 @@ fetch(url, {
                                     <div class="sl-input sl-flex-1 sl-relative">
                                                                                     <input aria-label="keyword" name="keyword"
                                                    id="queryparam-GETapi-employees-keyword"
-                                                   placeholder="The keyword search field for the name or nip."
+                                                   placeholder="The keyword search field for the name or employee id number."
                                                    value="administrator" data-component="query"
                                                    class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
                                             >
@@ -12301,8 +12513,8 @@ fetch(url, {
         {
             &quot;id&quot;: 32,
             &quot;username&quot;: &quot;admin&quot;,
-            &quot;nip&quot;: &quot;0000000000000&quot;,
-            &quot;nrp&quot;: &quot;0000000000000&quot;,
+            &quot;employee_id_number&quot;: &quot;0000000000000&quot;,
+            &quot;employee_registration_number&quot;: &quot;0000000000000&quot;,
             &quot;role_name&quot;: &quot;administrator&quot;,
             &quot;status&quot;: &quot;Aktif&quot;
         }
