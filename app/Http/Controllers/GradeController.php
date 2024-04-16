@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 /**
- * @group Grade
+ * @group Master Data
  *
  * APIs for grade
  */
@@ -20,7 +20,8 @@ class GradeController extends Controller
 
     /**
      * Get List of Grade
-     * @group Grade
+     * @group Master Data
+     * @subgroup Grade
      * @authenticated
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
      * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
