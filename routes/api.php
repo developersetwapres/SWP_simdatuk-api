@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AssistanceController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CollegeController;
 use App\Http\Controllers\EmployeeController;
@@ -33,7 +34,45 @@ Route::post('code-verification', [AuthController::class, 'codeVerification']);
 Route::post('reset-password', [AuthController::class, 'resetPassword']);
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::delete('logout', [AuthController::class, 'logout']);
+    Route::prefix('summaries')->group(function () {
+        Route::get('/', [SummaryController::class, 'index']);
+    });
+
+    Route::prefix('employees')->group(function () {
+        Route::get('/', [EmployeeController::class, 'index']);
+    });
+
+    Route::prefix('positions')->group(function () {
+        Route::get('/', [GradeController::class, 'index']);
+    });
+
+    Route::prefix('grades')->group(function () {
+        Route::get('/', [GradeController::class, 'index']);
+    });
+
+    Route::prefix('institutions')->group(function () {
+        Route::get('/', [InstitutionController::class, 'index']);
+        Route::post('/', [InstitutionController::class, 'create']);
+        Route::get('/{id}', [InstitutionController::class, 'show']);
+        Route::post('/{id}', [InstitutionController::class, 'update']);
+        Route::delete('/{id}', [InstitutionController::class, 'delete']);
+    });
+
+    Route::prefix('colleges')->group(function () {
+        Route::get('/', [CollegeController::class, 'index']);
+        Route::post('/', [CollegeController::class, 'create']);
+        Route::get('/{id}', [CollegeController::class, 'show']);
+        Route::post('/{id}', [CollegeController::class, 'update']);
+        Route::delete('/{id}', [CollegeController::class, 'delete']);
+    });
+
+    Route::prefix('assistances')->group(function () {
+        Route::get('/', [AssistanceController::class, 'index']);
+        Route::post('/', [AssistanceController::class, 'create']);
+        Route::get('/{id}', [AssistanceController::class, 'show']);
+        Route::post('/{id}', [AssistanceController::class, 'update']);
+        Route::delete('/{id}', [AssistanceController::class, 'delete']);
+    });
 
     Route::prefix('permissions')->group(function () {
         Route::get('/', [PermissionController::class, 'index']);
@@ -60,31 +99,5 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/', [ProfileController::class, 'update']);
     });
 
-    Route::prefix('colleges')->group(function () {
-        Route::get('/', [CollegeController::class, 'index']);
-        Route::post('/', [CollegeController::class, 'create']);
-        Route::get('/{id}', [CollegeController::class, 'show']);
-        Route::post('/{id}', [CollegeController::class, 'update']);
-        Route::delete('/{id}', [CollegeController::class, 'delete']);
-    });
-
-    Route::prefix('institutions')->group(function () {
-        Route::get('/', [InstitutionController::class, 'index']);
-        Route::post('/', [InstitutionController::class, 'create']);
-        Route::get('/{id}', [InstitutionController::class, 'show']);
-        Route::post('/{id}', [InstitutionController::class, 'update']);
-        Route::delete('/{id}', [InstitutionController::class, 'delete']);
-    });
-
-    Route::prefix('grades')->group(function () {
-        Route::get('/', [GradeController::class, 'index']);
-    });
-
-    Route::prefix('employees')->group(function () {
-        Route::get('/', [EmployeeController::class, 'index']);
-    });
-
-    Route::prefix('summaries')->group(function () {
-        Route::get('/', [SummaryController::class, 'index']);
-    });
+    Route::delete('logout', [AuthController::class, 'logout']);
 });
