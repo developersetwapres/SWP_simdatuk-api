@@ -30,7 +30,7 @@ class AuthController extends Controller
 
     /**
      * Login
-     * @response 200 {"code": 200,"message": "Pengguna berhasil login.","token": "12|Qt9HeTzHAmw5s2fLiRO09eovw1yF3EcSHFR4mU9Ga3cc24ab","user": {"id": 1,"email": "admin@setwapres.go.id","username": "admin","photo_profile": null,"employee_id": "0000000000000","registration_number": "0000000000000","role": {"id": 1,"name": "administrator"},"permissions": [{"id": 8,"name": "Data Pegawai - ASN","create": 1,"read": 1,"update": 1,"delete": 0}]}}
+     * @response 200 {"code": 200,"message": "Pengguna berhasil login.","token": "12|Qt9HeTzHAmw5s2fLiRO09eovw1yF3EcSHFR4mU9Ga3cc24ab","user": {"id": 1,"email": "admin@setwapres.go.id","username": "admin","photo_profile": null,"employee_id_number": "0000000000000","employee_registration_number": "0000000000000","role": {"id": 1,"name": "administrator"},"permissions": [{"id": 8,"name": "Data Pegawai - ASN","create": 1,"read": 1,"update": 1,"delete": 0}]}}
      * @response 422 {"code": 422,"message": "Username tidak boleh kosong.","data": {"username": ["Username email tidak boleh kosong."], "password": ["Kata sandi tidak boleh kosong."]}}
      * @response 401 {"code": 401,"message": "Kata sandi yang anda masukkan salah.","data": null}
      */
@@ -51,7 +51,7 @@ class AuthController extends Controller
         }
 
         $user = DB::table('users');
-        $user->select('users.id', 'users.email', 'users.username', 'users.photo_profile', 'users.employee_id', 'users.registration_number');
+        $user->select('users.id', 'users.email', 'users.username', 'users.photo_profile', 'users.employee_id_number', 'users.employee_registration_number');
         $user = $user->first();
         $user->photo_profile = (is_null($user->photo_profile)) ? asset('img/avatar.jpeg') : Storage::disk('public')->url($user->photo_profile);
 
