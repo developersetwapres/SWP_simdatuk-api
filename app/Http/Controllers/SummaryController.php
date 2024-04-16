@@ -21,7 +21,6 @@ class SummaryController extends Controller
 
     /**
      * Get List of Summaries
-     * @group Summary
      * @authenticated
      * @queryParam month integer Refers to the month between 1 - 12 of results being displayed. Default is '1'. Example: 1
      * @response 200 {"code": 200,"message": "success","data": {"users": [{"name": "Dr. Ir. Suprayoga Hadi, M.S.P.","photo_profile": "http://localhost/img/avatar.jpeg","date_of_birth": "12-12-1974"}],"total_government_employees": {"all": 294,"active": 288},"gender_employees": {"male": 155,"female": 133},"total_non_government_employees": {"assistance": 143,"outsourcing": 190},"work_unit": [{"name": "Kepala Sekretariat Wakil Presiden","quantity": 1}],"education_employees": [{"name": "Strata III","quantity": 8}]}}
