@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\AssistanceController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CollegeController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\EmploymentTypeController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\InstitutionController;
 use App\Http\Controllers\PermissionController;
@@ -40,6 +40,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('employees')->group(function () {
         Route::get('/', [EmployeeController::class, 'index']);
+        Route::post('/', [EmployeeController::class, 'create']);
+        Route::get('/{id}', [EmployeeController::class, 'show']);
+        Route::post('/{id}', [EmployeeController::class, 'update']);
     });
 
     Route::prefix('positions')->group(function () {
@@ -66,12 +69,12 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('/{id}', [CollegeController::class, 'delete']);
     });
 
-    Route::prefix('assistances')->group(function () {
-        Route::get('/', [AssistanceController::class, 'index']);
-        Route::post('/', [AssistanceController::class, 'create']);
-        Route::get('/{id}', [AssistanceController::class, 'show']);
-        Route::post('/{id}', [AssistanceController::class, 'update']);
-        Route::delete('/{id}', [AssistanceController::class, 'delete']);
+    Route::prefix('employment-types')->group(function () {
+        Route::get('/', [EmploymentTypeController::class, 'index']);
+        Route::post('/', [EmploymentTypeController::class, 'create']);
+        Route::get('/{id}', [EmploymentTypeController::class, 'show']);
+        Route::post('/{id}', [EmploymentTypeController::class, 'update']);
+        Route::delete('/{id}', [EmploymentTypeController::class, 'delete']);
     });
 
     Route::prefix('permissions')->group(function () {

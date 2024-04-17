@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('assistances', function (Blueprint $table) {
+        Schema::create('employment_types', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name', 160)->unique();
+            $table->string('name', 160);
             $table->boolean('status')->default(true);
+            $table->tinyInteger('type')->default(1)->comment('1=ASN, 2=NON-ASN, 3=OUTSOURCE');
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
         });
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('assistances');
+        Schema::dropIfExists('employment_types');
     }
 };
