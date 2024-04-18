@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Employee\CreateEmployeeRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -54,5 +55,51 @@ class EmployeeController extends Controller
             $item->status = ($item == true) ? 'Aktif' : 'Nonaktif';
         }
         return $this->paginateResponse(200, 'success', $users);
+    }
+
+    /**
+     * Create a New Employee
+     * @group Employee
+     * @authenticated
+     * @response 200 {"code": 200,"message": "Perguruan tinggi berhasil ditambah.","data": null}
+     */
+    public function create(CreateEmployeeRequest $request)
+    {
+        if ($this->request->hasFile('photo_profile')) {
+            $fileExtension = '.' . $this->request->file('photo_profile')->getClientOriginalExtension();
+            $fileName = Str::random(32) . $fileExtension;
+            Storage::disk('public')->putFileAs('photo_profile/', $this->request->file('photo_profile'), $fileName);
+            $this->posted['photo_profile'] = 'photo_profile/' . $fileName;
+        }
+
+        DB::table('employees')->insertTs($this->posted);
+
+        return $this->response(200, 'Pegawai berhasil ditambah.');
+    }
+
+    /**
+     * Get Detail Employee by ID
+     * @group Employee
+     * @authenticated
+     * @urlParam id Refers to the ID of Employee. Example: 1
+     * @response 404 {"code": 404,"message": "Perguruan tinggi tidak ditemukan.","data": null}
+     * @response 200 {"code": 200,"message": "success","data": {"id": 1,"name": "Universitas Gadjah Mada","region": "Dalam negeri","address": "Daerah Istimewa Yogyakarta", "accreditation": "A", "photo_profile": "http://localhost/storage/avatars/8X1kJJ0kP0pg08dC0xTKLzfH88Doaegm.png"}}
+     */
+    public function show()
+    {
+
+    }
+
+    /**
+     * Update Employee by ID
+     * @group Employee
+     * @authenticated
+     * @urlParam id Refers to the ID of College. Example: 1
+     * @response 404 {"code": 404,"message": "Perguruan tinggi tidak ditemukan.","data": null}
+     * @response 200 {"code": 200,"message": "Perguruan tinggi berhasil diupdate.","data": null}
+     */
+    public function update()
+    {
+
     }
 }
