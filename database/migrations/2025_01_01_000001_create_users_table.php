@@ -43,7 +43,6 @@ return new class extends Migration
             $table->string('id_tax', 20)->nullable();
             $table->boolean('employment_status')->default(true)->comment('true=aktif, false=tidak aktif');
             $table->boolean('inner_housing_complex')->default(true)->comment('true=dalam, false=luar');
-            $table->string('housing_complex_name', 160)->nullable();
             $table->text('current_address')->nullable();
             $table->string('home_phone_number', 20)->nullable();
             $table->string('mobile_phone', 20)->nullable();

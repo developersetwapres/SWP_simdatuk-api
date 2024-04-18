@@ -29,8 +29,8 @@ class EmploymentTypeController extends Controller
      * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
      * @queryParam status boolean Refers to the status display of Employment Type. Defaults is null. Example: null
      * @queryParam type integer Refers to the type of Employment Type. 1=ASN, 2=NON-ASN or 3=OUTSOURCE Defaults is null. Example: null
-     * @queryParam keyword string The keyword search field for the name of assistance. Example: staff khusus
-     * @response 200 {"code": 200,"message": "success","data": [{"id": 3,"name": "Anggota Tim Ahli", "status}],"pagination": {"total": 15,"count": 1,"per_page": 1,"current_page": 1,"total_pages": 15,"links": {"first_page": "http://localhost/api/assistances?page=1","last_page": "http://localhost/api/assistances?page=15","next_page": "http://localhost/api/assistances?page=2","prev_page": null}}}
+     * @queryParam keyword string The keyword search field for the name of employment type. Example: ORGANIK
+     * @response 200 {"code": 200,"message": "success","data": [{"id": 1,"name": "TNI/POLRI","status": 1,"type": 1}],"pagination": {"total": 20,"count": 1,"per_page": 1,"current_page": 1,"total_pages": 20,"links": {"first_page": "http://localhost/api/employment-types?page=1","last_page": "http://localhost/api/employment-types?page=20","next_page": "http://localhost/api/employment-types?page=2","prev_page": null}}}
      */
     public function index()
     {

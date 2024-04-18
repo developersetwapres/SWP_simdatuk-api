@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Employee\CreateEmployeeRequest;
+use App\Http\Requests\Employee\UpdateEmployeeRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -61,15 +62,38 @@ class EmployeeController extends Controller
      * Create a New Employee
      * @group Employee
      * @authenticated
-     * @response 200 {"code": 200,"message": "Perguruan tinggi berhasil ditambah.","data": null}
+     * @response 200 {"code": 200,"message": "Pegawai berhasil ditambah.","data": null}
      */
     public function create(CreateEmployeeRequest $request)
     {
+        $employmentType = DB::table('employment_types');
+        $employmentType->where('id', $this->request->employment_type_id);
+        $employmentType->where('status', true);
+        $employmentType->where('type', $this->request->type);
+        $employmentType = $employmentType->first();
+        if (!$employmentType) {
+            return $this->response(404, 'Jenis pegawai tidak ditemukan.');
+        }
+
+        $institution = DB::table('institutions');
+        $institution->where('id', $this->request->institution_id);
+        $institution = $institution->first();
+        if (!$institution) {
+            return $this->response(404, 'Institusi tidak ditemukan.');
+        }
+
         if ($this->request->hasFile('photo_profile')) {
             $fileExtension = '.' . $this->request->file('photo_profile')->getClientOriginalExtension();
             $fileName = Str::random(32) . $fileExtension;
             Storage::disk('public')->putFileAs('photo_profile/', $this->request->file('photo_profile'), $fileName);
             $this->posted['photo_profile'] = 'photo_profile/' . $fileName;
+        }
+
+        if ($this->request->hasFile('employee_id_card')) {
+            $fileExtension = '.' . $this->request->file('employee_id_card')->getClientOriginalExtension();
+            $fileName = Str::random(32) . $fileExtension;
+            Storage::disk('public')->putFileAs('employee_id_card/', $this->request->file('employee_id_card'), $fileName);
+            $this->posted['employee_id_card'] = 'employee_id_card/' . $fileName;
         }
 
         DB::table('employees')->insertTs($this->posted);
@@ -82,7 +106,7 @@ class EmployeeController extends Controller
      * @group Employee
      * @authenticated
      * @urlParam id Refers to the ID of Employee. Example: 1
-     * @response 404 {"code": 404,"message": "Perguruan tinggi tidak ditemukan.","data": null}
+     * @response 404 {"code": 404,"message": "Pegawai tidak ditemukan.","data": null}
      * @response 200 {"code": 200,"message": "success","data": {"id": 1,"name": "Universitas Gadjah Mada","region": "Dalam negeri","address": "Daerah Istimewa Yogyakarta", "accreditation": "A", "photo_profile": "http://localhost/storage/avatars/8X1kJJ0kP0pg08dC0xTKLzfH88Doaegm.png"}}
      */
     public function show()
@@ -94,11 +118,11 @@ class EmployeeController extends Controller
      * Update Employee by ID
      * @group Employee
      * @authenticated
-     * @urlParam id Refers to the ID of College. Example: 1
-     * @response 404 {"code": 404,"message": "Perguruan tinggi tidak ditemukan.","data": null}
-     * @response 200 {"code": 200,"message": "Perguruan tinggi berhasil diupdate.","data": null}
+     * @urlParam id Refers to the ID of Employee. Example: 1
+     * @response 404 {"code": 404,"message": "Pegawai tidak ditemukan.","data": null}
+     * @response 200 {"code": 200,"message": "Pegawai berhasil diupdate.","data": null}
      */
-    public function update()
+    public function update(UpdateEmployeeRequest $request)
     {
 
     }
