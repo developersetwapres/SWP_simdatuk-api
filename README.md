@@ -44,11 +44,26 @@ docker-compose up -d
 
 ## API Collection
 
-For a list of used endpoints, you can use this api documentation [here](https://simdatuk-api.ekuator.id/docs).
+For a list of used endpoints, you can use this api documentation [here](https://localhost/docs).
 
 ## Database Diagram
 
 To see database diagram, copy data on [**diagram.txt**](/dbdiagram.txt) file and paste on [https://dbdiagram.io](https://dbdiagram.io)
+
+## Infrastructure
+
+The following is the recommendation infrastructure used in constructing in production
+![SIMDATUK](/infrastructure.jpg)
+
+## Specification
+
+| Item             | Staging        | Production     |
+| ---------------- | -------------- | -------------- |
+| Processor        | 2vCPU          | 2vCPU          |
+| RAM              | 2GB            | 4GB            |
+| Storage          | 10GB           | 10GB           |
+| Operating System | Ubuntu 12.04   | Ubuntu 12.04   |
+| Docker           | Latest version | Latest version |
 
 ## Code Style
 
