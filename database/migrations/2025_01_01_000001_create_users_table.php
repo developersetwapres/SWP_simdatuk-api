@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password', 255)->nullable();
             $table->string('name', 160);
             $table->string('photo_profile', 160)->nullable();
+            $table->string('id_number')->nullable()->unique();
             $table->string('employee_id_number', 20)->nullable()->unique();
             $table->string('employee_registration_number', 20)->nullable()->unique();
             $table->string('place_of_birth', 30)->nullable();
@@ -26,19 +27,20 @@ return new class extends Migration
             $table->smallInteger('religion')->default(1)->comment('1=Islam, 2=Kristen, 3=Katolik, 4=Hindu, 5=Buddha, 6=Konghucu');
             $table->boolean('gender')->default(true)->comment('true=Pria, false=Wanita');
             $table->smallInteger('marital_status')->default(1)->comment('1=Belum Menikah, 2=Menikah, 3=Cerai, 4=Janda, 5=Duda');
-            $table->unsignedBigInteger('grade')->nullable(); // Dropdown
+            $table->unsignedBigInteger('employment_type_id')->nullable();
+            $table->unsignedBigInteger('grade_id')->nullable(); // Dropdown
             $table->date('grade_effective_date')->nullable();
-            $table->unsignedBigInteger('position')->nullable(); // Dropdown
-            $table->unsignedBigInteger('echelon')->nullable(); // Dropdown
+            $table->unsignedBigInteger('position_id')->nullable(); // Dropdown
+            $table->unsignedBigInteger('echelon_id')->nullable(); // Dropdown
             $table->date('echelon_effective_date')->nullable();
-            $table->unsignedBigInteger('institution')->nullable(); // Dropdown
-            $table->unsignedBigInteger('organization')->nullable(); // Dropdown
-            $table->unsignedBigInteger('work_unit')->nullable(); // Dropdown
+            $table->unsignedBigInteger('institution_id')->nullable(); // Dropdown
+            $table->unsignedBigInteger('organization_id')->nullable(); // Dropdown
+            $table->unsignedBigInteger('work_unit_id')->nullable(); // Dropdown
             $table->string('employee_id_card_number', 20)->nullable();
             $table->string('employee_id_card', 160)->nullable();
             $table->string('wife_id_card_number', 20)->nullable();
             $table->string('husband_id_card_number', 20)->nullable();
-            $table->string('tax_id', 20)->nullable();
+            $table->string('id_tax', 20)->nullable();
             $table->boolean('employment_status')->default(true)->comment('true=aktif, false=tidak aktif');
             $table->boolean('inner_housing_complex')->default(true)->comment('true=dalam, false=luar');
             $table->string('housing_complex_name', 160)->nullable();
@@ -47,6 +49,7 @@ return new class extends Migration
             $table->string('mobile_phone', 20)->nullable();
             $table->text('office_address', 160)->nullable();
             $table->string('office_phone_number', 20)->nullable();
+            $table->text('description')->nullable();
             $table->tinyInteger('type')->nullable()->default(1)->comment('1=ASN, 2=NON ASN, 3=OUTSOURCING');
             $table->boolean('status')->default(false)->comment('true=active, false=deactivate');
             $table->string('verification_code', 160)->nullable()->unique();
@@ -55,6 +58,7 @@ return new class extends Migration
             $table->timestamp('updated_at')->nullable();
 
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('set null');
+            $table->foreign('employment_type_id')->references('id')->on('employment_types')->onDelete('set null');
         });
     }
 
