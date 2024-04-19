@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @group Summary
@@ -28,46 +29,14 @@ class SummaryController extends Controller
     public function index()
     {
         $users = DB::table('users');
-        $users->where('tanggal_lahir', $this->request->month);
+        $users->whereMonth('date_of_birth', $this->request->month);
+        $users->select('name', 'photo_profile', 'date_of_birth');
         $users = $users->take(8)->get();
+        foreach ($users as $item) {
+            $item->photo_profile = (is_null($item->photo_profile)) ? asset('img/avatar.jpeg') : Storage::disk('public')->url($item->photo_profile);
+        }
         $data = [
-            "users" => [
-                [
-                    "name" => "Dr. Ir. Suprayoga Hadi, M.S.P.",
-                    "photo_profile" => asset('img/avatar.jpeg'),
-                    "date_of_birth" => '12-12-1974',
-                ],
-                [
-                    "name" => "Ade Ulfah Rahayu Ningsih, S.E.",
-                    "photo_profile" => asset('img/avatar.jpeg'),
-                    "date_of_birth" => '12-12-1974',
-                ],
-                [
-                    "name" => "Ayu Pudianingtias, S.E., M.P.A.",
-                    "photo_profile" => asset('img/avatar.jpeg'),
-                    "date_of_birth" => '12-12-1974',
-                ],
-                [
-                    "name" => "Dr. Ir. Suprayoga Hadi, M.S.P.",
-                    "photo_profile" => asset('img/avatar.jpeg'),
-                    "date_of_birth" => '12-12-1974',
-                ],
-                [
-                    "name" => "Ade Ulfah Rahayu Ningsih, S.E.",
-                    "photo_profile" => asset('img/avatar.jpeg'),
-                    "date_of_birth" => '12-12-1974',
-                ],
-                [
-                    "name" => "Ayu Pudianingtias, S.E., M.P.A.",
-                    "photo_profile" => asset('img/avatar.jpeg'),
-                    "date_of_birth" => '12-12-1974',
-                ],
-                [
-                    "name" => "Ayu Pudianingtias, S.E., M.P.A.",
-                    "photo_profile" => asset('img/avatar.jpeg'),
-                    "date_of_birth" => '12-12-1974',
-                ],
-            ],
+            "users" => $users,
             "total_government_employees" => [
                 "all" => 294,
                 "active" => 288,
