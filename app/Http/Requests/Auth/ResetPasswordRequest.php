@@ -61,7 +61,7 @@ class ResetPasswordRequest extends FormRequest
             ],
             'status' => [
                 'description' => 'Status of code, true for register and false for forgot password.',
-                'example' => 'true',
+                'example' => true,
             ],
             'password' => [
                 'description' => 'Refers to the Password of User.',

@@ -55,7 +55,7 @@ class CodeVerificationRequest extends FormRequest
             ],
             'status' => [
                 'description' => 'Status of code, true for register and false for forgot password.',
-                'example' => 'true',
+                'example' => true,
             ],
         ];
     }

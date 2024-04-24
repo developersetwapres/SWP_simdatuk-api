@@ -56,7 +56,7 @@ class UpdateStatusRequest extends FormRequest
             ],
             'status' => [
                 'description' => 'Field to update status user active or deactivate.',
-                'example' => 'true',
+                'example' => true,
             ],
         ];
     }
