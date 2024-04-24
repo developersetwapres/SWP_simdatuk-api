@@ -2,6 +2,17 @@
 
 namespace App\Http\Requests\Employee;
 
+use App\Http\Requests\Discipline\CreateDisciplineRequest;
+use App\Http\Requests\Education\CreateEducationRequest;
+use App\Http\Requests\Family\CreateFamilyRequest;
+use App\Http\Requests\Grade\CreateGradeRequest;
+use App\Http\Requests\Leave\CreateLeaveRequest;
+use App\Http\Requests\Performance\CreatePerformanceRequest;
+use App\Http\Requests\Position\CreatePositionRequest;
+use App\Http\Requests\Recognition\CreateRecognitionRequest;
+use App\Http\Requests\Salary\CreateSalaryRequest;
+use App\Http\Requests\Target\CreateTargetRequest;
+use App\Http\Requests\Training\CreateTrainingRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateEmployeeRequest extends FormRequest
@@ -21,13 +32,13 @@ class CreateEmployeeRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $userRules = [
             'email' => 'email|unique:users,email',
             'name' => 'required|max:160',
-            'photo_profile' => 'file|extensions:jpg,jpeg,png|max:2048|dimensions:min_width=100,min_height=200',
+            'photo_profile' => 'file|extensions:jpg,jpeg,png|max:2048|dimensions:width=350,height=500',
             'id_number' => 'numeric|digits:16|unique:users,id_number',
-            'employee_id_number' => 'numeric|min:5|max:10|unique:users,employee_id_number',
-            'employee_registration_number' => 'numeric|min:5|max:10|unique:users,employee_registration_number',
+            'employee_id_number' => 'numeric|min:00000|max:9999999999|unique:users,employee_id_number',
+            'employee_registration_number' => 'numeric|min:00000|max:9999999999|unique:users,employee_registration_number',
             'place_of_birth' => 'required|max:160',
             'date_of_birth' => 'required|date',
             'religion' => 'required|in:1,2,3,4,5,6',
@@ -42,21 +53,35 @@ class CreateEmployeeRequest extends FormRequest
             'institution_id' => 'numeric',
             'organization_id' => 'numeric',
             'work_unit_id' => 'numeric',
-            'employee_id_card_number' => 'numeric|min:5|max:10|unique:users,employee_id_card_number',
+            'employee_id_card_number' => 'numeric|min:00000|max:9999999999|unique:users,employee_id_card_number',
             'employee_id_card' => 'file|extensions:jpg,jpeg,png,pdf|max:2048',
-            'wife_id_card_number' => 'numeric|min:5|max:10|unique:users,wife_id_card_number',
-            'husband_id_card_number' => 'numeric|min:5|max:10|unique:users,husband_id_card_number',
-            'id_tax' => 'numeric|digits:16|unique:users,id_tax',
+            'wife_id_card_number' => 'numeric|min:00000|max:9999999999|unique:users,wife_id_card_number',
+            'husband_id_card_number' => 'numeric|min:00000|max:9999999999|unique:users,husband_id_card_number',
+            'id_tax' => 'max:16|unique:users,id_tax',
             'employment_status' => 'boolean',
             'inner_housing_complex' => 'boolean',
             'current_address' => 'max:160',
-            'home_phone_number' => 'numeric|max:14',
-            'mobile_phone' => 'numeric|max:14',
+            'home_phone_number' => 'numeric|max:99999999999999',
+            'mobile_phone' => 'numeric|max:99999999999999',
             'office_address' => 'max:160',
-            'office_phone_number' => 'numeric|max:14',
+            'office_phone_number' => 'numeric|max:99999999999999',
             'description' => 'max:160',
             'type' => 'required|in:1,2,3',
         ];
+        return array_merge(
+            $userRules,
+            CreateEducationRequest::rules(),
+            CreatePositionRequest::rules(),
+            CreateGradeRequest::rules(),
+            CreateSalaryRequest::rules(),
+            CreateTrainingRequest::rules(),
+            CreateRecognitionRequest::rules(),
+            CreateTargetRequest::rules(),
+            CreatePerformanceRequest::rules(),
+            CreateDisciplineRequest::rules(),
+            CreateFamilyRequest::rules(),
+            CreateLeaveRequest::rules(),
+        );
     }
 
     /**
@@ -66,7 +91,7 @@ class CreateEmployeeRequest extends FormRequest
      */
     public function messages(): array
     {
-        return [
+        $userMessages = [
             'email.email' => 'Format email harus sesuai.',
             'email.unique' => 'Email sudah terdaftar.',
             'name.required' => 'Nama tidak boleh kosong.',
@@ -74,6 +99,7 @@ class CreateEmployeeRequest extends FormRequest
             'photo_profile.file' => 'Foto profil harus berupa file.',
             'photo_profile.extensions' => 'Foto profil harus berupa jpg, jpeg atau png.',
             'photo_profile.max' => 'Ukuran foto profil tidak boleh lebih dari 2MB.',
+            'photo_profile.dimensions' => 'Ukuran foto profil harus 350px X 500px.',
             'id_number.numeric' => 'NIK harus berupa angka.',
             'id_number.digits' => 'NIK harus terdiri dari 16 digit angka.',
             'id_number.unique' => 'NIK sudah terdaftar.',
@@ -118,8 +144,7 @@ class CreateEmployeeRequest extends FormRequest
             'husband_id_card_number.min' => 'Nomor kartu suami tidak boleh kurang dari 5 digit angka.',
             'husband_id_card_number.max' => 'Nomor kartu suami tidak boleh lebih dari 10 digit angka.',
             'husband_id_card_number.unique' => 'Nomor kartu suami sudah terdaftar.',
-            'id_tax.numeric' => 'NPWP harus berupa angka.',
-            'id_tax.digits' => 'NPWP harus terdiri dari 16 digit angka.',
+            'id_tax.max' => 'NPWP tidak boleh lebih dari 16 digit.',
             'id_tax.unique' => 'NPWP sudah terdaftar.',
             'employment_status.boolean' => 'Status pegawai harus boolean.',
             'inner_housing_complex.boolean' => 'Komplek harus berupa boolean.',
@@ -135,6 +160,21 @@ class CreateEmployeeRequest extends FormRequest
             'type.required' => 'Tipe pegawai tidak boleh kosong.',
             'type.in' => 'Tipe pegawai diantara 1, 2 atau 3',
         ];
+
+        return array_merge(
+            $userMessages,
+            CreateEducationRequest::messages(),
+            CreatePositionRequest::messages(),
+            CreateGradeRequest::messages(),
+            CreateSalaryRequest::messages(),
+            CreateTrainingRequest::messages(),
+            CreateRecognitionRequest::messages(),
+            CreateTargetRequest::messages(),
+            CreatePerformanceRequest::messages(),
+            CreateDisciplineRequest::messages(),
+            CreateFamilyRequest::messages(),
+            CreateLeaveRequest::messages(),
+        );
     }
 
     /**
@@ -144,7 +184,7 @@ class CreateEmployeeRequest extends FormRequest
      */
     public function bodyParameters(): array
     {
-        return [
+        $userBodyParameters = [
             'email' => [
                 'description' => 'Refers to the Email of Employee.',
                 'example' => 'padmi@wapresri.go.id',
@@ -282,5 +322,20 @@ class CreateEmployeeRequest extends FormRequest
                 'example' => 1,
             ],
         ];
+
+        return array_merge(
+            $userBodyParameters,
+            CreateEducationRequest::bodyParameters(),
+            CreatePositionRequest::bodyParameters(),
+            CreateGradeRequest::bodyParameters(),
+            CreateSalaryRequest::bodyParameters(),
+            CreateTrainingRequest::bodyParameters(),
+            CreateRecognitionRequest::bodyParameters(),
+            CreateTargetRequest::bodyParameters(),
+            CreatePerformanceRequest::bodyParameters(),
+            CreateDisciplineRequest::bodyParameters(),
+            CreateFamilyRequest::bodyParameters(),
+            CreateLeaveRequest::bodyParameters(),
+        );
     }
 }

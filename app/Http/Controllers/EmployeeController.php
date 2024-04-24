@@ -6,6 +6,8 @@ use App\Http\Requests\Employee\CreateEmployeeRequest;
 use App\Http\Requests\Employee\UpdateEmployeeRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 /**
  * @group Employee
@@ -17,7 +19,21 @@ class EmployeeController extends Controller
     public function __construct(Request $request)
     {
         $this->request = $request;
-        $this->posted = $request->except('_token', '_method');
+        $this->posted = $request->except(
+            '_token',
+            '_method',
+            'educations',
+            'positions',
+            'grades',
+            'salaries',
+            'trainings',
+            'recognitions',
+            'performances',
+            'targets',
+            'disciplinaries',
+            'families',
+            'leaves'
+        );
     }
 
     /**
@@ -66,6 +82,12 @@ class EmployeeController extends Controller
      */
     public function create(CreateEmployeeRequest $request)
     {
+        // try {
+        //     DB::beginTransaction();
+        //     DB::commit();
+        // } catch (\Throwable $th) {
+        //     DB::rollback();
+        // }
         $employmentType = DB::table('employment_types');
         $employmentType->where('id', $this->request->employment_type_id);
         $employmentType->where('status', true);
@@ -96,7 +118,106 @@ class EmployeeController extends Controller
             $this->posted['employee_id_card'] = 'employee_id_card/' . $fileName;
         }
 
-        DB::table('employees')->insertTs($this->posted);
+        $userId = DB::table('users')->insertGetIdTs($this->posted);
+
+        // Insert Educations
+        if (isset($this->request->educations)) {
+            $educations = $this->request->educations;
+            foreach ($educations as $education) {
+                $education['user_id'] = $userId;
+            }
+            DB::table('user_educations')->insertTs($educations);
+        }
+
+        // Insert Positions
+        if (isset($this->request->positions)) {
+            $positions = $this->request->positions;
+            foreach ($positions as $position) {
+                $position['user_id'] = $userId;
+            }
+            DB::table('user_positions')->insertTs($positions);
+        }
+
+        // Insert Grades
+        if (isset($this->request->grades)) {
+            $grades = $this->request->grades;
+            foreach ($grades as $grade) {
+                $grade['user_id'] = $userId;
+            }
+            DB::table('user_grades')->insertTs($grades);
+        }
+
+        // Insert Sallaries
+        if (isset($this->request->sallaries)) {
+            $sallaries = $this->request->sallaries;
+            foreach ($sallaries as $grade) {
+                $grade['user_id'] = $userId;
+            }
+            DB::table('user_sallaries')->insertTs($sallaries);
+        }
+
+        // Insert Trainings
+        if (isset($this->request->trainings)) {
+            $trainings = $this->request->trainings;
+            foreach ($trainings as $training) {
+                $training['user_id'] = $userId;
+            }
+            DB::table('user_trainings')->insertTs($trainings);
+        }
+
+        // Insert Recognitions
+        if (isset($this->request->recognitions)) {
+            $recognitions = $this->request->recognitions;
+            foreach ($recognitions as $recognition) {
+                $recognition['user_id'] = $userId;
+            }
+            DB::table('user_recognitions')->insertTs($recognitions);
+        }
+
+        // Insert Targets
+        if (isset($this->request->targets)) {
+            $targets = $this->request->targets;
+            foreach ($targets as $recognition) {
+                $recognition['user_id'] = $userId;
+            }
+            DB::table('user_targets')->insertTs($targets);
+        }
+
+        // Insert Performances
+        if (isset($this->request->performances)) {
+            $performances = $this->request->performances;
+            foreach ($performances as $performance) {
+                $performance['user_id'] = $userId;
+            }
+            DB::table('user_performances')->insertTs($performances);
+        }
+
+        // Insert Disciplinaries
+        if (isset($this->request->disciplinaries)) {
+            $disciplinaries = $this->request->disciplinaries;
+            foreach ($disciplinaries as $discipline) {
+                $discipline['user_id'] = $userId;
+            }
+            DB::table('user_disciplinaries')->insertTs($disciplinaries);
+        }
+
+        // Insert Families
+        if (isset($this->request->families)) {
+            $families = $this->request->families;
+            foreach ($families as $family) {
+                $family['user_id'] = $userId;
+            }
+            DB::table('user_families')->insertTs($families);
+        }
+
+        // Insert Leaves
+        if (isset($this->request->leaves)) {
+            $leaves = $this->request->leaves;
+            foreach ($leaves as $leave) {
+                $leave['user_id'] = $userId;
+            }
+            DB::table('user_leaves')->insertTs($leaves);
+        }
 
         return $this->response(200, 'Pegawai berhasil ditambah.');
     }
@@ -111,7 +232,14 @@ class EmployeeController extends Controller
      */
     public function show()
     {
-
+        $user = DB::table('users');
+        $user->where('id', $this->request->id);
+        $user->select('type');
+        $user = $user->first();
+        if (!$user) {
+            return $this->response(404, 'Pegawai tidak ditemukan.');
+        }
+        return $this->response(200, 'success', $user);
     }
 
     /**

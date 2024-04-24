@@ -24,9 +24,9 @@ return new class extends Migration
             $table->string('employee_registration_number', 20)->nullable()->unique();
             $table->string('place_of_birth', 30)->nullable();
             $table->date('date_of_birth')->nullable();
-            $table->smallInteger('religion')->default(1)->comment('1=Islam, 2=Kristen, 3=Katolik, 4=Hindu, 5=Buddha, 6=Konghucu');
+            $table->tinyInteger('religion')->default(1)->comment('1=Islam, 2=Kristen, 3=Katolik, 4=Hindu, 5=Buddha, 6=Konghucu');
             $table->boolean('gender')->default(true)->comment('true=Pria, false=Wanita');
-            $table->smallInteger('marital_status')->default(1)->comment('1=Belum Menikah, 2=Menikah, 3=Cerai, 4=Janda, 5=Duda');
+            $table->tinyInteger('marital_status')->default(1)->comment('1=Belum Menikah, 2=Menikah, 3=Cerai, 4=Janda, 5=Duda');
             $table->unsignedBigInteger('employment_type_id')->nullable();
             $table->unsignedBigInteger('grade_id')->nullable(); // Dropdown
             $table->date('grade_effective_date')->nullable();

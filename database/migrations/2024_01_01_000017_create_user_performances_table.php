@@ -11,13 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('grades', function (Blueprint $table) {
+        Schema::create('user_performances', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name', 30);
-            $table->string('code', 5);
-            $table->tinyInteger('type')->default(1)->comment('1=PNS, 2=PPPK');
+            $table->unsignedBigInteger('user_id');
+            $table->tinyInteger('period_month');
+            $table->year('period_year');
+            $table->string('ppk_period', 160);
+            $table->tinyInteger('work_performance_score');
+            $table->string('description', 160);
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -26,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('grades');
+        Schema::dropIfExists('user_performances');
     }
 };
