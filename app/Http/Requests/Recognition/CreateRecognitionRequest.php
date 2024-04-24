@@ -13,13 +13,13 @@ class CreateRecognitionRequest
     public static function rules(): array
     {
         return [
-            'recognitions.*.period_month' => 'numeric|digits_between:1,12',
-            'recognitions.*.period_year' => 'date_format:Y',
-            'recognitions.*.name' => 'max:160',
+            'recognitions.*.period_month' => 'required|numeric|digits_between:1,12',
+            'recognitions.*.period_year' => 'required|date_format:Y',
+            'recognitions.*.name' => 'required|max:160',
             'recognitions.*.description' => 'max:160',
-            'recognitions.*.type_of_decree' => 'numeric',
-            'recognitions.*.decree_date' => 'date',
-            'recognitions.*.decree_number' => 'max:160',
+            'recognitions.*.type_of_decree' => 'required|numeric',
+            'recognitions.*.decree_date' => 'required|date',
+            'recognitions.*.decree_number' => 'required|max:160',
             'recognitions.*.decree_year' => 'date_format:Y',
             'recognitions.*.awarding_institution' => 'max:160',
             'recognitions.*.date_of_receipt' => 'date',
@@ -34,13 +34,19 @@ class CreateRecognitionRequest
     public static function messages(): array
     {
         return [
+            'recognitions.*.period_month.required' => 'Bulan periode riwayat tidak boleh kosong.',
             'recognitions.*.period_month.numeric' => 'Bulan periode riwayat harus berupa angka.',
             'recognitions.*.period_month.digits_between' => 'Bulan periode riwayat harus diantara 1 hingga 12.',
+            'recognitions.*.period_year.required' => 'Tahun periode riwayat tidak boleh kosong.',
             'recognitions.*.period_year.date_format' => 'Tahun periode riwayat harus dengan format YYYY.',
+            'recognitions.*.name.required' => 'Nama penghargaan tidak boleh kosong.',
             'recognitions.*.name.max' => 'Nama penghargaan tidak boleh lebih dari 160 karakter.',
             'recognitions.*.description.max' => 'Keterangan penghargaan tidak boleh lebih dari 160 karakter.',
+            'recognitions.*.type_of_decree.required' => 'Jenis SK tidak boleh kosong.',
             'recognitions.*.type_of_decree.numeric' => 'Jenis SK harus berupa angka.',
+            'recognitions.*.decree_date.required' => 'Tanggal SK tidak boleh kosong.',
             'recognitions.*.decree_date.date' => 'Tanggal SK harus berupa tanggal.',
+            'recognitions.*.decree_number.required' => 'No SK Penghargaan tidak boleh kosong.',
             'recognitions.*.decree_number.max' => 'No SK Penghargaan tidak boleh lebih dari 160 karakter.',
             'recognitions.*.decree_year.date_format' => 'Tahun SK harus dengan format YYYY.',
             'recognitions.*.awarding_institution.max' => 'Instansi pemberi penghargaan tidak boleh lebih dari 160 karakter.',

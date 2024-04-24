@@ -4313,6 +4313,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">employee_id_number</div>
                                             <span class="sl-truncate sl-text-muted">number</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Employee ID Number of Employee. Must be at least 00000. Must not be greater than 9999999999.</p>
@@ -4521,6 +4523,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">grade_id</div>
                                             <span class="sl-truncate sl-text-muted">number</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Grade ID of Employee.</p>
@@ -4546,6 +4550,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">grade_effective_date</div>
                                             <span class="sl-truncate sl-text-muted">string</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Grade Effective Date of Employee. Must be a valid date.</p>
@@ -4571,6 +4577,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">position_id</div>
                                             <span class="sl-truncate sl-text-muted">number</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Position ID of Employee.</p>
@@ -4646,6 +4654,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">institution_id</div>
                                             <span class="sl-truncate sl-text-muted">number</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Institution ID of Employee.</p>
@@ -4671,6 +4681,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">organization_id</div>
                                             <span class="sl-truncate sl-text-muted">number</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Organization ID of Employee.</p>
@@ -4696,6 +4708,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">work_unit_id</div>
                                             <span class="sl-truncate sl-text-muted">number</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Work Unit ID of Employee.</p>
@@ -4823,7 +4837,7 @@ fetch(url, {
                                     </div>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the ID Tax of Employee. Must be 16 digits.</p>
+            <p>Refers to the ID Tax of Employee. Must not be greater than 16 characters.</p>
         </div>
                                             <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
@@ -4846,6 +4860,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">employment_status</div>
                                             <span class="sl-truncate sl-text-muted">boolean</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Employment Status of Employee. true=aktif, false=tidak aktif.</p>
@@ -4863,6 +4879,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">inner_housing_complex</div>
                                             <span class="sl-truncate sl-text-muted">boolean</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Inner Housing Complex of Employee. true=dalam, false=luar.</p>
@@ -5081,6 +5099,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">level</div>
                                             <span class="sl-truncate sl-text-muted">number</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Level of Employee Education. 1=TK / Sederajat, 2=SD / Sederajat, 3=SLTP / Sederajat, 4=SLTA / Sederajat, 5=Diploma I / II, 6=Akademi / Diploma III / Sarjana Muda, 7=Diploma IV / Strata I, 8=Strata II, 9=Strata III.</p>
@@ -5108,6 +5128,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">name</div>
                                             <span class="sl-truncate sl-text-muted">string</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Name of Employee Education. Must not be greater than 160 characters.</p>
@@ -5183,6 +5205,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">status</div>
                                             <span class="sl-truncate sl-text-muted">number</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Status of Employee Education. 1=Lulus, 2=DO, 3=Aktif, 4=Non-Aktif, 5=Mengundurkan Diri.</p>
@@ -5210,6 +5234,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">year_of_graduation</div>
                                             <span class="sl-truncate sl-text-muted">string</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Year of Graduation of Employee Education. Must be a valid date in the format <code>Y</code>.</p>
@@ -5284,6 +5310,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">period_month</div>
                                             <span class="sl-truncate sl-text-muted">string</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Period Month of Employee Position. Must be between 1 and 12 digits.</p>
@@ -5309,6 +5337,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">period_year</div>
                                             <span class="sl-truncate sl-text-muted">string</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Period Year of Employee Position. Must be a valid date in the format <code>Y</code>.</p>
@@ -5334,6 +5364,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">position_id</div>
                                             <span class="sl-truncate sl-text-muted">number</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the ID Position of Employee Position.</p>
@@ -5359,6 +5391,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">group_id</div>
                                             <span class="sl-truncate sl-text-muted">number</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the ID Group of Employee Position.</p>
@@ -5384,6 +5418,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">effective_date</div>
                                             <span class="sl-truncate sl-text-muted">string</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Effective Date of Employee Position. Must be a valid date.</p>
@@ -5459,6 +5495,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">type_of_decree</div>
                                             <span class="sl-truncate sl-text-muted">number</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Type of Decree of Employee Position.</p>
@@ -5584,6 +5622,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">termination_date</div>
                                             <span class="sl-truncate sl-text-muted">string</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Termination Date of Employee Position. Must be a valid date.</p>
@@ -5611,7 +5651,7 @@ fetch(url, {
                                     </div>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Termination Decree of Employee Position. Must be a valid date.</p>
+            <p>Refers to the Termination Decree of Employee Position. Must not be greater than 160 characters.</p>
         </div>
                                             <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
@@ -5634,6 +5674,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">type_of_termination_decree</div>
                                             <span class="sl-truncate sl-text-muted">number</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Type of Termination Decree of Employee Position.</p>
@@ -5709,6 +5751,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">status</div>
                                             <span class="sl-truncate sl-text-muted">number</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Status of Employee Position.</p>
@@ -5758,6 +5802,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">period_month</div>
                                             <span class="sl-truncate sl-text-muted">string</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Period Month of Employee Grade. Must be between 1 and 12 digits.</p>
@@ -5783,6 +5829,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">period_year</div>
                                             <span class="sl-truncate sl-text-muted">string</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Period Year of Employee Grade. Must be a valid date in the format <code>Y</code>.</p>
@@ -5808,6 +5856,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">grade_id</div>
                                             <span class="sl-truncate sl-text-muted">number</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the ID Grade of Employee Grade.</p>
@@ -5833,6 +5883,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">effective_date</div>
                                             <span class="sl-truncate sl-text-muted">string</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Effective Date of Employee Grade. Must be a valid date.</p>
@@ -5908,6 +5960,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">type_of_decree</div>
                                             <span class="sl-truncate sl-text-muted">number</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Type of Decree of Employee Grade.</p>
@@ -6008,6 +6062,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">status</div>
                                             <span class="sl-truncate sl-text-muted">number</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Status of Employee Grade.</p>
@@ -6016,7 +6072,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        0
+                        1
                     </div>
                 </div>
             </div>
@@ -6057,6 +6113,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">period_month</div>
                                             <span class="sl-truncate sl-text-muted">string</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Period Month of Employee Salary. Must be between 1 and 12 digits.</p>
@@ -6082,6 +6140,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">period_year</div>
                                             <span class="sl-truncate sl-text-muted">string</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Period Year of Employee Salary. Must be a valid date in the format <code>Y</code>.</p>
@@ -6107,6 +6167,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">grade_id</div>
                                             <span class="sl-truncate sl-text-muted">number</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the ID Grade of Employee Salary.</p>
@@ -6182,6 +6244,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">length_of_service_month</div>
                                             <span class="sl-truncate sl-text-muted">string</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Length of Service Month of Employee Salary. Must be between 1 and 12 digits.</p>
@@ -6207,6 +6271,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">length_of_service_year</div>
                                             <span class="sl-truncate sl-text-muted">string</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Length of Service Year of Employee Salary. Must be a valid date in the format <code>Y</code>.</p>
@@ -6232,6 +6298,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">previous_basic_salary</div>
                                             <span class="sl-truncate sl-text-muted">number</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Previous Basic Salary of Employee Salary.</p>
@@ -6257,6 +6325,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">new_basic_salary</div>
                                             <span class="sl-truncate sl-text-muted">number</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the New Basic Salary of Employee Salary.</p>
@@ -6331,6 +6401,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">period_month</div>
                                             <span class="sl-truncate sl-text-muted">string</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Period Month of Employee Training. Must be between 1 and 12 digits.</p>
@@ -6356,6 +6428,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">period_year</div>
                                             <span class="sl-truncate sl-text-muted">string</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Period Year of Employee Training. Must be a valid date in the format <code>Y</code>.</p>
@@ -6381,6 +6455,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">name</div>
                                             <span class="sl-truncate sl-text-muted">string</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Name of Employee Training. Must not be greater than 160 characters.</p>
@@ -6406,6 +6482,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">reference_number</div>
                                             <span class="sl-truncate sl-text-muted">string</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Reference Number of Employee Training. Must not be greater than 160 characters.</p>
@@ -6448,6 +6526,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">start_date</div>
                                             <span class="sl-truncate sl-text-muted">string</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Start Date of Employee Training. Must be a valid date.</p>
@@ -6548,6 +6628,8 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">type</div>
                                             <span class="sl-truncate sl-text-muted">number</span>
                                     </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Type of Employee Training. 1=Struktural, 2=Fungsional, 3=Teknis.</p>
@@ -7898,7 +7980,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        3
+                        9
                     </div>
                 </div>
             </div>
@@ -8694,7 +8776,7 @@ fetch(url, {
                                         <div class="sl-input sl-flex-1 sl-relative">
                                                                                             <input aria-label="id_tax" name="id_tax"
                                                        id="bodyparam-POSTapi-employees-id_tax"
-                                                       placeholder="Refers to the ID Tax of Employee. Must be 16 digits."
+                                                       placeholder="Refers to the ID Tax of Employee. Must not be greater than 16 characters."
                                                        value="12345678901234" data-component="body"
                                                        class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
                                                 >
@@ -9119,7 +9201,7 @@ You can check the Dev Tools console for debugging information.</p>
     --form "grades[][decree_number]=58/Set.Neg/Pers.In/6/1993, 12-06-1993"\
     --form "grades[][decree_date]=2020-10-22"\
     --form "grades[][description]=Kenaikan Pangkat Reguler"\
-    --form "grades[][status]=0"\
+    --form "grades[][status]=1"\
     --form "salaries[][period_month]=3"\
     --form "salaries[][period_year]=2020"\
     --form "salaries[][grade_id]=1"\
@@ -9187,7 +9269,7 @@ You can check the Dev Tools console for debugging information.</p>
     --form "families[][name_of_father]=Sunandar"\
     --form "families[][name_of_mother]=Maemunah"\
     --form "families[][relationship_status]=1"\
-    --form "families[][education]=3"\
+    --form "families[][education]=9"\
     --form "families[][occupation]=Wirausaha"\
     --form "families[][occupation_description]=Wirausaha Menengah"\
     --form "families[][marital_status]=1"\
@@ -9288,7 +9370,7 @@ body.append('grades[][type_of_decree]', '1');
 body.append('grades[][decree_number]', '58/Set.Neg/Pers.In/6/1993, 12-06-1993');
 body.append('grades[][decree_date]', '2020-10-22');
 body.append('grades[][description]', 'Kenaikan Pangkat Reguler');
-body.append('grades[][status]', '0');
+body.append('grades[][status]', '1');
 body.append('salaries[][period_month]', '3');
 body.append('salaries[][period_year]', '2020');
 body.append('salaries[][grade_id]', '1');
@@ -9356,7 +9438,7 @@ body.append('families[][date_of_birth]', '1985-10-22');
 body.append('families[][name_of_father]', 'Sunandar');
 body.append('families[][name_of_mother]', 'Maemunah');
 body.append('families[][relationship_status]', '1');
-body.append('families[][education]', '3');
+body.append('families[][education]', '9');
 body.append('families[][occupation]', 'Wirausaha');
 body.append('families[][occupation_description]', 'Wirausaha Menengah');
 body.append('families[][marital_status]', '1');
@@ -22639,7 +22721,7 @@ You can check the Dev Tools console for debugging information.</p>
     --data "{
     \"name\": \"admin\",
     \"permissions\": [
-        \"repellendus\"
+        \"voluptas\"
     ]
 }"
 </code></pre>                                        </div>
@@ -22662,7 +22744,7 @@ const headers = {
 let body = {
     "name": "admin",
     "permissions": [
-        "repellendus"
+        "voluptas"
     ]
 };
 

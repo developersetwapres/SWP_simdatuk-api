@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('reason', 160);
             $table->string('number', 160);
             $table->string('purpose', 160);
-            $table->string('leave_letter');
+            $table->string('leave_letter')->nullable();
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
 

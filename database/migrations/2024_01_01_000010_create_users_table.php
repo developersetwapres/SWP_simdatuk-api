@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('employee_registration_number', 20)->nullable()->unique();
             $table->string('place_of_birth', 30)->nullable();
             $table->date('date_of_birth')->nullable();
-            $table->tinyInteger('religion')->default(1)->comment('1=Islam, 2=Kristen, 3=Katolik, 4=Hindu, 5=Buddha, 6=Konghucu');
+            $table->tinyInteger('religion')->nullable()->comment('1=Islam, 2=Kristen, 3=Katolik, 4=Hindu, 5=Buddha, 6=Konghucu');
             $table->boolean('gender')->default(true)->comment('true=Pria, false=Wanita');
             $table->tinyInteger('marital_status')->default(1)->comment('1=Belum Menikah, 2=Menikah, 3=Cerai, 4=Janda, 5=Duda');
             $table->unsignedBigInteger('employment_type_id')->nullable();
@@ -49,7 +49,7 @@ return new class extends Migration
             $table->text('office_address', 160)->nullable();
             $table->string('office_phone_number', 20)->nullable();
             $table->text('description')->nullable();
-            $table->tinyInteger('type')->nullable()->default(1)->comment('1=ASN, 2=NON ASN, 3=OUTSOURCING');
+            $table->tinyInteger('type')->nullable()->comment('1=ASN, 2=NON ASN, 3=OUTSOURCING');
             $table->boolean('status')->default(false)->comment('true=active, false=deactivate');
             $table->string('verification_code', 160)->nullable()->unique();
             $table->date('expire_at')->nullable();

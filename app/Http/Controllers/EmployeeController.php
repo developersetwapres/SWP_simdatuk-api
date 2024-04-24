@@ -122,99 +122,110 @@ class EmployeeController extends Controller
 
         // Insert Educations
         if (isset($this->request->educations)) {
-            $educations = $this->request->educations;
-            foreach ($educations as $education) {
+            $educations = array();
+            foreach ($this->request->educations as $education) {
                 $education['user_id'] = $userId;
+                array_push($educations, $education);
             }
             DB::table('user_educations')->insertTs($educations);
         }
 
         // Insert Positions
         if (isset($this->request->positions)) {
-            $positions = $this->request->positions;
-            foreach ($positions as $position) {
+            $positions = array();
+            foreach ($this->request->positions as $position) {
                 $position['user_id'] = $userId;
+                array_push($positions, $position);
             }
             DB::table('user_positions')->insertTs($positions);
         }
 
         // Insert Grades
         if (isset($this->request->grades)) {
-            $grades = $this->request->grades;
-            foreach ($grades as $grade) {
+            $grades = array();
+            foreach ($this->request->grades as $grade) {
                 $grade['user_id'] = $userId;
+                array_push($grades, $grade);
             }
             DB::table('user_grades')->insertTs($grades);
         }
 
-        // Insert Sallaries
-        if (isset($this->request->sallaries)) {
-            $sallaries = $this->request->sallaries;
-            foreach ($sallaries as $grade) {
-                $grade['user_id'] = $userId;
+        // Insert Salaries
+        if (isset($this->request->salaries)) {
+            $salaries = array();
+            foreach ($this->request->salaries as $salary) {
+                $salary['user_id'] = $userId;
+                array_push($salaries, $salary);
             }
             DB::table('user_sallaries')->insertTs($sallaries);
         }
 
         // Insert Trainings
         if (isset($this->request->trainings)) {
-            $trainings = $this->request->trainings;
-            foreach ($trainings as $training) {
+            $trainings = array();
+            foreach ($this->request->trainings as $training) {
                 $training['user_id'] = $userId;
+                array_push($trainings, $training);
             }
             DB::table('user_trainings')->insertTs($trainings);
         }
 
         // Insert Recognitions
         if (isset($this->request->recognitions)) {
-            $recognitions = $this->request->recognitions;
-            foreach ($recognitions as $recognition) {
+            $recognitions = array();
+            foreach ($this->request->recognitions as $recognition) {
                 $recognition['user_id'] = $userId;
+                array_push($recognitions, $recognition);
             }
             DB::table('user_recognitions')->insertTs($recognitions);
         }
 
         // Insert Targets
         if (isset($this->request->targets)) {
-            $targets = $this->request->targets;
-            foreach ($targets as $recognition) {
-                $recognition['user_id'] = $userId;
+            $targets = array();
+            foreach ($this->request->targets as $recognition) {
+                $target['user_id'] = $userId;
+                array_push($targets, $target);
             }
             DB::table('user_targets')->insertTs($targets);
         }
 
         // Insert Performances
         if (isset($this->request->performances)) {
-            $performances = $this->request->performances;
-            foreach ($performances as $performance) {
+            $performances = array();
+            foreach ($this->request->performances as $performance) {
                 $performance['user_id'] = $userId;
+                array_push($performances, $performance);
             }
             DB::table('user_performances')->insertTs($performances);
         }
 
         // Insert Disciplinaries
         if (isset($this->request->disciplinaries)) {
-            $disciplinaries = $this->request->disciplinaries;
-            foreach ($disciplinaries as $discipline) {
+            $disciplinaries = array();
+            foreach ($this->request->disciplinaries as $discipline) {
                 $discipline['user_id'] = $userId;
+                array_push($disciplinaries, $discipline);
             }
             DB::table('user_disciplinaries')->insertTs($disciplinaries);
         }
 
         // Insert Families
         if (isset($this->request->families)) {
-            $families = $this->request->families;
-            foreach ($families as $family) {
+            $families = array();
+            foreach ($this->request->families as $family) {
                 $family['user_id'] = $userId;
+                array_push($families, $family);
             }
             DB::table('user_families')->insertTs($families);
         }
 
         // Insert Leaves
         if (isset($this->request->leaves)) {
-            $leaves = $this->request->leaves;
-            foreach ($leaves as $leave) {
+            $leaves = array();
+            foreach ($this->request->leaves as $leave) {
                 $leave['user_id'] = $userId;
+                array_push($leaves, $leave);
             }
             DB::table('user_leaves')->insertTs($leaves);
         }

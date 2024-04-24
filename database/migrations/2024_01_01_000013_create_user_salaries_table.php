@@ -17,13 +17,13 @@ return new class extends Migration
             $table->tinyInteger('period_month');
             $table->year('period_year');
             $table->unsignedBigInteger('grade_id');
-            $table->date('effective_date');
-            $table->string('decree_number', 160);
+            $table->date('effective_date')->nullable();
+            $table->string('decree_number', 160)->nullable();
             $table->string('length_of_service_month', 2);
             $table->year('length_of_service_year');
             $table->integer('previous_basic_salary');
             $table->integer('new_basic_salary');
-            $table->string('description', 160);
+            $table->string('description', 160)->nullable();
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
 

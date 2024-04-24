@@ -18,7 +18,7 @@ return new class extends Migration
             $table->year('period_year');
             $table->string('ppk_period', 160);
             $table->tinyInteger('work_performance_score');
-            $table->string('description', 160);
+            $table->string('description', 160)->nullable();
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
 

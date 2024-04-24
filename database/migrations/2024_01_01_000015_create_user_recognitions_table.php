@@ -17,13 +17,13 @@ return new class extends Migration
             $table->tinyInteger('period_month');
             $table->year('period_year');
             $table->string('name', 160);
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->tinyInteger('type_of_decree');
             $table->date('decree_date');
             $table->string('decree_number', 160);
-            $table->year('decree_year');
-            $table->string('awarding_institution', 160);
-            $table->date('date_of_receipt');
+            $table->year('decree_year')->nullable();
+            $table->string('awarding_institution', 160)->nullable();
+            $table->date('date_of_receipt')->nullable();
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
 

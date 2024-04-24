@@ -13,16 +13,16 @@ class CreateTrainingRequest
     public static function rules(): array
     {
         return [
-            'trainings.*.period_month' => 'numeric|digits_between:1,12',
-            'trainings.*.period_year' => 'date_format:Y',
-            'trainings.*.name' => 'max:160',
-            'trainings.*.reference_number' => 'max:160',
+            'trainings.*.period_month' => 'required|numeric|digits_between:1,12',
+            'trainings.*.period_year' => 'required|date_format:Y',
+            'trainings.*.name' => 'required|max:160',
+            'trainings.*.reference_number' => 'required|max:160',
             'trainings.*.level' => 'max:160',
-            'trainings.*.start_date' => 'date',
+            'trainings.*.start_date' => 'required|date',
             'trainings.*.duration' => 'numeric',
             'trainings.*.organizer' => 'max:160',
             'trainings.*.certificate' => 'file|extensions:jpg,jpeg,png,pdf|max:2048',
-            'trainings.*.type' => 'numeric|in:1,2,3',
+            'trainings.*.type' => 'required|numeric|in:1,2,3',
         ];
     }
 
@@ -34,18 +34,24 @@ class CreateTrainingRequest
     public static function messages(): array
     {
         return [
+            'trainings.*.period_month.required' => 'Bulan periode riwayat tidak boleh kosong.',
             'trainings.*.period_month.numeric' => 'Bulan periode riwayat harus berupa angka.',
             'trainings.*.period_month.digits_between' => 'Bulan periode riwayat harus diantara 1 hingga 12.',
+            'trainings.*.period_year.required' => 'Tahun periode riwayat tidak boleh kosong.',
             'trainings.*.period_year.date_format' => 'Tahun periode riwayat harus dengan format YYYY.',
+            'trainings.*.name.required' => 'Nama diklat tidak boleh kosong.',
             'trainings.*.name.max' => 'Nama diklat tidak boleh lebih dari 160 karakter.',
+            'trainings.*.reference_number.required' => 'No surat perintah tidak boleh kosong.',
             'trainings.*.reference_number.max' => 'No surat perintah tidak boleh lebih dari 160 karakter.',
             'trainings.*.level.max' => 'Jenjang tidak boleh lebih dari 160 karakter.',
+            'trainings.*.start_date.required' => 'Tanggal pelaksanaan tidak boleh kosong.',
             'trainings.*.start_date.date' => 'Tanggal pelaksanaan harus berupa tanggal.',
             'trainings.*.duration.numeric' => 'Durasi pelatihan harus berupa angka.',
             'trainings.*.organizer.max' => 'Penyelenggara tidak boleh lebih dari 160 karakter.',
             'trainings.*.certificate.file' => 'Sertifikat harus berupa file.',
             'trainings.*.certificate.extensions' => 'Sertifikat harus berupa jpg, jpeg atau png.',
             'trainings.*.certificate.max' => 'Ukuran sertifikat tidak boleh lebih dari 2MB.',
+            'trainings.*.type.required' => 'Tipe pelatihan tidak boleh kosong.',
             'trainings.*.type.numeric' => 'Tipe pelatihan harus berupa angka.',
             'trainings.*.type.in' => 'Tipe pelatihan harus diantara 1, 2 atau 3.',
         ];

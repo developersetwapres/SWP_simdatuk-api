@@ -13,13 +13,13 @@ class CreateTargetRequest
     public static function rules(): array
     {
         return [
-            'targets.*.period_month' => 'numeric|digits_between:1,12',
-            'targets.*.period_year' => 'date_format:Y',
-            'targets.*.appraisal_period' => 'numeric',
+            'targets.*.period_month' => 'required|numeric|digits_between:1,12',
+            'targets.*.period_year' => 'required|date_format:Y',
+            'targets.*.appraisal_period' => 'required|numeric',
             'targets.*.year' => 'date_format:Y',
-            'targets.*.work_behavior_rating' => 'numeric',
-            'targets.*.employee_performance_predicate' => 'numeric',
-            'targets.*.organizational_performance_achievement' => 'numeric',
+            'targets.*.work_behavior_rating' => 'required|numeric',
+            'targets.*.employee_performance_predicate' => 'required|numeric',
+            'targets.*.organizational_performance_achievement' => 'required|numeric',
         ];
     }
 
@@ -31,13 +31,19 @@ class CreateTargetRequest
     public static function messages(): array
     {
         return [
+            'targets.*.period_month.required' => 'Bulan periode riwayat tidak boleh kosong.',
             'targets.*.period_month.numeric' => 'Bulan periode riwayat harus berupa angka.',
             'targets.*.period_month.digits_between' => 'Bulan periode riwayat harus diantara 1 hingga 12.',
+            'targets.*.period_year.required' => 'Tahun periode riwayat tidak boleh kosong.',
             'targets.*.period_year.date_format' => 'Tahun periode riwayat harus dengan format YYYY.',
+            'targets.*.appraisal_period.required' => 'Periode penilaian tidak boleh kosong.',
             'targets.*.appraisal_period.numeric' => 'Periode penilaian harus berupa angka.',
             'targets.*.year.date_format' => 'Tahun SKP harus dengan format YYYY.',
+            'targets.*.work_behavior_rating.required' => 'Rating perilaku kerja tidak boleh kosong.',
             'targets.*.work_behavior_rating.numeric' => 'Rating perilaku kerja harus berupa angka.',
+            'targets.*.employee_performance_predicate.required' => 'Predikat kinerja pegawai tidak boleh kosong.',
             'targets.*.employee_performance_predicate.numeric' => 'Predikat kinerja pegawai harus berupa angka.',
+            'targets.*.organizational_performance_achievement.required' => 'Capaian kinerja organisasi tidak boleh kosong.',
             'targets.*.organizational_performance_achievement.numeric' => 'Capaian kinerja organisasi harus berupa angka.',
         ];
     }

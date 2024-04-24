@@ -13,17 +13,17 @@ class CreateGradeRequest
     public static function rules(): array
     {
         return [
-            'grades.*.period_month' => 'numeric|digits_between:1,12',
-            'grades.*.period_year' => 'date_format:Y',
-            'grades.*.grade_id' => 'numeric',
-            'grades.*.effective_date' => 'date',
+            'grades.*.period_month' => 'required|numeric|digits_between:1,12',
+            'grades.*.period_year' => 'required|date_format:Y',
+            'grades.*.grade_id' => 'required|numeric',
+            'grades.*.effective_date' => 'required|date',
             'grades.*.decree_name' => 'max:160',
             'grades.*.decree_document' => 'file|extensions:jpg,jpeg,png,pdf|max:2048',
-            'grades.*.type_of_decree' => 'numeric',
+            'grades.*.type_of_decree' => 'required|numeric',
             'grades.*.decree_number' => 'max:160',
             'grades.*.decree_date' => 'date',
             'grades.*.description' => 'max:160',
-            'grades.*.status' => 'numeric',
+            'grades.*.status' => 'required|numeric',
         ];
     }
 
@@ -35,19 +35,25 @@ class CreateGradeRequest
     public static function messages(): array
     {
         return [
+            'grades.*.period_month.required' => 'Bulan periode riwayat tidak boleh kosong.',
             'grades.*.period_month.numeric' => 'Bulan periode riwayat harus berupa angka.',
             'grades.*.period_month.digits_between' => 'Bulan periode riwayat harus diantara 1 hingga 12.',
+            'grades.*.period_year.required' => 'Tahun periode riwayat tidak boleh kosong.',
             'grades.*.period_year.date_format' => 'Tahun periode riwayat harus dengan format YYYY.',
+            'grades.*.grade_id.required' => 'Golongan tidak boleh kosong.',
             'grades.*.grade_id.numeric' => 'Golongan harus berupa angka.',
+            'grades.*.effective_date.required' => 'Tanggal efektif golongan tidak boleh kosong.',
             'grades.*.effective_date.date' => 'Tanggal efektif golongan harus berupa tanggal.',
             'grades.*.decree_name.max' => 'SK golongan tidak boleh lebih dari 160 karakter.',
             'grades.*.decree_document.file' => 'SK golongan harus berupa file.',
             'grades.*.decree_document.extensions' => 'SK golongan harus berupa jpg, jpeg atau png.',
             'grades.*.decree_document.max' => 'SK golongan tidak boleh lebih dari 2MB',
+            'grades.*.type_of_decree.required' => 'Jenis SK golongan tidak boleh kosong.',
             'grades.*.type_of_decree.numeric' => 'Jenis SK golongan harus berupa angka.',
             'grades.*.decree_number.max' => 'Nomor SK golongan tidak beloh lebih dari 160 karakter.',
             'grades.*.decree_date.date' => 'Tanggal SK golongan harus berupa tanggal.',
             'grades.*.description.max' => 'Keterangan golongan tidak boleh lebih dari 160 karakter.',
+            'grades.*.status.required' => 'Status golongan tidak boleh kosong.',
             'grades.*.status.numeric' => 'Status golongan harus berupa angka.',
         ];
     }

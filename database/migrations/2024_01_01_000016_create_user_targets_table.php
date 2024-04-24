@@ -17,7 +17,7 @@ return new class extends Migration
             $table->tinyInteger('period_month');
             $table->year('period_year');
             $table->tinyInteger('appraisal_period');
-            $table->year('year');
+            $table->year('year')->nullable();
             $table->tinyInteger('work_behavior_rating');
             $table->tinyInteger('employee_performance_predicate');
             $table->tinyInteger('organizational_performance_achievement');

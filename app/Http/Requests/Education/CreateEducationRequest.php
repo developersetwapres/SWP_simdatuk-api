@@ -13,12 +13,12 @@ class CreateEducationRequest
     public static function rules(): array
     {
         return [
-            'educations.*.level' => 'numeric|in:1,2,3,4,5,6,7,8,9',
-            'educations.*.name' => 'max:160',
+            'educations.*.level' => 'required|numeric|in:1,2,3,4,5,6,7,8,9',
+            'educations.*.name' => 'required|max:160',
             'educations.*.faculty' => 'max:160',
             'educations.*.major' => 'max:160',
-            'educations.*.status' => 'numeric|in:1,2,3,4,5',
-            'educations.*.year_of_graduation' => 'date_format:Y',
+            'educations.*.status' => 'required|numeric|in:1,2,3,4,5',
+            'educations.*.year_of_graduation' => 'required|date_format:Y',
             'educations.*.description' => 'max:160',
         ];
     }
@@ -31,13 +31,17 @@ class CreateEducationRequest
     public static function messages(): array
     {
         return [
+            'educations.*.level.required' => 'Tingkat pendidikan tidak boleh kosong.',
             'educations.*.level.numeric' => 'Tingkat pendidikan harus berupa angka.',
             'educations.*.level.in' => 'Tingkat pendidikan harus diantara 1,2,3,4,5,6,7,8 atau 9',
+            'educations.*.name.requird' => 'Nama tidak boleh kosong.',
             'educations.*.name.max' => 'Nama tidak boleh lebih dari 160 karakter.',
             'educations.*.faculty.max' => 'Nama fakultas tidak boleh lebih dari 160 karakter.',
             'educations.*.major.max' => 'Jurusan tidak boleh lebih dari 160 karakter.',
+            'educations.*.status.required' => 'Status tidak boleh kosong.',
             'educations.*.status.numeric' => 'Status harus berupa angka.',
             'educations.*.status.in' => 'Status harus diantara 1,2,3,4 atau 5.',
+            'educations.*.year_of_graduation.required' => 'Tahun kelulusan tidak boleh kosong.',
             'educations.*.year_of_graduation.date' => 'Tahun kelulusan harus dengan format YYYY.',
             'educations.*.description.max' => 'Keterangan tidak boleh lebih dari 160 karakter.',
         ];

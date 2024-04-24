@@ -18,12 +18,12 @@ return new class extends Migration
             $table->year('period_year');
             $table->unsignedBigInteger('grade_id');
             $table->date('effective_date');
-            $table->string('decree_name', 160);
-            $table->string('decree_document');
+            $table->string('decree_name', 160)->nullable();
+            $table->string('decree_document')->nullable();
             $table->unsignedBigInteger('type_of_decree');
-            $table->string('decree_number', 160);
-            $table->date('decree_date');
-            $table->string('description', 160);
+            $table->string('decree_number', 160)->nullable();
+            $table->date('decree_date')->nullable();
+            $table->string('description', 160)->nullable();
             $table->tinyInteger('status');
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();

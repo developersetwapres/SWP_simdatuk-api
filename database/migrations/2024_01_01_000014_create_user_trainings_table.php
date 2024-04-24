@@ -18,11 +18,11 @@ return new class extends Migration
             $table->year('period_year');
             $table->string('name', 160);
             $table->string('reference_number', 160);
-            $table->string('level', 160);
+            $table->string('level', 160)->nullable();
             $table->date('start_date');
-            $table->tinyInteger('duration')->comment('in days');
-            $table->string('organizer', 160);
-            $table->string('certificate');
+            $table->tinyInteger('duration')->nullable()->comment('in days');
+            $table->string('organizer', 160)->nullable();
+            $table->string('certificate')->nullable();
             $table->tinyInteger('type')->default(1)->comment('1=Struktural, 2=Fungsional, 3=Teknis');
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
