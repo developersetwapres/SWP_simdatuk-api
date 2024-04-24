@@ -4,6 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Employee\CreateEmployeeRequest;
 use App\Http\Requests\Employee\UpdateEmployeeRequest;
+use App\Repositories\DisciplineRepository;
+use App\Repositories\EducationRepository;
+use App\Repositories\EmployeeRepository;
+use App\Repositories\GradeRepository;
+use App\Repositories\LeaveRepository;
+use App\Repositories\PerformanceRepository;
+use App\Repositories\PositionRepository;
+use App\Repositories\RecognitionRepository;
+use App\Repositories\SalaryRepository;
+use App\Repositories\TargetRepository;
+use App\Repositories\TrainingRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -16,8 +27,22 @@ use Illuminate\Support\Str;
  */
 class EmployeeController extends Controller
 {
-    public function __construct(Request $request)
-    {
+    protected $targetRepository;
+
+    public function __construct(
+        Request $request,
+        EmployeeRepository $employeeRepository,
+        EducationRepository $educationRepository,
+        PositionRepository $positionRepository,
+        GradeRepository $gradeRepository,
+        SalaryRepository $salaryRepository,
+        TrainingRepository $trainingRepository,
+        RecognitionRepository $recognitionRepository,
+        TargetRepository $targetRepository,
+        PerformanceRepository $performanceRepository,
+        DisciplineRepository $disciplineRepository,
+        LeaveRepository $leaveRepository,
+    ) {
         $this->request = $request;
         $this->posted = $request->except(
             '_token',
@@ -34,6 +59,17 @@ class EmployeeController extends Controller
             'families',
             'leaves'
         );
+        $this->employeeRepository = $employeeRepository;
+        $this->educationRepository = $educationRepository;
+        $this->positionRepository = $positionRepository;
+        $this->gradeRepository = $gradeRepository;
+        $this->salaryRepository = $salaryRepository;
+        $this->trainingRepository = $trainingRepository;
+        $this->recognitionRepository = $recognitionRepository;
+        $this->targetRepository = $targetRepository;
+        $this->performanceRepository = $performanceRepository;
+        $this->disciplineRepository = $disciplineRepository;
+        $this->leaveRepository = $leaveRepository;
     }
 
     /**
@@ -82,12 +118,6 @@ class EmployeeController extends Controller
      */
     public function create(CreateEmployeeRequest $request)
     {
-        // try {
-        //     DB::beginTransaction();
-        //     DB::commit();
-        // } catch (\Throwable $th) {
-        //     DB::rollback();
-        // }
         $employmentType = DB::table('employment_types');
         $employmentType->where('id', $this->request->employment_type_id);
         $employmentType->where('status', true);
@@ -118,6 +148,12 @@ class EmployeeController extends Controller
             $this->posted['employee_id_card'] = 'employee_id_card/' . $fileName;
         }
 
+        // try {
+        //     DB::beginTransaction();
+        //     DB::commit();
+        // } catch (\Throwable $th) {
+        //     DB::rollback();
+        // }
         $userId = DB::table('users')->insertGetIdTs($this->posted);
 
         // Insert Educations
@@ -157,7 +193,7 @@ class EmployeeController extends Controller
                 $salary['user_id'] = $userId;
                 array_push($salaries, $salary);
             }
-            DB::table('user_sallaries')->insertTs($sallaries);
+            DB::table('user_salaries')->insertTs($salaries);
         }
 
         // Insert Trainings
@@ -183,7 +219,7 @@ class EmployeeController extends Controller
         // Insert Targets
         if (isset($this->request->targets)) {
             $targets = array();
-            foreach ($this->request->targets as $recognition) {
+            foreach ($this->request->targets as $target) {
                 $target['user_id'] = $userId;
                 array_push($targets, $target);
             }
@@ -243,14 +279,38 @@ class EmployeeController extends Controller
      */
     public function show()
     {
-        $user = DB::table('users');
-        $user->where('id', $this->request->id);
-        $user->select('type');
-        $user = $user->first();
-        if (!$user) {
+        $employee = $this->employeeRepository->getDetail($this->request->id);
+        if (!$employee) {
             return $this->response(404, 'Pegawai tidak ditemukan.');
         }
-        return $this->response(200, 'success', $user);
+
+        $educations = $this->educationRepository->getDetail($this->request->id);
+        $positions = $this->positionRepository->getDetail($this->request->id);
+        $grades = $this->gradeRepository->getDetail($this->request->id);
+        $salaries = $this->salaryRepository->getDetail($this->request->id);
+        $structurals = $this->trainingRepository->getDetail($this->request->id, 1);
+        $functionals = $this->trainingRepository->getDetail($this->request->id, 2);
+        $technicals = $this->trainingRepository->getDetail($this->request->id, 3);
+        $recognitions = $this->recognitionRepository->getDetail($this->request->id);
+        $targets = $this->targetRepository->getDetail($this->request->id);
+        $performances = $this->performanceRepository->getDetail($this->request->id);
+        $disciplinaries = $this->disciplineRepository->getDetail($this->request->id);
+        $leaves = $this->leaveRepository->getDetail($this->request->id);
+
+        $employee->educations = $educations;
+        $employee->positions = $positions;
+        $employee->grades = $grades;
+        $employee->salaries = $salaries;
+        $employee->structurals = $structurals;
+        $employee->functionals = $functionals;
+        $employee->technicals = $technicals;
+        $employee->recognitions = $recognitions;
+        $employee->targets = $targets;
+        $employee->performances = $performances;
+        $employee->disciplinaries = $disciplinaries;
+        $employee->leaves = $leaves;
+
+        return $this->response(200, 'success', $employee);
     }
 
     /**
