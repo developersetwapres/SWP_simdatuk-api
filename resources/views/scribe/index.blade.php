@@ -913,7 +913,7 @@
 
         </div>
         <div class="sl-flex sl-items-center sl-px-4 sl-py-3 sl-border-t">
-            Last updated: April 24, 2024
+            Last updated: April 25, 2024
         </div>
 
         <div class="sl-flex sl-items-center sl-px-4 sl-py-3 sl-border-t">
@@ -22793,7 +22793,7 @@ You can check the Dev Tools console for debugging information.</p>
     --data "{
     \"name\": \"admin\",
     \"permissions\": [
-        \"voluptas\"
+        \"quidem\"
     ]
 }"
 </code></pre>                                        </div>
@@ -22816,7 +22816,7 @@ const headers = {
 let body = {
     "name": "admin",
     "permissions": [
-        "voluptas"
+        "quidem"
     ]
 };
 
