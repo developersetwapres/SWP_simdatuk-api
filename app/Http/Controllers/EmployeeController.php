@@ -12,7 +12,6 @@ use App\Repositories\LeaveRepository;
 use App\Repositories\PerformanceRepository;
 use App\Repositories\PositionRepository;
 use App\Repositories\RecognitionRepository;
-use App\Repositories\SalaryRepository;
 use App\Repositories\TargetRepository;
 use App\Repositories\TrainingRepository;
 use Illuminate\Http\Request;
@@ -35,7 +34,6 @@ class EmployeeController extends Controller
         EducationRepository $educationRepository,
         PositionRepository $positionRepository,
         GradeRepository $gradeRepository,
-        SalaryRepository $salaryRepository,
         TrainingRepository $trainingRepository,
         RecognitionRepository $recognitionRepository,
         TargetRepository $targetRepository,
@@ -63,7 +61,6 @@ class EmployeeController extends Controller
         $this->educationRepository = $educationRepository;
         $this->positionRepository = $positionRepository;
         $this->gradeRepository = $gradeRepository;
-        $this->salaryRepository = $salaryRepository;
         $this->trainingRepository = $trainingRepository;
         $this->recognitionRepository = $recognitionRepository;
         $this->targetRepository = $targetRepository;
@@ -186,16 +183,6 @@ class EmployeeController extends Controller
             DB::table('user_grades')->insertTs($grades);
         }
 
-        // Insert Salaries
-        if (isset($this->request->salaries)) {
-            $salaries = array();
-            foreach ($this->request->salaries as $salary) {
-                $salary['user_id'] = $userId;
-                array_push($salaries, $salary);
-            }
-            DB::table('user_salaries')->insertTs($salaries);
-        }
-
         // Insert Trainings
         if (isset($this->request->trainings)) {
             $trainings = array();
@@ -287,7 +274,6 @@ class EmployeeController extends Controller
         $educations = $this->educationRepository->getDetail($this->request->id);
         $positions = $this->positionRepository->getDetail($this->request->id);
         $grades = $this->gradeRepository->getDetail($this->request->id);
-        $salaries = $this->salaryRepository->getDetail($this->request->id);
         $structurals = $this->trainingRepository->getDetail($this->request->id, 1);
         $functionals = $this->trainingRepository->getDetail($this->request->id, 2);
         $technicals = $this->trainingRepository->getDetail($this->request->id, 3);
@@ -300,7 +286,6 @@ class EmployeeController extends Controller
         $employee->educations = $educations;
         $employee->positions = $positions;
         $employee->grades = $grades;
-        $employee->salaries = $salaries;
         $employee->structurals = $structurals;
         $employee->functionals = $functionals;
         $employee->technicals = $technicals;
