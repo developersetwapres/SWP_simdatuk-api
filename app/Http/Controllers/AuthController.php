@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Storage;
 
 /**
  * @group Authentication
@@ -53,7 +52,7 @@ class AuthController extends Controller
         $user = DB::table('users');
         $user->select('users.id', 'users.email', 'users.username', 'users.photo_profile', 'users.employee_id_number', 'users.employee_registration_number');
         $user = $user->first();
-        $user->photo_profile = (is_null($user->photo_profile)) ? asset('img/avatar.jpeg') : Storage::disk('public')->url($user->photo_profile);
+        $user->photo_profile = $this->getDocument($user->photo_profile);
 
         $role = DB::table('roles');
         $role->join('users', 'roles.id', 'users.role_id');

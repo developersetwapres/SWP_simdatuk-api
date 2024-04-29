@@ -37,7 +37,7 @@ class ProfileController extends Controller
         $role->select('name');
         $role = $role->first();
 
-        $photoProfile = (is_null($user->photo_profile)) ? asset('img/avatar.jpeg') : Storage::disk('public')->url($user->photo_profile);
+        $photoProfile = $this->getDocument($user->photo_profile);
 
         $data = [
             'id' => $user->id,
