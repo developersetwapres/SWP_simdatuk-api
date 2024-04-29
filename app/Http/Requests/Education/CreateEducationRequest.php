@@ -20,6 +20,7 @@ class CreateEducationRequest
             'educations.*.status' => 'required|numeric|in:1,2,3,4,5',
             'educations.*.year_of_graduation' => 'required|date_format:Y',
             'educations.*.description' => 'max:160',
+            'educations.*.degree_document' => 'file|extensions:jpg,jpeg,png,pdf|max:2048',
         ];
     }
 
@@ -44,6 +45,9 @@ class CreateEducationRequest
             'educations.*.year_of_graduation.required' => 'Tahun kelulusan tidak boleh kosong.',
             'educations.*.year_of_graduation.date' => 'Tahun kelulusan harus dengan format YYYY.',
             'educations.*.description.max' => 'Keterangan tidak boleh lebih dari 160 karakter.',
+            'educations.*.degree_document.file' => 'Ijazah harus berupa file.',
+            'educations.*.degree_document.extensions' => 'Ijazah harus berupa jpg, jpeg atau png.',
+            'educations.*.degree_document.max' => 'Ukuran ijazah tidak boleh lebih dari 2MB.',
         ];
     }
 
@@ -82,6 +86,10 @@ class CreateEducationRequest
             'educations.*.description' => [
                 'description' => 'Refers to the Description of Employee Education.',
                 'example' => 'Keterangan',
+            ],
+            'educations.*.degree_document' => [
+                'description' => 'Refers to the Degree Document of Employee Education.',
+                'example' => public_path('/img/logo.svg'),
             ],
         ];
     }

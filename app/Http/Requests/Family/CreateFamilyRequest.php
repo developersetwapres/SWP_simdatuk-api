@@ -95,7 +95,7 @@ class CreateFamilyRequest
             ],
             'families.*.gender' => [
                 'description' => 'Refers to the Gender of Employee Family.',
-                'example' => true,
+                'example' => 1,
             ],
             'families.*.religion' => [
                 'description' => 'Refers to the Religion of Employee Family.',

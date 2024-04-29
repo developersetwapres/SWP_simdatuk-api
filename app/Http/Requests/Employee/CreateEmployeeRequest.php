@@ -227,7 +227,7 @@ class CreateEmployeeRequest extends FormRequest
             ],
             'gender' => [
                 'description' => 'Refers to the Gender of Employee. true=laki-laki, false=perempuan',
-                'example' => true,
+                'example' => 1,
             ],
             'marital_status' => [
                 'description' => 'Refers to the Marital Status of Employee. 1=Belum Menikah, 2=Menikah, 3=Cerai, 4=Janda, 5=Duda',
@@ -291,11 +291,11 @@ class CreateEmployeeRequest extends FormRequest
             ],
             'employment_status' => [
                 'description' => 'Refers to the Employment Status of Employee. true=aktif, false=tidak aktif',
-                'example' => true,
+                'example' => 1,
             ],
             'inner_housing_complex' => [
                 'description' => 'Refers to the Inner Housing Complex of Employee. true=dalam, false=luar',
-                'example' => true,
+                'example' => 1,
             ],
             'current_address' => [
                 'description' => 'Refers to the Current Address of Employee.',

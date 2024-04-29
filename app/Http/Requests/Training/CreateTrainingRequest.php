@@ -79,7 +79,7 @@ class CreateTrainingRequest
             ],
             'trainings.*.reference_number' => [
                 'description' => 'Refers to the Reference Number of Employee Training.',
-                'example' => '',
+                'example' => 'No 123',
             ],
             'trainings.*.level' => [
                 'description' => 'Refers to the Level of Employee Training.',

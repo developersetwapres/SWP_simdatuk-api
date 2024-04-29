@@ -132,17 +132,13 @@ class EmployeeController extends Controller
         }
 
         if ($this->request->hasFile('photo_profile')) {
-            $fileExtension = '.' . $this->request->file('photo_profile')->getClientOriginalExtension();
-            $fileName = Str::random(32) . $fileExtension;
-            Storage::disk('public')->putFileAs('photo_profile/', $this->request->file('photo_profile'), $fileName);
-            $this->posted['photo_profile'] = 'photo_profile/' . $fileName;
+            $path = $this->uploadDocument($this->request->file('photo_profile'), 'photo_profile');
+            $this->posted['photo_profile'] = $path;
         }
 
         if ($this->request->hasFile('employee_id_card')) {
-            $fileExtension = '.' . $this->request->file('employee_id_card')->getClientOriginalExtension();
-            $fileName = Str::random(32) . $fileExtension;
-            Storage::disk('public')->putFileAs('employee_id_card/', $this->request->file('employee_id_card'), $fileName);
-            $this->posted['employee_id_card'] = 'employee_id_card/' . $fileName;
+            $path = $this->uploadDocument($this->request->file('employee_id_card'), 'employee_id_card');
+            $this->posted['employee_id_card'] = $path;
         }
 
         // try {
@@ -157,6 +153,9 @@ class EmployeeController extends Controller
         if (isset($this->request->educations)) {
             $educations = array();
             foreach ($this->request->educations as $education) {
+                if (is_file($education['degree_document'])) {
+                    $education['degree_document'] = $this->uploadDocument($education['degree_document'], 'degree_document');
+                }
                 $education['user_id'] = $userId;
                 array_push($educations, $education);
             }
@@ -167,6 +166,9 @@ class EmployeeController extends Controller
         if (isset($this->request->positions)) {
             $positions = array();
             foreach ($this->request->positions as $position) {
+                if (is_file($position['decree_document'])) {
+                    $position['decree_document'] = $this->uploadDocument($position['decree_document'], 'decree_document');
+                }
                 $position['user_id'] = $userId;
                 array_push($positions, $position);
             }
@@ -177,6 +179,9 @@ class EmployeeController extends Controller
         if (isset($this->request->grades)) {
             $grades = array();
             foreach ($this->request->grades as $grade) {
+                if (is_file($grade['decree_document'])) {
+                    $grade['decree_document'] = $this->uploadDocument($grade['decree_document'], 'decree_document');
+                }
                 $grade['user_id'] = $userId;
                 array_push($grades, $grade);
             }
@@ -187,6 +192,9 @@ class EmployeeController extends Controller
         if (isset($this->request->trainings)) {
             $trainings = array();
             foreach ($this->request->trainings as $training) {
+                if (is_file($training['certificate'])) {
+                    $training['certificate'] = $this->uploadDocument($training['certificate'], 'certificate');
+                }
                 $training['user_id'] = $userId;
                 array_push($trainings, $training);
             }
@@ -247,6 +255,9 @@ class EmployeeController extends Controller
         if (isset($this->request->leaves)) {
             $leaves = array();
             foreach ($this->request->leaves as $leave) {
+                if (is_file($leave['leave_letter'])) {
+                    $leave['leave_letter'] = $this->uploadDocument($leave['leave_letter'], 'leave_letter');
+                }
                 $leave['user_id'] = $userId;
                 array_push($leaves, $leave);
             }

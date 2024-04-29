@@ -63,7 +63,7 @@ class UpdateCollegeRequest extends FormRequest
             ],
             'region' => [
                 'description' => 'Refers to the Region of College.',
-                'example' => true,
+                'example' => 1,
             ],
             'address' => [
                 'description' => 'Refers to the Address of College.',
