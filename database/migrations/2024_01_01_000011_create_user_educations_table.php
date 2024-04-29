@@ -21,6 +21,7 @@ return new class extends Migration
             $table->tinyInteger('status')->default(1)->comment('1=Lulus, 2=DO, 3=Aktif, 4=Non-Aktif, 5=Mengundurkan diri');
             $table->year('year_of_graduation');
             $table->text('description')->nullable();
+            $table->text('degree_document')->nullable();
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
 
