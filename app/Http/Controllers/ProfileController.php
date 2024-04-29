@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Profile\UpdateProfileRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -81,12 +82,11 @@ class ProfileController extends Controller
             }
 
             // Check if password submitted
-            if (isset($this->request->password) && this->request->password !== null) {
+            if (isset($this->request->password) && $this->request->password !== null) {
                 DB::table('users')->where('id', $this->request->user()->id)->updateTs([
                     'password' => Hash::make($this->request->password),
                 ]);
             }
-
             DB::commit();
             return $this->response(200, 'Profil berhasil diupdate.');
         } catch (\Throwable $th) {
