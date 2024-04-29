@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CollegeController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmploymentTypeController;
+use App\Http\Controllers\ExportController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\InstitutionController;
 use App\Http\Controllers\PermissionController;
@@ -103,4 +104,8 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::delete('logout', [AuthController::class, 'logout']);
+
+    Route::prefix('export')->group(function () {
+        Route::get('/user', [ExportController::class, 'user']);
+    });
 });
