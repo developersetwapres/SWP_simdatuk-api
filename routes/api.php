@@ -107,5 +107,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('export')->group(function () {
         Route::get('/user', [ExportController::class, 'user']);
+        Route::get('/recap/employee', [ExportController::class, 'recapEmployee']);
     });
 });
