@@ -10,6 +10,7 @@ class AssessmentRepository
     {
         $userAssessments = DB::table('user_assessments');
         $userAssessments->where('user_id', $userId);
+        $userAssessments->where('type', $type);
         $userAssessments->select(
             'assessment_date',
             'point',

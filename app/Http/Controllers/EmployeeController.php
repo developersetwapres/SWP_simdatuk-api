@@ -160,151 +160,151 @@ class EmployeeController extends Controller
             $this->posted['employee_id_card'] = $path;
         }
 
-        // try {
-        //     DB::beginTransaction();
-        //     DB::commit();
-        // } catch (\Throwable $th) {
-        //     DB::rollback();
-        // }
-        $userId = DB::table('users')->insertGetIdTs($this->posted);
+        try {
+            DB::beginTransaction();
+            $userId = DB::table('users')->insertGetIdTs($this->posted);
 
-        // Insert Educations
-        if (isset($this->request->educations)) {
-            $educations = array();
-            foreach ($this->request->educations as $education) {
-                if (is_file($education['degree_document'])) {
-                    $education['degree_document'] = $this->uploadDocument($education['degree_document'], 'degree_document');
+            // Insert Educations
+            if (isset($this->request->educations)) {
+                $educations = array();
+                foreach ($this->request->educations as $education) {
+                    if (is_file($education['degree_document'])) {
+                        $education['degree_document'] = $this->uploadDocument($education['degree_document'], 'degree_document');
+                    }
+                    $education['user_id'] = $userId;
+                    array_push($educations, $education);
                 }
-                $education['user_id'] = $userId;
-                array_push($educations, $education);
+                DB::table('user_educations')->insertTs($educations);
             }
-            DB::table('user_educations')->insertTs($educations);
-        }
 
-        // Insert Positions
-        if (isset($this->request->positions)) {
-            $positions = array();
-            foreach ($this->request->positions as $position) {
-                if (is_file($position['decree_document'])) {
-                    $position['decree_document'] = $this->uploadDocument($position['decree_document'], 'decree_document');
+            // Insert Positions
+            if (isset($this->request->positions)) {
+                $positions = array();
+                foreach ($this->request->positions as $position) {
+                    if (is_file($position['decree_document'])) {
+                        $position['decree_document'] = $this->uploadDocument($position['decree_document'], 'decree_document');
+                    }
+                    $position['user_id'] = $userId;
+                    array_push($positions, $position);
                 }
-                $position['user_id'] = $userId;
-                array_push($positions, $position);
+                DB::table('user_positions')->insertTs($positions);
             }
-            DB::table('user_positions')->insertTs($positions);
-        }
 
-        // Insert Grades
-        if (isset($this->request->grades)) {
-            $grades = array();
-            foreach ($this->request->grades as $grade) {
-                if (is_file($grade['decree_document'])) {
-                    $grade['decree_document'] = $this->uploadDocument($grade['decree_document'], 'decree_document');
+            // Insert Grades
+            if (isset($this->request->grades)) {
+                $grades = array();
+                foreach ($this->request->grades as $grade) {
+                    if (is_file($grade['decree_document'])) {
+                        $grade['decree_document'] = $this->uploadDocument($grade['decree_document'], 'decree_document');
+                    }
+                    $grade['user_id'] = $userId;
+                    array_push($grades, $grade);
                 }
-                $grade['user_id'] = $userId;
-                array_push($grades, $grade);
+                DB::table('user_grades')->insertTs($grades);
             }
-            DB::table('user_grades')->insertTs($grades);
-        }
 
-        // Insert Trainings
-        if (isset($this->request->trainings)) {
-            $trainings = array();
-            foreach ($this->request->trainings as $training) {
-                if (is_file($training['certificate'])) {
-                    $training['certificate'] = $this->uploadDocument($training['certificate'], 'certificate');
+            // Insert Trainings
+            if (isset($this->request->trainings)) {
+                $trainings = array();
+                foreach ($this->request->trainings as $training) {
+                    if (is_file($training['certificate'])) {
+                        $training['certificate'] = $this->uploadDocument($training['certificate'], 'certificate');
+                    }
+                    $training['user_id'] = $userId;
+                    array_push($trainings, $training);
                 }
-                $training['user_id'] = $userId;
-                array_push($trainings, $training);
+                DB::table('user_trainings')->insertTs($trainings);
             }
-            DB::table('user_trainings')->insertTs($trainings);
-        }
 
-        // Insert Recognitions
-        if (isset($this->request->recognitions)) {
-            $recognitions = array();
-            foreach ($this->request->recognitions as $recognition) {
-                $recognition['user_id'] = $userId;
-                array_push($recognitions, $recognition);
-            }
-            DB::table('user_recognitions')->insertTs($recognitions);
-        }
-
-        // Insert Targets
-        if (isset($this->request->targets)) {
-            $targets = array();
-            foreach ($this->request->targets as $target) {
-                $target['user_id'] = $userId;
-                array_push($targets, $target);
-            }
-            DB::table('user_targets')->insertTs($targets);
-        }
-
-        // Insert Performances
-        if (isset($this->request->performances)) {
-            $performances = array();
-            foreach ($this->request->performances as $performance) {
-                $performance['user_id'] = $userId;
-                array_push($performances, $performance);
-            }
-            DB::table('user_performances')->insertTs($performances);
-        }
-
-        // Insert Disciplinaries
-        if (isset($this->request->disciplinaries)) {
-            $disciplinaries = array();
-            foreach ($this->request->disciplinaries as $discipline) {
-                $discipline['user_id'] = $userId;
-                array_push($disciplinaries, $discipline);
-            }
-            DB::table('user_disciplinaries')->insertTs($disciplinaries);
-        }
-
-        // Insert Families
-        if (isset($this->request->families)) {
-            $families = array();
-            foreach ($this->request->families as $family) {
-                $family['user_id'] = $userId;
-                array_push($families, $family);
-            }
-            DB::table('user_families')->insertTs($families);
-        }
-
-        // Insert Leaves
-        if (isset($this->request->leaves)) {
-            $leaves = array();
-            foreach ($this->request->leaves as $leave) {
-                if (is_file($leave['leave_letter'])) {
-                    $leave['leave_letter'] = $this->uploadDocument($leave['leave_letter'], 'leave_letter');
+            // Insert Recognitions
+            if (isset($this->request->recognitions)) {
+                $recognitions = array();
+                foreach ($this->request->recognitions as $recognition) {
+                    $recognition['user_id'] = $userId;
+                    array_push($recognitions, $recognition);
                 }
-                $leave['user_id'] = $userId;
-                array_push($leaves, $leave);
+                DB::table('user_recognitions')->insertTs($recognitions);
             }
-            DB::table('user_leaves')->insertTs($leaves);
-        }
 
-        // Insert Notes
-        if (isset($this->request->notes)) {
-            $notes = array();
-            foreach ($this->request->notes as $note) {
-                $note['user_id'] = $userId;
-                $note['giver_id'] = $this->request->user()->id;
-                array_push($notes, $note);
-            }
-            DB::table('user_notes')->insertTs($notes);
-        }
-
-        // Insert Assessments
-        if (isset($this->request->assessments)) {
-            $assessments = array();
-            foreach ($this->request->assessments as $assessment) {
-                if (is_file($assessment['assessment_document'])) {
-                    $assessment['assessment_document'] = $this->uploadDocument($assessment['assessment_document'], 'assessment_document');
+            // Insert Targets
+            if (isset($this->request->targets)) {
+                $targets = array();
+                foreach ($this->request->targets as $target) {
+                    $target['user_id'] = $userId;
+                    array_push($targets, $target);
                 }
-                $assessment['user_id'] = $userId;
-                array_push($assessments, $assessment);
+                DB::table('user_targets')->insertTs($targets);
             }
-            DB::table('user_assessments')->insertTs($assessments);
+
+            // Insert Performances
+            if (isset($this->request->performances)) {
+                $performances = array();
+                foreach ($this->request->performances as $performance) {
+                    $performance['user_id'] = $userId;
+                    array_push($performances, $performance);
+                }
+                DB::table('user_performances')->insertTs($performances);
+            }
+
+            // Insert Disciplinaries
+            if (isset($this->request->disciplinaries)) {
+                $disciplinaries = array();
+                foreach ($this->request->disciplinaries as $discipline) {
+                    $discipline['user_id'] = $userId;
+                    array_push($disciplinaries, $discipline);
+                }
+                DB::table('user_disciplinaries')->insertTs($disciplinaries);
+            }
+
+            // Insert Families
+            if (isset($this->request->families)) {
+                $families = array();
+                foreach ($this->request->families as $family) {
+                    $family['user_id'] = $userId;
+                    array_push($families, $family);
+                }
+                DB::table('user_families')->insertTs($families);
+            }
+
+            // Insert Leaves
+            if (isset($this->request->leaves)) {
+                $leaves = array();
+                foreach ($this->request->leaves as $leave) {
+                    if (is_file($leave['leave_letter'])) {
+                        $leave['leave_letter'] = $this->uploadDocument($leave['leave_letter'], 'leave_letter');
+                    }
+                    $leave['user_id'] = $userId;
+                    array_push($leaves, $leave);
+                }
+                DB::table('user_leaves')->insertTs($leaves);
+            }
+
+            // Insert Notes
+            if (isset($this->request->notes)) {
+                $notes = array();
+                foreach ($this->request->notes as $note) {
+                    $note['user_id'] = $userId;
+                    $note['giver_id'] = $this->request->user()->id;
+                    array_push($notes, $note);
+                }
+                DB::table('user_notes')->insertTs($notes);
+            }
+
+            // Insert Assessments
+            if (isset($this->request->assessments)) {
+                $assessments = array();
+                foreach ($this->request->assessments as $assessment) {
+                    if (is_file($assessment['assessment_document'])) {
+                        $assessment['assessment_document'] = $this->uploadDocument($assessment['assessment_document'], 'assessment_document');
+                    }
+                    $assessment['user_id'] = $userId;
+                    array_push($assessments, $assessment);
+                }
+                DB::table('user_assessments')->insertTs($assessments);
+            }
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
         }
 
         return $this->response(200, 'Pegawai berhasil ditambah.');
@@ -336,10 +336,10 @@ class EmployeeController extends Controller
         $performances = $this->performanceRepository->getDetail($this->request->id);
         $disciplinaries = $this->disciplineRepository->getDetail($this->request->id);
         $leaves = $this->leaveRepository->getDetail($this->request->id);
-        $assessments = $this->assessmentsRepository->getDetail($this->request->id, 1);
-        $competencies = $this->assessmentsRepository->getDetail($this->request->id, 2);
-        $talents = $this->assessmentsRepository->getDetail($this->request->id, 3);
-        $notes = $this->notesRepository->getDetail($this->request->id);
+        $notes = $this->noteRepository->getDetail($this->request->id);
+        $assessments = $this->assessmentRepository->getDetail($this->request->id, 1);
+        $competencies = $this->assessmentRepository->getDetail($this->request->id, 2);
+        $talents = $this->assessmentRepository->getDetail($this->request->id, 3);
 
         $employee->educations = $educations;
         $employee->positions = $positions;
@@ -354,8 +354,8 @@ class EmployeeController extends Controller
         $employee->leaves = $leaves;
         $employee->notes = $notes;
         $employee->assessments = $assessments;
-        $employee->$competencies = $competencies;
-        $employee->$talents = $talents;
+        $employee->competencies = $competencies;
+        $employee->talents = $talents;
 
         return $this->response(200, 'success', $employee);
     }
