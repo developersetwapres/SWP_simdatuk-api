@@ -12,7 +12,7 @@
         }
 
         @page {
-            margin: 72px 25px;
+            margin: 72px 32px;
         }
 
         header {
@@ -44,7 +44,7 @@
         }
 
         .title {
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 700;
         }
 
