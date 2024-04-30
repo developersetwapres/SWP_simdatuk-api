@@ -13,7 +13,6 @@ class CreateNoteRequest
     public static function rules(): array
     {
         return [
-            'notes.*.user_id' => 'required|numeric',
             'notes.*.description' => 'required|max:160',
         ];
     }
@@ -26,10 +25,8 @@ class CreateNoteRequest
     public static function messages(): array
     {
         return [
-            'notes.*.user_id.required' => 'ID pegawai tidak boleh kosong.',
-            'notes.*.user_id.numeric' => 'ID pegawai harus berupa angka.',
             'notes.*.description.required' => 'Catatan tidak boleh kosong',
-            'notes.*.description.numeric' => 'Catatan harus berupa angka.',
+            'notes.*.description.max' => 'Catatan tidak boleh lebih dari 160 karakter.',
         ];
     }
 
@@ -41,10 +38,6 @@ class CreateNoteRequest
     public static function bodyParameters(): array
     {
         return [
-            'notes.*.user_id' => [
-                'description' => 'Refers to the User ID of Employee Note.',
-                'example' => 1,
-            ],
             'notes.*.description' => [
                 'description' => 'Refers to the Description of Employee Note.',
                 'example' => 'Catatan',

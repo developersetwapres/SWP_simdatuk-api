@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Employee\CreateEmployeeRequest;
 use App\Http\Requests\Employee\UpdateEmployeeRequest;
+use App\Repositories\AssessmentRepository;
 use App\Repositories\DisciplineRepository;
 use App\Repositories\EducationRepository;
 use App\Repositories\EmployeeRepository;
 use App\Repositories\GradeRepository;
 use App\Repositories\LeaveRepository;
+use App\Repositories\NoteRepository;
 use App\Repositories\PerformanceRepository;
 use App\Repositories\PositionRepository;
 use App\Repositories\RecognitionRepository;
@@ -26,7 +28,18 @@ use Illuminate\Support\Str;
  */
 class EmployeeController extends Controller
 {
+    protected $employeeRepository;
+    protected $educationRepository;
+    protected $positionRepository;
+    protected $gradeRepository;
+    protected $trainingRepository;
+    protected $recognitionRepository;
     protected $targetRepository;
+    protected $performanceRepository;
+    protected $disciplineRepository;
+    protected $leaveRepository;
+    protected $noteRepository;
+    protected $assessmentRepository;
 
     public function __construct(
         Request $request,
@@ -40,6 +53,8 @@ class EmployeeController extends Controller
         PerformanceRepository $performanceRepository,
         DisciplineRepository $disciplineRepository,
         LeaveRepository $leaveRepository,
+        NoteRepository $noteRepository,
+        AssessmentRepository $assessmentRepository,
     ) {
         $this->request = $request;
         $this->posted = $request->except(
@@ -55,7 +70,9 @@ class EmployeeController extends Controller
             'targets',
             'disciplinaries',
             'families',
-            'leaves'
+            'leaves',
+            'notes',
+            'assessments'
         );
         $this->employeeRepository = $employeeRepository;
         $this->educationRepository = $educationRepository;
@@ -67,6 +84,8 @@ class EmployeeController extends Controller
         $this->performanceRepository = $performanceRepository;
         $this->disciplineRepository = $disciplineRepository;
         $this->leaveRepository = $leaveRepository;
+        $this->noteRepository = $noteRepository;
+        $this->assessmentRepository = $assessmentRepository;
     }
 
     /**
@@ -264,6 +283,30 @@ class EmployeeController extends Controller
             DB::table('user_leaves')->insertTs($leaves);
         }
 
+        // Insert Notes
+        if (isset($this->request->notes)) {
+            $notes = array();
+            foreach ($this->request->notes as $note) {
+                $note['user_id'] = $userId;
+                $note['giver_id'] = $this->request->user()->id;
+                array_push($notes, $note);
+            }
+            DB::table('user_notes')->insertTs($notes);
+        }
+
+        // Insert Assessments
+        if (isset($this->request->assessments)) {
+            $assessments = array();
+            foreach ($this->request->assessments as $assessment) {
+                if (is_file($assessment['assessment_document'])) {
+                    $assessment['assessment_document'] = $this->uploadDocument($assessment['assessment_document'], 'assessment_document');
+                }
+                $assessment['user_id'] = $userId;
+                array_push($assessments, $assessment);
+            }
+            DB::table('user_assessments')->insertTs($assessments);
+        }
+
         return $this->response(200, 'Pegawai berhasil ditambah.');
     }
 
@@ -293,6 +336,10 @@ class EmployeeController extends Controller
         $performances = $this->performanceRepository->getDetail($this->request->id);
         $disciplinaries = $this->disciplineRepository->getDetail($this->request->id);
         $leaves = $this->leaveRepository->getDetail($this->request->id);
+        $assessments = $this->assessmentsRepository->getDetail($this->request->id, 1);
+        $competencies = $this->assessmentsRepository->getDetail($this->request->id, 2);
+        $talents = $this->assessmentsRepository->getDetail($this->request->id, 3);
+        $notes = $this->notesRepository->getDetail($this->request->id);
 
         $employee->educations = $educations;
         $employee->positions = $positions;
@@ -305,6 +352,10 @@ class EmployeeController extends Controller
         $employee->performances = $performances;
         $employee->disciplinaries = $disciplinaries;
         $employee->leaves = $leaves;
+        $employee->notes = $notes;
+        $employee->assessments = $assessments;
+        $employee->$competencies = $competencies;
+        $employee->$talents = $talents;
 
         return $this->response(200, 'success', $employee);
     }

@@ -2,11 +2,13 @@
 
 namespace App\Http\Requests\Employee;
 
+use App\Http\Requests\Assessment\CreateAssessmentRequest;
 use App\Http\Requests\Discipline\CreateDisciplineRequest;
 use App\Http\Requests\Education\CreateEducationRequest;
 use App\Http\Requests\Family\CreateFamilyRequest;
 use App\Http\Requests\Grade\CreateGradeRequest;
 use App\Http\Requests\Leave\CreateLeaveRequest;
+use App\Http\Requests\Note\CreateNoteRequest;
 use App\Http\Requests\Performance\CreatePerformanceRequest;
 use App\Http\Requests\Position\CreatePositionRequest;
 use App\Http\Requests\Recognition\CreateRecognitionRequest;
@@ -79,6 +81,8 @@ class CreateEmployeeRequest extends FormRequest
             CreateDisciplineRequest::rules(),
             CreateFamilyRequest::rules(),
             CreateLeaveRequest::rules(),
+            CreateNoteRequest::rules(),
+            CreateAssessmentRequest::rules(),
         );
     }
 
@@ -178,6 +182,8 @@ class CreateEmployeeRequest extends FormRequest
             CreateDisciplineRequest::messages(),
             CreateFamilyRequest::messages(),
             CreateLeaveRequest::messages(),
+            CreateNoteRequest::messages(),
+            CreateAssessmentRequest::messages(),
         );
     }
 
@@ -339,6 +345,8 @@ class CreateEmployeeRequest extends FormRequest
             CreateDisciplineRequest::bodyParameters(),
             CreateFamilyRequest::bodyParameters(),
             CreateLeaveRequest::bodyParameters(),
+            CreateNoteRequest::bodyParameters(),
+            CreateAssessmentRequest::bodyParameters(),
         );
     }
 }
