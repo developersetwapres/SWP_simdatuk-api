@@ -121,7 +121,7 @@ class CreateFamilyRequest
                 'description' => 'Refers to the Relationship Status of Employee Family.',
                 'example' => 1,
             ],
-            'families.*.level' => [
+            'families.*.education' => [
                 'description' => 'Refers to the Level of Employee Family.',
                 'example' => 1,
             ],
