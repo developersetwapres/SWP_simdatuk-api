@@ -11,23 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_trainings', function (Blueprint $table) {
+        Schema::create('trainings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
             $table->tinyInteger('period_month');
             $table->year('period_year');
             $table->string('name', 160);
-            $table->string('reference_number', 160);
             $table->string('level', 160)->nullable();
             $table->date('start_date');
             $table->tinyInteger('duration')->nullable()->comment('in days');
             $table->string('organizer', 160)->nullable();
-            $table->string('certificate')->nullable();
+            $table->string('reference_number', 160);
+            $table->text('link')->nullable();
             $table->tinyInteger('type')->default(1)->comment('1=Struktural, 2=Fungsional, 3=Teknis');
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -36,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_trainings');
+        Schema::dropIfExists('trainings');
     }
 };

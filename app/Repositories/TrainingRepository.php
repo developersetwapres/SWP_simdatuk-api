@@ -2,26 +2,26 @@
 
 namespace App\Repositories;
 
+use App\Helpers\Document;
 use Illuminate\Support\Facades\DB;
 
 class TrainingRepository
 {
+    use Document;
+
     public function getDetail($userId, $type)
     {
-        $userTrainings = DB::table('user_trainings');
-        $userTrainings->where('user_id', $userId);
-        $userTrainings->where('type', $type);
-        $userTrainings->select(
-            'period_month',
-            'period_year',
-            'name',
-            'reference_number',
-            'level',
-            'start_date',
-            'duration',
-            'organizer',
-            'certificate'
-        );
-        return $userTrainings = $userTrainings->get();
+        $trainings = DB::table('user_trainings as ut');
+        $trainings->join('trainings as t', 't.id', '=', 'ut.training_id');
+        $trainings->where('ut.user_id', $userId);
+        $trainings->where('t.type', $type);
+        $trainings->select('t.id', 't.period_month', 't.name', 't.level', 't.start_date', 't.duration', 't.organizer', 't.reference_number', 't.link', 'ut.certificate', 't.type', 't.created_at');
+        $trainings = $trainings->get();
+
+        foreach ($trainings as $training) {
+            $training->certificate = $this->getDocument($training->certificate);
+        }
+
+        return $trainings;
     }
 }

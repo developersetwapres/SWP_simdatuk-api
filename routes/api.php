@@ -11,6 +11,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SummaryController;
+use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -44,6 +45,13 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/', [EmployeeController::class, 'create']);
         Route::get('/{id}', [EmployeeController::class, 'show']);
         Route::post('/{id}', [EmployeeController::class, 'update']);
+    });
+
+    Route::prefix('trainings')->group(function () {
+        Route::get('/', [TrainingController::class, 'index']);
+        Route::post('/', [TrainingController::class, 'create']);
+        Route::get('/{id}', [TrainingController::class, 'show']);
+        Route::post('/{id}', [TrainingController::class, 'update']);
     });
 
     Route::prefix('positions')->group(function () {

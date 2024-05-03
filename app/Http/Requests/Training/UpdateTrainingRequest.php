@@ -4,7 +4,7 @@ namespace App\Http\Requests\Training;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateTrainingRequest extends FormRequest
+class UpdateTrainingRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -32,6 +32,7 @@ class CreateTrainingRequest extends FormRequest
             'organizer' => 'max:160',
             'link' => 'url',
             'type' => 'required|numeric|in:1,2,3',
+            'users.*.id' => 'nullable|numeric',
             'users.*.user_id' => 'required|numeric',
             'users.*.certificate' => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
         ];
@@ -63,6 +64,7 @@ class CreateTrainingRequest extends FormRequest
             'type.required' => 'Tipe pelatihan tidak boleh kosong.',
             'type.numeric' => 'Tipe pelatihan harus berupa angka.',
             'type.in' => 'Tipe pelatihan harus diantara 1, 2 atau 3.',
+            'users.*.id.numeric' => 'ID harus berupa angka.',
             'users.*.user_id.required' => 'User ID tidak boleh kosong.',
             'users.*.user_id.numeric' => 'User ID harus berupa angka.',
             'users.*.certificate.file' => 'Sertifikat harus berupa file.',
@@ -117,6 +119,10 @@ class CreateTrainingRequest extends FormRequest
             ],
             'type' => [
                 'description' => 'Refers to the Type of Employee Training. 1=Struktural, 2=Fungsional, 3=Teknis.',
+                'example' => 1,
+            ],
+            'users.*.id' => [
+                'description' => 'Refers to the ID of List Employee Training.',
                 'example' => 1,
             ],
             'users.*.user_id' => [

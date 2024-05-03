@@ -203,19 +203,6 @@ class EmployeeController extends Controller
                 DB::table('user_grades')->insertTs($grades);
             }
 
-            // Insert Trainings
-            if (isset($this->request->trainings)) {
-                $trainings = array();
-                foreach ($this->request->trainings as $training) {
-                    if (is_file($training['certificate'])) {
-                        $training['certificate'] = $this->uploadDocument($training['certificate'], 'certificate');
-                    }
-                    $training['user_id'] = $userId;
-                    array_push($trainings, $training);
-                }
-                DB::table('user_trainings')->insertTs($trainings);
-            }
-
             // Insert Recognitions
             if (isset($this->request->recognitions)) {
                 $recognitions = array();
