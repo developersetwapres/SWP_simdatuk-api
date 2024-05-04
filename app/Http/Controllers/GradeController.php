@@ -7,8 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 /**
  * @group Master Data
- *
- * APIs for grade
+ * @subgroupDescription These endpoints allow you to perform CRUD operations on grade data, enabling the retrieval, creation, updating and deleting of grade records as needed.
  */
 class GradeController extends Controller
 {
@@ -19,8 +18,9 @@ class GradeController extends Controller
     }
 
     /**
-     * Get List of Grade
-     * @group Master Data
+     * Get List of Grades
+     *
+     * Retrieve the grade of master data.
      * @subgroup Grade
      * @authenticated
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1

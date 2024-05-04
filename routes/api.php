@@ -1,14 +1,16 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CollegeController;
+use App\Http\Controllers\DecreeTypeController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmploymentTypeController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\InstitutionController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\PositionController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RecognitionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SummaryController;
 use App\Http\Controllers\TrainingController;
@@ -36,6 +38,8 @@ Route::post('code-verification', [AuthController::class, 'codeVerification']);
 Route::post('reset-password', [AuthController::class, 'resetPassword']);
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::delete('logout', [AuthController::class, 'logout']);
+
     Route::prefix('summaries')->group(function () {
         Route::get('/', [SummaryController::class, 'index']);
     });
@@ -54,8 +58,15 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/{id}', [TrainingController::class, 'update']);
     });
 
+    Route::prefix('recognitions')->group(function () {
+        Route::get('/', [RecognitionController::class, 'index']);
+        Route::post('/', [RecognitionController::class, 'create']);
+        Route::get('/{id}', [RecognitionController::class, 'show']);
+        Route::post('/{id}', [RecognitionController::class, 'update']);
+    });
+
     Route::prefix('positions')->group(function () {
-        Route::get('/', [GradeController::class, 'index']);
+        Route::get('/', [PositionController::class, 'index']);
     });
 
     Route::prefix('grades')->group(function () {
@@ -70,14 +81,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('/{id}', [InstitutionController::class, 'delete']);
     });
 
-    Route::prefix('colleges')->group(function () {
-        Route::get('/', [CollegeController::class, 'index']);
-        Route::post('/', [CollegeController::class, 'create']);
-        Route::get('/{id}', [CollegeController::class, 'show']);
-        Route::post('/{id}', [CollegeController::class, 'update']);
-        Route::delete('/{id}', [CollegeController::class, 'delete']);
-    });
-
     Route::prefix('employment-types')->group(function () {
         Route::get('/', [EmploymentTypeController::class, 'index']);
         Route::post('/', [EmploymentTypeController::class, 'create']);
@@ -86,10 +89,13 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('/{id}', [EmploymentTypeController::class, 'delete']);
     });
 
+    Route::prefix('decree-types')->group(function () {
+        Route::get('/', [DecreeTypeController::class, 'index']);
+    });
+
     Route::prefix('permissions')->group(function () {
         Route::get('/', [PermissionController::class, 'index']);
     });
-
     Route::prefix('roles')->group(function () {
         Route::get('/', [RoleController::class, 'index']);
         Route::post('/', [RoleController::class, 'create']);
@@ -111,10 +117,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/', [ProfileController::class, 'update']);
     });
 
-    Route::delete('logout', [AuthController::class, 'logout']);
-
     Route::prefix('export')->group(function () {
-        Route::get('/user', [ExportController::class, 'user']);
-        Route::get('/recap/employee', [ExportController::class, 'recapEmployee']);
+        Route::get('/recapitulations', [ExportController::class, 'recapitulations']);
+        Route::get('/employees', [ExportController::class, 'employees']);
+        Route::get('/employees/{id}', [ExportController::class, 'detailEmployee']);
     });
 });

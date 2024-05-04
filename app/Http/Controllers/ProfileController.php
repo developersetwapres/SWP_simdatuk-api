@@ -11,8 +11,6 @@ use Illuminate\Support\Str;
 
 /**
  * @group Profile
- *
- * APIs for user management
  */
 class ProfileController extends Controller
 {
@@ -24,7 +22,10 @@ class ProfileController extends Controller
 
     /**
      * Get Profile
+     *
+     * Get detail of data profile.
      * @group Profile
+     * Below are the endpoints for get currently user logged in profile data and update profile.
      * @authenticated
      * @response 200 {"code": 200,"message": "success","data": {"id": 1,"name": "administrator","employee_id_number": "0000000000000","employee_registration_number": "0000000000000","username": "admin","email": "admin@setwapres.go.id","role_name": "administrator"}}
      */
@@ -37,7 +38,7 @@ class ProfileController extends Controller
         $role->select('name');
         $role = $role->first();
 
-        $photoProfile = $this->getDocument($user->photo_profile);
+        $photoProfile = $this->getDocument($user->photo_profile, true);
 
         $data = [
             'id' => $user->id,
@@ -55,8 +56,9 @@ class ProfileController extends Controller
     /**
      * Update Profile
      *
-     * Note: still bugs on elements theme when content-type is multiple/form-data, issue at https://github.com/knuckleswtf/scribe/issues/831
-     *
+     * Update currently user logged in profile data. <br/><br/>
+     * <strong>Note:</strong> still bugs on elements theme when content-type is multiple/form-data <br/>
+     * issue at https://github.com/knuckleswtf/scribe/issues/831
      * @group Profile
      * @authenticated
      * @response 200 {"code": 200,"message": "Profil berhasil diupdate.","data": null}

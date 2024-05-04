@@ -9,8 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 /**
  * @group Master Data
- *
- * APIs for institution
+ * @subgroupDescription These endpoints allow you to perform CRUD operations on institution data, enabling the retrieval, creation, updating and deleting of institution records as needed.
  */
 class InstitutionController extends Controller
 {
@@ -22,7 +21,8 @@ class InstitutionController extends Controller
 
     /**
      * Get List of Institutions
-     * @group Master Data
+     *
+     * Retrieve the institution of master data.
      * @subgroup Institution
      * @authenticated
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
@@ -60,7 +60,8 @@ class InstitutionController extends Controller
 
     /**
      * Create a New Institution
-     * @group Master Data
+     *
+     * Add a new institution entry for an master data of institution.
      * @subgroup Institution
      * @authenticated
      * @response 200 {"code": 200,"message": "Institusi berhasil ditambah.","data": null}
@@ -73,7 +74,8 @@ class InstitutionController extends Controller
 
     /**
      * Get Detail Institution by ID
-     * @group Master Data
+     *
+     * Retrieve institution for a specific an master data of institution.
      * @subgroup Institution
      * @authenticated
      * @urlParam id Refers to the ID of Institution. Example: 1
@@ -96,7 +98,8 @@ class InstitutionController extends Controller
 
     /**
      * Update Institution by ID
-     * @group Master Data
+     *
+     * Update an existing institution entry.
      * @subgroup Institution
      * @authenticated
      * @urlParam id Refers to the ID of Institution. Example: 1
@@ -123,7 +126,8 @@ class InstitutionController extends Controller
 
     /**
      * Delete Institution by ID
-     * @group Master Data
+     *
+     * Delete a specific institution entry.
      * @subgroup Institution
      * @authenticated
      * @urlParam id Refers to the ID of Institution. Example: 1

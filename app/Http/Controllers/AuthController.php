@@ -16,8 +16,7 @@ use Illuminate\Support\Facades\Mail;
 
 /**
  * @group Authentication
- *
- * APIs for authentication
+ * Below is a list of endpoints crucial for authentication processes, including login, forgot password, token verification, reset password, and logout, facilitating secure and authenticated access for users.
  */
 class AuthController extends Controller
 {
@@ -29,6 +28,8 @@ class AuthController extends Controller
 
     /**
      * Login
+     *
+     * Below are the endpoints specifically tailored for the login process, utilizing Sanctum as the authentication method, ensuring secure access for users.
      * @response 200 {"code": 200,"message": "Pengguna berhasil login.","token": "12|Qt9HeTzHAmw5s2fLiRO09eovw1yF3EcSHFR4mU9Ga3cc24ab","user": {"id": 1,"email": "admin@setwapres.go.id","username": "admin","photo_profile": null,"employee_id_number": "0000000000000","employee_registration_number": "0000000000000","role": {"id": 1,"name": "administrator"},"permissions": [{"id": 8,"name": "Data Pegawai - ASN","create": 1,"read": 1,"update": 1,"delete": 0}]}}
      * @response 422 {"code": 422,"message": "Username tidak boleh kosong.","data": {"username": ["Username email tidak boleh kosong."], "password": ["Kata sandi tidak boleh kosong."]}}
      * @response 401 {"code": 401,"message": "Kata sandi yang anda masukkan salah.","data": null}
@@ -52,7 +53,7 @@ class AuthController extends Controller
         $user = DB::table('users');
         $user->select('users.id', 'users.email', 'users.username', 'users.photo_profile', 'users.employee_id_number', 'users.employee_registration_number');
         $user = $user->first();
-        $user->photo_profile = $this->getDocument($user->photo_profile);
+        $user->photo_profile = $this->getDocument($user->photo_profile, true);
 
         $role = DB::table('roles');
         $role->join('users', 'roles.id', 'users.role_id');
@@ -81,6 +82,8 @@ class AuthController extends Controller
 
     /**
      * Forgot Password
+     *
+     * Below are the endpoints dedicated to the 'forgot password' functionality, facilitating the secure retrieval and resetting of passwords for users who have forgotten them.
      * @response 200 {"code": 200,"message": "Email sudah dikirim.","data": null}
      * @response 422 {"code": 422,"message": "Email tidak boleh kosong.","data": null}
      * @response 404 {"code": 404,"message": "Email tidak terdaftar sebagai pengguna.","data": null}
@@ -113,6 +116,8 @@ class AuthController extends Controller
 
     /**
      * Code Verification
+     *
+     * Below are the endpoints designated for token verification during both registration and password recovery processes, ensuring secure validation of user actions.
      * @response 200 {"code": 200,"message": "Verifikasi kode berhasil.", "data": null}
      * @response 404 {"code": 404,"message": "Verifikasi kode tidak tersedia.","data": null}
      * @response 404 {"code": 404,"message": "Verifikasi kode sudah kadaluarsa.","data": null}
@@ -124,6 +129,8 @@ class AuthController extends Controller
 
     /**
      * Reset Password
+     *
+     * Below are the endpoints designed for resetting passwords or setting new passwords after token verification, providing a secure mechanism for users to regain access to their accounts.
      * @response 200 {"code": 200,"message": "Reset password berhasil disimpan","data": null}
      * @response 200 {"code": 200,"message": "Password baru berhasil disimpan.","data": null}
      */
@@ -169,6 +176,8 @@ class AuthController extends Controller
 
     /**
      * Logout
+     *
+     * Below is the endpoint designated for logging out, allowing users to securely terminate their session and prevent unauthorized access to their account.
      * @authenticated
      * @response 200{"code": 200,"message": "Pengguna berhasil logout.","data": null}
      * @response 401 {"code": 401,"message": "Anda harus login terlebih dahulu!","data": null}

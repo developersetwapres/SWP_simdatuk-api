@@ -8,9 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 /**
- * @group ACL - Access Control List
- *
- * APIs for permissions
+ * @group Access Control List
+ * @subgroupDescription These endpoints allow you to perform CRUD operations on role data, enabling the retrieval, creation, updating and deleting of role records as needed.
  */
 class RoleController extends Controller
 {
@@ -23,9 +22,9 @@ class RoleController extends Controller
 
     /**
      * Get List of Roles
-     * @group ACL - Access Control List
+     *
+     * Retrieve the role of Access Control List.
      * @subgroup Role
-     * @subgroupDescription A description for the subgroup
      * @authenticated
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
      * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
@@ -59,7 +58,8 @@ class RoleController extends Controller
 
     /**
      * Create a New Role
-     * @group ACL - Access Control List
+     *
+     * Add a new role entry for Access Control List of role.
      * @subgroup Role
      * @authenticated
      * @response 200 {"code": 200,"message": "Role berhasil ditambah.","data": null}
@@ -75,7 +75,7 @@ class RoleController extends Controller
             ]);
 
             $data = [];
-            foreach ($this->request->permissions as $item) {
+            foreach ($this->request->roles as $item) {
                 $array = [
                     'role_id' => $role,
                     'permission_id' => $item['id'],
@@ -100,7 +100,8 @@ class RoleController extends Controller
 
     /**
      * Get Detail Role by ID
-     * @group ACL - Access Control List
+     *
+     * Retrieve role for a specific Access Control List of role.
      * @subgroup Role
      * @authenticated
      * @urlParam id Refers to the ID of Role. Example: 1
@@ -130,7 +131,8 @@ class RoleController extends Controller
 
     /**
      * Update Role by ID
-     * @group ACL - Access Control List
+     *
+     * Update an existing role entry.
      * @subgroup Role
      * @authenticated
      * @urlParam id Refers to the ID of Role. Example: 1
@@ -185,7 +187,8 @@ class RoleController extends Controller
 
     /**
      * Delete Role by ID
-     * @group ACL - Access Control List
+     *
+     * Delete a specific role entry.
      * @subgroup Role
      * @authenticated
      * @urlParam id Refers to the ID of Role. Example: 1

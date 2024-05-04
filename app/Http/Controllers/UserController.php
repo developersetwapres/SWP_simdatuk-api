@@ -12,9 +12,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 /**
- * @group ACL - Access Control List
- *
- * APIs for user management
+ * @group Access Control List
+ * @subgroupDescription These endpoints allow you to perform CRUD operations on user data, enabling the retrieval, creation, updating and deleting of user records as needed.
  */
 class UserController extends Controller
 {
@@ -27,9 +26,9 @@ class UserController extends Controller
 
     /**
      * Get List of Users
-     * @group ACL - Access Control List
+     *
+     * Retrieve the user of Access Control List.
      * @subgroup User
-     * @subgroupDescription A description for the subgroup
      * @authenticated
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
      * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
@@ -67,7 +66,8 @@ class UserController extends Controller
 
     /**
      * Create a New User
-     * @group ACL - Access Control List
+     *
+     * Add a new user entry for Access Control List of user.
      * @subgroup User
      * @authenticated
      * @response 422 {"code": 422, "message": "Role tidak ditemukan.", "data": null}
@@ -118,7 +118,8 @@ class UserController extends Controller
 
     /**
      * Get Detail User by ID
-     * @group ACL - Access Control List
+     *
+     * Retrieve user for a specific Access Control List of user.
      * @subgroup User
      * @authenticated
      * @urlParam id Refers to the ID of User. Example: 1
@@ -149,7 +150,8 @@ class UserController extends Controller
 
     /**
      * Update User by ID
-     * @group ACL - Access Control List
+     *
+     * Update an existing user entry.
      * @subgroup User
      * @authenticated
      * @urlParam id Refers to the ID of User. Example: 1
@@ -209,7 +211,8 @@ class UserController extends Controller
 
     /**
      * Update Status User by ID
-     * @group ACL - Access Control List
+     *
+     * Update a specific user status.
      * @subgroup User
      * @authenticated
      * @response 200 {"code": 200,"message": "Pengguna berhasil diaktifkan.","data": null}

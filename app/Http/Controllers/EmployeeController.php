@@ -23,8 +23,6 @@ use Illuminate\Support\Str;
 
 /**
  * @group Employee
- *
- * APIs for employee
  */
 class EmployeeController extends Controller
 {
@@ -90,7 +88,10 @@ class EmployeeController extends Controller
 
     /**
      * Get List of Employee
+     *
+     * Retrieve all ASN/NON-ASN/OUTSOURCE employees.
      * @group Employee
+     * Below are the CRUD API endpoints for managing employees categorized as ASN (Civil Servants), NON ASN (Non-Civil Servants), and OUTSOURCE (Outsourced Personnel):
      * @authenticated
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
      * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
@@ -128,6 +129,8 @@ class EmployeeController extends Controller
 
     /**
      * Create a New Employee
+     *
+     * Create a new ASN/NON-ASN/OUTSOURCE employee.
      * @group Employee
      * @authenticated
      * @response 200 {"code": 200,"message": "Pegawai berhasil ditambah.","data": null}
@@ -299,6 +302,8 @@ class EmployeeController extends Controller
 
     /**
      * Get Detail Employee by ID
+     *
+     * Retrieve details of a specific ASN/NON-ASN/OUTSOURCE employee.
      * @group Employee
      * @authenticated
      * @urlParam id Refers to the ID of Employee. Example: 1
@@ -349,6 +354,8 @@ class EmployeeController extends Controller
 
     /**
      * Update Employee by ID
+     *
+     * Update details of a specific ASN/NON-ASN/OUTSOURCE employee.
      * @group Employee
      * @authenticated
      * @urlParam id Refers to the ID of Employee. Example: 1

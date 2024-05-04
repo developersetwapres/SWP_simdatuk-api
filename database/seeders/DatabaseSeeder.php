@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(GradeSeeder::class);
         $this->call(InstitutionSeeder::class);
         $this->call(EmploymentTypeSeeder::class);
+        $this->call(DecreeTypeSeeder::class);
         $this->call(UserSeeder::class);
     }
 }

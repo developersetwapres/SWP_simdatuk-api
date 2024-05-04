@@ -9,8 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 /**
  * @group Master Data
- *
- * APIs for employment types
+ * @subgroupDescription These endpoints allow you to perform CRUD operations on employment type data, enabling the retrieval, creation, updating and deleting of employment type records as needed.
  */
 class EmploymentTypeController extends Controller
 {
@@ -22,7 +21,8 @@ class EmploymentTypeController extends Controller
 
     /**
      * Get List of Employment Types
-     * @group Master Data
+     *
+     * Retrieve the employment type of master data.
      * @subgroup Employment Type
      * @authenticated
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
@@ -72,7 +72,8 @@ class EmploymentTypeController extends Controller
 
     /**
      * Create a New Employment Type
-     * @group Master Data
+     *
+     * Add a new employment type entry for an master data of employment type.
      * @subgroup Employment Type
      * @authenticated
      * @response 200 {"code": 200,"message": "Jenis pegawai berhasil ditambah.","data": null}
@@ -85,7 +86,8 @@ class EmploymentTypeController extends Controller
 
     /**
      * Get Detail Employment Type by ID
-     * @group Master Data
+     *
+     * Retrieve employment type for a specific an master data of employment type.
      * @subgroup Employment Type
      * @authenticated
      * @urlParam id Refers to the ID of Employment Type. Example: 1
@@ -108,7 +110,8 @@ class EmploymentTypeController extends Controller
 
     /**
      * Update Employment Type by ID
-     * @group Master Data
+     *
+     * Update an existing employment type entry.
      * @subgroup Employment Type
      * @authenticated
      * @urlParam id Refers to the ID of Employment Type. Example: 1
@@ -135,7 +138,8 @@ class EmploymentTypeController extends Controller
 
     /**
      * Delete Employment Type by ID
-     * @group Master Data
+     *
+     * Delete a specific employment type entry.
      * @subgroup Employment Type
      * @authenticated
      * @urlParam id Refers to the ID of Employment Type. Example: 1

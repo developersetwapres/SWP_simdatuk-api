@@ -2,19 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Training\CreateTrainingRequest;
-use App\Http\Requests\Training\UpdateTrainingRequest;
-use App\Repositories\TrainingRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\DB;
 
 /**
  * @group History
- * These endpoints would allow you to track and manage the history of various activities related to employee recognition, training, and other pertinent events.
- * @subgroupDescription These endpoints allow you to perform CRUD operations on training data, enabling the retrieval, creation, and updating of training records as needed.
+ * @subgroupDescription These endpoints allow you to perform CRUD operations on recognition data, enabling the retrieval, creation, and updating of recognition records as needed.
  */
-class TrainingController extends Controller
+class RecognitionController extends Controller
 {
     protected $trainingRepository;
 
@@ -28,10 +22,10 @@ class TrainingController extends Controller
     }
 
     /**
-     * Get List of Trainings
+     * Get List of Recognitions
      *
-     * Retrieve the history of employee training sessions.
-     * @subgroup Training
+     * Retrieve the history of employee recognitions.
+     * @subgroup Recognition
      * @authenticated
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
      * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
@@ -71,10 +65,10 @@ class TrainingController extends Controller
     }
 
     /**
-     * Create a New Training
+     * Create a New Recognition
      *
-     * Add a new training session entry for an employee.
-     * @subgroup Training
+     * Add a new recognition entry for an employee.
+     * @subgroup Recognition
      * @authenticated
      * @response 200 {"code": 200,"message": "Pelatihan berhasil ditambah.","data": null}
      */
@@ -106,10 +100,10 @@ class TrainingController extends Controller
     }
 
     /**
-     * Get Detail Training by ID
+     * Get Detail Recognition by ID
      *
-     * Retrieve training history for a specific employee.
-     * @subgroup Training
+     * Retrieve recognition history for a specific employee.
+     * @subgroup Recognition
      * @authenticated
      * @urlParam id Refers to the ID of Training. Example: 1
      * @response 404
@@ -141,10 +135,10 @@ class TrainingController extends Controller
     }
 
     /**
-     * Update Training by ID
+     * Update Recognition by ID
      *
-     * Update an existing training session entry.
-     * @subgroup Training
+     * Update an existing recognition entry.
+     * @subgroup Recognition
      * @authenticated
      * @urlParam id Refers to the ID of Training. Example: 1
      * @response 404 {"code": 404,"message": "Pelatihan tidak ditemukan.","data": null}
