@@ -6,6 +6,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmploymentTypeController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\GradeController;
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\InstitutionController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PositionController;
@@ -91,6 +92,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('decree-types')->group(function () {
         Route::get('/', [DecreeTypeController::class, 'index']);
+    });
+
+    Route::prefix('groups')->group(function () {
+        Route::get('/', [GroupController::class, 'index']);
     });
 
     Route::prefix('permissions')->group(function () {
