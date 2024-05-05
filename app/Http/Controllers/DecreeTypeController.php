@@ -25,10 +25,9 @@ class DecreeTypeController extends Controller
      * @authenticated
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
      * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
-     * @queryParam status boolean Refers to the status display of Employment Type. Defaults is null. Example: null
-     * @queryParam type integer Refers to the type of Employment Type. 1=ASN, 2=NON-ASN or 3=OUTSOURCE Defaults is null. Example: null
-     * @queryParam keyword string The keyword search field for the name of employment type. Example: ORGANIK
-     * @response 200 {"code": 200,"message": "success","data": [{"id": 1,"name": "TNI/POLRI","status": 1,"type": 1}],"pagination": {"total": 20,"count": 1,"per_page": 1,"current_page": 1,"total_pages": 20,"links": {"first_page": "http://localhost/api/employment-types?page=1","last_page": "http://localhost/api/employment-types?page=20","next_page": "http://localhost/api/employment-types?page=2","prev_page": null}}}
+     * @queryParam keyword string The keyword search field for the name of decree type. Example: ORGANIK
+     * @response 200 {"code": 200,"message": "success","data": [{"id": 1,"name": "Keputusan Presiden","acronym": "Keppres","created_at": "2024-05-05 10:44:27"}],"pagination": {"total": 14,"count": 10,"per_page": 10,"current_page": 1,"total_pages": 2,"links": {"first_page": "http://localhost/api/decree-types?page=1","last_page": "http://localhost/api/decree-types?page=2","next_page": "http://localhost/api/decree-types?page=2","prev_page": null}}}
+
      */
     public function index()
     {
