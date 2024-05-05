@@ -37,34 +37,24 @@ class DecreeTypeController extends Controller
             'page.min' => 'Page minimal harus 1 atau lebih.',
             'limit.numeric' => 'Limit harus berupa angka.',
             'limit.min' => 'Limit minimal harus 1 atau lebih.',
-            'status.boolean' => 'Status harus berupa boolean. ',
-            'type.in' => 'Type harus diantara 1, 2 atau 3. ',
         ];
 
         $validatedData = $this->request->validate([
             'page' => 'nullable|numeric|min:1',
             'limit' => 'nullable|numeric|min:1',
-            'status' => 'nullable|boolean',
-            'type' => 'nullable|in:1,2,3',
         ], $messages);
 
         $this->request->limit = ($this->request->limit) ? $this->request->limit : 10;
 
-        $employmentTypes = DB::table('employment_types');
-        $employmentTypes->select('id', 'name', 'status', 'type');
-        $employmentTypes->where('name', 'like', '%' . $this->request->keyword . '%');
-        if ($this->request->status) {
-            $employmentTypes->where('status', $this->request->status);
-        }
-        if ($this->request->type) {
-            $employmentTypes->where('type', $this->request->type);
-        }
-        $employmentTypes = $employmentTypes->paginate($this->request->limit);
+        $decreeTypes = DB::table('decree_types');
+        $decreeTypes->select('id', 'name', 'acronym', 'created_at');
+        $decreeTypes->where('name', 'like', '%' . $this->request->keyword . '%');
+        $decreeTypes = $decreeTypes->paginate($this->request->limit);
 
-        if ($employmentTypes->isEmpty()) {
-            return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $employmentTypes);
+        if ($decreeTypes->isEmpty()) {
+            return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $decreeTypes);
         }
 
-        return $this->paginateResponse(200, 'success', $employmentTypes);
+        return $this->paginateResponse(200, 'success', $decreeTypes);
     }
 }
