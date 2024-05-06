@@ -113,13 +113,13 @@ class RecognitionController extends Controller
         $recognition = $recognition->first();
 
         if (!$recognition) {
-            return $this->response(404, 'Pelatihan tidak ditemukan.');
+            return $this->response(404, 'Penghargaan tidak ditemukan.');
         }
 
         $users = DB::table('user_recognitions as ur');
         $users->join('users as u', 'u.id', '=', 'ur.user_id');
         $users->where('ur.recognition_id', $recognition->id);
-        $users->select('u.id', 'u.name');
+        $users->select('ur.id', 'ur.user_id', 'u.name', 'ur.created_at');
         $users = $users->get();
 
         $recognition->users = $users;
