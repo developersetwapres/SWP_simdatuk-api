@@ -4,7 +4,7 @@ namespace App\Http\Requests\Recognition;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateRecognitionRequest extends FormRequest
+class UpdateRecognitionRequest extends FormRequest
 {
 
     /**

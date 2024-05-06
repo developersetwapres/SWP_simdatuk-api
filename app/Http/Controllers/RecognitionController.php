@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Recognition\CreateRecognitionRequest;
+use App\Http\Requests\Recognition\UpdateRecognitionRequest;
+use App\Repositories\RecognitionRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 /**
  * @group History
@@ -10,15 +14,15 @@ use Illuminate\Http\Request;
  */
 class RecognitionController extends Controller
 {
-    protected $trainingRepository;
+    protected $recognitionRepository;
 
     public function __construct(
         Request $request,
-        TrainingRepository $trainingRepository,
+        RecognitionRepository $recognitionRepository,
     ) {
         $this->request = $request;
         $this->posted = $request->except('_token', '_method');
-        $this->trainingRepository = $trainingRepository;
+        $this->recognitionRepository = $recognitionRepository;
     }
 
     /**
@@ -29,9 +33,8 @@ class RecognitionController extends Controller
      * @authenticated
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
      * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
-     * @queryParam type integer Refers to the types of items to be displayed per page. Example: 1
-     * @queryParam name string The keyword search field for the name. Example: Diklat PIM Tk.III
-     * @response 200 {"code": 200,"message": "success","data": [{"id": 1,"created_at": "2024-05-03 05:29:30","name": "Sepadya tahun 1994","period_month": 3,"period_year": "2020","start_date": "2020-10-22","total": 2}],"pagination": {"total": 4,"count": 4,"per_page": 10,"current_page": 1,"total_pages": 1,"links": {"first_page": "http://localhost/api/trainings?page=1","last_page": "http://localhost/api/trainings?page=1","next_page": null,"prev_page": null}}}
+     * @queryParam name string The keyword search field for the name. Example: Satya Lencana
+     * @response 200 {"code": 200,"message": "success","data": [{"id": 1,"created_at": "2024-05-05 11:14:44","name": "Diklat Komputer Microsoft Excell","period_month": 3,"period_year": "2020","awarding_institution": "Setwapres","total": 1}],"pagination": {"total": 2,"count": 2,"per_page": 10,"current_page": 1,"total_pages": 1,"links": {"first_page": "http://localhost/api/recognitions?page=1","last_page": "http://localhost/api/recognitions?page=1","next_page": null,"prev_page": null}}}
      */
     public function index()
     {
@@ -40,28 +43,24 @@ class RecognitionController extends Controller
             'page.min' => 'Page minimal harus 1 atau lebih.',
             'limit.numeric' => 'Limit harus berupa angka.',
             'limit.min' => 'Limit minimal harus 1 atau lebih.',
-            'type.required' => 'Tipe tidak boleh kosong.',
-            'type.in' => 'Tipe harus diantara 1, 2 atau 3.',
         ];
 
         $validatedData = $this->request->validate([
             'page' => 'nullable|numeric|min:1',
             'limit' => 'nullable|numeric|min:1',
-            'type' => 'required|in:1,2,3',
         ], $messages);
         $this->request->limit = ($this->request->limit) ? $this->request->limit : 10;
 
-        $trainings = DB::table('trainings as t');
-        $trainings->leftjoin('user_trainings as ut', 't.id', '=', 'ut.training_id');
-        $trainings->select('t.id', 't.created_at', 't.name', 't.period_month', 't.period_year', 't.start_date', DB::raw("COUNT(ut.id) AS total"));
-        $trainings->where('t.name', 'like', '%' . $this->request->name . '%');
-        $trainings->where('t.type', $this->request->type);
-        $trainings->groupby('t.id');
-        $trainings = $trainings->paginate($this->request->limit);
-        if ($trainings->isEmpty()) {
-            return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $trainings);
+        $recognitions = DB::table('recognitions as r');
+        $recognitions->leftjoin('user_recognitions as ur', 'r.id', '=', 'ur.recognition_id');
+        $recognitions->select('r.id', 'r.created_at', 'r.name', 'r.period_month', 'r.period_year', 'r.awarding_institution', DB::raw("COUNT(ur.id) AS total"));
+        $recognitions->where('r.name', 'like', '%' . $this->request->name . '%');
+        $recognitions->groupby('r.id');
+        $recognitions = $recognitions->paginate($this->request->limit);
+        if ($recognitions->isEmpty()) {
+            return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $recognitions);
         }
-        return $this->paginateResponse(200, 'success', $trainings);
+        return $this->paginateResponse(200, 'success', $recognitions);
     }
 
     /**
@@ -70,28 +69,25 @@ class RecognitionController extends Controller
      * Add a new recognition entry for an employee.
      * @subgroup Recognition
      * @authenticated
-     * @response 200 {"code": 200,"message": "Pelatihan berhasil ditambah.","data": null}
+     * @response 200 {"code": 200,"message": "Penghargaan berhasil ditambah.","data": null}
      */
-    public function create(CreateTrainingRequest $request)
+    public function create(CreateRecognitionRequest $request)
     {
         try {
             DB::beginTransaction();
-            $trainingId = DB::table('trainings')->insertGetIdTs($this->request->except('users'));
+            $recognitionId = DB::table('recognitions')->insertGetIdTs($this->request->except('users'));
 
             // Insert Users
             if (isset($this->request->users)) {
                 $users = array();
                 foreach ($this->request->users as $user) {
-                    if (is_file($user['certificate'])) {
-                        $user['certificate'] = $this->uploadDocument($user['certificate'], 'certificate');
-                    }
-                    $user['training_id'] = $trainingId;
+                    $user['recognition_id'] = $recognitionId;
                     array_push($users, $user);
                 }
-                DB::table('user_trainings')->insertTs($users);
+                DB::table('user_recognitions')->insertTs($users);
             }
             DB::commit();
-            return $this->response(200, 'Pelatihan berhasil ditambah.');
+            return $this->response(200, 'Penghargaan berhasil ditambah.');
         } catch (\Throwable $th) {
             \Log::warning($th);
             DB::rollback();
@@ -105,33 +101,30 @@ class RecognitionController extends Controller
      * Retrieve recognition history for a specific employee.
      * @subgroup Recognition
      * @authenticated
-     * @urlParam id Refers to the ID of Training. Example: 1
-     * @response 404
-     * @response 200
+     * @urlParam id Refers to the ID of Recognition. Example: 1
+     * @response 404 {"code": 404,"message": "Penghargaan tidak ditemukan.","data": null}
+     * @response 200 {"code": 200,"message": "success","data": {"id": 2,"period_month": 3,"period_year": "2020","name": "Diklat Komputer Microsoft Excell","description": "Excel","type_of_decree": 1,"decree_date": "2020-10-22","decree_number": "Keppres Nomor 031/TK/tahun 2008, 17-Aug-08","decree_year": "2020","awarding_institution": "Setwapres","date_of_receipt": "2020-10-22","created_at": "2024-05-05 11:16:15","users": [{"id": 2,"name": "Umi Yance Puspita"},{"id": 3,"name": "Digdaya Ardianto"}]}}
      */
     public function show()
     {
-        $training = DB::table('trainings');
-        $training->where('id', $this->request->id);
-        $training->select('id', 'period_month', 'period_year', 'name', 'reference_number', 'level', 'start_date', 'duration', 'organizer', 'link');
-        $training = $training->first();
+        $recognition = DB::table('recognitions');
+        $recognition->where('id', $this->request->id);
+        $recognition->select('id', 'period_month', 'period_year', 'name', 'description', 'type_of_decree', 'decree_date', 'decree_number', 'decree_year', 'awarding_institution', 'date_of_receipt', 'created_at');
+        $recognition = $recognition->first();
 
-        if (!$training) {
+        if (!$recognition) {
             return $this->response(404, 'Pelatihan tidak ditemukan.');
         }
 
-        $users = DB::table('user_trainings');
-        $users->where('training_id', $training->id);
-        $users->select('id', 'certificate', 'created_at');
+        $users = DB::table('user_recognitions as ur');
+        $users->join('users as u', 'u.id', '=', 'ur.user_id');
+        $users->where('ur.recognition_id', $recognition->id);
+        $users->select('u.id', 'u.name');
         $users = $users->get();
 
-        foreach ($users as $user) {
-            $user->certificate = $this->getDocument($user->certificate);
-        }
+        $recognition->users = $users;
 
-        $training->users = $users;
-
-        return $this->response(200, 'success', $training);
+        return $this->response(200, 'success', $recognition);
     }
 
     /**
@@ -141,63 +134,38 @@ class RecognitionController extends Controller
      * @subgroup Recognition
      * @authenticated
      * @urlParam id Refers to the ID of Training. Example: 1
-     * @response 404 {"code": 404,"message": "Pelatihan tidak ditemukan.","data": null}
-     * @response 200 {"code": 200,"message": "Pelatihan berhasil diupdate.","data": null}
+     * @response 404 {"code": 404,"message": "Penghargaan tidak ditemukan.","data": null}
+     * @response 200 {"code": 200,"message": "Penghargaan berhasil diupdate.","data": null}
      */
-    public function update(UpdateTrainingRequest $request)
+    public function update(UpdateRecognitionRequest $request)
     {
-        $training = DB::table('trainings');
-        $training->where('id', $this->request->id);
-        $training->select('id');
-        $training = $training->first();
+        $recognition = DB::table('recognitions');
+        $recognition->where('id', $this->request->id);
+        $recognition->select('id');
+        $recognition = $recognition->first();
 
-        if (!$training) {
-            return $this->response(404, 'Pelatihan tidak ditemukan.');
+        if (!$recognition) {
+            return $this->response(404, 'Penghargaan tidak ditemukan.');
         }
 
-        $training = DB::table('trainings');
-        $training->where('id', $this->request->id);
-        $training = $training->updateTs($this->request->except('users'));
+        $recognition = DB::table('recognitions');
+        $recognition->where('id', $this->request->id);
+        $recognition = $recognition->updateTs($this->request->except('users'));
 
         $users = array();
 
         if (isset($this->request->users)) {
 
-            // Get existing user training
-            $userTrainings = DB::table('user_trainings');
-            $userTrainings->where('training_id', $this->request->id);
-            $userTrainings->select('id');
-            $userTrainings = $userTrainings->get();
-
             // Delete user training
-            $array1 = Arr::pluck($userTrainings, 'id');
-            $array2 = Arr::pluck($this->request->users, 'id');
-            $result = array_diff($array1, $array2);
-            DB::table('user_trainings')->whereIn('id', $result)->delete();
+            DB::table('user_recognitions')->where('recognition_id', $this->request->id);
 
             foreach ($this->request->users as $user) {
-                if (!is_null($user['id'])) {
-
-                    // Update existing user training
-                    if (is_file($user['certificate'])) {
-                        $user['certificate'] = $this->uploadDocument($user['certificate'], 'certificate');
-                    }
-                    DB::table('user_trainings')->where('id', $user['id'])->updateTs($user);
-                } else {
-
-                    // Insert new item user training
-                    if (is_file($user['certificate'])) {
-                        $user['certificate'] = $this->uploadDocument($user['certificate'], 'certificate');
-                    }
-                    $user['training_id'] = $this->request->id;
-
-                    // Collect user to bulk insert
-                    array_push($users, $user);
-                }
+                $user['recognition_id'] = $this->request->id;
+                // Collect user to bulk insert
+                array_push($users, $user);
             }
-
-            DB::table('user_trainings')->insertTs($users);
+            DB::table('user_recognitions')->insertTs($users);
         }
-        return $this->response(200, 'Pelatihan berhasil diupdate.');
+        return $this->response(200, 'Penghargaan berhasil diupdate.');
     }
 }

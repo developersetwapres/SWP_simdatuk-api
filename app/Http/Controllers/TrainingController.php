@@ -128,9 +128,10 @@ class TrainingController extends Controller
             return $this->response(404, 'Pelatihan tidak ditemukan.');
         }
 
-        $users = DB::table('user_trainings');
-        $users->where('training_id', $training->id);
-        $users->select('id', 'certificate', 'created_at');
+        $users = DB::table('user_trainings as ut');
+        $users->join('users as u', 'u.id', '=', 'ut.user_id');
+        $users->where('ut.training_id', $training->id);
+        $users->select('ut.id', 'ut.user_id', 'u.name', 'ut.certificate', 'ut.created_at');
         $users = $users->get();
 
         foreach ($users as $user) {
