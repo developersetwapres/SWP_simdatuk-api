@@ -88,8 +88,10 @@ class TrainingController extends Controller
             if (isset($this->request->users)) {
                 $users = array();
                 foreach ($this->request->users as $user) {
-                    if (is_file($user['certificate'])) {
+                    if (isset($user['certificate']) && is_file($user['certificate'])) {
                         $user['certificate'] = $this->uploadDocument($user['certificate'], 'certificate');
+                    } else {
+                        $user['certificate'] = null;
                     }
                     $user['training_id'] = $trainingId;
                     array_push($users, $user);
@@ -185,15 +187,19 @@ class TrainingController extends Controller
                 if (!is_null($user['id'])) {
 
                     // Update existing user training
-                    if (is_file($user['certificate'])) {
+                    if (isset($user['certificate']) && is_file($user['certificate'])) {
                         $user['certificate'] = $this->uploadDocument($user['certificate'], 'certificate');
+                    } else {
+                        $user['certificate'] = null;
                     }
                     DB::table('user_trainings')->where('id', $user['id'])->updateTs($user);
                 } else {
 
                     // Insert new item user training
-                    if (is_file($user['certificate'])) {
+                    if (isset($user['certificate']) && is_file($user['certificate'])) {
                         $user['certificate'] = $this->uploadDocument($user['certificate'], 'certificate');
+                    } else {
+                        $user['certificate'] = null;
                     }
                     $user['training_id'] = $this->request->id;
 
@@ -201,7 +207,6 @@ class TrainingController extends Controller
                     array_push($users, $user);
                 }
             }
-
             DB::table('user_trainings')->insertTs($users);
         }
         return $this->response(200, 'Pelatihan berhasil diupdate.');

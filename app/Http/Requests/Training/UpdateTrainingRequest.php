@@ -19,7 +19,7 @@ class UpdateTrainingRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public static function rules(): array
+    public function rules(): array
     {
         return [
             'period_month' => 'required|numeric|digits_between:1,12',
@@ -127,7 +127,7 @@ class UpdateTrainingRequest extends FormRequest
             ],
             'users.*.user_id' => [
                 'description' => 'Refers to the User ID of List Employee Training.',
-                'example' => public_path('/img/logo.svg'),
+                'example' => 1,
             ],
             'users.*.certificate' => [
                 'description' => 'Refers to the Certificate of List Employee Training.',
