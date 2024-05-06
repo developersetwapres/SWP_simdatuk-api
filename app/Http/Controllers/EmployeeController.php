@@ -206,16 +206,6 @@ class EmployeeController extends Controller
                 DB::table('user_grades')->insertTs($grades);
             }
 
-            // Insert Recognitions
-            if (isset($this->request->recognitions)) {
-                $recognitions = array();
-                foreach ($this->request->recognitions as $recognition) {
-                    $recognition['user_id'] = $userId;
-                    array_push($recognitions, $recognition);
-                }
-                DB::table('user_recognitions')->insertTs($recognitions);
-            }
-
             // Insert Targets
             if (isset($this->request->targets)) {
                 $targets = array();

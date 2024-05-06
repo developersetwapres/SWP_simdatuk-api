@@ -11,7 +11,6 @@ use App\Http\Requests\Leave\CreateLeaveRequest;
 use App\Http\Requests\Note\CreateNoteRequest;
 use App\Http\Requests\Performance\CreatePerformanceRequest;
 use App\Http\Requests\Position\CreatePositionRequest;
-use App\Http\Requests\Recognition\CreateRecognitionRequest;
 use App\Http\Requests\Target\CreateTargetRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -73,7 +72,6 @@ class CreateEmployeeRequest extends FormRequest
             CreateEducationRequest::rules(),
             CreatePositionRequest::rules(),
             CreateGradeRequest::rules(),
-            CreateRecognitionRequest::rules(),
             CreateTargetRequest::rules(),
             CreatePerformanceRequest::rules(),
             CreateDisciplineRequest::rules(),
@@ -173,7 +171,6 @@ class CreateEmployeeRequest extends FormRequest
             CreateEducationRequest::messages(),
             CreatePositionRequest::messages(),
             CreateGradeRequest::messages(),
-            CreateRecognitionRequest::messages(),
             CreateTargetRequest::messages(),
             CreatePerformanceRequest::messages(),
             CreateDisciplineRequest::messages(),
@@ -335,7 +332,6 @@ class CreateEmployeeRequest extends FormRequest
             CreateEducationRequest::bodyParameters(),
             CreatePositionRequest::bodyParameters(),
             CreateGradeRequest::bodyParameters(),
-            CreateRecognitionRequest::bodyParameters(),
             CreateTargetRequest::bodyParameters(),
             CreatePerformanceRequest::bodyParameters(),
             CreateDisciplineRequest::bodyParameters(),
