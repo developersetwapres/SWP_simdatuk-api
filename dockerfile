@@ -1,18 +1,18 @@
 # Use an official PHP 8.3 FPM with Alpine Linux as a parent image
-FROM php:8.3-fpm-alpine
+FROM php:8.3-fpm
 
 # Set the working directory to /var/www/html
 WORKDIR /app
 
-# Install system dependencies
-RUN apk --update --no-cache add \
+RUN apt-get update && apt-get install -y \
   bash \
   libzip-dev \
   unzip \
   git \
   curl \
   nginx \
-  supervisor
+  supervisor \
+  && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
 RUN curl -sSL https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions -o - | sh -s \
@@ -51,7 +51,6 @@ RUN composer install --no-scripts --no-autoloader
 RUN composer clear-cache && composer dump-autoload --no-scripts --optimize
 
 # Generate api documentation
-RUN php artisan scribe:generate
 RUN chown -R www-data:www-data /app/storage/app/scribe
 RUN chmod -R 777 /app/storage/app/scribe
 
@@ -59,12 +58,13 @@ RUN chmod -R 777 /app/storage/app/scribe
 RUN php artisan storage:link
 
 # Nginx configuration
-COPY docker/nginx.conf /etc/nginx/http.d/default.conf
+COPY docker/nginx.conf /etc/nginx/nginx.conf
+COPY docker/local.conf /etc/nginx/conf.d
 
 # Supervisor configuration
 COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# # Start Supervisord
+# Start Supervisord
 CMD ["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
 
 # Expose port 80 for Nginx
