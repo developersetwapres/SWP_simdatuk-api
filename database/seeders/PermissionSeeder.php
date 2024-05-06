@@ -119,6 +119,14 @@ class PermissionSeeder extends Seeder
                 'name' => 'Export',
                 'permitted_actions' => 'r',
             ],
+            [
+                'name' => 'Catatan',
+                'permitted_actions' => 'crud',
+            ],
+            [
+                'name' => 'Hasil Talent Pool',
+                'permitted_actions' => 'crud',
+            ],
         ];
         DB::table('permissions')->insertTs($permission);
     }
