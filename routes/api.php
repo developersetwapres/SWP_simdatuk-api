@@ -16,7 +16,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SummaryController;
 use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\SKPController;
+use App\Http\Controllers\TargetController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -129,10 +129,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/employees/{id}', [ExportController::class, 'detailEmployee']);
     });
 
-    Route::prefix('skp')->group(function(){
-        Route::get('/', [SKPController::class, 'index']);
-        Route::get('/{id}', [SKPController::class, 'show']);
-        Route::post('/{id}', [SKPController::class, 'update']);
-        Route::post('/', [SKPController::class, 'create']);
+    Route::prefix('target')->group(function(){
+        Route::get('/', [TargetController::class, 'index']);
+        Route::get('/{id}', [TargetController::class, 'show']);
+        Route::post('/{id}', [TargetController::class, 'update']);
+        Route::post('/', [TargetController::class, 'create']);
     });
 });

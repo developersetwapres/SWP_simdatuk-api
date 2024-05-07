@@ -14,17 +14,15 @@ return new class extends Migration
         Schema::create('user_targets', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
-            $table->tinyInteger('period_month');
-            $table->year('period_year');
-            $table->tinyInteger('appraisal_period');
-            $table->year('year')->nullable();
-            $table->tinyInteger('work_behavior_rating');
-            $table->tinyInteger('employee_performance_predicate');
-            $table->tinyInteger('organizational_performance_achievement');
+            $table->unsignedBigInteger('target_id');
+            $table->tinyInteger('work_behavior_rating')->default(1)->comment('1 = Dibawah ekspektasi, 2 = Sesuai ekspektasi, 3 = Diatas ekspektasi');
+            $table->tinyInteger('employee_performance_predicate')->default(1)->comment('1 = Baik, 2 = Sangat Baik');
+            $table->tinyInteger('organizational_performance_achievement')->default(1)->comment('1 = Baik, 2 = Sangat Baik');
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('target_id')->references('id')->on('targets')->onDelete('cascade');
         });
     }
 

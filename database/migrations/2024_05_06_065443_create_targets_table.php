@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('skps', function (Blueprint $table) {
+        Schema::create('targets', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 160);
             $table->tinyInteger('period_month');
             $table->year('period_year');
-            $table->enum('period_review', ['Q1', 'Q2', 'Q3', 'Q4']);
+            $table->enum('appraisal_period', ['Q1', 'Q2', 'Q3', 'Q4']);
             $table->year('year');
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();;
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('skps');
+        Schema::dropIfExists('targets');
     }
 };
