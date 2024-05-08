@@ -157,7 +157,7 @@ class RecognitionController extends Controller
         if (isset($this->request->users)) {
 
             // Delete user training
-            DB::table('user_recognitions')->where('recognition_id', $this->request->id);
+            DB::table('user_recognitions')->where('recognition_id', $this->request->id)->delete();
 
             foreach ($this->request->users as $user) {
                 $user['recognition_id'] = $this->request->id;
