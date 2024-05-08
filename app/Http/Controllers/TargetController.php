@@ -36,8 +36,8 @@ class TargetController extends Controller
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
      * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
      * @queryParam type integer Refers to the types of items to be displayed per page. Example: 1
-     * @queryParam name string The keyword search field for the name. Example: Diklat PIM Tk.III
-     * @response 200 {"code": 200,"message": "success","data": [{"id": 1,"created_at": "2024-05-03 05:29:30","name": "Sepadya tahun 1994","period_month": 3,"period_year": "2020","start_date": "2020-10-22", "review_period": "Q1" ,"total": 2}],"pagination": {"total": 4,"count": 4,"per_page": 10,"current_page": 1,"total_pages": 1,"links": {"first_page": "http://localhost/api/target?page=1","last_page": "http://localhost/api/target?page=1","next_page": null,"prev_page": null}}}
+     * @queryParam name string The keyword search field for the name. Example: SKP Desember 2023
+     * @response 200 {"code": 200,"message": "success","data": [{"id": 1,"created_at": "2024-05-03 05:29:30","name": "SKP Desember 2023","period_month": 3,"period_year": "2020","start_date": "2020-10-22", "appraisal_period": "Q1" ,"total": 2}],"pagination": {"total": 4,"count": 4,"per_page": 10,"current_page": 1,"total_pages": 1,"links": {"first_page": "http://localhost/api/target?page=1","last_page": "http://localhost/api/target?page=1","next_page": null,"prev_page": null}}}
      */
     public function index()
     {
@@ -54,11 +54,11 @@ class TargetController extends Controller
         ], $messages);
         $this->request->limit = ($this->request->limit) ? $this->request->limit : 10;
 
-        $targets = DB::table('targets as s');
-        $targets->leftjoin('user_targets as us', 's.id', '=', 'us.target_id');
-        $targets->select('s.id', 's.created_at', 's.name', 's.period_month', 's.period_year', 's.appraisal_period', DB::raw("COUNT(us.id) AS total"));
-        $targets->where('s.name', 'like', '%' . $this->request->name . '%');;
-        $targets->groupby('s.id');
+        $targets = DB::table('targets as t');
+        $targets->leftjoin('user_targets as ut', 't.id', '=', 'ut.target_id');
+        $targets->select('t.id', 't.created_at', 't.name', 't.period_month', 't.period_year', 't.appraisal_period', DB::raw("COUNT(ut.id) AS total"));
+        $targets->where('t.name', 'like', '%' . $this->request->name . '%');;
+        $targets->groupby('t.id');
         $targets = $targets->paginate($this->request->limit);
         if ($targets->isEmpty()) {
             return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $targets);
@@ -79,8 +79,7 @@ class TargetController extends Controller
     {
         try{
             DB::beginTransaction();
-            $targetId = DB::table('targets')->insertGetIdTs($this->request->except('users', 'user_id', 'work_behavior_rating','organizational_performance_achievement', 'employee_performance_predicate'));
-            echo $targetId;
+            $targetId = DB::table('targets')->insertGetIdTs($this->request->except('users'));
             //insert Users
             if (isset($this->request->users)){
                 $users  = array();
@@ -108,7 +107,7 @@ class TargetController extends Controller
      * @authenticated
      * @urlParam id Refers to the ID of Target. Example: 1
      * @response 404
-     * @response 200
+     * @response 200 {"code":200,"message":"success","data":{"id":24,"period_month":1,"period_year":"2024","name":"\"test 2\"","appraisal_period":"Q1","year":"2024","users":[{"id":47,"created_at":"2024-05-07 07:03:38","employee_performance_predicate":1,"organizational_performance_achievement":1,"work_behavior_rating":1}]}}
      */
     public function show()
     {
@@ -154,23 +153,14 @@ class TargetController extends Controller
 
         $target = DB::table('targets');
         $target->where('id', $this->request->id);
-        $target = $target->updateTs($this->request->except('users', 'user_id', 'work_behavior_rating','organizational_performance_achievement', 'employee_performance_predicate'));
+        $target = $target->updateTs($this->request->except('users'));
 
         $users = array();
 
         if (isset($this->request->users)) {
 
-            // Get existing user target
-            $userTargets = DB::table('user_targets');
-            $userTargets->where('target_id', $this->request->id);
-            $userTargets->select('id');
-            $userTargets = $userTargets->get();
+            DB::table('user_targets')->where('target_id', $this->request->id)->delete();
 
-            // Delete user target
-            $array1 = Arr::pluck($userTargets, 'id');
-            $array2 = Arr::pluck($this->request->users, 'id');
-            $result = array_diff($array1, $array2);
-            DB::table('user_targets')->whereIn('id', $result)->delete();
             foreach ($this->request->users as $user) {
                 $user['target_id'] = $this->request->id;
                 // Collect user to bulk insert

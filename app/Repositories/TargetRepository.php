@@ -8,10 +8,10 @@ class TargetRepository
 {
     public function getDetail($userId)
     {
-        $target = DB::table('user_targets as ut');
-        $target->join('targets as t', 't.id', '=', 'ut.target_id');
-        $target->where('ut.user_id', $userId);
-        $target->select('t.id',
+        $userTargets = DB::table('user_targets as ut');
+        $userTargets->join('targets as t', 't.id', '=', 'ut.target_id');
+        $userTargets->where('ut.user_id', $userId);
+        $userTargets->select(
             't.period_month',
             't.period_year',
             't.appraisal_period',
@@ -21,7 +21,6 @@ class TargetRepository
             'ut.organizational_performance_achievement',
             't.name',
             't.created_at');
-        $target = $target->get();
-        return $userTargets = $target->get();
+        return $userTargets = $userTargets->get();
     }
 }
