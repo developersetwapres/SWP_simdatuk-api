@@ -16,6 +16,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SummaryController;
 use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TargetController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -126,5 +127,12 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/recapitulations', [ExportController::class, 'recapitulations']);
         Route::get('/employees', [ExportController::class, 'employees']);
         Route::get('/employees/{id}', [ExportController::class, 'detailEmployee']);
+    });
+
+    Route::prefix('target')->group(function(){
+        Route::get('/', [TargetController::class, 'index']);
+        Route::get('/{id}', [TargetController::class, 'show']);
+        Route::post('/{id}', [TargetController::class, 'update']);
+        Route::post('/', [TargetController::class, 'create']);
     });
 });
