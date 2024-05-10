@@ -6,12 +6,10 @@ use App\Http\Requests\Target\CreateTargetRequest;
 use App\Http\Requests\Target\UpdateTargetRequest;
 use App\Repositories\TargetRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 /**
  * @group History
- * These endpoints would allow you to track and manage the history of various activities related to employee recognition, training, and other pertinent events.
  * @subgroupDescription These endpoints allow you to perform CRUD operations on Target data, enabling the retrieval, creation, and updating of Target records as needed.
  */
 class TargetController extends Controller
@@ -27,7 +25,7 @@ class TargetController extends Controller
         $this->TargetRepository = $TargetRepository;
     }
 
-     /**
+    /**
      * Get List of Target
      *
      * Retrieve the history of employee Targets.
@@ -57,7 +55,7 @@ class TargetController extends Controller
         $targets = DB::table('targets as t');
         $targets->leftjoin('user_targets as ut', 't.id', '=', 'ut.target_id');
         $targets->select('t.id', 't.created_at', 't.name', 't.period_month', 't.period_year', 't.appraisal_period', DB::raw("COUNT(ut.id) AS total"));
-        $targets->where('t.name', 'like', '%' . $this->request->name . '%');;
+        $targets->where('t.name', 'like', '%' . $this->request->name . '%');
         $targets->groupby('t.id');
         $targets = $targets->paginate($this->request->limit);
         if ($targets->isEmpty()) {
@@ -66,24 +64,23 @@ class TargetController extends Controller
         return $this->paginateResponse(200, 'success', $targets);
     }
 
-
     /**
      * Create a New Target
      *
      * Add a new Target entry for employees.
      * @subgroup Target
      * @authenticated
-     * @response 200 {"code": 200,"message": "Target berhasil ditambah.","data": null}
+     * @response 200 {"code": 200,"message": "SKP berhasil ditambah.","data": null}
      */
     public function create(CreateTargetRequest $request)
     {
-        try{
+        try {
             DB::beginTransaction();
             $targetId = DB::table('targets')->insertGetIdTs($this->request->except('users'));
             //insert Users
-            if (isset($this->request->users)){
-                $users  = array();
-                foreach ($this->request->users as $user){
+            if (isset($this->request->users)) {
+                $users = array();
+                foreach ($this->request->users as $user) {
                     $user['target_id'] = $targetId;
                     array_push($users, $user);
                 }
@@ -91,8 +88,8 @@ class TargetController extends Controller
             }
 
             DB::commit();
-            return $this->response(200, 'Target berhasil ditambah.');
-        }catch (\Throwable $th) {
+            return $this->response(200, 'SKP berhasil ditambah.');
+        } catch (\Throwable $th) {
             \Log::warning($th);
             DB::rollback();
             return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
@@ -106,7 +103,7 @@ class TargetController extends Controller
      * @subgroup Target
      * @authenticated
      * @urlParam id Refers to the ID of Target. Example: 1
-     * @response 404
+     * @response 404 {"code": 404,"message": "SKP tidak ditemukan.","data": null}
      * @response 200 {"code":200,"message":"success","data":{"id":24,"period_month":1,"period_year":"2024","name":"\"test 2\"","appraisal_period":"Q1","year":"2024","users":[{"id":47,"created_at":"2024-05-07 07:03:38","employee_performance_predicate":1,"organizational_performance_achievement":1,"work_behavior_rating":1}]}}
      */
     public function show()
@@ -117,7 +114,7 @@ class TargetController extends Controller
         $target = $target->first();
 
         if (!$target) {
-            return $this->response(404, 'Pelatihan tidak ditemukan.');
+            return $this->response(404, 'SKP tidak ditemukan.');
         }
 
         $users = DB::table('user_targets');
@@ -137,8 +134,8 @@ class TargetController extends Controller
      * @subgroup Target
      * @authenticated
      * @urlParam id Refers to the ID of Target. Example: 1
-     * @response 404 {"code": 404,"message": "Target tidak ditemukan.","data": null}
-     * @response 200 {"code": 200,"message": "Target berhasil diupdate.","data": null}
+     * @response 404 {"code": 404,"message": "SKP tidak ditemukan.","data": null}
+     * @response 200 {"code": 200,"message": "SKP berhasil diupdate.","data": null}
      */
     public function update(UpdateTargetRequest $request)
     {
@@ -148,7 +145,7 @@ class TargetController extends Controller
         $target = $target->first();
 
         if (!$target) {
-            return $this->response(404, 'Pelatihan tidak ditemukan.');
+            return $this->response(404, 'SKP tidak ditemukan.');
         }
 
         $target = DB::table('targets');
@@ -169,6 +166,6 @@ class TargetController extends Controller
 
             DB::table('user_targets')->insertTs($users);
         }
-        return $this->response(200, 'Target berhasil diupdate.');
+        return $this->response(200, 'SKP berhasil diupdate.');
     }
 }

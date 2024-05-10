@@ -7,13 +7,11 @@ use App\Http\Requests\Performance\CreatePerformanceRequest;
 use App\Http\Requests\Performance\UpdatePerformanceRequest;
 use App\Repositories\PerformanceRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 /**
  * @group History
- * These endpoints would allow you to track and manage the history of various activities related to employee recognition, training, and other pertinent events.
- * @subgroupDescription These endpoints allow you to perform CRUD operations on Target data, enabling the retrieval, creation, and updating of Target records as needed.
+ * @subgroupDescription These endpoints allow you to perform CRUD operations on Performance data, enabling the retrieval, creation, and updating of Performance records as needed.
  */
 class PerformanceController extends Controller
 {
@@ -58,7 +56,7 @@ class PerformanceController extends Controller
         $performances = DB::table('performances as p');
         $performances->leftjoin('user_performances as up', 'p.id', '=', 'up.performance_id');
         $performances->select('p.id', 'p.created_at', 'p.name', 'p.period_month', 'p.period_year', 'p.performance_period', DB::raw("COUNT(up.id) AS total"));
-        $performances->where('p.name', 'like', '%' . $this->request->name . '%');;
+        $performances->where('p.name', 'like', '%' . $this->request->name . '%');
         $performances->groupby('p.id');
         $performances = $performances->paginate($this->request->limit);
         if ($performances->isEmpty()) {
@@ -73,7 +71,7 @@ class PerformanceController extends Controller
      * Add a new Performance entry for employees.
      * @subgroup Performance
      * @authenticated
-     * @response 200 {"code": 200,"message": "Performance berhasil ditambah.","data": null}
+     * @response 200 {"code": 200,"message": "PPK berhasil ditambah.","data": null}
      */
     public function create(CreatePerformanceRequest $request)
     {
@@ -91,8 +89,8 @@ class PerformanceController extends Controller
             }
 
             DB::commit();
-            return $this->response(200, 'Performance berhasil ditambahkan.');
-        }catch (\Throwable $th) {
+            return $this->response(200, 'PPK berhasil ditambahkan.');
+        } catch (\Throwable $th) {
             \Log::warning($th);
             DB::rollBack();
             return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
@@ -106,7 +104,7 @@ class PerformanceController extends Controller
      * @subgroup Performance
      * @authenticated
      * @urlParam id Refers to the ID of Performance. Example: 1
-     * @response 404
+     * @response 404 {"code": 404,"message": "PPK tidak ditemukan.","data": null}
      * @response 200 {"code":200,"message":"success","data":{"id":2,"name":"PPK November 2025","performance_period":"PPK November 2025","period_year":"2025","period_month":10,"description":"Penilaian Bulanan","users":[{"id":2,"created_at":"2024-05-10 04:42:35","user_id":1,"work_performance_score":80}]}}
      */
     public function show()
@@ -117,7 +115,7 @@ class PerformanceController extends Controller
         $performance = $performance->first();
 
         if (!$performance) {
-            return $this->response(404, 'Performance tidak ditemukan.');
+            return $this->response(404, 'PPK tidak ditemukan.');
         }
 
         $users = DB::table('user_performances');
@@ -137,8 +135,8 @@ class PerformanceController extends Controller
      * @subgroup Performance
      * @authenticated
      * @urlParam id Refers to the ID of Performance. Example: 1
-     * @response 404 {"code": 404,"message": "Performance tidak ditemukan.","data": null}
-     * @response 200 {"code": 200,"message": "Performance berhasil diupdate.","data": null}
+     * @response 404 {"code": 404,"message": "PPK tidak ditemukan.","data": null}
+     * @response 200 {"code": 200,"message": "PPK berhasil diupdate.","data": null}
      */
     public function update(UpdatePerformanceRequest $request)
     {
@@ -148,7 +146,7 @@ class PerformanceController extends Controller
         $performance = $performance->first();
 
         if (!$performance) {
-            return $this->response(404, 'Performance tidak ditemukan.');
+            return $this->response(404, 'PPK tidak ditemukan.');
         }
 
         $performance = DB::table('performances');
@@ -169,7 +167,7 @@ class PerformanceController extends Controller
 
             DB::table('user_performances')->insertTs($users);
         }
-        return $this->response(200, 'Performance berhasil diupdate.');
+        return $this->response(200, 'PPK berhasil diupdate.');
 
     }
 }

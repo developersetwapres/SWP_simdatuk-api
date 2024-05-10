@@ -15,9 +15,7 @@ use App\Http\Controllers\RecognitionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SummaryController;
 use App\Http\Controllers\TrainingController;
-use App\Http\Controllers\PerformanceController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\TargetController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -66,6 +64,20 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/', [RecognitionController::class, 'create']);
         Route::get('/{id}', [RecognitionController::class, 'show']);
         Route::post('/{id}', [RecognitionController::class, 'update']);
+    });
+
+    Route::prefix('target')->group(function () {
+        Route::get('/', [TargetController::class, 'index']);
+        Route::get('/{id}', [TargetController::class, 'show']);
+        Route::post('/{id}', [TargetController::class, 'update']);
+        Route::post('/', [TargetController::class, 'create']);
+    });
+
+    Route::prefix('performances')->group(function () {
+        Route::get('/', [PerformanceController::class, 'index']);
+        Route::get('/{id}', [PerformanceController::class, 'show']);
+        Route::post('/', [PerformanceController::class, 'create']);
+        Route::post('/{id}', [PerformanceController::class, 'update']);
     });
 
     Route::prefix('positions')->group(function () {
@@ -128,19 +140,5 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/recapitulations', [ExportController::class, 'recapitulations']);
         Route::get('/employees', [ExportController::class, 'employees']);
         Route::get('/employees/{id}', [ExportController::class, 'detailEmployee']);
-    });
-
-    Route::prefix('performances')->group(function () {
-       Route::get('/', [PerformanceController::class, 'index']);
-       Route::get('/{id}', [PerformanceController::class, 'show']);
-       Route::post('/', [PerformanceController::class, 'create']);
-       Route::post('/{id}', [PerformanceController::class, 'update']);
-    });
-
-    Route::prefix('target')->group(function(){
-        Route::get('/', [TargetController::class, 'index']);
-        Route::get('/{id}', [TargetController::class, 'show']);
-        Route::post('/{id}', [TargetController::class, 'update']);
-        Route::post('/', [TargetController::class, 'create']);
     });
 });
