@@ -2,15 +2,24 @@
 
 namespace App\Http\Requests\Target;
 
-class CreateTargetRequest
+use Illuminate\Foundation\Http\FormRequest;
+
+class UpdateTargetRequest extends FormRequest
 {
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
 
     /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public static function rules(): array
+    public function rules(): array
     {
         return [
             'targets.*.period_month' => 'required|numeric|digits_between:1,12',
@@ -28,7 +37,7 @@ class CreateTargetRequest
      *
      * @return array
      */
-    public static function messages(): array
+    public function messages(): array
     {
         return [
             'targets.*.period_month.required' => 'Bulan periode riwayat tidak boleh kosong.',
@@ -37,7 +46,7 @@ class CreateTargetRequest
             'targets.*.period_year.required' => 'Tahun periode riwayat tidak boleh kosong.',
             'targets.*.period_year.date_format' => 'Tahun periode riwayat harus dengan format YYYY.',
             'targets.*.appraisal_period.required' => 'Periode penilaian tidak boleh kosong.',
-            'targets.*.year.date_format' => 'Tahun target harus dengan format YYYY.',
+            'targets.*.year.date_format' => 'Tahun Target harus dengan format YYYY.',
             'users.*.user_id' => 'required|numeric',
             'users.*.work_behavior_rating.required' => 'Rating perilaku kerja tidak boleh kosong.',
             'users.*.work_behavior_rating.numeric' => 'Rating perilaku kerja harus berupa angka.',
@@ -45,47 +54,6 @@ class CreateTargetRequest
             'users.*.employee_performance_predicate.numeric' => 'Predikat kinerja pegawai harus berupa angka.',
             'users.*.organizational_performance_achievement.required' => 'Capaian kinerja organisasi tidak boleh kosong.',
             'users.*.organizational_performance_achievement.numeric' => 'Capaian kinerja organisasi harus berupa angka.',
-        ];
-    }
-
-    /**
-     * Description for scribe
-     *
-     * @return array
-     */
-    public static function bodyParameters(): array
-    {
-        return [
-            'targets.*.period_month' => [
-                'description' => 'Refers to the Period Month of Employee Target.',
-                'example' => 3,
-            ],
-            'targets.*.period_year' => [
-                'description' => 'Refers to the Period Year of Employee Target.',
-                'example' => '2020',
-            ],
-            'targets.*.appraisal_period' => [
-                'description' => 'Refers to the Appraisal Period of Employee Target.',
-                'example' => 1,
-            ],
-            'targets.*.year' => [
-                'description' => 'Refers to the Year of Employee Target.',
-                'example' => '2020',
-            ],
-            'users.*.user_id.required' => 'User ID tidak boleh kosong.',
-            'users.*.user_id.numeric' => 'User ID harus berupa angka.',
-            'users.*.work_behavior_rating' => [
-                'description' => 'Refers to the Work Behavior Rating of Employee Target.',
-                'example' => 5,
-            ],
-            'users.*.employee_performance_predicate' => [
-                'description' => 'Refers to the Employee Performance Predicate of Employee Target.',
-                'example' => 5,
-            ],
-            'users.*.organizational_performance_achievement' => [
-                'description' => 'Refers to the Orginizational Performance Achievement of Employee Target.',
-                'example' => 5,
-            ],
         ];
     }
 }

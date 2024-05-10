@@ -65,6 +65,28 @@ The following is the recommendation infrastructure used in constructing in produ
 | Operating System | Ubuntu 12.04   | Ubuntu 12.04   |
 | Docker           | Latest version | Latest version |
 
+## How to Deploy to Production
+
+```bash
+cd /var/www/api
+git pull origin main
+```
+
+Update .env file
+
+```bash
+docker build . -t simdatuk-api —no-cache
+docker rm simdatuk-api --force
+docker run -d -p 8080:80 --name simdatuk-api -v /var/www/app/api:/storage --network simdatuk_network --restart always simdatuk-api
+```
+
+Run migration
+
+```bash
+docker exec -it /bin/bash simsdatuk-api
+php artisan migrate
+```
+
 ## Code Style
 
 To adhere to good coding standards, follow the references below:

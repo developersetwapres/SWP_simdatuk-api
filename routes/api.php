@@ -17,6 +17,7 @@ use App\Http\Controllers\SummaryController;
 use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\PerformanceController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TargetController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -134,5 +135,12 @@ Route::middleware('auth:sanctum')->group(function () {
        Route::get('/{id}', [PerformanceController::class, 'show']);
        Route::post('/', [PerformanceController::class, 'create']);
        Route::post('/{id}', [PerformanceController::class, 'update']);
+    });
+
+    Route::prefix('target')->group(function(){
+        Route::get('/', [TargetController::class, 'index']);
+        Route::get('/{id}', [TargetController::class, 'show']);
+        Route::post('/{id}', [TargetController::class, 'update']);
+        Route::post('/', [TargetController::class, 'create']);
     });
 });
