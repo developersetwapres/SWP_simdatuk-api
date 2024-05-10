@@ -206,26 +206,6 @@ class EmployeeController extends Controller
                 DB::table('user_grades')->insertTs($grades);
             }
 
-            // Insert Targets
-            if (isset($this->request->targets)) {
-                $targets = array();
-                foreach ($this->request->targets as $target) {
-                    $target['user_id'] = $userId;
-                    array_push($targets, $target);
-                }
-                DB::table('user_targets')->insertTs($targets);
-            }
-
-            // Insert Performances
-            if (isset($this->request->performances)) {
-                $performances = array();
-                foreach ($this->request->performances as $performance) {
-                    $performance['user_id'] = $userId;
-                    array_push($performances, $performance);
-                }
-                DB::table('user_performances')->insertTs($performances);
-            }
-
             // Insert Disciplinaries
             if (isset($this->request->disciplinaries)) {
                 $disciplinaries = array();
