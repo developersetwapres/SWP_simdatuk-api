@@ -76,8 +76,8 @@ Update .env file
 
 ```bash
 docker build . -t simdatuk-api —no-cache
-docker rm simdatuk-api --force
-docker run -d -p 8080:80 --name simdatuk-api -v /var/www/app/api:/storage --network simdatuk_network --restart always simdatuk-api
+docker rm simdatuk-api --force && docker run -d -p 8080:80 --name simdatuk-api --network simdatuk_network --restart always simdatuk-api
+docker image prune -f
 ```
 
 Run migration
