@@ -6,7 +6,6 @@ use App\Http\Requests\Profile\UpdateProfileRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 /**
@@ -75,11 +74,9 @@ class ProfileController extends Controller
 
             // Check if file submitted
             if ($this->request->hasFile('photo_profile')) {
-                $fileExtension = '.' . $this->request->file('photo_profile')->getClientOriginalExtension();
-                $fileName = Str::random(32) . $fileExtension;
-                Storage::disk('public')->putFileAs('photo_profile/', $this->request->file('photo_profile'), $fileName);
+                $path = $this->uploadDocument($this->request->file('photo_profile'), 'photo_profile');
                 DB::table('users')->where('id', $this->request->user()->id)->updateTs([
-                    'photo_profile' => 'photo_profile/' . $fileName,
+                    'photo_profile' => $path,
                 ]);
             }
 
