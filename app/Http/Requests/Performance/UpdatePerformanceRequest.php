@@ -2,15 +2,24 @@
 
 namespace App\Http\Requests\Performance;
 
-class CreatePerformanceRequest
+use Illuminate\Foundation\Http\FormRequest;
+
+class UpdatePerformanceRequest extends FormRequest
 {
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
 
     /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public static function rules(): array
+    public function rules(): array
     {
         return [
             'period_month' => 'required|numeric|digits_between:1,12',
@@ -28,7 +37,7 @@ class CreatePerformanceRequest
      *
      * @return array
      */
-    public static function messages(): array
+    public function messages(): array
     {
         return [
             'period_month.required' => 'Bulan periode riwayat tidak boleh kosong.',
@@ -47,14 +56,13 @@ class CreatePerformanceRequest
         ];
     }
 
-    /**
-     * Description for scribe
-     *
-     * @return array
-     */
     public static function bodyParameters(): array
     {
         return [
+            'name' => [
+                'description' => 'Refers to the name Performance report.',
+                'example' => 'PPK November 2026',
+            ],
             'period_month' => [
                 'description' => 'Refers to the Period Month of Employee Performance.',
                 'example' => 3,
@@ -67,13 +75,13 @@ class CreatePerformanceRequest
                 'description' => 'Refers to the PPK Period of Employee Performance.',
                 'example' => '20',
             ],
-            'users.*.work_performance_score' => [
-                'description' => 'Refers to the Work Performance Score of Employee Performance.',
-                'example' => 5,
-            ],
             'users.*.user_id' => [
                 'description' => 'Refers to the ID of employee',
                 'example' => 1,
+            ],
+            'users.*.work_performance_score' => [
+                'description' => 'Refers to the Work Performance Score of Employee Performance.',
+                'example' => 5,
             ],
             'description' => [
                 'description' => 'Refers to the Description of Employee Performance.',
