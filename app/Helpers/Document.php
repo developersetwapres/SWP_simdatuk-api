@@ -19,7 +19,7 @@ trait Document
         $directory = '/' . $directory . '/';
         $fileExtension = '.' . $file->getClientOriginalExtension();
         $fileName = Str::random(32) . $fileExtension;
-        Storage::disk('public')->putFileAs($directory, $file, $fileName);
+        Storage::disk('s3')->putFileAs($directory, $file, $fileName);
         return $directory . $fileName;
     }
 
@@ -32,9 +32,9 @@ trait Document
     public function getDocument($path, $status = false)
     {
         if ($status) {
-            return (is_null($path)) ? asset('img/avatar.jpeg') : Storage::disk('public')->url($path);
+            return (is_null($path)) ? asset('img/avatar.jpeg') : Storage::disk('s3')->url($path);
         } else {
-            return (is_null($path)) ? null : Storage::disk('public')->url($path);
+            return (is_null($path)) ? null : Storage::disk('s3')->url($path);
         }
     }
 }
