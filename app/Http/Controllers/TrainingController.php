@@ -131,7 +131,7 @@ class TrainingController extends Controller
         $users = DB::table('user_trainings as ut');
         $users->join('users as u', 'u.id', '=', 'ut.user_id');
         $users->where('ut.training_id', $training->id);
-        $users->select('ut.id', 'ut.user_id', 'u.name', 'ut.certificate', 'ut.created_at');
+        $users->select('ut.id', 'ut.user_id', 'u.name', 'u.employee_id_number', 'ut.certificate', 'ut.created_at');
         $users = $users->get();
 
         foreach ($users as $user) {

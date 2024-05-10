@@ -118,9 +118,10 @@ class PerformanceController extends Controller
             return $this->response(404, 'PPK tidak ditemukan.');
         }
 
-        $users = DB::table('user_performances');
+        $users = DB::table('user_performances as up');
+        $users->join('users as u', 'u.id', '=', 'up.user_id');
         $users->where('performance_id', $performance->id);
-        $users->select('id', 'created_at', 'user_id', 'work_performance_score');
+        $users->select('up.id', 'up.created_at', 'up.user_id', 'up.work_performance_score', 'u.name', 'u.employee_id_number');
         $users = $users->get();
 
         $performance->users = $users;

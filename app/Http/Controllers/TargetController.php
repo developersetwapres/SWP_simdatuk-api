@@ -117,9 +117,10 @@ class TargetController extends Controller
             return $this->response(404, 'SKP tidak ditemukan.');
         }
 
-        $users = DB::table('user_targets');
+        $users = DB::table('user_targets as ut');
+        $users->join('users as u', 'u.id', '=', 'ut.user_id');
         $users->where('target_id', $target->id);
-        $users->select('id', 'created_at', 'employee_performance_predicate', 'organizational_performance_achievement', 'work_behavior_rating');
+        $users->select('ut.id', 'ut.created_at', 'ut.employee_performance_predicate', 'ut.organizational_performance_achievement', 'ut.work_behavior_rating', 'u.name', 'u.employee_id_number');
         $users = $users->get();
 
         $target->users = $users;

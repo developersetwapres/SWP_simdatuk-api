@@ -119,7 +119,7 @@ class RecognitionController extends Controller
         $users = DB::table('user_recognitions as ur');
         $users->join('users as u', 'u.id', '=', 'ur.user_id');
         $users->where('ur.recognition_id', $recognition->id);
-        $users->select('ur.id', 'ur.user_id', 'u.name', 'ur.created_at');
+        $users->select('ur.id', 'ur.user_id', 'u.name', 'ur.created_at', 'u.employee_id_number');
         $users = $users->get();
 
         $recognition->users = $users;

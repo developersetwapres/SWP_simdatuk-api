@@ -15,6 +15,8 @@ use App\Http\Controllers\RecognitionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SummaryController;
 use App\Http\Controllers\TrainingController;
+use App\Http\Controllers\PerformanceController;
+use App\Http\Controllers\TargetController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
