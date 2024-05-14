@@ -15,9 +15,9 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('target_id');
-            $table->tinyInteger('work_behavior_rating')->default(1)->comment('1 = Dibawah ekspektasi, 2 = Sesuai ekspektasi, 3 = Diatas ekspektasi');
-            $table->tinyInteger('employee_performance_predicate')->default(1)->comment('1 = Baik, 2 = Sangat Baik');
-            $table->tinyInteger('organizational_performance_achievement')->default(1)->comment('1 = Baik, 2 = Sangat Baik');
+            $table->float('work_behavior_rating', 3, 2)->comment('1 = Dibawah ekspektasi, 2 = Sesuai ekspektasi, 3 = Diatas ekspektasi');
+            $table->float('employee_performance_predicate', 3, 2)->comment('1 = Baik, 2 = Sangat Baik');
+            $table->float('organizational_performance_achievement', 3, 2)->comment('1 = Baik, 2 = Sangat Baik');
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
 

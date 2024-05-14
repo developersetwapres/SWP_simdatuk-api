@@ -336,13 +336,13 @@
             @foreach($userTrainingStructural as $value)
             <tr style="border-bottom: 1px solid #F0F0F0;">
                 <td class="table-section-3-body">{{ $indexTrainingStructural++ }}</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
+                <td class="table-section-3-body">{{ $value['name'] }}</td>
+                <td class="table-section-3-body">{{ $value['certificate'] }}</td>
+                <td class="table-section-3-body">{{ $value['level'] }}</td>
+                <td class="table-section-3-body">{{ $value['start_date'] }}</td>
+                <td class="table-section-3-body">{{ $value['duration'] }}</td>
+                <td class="table-section-3-body">{{ $value['organizer'] }}</td>
+                <td class="table-section-3-body"><a href="{{ $value['link'] }}">Lihat File</a></td>
             </tr>
             @endforeach
         </tbody>
@@ -367,13 +367,13 @@
             @foreach($userTrainingFunctional as $value)
             <tr style="border-bottom: 1px solid #F0F0F0;">
                 <td class="table-section-3-body">{{ $indexTrainingFunctional++ }}</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
+                <td class="table-section-3-body">{{ $value['name'] }}</td>
+                <td class="table-section-3-body">{{ $value['certificate'] }}</td>
+                <td class="table-section-3-body">{{ $value['level'] }}</td>
+                <td class="table-section-3-body">{{ $value['start_date'] }}</td>
+                <td class="table-section-3-body">{{ $value['duration'] }}</td>
+                <td class="table-section-3-body">{{ $value['organizer'] }}</td>
+                <td class="table-section-3-body"><a href="{{ $value['link'] }}">Lihat File</a></td>
             </tr>
             @endforeach
         </tbody>
@@ -396,11 +396,11 @@
             @foreach($userTrainingTechnical as $value)
             <tr style="border-bottom: 1px solid #F0F0F0;">
                 <td class="table-section-3-body">{{ $indexTrainingTechnical++ }}</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
+                <td class="table-section-3-body">{{ $value['name'] }}</td>
+                <td class="table-section-3-body">{{ $value['certificate'] }}</td>
+                <td class="table-section-3-body">{{ $value['start_date'] }}</td>
+                <td class="table-section-3-body">{{ $value['duration'] }}</td>
+                <td class="table-section-3-body"><a href="{{ $value['link'] }}">Lihat File</a></td>
             </tr>
             @endforeach
         </tbody>
@@ -426,14 +426,14 @@
             @foreach($userAward as $value)
             <tr style="border-bottom: 1px solid #F0F0F0;">
                 <td class="table-section-3-body">{{ $indexAward++ }}</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
+                <td class="table-section-3-body">{{ $value['decree_name'] }}</td>
+                <td class="table-section-3-body">{{ $value['desc'] }}</td>
+                <td class="table-section-3-body">{{ $value['decree_type'] }}</td>
+                <td class="table-section-3-body">{{ $value['decree_date'] }}</td>
+                <td class="table-section-3-body">{{ $value['decree_number'] }}</td>
+                <td class="table-section-3-body">{{ $value['decree_year'] }}</td>
+                <td class="table-section-3-body">{{ $value['awarding_institution'] }}</td>
+                <td class="table-section-3-body">{{ $value['receipt_date'] }}</td>
             </tr>
             @endforeach
         </tbody>
@@ -456,11 +456,11 @@
             @foreach($userSKP as $value)
             <tr style="border-bottom: 1px solid #F0F0F0;">
                 <td class="table-section-3-body">{{ $indexSKP++ }}</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
+                <td class="table-section-3-body">{{ $value['work_behavior_rating'] }}</td>
+                <td class="table-section-3-body">{{ $value['employee_performance_predicate'] }}</td>
+                <td class="table-section-3-body">{{ $value['organizational_performance_achievement'] }}</td>
+                <td class="table-section-3-body">{{ $value['period'] }}</td>
+                <td class="table-section-3-body">{{ $value['target_year'] }}</td>
             </tr>
             @endforeach
         </tbody>
@@ -481,9 +481,9 @@
             @foreach($userPerformance as $value)
             <tr style="border-bottom: 1px solid #F0F0F0;">
                 <td class="table-section-3-body">{{ $indexPerformance++ }}</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
+                <td class="table-section-3-body">{{ $value['period'] }}</td>
+                <td class="table-section-3-body">{{ $value['score'] }}</td>
+                <td class="table-section-3-body">{{ $value['description'] }}</td>
             </tr>
             @endforeach
         </tbody>
@@ -600,13 +600,13 @@
             @foreach($userPaidLeave as $value)
             <tr style="border-bottom: 1px solid #F0F0F0;">
                 <td class="table-section-3-body">{{ $indexPaidLeave++ }}</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
+                <td class="table-section-3-body">{{ $value['grade'] }}</td>
+                <td class="table-section-3-body">Lorem</td>
+                <td class="table-section-3-body">{{ $value['start_date'] }} - {{ $value['end_date'] }}</td>
+                <td class="table-section-3-body">{{ $value['reason'] }}</td>
+                <td class="table-section-3-body">{{ $value['number'] }}</td>
+                <td class="table-section-3-body">{{ $value['purpose'] }}</td>
+                <td class="table-section-3-body"><a href="{{ $value['letter'] }}">Lihat File</a></td>
             </tr>
             @endforeach
         </tbody>
@@ -627,9 +627,9 @@
             @foreach($userNotes as $value)
             <tr style="border-bottom: 1px solid #F0F0F0;">
                 <td class="table-section-3-body">{{ $indexNotes++ }}</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
+                <td class="table-section-3-body">{{ $value['created_at'] }}</td>
+                <td class="table-section-3-body">{{ $value['giver'] }}</td>
+                <td class="table-section-3-body">{{ $value['description'] }}</td>
             </tr>
             @endforeach
         </tbody>

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Simdatuk Documentation</title>
+    <title>Laravel Documentation</title>
 
     <link href="https://fonts.googleapis.com/css?family=PT+Sans&display=swap" rel="stylesheet">
 
@@ -271,7 +271,7 @@
                 <img src="img/logo.svg" height="30px" width="30px" alt="logo">
             </div>
                 <h4 class="sl-text-paragraph sl-leading-snug sl-font-prose sl-font-semibold sl-text-heading">
-            Simdatuk Documentation
+            Laravel Documentation
         </h4>
     </div>
 
@@ -1216,7 +1216,7 @@
 
         </div>
         <div class="sl-flex sl-items-center sl-px-4 sl-py-3 sl-border-t">
-            Last updated: May 10, 2024
+            Last updated: May 14, 2024
         </div>
 
         <div class="sl-flex sl-items-center sl-px-4 sl-py-3 sl-border-t">
@@ -1230,7 +1230,7 @@
         <div class="sl-mb-10">
             <div class="sl-mb-4">
                 <h1 class="sl-text-5xl sl-leading-tight sl-font-prose sl-font-semibold sl-text-heading">
-                    Simdatuk Documentation
+                    Laravel Documentation
                 </h1>
                                     <a title="Download Postman collection" class="sl-mx-1"
                        href="{{ route("scribe.postman") }}" target="_blank">
@@ -4558,7 +4558,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
+                        C:\xampp\htdocs\api\public\/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -5063,7 +5063,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
+                        C:\xampp\htdocs\api\public\/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -5336,13 +5336,13 @@ fetch(url, {
                                     </div>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Description of Employee Performance. Must not be greater than 160 characters.</p>
+            <p>Refers to the Description of Employee. Must not be greater than 160 characters.</p>
         </div>
                                             <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        Prestasi kinerja
+                        Keterangan pegawai
                     </div>
                 </div>
             </div>
@@ -5372,87 +5372,6 @@ fetch(url, {
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
                         1
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">period_month</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Period Month of Employee Performance. Must be between 1 and 12 digits.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        3
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">period_year</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Period Year of Employee Performance. Must be a valid date in the format <code>Y</code>.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        2020
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">performance_period</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the PPK Period of Employee Performance. Must not be greater than 160 characters.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        20
                     </div>
                 </div>
             </div>
@@ -5686,7 +5605,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
+                        C:\xampp\htdocs\api\public\/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -5895,7 +5814,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
+                        C:\xampp\htdocs\api\public\/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -6360,7 +6279,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
+                        C:\xampp\htdocs\api\public\/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -6490,316 +6409,6 @@ fetch(url, {
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
                         1
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-            </div>
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2  sl-cursor-pointer ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                            <div class="sl-flex sl-justify-center sl-w-8 sl--ml-8 sl-pl-3 sl-text-muted expansion-chevrons" role="button">
-                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right"
-                         class="svg-inline--fa fa-chevron-right fa-fw fa-sm sl-icon" role="img"
-                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                        <path fill="currentColor"
-                              d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"></path>
-                    </svg>
-                </div>
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">targets</div>
-                                            <span class="sl-truncate sl-text-muted">object[]</span>
-                                    </div>
-                                    </div>
-                                    </div>
-</div>
-
-                    <div class="children" style="display: none;">
-                <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">period_month</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Period Month of Employee Target. Must be between 1 and 12 digits.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        3
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">period_year</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Period Year of Employee Target. Must be a valid date in the format <code>Y</code>.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        2020
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">appraisal_period</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Appraisal Period of Employee Target.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        1
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">year</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Year of Employee Target. Must be a valid date in the format <code>Y</code>.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        2020
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-            </div>
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2  sl-cursor-pointer ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                            <div class="sl-flex sl-justify-center sl-w-8 sl--ml-8 sl-pl-3 sl-text-muted expansion-chevrons" role="button">
-                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right"
-                         class="svg-inline--fa fa-chevron-right fa-fw fa-sm sl-icon" role="img"
-                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                        <path fill="currentColor"
-                              d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"></path>
-                    </svg>
-                </div>
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">users</div>
-                                            <span class="sl-truncate sl-text-muted">object[]</span>
-                                    </div>
-                                    </div>
-                                    </div>
-</div>
-
-                    <div class="children" style="display: none;">
-                <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">work_behavior_rating</div>
-                                            <span class="sl-truncate sl-text-muted">number</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Work Behavior Rating of Employee Target.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        5
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">employee_performance_predicate</div>
-                                            <span class="sl-truncate sl-text-muted">number</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Employee Performance Predicate of Employee Target.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        5
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">organizational_performance_achievement</div>
-                                            <span class="sl-truncate sl-text-muted">number</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Orginizational Performance Achievement of Employee Target.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        5
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">user_id</div>
-                                            <span class="sl-truncate sl-text-muted">number</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the ID of employee.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        1
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-            </div>
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2  sl-cursor-pointer ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                            <div class="sl-flex sl-justify-center sl-w-8 sl--ml-8 sl-pl-3 sl-text-muted expansion-chevrons" role="button">
-                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right"
-                         class="svg-inline--fa fa-chevron-right fa-fw fa-sm sl-icon" role="img"
-                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                        <path fill="currentColor"
-                              d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"></path>
-                    </svg>
-                </div>
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">user</div>
-                                            <span class="sl-truncate sl-text-muted">object[]</span>
-                                    </div>
-                                    </div>
-                                    </div>
-</div>
-
-                    <div class="children" style="display: none;">
-                <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">work_performance_score</div>
-                                            <span class="sl-truncate sl-text-muted">number</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        3883456.021
                     </div>
                 </div>
             </div>
@@ -7935,7 +7544,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
+                        C:\xampp\htdocs\api\public\/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -8112,7 +7721,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
+                        C:\xampp\htdocs\api\public\/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -8690,8 +8299,8 @@ fetch(url, {
                                         <div class="sl-input sl-flex-1 sl-relative">
                                                                                             <input aria-label="description" name="description"
                                                        id="bodyparam-POSTapi-employees-description"
-                                                       placeholder="Refers to the Description of Employee Performance. Must not be greater than 160 characters."
-                                                       value="Prestasi kinerja" data-component="body"
+                                                       placeholder="Refers to the Description of Employee. Must not be greater than 160 characters."
+                                                       value="Keterangan pegawai" data-component="body"
                                                        class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
                                                 >
                                                                                     </div>
@@ -8705,45 +8314,6 @@ fetch(url, {
                                                        id="bodyparam-POSTapi-employees-type"
                                                        placeholder="Refers to the Type of Employee. 1=ASN, 2=NON-ASN, 3=OUTSOURCE."
                                                        value="1" data-component="body"
-                                                       class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
-                                                >
-                                                                                    </div>
-                                    </div>
-                                                                                                        <label aria-hidden="true"
-                                           for="bodyparam-POSTapi-employees-period_month">period_month</label>
-                                    <span class="sl-mx-3">:</span>
-                                    <div class="sl-flex sl-flex-1">
-                                        <div class="sl-input sl-flex-1 sl-relative">
-                                                                                            <input aria-label="period_month" name="period_month"
-                                                       id="bodyparam-POSTapi-employees-period_month"
-                                                       placeholder="Refers to the Period Month of Employee Performance. Must be between 1 and 12 digits."
-                                                       value="3" data-component="body"
-                                                       class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
-                                                >
-                                                                                    </div>
-                                    </div>
-                                                                                                        <label aria-hidden="true"
-                                           for="bodyparam-POSTapi-employees-period_year">period_year</label>
-                                    <span class="sl-mx-3">:</span>
-                                    <div class="sl-flex sl-flex-1">
-                                        <div class="sl-input sl-flex-1 sl-relative">
-                                                                                            <input aria-label="period_year" name="period_year"
-                                                       id="bodyparam-POSTapi-employees-period_year"
-                                                       placeholder="Refers to the Period Year of Employee Performance. Must be a valid date in the format &lt;code&gt;Y&lt;/code&gt;."
-                                                       value="2020" data-component="body"
-                                                       class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
-                                                >
-                                                                                    </div>
-                                    </div>
-                                                                                                        <label aria-hidden="true"
-                                           for="bodyparam-POSTapi-employees-performance_period">performance_period</label>
-                                    <span class="sl-mx-3">:</span>
-                                    <div class="sl-flex sl-flex-1">
-                                        <div class="sl-input sl-flex-1 sl-relative">
-                                                                                            <input aria-label="performance_period" name="performance_period"
-                                                       id="bodyparam-POSTapi-employees-performance_period"
-                                                       placeholder="Refers to the PPK Period of Employee Performance. Must not be greater than 160 characters."
-                                                       value="20" data-component="body"
                                                        class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
                                                 >
                                                                                     </div>
@@ -8788,45 +8358,6 @@ fetch(url, {
                                                                                     </div>
                                     </div>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     <label aria-hidden="true"
-                                           for="bodyparam-POSTapi-employees-targets">targets</label>
-                                    <span class="sl-mx-3">:</span>
-                                    <div class="sl-flex sl-flex-1">
-                                        <div class="sl-input sl-flex-1 sl-relative">
-                                                                                            <input aria-label="targets" name="targets"
-                                                       id="bodyparam-POSTapi-employees-targets"
-                                                       placeholder=""
-                                                       value="[[]]" data-component="body"
-                                                       class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
-                                                >
-                                                                                    </div>
-                                    </div>
-                                                                                                                                                                                                                                                        <label aria-hidden="true"
-                                           for="bodyparam-POSTapi-employees-users">users</label>
-                                    <span class="sl-mx-3">:</span>
-                                    <div class="sl-flex sl-flex-1">
-                                        <div class="sl-input sl-flex-1 sl-relative">
-                                                                                            <input aria-label="users" name="users"
-                                                       id="bodyparam-POSTapi-employees-users"
-                                                       placeholder=""
-                                                       value="[[]]" data-component="body"
-                                                       class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
-                                                >
-                                                                                    </div>
-                                    </div>
-                                                                                                                                                                                                                                                        <label aria-hidden="true"
-                                           for="bodyparam-POSTapi-employees-user">user</label>
-                                    <span class="sl-mx-3">:</span>
-                                    <div class="sl-flex sl-flex-1">
-                                        <div class="sl-input sl-flex-1 sl-relative">
-                                                                                            <input aria-label="user" name="user"
-                                                       id="bodyparam-POSTapi-employees-user"
-                                                       placeholder=""
-                                                       value="[[]]" data-component="body"
-                                                       class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
-                                                >
-                                                                                    </div>
-                                    </div>
-                                                                                                                                            <label aria-hidden="true"
                                            for="bodyparam-POSTapi-employees-disciplinaries">disciplinaries</label>
                                     <span class="sl-mx-3">:</span>
                                     <div class="sl-flex sl-flex-1">
@@ -9015,11 +8546,8 @@ You can check the Dev Tools console for debugging information.</p>
     --form "mobile_phone=6281234567890"\
     --form "office_address=Jalan Mawar No. 123, Kelurahan Bunga Indah, Kecamatan Kota Baru, Jakarta, Kode Pos 12345"\
     --form "office_phone_number=2112345678"\
-    --form "description=Prestasi kinerja"\
+    --form "description=Keterangan pegawai"\
     --form "type=1"\
-    --form "period_month=3"\
-    --form "period_year=2020"\
-    --form "performance_period=20"\
     --form "educations[][level]=1"\
     --form "educations[][name]=Universitas Indonesia"\
     --form "educations[][faculty]=Fakultas Ilmu Komputer"\
@@ -9054,15 +8582,6 @@ You can check the Dev Tools console for debugging information.</p>
     --form "grades[][decree_date]=2020-10-22"\
     --form "grades[][description]=Kenaikan Pangkat Reguler"\
     --form "grades[][status]=1"\
-    --form "targets[][period_month]=3"\
-    --form "targets[][period_year]=2020"\
-    --form "targets[][appraisal_period]=1"\
-    --form "targets[][year]=2020"\
-    --form "users[][work_behavior_rating]=5"\
-    --form "users[][employee_performance_predicate]=5"\
-    --form "users[][organizational_performance_achievement]=5"\
-    --form "users[][user_id]=1"\
-    --form "user[][work_performance_score]=3883456.021"\
     --form "disciplinaries[][period_month]=3"\
     --form "disciplinaries[][period_year]=2020"\
     --form "disciplinaries[][grade_id]=1"\
@@ -9107,13 +8626,13 @@ You can check the Dev Tools console for debugging information.</p>
     --form "assessments[][point]=10"\
     --form "assessments[][organizer]=PPKASN"\
     --form "assessments[][type]=1"\
-    --form "photo_profile=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" \
-    --form "employee_id_card=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" \
-    --form "educations[][degree_document]=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" \
-    --form "positions[][decree_document]=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" \
-    --form "grades[][decree_document]=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" \
-    --form "leaves[][leave_letter]=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" \
-    --form "assessments[][assessment_document]=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" </code></pre>                                        </div>
+    --form "photo_profile=@C:\xampp\htdocs\api\public\img\logo.svg" \
+    --form "employee_id_card=@C:\xampp\htdocs\api\public\img\logo.svg" \
+    --form "educations[][degree_document]=@C:\xampp\htdocs\api\public\img\logo.svg" \
+    --form "positions[][decree_document]=@C:\xampp\htdocs\api\public\img\logo.svg" \
+    --form "grades[][decree_document]=@C:\xampp\htdocs\api\public\img\logo.svg" \
+    --form "leaves[][leave_letter]=@C:\xampp\htdocs\api\public\img\logo.svg" \
+    --form "assessments[][assessment_document]=@C:\xampp\htdocs\api\public\img\logo.svg" </code></pre>                                        </div>
                                     </div>
                                 </div>
                                                             <div class="sl-bg-canvas-100 example-request example-request-javascript"
@@ -9161,11 +8680,8 @@ body.append('home_phone_number', '2112345678');
 body.append('mobile_phone', '6281234567890');
 body.append('office_address', 'Jalan Mawar No. 123, Kelurahan Bunga Indah, Kecamatan Kota Baru, Jakarta, Kode Pos 12345');
 body.append('office_phone_number', '2112345678');
-body.append('description', 'Prestasi kinerja');
+body.append('description', 'Keterangan pegawai');
 body.append('type', '1');
-body.append('period_month', '3');
-body.append('period_year', '2020');
-body.append('performance_period', '20');
 body.append('educations[][level]', '1');
 body.append('educations[][name]', 'Universitas Indonesia');
 body.append('educations[][faculty]', 'Fakultas Ilmu Komputer');
@@ -9200,15 +8716,6 @@ body.append('grades[][decree_number]', '58/Set.Neg/Pers.In/6/1993, 12-06-1993');
 body.append('grades[][decree_date]', '2020-10-22');
 body.append('grades[][description]', 'Kenaikan Pangkat Reguler');
 body.append('grades[][status]', '1');
-body.append('targets[][period_month]', '3');
-body.append('targets[][period_year]', '2020');
-body.append('targets[][appraisal_period]', '1');
-body.append('targets[][year]', '2020');
-body.append('users[][work_behavior_rating]', '5');
-body.append('users[][employee_performance_predicate]', '5');
-body.append('users[][organizational_performance_achievement]', '5');
-body.append('users[][user_id]', '1');
-body.append('user[][work_performance_score]', '3883456.021');
 body.append('disciplinaries[][period_month]', '3');
 body.append('disciplinaries[][period_year]', '2020');
 body.append('disciplinaries[][grade_id]', '1');
@@ -9963,7 +9470,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
+                        C:\xampp\htdocs\api\public\/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -10468,7 +9975,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
+                        C:\xampp\htdocs\api\public\/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -10741,13 +10248,13 @@ fetch(url, {
                                     </div>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Description of Employee Performance. Must not be greater than 160 characters.</p>
+            <p>Refers to the Description of Employee. Must not be greater than 160 characters.</p>
         </div>
                                             <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        Prestasi kinerja
+                        Keterangan pegawai
                     </div>
                 </div>
             </div>
@@ -10777,87 +10284,6 @@ fetch(url, {
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
                         1
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">period_month</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Period Month of Employee Performance. Must be between 1 and 12 digits.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        3
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">period_year</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Period Year of Employee Performance. Must be a valid date in the format <code>Y</code>.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        2020
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">performance_period</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the PPK Period of Employee Performance. Must not be greater than 160 characters.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        20
                     </div>
                 </div>
             </div>
@@ -11091,7 +10517,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
+                        C:\xampp\htdocs\api\public\/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -11300,7 +10726,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
+                        C:\xampp\htdocs\api\public\/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -11765,7 +11191,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
+                        C:\xampp\htdocs\api\public\/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -11895,316 +11321,6 @@ fetch(url, {
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
                         1
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-            </div>
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2  sl-cursor-pointer ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                            <div class="sl-flex sl-justify-center sl-w-8 sl--ml-8 sl-pl-3 sl-text-muted expansion-chevrons" role="button">
-                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right"
-                         class="svg-inline--fa fa-chevron-right fa-fw fa-sm sl-icon" role="img"
-                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                        <path fill="currentColor"
-                              d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"></path>
-                    </svg>
-                </div>
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">targets</div>
-                                            <span class="sl-truncate sl-text-muted">object[]</span>
-                                    </div>
-                                    </div>
-                                    </div>
-</div>
-
-                    <div class="children" style="display: none;">
-                <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">period_month</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Period Month of Employee Target. Must be between 1 and 12 digits.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        3
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">period_year</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Period Year of Employee Target. Must be a valid date in the format <code>Y</code>.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        2020
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">appraisal_period</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Appraisal Period of Employee Target.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        1
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">year</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Year of Employee Target. Must be a valid date in the format <code>Y</code>.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        2020
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-            </div>
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2  sl-cursor-pointer ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                            <div class="sl-flex sl-justify-center sl-w-8 sl--ml-8 sl-pl-3 sl-text-muted expansion-chevrons" role="button">
-                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right"
-                         class="svg-inline--fa fa-chevron-right fa-fw fa-sm sl-icon" role="img"
-                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                        <path fill="currentColor"
-                              d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"></path>
-                    </svg>
-                </div>
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">users</div>
-                                            <span class="sl-truncate sl-text-muted">object[]</span>
-                                    </div>
-                                    </div>
-                                    </div>
-</div>
-
-                    <div class="children" style="display: none;">
-                <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">work_behavior_rating</div>
-                                            <span class="sl-truncate sl-text-muted">number</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Work Behavior Rating of Employee Target.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        5
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">employee_performance_predicate</div>
-                                            <span class="sl-truncate sl-text-muted">number</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Employee Performance Predicate of Employee Target.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        5
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">organizational_performance_achievement</div>
-                                            <span class="sl-truncate sl-text-muted">number</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Orginizational Performance Achievement of Employee Target.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        5
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">user_id</div>
-                                            <span class="sl-truncate sl-text-muted">number</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the ID of employee.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        1
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-            </div>
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2  sl-cursor-pointer ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                            <div class="sl-flex sl-justify-center sl-w-8 sl--ml-8 sl-pl-3 sl-text-muted expansion-chevrons" role="button">
-                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right"
-                         class="svg-inline--fa fa-chevron-right fa-fw fa-sm sl-icon" role="img"
-                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                        <path fill="currentColor"
-                              d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"></path>
-                    </svg>
-                </div>
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">user</div>
-                                            <span class="sl-truncate sl-text-muted">object[]</span>
-                                    </div>
-                                    </div>
-                                    </div>
-</div>
-
-                    <div class="children" style="display: none;">
-                <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">work_performance_score</div>
-                                            <span class="sl-truncate sl-text-muted">number</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        2252.45869
                     </div>
                 </div>
             </div>
@@ -13340,7 +12456,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
+                        C:\xampp\htdocs\api\public\/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -13517,7 +12633,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
+                        C:\xampp\htdocs\api\public\/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -14128,8 +13244,8 @@ fetch(url, {
                                         <div class="sl-input sl-flex-1 sl-relative">
                                                                                             <input aria-label="description" name="description"
                                                        id="bodyparam-POSTapi-employees--id--description"
-                                                       placeholder="Refers to the Description of Employee Performance. Must not be greater than 160 characters."
-                                                       value="Prestasi kinerja" data-component="body"
+                                                       placeholder="Refers to the Description of Employee. Must not be greater than 160 characters."
+                                                       value="Keterangan pegawai" data-component="body"
                                                        class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
                                                 >
                                                                                     </div>
@@ -14143,45 +13259,6 @@ fetch(url, {
                                                        id="bodyparam-POSTapi-employees--id--type"
                                                        placeholder="Refers to the Type of Employee. 1=ASN, 2=NON-ASN, 3=OUTSOURCE."
                                                        value="1" data-component="body"
-                                                       class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
-                                                >
-                                                                                    </div>
-                                    </div>
-                                                                                                        <label aria-hidden="true"
-                                           for="bodyparam-POSTapi-employees--id--period_month">period_month</label>
-                                    <span class="sl-mx-3">:</span>
-                                    <div class="sl-flex sl-flex-1">
-                                        <div class="sl-input sl-flex-1 sl-relative">
-                                                                                            <input aria-label="period_month" name="period_month"
-                                                       id="bodyparam-POSTapi-employees--id--period_month"
-                                                       placeholder="Refers to the Period Month of Employee Performance. Must be between 1 and 12 digits."
-                                                       value="3" data-component="body"
-                                                       class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
-                                                >
-                                                                                    </div>
-                                    </div>
-                                                                                                        <label aria-hidden="true"
-                                           for="bodyparam-POSTapi-employees--id--period_year">period_year</label>
-                                    <span class="sl-mx-3">:</span>
-                                    <div class="sl-flex sl-flex-1">
-                                        <div class="sl-input sl-flex-1 sl-relative">
-                                                                                            <input aria-label="period_year" name="period_year"
-                                                       id="bodyparam-POSTapi-employees--id--period_year"
-                                                       placeholder="Refers to the Period Year of Employee Performance. Must be a valid date in the format &lt;code&gt;Y&lt;/code&gt;."
-                                                       value="2020" data-component="body"
-                                                       class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
-                                                >
-                                                                                    </div>
-                                    </div>
-                                                                                                        <label aria-hidden="true"
-                                           for="bodyparam-POSTapi-employees--id--performance_period">performance_period</label>
-                                    <span class="sl-mx-3">:</span>
-                                    <div class="sl-flex sl-flex-1">
-                                        <div class="sl-input sl-flex-1 sl-relative">
-                                                                                            <input aria-label="performance_period" name="performance_period"
-                                                       id="bodyparam-POSTapi-employees--id--performance_period"
-                                                       placeholder="Refers to the PPK Period of Employee Performance. Must not be greater than 160 characters."
-                                                       value="20" data-component="body"
                                                        class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
                                                 >
                                                                                     </div>
@@ -14226,45 +13303,6 @@ fetch(url, {
                                                                                     </div>
                                     </div>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     <label aria-hidden="true"
-                                           for="bodyparam-POSTapi-employees--id--targets">targets</label>
-                                    <span class="sl-mx-3">:</span>
-                                    <div class="sl-flex sl-flex-1">
-                                        <div class="sl-input sl-flex-1 sl-relative">
-                                                                                            <input aria-label="targets" name="targets"
-                                                       id="bodyparam-POSTapi-employees--id--targets"
-                                                       placeholder=""
-                                                       value="[[]]" data-component="body"
-                                                       class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
-                                                >
-                                                                                    </div>
-                                    </div>
-                                                                                                                                                                                                                                                        <label aria-hidden="true"
-                                           for="bodyparam-POSTapi-employees--id--users">users</label>
-                                    <span class="sl-mx-3">:</span>
-                                    <div class="sl-flex sl-flex-1">
-                                        <div class="sl-input sl-flex-1 sl-relative">
-                                                                                            <input aria-label="users" name="users"
-                                                       id="bodyparam-POSTapi-employees--id--users"
-                                                       placeholder=""
-                                                       value="[[]]" data-component="body"
-                                                       class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
-                                                >
-                                                                                    </div>
-                                    </div>
-                                                                                                                                                                                                                                                        <label aria-hidden="true"
-                                           for="bodyparam-POSTapi-employees--id--user">user</label>
-                                    <span class="sl-mx-3">:</span>
-                                    <div class="sl-flex sl-flex-1">
-                                        <div class="sl-input sl-flex-1 sl-relative">
-                                                                                            <input aria-label="user" name="user"
-                                                       id="bodyparam-POSTapi-employees--id--user"
-                                                       placeholder=""
-                                                       value="[[]]" data-component="body"
-                                                       class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
-                                                >
-                                                                                    </div>
-                                    </div>
-                                                                                                                                            <label aria-hidden="true"
                                            for="bodyparam-POSTapi-employees--id--disciplinaries">disciplinaries</label>
                                     <span class="sl-mx-3">:</span>
                                     <div class="sl-flex sl-flex-1">
@@ -14453,11 +13491,8 @@ You can check the Dev Tools console for debugging information.</p>
     --form "mobile_phone=6281234567890"\
     --form "office_address=Jalan Mawar No. 123, Kelurahan Bunga Indah, Kecamatan Kota Baru, Jakarta, Kode Pos 12345"\
     --form "office_phone_number=2112345678"\
-    --form "description=Prestasi kinerja"\
+    --form "description=Keterangan pegawai"\
     --form "type=1"\
-    --form "period_month=3"\
-    --form "period_year=2020"\
-    --form "performance_period=20"\
     --form "educations[][level]=1"\
     --form "educations[][name]=Universitas Indonesia"\
     --form "educations[][faculty]=Fakultas Ilmu Komputer"\
@@ -14492,15 +13527,6 @@ You can check the Dev Tools console for debugging information.</p>
     --form "grades[][decree_date]=2020-10-22"\
     --form "grades[][description]=Kenaikan Pangkat Reguler"\
     --form "grades[][status]=1"\
-    --form "targets[][period_month]=3"\
-    --form "targets[][period_year]=2020"\
-    --form "targets[][appraisal_period]=1"\
-    --form "targets[][year]=2020"\
-    --form "users[][work_behavior_rating]=5"\
-    --form "users[][employee_performance_predicate]=5"\
-    --form "users[][organizational_performance_achievement]=5"\
-    --form "users[][user_id]=1"\
-    --form "user[][work_performance_score]=2252.45869"\
     --form "disciplinaries[][period_month]=3"\
     --form "disciplinaries[][period_year]=2020"\
     --form "disciplinaries[][grade_id]=1"\
@@ -14545,13 +13571,13 @@ You can check the Dev Tools console for debugging information.</p>
     --form "assessments[][point]=10"\
     --form "assessments[][organizer]=PPKASN"\
     --form "assessments[][type]=1"\
-    --form "photo_profile=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" \
-    --form "employee_id_card=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" \
-    --form "educations[][degree_document]=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" \
-    --form "positions[][decree_document]=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" \
-    --form "grades[][decree_document]=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" \
-    --form "leaves[][leave_letter]=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" \
-    --form "assessments[][assessment_document]=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" </code></pre>                                        </div>
+    --form "photo_profile=@C:\xampp\htdocs\api\public\img\logo.svg" \
+    --form "employee_id_card=@C:\xampp\htdocs\api\public\img\logo.svg" \
+    --form "educations[][degree_document]=@C:\xampp\htdocs\api\public\img\logo.svg" \
+    --form "positions[][decree_document]=@C:\xampp\htdocs\api\public\img\logo.svg" \
+    --form "grades[][decree_document]=@C:\xampp\htdocs\api\public\img\logo.svg" \
+    --form "leaves[][leave_letter]=@C:\xampp\htdocs\api\public\img\logo.svg" \
+    --form "assessments[][assessment_document]=@C:\xampp\htdocs\api\public\img\logo.svg" </code></pre>                                        </div>
                                     </div>
                                 </div>
                                                             <div class="sl-bg-canvas-100 example-request example-request-javascript"
@@ -14599,11 +13625,8 @@ body.append('home_phone_number', '2112345678');
 body.append('mobile_phone', '6281234567890');
 body.append('office_address', 'Jalan Mawar No. 123, Kelurahan Bunga Indah, Kecamatan Kota Baru, Jakarta, Kode Pos 12345');
 body.append('office_phone_number', '2112345678');
-body.append('description', 'Prestasi kinerja');
+body.append('description', 'Keterangan pegawai');
 body.append('type', '1');
-body.append('period_month', '3');
-body.append('period_year', '2020');
-body.append('performance_period', '20');
 body.append('educations[][level]', '1');
 body.append('educations[][name]', 'Universitas Indonesia');
 body.append('educations[][faculty]', 'Fakultas Ilmu Komputer');
@@ -14638,15 +13661,6 @@ body.append('grades[][decree_number]', '58/Set.Neg/Pers.In/6/1993, 12-06-1993');
 body.append('grades[][decree_date]', '2020-10-22');
 body.append('grades[][description]', 'Kenaikan Pangkat Reguler');
 body.append('grades[][status]', '1');
-body.append('targets[][period_month]', '3');
-body.append('targets[][period_year]', '2020');
-body.append('targets[][appraisal_period]', '1');
-body.append('targets[][year]', '2020');
-body.append('users[][work_behavior_rating]', '5');
-body.append('users[][employee_performance_predicate]', '5');
-body.append('users[][organizational_performance_achievement]', '5');
-body.append('users[][user_id]', '1');
-body.append('user[][work_performance_score]', '2252.45869');
 body.append('disciplinaries[][period_month]', '3');
 body.append('disciplinaries[][period_year]', '2020');
 body.append('disciplinaries[][grade_id]', '1');
@@ -15780,7 +14794,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
+                        C:\xampp\htdocs\api\public\/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -16156,7 +15170,7 @@ You can check the Dev Tools console for debugging information.</p>
     --form "link=https://google.com"\
     --form "type=1"\
     --form "users[][user_id]=1"\
-    --form "users[][certificate]=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" </code></pre>                                        </div>
+    --form "users[][certificate]=@C:\xampp\htdocs\api\public\img\logo.svg" </code></pre>                                        </div>
                                     </div>
                                 </div>
                                                             <div class="sl-bg-canvas-100 example-request example-request-javascript"
@@ -17160,7 +16174,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
+                        C:\xampp\htdocs\api\public\/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -17570,7 +16584,7 @@ You can check the Dev Tools console for debugging information.</p>
     --form "type=1"\
     --form "users[][id]=1"\
     --form "users[][user_id]=1"\
-    --form "users[][certificate]=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" </code></pre>                                        </div>
+    --form "users[][certificate]=@C:\xampp\htdocs\api\public\img\logo.svg" </code></pre>                                        </div>
                                     </div>
                                 </div>
                                                             <div class="sl-bg-canvas-100 example-request example-request-javascript"
@@ -21412,28 +20426,6 @@ fetch(url, {
                                     <div class="expandable sl-text-sm sl-border-l sl-ml-px">
         <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
     <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2  sl-cursor-pointer ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                            <div class="sl-flex sl-justify-center sl-w-8 sl--ml-8 sl-pl-3 sl-text-muted expansion-chevrons" role="button">
-                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right"
-                         class="svg-inline--fa fa-chevron-right fa-fw fa-sm sl-icon" role="img"
-                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                        <path fill="currentColor"
-                              d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"></path>
-                    </svg>
-                </div>
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">targets</div>
-                                            <span class="sl-truncate sl-text-muted">object[]</span>
-                                    </div>
-                                    </div>
-                                    </div>
-</div>
-
-                    <div class="children" style="display: none;">
-                <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
     <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
         <div class="sl-flex sl-items-center sl-max-w-full">
                                         <div class="sl-flex sl-items-baseline sl-text-base">
@@ -21444,13 +20436,13 @@ fetch(url, {
                     <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Must be between 1 and 12 digits.</p>
+            <p>Refers to the Period Month of Employee Target. Must be between 1 and 12 digits.</p>
         </div>
                                             <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        81523
+                        3
                     </div>
                 </div>
             </div>
@@ -21458,7 +20450,7 @@ fetch(url, {
 </div>
 
             </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
+    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
         <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
     <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
     <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
@@ -21471,13 +20463,13 @@ fetch(url, {
                     <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Must be a valid date in the format <code>Y</code>.</p>
+            <p>Refers to the Period Year of Employee Target. Must be a valid date in the format <code>Y</code>.</p>
         </div>
                                             <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        2024
+                        2020
                     </div>
                 </div>
             </div>
@@ -21485,7 +20477,7 @@ fetch(url, {
 </div>
 
             </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
+    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
         <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
     <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
     <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
@@ -21497,11 +20489,14 @@ fetch(url, {
                                     <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
                     <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Appraisal Period of Employee Target.</p>
+        </div>
                                             <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        non
+                        Q1
                     </div>
                 </div>
             </div>
@@ -21509,7 +20504,7 @@ fetch(url, {
 </div>
 
             </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
+    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
         <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
     <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
     <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
@@ -21520,13 +20515,13 @@ fetch(url, {
                                     </div>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Must be a valid date in the format <code>Y</code>.</p>
+            <p>Refers to the Year of Employee Target. Must be a valid date in the format <code>Y</code>.</p>
         </div>
                                             <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        2024
+                        2020
                     </div>
                 </div>
             </div>
@@ -21534,7 +20529,32 @@ fetch(url, {
 </div>
 
             </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">name</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to name of Work Performance Score. Must not be greater than 160 characters.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        PPK December 2020
+                    </div>
+                </div>
             </div>
+            </div>
+</div>
+
             </div>
     <div class="expandable sl-text-sm sl-border-l sl-ml-px">
         <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
@@ -21564,17 +20584,47 @@ fetch(url, {
     <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
         <div class="sl-flex sl-items-center sl-max-w-full">
                                         <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">user_id</div>
+                                            <span class="sl-truncate sl-text-muted">number</span>
+                                    </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the User ID of List Employee Recognition.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        1
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">work_behavior_rating</div>
                                             <span class="sl-truncate sl-text-muted">number</span>
                                     </div>
                                     <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
                     <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Work Behavior Rating of Employee Target.</p>
+        </div>
                                             <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        176.83976
+                        1
                     </div>
                 </div>
             </div>
@@ -21594,11 +20644,14 @@ fetch(url, {
                                     <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
                     <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Employee Performance Predicate of Employee Target.</p>
+        </div>
                                             <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        6513
+                        1
                     </div>
                 </div>
             </div>
@@ -21618,11 +20671,14 @@ fetch(url, {
                                     <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
                     <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Orginizational Performance Achievement of Employee Target.</p>
+        </div>
                                             <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        24489327.83934
+                        1
                     </div>
                 </div>
             </div>
@@ -21787,19 +20843,17 @@ fetch(url, {
                                      id="json-body-POSTapi-target--id-"
                                      style="font-family: var(--font-code); font-size: 12px; line-height: var(--lh-code);"
                                 >{
-    "targets": [
-        {
-            "period_month": "81523",
-            "period_year": "2024",
-            "appraisal_period": "non",
-            "year": "2024"
-        }
-    ],
+    "period_month": 3,
+    "period_year": "2020",
+    "appraisal_period": "Q1",
+    "year": "2020",
+    "name": "PPK December 2020",
     "users": [
         {
-            "work_behavior_rating": 176.83976,
-            "employee_performance_predicate": 6513,
-            "organizational_performance_achievement": 24489327.83934
+            "user_id": 1,
+            "work_behavior_rating": 1,
+            "employee_performance_predicate": 1,
+            "organizational_performance_achievement": 1
         }
     ]
 }</div>
@@ -21898,19 +20952,17 @@ You can check the Dev Tools console for debugging information.</p>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"targets\": [
-        {
-            \"period_month\": \"81523\",
-            \"period_year\": \"2024\",
-            \"appraisal_period\": \"non\",
-            \"year\": \"2024\"
-        }
-    ],
+    \"period_month\": 3,
+    \"period_year\": \"2020\",
+    \"appraisal_period\": \"Q1\",
+    \"year\": \"2020\",
+    \"name\": \"PPK December 2020\",
     \"users\": [
         {
-            \"work_behavior_rating\": 176.83976,
-            \"employee_performance_predicate\": 6513,
-            \"organizational_performance_achievement\": 24489327.83934
+            \"user_id\": 1,
+            \"work_behavior_rating\": 1,
+            \"employee_performance_predicate\": 1,
+            \"organizational_performance_achievement\": 1
         }
     ]
 }"
@@ -21932,19 +20984,17 @@ const headers = {
 };
 
 let body = {
-    "targets": [
-        {
-            "period_month": "81523",
-            "period_year": "2024",
-            "appraisal_period": "non",
-            "year": "2024"
-        }
-    ],
+    "period_month": 3,
+    "period_year": "2020",
+    "appraisal_period": "Q1",
+    "year": "2020",
+    "name": "PPK December 2020",
     "users": [
         {
-            "work_behavior_rating": 176.83976,
-            "employee_performance_predicate": 6513,
-            "organizational_performance_achievement": 24489327.83934
+            "user_id": 1,
+            "work_behavior_rating": 1,
+            "employee_performance_predicate": 1,
+            "organizational_performance_achievement": 1
         }
     ]
 };
@@ -22120,6 +21170,277 @@ fetch(url, {
                     
 
                     
+                                            <div class="sl-stack sl-stack--vertical sl-stack--6 sl-flex sl-flex-col sl-items-stretch">
+                            <h3 class="sl-text-2xl sl-leading-snug sl-font-prose">Body Parameters</h3>
+
+                                <div class="sl-text-sm">
+                                    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">period_month</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Period Month of Employee Target. Must be between 1 and 12 digits.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        3
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">period_year</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Period Year of Employee Target. Must be a valid date in the format <code>Y</code>.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        2020
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">appraisal_period</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Appraisal Period of Employee Target.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        Q1
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">year</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Year of Employee Target. Must be a valid date in the format <code>Y</code>.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        2020
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">name</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to name of Work Performance Score. Must not be greater than 160 characters.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        PPK December 2020
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2  sl-cursor-pointer ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                            <div class="sl-flex sl-justify-center sl-w-8 sl--ml-8 sl-pl-3 sl-text-muted expansion-chevrons" role="button">
+                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right"
+                         class="svg-inline--fa fa-chevron-right fa-fw fa-sm sl-icon" role="img"
+                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                        <path fill="currentColor"
+                              d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"></path>
+                    </svg>
+                </div>
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">users</div>
+                                            <span class="sl-truncate sl-text-muted">object[]</span>
+                                    </div>
+                                    </div>
+                                    </div>
+</div>
+
+                    <div class="children" style="display: none;">
+                <div class="expandable sl-text-sm sl-border-l sl-ml-7">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">user_id</div>
+                                            <span class="sl-truncate sl-text-muted">number</span>
+                                    </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the User ID of List Employee Recognition.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        1
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">work_behavior_rating</div>
+                                            <span class="sl-truncate sl-text-muted">number</span>
+                                    </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Work Behavior Rating of Employee Target.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        1
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">employee_performance_predicate</div>
+                                            <span class="sl-truncate sl-text-muted">number</span>
+                                    </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Employee Performance Predicate of Employee Target.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        1
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">organizational_performance_achievement</div>
+                                            <span class="sl-truncate sl-text-muted">number</span>
+                                    </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Orginizational Performance Achievement of Employee Target.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        1
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+            </div>
+            </div>
+                            </div>
+                        </div>
                     
                                     </div>
             </div>
@@ -22134,7 +21455,7 @@ fetch(url, {
               data-method="POST"
               data-path="api/target"
               data-hasfiles="0"
-              data-hasjsonbody="0">
+              data-hasjsonbody="1">
                             <div class="sl-panel sl-outline-none sl-w-full expandable">
                     <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
                          role="button">
@@ -22218,6 +21539,45 @@ fetch(url, {
             
             
             
+                            <div class="sl-panel sl-outline-none sl-w-full expandable">
+                    <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
+                         role="button">
+                        <div class="sl-flex sl-flex-1 sl-items-center sl-h-lg">
+                            <div class="sl-flex sl-items-center sl-mr-1.5 expansion-chevrons expansion-chevrons-solid expanded">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                     data-icon="caret-down"
+                                     class="svg-inline--fa fa-caret-down fa-fw sl-icon" role="img"
+                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                    <path fill="currentColor"
+                                          d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"></path>
+                                </svg>
+                            </div>
+                            Body
+                        </div>
+                    </div>
+                    <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
+                                                    <div class="TextRequestBody sl-p-4">
+                                <div class="code-editor language-json"
+                                     id="json-body-POSTapi-target"
+                                     style="font-family: var(--font-code); font-size: 12px; line-height: var(--lh-code);"
+                                >{
+    "period_month": 3,
+    "period_year": "2020",
+    "appraisal_period": "Q1",
+    "year": "2020",
+    "name": "PPK December 2020",
+    "users": [
+        {
+            "user_id": 1,
+            "work_behavior_rating": 1,
+            "employee_performance_predicate": 1,
+            "organizational_performance_achievement": 1
+        }
+    ]
+}</div>
+                            </div>
+                                            </div>
+                </div>
             
             <div class="SendButtonHolder sl-mt-4 sl-p-4 sl-pt-0">
                 <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-center">
@@ -22308,7 +21668,23 @@ You can check the Dev Tools console for debugging information.</p>
     "http://localhost/api/target" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre>                                        </div>
+    --header "Accept: application/json" \
+    --data "{
+    \"period_month\": 3,
+    \"period_year\": \"2020\",
+    \"appraisal_period\": \"Q1\",
+    \"year\": \"2020\",
+    \"name\": \"PPK December 2020\",
+    \"users\": [
+        {
+            \"user_id\": 1,
+            \"work_behavior_rating\": 1,
+            \"employee_performance_predicate\": 1,
+            \"organizational_performance_achievement\": 1
+        }
+    ]
+}"
+</code></pre>                                        </div>
                                     </div>
                                 </div>
                                                             <div class="sl-bg-canvas-100 example-request example-request-javascript"
@@ -22325,9 +21701,26 @@ const headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "period_month": 3,
+    "period_year": "2020",
+    "appraisal_period": "Q1",
+    "year": "2020",
+    "name": "PPK December 2020",
+    "users": [
+        {
+            "user_id": 1,
+            "work_behavior_rating": 1,
+            "employee_performance_predicate": 1,
+            "organizational_performance_achievement": 1
+        }
+    ]
+};
+
 fetch(url, {
     method: "POST",
     headers,
+    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre>                                        </div>
                                     </div>
                                 </div>
@@ -23501,6 +22894,223 @@ fetch(url, {
                     
 
                     
+                                            <div class="sl-stack sl-stack--vertical sl-stack--6 sl-flex sl-flex-col sl-items-stretch">
+                            <h3 class="sl-text-2xl sl-leading-snug sl-font-prose">Body Parameters</h3>
+
+                                <div class="sl-text-sm">
+                                    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">period_month</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Period Month of Employee Performance. Must be between 1 and 12 digits.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        3
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">period_year</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Period Year of Employee Performance. Must be a valid date in the format <code>Y</code>.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        2020
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">performance_period</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the PPK Period of Employee Performance. Must not be greater than 160 characters.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        PPK Desember 2020
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">name</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to name of Work Performance Score. Must not be greater than 160 characters.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        PPK December 2020
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">description</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Description of Employee Performance. Must not be greater than 160 characters.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        Penilaian Bulanan
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2  sl-cursor-pointer ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                            <div class="sl-flex sl-justify-center sl-w-8 sl--ml-8 sl-pl-3 sl-text-muted expansion-chevrons" role="button">
+                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right"
+                         class="svg-inline--fa fa-chevron-right fa-fw fa-sm sl-icon" role="img"
+                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                        <path fill="currentColor"
+                              d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"></path>
+                    </svg>
+                </div>
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">users</div>
+                                            <span class="sl-truncate sl-text-muted">object[]</span>
+                                    </div>
+                                    </div>
+                                    </div>
+</div>
+
+                    <div class="children" style="display: none;">
+                <div class="expandable sl-text-sm sl-border-l sl-ml-7">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">user_id</div>
+                                            <span class="sl-truncate sl-text-muted">number</span>
+                                    </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the ID of employee.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        1
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">work_performance_score</div>
+                                            <span class="sl-truncate sl-text-muted">number</span>
+                                    </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Work Performance Score of Employee Performance.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        80
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+            </div>
+            </div>
+                            </div>
+                        </div>
                     
                                     </div>
             </div>
@@ -23515,7 +23125,7 @@ fetch(url, {
               data-method="POST"
               data-path="api/performances"
               data-hasfiles="0"
-              data-hasjsonbody="0">
+              data-hasjsonbody="1">
                             <div class="sl-panel sl-outline-none sl-w-full expandable">
                     <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
                          role="button">
@@ -23599,6 +23209,43 @@ fetch(url, {
             
             
             
+                            <div class="sl-panel sl-outline-none sl-w-full expandable">
+                    <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
+                         role="button">
+                        <div class="sl-flex sl-flex-1 sl-items-center sl-h-lg">
+                            <div class="sl-flex sl-items-center sl-mr-1.5 expansion-chevrons expansion-chevrons-solid expanded">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                     data-icon="caret-down"
+                                     class="svg-inline--fa fa-caret-down fa-fw sl-icon" role="img"
+                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                    <path fill="currentColor"
+                                          d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"></path>
+                                </svg>
+                            </div>
+                            Body
+                        </div>
+                    </div>
+                    <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
+                                                    <div class="TextRequestBody sl-p-4">
+                                <div class="code-editor language-json"
+                                     id="json-body-POSTapi-performances"
+                                     style="font-family: var(--font-code); font-size: 12px; line-height: var(--lh-code);"
+                                >{
+    "period_month": 3,
+    "period_year": "2020",
+    "performance_period": "PPK Desember 2020",
+    "name": "PPK December 2020",
+    "description": "Penilaian Bulanan",
+    "users": [
+        {
+            "user_id": 1,
+            "work_performance_score": 80
+        }
+    ]
+}</div>
+                            </div>
+                                            </div>
+                </div>
             
             <div class="SendButtonHolder sl-mt-4 sl-p-4 sl-pt-0">
                 <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-center">
@@ -23689,7 +23336,21 @@ You can check the Dev Tools console for debugging information.</p>
     "http://localhost/api/performances" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre>                                        </div>
+    --header "Accept: application/json" \
+    --data "{
+    \"period_month\": 3,
+    \"period_year\": \"2020\",
+    \"performance_period\": \"PPK Desember 2020\",
+    \"name\": \"PPK December 2020\",
+    \"description\": \"Penilaian Bulanan\",
+    \"users\": [
+        {
+            \"user_id\": 1,
+            \"work_performance_score\": 80
+        }
+    ]
+}"
+</code></pre>                                        </div>
                                     </div>
                                 </div>
                                                             <div class="sl-bg-canvas-100 example-request example-request-javascript"
@@ -23706,9 +23367,24 @@ const headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "period_month": 3,
+    "period_year": "2020",
+    "performance_period": "PPK Desember 2020",
+    "name": "PPK December 2020",
+    "description": "Penilaian Bulanan",
+    "users": [
+        {
+            "user_id": 1,
+            "work_performance_score": 80
+        }
+    ]
+};
+
 fetch(url, {
     method: "POST",
     headers,
+    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre>                                        </div>
                                     </div>
                                 </div>
@@ -23968,7 +23644,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        20
+                        PPK Desember 2020
                     </div>
                 </div>
             </div>
@@ -23989,13 +23665,13 @@ fetch(url, {
                     <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the name Performance report. Must not be greater than 160 characters.</p>
+            <p>Refers to name of Work Performance Score. Must not be greater than 160 characters.</p>
         </div>
                                             <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        PPK November 2026
+                        PPK December 2020
                     </div>
                 </div>
             </div>
@@ -24020,7 +23696,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        Prestasi kinerja
+                        Penilaian Bulanan
                     </div>
                 </div>
             </div>
@@ -24077,31 +23753,7 @@ fetch(url, {
 </div>
 
             </div>
-            </div>
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2  sl-cursor-pointer ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                            <div class="sl-flex sl-justify-center sl-w-8 sl--ml-8 sl-pl-3 sl-text-muted expansion-chevrons" role="button">
-                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right"
-                         class="svg-inline--fa fa-chevron-right fa-fw fa-sm sl-icon" role="img"
-                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                        <path fill="currentColor"
-                              d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"></path>
-                    </svg>
-                </div>
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">user</div>
-                                            <span class="sl-truncate sl-text-muted">object[]</span>
-                                    </div>
-                                    </div>
-                                    </div>
-</div>
-
-                    <div class="children" style="display: none;">
-                <div class="expandable sl-text-sm sl-border-l sl-ml-7">
+    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
         <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
     <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
     <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
@@ -24113,11 +23765,14 @@ fetch(url, {
                                     <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
                     <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Work Performance Score of Employee Performance.</p>
+        </div>
                                             <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        7185.74948699
+                        80
                     </div>
                 </div>
             </div>
@@ -24284,17 +23939,13 @@ fetch(url, {
                                 >{
     "period_month": 3,
     "period_year": "2020",
-    "performance_period": "20",
-    "name": "PPK November 2026",
-    "description": "Prestasi kinerja",
+    "performance_period": "PPK Desember 2020",
+    "name": "PPK December 2020",
+    "description": "Penilaian Bulanan",
     "users": [
         {
-            "user_id": 1
-        }
-    ],
-    "user": [
-        {
-            "work_performance_score": 7185.74948699
+            "user_id": 1,
+            "work_performance_score": 80
         }
     ]
 }</div>
@@ -24395,17 +24046,13 @@ You can check the Dev Tools console for debugging information.</p>
     --data "{
     \"period_month\": 3,
     \"period_year\": \"2020\",
-    \"performance_period\": \"20\",
-    \"name\": \"PPK November 2026\",
-    \"description\": \"Prestasi kinerja\",
+    \"performance_period\": \"PPK Desember 2020\",
+    \"name\": \"PPK December 2020\",
+    \"description\": \"Penilaian Bulanan\",
     \"users\": [
         {
-            \"user_id\": 1
-        }
-    ],
-    \"user\": [
-        {
-            \"work_performance_score\": 7185.74948699
+            \"user_id\": 1,
+            \"work_performance_score\": 80
         }
     ]
 }"
@@ -24429,17 +24076,13 @@ const headers = {
 let body = {
     "period_month": 3,
     "period_year": "2020",
-    "performance_period": "20",
-    "name": "PPK November 2026",
-    "description": "Prestasi kinerja",
+    "performance_period": "PPK Desember 2020",
+    "name": "PPK December 2020",
+    "description": "Penilaian Bulanan",
     "users": [
         {
-            "user_id": 1
-        }
-    ],
-    "user": [
-        {
-            "work_performance_score": 7185.74948699
+            "user_id": 1,
+            "work_performance_score": 80
         }
     ]
 };
@@ -33869,7 +33512,7 @@ You can check the Dev Tools console for debugging information.</p>
     --data "{
     \"name\": \"admin\",
     \"permissions\": [
-        \"deleniti\"
+        \"reiciendis\"
     ]
 }"
 </code></pre>                                        </div>
@@ -33892,7 +33535,7 @@ const headers = {
 let body = {
     "name": "admin",
     "permissions": [
-        "deleniti"
+        "reiciendis"
     ]
 };
 
@@ -37457,7 +37100,7 @@ issue at <a href="https://github.com/knuckleswtf/scribe/issues/831">https://gith
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
+                        C:\xampp\htdocs\api\public\/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -37888,7 +37531,7 @@ You can check the Dev Tools console for debugging information.</p>
     --form "old_password=current_password"\
     --form "password=new_password"\
     --form "password_confirmation=new_password"\
-    --form "photo_profile=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" </code></pre>                                        </div>
+    --form "photo_profile=@C:\xampp\htdocs\api\public\img\logo.svg" </code></pre>                                        </div>
                                     </div>
                                 </div>
                                                             <div class="sl-bg-canvas-100 example-request example-request-javascript"
@@ -38866,7 +38509,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        libero
+                        iure
                     </div>
                 </div>
             </div>
@@ -38999,7 +38642,7 @@ fetch(url, {
                                         <input aria-label="id" name="id"
                                                id="urlparam-GETapi-export-employees--id--id"
                                                placeholder="The ID of the employee."
-                                               value="libero" data-component="url"
+                                               value="iure" data-component="url"
                                                class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
                                     </div>
                                 </div>
@@ -39095,7 +38738,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/export/employees/libero" \
+    --get "http://localhost/api/export/employees/iure" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -39106,7 +38749,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/export/employees/libero"
+    "http://localhost/api/export/employees/iure"
 );
 
 const headers = {

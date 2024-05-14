@@ -15,7 +15,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('performance_id');
-            $table->tinyInteger('work_performance_score');
+            $table->float('work_performance_score', 3, 2);
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
 

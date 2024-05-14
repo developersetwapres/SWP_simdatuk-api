@@ -2,21 +2,33 @@
 
 namespace App\Http\Requests\Target;
 
-class CreateTargetRequest
+use Illuminate\Foundation\Http\FormRequest;
+
+
+class CreateTargetRequest extends FormRequest
 {
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
 
     /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public static function rules(): array
+    public function rules(): array
     {
         return [
-            'targets.*.period_month' => 'required|numeric|digits_between:1,12',
-            'targets.*.period_year' => 'required|date_format:Y',
-            'targets.*.appraisal_period' => 'required',
-            'targets.*.year' => 'date_format:Y',
+            'period_month' => 'required|numeric|digits_between:1,12',
+            'period_year' => 'required|date_format:Y',
+            'appraisal_period' => 'required',
+            'year' => 'date_format:Y',
+            'name' => 'required|max:160',
+            'users.*.user_id' => 'required|numeric',
             'users.*.work_behavior_rating' => 'required|numeric',
             'users.*.employee_performance_predicate' => 'required|numeric',
             'users.*.organizational_performance_achievement' => 'required|numeric',
@@ -28,17 +40,20 @@ class CreateTargetRequest
      *
      * @return array
      */
-    public static function messages(): array
+    public function messages(): array
     {
         return [
-            'targets.*.period_month.required' => 'Bulan periode riwayat tidak boleh kosong.',
-            'targets.*.period_month.numeric' => 'Bulan periode riwayat harus berupa angka.',
-            'targets.*.period_month.digits_between' => 'Bulan periode riwayat harus diantara 1 hingga 12.',
-            'targets.*.period_year.required' => 'Tahun periode riwayat tidak boleh kosong.',
-            'targets.*.period_year.date_format' => 'Tahun periode riwayat harus dengan format YYYY.',
-            'targets.*.appraisal_period.required' => 'Periode penilaian tidak boleh kosong.',
-            'targets.*.year.date_format' => 'Tahun target harus dengan format YYYY.',
-            'users.*.user_id' => 'required|numeric',
+            'period_month.required' => 'Bulan periode riwayat tidak boleh kosong.',
+            'period_month.numeric' => 'Bulan periode riwayat harus berupa angka.',
+            'period_month.digits_between' => 'Bulan periode riwayat harus diantara 1 hingga 12.',
+            'period_year.required' => 'Tahun periode riwayat tidak boleh kosong.',
+            'period_year.date_format' => 'Tahun periode riwayat harus dengan format YYYY.',
+            'appraisal_period.required' => 'Periode penilaian tidak boleh kosong.',
+            'year.date_format' => 'Tahun target harus dengan format YYYY.',
+            'name.required' => 'Nama target tidak boleh kosong.',
+            'name.max' => 'Nama target tidak boleh lebih dari 160 karakter.',
+            'users.*.user_id.required' => 'User ID tidak boleh kosong.',
+            'users.*.user_id.numeric' => 'User ID harus berupa angka.',
             'users.*.work_behavior_rating.required' => 'Rating perilaku kerja tidak boleh kosong.',
             'users.*.work_behavior_rating.numeric' => 'Rating perilaku kerja harus berupa angka.',
             'users.*.employee_performance_predicate.required' => 'Predikat kinerja pegawai tidak boleh kosong.',
@@ -53,38 +68,44 @@ class CreateTargetRequest
      *
      * @return array
      */
-    public static function bodyParameters(): array
+    public function bodyParameters(): array
     {
         return [
-            'targets.*.period_month' => [
+            'period_month' => [
                 'description' => 'Refers to the Period Month of Employee Target.',
                 'example' => 3,
             ],
-            'targets.*.period_year' => [
+            'period_year' => [
                 'description' => 'Refers to the Period Year of Employee Target.',
                 'example' => '2020',
             ],
-            'targets.*.appraisal_period' => [
+            'appraisal_period' => [
                 'description' => 'Refers to the Appraisal Period of Employee Target.',
-                'example' => 1,
+                'example' => 'Q1',
             ],
-            'targets.*.year' => [
+            'year' => [
                 'description' => 'Refers to the Year of Employee Target.',
                 'example' => '2020',
             ],
-            'users.*.user_id.required' => 'User ID tidak boleh kosong.',
-            'users.*.user_id.numeric' => 'User ID harus berupa angka.',
+            'users.*.user_id' => [
+                'description' => 'Refers to the User ID of List Employee Recognition.',
+                'example' => 1,
+            ],
             'users.*.work_behavior_rating' => [
                 'description' => 'Refers to the Work Behavior Rating of Employee Target.',
-                'example' => 5,
+                'example' => 1,
             ],
             'users.*.employee_performance_predicate' => [
                 'description' => 'Refers to the Employee Performance Predicate of Employee Target.',
-                'example' => 5,
+                'example' => 1,
             ],
             'users.*.organizational_performance_achievement' => [
                 'description' => 'Refers to the Orginizational Performance Achievement of Employee Target.',
-                'example' => 5,
+                'example' => 1,
+            ],
+            'name' => [
+                'description' => 'Refers to name of Work Performance Score',
+                'example'  => 'PPK December 2020',
             ],
         ];
     }

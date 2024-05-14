@@ -2,8 +2,17 @@
 
 namespace App\Http\Requests\Performance;
 
-class CreatePerformanceRequest
+use Illuminate\Foundation\Http\FormRequest;
+class CreatePerformanceRequest extends FormRequest
 {
+
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -18,7 +27,7 @@ class CreatePerformanceRequest
             'performance_period' => 'required|max:160',
             'name' => 'required|max:160',
             'users.*.user_id' => 'required|numeric',
-            'user.*.work_performance_score' => 'required|numeric',
+            'users.*.work_performance_score' => 'required|numeric',
             'description' => 'max:160',
         ];
     }
@@ -28,7 +37,7 @@ class CreatePerformanceRequest
      *
      * @return array
      */
-    public static function messages(): array
+    public function messages(): array
     {
         return [
             'period_month.required' => 'Bulan periode riwayat tidak boleh kosong.',
@@ -39,6 +48,7 @@ class CreatePerformanceRequest
             'performance_period.required' => 'PPK periode tidak boleh kosong.',
             'performance_period.max' => 'PPK periode tidak boleh lebih dari 160 karakter.',
             'name.required' => 'Nama nilai prestasi kerja tidak boleh kosong.',
+            'name.max' => 'Nama nilai prestasi tidak boleh lebih dari 160 karakter.',
             'users.*.user_id.required' => 'User ID tidak boleh kosong.',
             'users.*.user_id.numeric' => 'User ID harus berupa angka.',
             'users.*.work_performance_score.required' => 'Nilai prestasi kerja tidak boleh kosong.',
@@ -52,7 +62,7 @@ class CreatePerformanceRequest
      *
      * @return array
      */
-    public static function bodyParameters(): array
+    public function bodyParameters(): array
     {
         return [
             'period_month' => [
@@ -65,11 +75,15 @@ class CreatePerformanceRequest
             ],
             'performance_period' => [
                 'description' => 'Refers to the PPK Period of Employee Performance.',
-                'example' => '20',
+                'example' => 'PPK Desember 2020',
+            ],
+            'name' => [
+              'description' => 'Refers to name of Work Performance Score',
+              'example'  => 'PPK December 2020',
             ],
             'users.*.work_performance_score' => [
                 'description' => 'Refers to the Work Performance Score of Employee Performance.',
-                'example' => 5,
+                'example' => 80,
             ],
             'users.*.user_id' => [
                 'description' => 'Refers to the ID of employee',
@@ -77,7 +91,7 @@ class CreatePerformanceRequest
             ],
             'description' => [
                 'description' => 'Refers to the Description of Employee Performance.',
-                'example' => 'Prestasi kinerja',
+                'example' => 'Penilaian Bulanan',
             ],
         ];
     }

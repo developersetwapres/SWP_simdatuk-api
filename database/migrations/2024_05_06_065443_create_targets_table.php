@@ -17,7 +17,7 @@ return new class extends Migration
             $table->tinyInteger('period_month');
             $table->year('period_year');
             $table->enum('appraisal_period', ['Q1', 'Q2', 'Q3', 'Q4']);
-            $table->year('year');
+            $table->year('year')->nullable();
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();;
         });

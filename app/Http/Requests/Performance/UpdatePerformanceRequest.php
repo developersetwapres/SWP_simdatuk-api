@@ -27,7 +27,7 @@ class UpdatePerformanceRequest extends FormRequest
             'performance_period' => 'required|max:160',
             'name' => 'required|max:160',
             'users.*.user_id' => 'required|numeric',
-            'user.*.work_performance_score' => 'required|numeric',
+            'users.*.work_performance_score' => 'required|numeric',
             'description' => 'max:160',
         ];
     }
@@ -48,6 +48,7 @@ class UpdatePerformanceRequest extends FormRequest
             'performance_period.required' => 'PPK periode tidak boleh kosong.',
             'performance_period.max' => 'PPK periode tidak boleh lebih dari 160 karakter.',
             'name.required' => 'Nama nilai prestasi kerja tidak boleh kosong.',
+            'name.max' => 'Nama nilai prestasi tidak boleh lebih dari 160 karakter.',
             'users.*.user_id.required' => 'User ID tidak boleh kosong.',
             'users.*.user_id.numeric' => 'User ID harus berupa angka.',
             'users.*.work_performance_score.required' => 'Nilai prestasi kerja tidak boleh kosong.',
@@ -59,10 +60,6 @@ class UpdatePerformanceRequest extends FormRequest
     public static function bodyParameters(): array
     {
         return [
-            'name' => [
-                'description' => 'Refers to the name Performance report.',
-                'example' => 'PPK November 2026',
-            ],
             'period_month' => [
                 'description' => 'Refers to the Period Month of Employee Performance.',
                 'example' => 3,
@@ -73,19 +70,23 @@ class UpdatePerformanceRequest extends FormRequest
             ],
             'performance_period' => [
                 'description' => 'Refers to the PPK Period of Employee Performance.',
-                'example' => '20',
+                'example' => 'PPK Desember 2020',
+            ],
+            'name' => [
+                'description' => 'Refers to name of Work Performance Score',
+                'example'  => 'PPK December 2020',
+            ],
+            'users.*.work_performance_score' => [
+                'description' => 'Refers to the Work Performance Score of Employee Performance.',
+                'example' => 80,
             ],
             'users.*.user_id' => [
                 'description' => 'Refers to the ID of employee',
                 'example' => 1,
             ],
-            'users.*.work_performance_score' => [
-                'description' => 'Refers to the Work Performance Score of Employee Performance.',
-                'example' => 5,
-            ],
             'description' => [
                 'description' => 'Refers to the Description of Employee Performance.',
-                'example' => 'Prestasi kinerja',
+                'example' => 'Penilaian Bulanan',
             ],
         ];
     }
