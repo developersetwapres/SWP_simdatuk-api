@@ -3,15 +3,12 @@
 namespace App\Http\Requests\Employee;
 
 use App\Http\Requests\Assessment\CreateAssessmentRequest;
-use App\Http\Requests\Discipline\CreateDisciplineRequest;
 use App\Http\Requests\Education\CreateEducationRequest;
 use App\Http\Requests\Family\CreateFamilyRequest;
 use App\Http\Requests\Grade\CreateGradeRequest;
 use App\Http\Requests\Leave\CreateLeaveRequest;
 use App\Http\Requests\Note\CreateNoteRequest;
-use App\Http\Requests\Performance\CreatePerformanceRequest;
 use App\Http\Requests\Position\CreatePositionRequest;
-use App\Http\Requests\Target\CreateTargetRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateEmployeeRequest extends FormRequest
@@ -72,7 +69,6 @@ class CreateEmployeeRequest extends FormRequest
             CreateEducationRequest::rules(),
             CreatePositionRequest::rules(),
             CreateGradeRequest::rules(),
-            CreateDisciplineRequest::rules(),
             CreateFamilyRequest::rules(),
             CreateLeaveRequest::rules(),
             CreateNoteRequest::rules(),
@@ -169,7 +165,6 @@ class CreateEmployeeRequest extends FormRequest
             CreateEducationRequest::messages(),
             CreatePositionRequest::messages(),
             CreateGradeRequest::messages(),
-            CreateDisciplineRequest::messages(),
             CreateFamilyRequest::messages(),
             CreateLeaveRequest::messages(),
             CreateNoteRequest::messages(),
@@ -328,7 +323,6 @@ class CreateEmployeeRequest extends FormRequest
             CreateEducationRequest::bodyParameters(),
             CreatePositionRequest::bodyParameters(),
             CreateGradeRequest::bodyParameters(),
-            CreateDisciplineRequest::bodyParameters(),
             CreateFamilyRequest::bodyParameters(),
             CreateLeaveRequest::bodyParameters(),
             CreateNoteRequest::bodyParameters(),

@@ -20,7 +20,8 @@ class TargetRepository
             'ut.employee_performance_predicate',
             'ut.organizational_performance_achievement',
             't.name',
-            't.created_at');
+            't.created_at'
+        );
         return $userTargets = $userTargets->get();
     }
 }

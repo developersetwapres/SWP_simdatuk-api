@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Laravel Documentation</title>
+    <title>Simdatuk Documentation</title>
 
     <link href="https://fonts.googleapis.com/css?family=PT+Sans&display=swap" rel="stylesheet">
 
@@ -271,7 +271,7 @@
                 <img src="img/logo.svg" height="30px" width="30px" alt="logo">
             </div>
                 <h4 class="sl-text-paragraph sl-leading-snug sl-font-prose sl-font-semibold sl-text-heading">
-            Laravel Documentation
+            Simdatuk Documentation
         </h4>
     </div>
 
@@ -692,6 +692,57 @@
                                                     </a>
                                                                                             </div>
                                                                             </div>
+                                                                    <div class="expandable">
+                                        <div class="sl-flex sl-items-center sl-h-md sl-pr-4 sl-pl-8 sl-bg-canvas-100 hover:sl-bg-canvas-200 sl-cursor-pointer sl-select-none"
+                                             id="toc-item-history-disciplinary">
+                                            <div class="sl-flex-1 sl-items-center sl-truncate sl-mr-1.5 sl-p-0" title="Disciplinary">
+                                                <a class="ElementsTableOfContentsItem sl-block sl-no-underline"
+                                                   href="#history-disciplinary">
+                                                    Disciplinary
+                                                </a>
+                                            </div>
+                                                                                            <div class="sl-flex sl-items-center sl-text-xs expansion-chevrons">
+                                                    <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                                         data-icon="chevron-right"
+                                                         class="svg-inline--fa fa-chevron-right fa-fw sl-icon sl-text-muted"
+                                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                                        <path fill="currentColor"
+                                                              d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"></path>
+                                                    </svg>
+                                                </div>
+                                                                                    </div>
+
+                                                                                    <div class="children" style="display: none;">
+                                                                                                    <a class="ElementsTableOfContentsItem sl-block sl-no-underline"
+                                                       href="#history-GETapi-disciplinaries">
+                                                        <div title="Get List of Disciplinaries" id="toc-item-history-GETapi-disciplinaries"
+                                                             class="sl-flex sl-items-center sl-h-md sl-pr-4 sl-pl-12 sl-bg-canvas-100 hover:sl-bg-canvas-200 sl-cursor-pointer sl-select-none">
+                                                            Get List of Disciplinaries
+                                                        </div>
+                                                    </a>
+                                                                                                    <a class="ElementsTableOfContentsItem sl-block sl-no-underline"
+                                                       href="#history-GETapi-disciplinaries--id-">
+                                                        <div title="Get Detail Disciplinary by ID" id="toc-item-history-GETapi-disciplinaries--id-"
+                                                             class="sl-flex sl-items-center sl-h-md sl-pr-4 sl-pl-12 sl-bg-canvas-100 hover:sl-bg-canvas-200 sl-cursor-pointer sl-select-none">
+                                                            Get Detail Disciplinary by ID
+                                                        </div>
+                                                    </a>
+                                                                                                    <a class="ElementsTableOfContentsItem sl-block sl-no-underline"
+                                                       href="#history-POSTapi-disciplinaries">
+                                                        <div title="Create a New Disciplinary" id="toc-item-history-POSTapi-disciplinaries"
+                                                             class="sl-flex sl-items-center sl-h-md sl-pr-4 sl-pl-12 sl-bg-canvas-100 hover:sl-bg-canvas-200 sl-cursor-pointer sl-select-none">
+                                                            Create a New Disciplinary
+                                                        </div>
+                                                    </a>
+                                                                                                    <a class="ElementsTableOfContentsItem sl-block sl-no-underline"
+                                                       href="#history-POSTapi-disciplinaries--id-">
+                                                        <div title="Update Disciplinary by ID" id="toc-item-history-POSTapi-disciplinaries--id-"
+                                                             class="sl-flex sl-items-center sl-h-md sl-pr-4 sl-pl-12 sl-bg-canvas-100 hover:sl-bg-canvas-200 sl-cursor-pointer sl-select-none">
+                                                            Update Disciplinary by ID
+                                                        </div>
+                                                    </a>
+                                                                                            </div>
+                                                                            </div>
                                                             </div>
                                             </div>
                                     <div class="expandable">
@@ -943,6 +994,36 @@
                                                         <div title="Get List of Groups" id="toc-item-master-data-GETapi-groups"
                                                              class="sl-flex sl-items-center sl-h-md sl-pr-4 sl-pl-12 sl-bg-canvas-100 hover:sl-bg-canvas-200 sl-cursor-pointer sl-select-none">
                                                             Get List of Groups
+                                                        </div>
+                                                    </a>
+                                                                                            </div>
+                                                                            </div>
+                                                                    <div class="expandable">
+                                        <div class="sl-flex sl-items-center sl-h-md sl-pr-4 sl-pl-8 sl-bg-canvas-100 hover:sl-bg-canvas-200 sl-cursor-pointer sl-select-none"
+                                             id="toc-item-master-data-disciplinary-type">
+                                            <div class="sl-flex-1 sl-items-center sl-truncate sl-mr-1.5 sl-p-0" title="Disciplinary Type">
+                                                <a class="ElementsTableOfContentsItem sl-block sl-no-underline"
+                                                   href="#master-data-disciplinary-type">
+                                                    Disciplinary Type
+                                                </a>
+                                            </div>
+                                                                                            <div class="sl-flex sl-items-center sl-text-xs expansion-chevrons">
+                                                    <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                                         data-icon="chevron-right"
+                                                         class="svg-inline--fa fa-chevron-right fa-fw sl-icon sl-text-muted"
+                                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                                        <path fill="currentColor"
+                                                              d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"></path>
+                                                    </svg>
+                                                </div>
+                                                                                    </div>
+
+                                                                                    <div class="children" style="display: none;">
+                                                                                                    <a class="ElementsTableOfContentsItem sl-block sl-no-underline"
+                                                       href="#master-data-GETapi-disciplinary-types">
+                                                        <div title="Get List of Disciplinary Types" id="toc-item-master-data-GETapi-disciplinary-types"
+                                                             class="sl-flex sl-items-center sl-h-md sl-pr-4 sl-pl-12 sl-bg-canvas-100 hover:sl-bg-canvas-200 sl-cursor-pointer sl-select-none">
+                                                            Get List of Disciplinary Types
                                                         </div>
                                                     </a>
                                                                                             </div>
@@ -1230,7 +1311,7 @@
         <div class="sl-mb-10">
             <div class="sl-mb-4">
                 <h1 class="sl-text-5xl sl-leading-tight sl-font-prose sl-font-semibold sl-text-heading">
-                    Laravel Documentation
+                    Simdatuk Documentation
                 </h1>
                                     <a title="Download Postman collection" class="sl-mx-1"
                        href="{{ route("scribe.postman") }}" target="_blank">
@@ -4558,7 +4639,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        C:\xampp\htdocs\api\public\/img/logo.svg
+                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -5063,7 +5144,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        C:\xampp\htdocs\api\public\/img/logo.svg
+                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -5605,7 +5686,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        C:\xampp\htdocs\api\public\/img/logo.svg
+                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -5814,7 +5895,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        C:\xampp\htdocs\api\public\/img/logo.svg
+                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -6279,7 +6360,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        C:\xampp\htdocs\api\public\/img/logo.svg
+                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -6409,452 +6490,6 @@ fetch(url, {
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
                         1
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-            </div>
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2  sl-cursor-pointer ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                            <div class="sl-flex sl-justify-center sl-w-8 sl--ml-8 sl-pl-3 sl-text-muted expansion-chevrons" role="button">
-                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right"
-                         class="svg-inline--fa fa-chevron-right fa-fw fa-sm sl-icon" role="img"
-                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                        <path fill="currentColor"
-                              d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"></path>
-                    </svg>
-                </div>
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">disciplinaries</div>
-                                            <span class="sl-truncate sl-text-muted">object[]</span>
-                                    </div>
-                                    </div>
-                                    </div>
-</div>
-
-                    <div class="children" style="display: none;">
-                <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">period_month</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Period Month of Employee Discipline. Must be between 1 and 12 digits.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        3
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">period_year</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Period Year of Employee Discipline. Must be a valid date in the format <code>Y</code>.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        2020
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">grade_id</div>
-                                            <span class="sl-truncate sl-text-muted">number</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the ID Grade of Employee Discipline.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        1
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">position</div>
-                                            <span class="sl-truncate sl-text-muted">number</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Position of Employee Discipline.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        1
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">penalty</div>
-                                            <span class="sl-truncate sl-text-muted">number</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Penalty of Employee Discipline.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        1
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">decree_number</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Decree Number of Employee Discipline. Must not be greater than 160 characters.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        Nomor 112 Tahun 2013
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">date_of_decree</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Date of Decree of Employee Discipline. Must be a valid date.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        2020-10-22
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">start_date</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Start Date of Employee Discipline. Must be a valid date.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        2020-10-22
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">end_date</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the End Date of Employee Discipline. Must be a valid date.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        2020-10-22
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">status</div>
-                                            <span class="sl-truncate sl-text-muted">number</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Status of Employee Discipline.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        1
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">description</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Description of Employee Discipline. Must not be greater than 160 characters.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        Melanggar aturan
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">authorizing_officer</div>
-                                            <span class="sl-truncate sl-text-muted">number</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Authorizing Officer of Employee Discipline.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        1
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">name_of_authorizing_officer</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Name of Authorizing Officer of Employee Discipline. Must not be greater than 160 characters.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        Sapto Harjono Wahjoe Sedjati
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">level</div>
-                                            <span class="sl-truncate sl-text-muted">number</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Level of Employee Discipline.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        1
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">type</div>
-                                            <span class="sl-truncate sl-text-muted">number</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Type of Employee Discipline.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        1
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">validity_period</div>
-                                            <span class="sl-truncate sl-text-muted">number</span>
-                                    </div>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Validity Period of Employee Discipline.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        10
                     </div>
                 </div>
             </div>
@@ -7544,7 +7179,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        C:\xampp\htdocs\api\public\/img/logo.svg
+                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -7721,7 +7356,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        C:\xampp\htdocs\api\public\/img/logo.svg
+                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -8358,19 +7993,6 @@ fetch(url, {
                                                                                     </div>
                                     </div>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     <label aria-hidden="true"
-                                           for="bodyparam-POSTapi-employees-disciplinaries">disciplinaries</label>
-                                    <span class="sl-mx-3">:</span>
-                                    <div class="sl-flex sl-flex-1">
-                                        <div class="sl-input sl-flex-1 sl-relative">
-                                                                                            <input aria-label="disciplinaries" name="disciplinaries"
-                                                       id="bodyparam-POSTapi-employees-disciplinaries"
-                                                       placeholder=""
-                                                       value="[[]]" data-component="body"
-                                                       class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
-                                                >
-                                                                                    </div>
-                                    </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <label aria-hidden="true"
                                            for="bodyparam-POSTapi-employees-families">families</label>
                                     <span class="sl-mx-3">:</span>
                                     <div class="sl-flex sl-flex-1">
@@ -8582,22 +8204,6 @@ You can check the Dev Tools console for debugging information.</p>
     --form "grades[][decree_date]=2020-10-22"\
     --form "grades[][description]=Kenaikan Pangkat Reguler"\
     --form "grades[][status]=1"\
-    --form "disciplinaries[][period_month]=3"\
-    --form "disciplinaries[][period_year]=2020"\
-    --form "disciplinaries[][grade_id]=1"\
-    --form "disciplinaries[][position]=1"\
-    --form "disciplinaries[][penalty]=1"\
-    --form "disciplinaries[][decree_number]=Nomor 112 Tahun 2013"\
-    --form "disciplinaries[][date_of_decree]=2020-10-22"\
-    --form "disciplinaries[][start_date]=2020-10-22"\
-    --form "disciplinaries[][end_date]=2020-10-22"\
-    --form "disciplinaries[][status]=1"\
-    --form "disciplinaries[][description]=Melanggar aturan"\
-    --form "disciplinaries[][authorizing_officer]=1"\
-    --form "disciplinaries[][name_of_authorizing_officer]=Sapto Harjono Wahjoe Sedjati"\
-    --form "disciplinaries[][level]=1"\
-    --form "disciplinaries[][type]=1"\
-    --form "disciplinaries[][validity_period]=10"\
     --form "families[][card_number]=1234.5678.9012.3456"\
     --form "families[][name]=Adi Setiawan"\
     --form "families[][id_number]=1234567890123456"\
@@ -8626,13 +8232,13 @@ You can check the Dev Tools console for debugging information.</p>
     --form "assessments[][point]=10"\
     --form "assessments[][organizer]=PPKASN"\
     --form "assessments[][type]=1"\
-    --form "photo_profile=@C:\xampp\htdocs\api\public\img\logo.svg" \
-    --form "employee_id_card=@C:\xampp\htdocs\api\public\img\logo.svg" \
-    --form "educations[][degree_document]=@C:\xampp\htdocs\api\public\img\logo.svg" \
-    --form "positions[][decree_document]=@C:\xampp\htdocs\api\public\img\logo.svg" \
-    --form "grades[][decree_document]=@C:\xampp\htdocs\api\public\img\logo.svg" \
-    --form "leaves[][leave_letter]=@C:\xampp\htdocs\api\public\img\logo.svg" \
-    --form "assessments[][assessment_document]=@C:\xampp\htdocs\api\public\img\logo.svg" </code></pre>                                        </div>
+    --form "photo_profile=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" \
+    --form "employee_id_card=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" \
+    --form "educations[][degree_document]=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" \
+    --form "positions[][decree_document]=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" \
+    --form "grades[][decree_document]=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" \
+    --form "leaves[][leave_letter]=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" \
+    --form "assessments[][assessment_document]=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" </code></pre>                                        </div>
                                     </div>
                                 </div>
                                                             <div class="sl-bg-canvas-100 example-request example-request-javascript"
@@ -8716,22 +8322,6 @@ body.append('grades[][decree_number]', '58/Set.Neg/Pers.In/6/1993, 12-06-1993');
 body.append('grades[][decree_date]', '2020-10-22');
 body.append('grades[][description]', 'Kenaikan Pangkat Reguler');
 body.append('grades[][status]', '1');
-body.append('disciplinaries[][period_month]', '3');
-body.append('disciplinaries[][period_year]', '2020');
-body.append('disciplinaries[][grade_id]', '1');
-body.append('disciplinaries[][position]', '1');
-body.append('disciplinaries[][penalty]', '1');
-body.append('disciplinaries[][decree_number]', 'Nomor 112 Tahun 2013');
-body.append('disciplinaries[][date_of_decree]', '2020-10-22');
-body.append('disciplinaries[][start_date]', '2020-10-22');
-body.append('disciplinaries[][end_date]', '2020-10-22');
-body.append('disciplinaries[][status]', '1');
-body.append('disciplinaries[][description]', 'Melanggar aturan');
-body.append('disciplinaries[][authorizing_officer]', '1');
-body.append('disciplinaries[][name_of_authorizing_officer]', 'Sapto Harjono Wahjoe Sedjati');
-body.append('disciplinaries[][level]', '1');
-body.append('disciplinaries[][type]', '1');
-body.append('disciplinaries[][validity_period]', '10');
 body.append('families[][card_number]', '1234.5678.9012.3456');
 body.append('families[][name]', 'Adi Setiawan');
 body.append('families[][id_number]', '1234567890123456');
@@ -9470,7 +9060,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        C:\xampp\htdocs\api\public\/img/logo.svg
+                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -9975,7 +9565,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        C:\xampp\htdocs\api\public\/img/logo.svg
+                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -10517,7 +10107,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        C:\xampp\htdocs\api\public\/img/logo.svg
+                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -10726,7 +10316,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        C:\xampp\htdocs\api\public\/img/logo.svg
+                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -11191,7 +10781,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        C:\xampp\htdocs\api\public\/img/logo.svg
+                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -11321,452 +10911,6 @@ fetch(url, {
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
                         1
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-            </div>
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2  sl-cursor-pointer ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                            <div class="sl-flex sl-justify-center sl-w-8 sl--ml-8 sl-pl-3 sl-text-muted expansion-chevrons" role="button">
-                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right"
-                         class="svg-inline--fa fa-chevron-right fa-fw fa-sm sl-icon" role="img"
-                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                        <path fill="currentColor"
-                              d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"></path>
-                    </svg>
-                </div>
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">disciplinaries</div>
-                                            <span class="sl-truncate sl-text-muted">object[]</span>
-                                    </div>
-                                    </div>
-                                    </div>
-</div>
-
-                    <div class="children" style="display: none;">
-                <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">period_month</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Period Month of Employee Discipline. Must be between 1 and 12 digits.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        3
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">period_year</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Period Year of Employee Discipline. Must be a valid date in the format <code>Y</code>.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        2020
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">grade_id</div>
-                                            <span class="sl-truncate sl-text-muted">number</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the ID Grade of Employee Discipline.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        1
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">position</div>
-                                            <span class="sl-truncate sl-text-muted">number</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Position of Employee Discipline.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        1
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">penalty</div>
-                                            <span class="sl-truncate sl-text-muted">number</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Penalty of Employee Discipline.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        1
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">decree_number</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Decree Number of Employee Discipline. Must not be greater than 160 characters.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        Nomor 112 Tahun 2013
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">date_of_decree</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Date of Decree of Employee Discipline. Must be a valid date.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        2020-10-22
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">start_date</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Start Date of Employee Discipline. Must be a valid date.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        2020-10-22
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">end_date</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the End Date of Employee Discipline. Must be a valid date.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        2020-10-22
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">status</div>
-                                            <span class="sl-truncate sl-text-muted">number</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Status of Employee Discipline.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        1
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">description</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Description of Employee Discipline. Must not be greater than 160 characters.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        Melanggar aturan
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">authorizing_officer</div>
-                                            <span class="sl-truncate sl-text-muted">number</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Authorizing Officer of Employee Discipline.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        1
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">name_of_authorizing_officer</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Name of Authorizing Officer of Employee Discipline. Must not be greater than 160 characters.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        Sapto Harjono Wahjoe Sedjati
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">level</div>
-                                            <span class="sl-truncate sl-text-muted">number</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Level of Employee Discipline.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        1
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">type</div>
-                                            <span class="sl-truncate sl-text-muted">number</span>
-                                    </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Type of Employee Discipline.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        1
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">validity_period</div>
-                                            <span class="sl-truncate sl-text-muted">number</span>
-                                    </div>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Validity Period of Employee Discipline.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        10
                     </div>
                 </div>
             </div>
@@ -12456,7 +11600,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        C:\xampp\htdocs\api\public\/img/logo.svg
+                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -12633,7 +11777,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        C:\xampp\htdocs\api\public\/img/logo.svg
+                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -13303,19 +12447,6 @@ fetch(url, {
                                                                                     </div>
                                     </div>
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     <label aria-hidden="true"
-                                           for="bodyparam-POSTapi-employees--id--disciplinaries">disciplinaries</label>
-                                    <span class="sl-mx-3">:</span>
-                                    <div class="sl-flex sl-flex-1">
-                                        <div class="sl-input sl-flex-1 sl-relative">
-                                                                                            <input aria-label="disciplinaries" name="disciplinaries"
-                                                       id="bodyparam-POSTapi-employees--id--disciplinaries"
-                                                       placeholder=""
-                                                       value="[[]]" data-component="body"
-                                                       class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
-                                                >
-                                                                                    </div>
-                                    </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <label aria-hidden="true"
                                            for="bodyparam-POSTapi-employees--id--families">families</label>
                                     <span class="sl-mx-3">:</span>
                                     <div class="sl-flex sl-flex-1">
@@ -13527,22 +12658,6 @@ You can check the Dev Tools console for debugging information.</p>
     --form "grades[][decree_date]=2020-10-22"\
     --form "grades[][description]=Kenaikan Pangkat Reguler"\
     --form "grades[][status]=1"\
-    --form "disciplinaries[][period_month]=3"\
-    --form "disciplinaries[][period_year]=2020"\
-    --form "disciplinaries[][grade_id]=1"\
-    --form "disciplinaries[][position]=1"\
-    --form "disciplinaries[][penalty]=1"\
-    --form "disciplinaries[][decree_number]=Nomor 112 Tahun 2013"\
-    --form "disciplinaries[][date_of_decree]=2020-10-22"\
-    --form "disciplinaries[][start_date]=2020-10-22"\
-    --form "disciplinaries[][end_date]=2020-10-22"\
-    --form "disciplinaries[][status]=1"\
-    --form "disciplinaries[][description]=Melanggar aturan"\
-    --form "disciplinaries[][authorizing_officer]=1"\
-    --form "disciplinaries[][name_of_authorizing_officer]=Sapto Harjono Wahjoe Sedjati"\
-    --form "disciplinaries[][level]=1"\
-    --form "disciplinaries[][type]=1"\
-    --form "disciplinaries[][validity_period]=10"\
     --form "families[][card_number]=1234.5678.9012.3456"\
     --form "families[][name]=Adi Setiawan"\
     --form "families[][id_number]=1234567890123456"\
@@ -13571,13 +12686,13 @@ You can check the Dev Tools console for debugging information.</p>
     --form "assessments[][point]=10"\
     --form "assessments[][organizer]=PPKASN"\
     --form "assessments[][type]=1"\
-    --form "photo_profile=@C:\xampp\htdocs\api\public\img\logo.svg" \
-    --form "employee_id_card=@C:\xampp\htdocs\api\public\img\logo.svg" \
-    --form "educations[][degree_document]=@C:\xampp\htdocs\api\public\img\logo.svg" \
-    --form "positions[][decree_document]=@C:\xampp\htdocs\api\public\img\logo.svg" \
-    --form "grades[][decree_document]=@C:\xampp\htdocs\api\public\img\logo.svg" \
-    --form "leaves[][leave_letter]=@C:\xampp\htdocs\api\public\img\logo.svg" \
-    --form "assessments[][assessment_document]=@C:\xampp\htdocs\api\public\img\logo.svg" </code></pre>                                        </div>
+    --form "photo_profile=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" \
+    --form "employee_id_card=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" \
+    --form "educations[][degree_document]=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" \
+    --form "positions[][decree_document]=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" \
+    --form "grades[][decree_document]=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" \
+    --form "leaves[][leave_letter]=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" \
+    --form "assessments[][assessment_document]=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" </code></pre>                                        </div>
                                     </div>
                                 </div>
                                                             <div class="sl-bg-canvas-100 example-request example-request-javascript"
@@ -13661,22 +12776,6 @@ body.append('grades[][decree_number]', '58/Set.Neg/Pers.In/6/1993, 12-06-1993');
 body.append('grades[][decree_date]', '2020-10-22');
 body.append('grades[][description]', 'Kenaikan Pangkat Reguler');
 body.append('grades[][status]', '1');
-body.append('disciplinaries[][period_month]', '3');
-body.append('disciplinaries[][period_year]', '2020');
-body.append('disciplinaries[][grade_id]', '1');
-body.append('disciplinaries[][position]', '1');
-body.append('disciplinaries[][penalty]', '1');
-body.append('disciplinaries[][decree_number]', 'Nomor 112 Tahun 2013');
-body.append('disciplinaries[][date_of_decree]', '2020-10-22');
-body.append('disciplinaries[][start_date]', '2020-10-22');
-body.append('disciplinaries[][end_date]', '2020-10-22');
-body.append('disciplinaries[][status]', '1');
-body.append('disciplinaries[][description]', 'Melanggar aturan');
-body.append('disciplinaries[][authorizing_officer]', '1');
-body.append('disciplinaries[][name_of_authorizing_officer]', 'Sapto Harjono Wahjoe Sedjati');
-body.append('disciplinaries[][level]', '1');
-body.append('disciplinaries[][type]', '1');
-body.append('disciplinaries[][validity_period]', '10');
 body.append('families[][card_number]', '1234.5678.9012.3456');
 body.append('families[][name]', 'Adi Setiawan');
 body.append('families[][id_number]', '1234567890123456');
@@ -14794,7 +13893,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        C:\xampp\htdocs\api\public\/img/logo.svg
+                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -15170,7 +14269,7 @@ You can check the Dev Tools console for debugging information.</p>
     --form "link=https://google.com"\
     --form "type=1"\
     --form "users[][user_id]=1"\
-    --form "users[][certificate]=@C:\xampp\htdocs\api\public\img\logo.svg" </code></pre>                                        </div>
+    --form "users[][certificate]=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" </code></pre>                                        </div>
                                     </div>
                                 </div>
                                                             <div class="sl-bg-canvas-100 example-request example-request-javascript"
@@ -16174,7 +15273,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        C:\xampp\htdocs\api\public\/img/logo.svg
+                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -16584,7 +15683,7 @@ You can check the Dev Tools console for debugging information.</p>
     --form "type=1"\
     --form "users[][id]=1"\
     --form "users[][user_id]=1"\
-    --form "users[][certificate]=@C:\xampp\htdocs\api\public\img\logo.svg" </code></pre>                                        </div>
+    --form "users[][certificate]=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" </code></pre>                                        </div>
                                     </div>
                                 </div>
                                                             <div class="sl-bg-canvas-100 example-request example-request-javascript"
@@ -24154,6 +23253,2762 @@ fetch(url, {
     </div>
 </div>
 
+                                <h2 id="history-disciplinary"
+                class="sl-text-3xl sl-leading-tight sl-font-prose sl-text-heading sl-mt-5 sl-mb-3"
+            >
+                Disciplinary
+            </h2>
+                                        <p>These endpoints allow you to perform CRUD operations on disciplinary data, enabling the retrieval, creation, and updating of disciplinary records as needed.</p>
+                        <br>
+                            <div class="sl-stack sl-stack--vertical sl-stack--8 HttpOperation sl-flex sl-flex-col sl-items-stretch sl-w-full">
+    <div class="sl-stack sl-stack--vertical sl-stack--5 sl-flex sl-flex-col sl-items-stretch">
+        <div class="sl-relative">
+            <div class="sl-stack sl-stack--horizontal sl-stack--5 sl-flex sl-flex-row sl-items-center">
+                <h2 class="sl-text-3xl sl-leading-tight sl-font-prose sl-text-heading sl-mt-5 sl-mb-1"
+                    id="history-GETapi-disciplinaries">
+                    Get List of Disciplinaries
+                </h2>
+            </div>
+        </div>
+
+        <div class="sl-relative">
+            <div title="http://localhost/api/disciplinaries"
+                     class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
+                >
+                                            <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
+                             style="background-color: green;"
+                        >
+                            GET
+                        </div>
+                                        <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
+                        <div dir="rtl"
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
+                        <div class="sl-flex-1 sl-font-semibold">/api/disciplinaries</div>
+                    </div>
+
+                                                    <div class="sl-font-prose sl-font-semibold sl-px-1.5 sl-py-0.5 sl-text-on-primary sl-rounded-lg"
+                                 style="background-color: darkred"
+                            >requires authentication
+                            </div>
+                                    </div>
+        </div>
+
+        <p>Retrieve the history of employee disciplinaries.</p>
+    </div>
+    <div class="sl-flex">
+        <div data-testid="two-column-left" class="sl-flex-1 sl-w-0">
+            <div class="sl-stack sl-stack--vertical sl-stack--10 sl-flex sl-flex-col sl-items-stretch">
+                <div class="sl-stack sl-stack--vertical sl-stack--8 sl-flex sl-flex-col sl-items-stretch">
+                                            <div class="sl-stack sl-stack--vertical sl-stack--5 sl-flex sl-flex-col sl-items-stretch">
+                            <h3 class="sl-text-2xl sl-leading-snug sl-font-prose">
+                                Headers
+                            </h3>
+                            <div class="sl-text-sm">
+                                                                    <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">Authorization</div>
+                                    </div>
+                                    </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        Bearer {YOUR_AUTH_KEY}
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+                                                                    <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">Content-Type</div>
+                                    </div>
+                                    </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        application/json
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+                                                                    <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">Accept</div>
+                                    </div>
+                                    </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        application/json
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+                                                            </div>
+                        </div>
+                    
+                    
+
+                                                <div class="sl-stack sl-stack--vertical sl-stack--6 sl-flex sl-flex-col sl-items-stretch">
+                                <h3 class="sl-text-2xl sl-leading-snug sl-font-prose">Query Parameters</h3>
+
+                                <div class="sl-text-sm">
+                                                                            <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">page</div>
+                                            <span class="sl-truncate sl-text-muted">integer</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the current page of results being displayed. Default is '1'.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        1
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+                                                                            <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">limit</div>
+                                            <span class="sl-truncate sl-text-muted">integer</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the maximum number of items to be displayed per page. Defaults is '10'.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        10
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+                                                                            <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">name</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>The keyword search field for the name.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        Hukuman Disiplin
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+                                                                </div>
+                        </div>
+                    
+                    
+                                    </div>
+            </div>
+        </div>
+
+        <div data-testid="two-column-right" class="sl-relative sl-w-2/5 sl-ml-16" style="max-width: 500px;">
+            <div class="sl-stack sl-stack--vertical sl-stack--6 sl-flex sl-flex-col sl-items-stretch">
+
+                                    <div class="sl-inverted">
+    <div class="sl-overflow-y-hidden sl-rounded-lg">
+        <form class="TryItPanel sl-bg-canvas-100 sl-rounded-lg"
+              data-method="GET"
+              data-path="api/disciplinaries"
+              data-hasfiles="0"
+              data-hasjsonbody="0">
+                            <div class="sl-panel sl-outline-none sl-w-full expandable">
+                    <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
+                         role="button">
+                        <div class="sl-flex sl-flex-1 sl-items-center sl-h-lg">
+                            <div class="sl-flex sl-items-center sl-mr-1.5 expansion-chevrons expansion-chevrons-solid expanded">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                     data-icon="caret-down"
+                                     class="svg-inline--fa fa-caret-down fa-fw sl-icon" role="img"
+                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                    <path fill="currentColor"
+                                          d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"></path>
+                                </svg>
+                            </div>
+                            Auth
+                        </div>
+                    </div>
+                    <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
+                        <div class="ParameterGrid sl-p-4">
+                            <label aria-hidden="true"
+                                   for="auth-GETapi-disciplinaries">Authorization</label>
+                            <span class="sl-mx-3">:</span>
+                            <div class="sl-flex sl-flex-1">
+                                <div class="sl-input sl-flex-1 sl-relative">
+                                    <code>Bearer </code>
+                                    <input aria-label="Authorization"
+                                           id="auth-GETapi-disciplinaries"
+                                           data-component="header"
+                                           data-prefix="Bearer "
+                                           name="Authorization"
+                                           placeholder="{YOUR_AUTH_KEY}"
+                                           class="auth-value sl-relative sl-w-3/5 sl-h-md sl-text-base sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                            <div class="sl-panel sl-outline-none sl-w-full expandable">
+                    <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
+                         role="button">
+                        <div class="sl-flex sl-flex-1 sl-items-center sl-h-lg">
+                            <div class="sl-flex sl-items-center sl-mr-1.5 expansion-chevrons expansion-chevrons-solid expanded">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                     data-icon="caret-down"
+                                     class="svg-inline--fa fa-caret-down fa-fw sl-icon" role="img"
+                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                    <path fill="currentColor"
+                                          d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"></path>
+                                </svg>
+                            </div>
+                            Headers
+                        </div>
+                    </div>
+                    <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
+                        <div class="ParameterGrid sl-p-4">
+                                                                                                                            <label aria-hidden="true"
+                                       for="header-GETapi-disciplinaries-Content-Type">Content-Type</label>
+                                <span class="sl-mx-3">:</span>
+                                <div class="sl-flex sl-flex-1">
+                                    <div class="sl-input sl-flex-1 sl-relative">
+                                        <input aria-label="Content-Type" name="Content-Type"
+                                               id="header-GETapi-disciplinaries-Content-Type"
+                                               value="application/json" data-component="header"
+                                               class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
+                                    </div>
+                                </div>
+                                                                                            <label aria-hidden="true"
+                                       for="header-GETapi-disciplinaries-Accept">Accept</label>
+                                <span class="sl-mx-3">:</span>
+                                <div class="sl-flex sl-flex-1">
+                                    <div class="sl-input sl-flex-1 sl-relative">
+                                        <input aria-label="Accept" name="Accept"
+                                               id="header-GETapi-disciplinaries-Accept"
+                                               value="application/json" data-component="header"
+                                               class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
+                                    </div>
+                                </div>
+                                                    </div>
+                    </div>
+                </div>
+            
+            
+                            <div class="sl-panel sl-outline-none sl-w-full expandable">
+                    <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
+                         role="button">
+                        <div class="sl-flex sl-flex-1 sl-items-center sl-h-lg">
+                            <div class="sl-flex sl-items-center sl-mr-1.5 expansion-chevrons expansion-chevrons-solid expanded">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                     data-icon="caret-down"
+                                     class="svg-inline--fa fa-caret-down fa-fw sl-icon" role="img"
+                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                    <path fill="currentColor"
+                                          d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"></path>
+                                </svg>
+                            </div>
+                            Query Parameters
+                        </div>
+                    </div>
+                    <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
+                        <div class="ParameterGrid sl-p-4">
+                                                                                            <label aria-hidden="true"
+                                       for="queryparam-GETapi-disciplinaries-page">page</label>
+                                <span class="sl-mx-3">:</span>
+                                <div class="sl-flex sl-flex-1">
+                                    <div class="sl-input sl-flex-1 sl-relative">
+                                                                                    <input aria-label="page" name="page"
+                                                   id="queryparam-GETapi-disciplinaries-page"
+                                                   placeholder="Refers to the current page of results being displayed. Default is &#039;1&#039;."
+                                                   value="1" data-component="query"
+                                                   class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
+                                            >
+                                                                            </div>
+                                </div>
+                                                                                            <label aria-hidden="true"
+                                       for="queryparam-GETapi-disciplinaries-limit">limit</label>
+                                <span class="sl-mx-3">:</span>
+                                <div class="sl-flex sl-flex-1">
+                                    <div class="sl-input sl-flex-1 sl-relative">
+                                                                                    <input aria-label="limit" name="limit"
+                                                   id="queryparam-GETapi-disciplinaries-limit"
+                                                   placeholder="Refers to the maximum number of items to be displayed per page. Defaults is &#039;10&#039;."
+                                                   value="10" data-component="query"
+                                                   class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
+                                            >
+                                                                            </div>
+                                </div>
+                                                                                            <label aria-hidden="true"
+                                       for="queryparam-GETapi-disciplinaries-name">name</label>
+                                <span class="sl-mx-3">:</span>
+                                <div class="sl-flex sl-flex-1">
+                                    <div class="sl-input sl-flex-1 sl-relative">
+                                                                                    <input aria-label="name" name="name"
+                                                   id="queryparam-GETapi-disciplinaries-name"
+                                                   placeholder="The keyword search field for the name."
+                                                   value="Hukuman Disiplin" data-component="query"
+                                                   class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
+                                            >
+                                                                            </div>
+                                </div>
+                                                    </div>
+                    </div>
+                </div>
+            
+            
+            <div class="SendButtonHolder sl-mt-4 sl-p-4 sl-pt-0">
+                <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-center">
+                    <button type="button" data-endpoint="GETapi-disciplinaries"
+                            class="tryItOut-btn sl-button sl-h-sm sl-text-base sl-font-medium sl-px-1.5 sl-bg-primary hover:sl-bg-primary-dark active:sl-bg-primary-darker disabled:sl-bg-canvas-100 sl-text-on-primary disabled:sl-text-body sl-rounded sl-border-transparent sl-border disabled:sl-opacity-70"
+                    >
+                        Send Request 💥
+                    </button>
+                </div>
+            </div>
+
+            <div data-endpoint="GETapi-disciplinaries"
+                 class="tryItOut-error expandable sl-panel sl-outline-none sl-w-full" hidden>
+                <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
+                     role="button">
+                    <div class="sl-flex sl-flex-1 sl-items-center sl-h-lg">
+                        <div class="sl-flex sl-items-center sl-mr-1.5 expansion-chevrons expansion-chevrons-solid expanded">
+                            <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                 data-icon="caret-down"
+                                 class="svg-inline--fa fa-caret-down fa-fw sl-icon" role="img"
+                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                <path fill="currentColor"
+                                      d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"></path>
+                            </svg>
+                        </div>
+                        Request failed with error
+                    </div>
+                </div>
+                <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
+                    <div class="sl-panel__content sl-p-4">
+                        <p class="sl-pb-2"><strong class="error-message"></strong></p>
+                        <p class="sl-pb-2">Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</p>
+                    </div>
+                </div>
+            </div>
+
+                <div data-endpoint="GETapi-disciplinaries"
+                     class="tryItOut-response expandable sl-panel sl-outline-none sl-w-full" hidden>
+                    <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
+                         role="button">
+                        <div class="sl-flex sl-flex-1 sl-items-center sl-h-lg">
+                            <div class="sl-flex sl-items-center sl-mr-1.5 expansion-chevrons expansion-chevrons-solid expanded">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                     data-icon="caret-down"
+                                     class="svg-inline--fa fa-caret-down fa-fw sl-icon" role="img"
+                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                    <path fill="currentColor"
+                                          d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"></path>
+                                </svg>
+                            </div>
+                            Received response
+                        </div>
+                    </div>
+                    <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
+                        <div class="sl-panel__content sl-p-4">
+                            <p class="sl-pb-2 response-status"></p>
+                            <pre><code class="sl-pb-2 response-content language-json"
+                                       data-empty-response-text="<Empty response>"
+                                       style="max-height: 300px;"></code></pre>
+                        </div>
+                    </div>
+                </div>
+        </form>
+    </div>
+</div>
+                
+                                            <div class="sl-panel sl-outline-none sl-w-full sl-rounded-lg">
+                            <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-3 sl-pl-4 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-select-none">
+                                <div class="sl-flex sl-flex-1 sl-items-center sl-h-lg">
+                                    <div class="sl--ml-2">
+                                        Example request:
+                                        <select class="example-request-lang-toggle sl-text-base"
+                                                aria-label="Request Sample Language"
+                                                onchange="switchExampleLanguage(event.target.value);">
+                                                                                            <option>bash</option>
+                                                                                            <option>javascript</option>
+                                                                                    </select>
+                                    </div>
+                                </div>
+                            </div>
+                                                            <div class="sl-bg-canvas-100 example-request example-request-bash"
+                                     style="">
+                                    <div class="sl-px-0 sl-py-1">
+                                        <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
+                                            <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/disciplinaries?page=1&amp;limit=10&amp;name=Hukuman+Disiplin" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre>                                        </div>
+                                    </div>
+                                </div>
+                                                            <div class="sl-bg-canvas-100 example-request example-request-javascript"
+                                     style="display: none;">
+                                    <div class="sl-px-0 sl-py-1">
+                                        <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
+                                            <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/disciplinaries"
+);
+
+const params = {
+    "page": "1",
+    "limit": "10",
+    "name": "Hukuman Disiplin",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>                                        </div>
+                                    </div>
+                                </div>
+                                                    </div>
+                    
+                                            <div class="sl-panel sl-outline-none sl-w-full sl-rounded-lg">
+                            <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-3 sl-pl-4 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-select-none">
+                                <div class="sl-flex sl-flex-1 sl-items-center sl-py-2">
+                                    <div class="sl--ml-2">
+                                        <div class="sl-h-sm sl-text-base sl-font-medium sl-px-1.5 sl-text-muted sl-rounded sl-border-transparent sl-border">
+                                            <div class="sl-mb-2 sl-inline-block">Example response:</div>
+                                            <div class="sl-mb-2 sl-inline-block">
+                                                <select
+                                                        class="example-response-GETapi-disciplinaries-toggle sl-text-base"
+                                                        aria-label="Response sample"
+                                                        onchange="switchExampleResponse('GETapi-disciplinaries', event.target.value);">
+                                                                                                            <option value="0">200</option>
+                                                                                                    </select></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button"
+                                        class="sl-button sl-h-sm sl-text-base sl-font-medium sl-px-1.5 hover:sl-bg-canvas-50 active:sl-bg-canvas-100 sl-text-muted hover:sl-text-body focus:sl-text-body sl-rounded sl-border-transparent sl-border disabled:sl-opacity-70">
+                                    <div class="sl-mx-0">
+                                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="copy"
+                                             class="svg-inline--fa fa-copy fa-fw fa-sm sl-icon" role="img"
+                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <path fill="currentColor"
+                                                  d="M384 96L384 0h-112c-26.51 0-48 21.49-48 48v288c0 26.51 21.49 48 48 48H464c26.51 0 48-21.49 48-48V128h-95.1C398.4 128 384 113.6 384 96zM416 0v96h96L416 0zM192 352V128h-144c-26.51 0-48 21.49-48 48v288c0 26.51 21.49 48 48 48h192c26.51 0 48-21.49 48-48L288 416h-32C220.7 416 192 387.3 192 352z"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                            </div>
+                                                            <div class="sl-panel__content-wrapper sl-bg-canvas-100 example-response-GETapi-disciplinaries example-response-GETapi-disciplinaries-0"
+                                     style=" "
+                                >
+                                    <div class="sl-panel__content sl-p-0">                                                                                                                                
+                                            <pre><code style="max-height: 300px;"
+                                                       class="language-json sl-overflow-x-auto sl-overflow-y-auto">{
+    &quot;code&quot;: 200,
+    &quot;message&quot;: &quot;success&quot;,
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;created_at&quot;: &quot;2024-05-14 08:51:39&quot;,
+            &quot;name&quot;: &quot;Hukuman Disiplin Desember 2024&quot;,
+            &quot;period_month&quot;: 3,
+            &quot;period_year&quot;: &quot;2020&quot;,
+            &quot;total&quot;: 1
+        }
+    ],
+    &quot;pagination&quot;: {
+        &quot;total&quot;: 1,
+        &quot;count&quot;: 1,
+        &quot;per_page&quot;: 10,
+        &quot;current_page&quot;: 1,
+        &quot;total_pages&quot;: 1,
+        &quot;links&quot;: {
+            &quot;first_page&quot;: &quot;http://localhost/api/disciplinaries?page=1&quot;,
+            &quot;last_page&quot;: &quot;http://localhost/api/disciplinaries?page=1&quot;,
+            &quot;next_page&quot;: null,
+            &quot;prev_page&quot;: null
+        }
+    }
+}</code></pre>
+                                                                            </div>
+                                </div>
+                                                    </div>
+                            </div>
+    </div>
+</div>
+
+                    <div class="sl-stack sl-stack--vertical sl-stack--8 HttpOperation sl-flex sl-flex-col sl-items-stretch sl-w-full">
+    <div class="sl-stack sl-stack--vertical sl-stack--5 sl-flex sl-flex-col sl-items-stretch">
+        <div class="sl-relative">
+            <div class="sl-stack sl-stack--horizontal sl-stack--5 sl-flex sl-flex-row sl-items-center">
+                <h2 class="sl-text-3xl sl-leading-tight sl-font-prose sl-text-heading sl-mt-5 sl-mb-1"
+                    id="history-GETapi-disciplinaries--id-">
+                    Get Detail Disciplinary by ID
+                </h2>
+            </div>
+        </div>
+
+        <div class="sl-relative">
+            <div title="http://localhost/api/disciplinaries/{id}"
+                     class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
+                >
+                                            <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
+                             style="background-color: green;"
+                        >
+                            GET
+                        </div>
+                                        <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
+                        <div dir="rtl"
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
+                        <div class="sl-flex-1 sl-font-semibold">/api/disciplinaries/{id}</div>
+                    </div>
+
+                                                    <div class="sl-font-prose sl-font-semibold sl-px-1.5 sl-py-0.5 sl-text-on-primary sl-rounded-lg"
+                                 style="background-color: darkred"
+                            >requires authentication
+                            </div>
+                                    </div>
+        </div>
+
+        <p>Retrieve disciplinary history for a specific employee.</p>
+    </div>
+    <div class="sl-flex">
+        <div data-testid="two-column-left" class="sl-flex-1 sl-w-0">
+            <div class="sl-stack sl-stack--vertical sl-stack--10 sl-flex sl-flex-col sl-items-stretch">
+                <div class="sl-stack sl-stack--vertical sl-stack--8 sl-flex sl-flex-col sl-items-stretch">
+                                            <div class="sl-stack sl-stack--vertical sl-stack--5 sl-flex sl-flex-col sl-items-stretch">
+                            <h3 class="sl-text-2xl sl-leading-snug sl-font-prose">
+                                Headers
+                            </h3>
+                            <div class="sl-text-sm">
+                                                                    <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">Authorization</div>
+                                    </div>
+                                    </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        Bearer {YOUR_AUTH_KEY}
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+                                                                    <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">Content-Type</div>
+                                    </div>
+                                    </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        application/json
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+                                                                    <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">Accept</div>
+                                    </div>
+                                    </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        application/json
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+                                                            </div>
+                        </div>
+                    
+                                            <div class="sl-stack sl-stack--vertical sl-stack--6 sl-flex sl-flex-col sl-items-stretch">
+                            <h3 class="sl-text-2xl sl-leading-snug sl-font-prose">URL Parameters</h3>
+
+                            <div class="sl-text-sm">
+                                                                    <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">id</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the ID of Disciplinary.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        1
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+                                                            </div>
+                        </div>
+                    
+
+                    
+                    
+                                    </div>
+            </div>
+        </div>
+
+        <div data-testid="two-column-right" class="sl-relative sl-w-2/5 sl-ml-16" style="max-width: 500px;">
+            <div class="sl-stack sl-stack--vertical sl-stack--6 sl-flex sl-flex-col sl-items-stretch">
+
+                                    <div class="sl-inverted">
+    <div class="sl-overflow-y-hidden sl-rounded-lg">
+        <form class="TryItPanel sl-bg-canvas-100 sl-rounded-lg"
+              data-method="GET"
+              data-path="api/disciplinaries/{id}"
+              data-hasfiles="0"
+              data-hasjsonbody="0">
+                            <div class="sl-panel sl-outline-none sl-w-full expandable">
+                    <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
+                         role="button">
+                        <div class="sl-flex sl-flex-1 sl-items-center sl-h-lg">
+                            <div class="sl-flex sl-items-center sl-mr-1.5 expansion-chevrons expansion-chevrons-solid expanded">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                     data-icon="caret-down"
+                                     class="svg-inline--fa fa-caret-down fa-fw sl-icon" role="img"
+                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                    <path fill="currentColor"
+                                          d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"></path>
+                                </svg>
+                            </div>
+                            Auth
+                        </div>
+                    </div>
+                    <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
+                        <div class="ParameterGrid sl-p-4">
+                            <label aria-hidden="true"
+                                   for="auth-GETapi-disciplinaries--id-">Authorization</label>
+                            <span class="sl-mx-3">:</span>
+                            <div class="sl-flex sl-flex-1">
+                                <div class="sl-input sl-flex-1 sl-relative">
+                                    <code>Bearer </code>
+                                    <input aria-label="Authorization"
+                                           id="auth-GETapi-disciplinaries--id-"
+                                           data-component="header"
+                                           data-prefix="Bearer "
+                                           name="Authorization"
+                                           placeholder="{YOUR_AUTH_KEY}"
+                                           class="auth-value sl-relative sl-w-3/5 sl-h-md sl-text-base sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                            <div class="sl-panel sl-outline-none sl-w-full expandable">
+                    <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
+                         role="button">
+                        <div class="sl-flex sl-flex-1 sl-items-center sl-h-lg">
+                            <div class="sl-flex sl-items-center sl-mr-1.5 expansion-chevrons expansion-chevrons-solid expanded">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                     data-icon="caret-down"
+                                     class="svg-inline--fa fa-caret-down fa-fw sl-icon" role="img"
+                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                    <path fill="currentColor"
+                                          d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"></path>
+                                </svg>
+                            </div>
+                            Headers
+                        </div>
+                    </div>
+                    <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
+                        <div class="ParameterGrid sl-p-4">
+                                                                                                                            <label aria-hidden="true"
+                                       for="header-GETapi-disciplinaries--id--Content-Type">Content-Type</label>
+                                <span class="sl-mx-3">:</span>
+                                <div class="sl-flex sl-flex-1">
+                                    <div class="sl-input sl-flex-1 sl-relative">
+                                        <input aria-label="Content-Type" name="Content-Type"
+                                               id="header-GETapi-disciplinaries--id--Content-Type"
+                                               value="application/json" data-component="header"
+                                               class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
+                                    </div>
+                                </div>
+                                                                                            <label aria-hidden="true"
+                                       for="header-GETapi-disciplinaries--id--Accept">Accept</label>
+                                <span class="sl-mx-3">:</span>
+                                <div class="sl-flex sl-flex-1">
+                                    <div class="sl-input sl-flex-1 sl-relative">
+                                        <input aria-label="Accept" name="Accept"
+                                               id="header-GETapi-disciplinaries--id--Accept"
+                                               value="application/json" data-component="header"
+                                               class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
+                                    </div>
+                                </div>
+                                                    </div>
+                    </div>
+                </div>
+            
+                            <div class="sl-panel sl-outline-none sl-w-full expandable">
+                    <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
+                         role="button">
+                        <div class="sl-flex sl-flex-1 sl-items-center sl-h-lg">
+                            <div class="sl-flex sl-items-center sl-mr-1.5 expansion-chevrons expansion-chevrons-solid expanded">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                     data-icon="caret-down"
+                                     class="svg-inline--fa fa-caret-down fa-fw sl-icon" role="img"
+                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                    <path fill="currentColor"
+                                          d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"></path>
+                                </svg>
+                            </div>
+                            URL Parameters
+                        </div>
+                    </div>
+                    <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
+                        <div class="ParameterGrid sl-p-4">
+                                                            <label aria-hidden="true"
+                                       for="urlparam-GETapi-disciplinaries--id--id">id</label>
+                                <span class="sl-mx-3">:</span>
+                                <div class="sl-flex sl-flex-1">
+                                    <div class="sl-input sl-flex-1 sl-relative">
+                                        <input aria-label="id" name="id"
+                                               id="urlparam-GETapi-disciplinaries--id--id"
+                                               placeholder="Refers to the ID of Disciplinary."
+                                               value="1" data-component="url"
+                                               class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
+                                    </div>
+                                </div>
+                                                    </div>
+                    </div>
+                </div>
+            
+            
+            
+            <div class="SendButtonHolder sl-mt-4 sl-p-4 sl-pt-0">
+                <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-center">
+                    <button type="button" data-endpoint="GETapi-disciplinaries--id-"
+                            class="tryItOut-btn sl-button sl-h-sm sl-text-base sl-font-medium sl-px-1.5 sl-bg-primary hover:sl-bg-primary-dark active:sl-bg-primary-darker disabled:sl-bg-canvas-100 sl-text-on-primary disabled:sl-text-body sl-rounded sl-border-transparent sl-border disabled:sl-opacity-70"
+                    >
+                        Send Request 💥
+                    </button>
+                </div>
+            </div>
+
+            <div data-endpoint="GETapi-disciplinaries--id-"
+                 class="tryItOut-error expandable sl-panel sl-outline-none sl-w-full" hidden>
+                <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
+                     role="button">
+                    <div class="sl-flex sl-flex-1 sl-items-center sl-h-lg">
+                        <div class="sl-flex sl-items-center sl-mr-1.5 expansion-chevrons expansion-chevrons-solid expanded">
+                            <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                 data-icon="caret-down"
+                                 class="svg-inline--fa fa-caret-down fa-fw sl-icon" role="img"
+                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                <path fill="currentColor"
+                                      d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"></path>
+                            </svg>
+                        </div>
+                        Request failed with error
+                    </div>
+                </div>
+                <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
+                    <div class="sl-panel__content sl-p-4">
+                        <p class="sl-pb-2"><strong class="error-message"></strong></p>
+                        <p class="sl-pb-2">Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</p>
+                    </div>
+                </div>
+            </div>
+
+                <div data-endpoint="GETapi-disciplinaries--id-"
+                     class="tryItOut-response expandable sl-panel sl-outline-none sl-w-full" hidden>
+                    <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
+                         role="button">
+                        <div class="sl-flex sl-flex-1 sl-items-center sl-h-lg">
+                            <div class="sl-flex sl-items-center sl-mr-1.5 expansion-chevrons expansion-chevrons-solid expanded">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                     data-icon="caret-down"
+                                     class="svg-inline--fa fa-caret-down fa-fw sl-icon" role="img"
+                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                    <path fill="currentColor"
+                                          d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"></path>
+                                </svg>
+                            </div>
+                            Received response
+                        </div>
+                    </div>
+                    <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
+                        <div class="sl-panel__content sl-p-4">
+                            <p class="sl-pb-2 response-status"></p>
+                            <pre><code class="sl-pb-2 response-content language-json"
+                                       data-empty-response-text="<Empty response>"
+                                       style="max-height: 300px;"></code></pre>
+                        </div>
+                    </div>
+                </div>
+        </form>
+    </div>
+</div>
+                
+                                            <div class="sl-panel sl-outline-none sl-w-full sl-rounded-lg">
+                            <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-3 sl-pl-4 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-select-none">
+                                <div class="sl-flex sl-flex-1 sl-items-center sl-h-lg">
+                                    <div class="sl--ml-2">
+                                        Example request:
+                                        <select class="example-request-lang-toggle sl-text-base"
+                                                aria-label="Request Sample Language"
+                                                onchange="switchExampleLanguage(event.target.value);">
+                                                                                            <option>bash</option>
+                                                                                            <option>javascript</option>
+                                                                                    </select>
+                                    </div>
+                                </div>
+                            </div>
+                                                            <div class="sl-bg-canvas-100 example-request example-request-bash"
+                                     style="">
+                                    <div class="sl-px-0 sl-py-1">
+                                        <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
+                                            <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/disciplinaries/1" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre>                                        </div>
+                                    </div>
+                                </div>
+                                                            <div class="sl-bg-canvas-100 example-request example-request-javascript"
+                                     style="display: none;">
+                                    <div class="sl-px-0 sl-py-1">
+                                        <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
+                                            <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/disciplinaries/1"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>                                        </div>
+                                    </div>
+                                </div>
+                                                    </div>
+                    
+                                            <div class="sl-panel sl-outline-none sl-w-full sl-rounded-lg">
+                            <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-3 sl-pl-4 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-select-none">
+                                <div class="sl-flex sl-flex-1 sl-items-center sl-py-2">
+                                    <div class="sl--ml-2">
+                                        <div class="sl-h-sm sl-text-base sl-font-medium sl-px-1.5 sl-text-muted sl-rounded sl-border-transparent sl-border">
+                                            <div class="sl-mb-2 sl-inline-block">Example response:</div>
+                                            <div class="sl-mb-2 sl-inline-block">
+                                                <select
+                                                        class="example-response-GETapi-disciplinaries--id--toggle sl-text-base"
+                                                        aria-label="Response sample"
+                                                        onchange="switchExampleResponse('GETapi-disciplinaries--id-', event.target.value);">
+                                                                                                            <option value="0">200</option>
+                                                                                                            <option value="1">404</option>
+                                                                                                    </select></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button"
+                                        class="sl-button sl-h-sm sl-text-base sl-font-medium sl-px-1.5 hover:sl-bg-canvas-50 active:sl-bg-canvas-100 sl-text-muted hover:sl-text-body focus:sl-text-body sl-rounded sl-border-transparent sl-border disabled:sl-opacity-70">
+                                    <div class="sl-mx-0">
+                                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="copy"
+                                             class="svg-inline--fa fa-copy fa-fw fa-sm sl-icon" role="img"
+                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <path fill="currentColor"
+                                                  d="M384 96L384 0h-112c-26.51 0-48 21.49-48 48v288c0 26.51 21.49 48 48 48H464c26.51 0 48-21.49 48-48V128h-95.1C398.4 128 384 113.6 384 96zM416 0v96h96L416 0zM192 352V128h-144c-26.51 0-48 21.49-48 48v288c0 26.51 21.49 48 48 48h192c26.51 0 48-21.49 48-48L288 416h-32C220.7 416 192 387.3 192 352z"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                            </div>
+                                                            <div class="sl-panel__content-wrapper sl-bg-canvas-100 example-response-GETapi-disciplinaries--id- example-response-GETapi-disciplinaries--id--0"
+                                     style=" "
+                                >
+                                    <div class="sl-panel__content sl-p-0">                                                                                                                                
+                                            <pre><code style="max-height: 300px;"
+                                                       class="language-json sl-overflow-x-auto sl-overflow-y-auto">{
+    &quot;code&quot;: 200,
+    &quot;message&quot;: &quot;success&quot;,
+    &quot;data&quot;: {
+        &quot;id&quot;: 1,
+        &quot;period_month&quot;: 4,
+        &quot;period_year&quot;: &quot;2020&quot;,
+        &quot;name&quot;: &quot;Hukuman Disiplin Desember 2024&quot;,
+        &quot;created_at&quot;: &quot;2024-05-14 08:51:39&quot;,
+        &quot;users&quot;: [
+            {
+                &quot;id&quot;: 2,
+                &quot;user_id&quot;: 1,
+                &quot;name&quot;: &quot;administrator&quot;,
+                &quot;employee_id_number&quot;: &quot;0000000000000&quot;,
+                &quot;grade&quot;: &quot;Penata (III/c)&quot;,
+                &quot;position&quot;: &quot;Kepala Subbagian Administrasi&quot;,
+                &quot;disciplinary_type_id&quot;: 1,
+                &quot;disciplinary_type_name&quot;: &quot;Teguran Lisan&quot;,
+                &quot;disciplinary_type_description&quot;: &quot;Hukuman Disiplin Tingkat Ringan 1&quot;,
+                &quot;performance_allowance_deduction&quot;: 0.25,
+                &quot;performance_allowance_duration&quot;: 2,
+                &quot;decree_number&quot;: &quot;Nomor 112 Tahun 2023&quot;,
+                &quot;date_of_decree&quot;: &quot;2023-10-22&quot;,
+                &quot;start_date&quot;: &quot;2023-10-22&quot;,
+                &quot;end_date&quot;: &quot;2024-10-22&quot;,
+                &quot;authorizing_officer&quot;: &quot;Deputi Bidang Administrasi&quot;,
+                &quot;name_of_authorizing_officer&quot;: &quot;Sapto Harjono Wahjoe Sedjati, S.Sos., M.A.&quot;,
+                &quot;description&quot;: &quot;Tidak masuk ke kantor selama 10 hari&quot;,
+                &quot;created_at&quot;: &quot;2024-05-14 11:05:51&quot;
+            }
+        ]
+    }
+}</code></pre>
+                                                                            </div>
+                                </div>
+                                                            <div class="sl-panel__content-wrapper sl-bg-canvas-100 example-response-GETapi-disciplinaries--id- example-response-GETapi-disciplinaries--id--1"
+                                     style=" display: none;"
+                                >
+                                    <div class="sl-panel__content sl-p-0">                                                                                                                                
+                                            <pre><code style="max-height: 300px;"
+                                                       class="language-json sl-overflow-x-auto sl-overflow-y-auto">{
+    &quot;code&quot;: 404,
+    &quot;message&quot;: &quot;Hukuman disiplin tidak ditemukan.&quot;,
+    &quot;data&quot;: null
+}</code></pre>
+                                                                            </div>
+                                </div>
+                                                    </div>
+                            </div>
+    </div>
+</div>
+
+                    <div class="sl-stack sl-stack--vertical sl-stack--8 HttpOperation sl-flex sl-flex-col sl-items-stretch sl-w-full">
+    <div class="sl-stack sl-stack--vertical sl-stack--5 sl-flex sl-flex-col sl-items-stretch">
+        <div class="sl-relative">
+            <div class="sl-stack sl-stack--horizontal sl-stack--5 sl-flex sl-flex-row sl-items-center">
+                <h2 class="sl-text-3xl sl-leading-tight sl-font-prose sl-text-heading sl-mt-5 sl-mb-1"
+                    id="history-POSTapi-disciplinaries">
+                    Create a New Disciplinary
+                </h2>
+            </div>
+        </div>
+
+        <div class="sl-relative">
+            <div title="http://localhost/api/disciplinaries"
+                     class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
+                >
+                                            <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
+                             style="background-color: black;"
+                        >
+                            POST
+                        </div>
+                                        <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
+                        <div dir="rtl"
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
+                        <div class="sl-flex-1 sl-font-semibold">/api/disciplinaries</div>
+                    </div>
+
+                                                    <div class="sl-font-prose sl-font-semibold sl-px-1.5 sl-py-0.5 sl-text-on-primary sl-rounded-lg"
+                                 style="background-color: darkred"
+                            >requires authentication
+                            </div>
+                                    </div>
+        </div>
+
+        <p>Add a new disciplinary entry for an employee.</p>
+    </div>
+    <div class="sl-flex">
+        <div data-testid="two-column-left" class="sl-flex-1 sl-w-0">
+            <div class="sl-stack sl-stack--vertical sl-stack--10 sl-flex sl-flex-col sl-items-stretch">
+                <div class="sl-stack sl-stack--vertical sl-stack--8 sl-flex sl-flex-col sl-items-stretch">
+                                            <div class="sl-stack sl-stack--vertical sl-stack--5 sl-flex sl-flex-col sl-items-stretch">
+                            <h3 class="sl-text-2xl sl-leading-snug sl-font-prose">
+                                Headers
+                            </h3>
+                            <div class="sl-text-sm">
+                                                                    <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">Authorization</div>
+                                    </div>
+                                    </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        Bearer {YOUR_AUTH_KEY}
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+                                                                    <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">Content-Type</div>
+                                    </div>
+                                    </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        application/json
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+                                                                    <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">Accept</div>
+                                    </div>
+                                    </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        application/json
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+                                                            </div>
+                        </div>
+                    
+                    
+
+                    
+                                            <div class="sl-stack sl-stack--vertical sl-stack--6 sl-flex sl-flex-col sl-items-stretch">
+                            <h3 class="sl-text-2xl sl-leading-snug sl-font-prose">Body Parameters</h3>
+
+                                <div class="sl-text-sm">
+                                    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">period_month</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Period Month of Employee Disciplinary. Must be between 1 and 12 digits.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        3
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">period_year</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Period Year of Employee Disciplinary. Must be a valid date in the format <code>Y</code>.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        2020
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">name</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Name of Employee Disciplinary. Must not be greater than 160 characters.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        Hukuman Disiplin Desember 2024
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2  sl-cursor-pointer ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                            <div class="sl-flex sl-justify-center sl-w-8 sl--ml-8 sl-pl-3 sl-text-muted expansion-chevrons" role="button">
+                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right"
+                         class="svg-inline--fa fa-chevron-right fa-fw fa-sm sl-icon" role="img"
+                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                        <path fill="currentColor"
+                              d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"></path>
+                    </svg>
+                </div>
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">users</div>
+                                            <span class="sl-truncate sl-text-muted">object[]</span>
+                                    </div>
+                                    </div>
+                                    </div>
+</div>
+
+                    <div class="children" style="display: none;">
+                <div class="expandable sl-text-sm sl-border-l sl-ml-7">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">user_id</div>
+                                            <span class="sl-truncate sl-text-muted">number</span>
+                                    </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the User ID of Employee Disciplinary.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        1
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">grade</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Golongan of Employee Disciplinary. Must not be greater than 160 characters.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        Penata (III/c)
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">position</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Jabatan of Employee Disciplinary. Must not be greater than 160 characters.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        Kepala Subbagian Administrasi
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">disciplinary_type_id</div>
+                                            <span class="sl-truncate sl-text-muted">number</span>
+                                    </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Jenis Hukuman of Employee Disciplinary.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        1
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">decree_number</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the No SK of Employee Disciplinary. Must not be greater than 160 characters.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        Nomor 112 Tahun 2023
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">date_of_decree</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Tanggal SK of Employee Disciplinary. Must be a valid date.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        2023-10-22
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">start_date</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Tanggal Mulai Hukuman of Employee Disciplinary. Must be a valid date.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        2023-10-22
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">end_date</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Tanggal Selesai Hukuman of Employee Disciplinary. Must be a valid date.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        2024-10-22
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">authorizing_officer</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Pejabat Berwenang of Employee Disciplinary. Must not be greater than 160 characters.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        Deputi Bidang Administrasi
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">name_of_authorizing_officer</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Nama Pejabat Berwenang of Employee Disciplinary. Must not be greater than 160 characters.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        Sapto Harjono Wahjoe Sedjati, S.Sos., M.A.
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">description</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Uraian of Employee Disciplinary. Must not be greater than 160 characters.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        Tidak masuk ke kantor selama 10 hari
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+            </div>
+            </div>
+                            </div>
+                        </div>
+                    
+                                    </div>
+            </div>
+        </div>
+
+        <div data-testid="two-column-right" class="sl-relative sl-w-2/5 sl-ml-16" style="max-width: 500px;">
+            <div class="sl-stack sl-stack--vertical sl-stack--6 sl-flex sl-flex-col sl-items-stretch">
+
+                                    <div class="sl-inverted">
+    <div class="sl-overflow-y-hidden sl-rounded-lg">
+        <form class="TryItPanel sl-bg-canvas-100 sl-rounded-lg"
+              data-method="POST"
+              data-path="api/disciplinaries"
+              data-hasfiles="0"
+              data-hasjsonbody="1">
+                            <div class="sl-panel sl-outline-none sl-w-full expandable">
+                    <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
+                         role="button">
+                        <div class="sl-flex sl-flex-1 sl-items-center sl-h-lg">
+                            <div class="sl-flex sl-items-center sl-mr-1.5 expansion-chevrons expansion-chevrons-solid expanded">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                     data-icon="caret-down"
+                                     class="svg-inline--fa fa-caret-down fa-fw sl-icon" role="img"
+                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                    <path fill="currentColor"
+                                          d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"></path>
+                                </svg>
+                            </div>
+                            Auth
+                        </div>
+                    </div>
+                    <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
+                        <div class="ParameterGrid sl-p-4">
+                            <label aria-hidden="true"
+                                   for="auth-POSTapi-disciplinaries">Authorization</label>
+                            <span class="sl-mx-3">:</span>
+                            <div class="sl-flex sl-flex-1">
+                                <div class="sl-input sl-flex-1 sl-relative">
+                                    <code>Bearer </code>
+                                    <input aria-label="Authorization"
+                                           id="auth-POSTapi-disciplinaries"
+                                           data-component="header"
+                                           data-prefix="Bearer "
+                                           name="Authorization"
+                                           placeholder="{YOUR_AUTH_KEY}"
+                                           class="auth-value sl-relative sl-w-3/5 sl-h-md sl-text-base sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                            <div class="sl-panel sl-outline-none sl-w-full expandable">
+                    <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
+                         role="button">
+                        <div class="sl-flex sl-flex-1 sl-items-center sl-h-lg">
+                            <div class="sl-flex sl-items-center sl-mr-1.5 expansion-chevrons expansion-chevrons-solid expanded">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                     data-icon="caret-down"
+                                     class="svg-inline--fa fa-caret-down fa-fw sl-icon" role="img"
+                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                    <path fill="currentColor"
+                                          d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"></path>
+                                </svg>
+                            </div>
+                            Headers
+                        </div>
+                    </div>
+                    <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
+                        <div class="ParameterGrid sl-p-4">
+                                                                                                                            <label aria-hidden="true"
+                                       for="header-POSTapi-disciplinaries-Content-Type">Content-Type</label>
+                                <span class="sl-mx-3">:</span>
+                                <div class="sl-flex sl-flex-1">
+                                    <div class="sl-input sl-flex-1 sl-relative">
+                                        <input aria-label="Content-Type" name="Content-Type"
+                                               id="header-POSTapi-disciplinaries-Content-Type"
+                                               value="application/json" data-component="header"
+                                               class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
+                                    </div>
+                                </div>
+                                                                                            <label aria-hidden="true"
+                                       for="header-POSTapi-disciplinaries-Accept">Accept</label>
+                                <span class="sl-mx-3">:</span>
+                                <div class="sl-flex sl-flex-1">
+                                    <div class="sl-input sl-flex-1 sl-relative">
+                                        <input aria-label="Accept" name="Accept"
+                                               id="header-POSTapi-disciplinaries-Accept"
+                                               value="application/json" data-component="header"
+                                               class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
+                                    </div>
+                                </div>
+                                                    </div>
+                    </div>
+                </div>
+            
+            
+            
+                            <div class="sl-panel sl-outline-none sl-w-full expandable">
+                    <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
+                         role="button">
+                        <div class="sl-flex sl-flex-1 sl-items-center sl-h-lg">
+                            <div class="sl-flex sl-items-center sl-mr-1.5 expansion-chevrons expansion-chevrons-solid expanded">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                     data-icon="caret-down"
+                                     class="svg-inline--fa fa-caret-down fa-fw sl-icon" role="img"
+                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                    <path fill="currentColor"
+                                          d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"></path>
+                                </svg>
+                            </div>
+                            Body
+                        </div>
+                    </div>
+                    <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
+                                                    <div class="TextRequestBody sl-p-4">
+                                <div class="code-editor language-json"
+                                     id="json-body-POSTapi-disciplinaries"
+                                     style="font-family: var(--font-code); font-size: 12px; line-height: var(--lh-code);"
+                                >{
+    "period_month": 3,
+    "period_year": "2020",
+    "name": "Hukuman Disiplin Desember 2024",
+    "users": [
+        {
+            "user_id": 1,
+            "grade": "Penata (III\/c)",
+            "position": "Kepala Subbagian Administrasi",
+            "disciplinary_type_id": 1,
+            "decree_number": "Nomor 112 Tahun 2023",
+            "date_of_decree": "2023-10-22",
+            "start_date": "2023-10-22",
+            "end_date": "2024-10-22",
+            "authorizing_officer": "Deputi Bidang Administrasi",
+            "name_of_authorizing_officer": "Sapto Harjono Wahjoe Sedjati, S.Sos., M.A.",
+            "description": "Tidak masuk ke kantor selama 10 hari"
+        }
+    ]
+}</div>
+                            </div>
+                                            </div>
+                </div>
+            
+            <div class="SendButtonHolder sl-mt-4 sl-p-4 sl-pt-0">
+                <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-center">
+                    <button type="button" data-endpoint="POSTapi-disciplinaries"
+                            class="tryItOut-btn sl-button sl-h-sm sl-text-base sl-font-medium sl-px-1.5 sl-bg-primary hover:sl-bg-primary-dark active:sl-bg-primary-darker disabled:sl-bg-canvas-100 sl-text-on-primary disabled:sl-text-body sl-rounded sl-border-transparent sl-border disabled:sl-opacity-70"
+                    >
+                        Send Request 💥
+                    </button>
+                </div>
+            </div>
+
+            <div data-endpoint="POSTapi-disciplinaries"
+                 class="tryItOut-error expandable sl-panel sl-outline-none sl-w-full" hidden>
+                <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
+                     role="button">
+                    <div class="sl-flex sl-flex-1 sl-items-center sl-h-lg">
+                        <div class="sl-flex sl-items-center sl-mr-1.5 expansion-chevrons expansion-chevrons-solid expanded">
+                            <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                 data-icon="caret-down"
+                                 class="svg-inline--fa fa-caret-down fa-fw sl-icon" role="img"
+                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                <path fill="currentColor"
+                                      d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"></path>
+                            </svg>
+                        </div>
+                        Request failed with error
+                    </div>
+                </div>
+                <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
+                    <div class="sl-panel__content sl-p-4">
+                        <p class="sl-pb-2"><strong class="error-message"></strong></p>
+                        <p class="sl-pb-2">Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</p>
+                    </div>
+                </div>
+            </div>
+
+                <div data-endpoint="POSTapi-disciplinaries"
+                     class="tryItOut-response expandable sl-panel sl-outline-none sl-w-full" hidden>
+                    <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
+                         role="button">
+                        <div class="sl-flex sl-flex-1 sl-items-center sl-h-lg">
+                            <div class="sl-flex sl-items-center sl-mr-1.5 expansion-chevrons expansion-chevrons-solid expanded">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                     data-icon="caret-down"
+                                     class="svg-inline--fa fa-caret-down fa-fw sl-icon" role="img"
+                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                    <path fill="currentColor"
+                                          d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"></path>
+                                </svg>
+                            </div>
+                            Received response
+                        </div>
+                    </div>
+                    <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
+                        <div class="sl-panel__content sl-p-4">
+                            <p class="sl-pb-2 response-status"></p>
+                            <pre><code class="sl-pb-2 response-content language-json"
+                                       data-empty-response-text="<Empty response>"
+                                       style="max-height: 300px;"></code></pre>
+                        </div>
+                    </div>
+                </div>
+        </form>
+    </div>
+</div>
+                
+                                            <div class="sl-panel sl-outline-none sl-w-full sl-rounded-lg">
+                            <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-3 sl-pl-4 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-select-none">
+                                <div class="sl-flex sl-flex-1 sl-items-center sl-h-lg">
+                                    <div class="sl--ml-2">
+                                        Example request:
+                                        <select class="example-request-lang-toggle sl-text-base"
+                                                aria-label="Request Sample Language"
+                                                onchange="switchExampleLanguage(event.target.value);">
+                                                                                            <option>bash</option>
+                                                                                            <option>javascript</option>
+                                                                                    </select>
+                                    </div>
+                                </div>
+                            </div>
+                                                            <div class="sl-bg-canvas-100 example-request example-request-bash"
+                                     style="">
+                                    <div class="sl-px-0 sl-py-1">
+                                        <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
+                                            <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/disciplinaries" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"period_month\": 3,
+    \"period_year\": \"2020\",
+    \"name\": \"Hukuman Disiplin Desember 2024\",
+    \"users\": [
+        {
+            \"user_id\": 1,
+            \"grade\": \"Penata (III\\/c)\",
+            \"position\": \"Kepala Subbagian Administrasi\",
+            \"disciplinary_type_id\": 1,
+            \"decree_number\": \"Nomor 112 Tahun 2023\",
+            \"date_of_decree\": \"2023-10-22\",
+            \"start_date\": \"2023-10-22\",
+            \"end_date\": \"2024-10-22\",
+            \"authorizing_officer\": \"Deputi Bidang Administrasi\",
+            \"name_of_authorizing_officer\": \"Sapto Harjono Wahjoe Sedjati, S.Sos., M.A.\",
+            \"description\": \"Tidak masuk ke kantor selama 10 hari\"
+        }
+    ]
+}"
+</code></pre>                                        </div>
+                                    </div>
+                                </div>
+                                                            <div class="sl-bg-canvas-100 example-request example-request-javascript"
+                                     style="display: none;">
+                                    <div class="sl-px-0 sl-py-1">
+                                        <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
+                                            <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/disciplinaries"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "period_month": 3,
+    "period_year": "2020",
+    "name": "Hukuman Disiplin Desember 2024",
+    "users": [
+        {
+            "user_id": 1,
+            "grade": "Penata (III\/c)",
+            "position": "Kepala Subbagian Administrasi",
+            "disciplinary_type_id": 1,
+            "decree_number": "Nomor 112 Tahun 2023",
+            "date_of_decree": "2023-10-22",
+            "start_date": "2023-10-22",
+            "end_date": "2024-10-22",
+            "authorizing_officer": "Deputi Bidang Administrasi",
+            "name_of_authorizing_officer": "Sapto Harjono Wahjoe Sedjati, S.Sos., M.A.",
+            "description": "Tidak masuk ke kantor selama 10 hari"
+        }
+    ]
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre>                                        </div>
+                                    </div>
+                                </div>
+                                                    </div>
+                    
+                                            <div class="sl-panel sl-outline-none sl-w-full sl-rounded-lg">
+                            <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-3 sl-pl-4 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-select-none">
+                                <div class="sl-flex sl-flex-1 sl-items-center sl-py-2">
+                                    <div class="sl--ml-2">
+                                        <div class="sl-h-sm sl-text-base sl-font-medium sl-px-1.5 sl-text-muted sl-rounded sl-border-transparent sl-border">
+                                            <div class="sl-mb-2 sl-inline-block">Example response:</div>
+                                            <div class="sl-mb-2 sl-inline-block">
+                                                <select
+                                                        class="example-response-POSTapi-disciplinaries-toggle sl-text-base"
+                                                        aria-label="Response sample"
+                                                        onchange="switchExampleResponse('POSTapi-disciplinaries', event.target.value);">
+                                                                                                            <option value="0">200</option>
+                                                                                                    </select></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button"
+                                        class="sl-button sl-h-sm sl-text-base sl-font-medium sl-px-1.5 hover:sl-bg-canvas-50 active:sl-bg-canvas-100 sl-text-muted hover:sl-text-body focus:sl-text-body sl-rounded sl-border-transparent sl-border disabled:sl-opacity-70">
+                                    <div class="sl-mx-0">
+                                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="copy"
+                                             class="svg-inline--fa fa-copy fa-fw fa-sm sl-icon" role="img"
+                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <path fill="currentColor"
+                                                  d="M384 96L384 0h-112c-26.51 0-48 21.49-48 48v288c0 26.51 21.49 48 48 48H464c26.51 0 48-21.49 48-48V128h-95.1C398.4 128 384 113.6 384 96zM416 0v96h96L416 0zM192 352V128h-144c-26.51 0-48 21.49-48 48v288c0 26.51 21.49 48 48 48h192c26.51 0 48-21.49 48-48L288 416h-32C220.7 416 192 387.3 192 352z"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                            </div>
+                                                            <div class="sl-panel__content-wrapper sl-bg-canvas-100 example-response-POSTapi-disciplinaries example-response-POSTapi-disciplinaries-0"
+                                     style=" "
+                                >
+                                    <div class="sl-panel__content sl-p-0">                                                                                                                                
+                                            <pre><code style="max-height: 300px;"
+                                                       class="language-json sl-overflow-x-auto sl-overflow-y-auto">{
+    &quot;code&quot;: 200,
+    &quot;message&quot;: &quot;Hukuman disiplin berhasil ditambah.&quot;,
+    &quot;data&quot;: null
+}</code></pre>
+                                                                            </div>
+                                </div>
+                                                    </div>
+                            </div>
+    </div>
+</div>
+
+                    <div class="sl-stack sl-stack--vertical sl-stack--8 HttpOperation sl-flex sl-flex-col sl-items-stretch sl-w-full">
+    <div class="sl-stack sl-stack--vertical sl-stack--5 sl-flex sl-flex-col sl-items-stretch">
+        <div class="sl-relative">
+            <div class="sl-stack sl-stack--horizontal sl-stack--5 sl-flex sl-flex-row sl-items-center">
+                <h2 class="sl-text-3xl sl-leading-tight sl-font-prose sl-text-heading sl-mt-5 sl-mb-1"
+                    id="history-POSTapi-disciplinaries--id-">
+                    Update Disciplinary by ID
+                </h2>
+            </div>
+        </div>
+
+        <div class="sl-relative">
+            <div title="http://localhost/api/disciplinaries/{id}"
+                     class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
+                >
+                                            <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
+                             style="background-color: black;"
+                        >
+                            POST
+                        </div>
+                                        <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
+                        <div dir="rtl"
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
+                        <div class="sl-flex-1 sl-font-semibold">/api/disciplinaries/{id}</div>
+                    </div>
+
+                                                    <div class="sl-font-prose sl-font-semibold sl-px-1.5 sl-py-0.5 sl-text-on-primary sl-rounded-lg"
+                                 style="background-color: darkred"
+                            >requires authentication
+                            </div>
+                                    </div>
+        </div>
+
+        <p>Update an existing disciplinary entry.</p>
+    </div>
+    <div class="sl-flex">
+        <div data-testid="two-column-left" class="sl-flex-1 sl-w-0">
+            <div class="sl-stack sl-stack--vertical sl-stack--10 sl-flex sl-flex-col sl-items-stretch">
+                <div class="sl-stack sl-stack--vertical sl-stack--8 sl-flex sl-flex-col sl-items-stretch">
+                                            <div class="sl-stack sl-stack--vertical sl-stack--5 sl-flex sl-flex-col sl-items-stretch">
+                            <h3 class="sl-text-2xl sl-leading-snug sl-font-prose">
+                                Headers
+                            </h3>
+                            <div class="sl-text-sm">
+                                                                    <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">Authorization</div>
+                                    </div>
+                                    </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        Bearer {YOUR_AUTH_KEY}
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+                                                                    <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">Content-Type</div>
+                                    </div>
+                                    </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        application/json
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+                                                                    <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">Accept</div>
+                                    </div>
+                                    </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        application/json
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+                                                            </div>
+                        </div>
+                    
+                                            <div class="sl-stack sl-stack--vertical sl-stack--6 sl-flex sl-flex-col sl-items-stretch">
+                            <h3 class="sl-text-2xl sl-leading-snug sl-font-prose">URL Parameters</h3>
+
+                            <div class="sl-text-sm">
+                                                                    <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">id</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the ID of Disciplinary.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        1
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+                                                            </div>
+                        </div>
+                    
+
+                    
+                                            <div class="sl-stack sl-stack--vertical sl-stack--6 sl-flex sl-flex-col sl-items-stretch">
+                            <h3 class="sl-text-2xl sl-leading-snug sl-font-prose">Body Parameters</h3>
+
+                                <div class="sl-text-sm">
+                                    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">period_month</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Period Month of Employee Disciplinary. Must be between 1 and 12 digits.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        3
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">period_year</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Period Year of Employee Disciplinary. Must be a valid date in the format <code>Y</code>.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        2020
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">name</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Name of Employee Disciplinary. Must not be greater than 160 characters.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        Hukuman Disiplin Desember 2024
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2  sl-cursor-pointer ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                            <div class="sl-flex sl-justify-center sl-w-8 sl--ml-8 sl-pl-3 sl-text-muted expansion-chevrons" role="button">
+                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right"
+                         class="svg-inline--fa fa-chevron-right fa-fw fa-sm sl-icon" role="img"
+                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                        <path fill="currentColor"
+                              d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"></path>
+                    </svg>
+                </div>
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">users</div>
+                                            <span class="sl-truncate sl-text-muted">object[]</span>
+                                    </div>
+                                    </div>
+                                    </div>
+</div>
+
+                    <div class="children" style="display: none;">
+                <div class="expandable sl-text-sm sl-border-l sl-ml-7">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">user_id</div>
+                                            <span class="sl-truncate sl-text-muted">number</span>
+                                    </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the User ID of Employee Disciplinary.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        1
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">grade</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Golongan of Employee Disciplinary. Must not be greater than 160 characters.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        Penata (III/c)
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">position</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Jabatan of Employee Disciplinary. Must not be greater than 160 characters.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        Kepala Subbagian Administrasi
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">disciplinary_type_id</div>
+                                            <span class="sl-truncate sl-text-muted">number</span>
+                                    </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Jenis Hukuman of Employee Disciplinary.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        1
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">decree_number</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the No SK of Employee Disciplinary. Must not be greater than 160 characters.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        Nomor 112 Tahun 2023
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">date_of_decree</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Tanggal SK of Employee Disciplinary. Must be a valid date.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        2023-10-22
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">start_date</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Tanggal Mulai Hukuman of Employee Disciplinary. Must be a valid date.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        2023-10-22
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">end_date</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Tanggal Selesai Hukuman of Employee Disciplinary. Must be a valid date.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        2024-10-22
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">authorizing_officer</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Pejabat Berwenang of Employee Disciplinary. Must not be greater than 160 characters.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        Deputi Bidang Administrasi
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">name_of_authorizing_officer</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Nama Pejabat Berwenang of Employee Disciplinary. Must not be greater than 160 characters.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        Sapto Harjono Wahjoe Sedjati, S.Sos., M.A.
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">description</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Uraian of Employee Disciplinary. Must not be greater than 160 characters.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        Tidak masuk ke kantor selama 10 hari
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+            </div>
+            </div>
+                            </div>
+                        </div>
+                    
+                                    </div>
+            </div>
+        </div>
+
+        <div data-testid="two-column-right" class="sl-relative sl-w-2/5 sl-ml-16" style="max-width: 500px;">
+            <div class="sl-stack sl-stack--vertical sl-stack--6 sl-flex sl-flex-col sl-items-stretch">
+
+                                    <div class="sl-inverted">
+    <div class="sl-overflow-y-hidden sl-rounded-lg">
+        <form class="TryItPanel sl-bg-canvas-100 sl-rounded-lg"
+              data-method="POST"
+              data-path="api/disciplinaries/{id}"
+              data-hasfiles="0"
+              data-hasjsonbody="1">
+                            <div class="sl-panel sl-outline-none sl-w-full expandable">
+                    <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
+                         role="button">
+                        <div class="sl-flex sl-flex-1 sl-items-center sl-h-lg">
+                            <div class="sl-flex sl-items-center sl-mr-1.5 expansion-chevrons expansion-chevrons-solid expanded">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                     data-icon="caret-down"
+                                     class="svg-inline--fa fa-caret-down fa-fw sl-icon" role="img"
+                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                    <path fill="currentColor"
+                                          d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"></path>
+                                </svg>
+                            </div>
+                            Auth
+                        </div>
+                    </div>
+                    <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
+                        <div class="ParameterGrid sl-p-4">
+                            <label aria-hidden="true"
+                                   for="auth-POSTapi-disciplinaries--id-">Authorization</label>
+                            <span class="sl-mx-3">:</span>
+                            <div class="sl-flex sl-flex-1">
+                                <div class="sl-input sl-flex-1 sl-relative">
+                                    <code>Bearer </code>
+                                    <input aria-label="Authorization"
+                                           id="auth-POSTapi-disciplinaries--id-"
+                                           data-component="header"
+                                           data-prefix="Bearer "
+                                           name="Authorization"
+                                           placeholder="{YOUR_AUTH_KEY}"
+                                           class="auth-value sl-relative sl-w-3/5 sl-h-md sl-text-base sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                            <div class="sl-panel sl-outline-none sl-w-full expandable">
+                    <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
+                         role="button">
+                        <div class="sl-flex sl-flex-1 sl-items-center sl-h-lg">
+                            <div class="sl-flex sl-items-center sl-mr-1.5 expansion-chevrons expansion-chevrons-solid expanded">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                     data-icon="caret-down"
+                                     class="svg-inline--fa fa-caret-down fa-fw sl-icon" role="img"
+                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                    <path fill="currentColor"
+                                          d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"></path>
+                                </svg>
+                            </div>
+                            Headers
+                        </div>
+                    </div>
+                    <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
+                        <div class="ParameterGrid sl-p-4">
+                                                                                                                            <label aria-hidden="true"
+                                       for="header-POSTapi-disciplinaries--id--Content-Type">Content-Type</label>
+                                <span class="sl-mx-3">:</span>
+                                <div class="sl-flex sl-flex-1">
+                                    <div class="sl-input sl-flex-1 sl-relative">
+                                        <input aria-label="Content-Type" name="Content-Type"
+                                               id="header-POSTapi-disciplinaries--id--Content-Type"
+                                               value="application/json" data-component="header"
+                                               class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
+                                    </div>
+                                </div>
+                                                                                            <label aria-hidden="true"
+                                       for="header-POSTapi-disciplinaries--id--Accept">Accept</label>
+                                <span class="sl-mx-3">:</span>
+                                <div class="sl-flex sl-flex-1">
+                                    <div class="sl-input sl-flex-1 sl-relative">
+                                        <input aria-label="Accept" name="Accept"
+                                               id="header-POSTapi-disciplinaries--id--Accept"
+                                               value="application/json" data-component="header"
+                                               class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
+                                    </div>
+                                </div>
+                                                    </div>
+                    </div>
+                </div>
+            
+                            <div class="sl-panel sl-outline-none sl-w-full expandable">
+                    <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
+                         role="button">
+                        <div class="sl-flex sl-flex-1 sl-items-center sl-h-lg">
+                            <div class="sl-flex sl-items-center sl-mr-1.5 expansion-chevrons expansion-chevrons-solid expanded">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                     data-icon="caret-down"
+                                     class="svg-inline--fa fa-caret-down fa-fw sl-icon" role="img"
+                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                    <path fill="currentColor"
+                                          d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"></path>
+                                </svg>
+                            </div>
+                            URL Parameters
+                        </div>
+                    </div>
+                    <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
+                        <div class="ParameterGrid sl-p-4">
+                                                            <label aria-hidden="true"
+                                       for="urlparam-POSTapi-disciplinaries--id--id">id</label>
+                                <span class="sl-mx-3">:</span>
+                                <div class="sl-flex sl-flex-1">
+                                    <div class="sl-input sl-flex-1 sl-relative">
+                                        <input aria-label="id" name="id"
+                                               id="urlparam-POSTapi-disciplinaries--id--id"
+                                               placeholder="Refers to the ID of Disciplinary."
+                                               value="1" data-component="url"
+                                               class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
+                                    </div>
+                                </div>
+                                                    </div>
+                    </div>
+                </div>
+            
+            
+                            <div class="sl-panel sl-outline-none sl-w-full expandable">
+                    <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
+                         role="button">
+                        <div class="sl-flex sl-flex-1 sl-items-center sl-h-lg">
+                            <div class="sl-flex sl-items-center sl-mr-1.5 expansion-chevrons expansion-chevrons-solid expanded">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                     data-icon="caret-down"
+                                     class="svg-inline--fa fa-caret-down fa-fw sl-icon" role="img"
+                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                    <path fill="currentColor"
+                                          d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"></path>
+                                </svg>
+                            </div>
+                            Body
+                        </div>
+                    </div>
+                    <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
+                                                    <div class="TextRequestBody sl-p-4">
+                                <div class="code-editor language-json"
+                                     id="json-body-POSTapi-disciplinaries--id-"
+                                     style="font-family: var(--font-code); font-size: 12px; line-height: var(--lh-code);"
+                                >{
+    "period_month": 3,
+    "period_year": "2020",
+    "name": "Hukuman Disiplin Desember 2024",
+    "users": [
+        {
+            "user_id": 1,
+            "grade": "Penata (III\/c)",
+            "position": "Kepala Subbagian Administrasi",
+            "disciplinary_type_id": 1,
+            "decree_number": "Nomor 112 Tahun 2023",
+            "date_of_decree": "2023-10-22",
+            "start_date": "2023-10-22",
+            "end_date": "2024-10-22",
+            "authorizing_officer": "Deputi Bidang Administrasi",
+            "name_of_authorizing_officer": "Sapto Harjono Wahjoe Sedjati, S.Sos., M.A.",
+            "description": "Tidak masuk ke kantor selama 10 hari"
+        }
+    ]
+}</div>
+                            </div>
+                                            </div>
+                </div>
+            
+            <div class="SendButtonHolder sl-mt-4 sl-p-4 sl-pt-0">
+                <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-center">
+                    <button type="button" data-endpoint="POSTapi-disciplinaries--id-"
+                            class="tryItOut-btn sl-button sl-h-sm sl-text-base sl-font-medium sl-px-1.5 sl-bg-primary hover:sl-bg-primary-dark active:sl-bg-primary-darker disabled:sl-bg-canvas-100 sl-text-on-primary disabled:sl-text-body sl-rounded sl-border-transparent sl-border disabled:sl-opacity-70"
+                    >
+                        Send Request 💥
+                    </button>
+                </div>
+            </div>
+
+            <div data-endpoint="POSTapi-disciplinaries--id-"
+                 class="tryItOut-error expandable sl-panel sl-outline-none sl-w-full" hidden>
+                <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
+                     role="button">
+                    <div class="sl-flex sl-flex-1 sl-items-center sl-h-lg">
+                        <div class="sl-flex sl-items-center sl-mr-1.5 expansion-chevrons expansion-chevrons-solid expanded">
+                            <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                 data-icon="caret-down"
+                                 class="svg-inline--fa fa-caret-down fa-fw sl-icon" role="img"
+                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                <path fill="currentColor"
+                                      d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"></path>
+                            </svg>
+                        </div>
+                        Request failed with error
+                    </div>
+                </div>
+                <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
+                    <div class="sl-panel__content sl-p-4">
+                        <p class="sl-pb-2"><strong class="error-message"></strong></p>
+                        <p class="sl-pb-2">Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</p>
+                    </div>
+                </div>
+            </div>
+
+                <div data-endpoint="POSTapi-disciplinaries--id-"
+                     class="tryItOut-response expandable sl-panel sl-outline-none sl-w-full" hidden>
+                    <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
+                         role="button">
+                        <div class="sl-flex sl-flex-1 sl-items-center sl-h-lg">
+                            <div class="sl-flex sl-items-center sl-mr-1.5 expansion-chevrons expansion-chevrons-solid expanded">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                     data-icon="caret-down"
+                                     class="svg-inline--fa fa-caret-down fa-fw sl-icon" role="img"
+                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                    <path fill="currentColor"
+                                          d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"></path>
+                                </svg>
+                            </div>
+                            Received response
+                        </div>
+                    </div>
+                    <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
+                        <div class="sl-panel__content sl-p-4">
+                            <p class="sl-pb-2 response-status"></p>
+                            <pre><code class="sl-pb-2 response-content language-json"
+                                       data-empty-response-text="<Empty response>"
+                                       style="max-height: 300px;"></code></pre>
+                        </div>
+                    </div>
+                </div>
+        </form>
+    </div>
+</div>
+                
+                                            <div class="sl-panel sl-outline-none sl-w-full sl-rounded-lg">
+                            <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-3 sl-pl-4 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-select-none">
+                                <div class="sl-flex sl-flex-1 sl-items-center sl-h-lg">
+                                    <div class="sl--ml-2">
+                                        Example request:
+                                        <select class="example-request-lang-toggle sl-text-base"
+                                                aria-label="Request Sample Language"
+                                                onchange="switchExampleLanguage(event.target.value);">
+                                                                                            <option>bash</option>
+                                                                                            <option>javascript</option>
+                                                                                    </select>
+                                    </div>
+                                </div>
+                            </div>
+                                                            <div class="sl-bg-canvas-100 example-request example-request-bash"
+                                     style="">
+                                    <div class="sl-px-0 sl-py-1">
+                                        <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
+                                            <pre><code class="language-bash">curl --request POST \
+    "http://localhost/api/disciplinaries/1" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --data "{
+    \"period_month\": 3,
+    \"period_year\": \"2020\",
+    \"name\": \"Hukuman Disiplin Desember 2024\",
+    \"users\": [
+        {
+            \"user_id\": 1,
+            \"grade\": \"Penata (III\\/c)\",
+            \"position\": \"Kepala Subbagian Administrasi\",
+            \"disciplinary_type_id\": 1,
+            \"decree_number\": \"Nomor 112 Tahun 2023\",
+            \"date_of_decree\": \"2023-10-22\",
+            \"start_date\": \"2023-10-22\",
+            \"end_date\": \"2024-10-22\",
+            \"authorizing_officer\": \"Deputi Bidang Administrasi\",
+            \"name_of_authorizing_officer\": \"Sapto Harjono Wahjoe Sedjati, S.Sos., M.A.\",
+            \"description\": \"Tidak masuk ke kantor selama 10 hari\"
+        }
+    ]
+}"
+</code></pre>                                        </div>
+                                    </div>
+                                </div>
+                                                            <div class="sl-bg-canvas-100 example-request example-request-javascript"
+                                     style="display: none;">
+                                    <div class="sl-px-0 sl-py-1">
+                                        <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
+                                            <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/disciplinaries/1"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+let body = {
+    "period_month": 3,
+    "period_year": "2020",
+    "name": "Hukuman Disiplin Desember 2024",
+    "users": [
+        {
+            "user_id": 1,
+            "grade": "Penata (III\/c)",
+            "position": "Kepala Subbagian Administrasi",
+            "disciplinary_type_id": 1,
+            "decree_number": "Nomor 112 Tahun 2023",
+            "date_of_decree": "2023-10-22",
+            "start_date": "2023-10-22",
+            "end_date": "2024-10-22",
+            "authorizing_officer": "Deputi Bidang Administrasi",
+            "name_of_authorizing_officer": "Sapto Harjono Wahjoe Sedjati, S.Sos., M.A.",
+            "description": "Tidak masuk ke kantor selama 10 hari"
+        }
+    ]
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+    body: JSON.stringify(body),
+}).then(response =&gt; response.json());</code></pre>                                        </div>
+                                    </div>
+                                </div>
+                                                    </div>
+                    
+                                            <div class="sl-panel sl-outline-none sl-w-full sl-rounded-lg">
+                            <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-3 sl-pl-4 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-select-none">
+                                <div class="sl-flex sl-flex-1 sl-items-center sl-py-2">
+                                    <div class="sl--ml-2">
+                                        <div class="sl-h-sm sl-text-base sl-font-medium sl-px-1.5 sl-text-muted sl-rounded sl-border-transparent sl-border">
+                                            <div class="sl-mb-2 sl-inline-block">Example response:</div>
+                                            <div class="sl-mb-2 sl-inline-block">
+                                                <select
+                                                        class="example-response-POSTapi-disciplinaries--id--toggle sl-text-base"
+                                                        aria-label="Response sample"
+                                                        onchange="switchExampleResponse('POSTapi-disciplinaries--id-', event.target.value);">
+                                                                                                            <option value="0">200</option>
+                                                                                                            <option value="1">404</option>
+                                                                                                    </select></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button"
+                                        class="sl-button sl-h-sm sl-text-base sl-font-medium sl-px-1.5 hover:sl-bg-canvas-50 active:sl-bg-canvas-100 sl-text-muted hover:sl-text-body focus:sl-text-body sl-rounded sl-border-transparent sl-border disabled:sl-opacity-70">
+                                    <div class="sl-mx-0">
+                                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="copy"
+                                             class="svg-inline--fa fa-copy fa-fw fa-sm sl-icon" role="img"
+                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <path fill="currentColor"
+                                                  d="M384 96L384 0h-112c-26.51 0-48 21.49-48 48v288c0 26.51 21.49 48 48 48H464c26.51 0 48-21.49 48-48V128h-95.1C398.4 128 384 113.6 384 96zM416 0v96h96L416 0zM192 352V128h-144c-26.51 0-48 21.49-48 48v288c0 26.51 21.49 48 48 48h192c26.51 0 48-21.49 48-48L288 416h-32C220.7 416 192 387.3 192 352z"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                            </div>
+                                                            <div class="sl-panel__content-wrapper sl-bg-canvas-100 example-response-POSTapi-disciplinaries--id- example-response-POSTapi-disciplinaries--id--0"
+                                     style=" "
+                                >
+                                    <div class="sl-panel__content sl-p-0">                                                                                                                                
+                                            <pre><code style="max-height: 300px;"
+                                                       class="language-json sl-overflow-x-auto sl-overflow-y-auto">{
+    &quot;code&quot;: 200,
+    &quot;message&quot;: &quot;Hukuman disiplin berhasil diupdate.&quot;,
+    &quot;data&quot;: null
+}</code></pre>
+                                                                            </div>
+                                </div>
+                                                            <div class="sl-panel__content-wrapper sl-bg-canvas-100 example-response-POSTapi-disciplinaries--id- example-response-POSTapi-disciplinaries--id--1"
+                                     style=" display: none;"
+                                >
+                                    <div class="sl-panel__content sl-p-0">                                                                                                                                
+                                            <pre><code style="max-height: 300px;"
+                                                       class="language-json sl-overflow-x-auto sl-overflow-y-auto">{
+    &quot;code&quot;: 404,
+    &quot;message&quot;: &quot;Hukuman disiplin tidak ditemukan.&quot;,
+    &quot;data&quot;: null
+}</code></pre>
+                                                                            </div>
+                                </div>
+                                                    </div>
+                            </div>
+    </div>
+</div>
+
                 <h1 id="master-data"
         class="sl-text-5xl sl-leading-tight sl-font-prose sl-text-heading"
     >
@@ -31120,6 +32975,536 @@ fetch(url, {
     </div>
 </div>
 
+                                <h2 id="master-data-disciplinary-type"
+                class="sl-text-3xl sl-leading-tight sl-font-prose sl-text-heading sl-mt-5 sl-mb-3"
+            >
+                Disciplinary Type
+            </h2>
+                                        <p>These endpoints allow you to perform CRUD operations on disciplinary type data, enabling the retrieval, creation, updating and deleting of disciplinary type records as needed.</p>
+                        <br>
+                            <div class="sl-stack sl-stack--vertical sl-stack--8 HttpOperation sl-flex sl-flex-col sl-items-stretch sl-w-full">
+    <div class="sl-stack sl-stack--vertical sl-stack--5 sl-flex sl-flex-col sl-items-stretch">
+        <div class="sl-relative">
+            <div class="sl-stack sl-stack--horizontal sl-stack--5 sl-flex sl-flex-row sl-items-center">
+                <h2 class="sl-text-3xl sl-leading-tight sl-font-prose sl-text-heading sl-mt-5 sl-mb-1"
+                    id="master-data-GETapi-disciplinary-types">
+                    Get List of Disciplinary Types
+                </h2>
+            </div>
+        </div>
+
+        <div class="sl-relative">
+            <div title="http://localhost/api/disciplinary-types"
+                     class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
+                >
+                                            <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
+                             style="background-color: green;"
+                        >
+                            GET
+                        </div>
+                                        <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
+                        <div dir="rtl"
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
+                        <div class="sl-flex-1 sl-font-semibold">/api/disciplinary-types</div>
+                    </div>
+
+                                                    <div class="sl-font-prose sl-font-semibold sl-px-1.5 sl-py-0.5 sl-text-on-primary sl-rounded-lg"
+                                 style="background-color: darkred"
+                            >requires authentication
+                            </div>
+                                    </div>
+        </div>
+
+        <p>Retrieve the disciplinary type of master data.</p>
+    </div>
+    <div class="sl-flex">
+        <div data-testid="two-column-left" class="sl-flex-1 sl-w-0">
+            <div class="sl-stack sl-stack--vertical sl-stack--10 sl-flex sl-flex-col sl-items-stretch">
+                <div class="sl-stack sl-stack--vertical sl-stack--8 sl-flex sl-flex-col sl-items-stretch">
+                                            <div class="sl-stack sl-stack--vertical sl-stack--5 sl-flex sl-flex-col sl-items-stretch">
+                            <h3 class="sl-text-2xl sl-leading-snug sl-font-prose">
+                                Headers
+                            </h3>
+                            <div class="sl-text-sm">
+                                                                    <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">Authorization</div>
+                                    </div>
+                                    </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        Bearer {YOUR_AUTH_KEY}
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+                                                                    <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">Content-Type</div>
+                                    </div>
+                                    </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        application/json
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+                                                                    <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">Accept</div>
+                                    </div>
+                                    </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        application/json
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+                                                            </div>
+                        </div>
+                    
+                    
+
+                                                <div class="sl-stack sl-stack--vertical sl-stack--6 sl-flex sl-flex-col sl-items-stretch">
+                                <h3 class="sl-text-2xl sl-leading-snug sl-font-prose">Query Parameters</h3>
+
+                                <div class="sl-text-sm">
+                                                                            <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">page</div>
+                                            <span class="sl-truncate sl-text-muted">integer</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the current page of results being displayed. Default is '1'.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        1
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+                                                                            <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">limit</div>
+                                            <span class="sl-truncate sl-text-muted">integer</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the maximum number of items to be displayed per page. Defaults is '10'.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        10
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+                                                                            <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">keyword</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>The keyword search field for the name of employment type.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        Teguran Tertulis
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+                                                                </div>
+                        </div>
+                    
+                    
+                                    </div>
+            </div>
+        </div>
+
+        <div data-testid="two-column-right" class="sl-relative sl-w-2/5 sl-ml-16" style="max-width: 500px;">
+            <div class="sl-stack sl-stack--vertical sl-stack--6 sl-flex sl-flex-col sl-items-stretch">
+
+                                    <div class="sl-inverted">
+    <div class="sl-overflow-y-hidden sl-rounded-lg">
+        <form class="TryItPanel sl-bg-canvas-100 sl-rounded-lg"
+              data-method="GET"
+              data-path="api/disciplinary-types"
+              data-hasfiles="0"
+              data-hasjsonbody="0">
+                            <div class="sl-panel sl-outline-none sl-w-full expandable">
+                    <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
+                         role="button">
+                        <div class="sl-flex sl-flex-1 sl-items-center sl-h-lg">
+                            <div class="sl-flex sl-items-center sl-mr-1.5 expansion-chevrons expansion-chevrons-solid expanded">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                     data-icon="caret-down"
+                                     class="svg-inline--fa fa-caret-down fa-fw sl-icon" role="img"
+                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                    <path fill="currentColor"
+                                          d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"></path>
+                                </svg>
+                            </div>
+                            Auth
+                        </div>
+                    </div>
+                    <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
+                        <div class="ParameterGrid sl-p-4">
+                            <label aria-hidden="true"
+                                   for="auth-GETapi-disciplinary-types">Authorization</label>
+                            <span class="sl-mx-3">:</span>
+                            <div class="sl-flex sl-flex-1">
+                                <div class="sl-input sl-flex-1 sl-relative">
+                                    <code>Bearer </code>
+                                    <input aria-label="Authorization"
+                                           id="auth-GETapi-disciplinary-types"
+                                           data-component="header"
+                                           data-prefix="Bearer "
+                                           name="Authorization"
+                                           placeholder="{YOUR_AUTH_KEY}"
+                                           class="auth-value sl-relative sl-w-3/5 sl-h-md sl-text-base sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                            <div class="sl-panel sl-outline-none sl-w-full expandable">
+                    <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
+                         role="button">
+                        <div class="sl-flex sl-flex-1 sl-items-center sl-h-lg">
+                            <div class="sl-flex sl-items-center sl-mr-1.5 expansion-chevrons expansion-chevrons-solid expanded">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                     data-icon="caret-down"
+                                     class="svg-inline--fa fa-caret-down fa-fw sl-icon" role="img"
+                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                    <path fill="currentColor"
+                                          d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"></path>
+                                </svg>
+                            </div>
+                            Headers
+                        </div>
+                    </div>
+                    <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
+                        <div class="ParameterGrid sl-p-4">
+                                                                                                                            <label aria-hidden="true"
+                                       for="header-GETapi-disciplinary-types-Content-Type">Content-Type</label>
+                                <span class="sl-mx-3">:</span>
+                                <div class="sl-flex sl-flex-1">
+                                    <div class="sl-input sl-flex-1 sl-relative">
+                                        <input aria-label="Content-Type" name="Content-Type"
+                                               id="header-GETapi-disciplinary-types-Content-Type"
+                                               value="application/json" data-component="header"
+                                               class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
+                                    </div>
+                                </div>
+                                                                                            <label aria-hidden="true"
+                                       for="header-GETapi-disciplinary-types-Accept">Accept</label>
+                                <span class="sl-mx-3">:</span>
+                                <div class="sl-flex sl-flex-1">
+                                    <div class="sl-input sl-flex-1 sl-relative">
+                                        <input aria-label="Accept" name="Accept"
+                                               id="header-GETapi-disciplinary-types-Accept"
+                                               value="application/json" data-component="header"
+                                               class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
+                                    </div>
+                                </div>
+                                                    </div>
+                    </div>
+                </div>
+            
+            
+                            <div class="sl-panel sl-outline-none sl-w-full expandable">
+                    <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
+                         role="button">
+                        <div class="sl-flex sl-flex-1 sl-items-center sl-h-lg">
+                            <div class="sl-flex sl-items-center sl-mr-1.5 expansion-chevrons expansion-chevrons-solid expanded">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                     data-icon="caret-down"
+                                     class="svg-inline--fa fa-caret-down fa-fw sl-icon" role="img"
+                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                    <path fill="currentColor"
+                                          d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"></path>
+                                </svg>
+                            </div>
+                            Query Parameters
+                        </div>
+                    </div>
+                    <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
+                        <div class="ParameterGrid sl-p-4">
+                                                                                            <label aria-hidden="true"
+                                       for="queryparam-GETapi-disciplinary-types-page">page</label>
+                                <span class="sl-mx-3">:</span>
+                                <div class="sl-flex sl-flex-1">
+                                    <div class="sl-input sl-flex-1 sl-relative">
+                                                                                    <input aria-label="page" name="page"
+                                                   id="queryparam-GETapi-disciplinary-types-page"
+                                                   placeholder="Refers to the current page of results being displayed. Default is &#039;1&#039;."
+                                                   value="1" data-component="query"
+                                                   class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
+                                            >
+                                                                            </div>
+                                </div>
+                                                                                            <label aria-hidden="true"
+                                       for="queryparam-GETapi-disciplinary-types-limit">limit</label>
+                                <span class="sl-mx-3">:</span>
+                                <div class="sl-flex sl-flex-1">
+                                    <div class="sl-input sl-flex-1 sl-relative">
+                                                                                    <input aria-label="limit" name="limit"
+                                                   id="queryparam-GETapi-disciplinary-types-limit"
+                                                   placeholder="Refers to the maximum number of items to be displayed per page. Defaults is &#039;10&#039;."
+                                                   value="10" data-component="query"
+                                                   class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
+                                            >
+                                                                            </div>
+                                </div>
+                                                                                            <label aria-hidden="true"
+                                       for="queryparam-GETapi-disciplinary-types-keyword">keyword</label>
+                                <span class="sl-mx-3">:</span>
+                                <div class="sl-flex sl-flex-1">
+                                    <div class="sl-input sl-flex-1 sl-relative">
+                                                                                    <input aria-label="keyword" name="keyword"
+                                                   id="queryparam-GETapi-disciplinary-types-keyword"
+                                                   placeholder="The keyword search field for the name of employment type."
+                                                   value="Teguran Tertulis" data-component="query"
+                                                   class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
+                                            >
+                                                                            </div>
+                                </div>
+                                                    </div>
+                    </div>
+                </div>
+            
+            
+            <div class="SendButtonHolder sl-mt-4 sl-p-4 sl-pt-0">
+                <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-center">
+                    <button type="button" data-endpoint="GETapi-disciplinary-types"
+                            class="tryItOut-btn sl-button sl-h-sm sl-text-base sl-font-medium sl-px-1.5 sl-bg-primary hover:sl-bg-primary-dark active:sl-bg-primary-darker disabled:sl-bg-canvas-100 sl-text-on-primary disabled:sl-text-body sl-rounded sl-border-transparent sl-border disabled:sl-opacity-70"
+                    >
+                        Send Request 💥
+                    </button>
+                </div>
+            </div>
+
+            <div data-endpoint="GETapi-disciplinary-types"
+                 class="tryItOut-error expandable sl-panel sl-outline-none sl-w-full" hidden>
+                <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
+                     role="button">
+                    <div class="sl-flex sl-flex-1 sl-items-center sl-h-lg">
+                        <div class="sl-flex sl-items-center sl-mr-1.5 expansion-chevrons expansion-chevrons-solid expanded">
+                            <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                 data-icon="caret-down"
+                                 class="svg-inline--fa fa-caret-down fa-fw sl-icon" role="img"
+                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                <path fill="currentColor"
+                                      d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"></path>
+                            </svg>
+                        </div>
+                        Request failed with error
+                    </div>
+                </div>
+                <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
+                    <div class="sl-panel__content sl-p-4">
+                        <p class="sl-pb-2"><strong class="error-message"></strong></p>
+                        <p class="sl-pb-2">Tip: Check that you&#039;re properly connected to the network.
+If you&#039;re a maintainer of ths API, verify that your API is running and you&#039;ve enabled CORS.
+You can check the Dev Tools console for debugging information.</p>
+                    </div>
+                </div>
+            </div>
+
+                <div data-endpoint="GETapi-disciplinary-types"
+                     class="tryItOut-response expandable sl-panel sl-outline-none sl-w-full" hidden>
+                    <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
+                         role="button">
+                        <div class="sl-flex sl-flex-1 sl-items-center sl-h-lg">
+                            <div class="sl-flex sl-items-center sl-mr-1.5 expansion-chevrons expansion-chevrons-solid expanded">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                     data-icon="caret-down"
+                                     class="svg-inline--fa fa-caret-down fa-fw sl-icon" role="img"
+                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                    <path fill="currentColor"
+                                          d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"></path>
+                                </svg>
+                            </div>
+                            Received response
+                        </div>
+                    </div>
+                    <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
+                        <div class="sl-panel__content sl-p-4">
+                            <p class="sl-pb-2 response-status"></p>
+                            <pre><code class="sl-pb-2 response-content language-json"
+                                       data-empty-response-text="<Empty response>"
+                                       style="max-height: 300px;"></code></pre>
+                        </div>
+                    </div>
+                </div>
+        </form>
+    </div>
+</div>
+                
+                                            <div class="sl-panel sl-outline-none sl-w-full sl-rounded-lg">
+                            <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-3 sl-pl-4 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-select-none">
+                                <div class="sl-flex sl-flex-1 sl-items-center sl-h-lg">
+                                    <div class="sl--ml-2">
+                                        Example request:
+                                        <select class="example-request-lang-toggle sl-text-base"
+                                                aria-label="Request Sample Language"
+                                                onchange="switchExampleLanguage(event.target.value);">
+                                                                                            <option>bash</option>
+                                                                                            <option>javascript</option>
+                                                                                    </select>
+                                    </div>
+                                </div>
+                            </div>
+                                                            <div class="sl-bg-canvas-100 example-request example-request-bash"
+                                     style="">
+                                    <div class="sl-px-0 sl-py-1">
+                                        <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
+                                            <pre><code class="language-bash">curl --request GET \
+    --get "http://localhost/api/disciplinary-types?page=1&amp;limit=10&amp;keyword=Teguran+Tertulis" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json"</code></pre>                                        </div>
+                                    </div>
+                                </div>
+                                                            <div class="sl-bg-canvas-100 example-request example-request-javascript"
+                                     style="display: none;">
+                                    <div class="sl-px-0 sl-py-1">
+                                        <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
+                                            <pre><code class="language-javascript">const url = new URL(
+    "http://localhost/api/disciplinary-types"
+);
+
+const params = {
+    "page": "1",
+    "limit": "10",
+    "keyword": "Teguran Tertulis",
+};
+Object.keys(params)
+    .forEach(key =&gt; url.searchParams.append(key, params[key]));
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>                                        </div>
+                                    </div>
+                                </div>
+                                                    </div>
+                    
+                                            <div class="sl-panel sl-outline-none sl-w-full sl-rounded-lg">
+                            <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-3 sl-pl-4 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-select-none">
+                                <div class="sl-flex sl-flex-1 sl-items-center sl-py-2">
+                                    <div class="sl--ml-2">
+                                        <div class="sl-h-sm sl-text-base sl-font-medium sl-px-1.5 sl-text-muted sl-rounded sl-border-transparent sl-border">
+                                            <div class="sl-mb-2 sl-inline-block">Example response:</div>
+                                            <div class="sl-mb-2 sl-inline-block">
+                                                <select
+                                                        class="example-response-GETapi-disciplinary-types-toggle sl-text-base"
+                                                        aria-label="Response sample"
+                                                        onchange="switchExampleResponse('GETapi-disciplinary-types', event.target.value);">
+                                                                                                            <option value="0">200</option>
+                                                                                                    </select></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button"
+                                        class="sl-button sl-h-sm sl-text-base sl-font-medium sl-px-1.5 hover:sl-bg-canvas-50 active:sl-bg-canvas-100 sl-text-muted hover:sl-text-body focus:sl-text-body sl-rounded sl-border-transparent sl-border disabled:sl-opacity-70">
+                                    <div class="sl-mx-0">
+                                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="copy"
+                                             class="svg-inline--fa fa-copy fa-fw fa-sm sl-icon" role="img"
+                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <path fill="currentColor"
+                                                  d="M384 96L384 0h-112c-26.51 0-48 21.49-48 48v288c0 26.51 21.49 48 48 48H464c26.51 0 48-21.49 48-48V128h-95.1C398.4 128 384 113.6 384 96zM416 0v96h96L416 0zM192 352V128h-144c-26.51 0-48 21.49-48 48v288c0 26.51 21.49 48 48 48h192c26.51 0 48-21.49 48-48L288 416h-32C220.7 416 192 387.3 192 352z"></path>
+                                        </svg>
+                                    </div>
+                                </button>
+                            </div>
+                                                            <div class="sl-panel__content-wrapper sl-bg-canvas-100 example-response-GETapi-disciplinary-types example-response-GETapi-disciplinary-types-0"
+                                     style=" "
+                                >
+                                    <div class="sl-panel__content sl-p-0">                                                                                                                                
+                                            <pre><code style="max-height: 300px;"
+                                                       class="language-json sl-overflow-x-auto sl-overflow-y-auto">{
+    &quot;code&quot;: 200,
+    &quot;message&quot;: &quot;success&quot;,
+    &quot;data&quot;: [
+        {
+            &quot;id&quot;: 1,
+            &quot;name&quot;: &quot;Teguran Lisan&quot;,
+            &quot;description&quot;: &quot;Hukuman Disiplin Tingkat Ringan 1&quot;,
+            &quot;performance_allowance_deduction&quot;: 0.25,
+            &quot;performance_allowance_duration&quot;: 2
+        }
+    ],
+    &quot;pagination&quot;: {
+        &quot;total&quot;: 11,
+        &quot;count&quot;: 10,
+        &quot;per_page&quot;: 10,
+        &quot;current_page&quot;: 1,
+        &quot;total_pages&quot;: 2,
+        &quot;links&quot;: {
+            &quot;first_page&quot;: &quot;http://localhost/api/disciplinary-types?page=1&quot;,
+            &quot;last_page&quot;: &quot;http://localhost/api/disciplinary-types?page=2&quot;,
+            &quot;next_page&quot;: &quot;http://localhost/api/disciplinary-types?page=2&quot;,
+            &quot;prev_page&quot;: null
+        }
+    }
+}</code></pre>
+                                                                            </div>
+                                </div>
+                                                    </div>
+                            </div>
+    </div>
+</div>
+
                 <h1 id="access-control-list"
         class="sl-text-5xl sl-leading-tight sl-font-prose sl-text-heading"
     >
@@ -33512,7 +35897,7 @@ You can check the Dev Tools console for debugging information.</p>
     --data "{
     \"name\": \"admin\",
     \"permissions\": [
-        \"reiciendis\"
+        \"ab\"
     ]
 }"
 </code></pre>                                        </div>
@@ -33535,7 +35920,7 @@ const headers = {
 let body = {
     "name": "admin",
     "permissions": [
-        "reiciendis"
+        "ab"
     ]
 };
 
@@ -37100,7 +39485,7 @@ issue at <a href="https://github.com/knuckleswtf/scribe/issues/831">https://gith
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        C:\xampp\htdocs\api\public\/img/logo.svg
+                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -37531,7 +39916,7 @@ You can check the Dev Tools console for debugging information.</p>
     --form "old_password=current_password"\
     --form "password=new_password"\
     --form "password_confirmation=new_password"\
-    --form "photo_profile=@C:\xampp\htdocs\api\public\img\logo.svg" </code></pre>                                        </div>
+    --form "photo_profile=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" </code></pre>                                        </div>
                                     </div>
                                 </div>
                                                             <div class="sl-bg-canvas-100 example-request example-request-javascript"
@@ -38509,7 +40894,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        iure
+                        non
                     </div>
                 </div>
             </div>
@@ -38642,7 +41027,7 @@ fetch(url, {
                                         <input aria-label="id" name="id"
                                                id="urlparam-GETapi-export-employees--id--id"
                                                placeholder="The ID of the employee."
-                                               value="iure" data-component="url"
+                                               value="non" data-component="url"
                                                class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
                                     </div>
                                 </div>
@@ -38738,7 +41123,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/export/employees/iure" \
+    --get "http://localhost/api/export/employees/non" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -38749,7 +41134,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/export/employees/iure"
+    "http://localhost/api/export/employees/non"
 );
 
 const headers = {

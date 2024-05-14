@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Employee\CreateEmployeeRequest;
 use App\Http\Requests\Employee\UpdateEmployeeRequest;
 use App\Repositories\AssessmentRepository;
-use App\Repositories\DisciplineRepository;
+use App\Repositories\DisciplinaryRepository;
 use App\Repositories\EducationRepository;
 use App\Repositories\EmployeeRepository;
 use App\Repositories\GradeRepository;
@@ -34,7 +34,7 @@ class EmployeeController extends Controller
     protected $recognitionRepository;
     protected $targetRepository;
     protected $performanceRepository;
-    protected $disciplineRepository;
+    protected $disciplinaryRepository;
     protected $leaveRepository;
     protected $noteRepository;
     protected $assessmentRepository;
@@ -49,7 +49,7 @@ class EmployeeController extends Controller
         RecognitionRepository $recognitionRepository,
         TargetRepository $targetRepository,
         PerformanceRepository $performanceRepository,
-        DisciplineRepository $disciplineRepository,
+        DisciplinaryRepository $disciplinaryRepository,
         LeaveRepository $leaveRepository,
         NoteRepository $noteRepository,
         AssessmentRepository $assessmentRepository,
@@ -61,12 +61,6 @@ class EmployeeController extends Controller
             'educations',
             'positions',
             'grades',
-            'salaries',
-            'trainings',
-            'recognitions',
-            'performances',
-            'targets',
-            'disciplinaries',
             'families',
             'leaves',
             'notes',
@@ -80,7 +74,7 @@ class EmployeeController extends Controller
         $this->recognitionRepository = $recognitionRepository;
         $this->targetRepository = $targetRepository;
         $this->performanceRepository = $performanceRepository;
-        $this->disciplineRepository = $disciplineRepository;
+        $this->disciplinaryRepository = $disciplinaryRepository;
         $this->leaveRepository = $leaveRepository;
         $this->noteRepository = $noteRepository;
         $this->assessmentRepository = $assessmentRepository;
@@ -296,7 +290,7 @@ class EmployeeController extends Controller
         $recognitions = $this->recognitionRepository->getDetail($this->request->id);
         $targets = $this->targetRepository->getDetail($this->request->id);
         $performances = $this->performanceRepository->getDetail($this->request->id);
-        $disciplinaries = $this->disciplineRepository->getDetail($this->request->id);
+        $disciplinaries = $this->disciplinaryRepository->getDetail($this->request->id);
         $leaves = $this->leaveRepository->getDetail($this->request->id);
         $notes = $this->noteRepository->getDetail($this->request->id);
         $assessments = $this->assessmentRepository->getDetail($this->request->id, 1);

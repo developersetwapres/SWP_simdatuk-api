@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DecreeTypeController;
+use App\Http\Controllers\DisciplinaryController;
 use App\Http\Controllers\DisciplinaryTypeController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmploymentTypeController;
@@ -81,6 +82,13 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/{id}', [PerformanceController::class, 'show']);
         Route::post('/', [PerformanceController::class, 'create']);
         Route::post('/{id}', [PerformanceController::class, 'update']);
+    });
+
+    Route::prefix('disciplinaries')->group(function () {
+        Route::get('/', [DisciplinaryController::class, 'index']);
+        Route::get('/{id}', [DisciplinaryController::class, 'show']);
+        Route::post('/', [DisciplinaryController::class, 'create']);
+        Route::post('/{id}', [DisciplinaryController::class, 'update']);
     });
 
     Route::prefix('positions')->group(function () {
