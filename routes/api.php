@@ -2,21 +2,22 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DecreeTypeController;
+use App\Http\Controllers\DisciplinaryTypeController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmploymentTypeController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\InstitutionController;
+use App\Http\Controllers\PerformanceController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RecognitionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SummaryController;
-use App\Http\Controllers\TrainingController;
-use App\Http\Controllers\PerformanceController;
 use App\Http\Controllers\TargetController;
+use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -112,6 +113,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('groups')->group(function () {
         Route::get('/', [GroupController::class, 'index']);
+    });
+
+    Route::prefix('disciplinary-types')->group(function () {
+        Route::get('/', [DisciplinaryTypeController::class, 'index']);
     });
 
     Route::prefix('permissions')->group(function () {
