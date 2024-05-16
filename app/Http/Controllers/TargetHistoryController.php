@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Target\CreateTargetRequest;
 use App\Http\Requests\Target\UpdateTargetRequest;
-use App\Repositories\TargetRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -12,17 +11,12 @@ use Illuminate\Support\Facades\DB;
  * @group History
  * @subgroupDescription These endpoints allow you to perform CRUD operations on Target data, enabling the retrieval, creation, and updating of Target records as needed.
  */
-class TargetController extends Controller
+class TargetHistoryController extends Controller
 {
-    protected $TargetRepository;
-
-    public function __construct(
-        Request $request,
-        TargetRepository $TargetRepository,
-    ) {
+    public function __construct(Request $request)
+    {
         $this->request = $request;
         $this->posted = $request->except('_token', '_method');
-        $this->TargetRepository = $TargetRepository;
     }
 
     /**
@@ -161,7 +155,6 @@ class TargetController extends Controller
 
             foreach ($this->request->users as $user) {
                 $user['target_id'] = $this->request->id;
-                // Collect user to bulk insert
                 array_push($users, $user);
             }
 

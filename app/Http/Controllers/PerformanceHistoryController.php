@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
  * @group History
  * @subgroupDescription These endpoints allow you to perform CRUD operations on Performance data, enabling the retrieval, creation, and updating of Performance records as needed.
  */
-class PerformanceController extends Controller
+class PerformanceHistoryController extends Controller
 {
     protected $PerformanceRepository;
 

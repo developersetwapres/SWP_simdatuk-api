@@ -355,12 +355,11 @@ class ExportController extends Controller
 
         // Institution
         $userInstitution = DB::table('institutions as i');
-        $userInstitution->join('users', 'users.institution_id','=', 'i.id');
+        $userInstitution->join('users', 'users.institution_id', '=', 'i.id');
         $userInstitution->select('i.name');
         $userInstitution = $userInstitution->first();
 
         //Organization
-
 
         // Education
         $userEducation = DB::table('user_educations as ue');
@@ -381,7 +380,6 @@ class ExportController extends Controller
             ];
         }
 
-
         //Recognition
         $userRecognition = DB::table('user_recognitions as ur');
         $userRecognition->join('recognitions as r', 'r.id', '=', 'ur.recognition_id');
@@ -391,11 +389,11 @@ class ExportController extends Controller
             'r.decree_date', 'r.decree_number', 'r.decree_year', 'r.awarding_institution', 'r.date_of_receipt');
         $userRecognition = $userRecognition->get();
         $userRecognitionData = array();
-        foreach ($userRecognition as $recognition){
+        foreach ($userRecognition as $recognition) {
             $userRecognitionData[] = [
                 'decree_name' => $recognition->recognition_name,
                 'desc' => $recognition->recognition_description,
-                'decree_type' => $recognition->recognition_type,
+                'decree' => $recognition->recognition_type,
                 'decree_date' => $recognition->decree_date,
                 'decree_number' => $recognition->decree_number,
                 'decree_year' => $recognition->decree_year,
@@ -406,13 +404,13 @@ class ExportController extends Controller
 
         //Leaves
         $userLeave = DB::table('user_leaves as ul');
-        $userLeave->join('grades as g', 'g.id','=','ul.grade_id');
+        $userLeave->join('grades as g', 'g.id', '=', 'ul.grade_id');
         $userLeave->join('users as u', 'u.id', '=', 'ul.user_id');
         $userLeave->where('ul.user_id', $user->id);
         $userLeave->select('g.name', 'ul.start_date', 'ul.end_date', 'ul.reason', 'ul.number', 'ul.purpose', 'ul.leave_letter');
         $userLeave = $userLeave->get();
         $userLeaveData = array();
-        foreach ($userLeave as $leave){
+        foreach ($userLeave as $leave) {
             $userLeaveData[] = [
                 'grade' => $leave->name,
                 'start_date' => $leave->start_date,
@@ -432,7 +430,7 @@ class ExportController extends Controller
         $userTarget->select('t.appraisal_period as period', 't.year as target_year', 'ut.work_behavior_rating', 'ut.employee_performance_predicate', 'ut.organizational_performance_achievement');
         $userTarget = $userTarget->get();
         $userTargetData = array();
-        foreach ($userTarget as $target){
+        foreach ($userTarget as $target) {
             $userTargetData[] = [
                 'period' => $target->period,
                 'target_year' => $target->target_year,
@@ -447,26 +445,26 @@ class ExportController extends Controller
         $userPerformance->join('performances as p', 'p.id', '=', 'up.performance_id');
         $userPerformance->join('users as u', 'u.id', '=', 'up.user_id');
         $userPerformance->where('up.user_id', $user->id);
-        $userPerformance->select( 'p.description', 'p.performance_period', 'up.work_performance_score');
+        $userPerformance->select('p.description', 'p.performance_period', 'up.work_performance_score');
         $userPerformance = $userPerformance->get();
         $userPerformanceData = array();
-        foreach ($userPerformance as $performance){
+        foreach ($userPerformance as $performance) {
             $userPerformanceData[] = [
                 'period' => $performance->performance_period,
                 'score' => $performance->work_performance_score,
-                'description' => $performance->description
+                'description' => $performance->description,
             ];
         }
 
         //Notes
-        $userNote = DB::table('user_notes as un' );
+        $userNote = DB::table('user_notes as un');
         $userNote->join('users', 'users.id', '=', 'un.user_id');
-        $userNote->join('users as giver', 'giver.id', '=', 'un.giver_id' );
+        $userNote->join('users as giver', 'giver.id', '=', 'un.giver_id');
         $userNote->where('un.user_id', $user->id);
         $userNote->select('un.description', 'un.created_at', 'giver.username');
         $userNote = $userNote->get();
         $userNoteData = array();
-        foreach ($userNote as $note){
+        foreach ($userNote as $note) {
             $userNoteData[] = [
                 'description' => $note->description,
                 'created_at' => $note->created_at,
@@ -484,9 +482,9 @@ class ExportController extends Controller
         $trainingFunctional = array();
         $trainingStructural = array();
         $trainingTechnique = array();
-        foreach ($userTraining as $training){
-            switch ($training->type){
-                case '1' :
+        foreach ($userTraining as $training) {
+            switch ($training->type) {
+                case '1':
                     $trainingStructural[] = [
                         'name' => $training->name,
                         'certificate' => $training->reference_number,
@@ -497,7 +495,7 @@ class ExportController extends Controller
                         'link' => $training->link,
                     ];
                     break;
-                case '2' :
+                case '2':
                     $trainingFunctional[] = [
                         'name' => $training->name,
                         'certificate' => $training->reference_number,
@@ -508,7 +506,7 @@ class ExportController extends Controller
                         'link' => $training->link,
                     ];
                     break;
-                case '3' :
+                case '3':
                     $trainingTechnique[] = [
                         'name' => $training->name,
                         'certificate' => $training->reference_number,
@@ -516,12 +514,12 @@ class ExportController extends Controller
                         'duration' => $training->duration,
                         'link' => $training->link,
                     ];
-                break;
+                    break;
             }
         }
         $pdf = Pdf::loadview('exports/user', [
             'userProfile' => [
-                'Tempat, tanggal lahir' => $user->place_of_birth.', '.$user->date_of_birth,
+                'Tempat, tanggal lahir' => $user->place_of_birth . ', ' . $user->date_of_birth,
                 'Agama' => $user->religion,
                 'Jenis Kelamin' => ($user->gender ? 'Pria' : 'Wanita'),
                 'Status Perkawinan' => $user->marital_status,

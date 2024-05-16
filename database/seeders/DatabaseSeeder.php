@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call(GradeSeeder::class);
         $this->call(InstitutionSeeder::class);
         $this->call(EmploymentTypeSeeder::class);
-        $this->call(DecreeTypeSeeder::class);
-        $this->call(DisciplinaryTypeSeeder::class);
+        $this->call(DecreeSeeder::class);
+        $this->call(DisciplinarySeeder::class);
         $this->call(GroupSeeder::class);
         $this->call(UserSeeder::class);
     }

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Disciplinary;
+namespace App\Http\Requests\DisciplinaryHistory;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateDisciplinaryRequest extends FormRequest
+class CreateDisciplinaryHistoryRequest extends FormRequest
 {
 
     /**

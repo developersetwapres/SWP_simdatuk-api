@@ -5,15 +5,15 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class DecreeTypeSeeder extends Seeder
+class DecreeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        DB::table('decree_types')->delete();
-        $decreeTypes = [
+        DB::table('decrees')->delete();
+        $decrees = [
             ["name" => "Keputusan Presiden", "acronym" => "Keppres"],
             ["name" => "Keputusan Menteri Sekretaris Negara", "acronym" => "Kepmensesneg"],
             ["name" => "Keputusan Sekretaris Negara", "acronym" => "Kepsesneg"],
@@ -29,7 +29,7 @@ class DecreeTypeSeeder extends Seeder
             ["name" => "Keputusan Menteri Hukum dan HAM", "acronym" => "Kepmenkumham"],
             ["name" => "Keputusan Kepala Staf Angkatan Udara", "acronym" => "Kepkasau"],
         ];
-        DB::table('decree_types')->insertTs($decreeTypes);
+        DB::table('decrees')->insertTs($decrees);
 
     }
 }

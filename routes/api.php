@@ -1,24 +1,25 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\DecreeTypeController;
+use App\Http\Controllers\DecreeController;
 use App\Http\Controllers\DisciplinaryController;
-use App\Http\Controllers\DisciplinaryTypeController;
+use App\Http\Controllers\DisciplinaryHistoryController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmploymentTypeController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\GradeController;
+use App\Http\Controllers\GradeHistoryController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\InstitutionController;
-use App\Http\Controllers\PerformanceController;
+use App\Http\Controllers\PerformanceHistoryController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RecognitionController;
+use App\Http\Controllers\RecognitionHistoryController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SummaryController;
-use App\Http\Controllers\TargetController;
-use App\Http\Controllers\TrainingController;
+use App\Http\Controllers\TargetHistoryController;
+use App\Http\Controllers\TrainingHistoryController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -56,39 +57,46 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/{id}', [EmployeeController::class, 'update']);
     });
 
-    Route::prefix('trainings')->group(function () {
-        Route::get('/', [TrainingController::class, 'index']);
-        Route::post('/', [TrainingController::class, 'create']);
-        Route::get('/{id}', [TrainingController::class, 'show']);
-        Route::post('/{id}', [TrainingController::class, 'update']);
+    Route::prefix('grade-histories')->group(function () {
+        Route::get('/', [GradeHistoryController::class, 'index']);
+        Route::post('/', [GradeHistoryController::class, 'create']);
+        Route::get('/{id}', [GradeHistoryController::class, 'show']);
+        Route::post('/{id}', [GradeHistoryController::class, 'update']);
     });
 
-    Route::prefix('recognitions')->group(function () {
-        Route::get('/', [RecognitionController::class, 'index']);
-        Route::post('/', [RecognitionController::class, 'create']);
-        Route::get('/{id}', [RecognitionController::class, 'show']);
-        Route::post('/{id}', [RecognitionController::class, 'update']);
+    Route::prefix('training-histories')->group(function () {
+        Route::get('/', [TrainingHistoryController::class, 'index']);
+        Route::post('/', [TrainingHistoryController::class, 'create']);
+        Route::get('/{id}', [TrainingHistoryController::class, 'show']);
+        Route::post('/{id}', [TrainingHistoryController::class, 'update']);
     });
 
-    Route::prefix('target')->group(function () {
-        Route::get('/', [TargetController::class, 'index']);
-        Route::get('/{id}', [TargetController::class, 'show']);
-        Route::post('/{id}', [TargetController::class, 'update']);
-        Route::post('/', [TargetController::class, 'create']);
+    Route::prefix('recognition-histories')->group(function () {
+        Route::get('/', [RecognitionHistoryController::class, 'index']);
+        Route::post('/', [RecognitionHistoryController::class, 'create']);
+        Route::get('/{id}', [RecognitionHistoryController::class, 'show']);
+        Route::post('/{id}', [RecognitionHistoryController::class, 'update']);
     });
 
-    Route::prefix('performances')->group(function () {
-        Route::get('/', [PerformanceController::class, 'index']);
-        Route::get('/{id}', [PerformanceController::class, 'show']);
-        Route::post('/', [PerformanceController::class, 'create']);
-        Route::post('/{id}', [PerformanceController::class, 'update']);
+    Route::prefix('target-histories')->group(function () {
+        Route::get('/', [TargetHistoryController::class, 'index']);
+        Route::get('/{id}', [TargetHistoryController::class, 'show']);
+        Route::post('/{id}', [TargetHistoryController::class, 'update']);
+        Route::post('/', [TargetHistoryController::class, 'create']);
     });
 
-    Route::prefix('disciplinaries')->group(function () {
-        Route::get('/', [DisciplinaryController::class, 'index']);
-        Route::get('/{id}', [DisciplinaryController::class, 'show']);
-        Route::post('/', [DisciplinaryController::class, 'create']);
-        Route::post('/{id}', [DisciplinaryController::class, 'update']);
+    Route::prefix('performance-histories')->group(function () {
+        Route::get('/', [PerformanceHistoryController::class, 'index']);
+        Route::get('/{id}', [PerformanceHistoryController::class, 'show']);
+        Route::post('/', [PerformanceHistoryController::class, 'create']);
+        Route::post('/{id}', [PerformanceHistoryController::class, 'update']);
+    });
+
+    Route::prefix('disciplinary-histories')->group(function () {
+        Route::get('/', [DisciplinaryHistoryController::class, 'index']);
+        Route::get('/{id}', [DisciplinaryHistoryController::class, 'show']);
+        Route::post('/', [DisciplinaryHistoryController::class, 'create']);
+        Route::post('/{id}', [DisciplinaryHistoryController::class, 'update']);
     });
 
     Route::prefix('positions')->group(function () {
@@ -115,16 +123,16 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('/{id}', [EmploymentTypeController::class, 'delete']);
     });
 
-    Route::prefix('decree-types')->group(function () {
-        Route::get('/', [DecreeTypeController::class, 'index']);
+    Route::prefix('decrees')->group(function () {
+        Route::get('/', [DecreeController::class, 'index']);
     });
 
     Route::prefix('groups')->group(function () {
         Route::get('/', [GroupController::class, 'index']);
     });
 
-    Route::prefix('disciplinary-types')->group(function () {
-        Route::get('/', [DisciplinaryTypeController::class, 'index']);
+    Route::prefix('disciplinaries')->group(function () {
+        Route::get('/', [DisciplinaryController::class, 'index']);
     });
 
     Route::prefix('permissions')->group(function () {

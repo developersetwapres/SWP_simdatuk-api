@@ -428,7 +428,7 @@
                 <td class="table-section-3-body">{{ $indexAward++ }}</td>
                 <td class="table-section-3-body">{{ $value['decree_name'] }}</td>
                 <td class="table-section-3-body">{{ $value['desc'] }}</td>
-                <td class="table-section-3-body">{{ $value['decree_type'] }}</td>
+                <td class="table-section-3-body">{{ $value['decree'] }}</td>
                 <td class="table-section-3-body">{{ $value['decree_date'] }}</td>
                 <td class="table-section-3-body">{{ $value['decree_number'] }}</td>
                 <td class="table-section-3-body">{{ $value['decree_year'] }}</td>

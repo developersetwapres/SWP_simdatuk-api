@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Recognition\CreateRecognitionRequest;
 use App\Http\Requests\Recognition\UpdateRecognitionRequest;
-use App\Repositories\RecognitionRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -12,17 +11,12 @@ use Illuminate\Support\Facades\DB;
  * @group History
  * @subgroupDescription These endpoints allow you to perform CRUD operations on recognition data, enabling the retrieval, creation, and updating of recognition records as needed.
  */
-class RecognitionController extends Controller
+class RecognitionHistoryController extends Controller
 {
-    protected $recognitionRepository;
-
-    public function __construct(
-        Request $request,
-        RecognitionRepository $recognitionRepository,
-    ) {
+    public function __construct(Request $request)
+    {
         $this->request = $request;
         $this->posted = $request->except('_token', '_method');
-        $this->recognitionRepository = $recognitionRepository;
     }
 
     /**

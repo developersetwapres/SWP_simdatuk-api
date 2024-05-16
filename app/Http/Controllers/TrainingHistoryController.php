@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Training\CreateTrainingRequest;
 use App\Http\Requests\Training\UpdateTrainingRequest;
-use App\Repositories\TrainingRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -14,17 +13,12 @@ use Illuminate\Support\Facades\DB;
  * These endpoints would allow you to track and manage the history of various activities related to employee recognition, training, and other pertinent events.
  * @subgroupDescription These endpoints allow you to perform CRUD operations on training data, enabling the retrieval, creation, and updating of training records as needed.
  */
-class TrainingController extends Controller
+class TrainingHistoryController extends Controller
 {
-    protected $trainingRepository;
-
-    public function __construct(
-        Request $request,
-        TrainingRepository $trainingRepository,
-    ) {
+    public function __construct(Request $request)
+    {
         $this->request = $request;
         $this->posted = $request->except('_token', '_method');
-        $this->trainingRepository = $trainingRepository;
     }
 
     /**

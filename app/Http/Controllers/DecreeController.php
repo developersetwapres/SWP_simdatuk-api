@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\DB;
 
 /**
  * @group Master Data
- * @subgroupDescription These endpoints allow you to perform CRUD operations on decree type data, enabling the retrieval, creation, updating and deleting of decree type records as needed.
+ * @subgroupDescription These endpoints allow you to perform CRUD operations on decree data, enabling the retrieval, creation, updating and deleting of decree records as needed.
  */
-class DecreeTypeController extends Controller
+class DecreeController extends Controller
 {
     public function __construct(Request $request)
     {
@@ -18,14 +18,14 @@ class DecreeTypeController extends Controller
     }
 
     /**
-     * Get List of Decree Types
+     * Get List of Decrees
      *
-     * Retrieve the decree type of master data.
-     * @subgroup Decree Type
+     * Retrieve the decree of master data.
+     * @subgroup Decree
      * @authenticated
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
      * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
-     * @queryParam keyword string The keyword search field for the name of decree type. Example: ORGANIK
+     * @queryParam keyword string The keyword search field for the name of decree type. Example: Keputusan Presiden
      * @response 200 {"code": 200,"message": "success","data": [{"id": 1,"name": "Keputusan Presiden","acronym": "Keppres","created_at": "2024-05-05 10:44:27"}],"pagination": {"total": 14,"count": 10,"per_page": 10,"current_page": 1,"total_pages": 2,"links": {"first_page": "http://localhost/api/decree-types?page=1","last_page": "http://localhost/api/decree-types?page=2","next_page": "http://localhost/api/decree-types?page=2","prev_page": null}}}
 
      */
@@ -45,15 +45,15 @@ class DecreeTypeController extends Controller
 
         $this->request->limit = ($this->request->limit) ? $this->request->limit : 10;
 
-        $decreeTypes = DB::table('decree_types');
-        $decreeTypes->select('id', 'name', 'acronym', 'created_at');
-        $decreeTypes->where('name', 'like', '%' . $this->request->keyword . '%');
-        $decreeTypes = $decreeTypes->paginate($this->request->limit);
+        $decrees = DB::table('decrees');
+        $decrees->select('id', 'name', 'acronym', 'created_at');
+        $decrees->where('name', 'like', '%' . $this->request->keyword . '%');
+        $decrees = $decrees->paginate($this->request->limit);
 
-        if ($decreeTypes->isEmpty()) {
-            return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $decreeTypes);
+        if ($decrees->isEmpty()) {
+            return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $decrees);
         }
 
-        return $this->paginateResponse(200, 'success', $decreeTypes);
+        return $this->paginateResponse(200, 'success', $decrees);
     }
 }

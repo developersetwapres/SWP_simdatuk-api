@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('decree_types', function (Blueprint $table) {
+        Schema::create('grade_histories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 160);
-            $table->string('acronym', 160);
+            $table->tinyInteger('period_month');
+            $table->year('period_year');
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
         });
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('decree_types');
+        Schema::dropIfExists('grade_histories');
     }
 };

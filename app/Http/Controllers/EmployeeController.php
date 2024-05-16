@@ -187,19 +187,6 @@ class EmployeeController extends Controller
                 DB::table('user_positions')->insertTs($positions);
             }
 
-            // Insert Grades
-            if (isset($this->request->grades)) {
-                $grades = array();
-                foreach ($this->request->grades as $grade) {
-                    if (is_file($grade['decree_document'])) {
-                        $grade['decree_document'] = $this->uploadDocument($grade['decree_document'], 'decree_document');
-                    }
-                    $grade['user_id'] = $userId;
-                    array_push($grades, $grade);
-                }
-                DB::table('user_grades')->insertTs($grades);
-            }
-
             // Insert Disciplinaries
             if (isset($this->request->disciplinaries)) {
                 $disciplinaries = array();

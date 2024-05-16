@@ -5,7 +5,6 @@ namespace App\Http\Requests\Employee;
 use App\Http\Requests\Assessment\CreateAssessmentRequest;
 use App\Http\Requests\Education\CreateEducationRequest;
 use App\Http\Requests\Family\CreateFamilyRequest;
-use App\Http\Requests\Grade\CreateGradeRequest;
 use App\Http\Requests\Leave\CreateLeaveRequest;
 use App\Http\Requests\Note\CreateNoteRequest;
 use App\Http\Requests\Position\CreatePositionRequest;
@@ -68,7 +67,6 @@ class UpdateEmployeeRequest extends FormRequest
             $userRules,
             CreateEducationRequest::rules(),
             CreatePositionRequest::rules(),
-            CreateGradeRequest::rules(),
             CreateFamilyRequest::rules(),
             CreateLeaveRequest::rules(),
             CreateNoteRequest::rules(),
@@ -164,7 +162,6 @@ class UpdateEmployeeRequest extends FormRequest
             $userMessages,
             CreateEducationRequest::messages(),
             CreatePositionRequest::messages(),
-            CreateGradeRequest::messages(),
             CreateFamilyRequest::messages(),
             CreateLeaveRequest::messages(),
             CreateNoteRequest::messages(),
@@ -322,7 +319,6 @@ class UpdateEmployeeRequest extends FormRequest
             $userBodyParameters,
             CreateEducationRequest::bodyParameters(),
             CreatePositionRequest::bodyParameters(),
-            CreateGradeRequest::bodyParameters(),
             CreateFamilyRequest::bodyParameters(),
             CreateLeaveRequest::bodyParameters(),
             CreateNoteRequest::bodyParameters(),
