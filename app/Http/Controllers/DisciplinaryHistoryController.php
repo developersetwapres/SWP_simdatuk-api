@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 /**
  * @group History
- * @subgroupDescription These endpoints allow you to perform CRUD operations on disciplinary data, enabling the retrieval, creation, and updating of disciplinary records as needed.
+ * @subgroupDescription These endpoints allow you to perform CRUD operations on disciplinary history data, enabling the retrieval, creation, and updating of disciplinary history records as needed.
  */
 class DisciplinaryHistoryController extends Controller
 {
@@ -20,9 +20,9 @@ class DisciplinaryHistoryController extends Controller
     }
 
     /**
-     * Get List of Disciplinaries
+     * Get List of Disciplinary Histories
      *
-     * Retrieve the history of employee disciplinaries.
+     * Retrieve the disciplinary histories.
      * @subgroup Disciplinary
      * @authenticated
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
@@ -58,9 +58,9 @@ class DisciplinaryHistoryController extends Controller
     }
 
     /**
-     * Create a New Disciplinary
+     * Create a New Disciplinary History
      *
-     * Add a new disciplinary entry for an employee.
+     * Add a new disciplinary history entry.
      * @subgroup Disciplinary
      * @authenticated
      * @response 200 {"code": 200,"message": "Hukuman disiplin berhasil ditambah.","data": null}
@@ -90,9 +90,9 @@ class DisciplinaryHistoryController extends Controller
     }
 
     /**
-     * Get Detail Disciplinary by ID
+     * Get Detail Disciplinary History by ID
      *
-     * Retrieve disciplinary history for a specific employee.
+     * Retrieve disciplinary history for specific ID.
      * @subgroup Disciplinary
      * @authenticated
      * @urlParam id Refers to the ID of Disciplinary. Example: 1
@@ -123,9 +123,9 @@ class DisciplinaryHistoryController extends Controller
     }
 
     /**
-     * Update Disciplinary by ID
+     * Update Disciplinary History by ID
      *
-     * Update an existing disciplinary entry.
+     * Update an existing disciplinary history entry.
      * @subgroup Disciplinary
      * @authenticated
      * @urlParam id Refers to the ID of Disciplinary. Example: 1
@@ -151,12 +151,10 @@ class DisciplinaryHistoryController extends Controller
 
         if (isset($this->request->users)) {
 
-            // Delete user disciplinary
             DB::table('user_disciplinaries')->where('disciplinary_id', $this->request->id)->delete();
 
             foreach ($this->request->users as $user) {
                 $user['disciplinary_id'] = $this->request->id;
-                // Collect user to bulk insert
                 array_push($users, $user);
             }
             DB::table('user_disciplinaries')->insertTs($users);
