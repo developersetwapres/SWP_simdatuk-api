@@ -2,27 +2,40 @@
 
 namespace App\Repositories;
 
+use App\Helpers\Document;
 use Illuminate\Support\Facades\DB;
 
 class GradeRepository
 {
+    use Document;
+
     public function getDetail($userId)
     {
-        $userGrades = DB::table('user_grades');
-        $userGrades->where('user_id', $userId);
-        $userGrades->select(
-            'period_month',
-            'period_year',
-            'grade_id',
-            'effective_date',
-            'decree_name',
-            'decree_document',
-            'type_of_decree',
-            'decree_number',
-            'decree_date',
-            'description',
-            'status'
+        $grades = DB::table('grade_history_users as ghu');
+        $grades->join('grades as g', 'ghu.grade_id', '=', 'g.id');
+        $grades->where('ghu.user_id', $userId);
+        $grades->select(
+            'ghu.id',
+            'g.id as grade_id',
+            'g.name as grade_name',
+            'g.code as grade_code',
+            'ghu.effective_date',
+            'ghu.decree_name',
+            'ghu.decree_name',
+            'ghu.decree_document',
+            'ghu.type_of_decree',
+            'ghu.decree_number',
+            'ghu.decree_date',
+            'ghu.description',
+            'ghu.status',
+            'ghu.created_at'
         );
-        return $userGrades = $userGrades->get();
+        $grades = $grades->get();
+
+        foreach ($grades as $grade) {
+            $grade->decree_document = $this->getDocument($grade->decree_document);
+        }
+
+        return $grades;
     }
 }
