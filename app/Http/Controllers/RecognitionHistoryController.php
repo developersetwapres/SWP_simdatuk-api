@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Recognition\CreateRecognitionRequest;
-use App\Http\Requests\Recognition\UpdateRecognitionRequest;
+use App\Http\Requests\RecognitionHistory\CreateRecognitionHistoryRequest;
+use App\Http\Requests\RecognitionHistory\UpdateRecognitionHistoryRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -65,7 +65,7 @@ class RecognitionHistoryController extends Controller
      * @authenticated
      * @response 200 {"code": 200,"message": "Penghargaan berhasil ditambah.","data": null}
      */
-    public function create(CreateRecognitionRequest $request)
+    public function create(CreateRecognitionHistoryRequest $request)
     {
         try {
             DB::beginTransaction();
@@ -131,7 +131,7 @@ class RecognitionHistoryController extends Controller
      * @response 404 {"code": 404,"message": "Penghargaan tidak ditemukan.","data": null}
      * @response 200 {"code": 200,"message": "Penghargaan berhasil diupdate.","data": null}
      */
-    public function update(UpdateRecognitionRequest $request)
+    public function update(UpdateRecognitionHistoryRequest $request)
     {
         $recognition = DB::table('recognitions');
         $recognition->where('id', $this->request->id);

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Training;
+namespace App\Http\Requests\TrainingHistory;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateTrainingRequest extends FormRequest
+class UpdateTrainingHistoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Performance;
+namespace App\Http\Requests\PerformanceHistory;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdatePerformanceRequest extends FormRequest
+class CreatePerformanceHistoryRequest extends FormRequest
 {
+
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -19,7 +20,7 @@ class UpdatePerformanceRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+    public static function rules(): array
     {
         return [
             'period_month' => 'required|numeric|digits_between:1,12',
@@ -57,7 +58,12 @@ class UpdatePerformanceRequest extends FormRequest
         ];
     }
 
-    public static function bodyParameters(): array
+    /**
+     * Description for scribe
+     *
+     * @return array
+     */
+    public function bodyParameters(): array
     {
         return [
             'period_month' => [

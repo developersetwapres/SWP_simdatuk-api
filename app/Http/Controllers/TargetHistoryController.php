@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Target\CreateTargetRequest;
-use App\Http\Requests\Target\UpdateTargetRequest;
+use App\Http\Requests\TargetHistory\CreateTargetHistoryRequest;
+use App\Http\Requests\TargetHistory\UpdateTargetHistoryRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -66,7 +66,7 @@ class TargetHistoryController extends Controller
      * @authenticated
      * @response 200 {"code": 200,"message": "SKP berhasil ditambah.","data": null}
      */
-    public function create(CreateTargetRequest $request)
+    public function create(CreateTargetHistoryRequest $request)
     {
         try {
             DB::beginTransaction();
@@ -132,7 +132,7 @@ class TargetHistoryController extends Controller
      * @response 404 {"code": 404,"message": "SKP tidak ditemukan.","data": null}
      * @response 200 {"code": 200,"message": "SKP berhasil diupdate.","data": null}
      */
-    public function update(UpdateTargetRequest $request)
+    public function update(UpdateTargetHistoryRequest $request)
     {
         $target = DB::table('targets');
         $target->where('id', $this->request->id);

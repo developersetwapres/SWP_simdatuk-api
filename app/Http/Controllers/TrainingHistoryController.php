@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Training\CreateTrainingRequest;
-use App\Http\Requests\Training\UpdateTrainingRequest;
+use App\Http\Requests\TrainingHistory\CreateTrainingHistoryRequest;
+use App\Http\Requests\TrainingHistory\UpdateTrainingHistoryRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -72,7 +72,7 @@ class TrainingHistoryController extends Controller
      * @authenticated
      * @response 200 {"code": 200,"message": "Pelatihan berhasil ditambah.","data": null}
      */
-    public function create(CreateTrainingRequest $request)
+    public function create(CreateTrainingHistoryRequest $request)
     {
         try {
             DB::beginTransaction();
@@ -147,7 +147,7 @@ class TrainingHistoryController extends Controller
      * @response 404 {"code": 404,"message": "Pelatihan tidak ditemukan.","data": null}
      * @response 200 {"code": 200,"message": "Pelatihan berhasil diupdate.","data": null}
      */
-    public function update(UpdateTrainingRequest $request)
+    public function update(UpdateTrainingHistoryRequest $request)
     {
         $training = DB::table('trainings');
         $training->where('id', $this->request->id);

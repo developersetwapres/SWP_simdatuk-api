@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Recognition;
+namespace App\Http\Requests\RecognitionHistory;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateRecognitionRequest extends FormRequest
+class CreateRecognitionHistoryRequest extends FormRequest
 {
 
     /**

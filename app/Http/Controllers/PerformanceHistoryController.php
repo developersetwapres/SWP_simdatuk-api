@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Performance;
-use App\Http\Requests\Performance\CreatePerformanceRequest;
-use App\Http\Requests\Performance\UpdatePerformanceRequest;
-use App\Repositories\PerformanceRepository;
+use App\Http\Requests\PerformanceHistory\CreatePerformanceHistoryRequest;
+use App\Http\Requests\PerformanceHistory\UpdatePerformanceHistoryRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,15 +14,10 @@ use Illuminate\Support\Facades\DB;
  */
 class PerformanceHistoryController extends Controller
 {
-    protected $PerformanceRepository;
-
-    public function __construct(
-        Request $request,
-        PerformanceRepository $PerformanceRepository,
-    ) {
+    public function __construct(Request $request)
+    {
         $this->request = $request;
         $this->posted = $request->except('_token', '_method');
-        $this->TargetRepository = $PerformanceRepository;
     }
 
     /**
@@ -73,7 +67,7 @@ class PerformanceHistoryController extends Controller
      * @authenticated
      * @response 200 {"code": 200,"message": "PPK berhasil ditambah.","data": null}
      */
-    public function create(CreatePerformanceRequest $request)
+    public function create(CreatePerformanceHistoryRequest $request)
     {
         try {
             DB::beginTransaction();
@@ -139,7 +133,7 @@ class PerformanceHistoryController extends Controller
      * @response 404 {"code": 404,"message": "PPK tidak ditemukan.","data": null}
      * @response 200 {"code": 200,"message": "PPK berhasil diupdate.","data": null}
      */
-    public function update(UpdatePerformanceRequest $request)
+    public function update(UpdatePerformanceHistoryRequest $request)
     {
         $performance = DB::table('performances');
         $performance->where('id', $this->request->id);
