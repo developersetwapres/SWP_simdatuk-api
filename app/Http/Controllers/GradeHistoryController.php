@@ -28,7 +28,7 @@ class GradeHistoryController extends Controller
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
      * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
      * @queryParam name string The keyword search field for the name. Example: Penata Tingkat I (III/d)
-     * @response 200
+     * @response 200 {"code": 200,"message": "success","data": [{"id": 1,"created_at": "2024-05-16 05:07:27","name": "Riwayat Desember 2023","period_month": 3,"period_year": "2010","total": 1}],"pagination": {"total": 2,"count": 2,"per_page": 10,"current_page": 1,"total_pages": 1,"links": {"first_page": "http://localhost/api/grade-histories?page=1","last_page": "http://localhost/api/grade-histories?page=1","next_page": null,"prev_page": null}}}
      */
     public function index()
     {
@@ -102,7 +102,7 @@ class GradeHistoryController extends Controller
      * @authenticated
      * @urlParam id Refers to the ID of Grade. Example: 1
      * @response 404 {"code": 404,"message": "Riwayat golongan tidak ditemukan.","data": null}
-     * @response 200
+     * @response 200 {"code": 200,"message": "success","data": {"id": 1,"period_month": 3,"period_year": "2010","name": "Riwayat Desember 2023","created_at": "2024-05-16 05:07:27","users": [{"id": 1,"user_id": 1,"name": "administrator","employee_id_number": "0000000000000","grade_id": 1,"grade_name": "Juru Muda","grade_code": "I/a","effective_date": "2020-10-22","decree_number": "Nomor 50 Tahun 2008","created_at": "2024-05-16 05:07:27"}]}}
      */
     public function show()
     {
