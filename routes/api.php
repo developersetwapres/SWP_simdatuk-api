@@ -163,5 +163,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/recapitulations', [ExportController::class, 'recapitulations']);
         Route::get('/employees', [ExportController::class, 'employees']);
         Route::get('/employees/{id}', [ExportController::class, 'detailEmployee']);
+        Route::get('/rekapitulasi', [ExportController::class, 'rekapitulasi']);
+        Route::get('/rekapitulasi-non-asn', [ExportController::class, 'rekapitulasiNonASN']);
+        Route::get('/rekapitulasi-asn', [ExportController::class, 'rekapitulasiASN']);
     });
 });

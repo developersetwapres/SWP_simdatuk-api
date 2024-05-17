@@ -143,13 +143,13 @@
     <table>
         <tr>
             <td>
-                <img src='img/dummy-export/profile.png' class="profile-image" />
+                <img src='{{ $photoProfile }}' class="profile-image" />
             </td>
             <td>
                 <table style="margin-left: 12px;">
                     <tr>
                         <td class="name">
-                            Ica Marisa
+                            {{ $userName }}
                         </td>
                     </tr>
                     <tr>
@@ -514,19 +514,19 @@
             @foreach($userPunishment as $value)
             <tr style="border-bottom: 1px solid #F0F0F0;">
                 <td class="table-section-3-body">{{ $indexPunishment++ }}</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
+                <td class="table-section-3-body">{{ $value['grade'] }}</td>
+                <td class="table-section-3-body">{{ $value['position'] }}</td>
+                <td class="table-section-3-body">{{ $value['description'] }}</td>
+                <td class="table-section-3-body">{{ $value['decree_number'] }}</td>
+                <td class="table-section-3-body">{{ $value['date_of_decree'] }}</td>
+                <td class="table-section-3-body">{{ $value['start_date'] }} - {{ $value['end_date'] }}</td>
+                <td class="table-section-3-body">-</td>
+                <td class="table-section-3-body">{{ $value['description'] }}</td>
+                <td class="table-section-3-body">{{ $value['authorizing_officer'] }}</td>
+                <td class="table-section-3-body">{{ $value['name_of_authorizing_officer'] }}</td>
+                <td class="table-section-3-body">{{ $value['severity'] }}</td>
+                <td class="table-section-3-body">{{ $value['name'] }}</td>
+                <td class="table-section-3-body">{{ $value['performance_allowance_duration'] }}</td>
             </tr>
             @endforeach
         </tbody>
@@ -560,22 +560,22 @@
             @foreach($userFamily as $value)
             <tr style="border-bottom: 1px solid #F0F0F0;">
                 <td class="table-section-3-body">{{ $indexFamily++ }}</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
+                <td class="table-section-3-body">{{ $value['card_number'] }}</td>
+                <td class="table-section-3-body">{{ $value['name'] }}</td>
+                <td class="table-section-3-body">{{ $value['id_number'] }}</td>
+                <td class="table-section-3-body">{{ $value['gender'] }}</td>
+                <td class="table-section-3-body">{{ $value['religion'] }}</td>
+                <td class="table-section-3-body">{{ $value['place_of_birth'] }}</td>
+                <td class="table-section-3-body">{{ $value['date_of_birth'] }}</td>
+                <td class="table-section-3-body">{{ $value['name_of_father'] }}</td>
+                <td class="table-section-3-body">{{ $value['name_of_mother'] }}</td>
+                <td class="table-section-3-body">{{ $value['relationship_status'] }}</td>
+                <td class="table-section-3-body">{{ $value['education'] }}</td>
+                <td class="table-section-3-body">{{ $value['occupation'] }}</td>
+                <td class="table-section-3-body">{{ $value['occupation_description'] }}</td>
+                <td class="table-section-3-body">{{ $value['marital_status'] }}</td>
+                <td class="table-section-3-body">{{ $value['mobile_phone'] }}</td>
+                <td class="table-section-3-body">{{ $value['order'] }}</td>
             </tr>
             @endforeach
         </tbody>

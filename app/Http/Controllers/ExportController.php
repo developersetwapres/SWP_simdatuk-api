@@ -456,19 +456,80 @@ class ExportController extends Controller
             ];
         }
 
+        //Discipline
+        $userPunishment = DB::table('user_disciplinaries as ud');
+        $userPunishment->join('disciplinaries as d', 'd.id', '=', 'ud.disciplinary_id');
+        $userPunishment->join('disciplinary_types as dt', 'dt.id', '=', 'ud.disciplinary_type_id');
+        $userPunishment->join('users', 'users.id', '=', 'ud.user_id');
+        $userPunishment->where('ud.user_id', $user->id);
+        $userPunishment->select('ud.grade', 'ud.position', 'ud.decree_number', 'ud.date_of_decree', 'ud.start_date',
+            'ud.end_date', 'ud.description', 'ud.authorizing_officer', 'ud.name_of_authorizing_officer', 'dt.description as severity',
+            'dt.name', 'dt.performance_allowance_duration');
+        $userPunishment = $userPunishment->get();
+        $userPunishmentData = array();
+        foreach ($userPunishment as $punishment){
+            $userPunishmentData[] = [
+                'grade' => $punishment->grade,
+                'position' => $punishment->position,
+                'decree_number' => $punishment->decree_number,
+                'date_of_decree' => $punishment->date_of_decree,
+                'start_date' => $punishment->start_date,
+                'end_date' => $punishment->end_date,
+                'description' => $punishment->description,
+                'authorizing_officer' => $punishment->authorizing_officer,
+                'name_of_authorizing_officer' => $punishment->name_of_authorizing_officer,
+                'severity' => $punishment->severity,
+                'name' => $punishment->name,
+                'performance_allowance_duration' => $punishment->performance_allowance_duration,
+            ];
+        }
+
+        //Family
+        $userFamily = DB::table('user_families as uf');
+        $userFamily->join('users', 'users.id', '=', 'uf.user_id');
+        $userFamily->where('uf.user_id', $user->id);
+        $userFamily->select('uf.*');
+        $userFamily = $userFamily->get();
+        $userFamilyData = array();
+        foreach ($userFamily as $family){
+            $userFamilyData[] = [
+                'card_number' => $family->card_number,
+                'name' => $family->name,
+                'id_number' => $family->id_number,
+                'gender' => $family->gender,
+                'religion' => $family->religion,
+                'place_of_birth' => $family->place_of_birth,
+                'date_of_birth' => $family->date_of_birth,
+                'name_of_father' => $family->name_of_father,
+                'name_of_mother' => $family->name_of_mother,
+                'relationship_status' => $family->relationship_status,
+                'education' => $family->education,
+                'occupation' => $family->occupation,
+                'occupation_description' => $family->occupation_description,
+                'marital_status' => $family->marital_status,
+                'mobile_phone' => $family->mobile_phone,
+                'order' => $family->order,
+            ];
+        }
+
         //Notes
         $userNote = DB::table('user_notes as un');
         $userNote->join('users', 'users.id', '=', 'un.user_id');
         $userNote->join('users as giver', 'giver.id', '=', 'un.giver_id');
         $userNote->where('un.user_id', $user->id);
-        $userNote->select('un.description', 'un.created_at', 'giver.username');
+        $userNote->select('un.description', 'un.created_at', 'un.giver_id');
         $userNote = $userNote->get();
         $userNoteData = array();
-        foreach ($userNote as $note) {
+        foreach ($userNote as $note){
+            $noteGiver = DB::table('user_notes as un');
+            $noteGiver->join('users', 'users.id', '=', 'un.giver_id');
+            $noteGiver->where('un.giver_id', $note->giver_id);
+            $noteGiver->select('users.username');
+            $noteGiver = $noteGiver->first();
             $userNoteData[] = [
                 'description' => $note->description,
                 'created_at' => $note->created_at,
-                'giver' => $note->username,
+                'giver' => $noteGiver->username,
             ];
         }
 
@@ -517,21 +578,43 @@ class ExportController extends Controller
                     break;
             }
         }
+        $religion = match ($user->religion) {
+            1 => 'Islam',
+            2 => 'Kristen',
+            3 => 'Katolik',
+            4 => 'Hindu',
+            5 => 'Budha',
+            6 => 'Konghucu',
+            default => '-',
+        };
+        $maritalStatus = match ($user->marital_status) {
+            1 => 'Belum Menikah',
+            2 => 'Menikah',
+            3 => 'Cerai',
+            4 => 'Janda',
+            5 => 'Duda',
+            default => '-',
+        };
+        $housingComplex = match ($user->inner_housing_complex){
+            1 => 'Dalam',
+            2 => 'Luar',
+            default => '-',
+        };
         $pdf = Pdf::loadview('exports/user', [
             'userProfile' => [
-                'Tempat, tanggal lahir' => $user->place_of_birth . ', ' . $user->date_of_birth,
-                'Agama' => $user->religion,
+                'Tempat, tanggal lahir' => $user->place_of_birth.', '.$user->date_of_birth,
+                'Agama' => $religion,
                 'Jenis Kelamin' => ($user->gender ? 'Pria' : 'Wanita'),
-                'Status Perkawinan' => $user->marital_status,
+                'Status Perkawinan' => $maritalStatus,
                 'Instansi Induk' => $userInstitution->name,
                 'Satuan Organisasi' => 'Lorem ipsum',
-                'Unit Kerja' => 'Lorem ipsum',
-                'No. Karpeg/No. Karis/No. Karsu' => 'Lorem ipsum',
+                'Unit Kerja' => $user->work_unit_id,
+                'No. Karpeg/No. Karis/No. Karsu' => $user->wife_id_card_number. '/'.$user->husband_id_card_number,
                 'Masa Kerja Keseluruhan' => 'Lorem ipsum',
                 'Masa Kerja Golongan' => 'Lorem ipsum',
                 'NPWP' => $user->id_tax,
-                'Status Pegawai' => ($user->employment_status ? 'Aktik' : 'Tidak Aktif'),
-                'Komplek' => 'Lorem ipsum',
+                'Status Pegawai' => ($user->employment_status ? 'Aktif' : 'Tidak Aktif'),
+                'Komplek' => $housingComplex,
                 'Nama Komplek' => 'Lorem ipsum',
                 'Alamat Tempat Tinggal Saat Ini' => $user->current_address,
                 'No. Telepon Rumah' => $user->home_phone_number,
@@ -541,6 +624,8 @@ class ExportController extends Controller
                 'Email' => $user->email,
                 'Batas Usia Pensiun' => $user->expire_at,
             ],
+            'photoProfile' => $user->photo_profile,
+            'userName' => $user->name,
             'userCollege' => $userCollegeData,
             'userGrade' => [0, 0],
             'userGolongan' => [0, 0],
@@ -550,8 +635,8 @@ class ExportController extends Controller
             'userAward' => $userRecognitionData,
             'userSKP' => $userTargetData,
             'userPerformance' => $userPerformanceData,
-            'userPunishment' => [0, 0],
-            'userFamily' => [0, 0, 0],
+            'userPunishment' => $userPunishmentData,
+            'userFamily' => $userFamilyData,
             'userPaidLeave' => $userLeaveData,
             'userNotes' => $userNoteData,
         ]);
@@ -563,4 +648,43 @@ class ExportController extends Controller
         $pdf->set_option('tempDir', $tmp);
         return $pdf->download('user-pdf.pdf');
     }
+    public function rekapitulasi(){
+        $tmp = sys_get_temp_dir();
+        $pdf = pdf::loadView('exports/rekapitulasi', []);
+        $pdf->setOption('isHtml5ParserEnabled', true);
+        $pdf->setPaper("A4", "portrait");
+        $pdf->setOption('isRemoteEnabled', true);
+        $pdf->set_option('fontDir', $tmp);
+        $pdf->set_option('fontCache', $tmp);
+        $pdf->set_option('tempDir', $tmp);
+        return $pdf->download('rekapitulasi-pdf.pdf');
+    }
+
+    public function rekapitulasiNonASN()
+    {
+        $tmp = sys_get_temp_dir();
+        $pdf = pdf::loadView('exports/rekapitulasi-non-asn', []);
+        $pdf->setOption('isHtml5ParserEnabled', true);
+        $pdf->setPaper("A4", "portrait");
+        $pdf->setOption('isRemoteEnabled', true);
+        $pdf->set_option('fontDir', $tmp);
+        $pdf->set_option('fontCache', $tmp);
+        $pdf->set_option('tempDir', $tmp);
+        return $pdf->download('rekapitulasi-non-asn-pdf.pdf');
+    }
+
+    public function rekapitulasiASN()
+    {
+        $tmp = sys_get_temp_dir();
+        $pdf = pdf::loadView('exports/rekapitulasi-asn', []);
+        $pdf->setOption('isHtml5ParserEnabled', true);
+        $pdf->setPaper("A4", "portrait");
+        $pdf->setOption('isRemoteEnabled', true);
+        $pdf->set_option('fontDir', $tmp);
+        $pdf->set_option('fontCache', $tmp);
+        $pdf->set_option('tempDir', $tmp);
+        return $pdf->download('rekapitulasi-asn-pdf.pdf');
+    }
 }
+
+
