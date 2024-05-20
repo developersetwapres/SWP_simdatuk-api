@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('place_of_birth', 30)->nullable();
             $table->date('date_of_birth')->nullable();
             $table->tinyInteger('religion')->nullable()->comment('1=Islam, 2=Kristen, 3=Katolik, 4=Hindu, 5=Buddha, 6=Konghucu');
-            $table->boolean('gender')->default(true)->comment('true=Pria, false=Wanita');
+            $table->boolean('gender')->nullable()->comment('true=Pria, false=Wanita');
             $table->tinyInteger('marital_status')->nullable()->comment('1=Belum Menikah, 2=Menikah, 3=Cerai Hidup, 4=Cerai Mati');
             $table->unsignedBigInteger('employment_type_id')->nullable();
             $table->unsignedBigInteger('grade_id')->nullable();
