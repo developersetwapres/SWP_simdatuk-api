@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('employment_types', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 160);
-            $table->boolean('status')->default(true);
             $table->tinyInteger('type')->default(1)->comment('1=ASN, 2=NON-ASN, 3=OUTSOURCE');
+            $table->boolean('status')->default(true);
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
         });
