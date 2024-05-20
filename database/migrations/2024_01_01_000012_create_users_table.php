@@ -17,7 +17,9 @@ return new class extends Migration
             $table->string('email', 160)->nullable()->unique();
             $table->string('username', 160)->nullable()->unique();
             $table->string('password', 255)->nullable();
+            $table->string('title_prefix', 160)->nullable();
             $table->string('name', 160);
+            $table->string('title_suffix', 160)->nullable();
             $table->string('photo_profile', 160)->nullable();
             $table->string('id_number')->nullable()->unique();
             $table->string('employee_id_number', 20)->nullable()->unique();
@@ -26,16 +28,17 @@ return new class extends Migration
             $table->date('date_of_birth')->nullable();
             $table->tinyInteger('religion')->nullable()->comment('1=Islam, 2=Kristen, 3=Katolik, 4=Hindu, 5=Buddha, 6=Konghucu');
             $table->boolean('gender')->default(true)->comment('true=Pria, false=Wanita');
-            $table->tinyInteger('marital_status')->default(1)->comment('1=Belum Menikah, 2=Menikah, 3=Cerai, 4=Janda, 5=Duda');
+            $table->tinyInteger('marital_status')->nullable()->comment('1=Belum Menikah, 2=Menikah, 3=Cerai Hidup, 4=Cerai Mati');
             $table->unsignedBigInteger('employment_type_id')->nullable();
-            $table->unsignedBigInteger('grade_id')->nullable(); // Dropdown
+            $table->unsignedBigInteger('grade_id')->nullable();
             $table->date('grade_effective_date')->nullable();
-            $table->unsignedBigInteger('position_id')->nullable(); // Dropdown
-            $table->unsignedBigInteger('echelon_id')->nullable(); // Dropdown
+            $table->unsignedBigInteger('position_id')->nullable();
+            $table->date('position_effective_date')->nullable();
+            $table->unsignedBigInteger('echelon_id')->nullable();
             $table->date('echelon_effective_date')->nullable();
-            $table->unsignedBigInteger('institution_id')->nullable(); // Dropdown
-            $table->unsignedBigInteger('organization_id')->nullable(); // Dropdown
-            $table->unsignedBigInteger('work_unit_id')->nullable(); // Dropdown
+            $table->unsignedBigInteger('institution_id')->nullable();
+            $table->unsignedBigInteger('organization_id')->nullable();
+            $table->unsignedBigInteger('work_unit_id')->nullable();
             $table->string('employee_id_card_number', 20)->nullable();
             $table->string('employee_id_card', 160)->nullable();
             $table->string('wife_id_card_number', 20)->nullable();
