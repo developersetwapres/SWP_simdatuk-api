@@ -32,7 +32,7 @@ trait Document
     public function getDocument($path, $status = false)
     {
         if ($status) {
-            return (is_null($path)) ? asset('img/avatar.jpeg') : Storage::disk('s3')->url($path);
+            return (is_null($path)) ? asset('img/profile.jpg') : Storage::disk('s3')->url($path);
         } else {
             return (is_null($path)) ? null : Storage::disk('s3')->url($path);
         }
