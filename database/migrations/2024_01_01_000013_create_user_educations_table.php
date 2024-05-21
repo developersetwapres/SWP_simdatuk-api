@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('user_educations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
-            $table->tinyInteger('level')->default(1)->comment('1=TK / Sederajat, 2=SD / Sederajat, 3=SLTP / Sederajat, 4=SLTA / Sederajat, 5=Diploma I / II, 6=Akademi / Diploma III / Sarjana Muda, 7=Diploma IV / Strata I, 8=Strata II, 9=Strata III');
+            $table->tinyInteger('level')->default(1)->comment('1=SD/Sederajat, 2=SLTP/Sederajat, 3=SLTA/Sederajat, 4=Akademik/D3/S.Muda, 5=Diploma IV, 6=Strata I, 7=Strata II, 8=Strata III');
             $table->string('name', 160);
             $table->string('faculty', 160)->nullable();
             $table->string('major', 160)->nullable();

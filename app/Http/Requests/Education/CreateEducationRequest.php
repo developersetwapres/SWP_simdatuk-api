@@ -13,7 +13,7 @@ class CreateEducationRequest
     public static function rules(): array
     {
         return [
-            'educations.*.level' => 'required|numeric|in:1,2,3,4,5,6,7,8,9',
+            'educations.*.level' => 'required|numeric|in:1,2,3,4,5,6,7,8,',
             'educations.*.name' => 'required|max:160',
             'educations.*.faculty' => 'max:160',
             'educations.*.major' => 'max:160',
@@ -60,7 +60,7 @@ class CreateEducationRequest
     {
         return [
             'educations.*.level' => [
-                'description' => 'Refers to the Level of Employee Education. 1=TK / Sederajat, 2=SD / Sederajat, 3=SLTP / Sederajat, 4=SLTA / Sederajat, 5=Diploma I / II, 6=Akademi / Diploma III / Sarjana Muda, 7=Diploma IV / Strata I, 8=Strata II, 9=Strata III',
+                'description' => 'Refers to the Level of Employee Education. 1=SD/Sederajat, 2=SLTP/Sederajat, 3=SLTA/Sederajat, 4=Akademik/D3/S.Muda, 5=Diploma IV, 6=Strata I, 7=Strata II, 8=Strata III',
                 'example' => 1,
             ],
             'educations.*.name' => [
