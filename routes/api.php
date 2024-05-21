@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DecreeController;
 use App\Http\Controllers\DisciplinaryController;
 use App\Http\Controllers\DisciplinaryHistoryController;
+use App\Http\Controllers\EchelonController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmploymentTypeController;
 use App\Http\Controllers\ExportController;
@@ -14,6 +15,7 @@ use App\Http\Controllers\InstitutionController;
 use App\Http\Controllers\PerformanceHistoryController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PositionController;
+use App\Http\Controllers\PositionHistoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RecognitionHistoryController;
 use App\Http\Controllers\RoleController;
@@ -55,6 +57,13 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/', [EmployeeController::class, 'create']);
         Route::get('/{id}', [EmployeeController::class, 'show']);
         Route::post('/{id}', [EmployeeController::class, 'update']);
+    });
+
+    Route::prefix('position-histories')->group(function () {
+        Route::get('/', [PositionHistoryController::class, 'index']);
+        Route::post('/', [PositionHistoryController::class, 'create']);
+        Route::get('/{id}', [PositionHistoryController::class, 'show']);
+        Route::post('/{id}', [PositionHistoryController::class, 'update']);
     });
 
     Route::prefix('grade-histories')->group(function () {
@@ -125,6 +134,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('decrees')->group(function () {
         Route::get('/', [DecreeController::class, 'index']);
+    });
+
+    Route::prefix('echelons')->group(function () {
+        Route::get('/', [EchelonController::class, 'index']);
     });
 
     Route::prefix('groups')->group(function () {
