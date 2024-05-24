@@ -174,19 +174,6 @@ class EmployeeController extends Controller
                 DB::table('user_educations')->insertTs($educations);
             }
 
-            // Insert Positions
-            if (isset($this->request->positions)) {
-                $positions = array();
-                foreach ($this->request->positions as $position) {
-                    if (is_file($position['decree_document'])) {
-                        $position['decree_document'] = $this->uploadDocument($position['decree_document'], 'decree_document');
-                    }
-                    $position['user_id'] = $userId;
-                    array_push($positions, $position);
-                }
-                DB::table('user_positions')->insertTs($positions);
-            }
-
             // Insert Disciplinaries
             if (isset($this->request->disciplinaries)) {
                 $disciplinaries = array();

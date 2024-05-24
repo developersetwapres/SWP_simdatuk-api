@@ -7,7 +7,6 @@ use App\Http\Requests\Education\CreateEducationRequest;
 use App\Http\Requests\Family\CreateFamilyRequest;
 use App\Http\Requests\Leave\CreateLeaveRequest;
 use App\Http\Requests\Note\CreateNoteRequest;
-use App\Http\Requests\Position\CreatePositionRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateEmployeeRequest extends FormRequest
@@ -66,7 +65,6 @@ class CreateEmployeeRequest extends FormRequest
         return array_merge(
             $userRules,
             CreateEducationRequest::rules(),
-            CreatePositionRequest::rules(),
             CreateFamilyRequest::rules(),
             CreateLeaveRequest::rules(),
             CreateNoteRequest::rules(),
@@ -161,7 +159,6 @@ class CreateEmployeeRequest extends FormRequest
         return array_merge(
             $userMessages,
             CreateEducationRequest::messages(),
-            CreatePositionRequest::messages(),
             CreateFamilyRequest::messages(),
             CreateLeaveRequest::messages(),
             CreateNoteRequest::messages(),
@@ -318,7 +315,6 @@ class CreateEmployeeRequest extends FormRequest
         return array_merge(
             $userBodyParameters,
             CreateEducationRequest::bodyParameters(),
-            CreatePositionRequest::bodyParameters(),
             CreateFamilyRequest::bodyParameters(),
             CreateLeaveRequest::bodyParameters(),
             CreateNoteRequest::bodyParameters(),
