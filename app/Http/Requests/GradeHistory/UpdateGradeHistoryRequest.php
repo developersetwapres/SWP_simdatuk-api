@@ -25,6 +25,7 @@ class UpdateGradeHistoryRequest extends FormRequest
             'period_month' => 'required|numeric|digits_between:1,12',
             'period_year' => 'required|date_format:Y',
             'name' => 'required|max:160',
+            'users.*.id' => 'numeric|nullable',
             'users.*.user_id' => 'required|numeric',
             'users.*.grade_id' => 'required|numeric',
             'users.*.effective_date' => 'required|date',
@@ -53,6 +54,7 @@ class UpdateGradeHistoryRequest extends FormRequest
             'period_year.date_format' => 'Tahun periode riwayat harus dengan format YYYY.',
             'name.required' => 'Nama penghargaan tidak boleh kosong.',
             'name.max' => 'Nama penghargaan tidak boleh lebih dari 160 karakter.',
+            'users.*.id.numeric' => 'ID harus berupa angka.',
             'users.*.user_id.required' => 'User ID tidak boleh kosong.',
             'users.*.user_id.numeric' => 'User ID harus berupa angka.',
             'users.*.grade_id.required' => 'Golongan tidak boleh kosong.',
@@ -90,6 +92,10 @@ class UpdateGradeHistoryRequest extends FormRequest
             'name' => [
                 'description' => 'Refers to the Name of Employee Grade.',
                 'example' => 'Riwayat Desember 2023',
+            ],
+            'users.*.id' => [
+                'description' => 'Refers to the User ID of List Employee Recognition.',
+                'example' => 1,
             ],
             'users.*.user_id' => [
                 'description' => 'Refers to the User ID of List Employee Recognition.',

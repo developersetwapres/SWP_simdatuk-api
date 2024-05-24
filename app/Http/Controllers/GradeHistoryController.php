@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\GradeHistory\CreateGradeHistoryRequest;
 use App\Http\Requests\GradeHistory\UpdateGradeHistoryRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -77,8 +78,6 @@ class GradeHistoryController extends Controller
                 foreach ($this->request->users as $user) {
                     if (isset($user['decree_document']) && is_file($user['decree_document'])) {
                         $user['decree_document'] = $this->uploadDocument($user['decree_document'], 'decree_document');
-                    } else {
-                        $user['decree_document'] = null;
                     }
                     $user['grade_history_id'] = $gradeHistoryId;
                     array_push($users, $user);
@@ -169,26 +168,23 @@ class GradeHistoryController extends Controller
             DB::table('grade_history_users')->whereIn('id', $result)->delete();
 
             foreach ($this->request->users as $user) {
+                // Upload Document
+                if (isset($user['decree_document']) && is_file($user['decree_document'])) {
+                    $user['decree_document'] = $this->uploadDocument($user['decree_document'], 'decree_document');
+                }
+
                 if (!is_null($user['id'])) {
                     // Update existing data
-                    if (isset($user['decree_document']) && is_file($user['decree_document'])) {
-                        $user['decree_document'] = $this->uploadDocument($user['decree_document'], 'decree_document');
-                    } else {
-                        $user['decree_document'] = null;
-                    }
                     DB::table('grade_history_users')->where('id', $user['id'])->updateTs($user);
                 } else {
                     // Insert new item
-                    if (isset($user['decree_document']) && is_file($user['decree_document'])) {
-                        $user['decree_document'] = $this->uploadDocument($user['decree_document'], 'decree_document');
-                    } else {
-                        $user['decree_document'] = null;
-                    }
                     $user['grade_history_id'] = $this->request->id;
                     array_push($users, $user);
                 }
             }
-            DB::table('grade_history_users')->insertTs($users);
+            if (count($users) > 0) {
+                DB::table('grade_history_users')->insertTs($users);
+            }
         }
         return $this->response(200, 'Riwayat golongan berhasil diupdate.');
     }
