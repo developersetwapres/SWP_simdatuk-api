@@ -6,6 +6,7 @@ use App\Http\Requests\Performance;
 use App\Http\Requests\PerformanceHistory\CreatePerformanceHistoryRequest;
 use App\Http\Requests\PerformanceHistory\UpdatePerformanceHistoryRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -115,7 +116,7 @@ class PerformanceHistoryController extends Controller
         $users = DB::table('user_performances as up');
         $users->join('users as u', 'u.id', '=', 'up.user_id');
         $users->where('performance_id', $performance->id);
-        $users->select('up.id', 'up.created_at', 'up.user_id', 'up.work_performance_score', 'u.name', 'u.employee_id_number');
+        $users->select('up.id', 'up.user_id', 'u.name', 'u.employee_id_number', 'up.work_performance_score', 'up.created_at');
         $users = $users->get();
 
         $performance->users = $users;
@@ -152,17 +153,32 @@ class PerformanceHistoryController extends Controller
 
         if (isset($this->request->users)) {
 
-            DB::table('user_performances')->where('performance_id', $this->request->id)->delete();
+            // Get existing data
+            $userPerformances = DB::table('user_performances');
+            $userPerformances->where('performance_id', $this->request->id);
+            $userPerformances->select('id');
+            $userPerformances = $userPerformances->get();
+
+            // Delete data
+            $array1 = Arr::pluck($userPerformances, 'id');
+            $array2 = Arr::pluck($this->request->users, 'id');
+            $result = array_diff($array1, $array2);
+            DB::table('user_performances')->whereIn('id', $result)->delete();
 
             foreach ($this->request->users as $user) {
-                $user['performance_id'] = $this->request->id;
-                // Collect user to bulk insert
-                array_push($users, $user);
+                if (!is_null($user['id'])) {
+                    // Update existing data
+                    DB::table('user_performances')->where('id', $user['id'])->updateTs($user);
+                } else {
+                    // Insert new item
+                    $user['performance_id'] = $this->request->id;
+                    array_push($users, $user);
+                }
             }
-
-            DB::table('user_performances')->insertTs($users);
+            if (count($users) > 0) {
+                DB::table('user_performances')->insertTs($users);
+            }
         }
         return $this->response(200, 'PPK berhasil diupdate.');
-
     }
 }

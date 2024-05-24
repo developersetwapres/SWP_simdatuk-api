@@ -27,6 +27,7 @@ class UpdatePerformanceHistoryRequest extends FormRequest
             'performance_period' => 'required|max:160',
             'name' => 'required|max:160',
             'description' => 'max:160',
+            'users.*.id' => 'numeric|nullable',
             'users.*.user_id' => 'required|numeric',
             'users.*.work_performance_score' => 'required|numeric',
         ];
@@ -50,6 +51,7 @@ class UpdatePerformanceHistoryRequest extends FormRequest
             'name.required' => 'Nama nilai prestasi kerja tidak boleh kosong.',
             'name.max' => 'Nama nilai prestasi tidak boleh lebih dari 160 karakter.',
             'description.max' => 'Keterangan tidak boleh lebih dari 160 karakter.',
+            'users.*.id.numeric' => 'ID harus berupa angka.',
             'users.*.user_id.required' => 'User ID tidak boleh kosong.',
             'users.*.user_id.numeric' => 'User ID harus berupa angka.',
             'users.*.work_performance_score.required' => 'Nilai prestasi kerja tidak boleh kosong.',
@@ -57,7 +59,7 @@ class UpdatePerformanceHistoryRequest extends FormRequest
         ];
     }
 
-    public static function bodyParameters(): array
+    public function bodyParameters(): array
     {
         return [
             'period_month' => [
@@ -80,8 +82,12 @@ class UpdatePerformanceHistoryRequest extends FormRequest
                 'description' => 'Refers to the Description of Employee Performance.',
                 'example' => 'Penilaian Bulanan',
             ],
-            'users.*.user_id' => [
+            'users.*.id' => [
                 'description' => 'Refers to the ID of employee',
+                'example' => 1,
+            ],
+            'users.*.user_id' => [
+                'description' => 'Refers to the User ID of employee',
                 'example' => 1,
             ],
             'users.*.work_performance_score' => [

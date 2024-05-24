@@ -20,7 +20,7 @@ class CreatePerformanceHistoryRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public static function rules(): array
+    public function rules(): array
     {
         return [
             'period_month' => 'required|numeric|digits_between:1,12',
