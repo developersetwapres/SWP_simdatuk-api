@@ -13,23 +13,28 @@ class GradeRepository
     {
         $grades = DB::table('grade_history_users as ghu');
         $grades->join('grades as g', 'ghu.grade_id', '=', 'g.id');
+        $grades->join('grade_histories as gh', 'ghu.grade_history_id', '=', 'gh.id');
+        $grades->leftJoin('decrees as d', 'ghu.type_of_decree', '=', 'd.id');
         $grades->where('ghu.user_id', $userId);
         $grades->select(
             'ghu.id',
+            'gh.period_month',
+            'gh.period_year',
             'g.id as grade_id',
             'g.name as grade_name',
             'g.code as grade_code',
             'ghu.effective_date',
             'ghu.decree_name',
-            'ghu.decree_name',
             'ghu.decree_document',
             'ghu.type_of_decree',
+            'd.name as type_of_decree_name',
             'ghu.decree_number',
             'ghu.decree_date',
             'ghu.description',
             'ghu.status',
-            'ghu.created_at'
         );
+        $grades->orderBy('gh.period_year', 'desc');
+        $grades->orderBy('gh.period_month', 'desc');
         $grades = $grades->get();
 
         foreach ($grades as $grade) {

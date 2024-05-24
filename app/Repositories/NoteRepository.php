@@ -8,11 +8,11 @@ class NoteRepository
 {
     public function getDetail($userId)
     {
-        $userNotes = DB::table('user_notes');
-        $userNotes->where('user_id', $userId);
-        $userNotes->select(
+        $notes = DB::table('user_notes');
+        $notes->where('user_id', $userId);
+        $notes->select(
             'description',
         );
-        return $userNotes = $userNotes->get();
+        return $notes = $notes->get();
     }
 }

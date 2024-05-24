@@ -8,16 +8,16 @@ class AssessmentRepository
 {
     public function getDetail($userId, $type)
     {
-        $userAssessments = DB::table('user_assessments');
-        $userAssessments->where('user_id', $userId);
-        $userAssessments->where('type', $type);
-        $userAssessments->select(
+        $assessements = DB::table('user_assessments');
+        $assessements->where('user_id', $userId);
+        $assessements->where('type', $type);
+        $assessements->select(
             'assessment_date',
             'point',
             'organizer',
             'assessment_document',
             'type',
         );
-        return $userAssessments = $userAssessments->get();
+        return $assessements = $assessements->get();
     }
 }

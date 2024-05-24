@@ -8,9 +8,9 @@ class EducationRepository
 {
     public function getDetail($userId)
     {
-        $userEducations = DB::table('user_educations');
-        $userEducations->where('user_id', $userId);
-        $userEducations->select(
+        $educations = DB::table('user_educations');
+        $educations->where('user_id', $userId);
+        $educations->select(
             'level',
             'name',
             'faculty',
@@ -19,6 +19,6 @@ class EducationRepository
             'year_of_graduation',
             'description'
         );
-        return $userEducations = $userEducations->get();
+        return $educations = $educations->get();
     }
 }

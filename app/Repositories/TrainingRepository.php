@@ -15,7 +15,22 @@ class TrainingRepository
         $trainings->join('trainings as t', 't.id', '=', 'ut.training_id');
         $trainings->where('ut.user_id', $userId);
         $trainings->where('t.type', $type);
-        $trainings->select('t.id', 't.period_month', 't.name', 't.level', 't.start_date', 't.duration', 't.organizer', 't.reference_number', 't.link', 'ut.certificate', 't.type', 't.created_at');
+        $trainings->select(
+            'ut.id',
+            't.period_month',
+            't.period_year',
+            't.name',
+            't.level',
+            't.start_date',
+            't.duration',
+            't.organizer',
+            't.reference_number',
+            't.link',
+            'ut.certificate',
+            't.type',
+        );
+        $trainings->orderBy('t.period_year', 'desc');
+        $trainings->orderBy('t.period_month', 'desc');
         $trainings = $trainings->get();
 
         foreach ($trainings as $training) {

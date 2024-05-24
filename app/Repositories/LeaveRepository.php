@@ -8,9 +8,9 @@ class LeaveRepository
 {
     public function getDetail($userId)
     {
-        $userLeaves = DB::table('user_leaves');
-        $userLeaves->where('user_id', $userId);
-        $userLeaves->select(
+        $leaves = DB::table('user_leaves');
+        $leaves->where('user_id', $userId);
+        $leaves->select(
             'grade_id',
             'position',
             'start_date',
@@ -20,6 +20,6 @@ class LeaveRepository
             'purpose',
             'leave_letter',
         );
-        return $userLeaves = $userLeaves->get();
+        return $leaves = $leaves->get();
     }
 }
