@@ -30,6 +30,7 @@ RUN curl -sSL https://github.com/mlocati/docker-php-extension-installer/releases
   session \
   tokenizer \
   xml \
+  gd \
   @composer
 
 # Copy the rest of the application code to the container
