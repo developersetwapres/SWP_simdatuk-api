@@ -108,8 +108,8 @@ class TrainingHistoryController extends Controller
      * @subgroup Training
      * @authenticated
      * @urlParam id Refers to the ID of Training. Example: 1
-     * @response 404
-     * @response 200
+     * @response 404 {"code": 404,"message": "Pelatihan tidak ditemukan.","data": null}
+     * @response 200 {"code": 200,"message": "success","data": {"id": 1,"period_month": 3,"period_year": "2020","name": "Sepadya tahun 1994","reference_number": "13936/PPKASN/09/2021","level": "Diklat PIM Tk.III","start_date": "2020-10-22","duration": 10,"organizer": "PPKASN","link": "https://google.com","users": [{"id": 1,"user_id": 1,"name": "Mellinia Fitrika Irjayanti","employee_id_number": "00010015","certificate": null,"created_at": "2024-05-24 09:13:35"}]}}
      */
     public function show()
     {
@@ -166,13 +166,13 @@ class TrainingHistoryController extends Controller
 
         if (isset($this->request->users)) {
 
-            // Get existing user training
+            // Get existing data
             $userTrainings = DB::table('user_trainings');
             $userTrainings->where('training_id', $this->request->id);
             $userTrainings->select('id');
             $userTrainings = $userTrainings->get();
 
-            // Delete user training
+            // Delete data
             $array1 = Arr::pluck($userTrainings, 'id');
             $array2 = Arr::pluck($this->request->users, 'id');
             $result = array_diff($array1, $array2);
@@ -184,15 +184,15 @@ class TrainingHistoryController extends Controller
                 }
 
                 if (!is_null($user['id'])) {
-                    // Update existing user training
+                    // Update existing data
                     DB::table('user_trainings')->where('id', $user['id'])->updateTs($user);
                 } else {
-                    // Insert new item user training
+                    // Insert new item
                     $user['training_id'] = $this->request->id;
                     array_push($users, $user);
                 }
             }
-            if (count($users > 0)) {
+            if (count($users) > 0) {
                 DB::table('user_trainings')->insertTs($users);
             }
         }
