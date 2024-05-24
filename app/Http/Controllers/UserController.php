@@ -32,7 +32,7 @@ class UserController extends Controller
      * @authenticated
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
      * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
-     * @queryParam username string The keyword search field for the username. Example: admin
+     * @queryParam search string The keyword search field for the username. Example: admin
      * @response 200 {"code": 200, "message": "success", "data": [{"id": 32, "username": "admin", "employee_id_number": "0000000000000", "employee_registration_number": "0000000000000", "role_name": "administrator", "status": "Aktif"}], "pagination": {"total": 1, "count": 1, "per_page": 1, "current_page": 1, "total_pages": 1, "links": {"first_page": "http://localhost/api/users?page=1", "last_page": "http://localhost/api/users?page=1", "next_page": null, "prev_page": null}}}
      */
     public function index()
@@ -53,7 +53,7 @@ class UserController extends Controller
         $users = DB::table('users');
         $users->join('roles', 'users.role_id', 'role_id');
         $users->select('users.id', 'users.username', 'users.employee_id_number', 'users.employee_registration_number', 'roles.name as role_name', 'users.status');
-        $users->where('users.username', 'like', '%' . $this->request->username . '%');
+        $users->where('users.username', 'like', '%' . $this->request->search . '%');
         $users = $users->paginate($this->request->limit);
         if ($users->isEmpty()) {
             return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $users);

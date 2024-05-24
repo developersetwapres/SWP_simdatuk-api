@@ -28,7 +28,7 @@ class DisciplinaryHistoryController extends Controller
      * @authenticated
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
      * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
-     * @queryParam name string The keyword search field for the name. Example: Hukuman Disiplin
+     * @queryParam search string The keyword search field for the name. Example: Hukuman Disiplin
      * @response 200 {"code": 200,"message": "success","data": [{"id": 1,"created_at": "2024-05-14 08:51:39","name": "Hukuman Disiplin Desember 2024","period_month": 3,"period_year": "2020","total": 1}],"pagination": {"total": 1,"count": 1,"per_page": 10,"current_page": 1,"total_pages": 1,"links": {"first_page": "http://localhost/api/disciplinaries?page=1","last_page": "http://localhost/api/disciplinaries?page=1","next_page": null,"prev_page": null}}}
      */
     public function index()
@@ -49,7 +49,7 @@ class DisciplinaryHistoryController extends Controller
         $disciplinaries = DB::table('disciplinaries as d');
         $disciplinaries->leftjoin('user_disciplinaries as ud', 'd.id', '=', 'ud.disciplinary_id');
         $disciplinaries->select('d.id', 'd.created_at', 'd.name', 'd.period_month', 'd.period_year', DB::raw("COUNT(ud.id) AS total"));
-        $disciplinaries->where('d.name', 'like', '%' . $this->request->name . '%');
+        $disciplinaries->where('d.name', 'like', '%' . $this->request->search . '%');
         $disciplinaries->groupby('d.id');
         $disciplinaries = $disciplinaries->paginate($this->request->limit);
         if ($disciplinaries->isEmpty()) {

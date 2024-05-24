@@ -28,7 +28,7 @@ class PositionHistoryController extends Controller
      * @authenticated
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
      * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
-     * @queryParam name string The keyword search field for the name. Example: Asisten Wakil Presiden
+     * @queryParam search string The keyword search field for the name. Example: Asisten Wakil Presiden
      * @response 200
      */
     public function index()
@@ -49,7 +49,7 @@ class PositionHistoryController extends Controller
         $positionHistories = DB::table('position_histories as ph');
         $positionHistories->leftjoin('position_history_users as phu', 'ph.id', '=', 'phu.position_history_id');
         $positionHistories->select('ph.id', 'ph.name', 'ph.period_month', 'ph.period_year', 'ph.created_at', DB::raw("COUNT(phu.id) AS total"));
-        $positionHistories->where('ph.name', 'like', '%' . $this->request->name . '%');
+        $positionHistories->where('ph.name', 'like', '%' . $this->request->search . '%');
         $positionHistories->groupby('ph.id');
         $positionHistories = $positionHistories->paginate($this->request->limit);
         if ($positionHistories->isEmpty()) {

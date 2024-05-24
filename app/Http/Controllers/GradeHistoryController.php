@@ -28,7 +28,7 @@ class GradeHistoryController extends Controller
      * @authenticated
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
      * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
-     * @queryParam name string The keyword search field for the name. Example: Penata Tingkat I (III/d)
+     * @queryParam search string The keyword search field for the name. Example: Penata Tingkat I (III/d)
      * @response 200 {"code": 200,"message": "success","data": [{"id": 1,"created_at": "2024-05-16 05:07:27","name": "Riwayat Desember 2023","period_month": 3,"period_year": "2010","total": 1}],"pagination": {"total": 2,"count": 2,"per_page": 10,"current_page": 1,"total_pages": 1,"links": {"first_page": "http://localhost/api/grade-histories?page=1","last_page": "http://localhost/api/grade-histories?page=1","next_page": null,"prev_page": null}}}
      */
     public function index()
@@ -49,7 +49,7 @@ class GradeHistoryController extends Controller
         $gradeHistories = DB::table('grade_histories as gh');
         $gradeHistories->leftjoin('grade_history_users as ghu', 'gh.id', '=', 'ghu.grade_history_id');
         $gradeHistories->select('gh.id', 'gh.created_at', 'gh.name', 'gh.period_month', 'gh.period_year', DB::raw("COUNT(ghu.id) AS total"));
-        $gradeHistories->where('gh.name', 'like', '%' . $this->request->name . '%');
+        $gradeHistories->where('gh.name', 'like', '%' . $this->request->search . '%');
         $gradeHistories->groupby('gh.id');
         $gradeHistories = $gradeHistories->paginate($this->request->limit);
         if ($gradeHistories->isEmpty()) {

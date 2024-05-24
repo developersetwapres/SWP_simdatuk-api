@@ -25,7 +25,7 @@ class DisciplinaryController extends Controller
      * @authenticated
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
      * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
-     * @queryParam keyword string The keyword search field for the name of employment type. Example: Teguran Tertulis
+     * @queryParam search string The keyword search field for the name of employment type. Example: Teguran Tertulis
      * @response 200 {"code": 200,"message": "success","data": [{"id": 1,"name": "Teguran Lisan","description": "Hukuman Disiplin Tingkat Ringan 1","performance_allowance_deduction": 0.25,"performance_allowance_duration": 2}],"pagination": {"total": 11,"count": 10,"per_page": 10,"current_page": 1,"total_pages": 2,"links": {"first_page": "http://localhost/api/disciplinary-types?page=1","last_page": "http://localhost/api/disciplinary-types?page=2","next_page": "http://localhost/api/disciplinary-types?page=2","prev_page": null}}}
      */
     public function index()
@@ -46,7 +46,7 @@ class DisciplinaryController extends Controller
 
         $disciplinaryTypes = DB::table('disciplinary_types');
         $disciplinaryTypes->select('id', 'name', 'description', 'performance_allowance_deduction', 'performance_allowance_duration');
-        $disciplinaryTypes->where('name', 'like', '%' . $this->request->keyword . '%');
+        $disciplinaryTypes->where('name', 'like', '%' . $this->request->search . '%');
         $disciplinaryTypes = $disciplinaryTypes->paginate($this->request->limit);
 
         if ($disciplinaryTypes->isEmpty()) {

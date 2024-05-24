@@ -28,7 +28,7 @@ class RecognitionHistoryController extends Controller
      * @authenticated
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
      * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
-     * @queryParam name string The keyword search field for the name. Example: Satya Lencana
+     * @queryParam search string The keyword search field for the name. Example: Satya Lencana
      * @response 200 {"code": 200,"message": "success","data": [{"id": 1,"created_at": "2024-05-05 11:14:44","name": "Diklat Komputer Microsoft Excell","period_month": 3,"period_year": "2020","awarding_institution": "Setwapres","total": 1}],"pagination": {"total": 2,"count": 2,"per_page": 10,"current_page": 1,"total_pages": 1,"links": {"first_page": "http://localhost/api/recognitions?page=1","last_page": "http://localhost/api/recognitions?page=1","next_page": null,"prev_page": null}}}
      */
     public function index()
@@ -49,7 +49,7 @@ class RecognitionHistoryController extends Controller
         $recognitions = DB::table('recognitions as r');
         $recognitions->leftjoin('user_recognitions as ur', 'r.id', '=', 'ur.recognition_id');
         $recognitions->select('r.id', 'r.created_at', 'r.name', 'r.period_month', 'r.period_year', 'r.awarding_institution', DB::raw("COUNT(ur.id) AS total"));
-        $recognitions->where('r.name', 'like', '%' . $this->request->name . '%');
+        $recognitions->where('r.name', 'like', '%' . $this->request->search . '%');
         $recognitions->groupby('r.id');
         $recognitions = $recognitions->paginate($this->request->limit);
         if ($recognitions->isEmpty()) {

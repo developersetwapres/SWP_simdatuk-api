@@ -27,7 +27,7 @@ class InstitutionController extends Controller
      * @authenticated
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
      * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
-     * @queryParam keyword string The keyword search field for the name of institution. Example: kementerian
+     * @queryParam search string The keyword search field for the name of institution. Example: kementerian
      * @response 200 {"code": 200,"message": "success","data": [{"id": 2,"name": "Sekretariat Negara Wakil Presiden"}],"pagination": {"total": 1,"count": 1,"per_page": 10,"current_page": 1,"total_pages": 1,"links": {"first_page": "http://localhost/api/institutions?page=1","last_page": "http://localhost/api/institutions?page=1","next_page": null,"prev_page": null}}}
      */
     public function index()
@@ -48,7 +48,7 @@ class InstitutionController extends Controller
 
         $institutions = DB::table('institutions');
         $institutions->select('id', 'name');
-        $institutions->where('name', 'like', '%' . $this->request->keyword . '%');
+        $institutions->where('name', 'like', '%' . $this->request->search . '%');
         $institutions = $institutions->paginate($this->request->limit);
 
         if ($institutions->isEmpty()) {

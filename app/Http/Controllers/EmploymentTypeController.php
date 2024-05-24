@@ -29,7 +29,7 @@ class EmploymentTypeController extends Controller
      * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
      * @queryParam status boolean Refers to the status display of Employment Type. Defaults is null. Example: null
      * @queryParam type integer Refers to the type of Employment Type. 1=ASN, 2=NON-ASN or 3=OUTSOURCE Defaults is null. Example: null
-     * @queryParam keyword string The keyword search field for the name of employment type. Example: ORGANIK
+     * @queryParam search string The keyword search field for the name of employment type. Example: ORGANIK
      * @response 200 {"code": 200,"message": "success","data": [{"id": 1,"name": "TNI/POLRI","status": 1,"type": 1}],"pagination": {"total": 20,"count": 1,"per_page": 1,"current_page": 1,"total_pages": 20,"links": {"first_page": "http://localhost/api/employment-types?page=1","last_page": "http://localhost/api/employment-types?page=20","next_page": "http://localhost/api/employment-types?page=2","prev_page": null}}}
      */
     public function index()
@@ -54,7 +54,7 @@ class EmploymentTypeController extends Controller
 
         $employmentTypes = DB::table('employment_types');
         $employmentTypes->select('id', 'name', 'status', 'type');
-        $employmentTypes->where('name', 'like', '%' . $this->request->keyword . '%');
+        $employmentTypes->where('name', 'like', '%' . $this->request->search . '%');
         if ($this->request->status) {
             $employmentTypes->where('status', $this->request->status);
         }

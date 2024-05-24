@@ -28,7 +28,7 @@ class RoleController extends Controller
      * @authenticated
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
      * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
-     * @queryParam name string The keyword search field for the name. Example: administrator
+     * @queryParam search string The keyword search field for the name. Example: administrator
      * @response 200 {"code": 200,"message": "success","data": [{"id": 2,"name": "administrator"}],"pagination": {"total": 1,"count": 1,"per_page": 10,"current_page": 1,"total_pages": 1,"links": {"first_page": "http://localhost/api/roles?page=1","last_page": "http://localhost/api/roles?page=1","next_page": null,"prev_page": null}}}
      */
     public function index()
@@ -47,8 +47,8 @@ class RoleController extends Controller
         $this->request->limit = ($this->request->limit) ? $this->request->limit : 10;
 
         $roles = DB::table('roles');
-        $roles->select('id', 'name', );
-        $roles->where('name', 'like', '%' . $this->request->name . '%');
+        $roles->select('id', 'name');
+        $roles->where('name', 'like', '%' . $this->request->search . '%');
         $roles = $roles->paginate($this->request->limit);
         if ($roles->isEmpty()) {
             return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $roles);

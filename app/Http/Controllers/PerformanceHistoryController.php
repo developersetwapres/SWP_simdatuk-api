@@ -30,7 +30,7 @@ class PerformanceHistoryController extends Controller
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
      * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
      * @queryParam type integer Refers to the types of items to be displayed per page. Example: 1
-     * @queryParam name string The keyword search field for the name. Example: PPK Mei 2024
+     * @queryParam search string The keyword search field for the name. Example: PPK Mei 2024
      * @response 200 {"code":200,"message":"success","data":[{"id":1,"created_at":"2024-05-10 04:36:41","name":"PPK Mei 2024","period_month":5,"period_year":"2024","performance_period":"PPK Mei 2024","total":1}],"pagination":{"total":1,"count":1,"per_page":10,"current_page":1,"total_pages":1,"links":{"first_page":"http://localhost:8000/api/performances?page=1","last_page":"http://localhost:8000/api/performances?page=1","next_page":null,"prev_page":null}}}
      */
 
@@ -51,7 +51,7 @@ class PerformanceHistoryController extends Controller
         $performances = DB::table('performances as p');
         $performances->leftjoin('user_performances as up', 'p.id', '=', 'up.performance_id');
         $performances->select('p.id', 'p.created_at', 'p.name', 'p.period_month', 'p.period_year', 'p.performance_period', DB::raw("COUNT(up.id) AS total"));
-        $performances->where('p.name', 'like', '%' . $this->request->name . '%');
+        $performances->where('p.name', 'like', '%' . $this->request->search . '%');
         $performances->groupby('p.id');
         $performances = $performances->paginate($this->request->limit);
         if ($performances->isEmpty()) {

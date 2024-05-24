@@ -29,7 +29,7 @@ class TargetHistoryController extends Controller
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
      * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
      * @queryParam type integer Refers to the types of items to be displayed per page. Example: 1
-     * @queryParam name string The keyword search field for the name. Example: SKP Desember 2023
+     * @queryParam search string The keyword search field for the name. Example: SKP Desember 2023
      * @response 200 {"code": 200,"message": "success","data": [{"id": 1,"created_at": "2024-05-03 05:29:30","name": "SKP Desember 2023","period_month": 3,"period_year": "2020","start_date": "2020-10-22", "appraisal_period": "Q1" ,"total": 2}],"pagination": {"total": 4,"count": 4,"per_page": 10,"current_page": 1,"total_pages": 1,"links": {"first_page": "http://localhost/api/target?page=1","last_page": "http://localhost/api/target?page=1","next_page": null,"prev_page": null}}}
      */
     public function index()
@@ -50,7 +50,7 @@ class TargetHistoryController extends Controller
         $targets = DB::table('targets as t');
         $targets->leftjoin('user_targets as ut', 't.id', '=', 'ut.target_id');
         $targets->select('t.id', 't.created_at', 't.name', 't.period_month', 't.period_year', 't.appraisal_period', DB::raw("COUNT(ut.id) AS total"));
-        $targets->where('t.name', 'like', '%' . $this->request->name . '%');
+        $targets->where('t.name', 'like', '%' . $this->request->search . '%');
         $targets->groupby('t.id');
         $targets = $targets->paginate($this->request->limit);
         if ($targets->isEmpty()) {
