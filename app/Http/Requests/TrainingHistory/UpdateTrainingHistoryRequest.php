@@ -32,7 +32,7 @@ class UpdateTrainingHistoryRequest extends FormRequest
             'organizer' => 'max:160',
             'link' => 'url',
             'type' => 'required|numeric|in:1,2,3',
-            'users.*.id' => 'nullable|numeric',
+            'users.*.id' => 'numeric|nullable',
             'users.*.user_id' => 'required|numeric',
             'users.*.certificate' => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
         ];

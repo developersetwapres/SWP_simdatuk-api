@@ -179,30 +179,22 @@ class TrainingHistoryController extends Controller
             DB::table('user_trainings')->whereIn('id', $result)->delete();
 
             foreach ($this->request->users as $user) {
-                if (!is_null($user['id'])) {
+                if (isset($user['certificate']) && is_file($user['certificate'])) {
+                    $user['certificate'] = $this->uploadDocument($user['certificate'], 'certificate');
+                }
 
+                if (!is_null($user['id'])) {
                     // Update existing user training
-                    if (isset($user['certificate']) && is_file($user['certificate'])) {
-                        $user['certificate'] = $this->uploadDocument($user['certificate'], 'certificate');
-                    } else {
-                        $user['certificate'] = null;
-                    }
                     DB::table('user_trainings')->where('id', $user['id'])->updateTs($user);
                 } else {
-
                     // Insert new item user training
-                    if (isset($user['certificate']) && is_file($user['certificate'])) {
-                        $user['certificate'] = $this->uploadDocument($user['certificate'], 'certificate');
-                    } else {
-                        $user['certificate'] = null;
-                    }
                     $user['training_id'] = $this->request->id;
-
-                    // Collect user to bulk insert
                     array_push($users, $user);
                 }
             }
-            DB::table('user_trainings')->insertTs($users);
+            if (count($users > 0)) {
+                DB::table('user_trainings')->insertTs($users);
+            }
         }
         return $this->response(200, 'Pelatihan berhasil diupdate.');
     }
