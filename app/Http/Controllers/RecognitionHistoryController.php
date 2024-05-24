@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RecognitionHistory\CreateRecognitionHistoryRequest;
 use App\Http\Requests\RecognitionHistory\UpdateRecognitionHistoryRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -150,15 +151,32 @@ class RecognitionHistoryController extends Controller
 
         if (isset($this->request->users)) {
 
-            // Delete user training
-            DB::table('user_recognitions')->where('recognition_id', $this->request->id)->delete();
+            // Get existing data
+            $userRecognitions = DB::table('user_recognitions');
+            $userRecognitions->where('recognition_id', $this->request->id);
+            $userRecognitions->select('id');
+            $userRecognitions = $userRecognitions->get();
+
+            // Delete data
+            $array1 = Arr::pluck($userRecognitions, 'id');
+            $array2 = Arr::pluck($this->request->users, 'id');
+            $result = array_diff($array1, $array2);
+            DB::table('user_recognitions')->whereIn('id', $result)->delete();
 
             foreach ($this->request->users as $user) {
-                $user['recognition_id'] = $this->request->id;
-                // Collect user to bulk insert
-                array_push($users, $user);
+                if (!is_null($user['id'])) {
+                    // Update existing data
+                    DB::table('user_recognitions')->where('id', $user['id'])->updateTs($user);
+                } else {
+                    // Insert new item
+                    $user['recognition_id'] = $this->request->id;
+                    array_push($users, $user);
+                }
             }
-            DB::table('user_recognitions')->insertTs($users);
+
+            if (count($users > 0)) {
+                DB::table('user_recognitions')->insertTs($users);
+            }
         }
         return $this->response(200, 'Penghargaan berhasil diupdate.');
     }
