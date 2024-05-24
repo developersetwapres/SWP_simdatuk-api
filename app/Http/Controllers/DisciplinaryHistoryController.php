@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\DisciplinaryHistory\CreateDisciplinaryHistoryRequest;
 use App\Http\Requests\DisciplinaryHistory\UpdateDisciplinaryHistoryRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -112,7 +113,7 @@ class DisciplinaryHistoryController extends Controller
 
         $users = DB::table('user_disciplinaries as ud');
         $users->join('users as u', 'u.id', '=', 'ud.user_id');
-        $users->join('disciplinary_types as dt', 'ud.disciplinary_id', '=', 'dt.id');
+        $users->leftjoin('disciplinary_types as dt', 'ud.disciplinary_id', '=', 'dt.id');
         $users->where('ud.disciplinary_id', $disciplinary->id);
         $users->select('ud.id', 'ud.user_id', 'u.name', 'u.employee_id_number', 'ud.grade', 'ud.position', 'dt.id as disciplinary_type_id', 'dt.name as disciplinary_type_name', 'dt.description as disciplinary_type_description', 'dt.performance_allowance_deduction', 'dt.performance_allowance_duration', 'ud.decree_number', 'ud.date_of_decree', 'ud.start_date', 'ud.end_date', 'ud.authorizing_officer', 'ud.name_of_authorizing_officer', 'ud.description', 'ud.created_at');
         $users = $users->get();
@@ -151,13 +152,31 @@ class DisciplinaryHistoryController extends Controller
 
         if (isset($this->request->users)) {
 
-            DB::table('user_disciplinaries')->where('disciplinary_id', $this->request->id)->delete();
+            // Get existing data
+            $userDisciplinaries = DB::table('user_disciplinaries');
+            $userDisciplinaries->where('disciplinary_id', $this->request->id);
+            $userDisciplinaries->select('id');
+            $userDisciplinaries = $userDisciplinaries->get();
+
+            // Delete data
+            $array1 = Arr::pluck($userDisciplinaries, 'id');
+            $array2 = Arr::pluck($this->request->users, 'id');
+            $result = array_diff($array1, $array2);
+            DB::table('user_disciplinaries')->whereIn('id', $result)->delete();
 
             foreach ($this->request->users as $user) {
-                $user['disciplinary_id'] = $this->request->id;
-                array_push($users, $user);
+                if (!is_null($user['id'])) {
+                    // Update existing data
+                    DB::table('user_disciplinaries')->where('id', $user['id'])->updateTs($user);
+                } else {
+                    // Insert new item
+                    $user['disciplinary_id'] = $this->request->id;
+                    array_push($users, $user);
+                }
             }
-            DB::table('user_disciplinaries')->insertTs($users);
+            if (count($users) > 0) {
+                DB::table('user_disciplinaries')->insertTs($users);
+            }
         }
         return $this->response(200, 'Hukuman disiplin berhasil diupdate.');
     }
