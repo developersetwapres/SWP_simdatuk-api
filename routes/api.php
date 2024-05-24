@@ -89,9 +89,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('target-histories')->group(function () {
         Route::get('/', [TargetHistoryController::class, 'index']);
+        Route::post('/', [TargetHistoryController::class, 'create']);
         Route::get('/{id}', [TargetHistoryController::class, 'show']);
         Route::post('/{id}', [TargetHistoryController::class, 'update']);
-        Route::post('/', [TargetHistoryController::class, 'create']);
     });
 
     Route::prefix('performance-histories')->group(function () {
