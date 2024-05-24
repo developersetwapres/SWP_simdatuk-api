@@ -27,6 +27,7 @@ class UpdateTargetHistoryRequest extends FormRequest
             'name' => 'required|max:160',
             'appraisal_period' => 'required',
             'year' => 'date_format:Y',
+            'users.*.id' => 'numeric|nullable',
             'users.*.user_id' => 'required|numeric',
             'users.*.work_behavior_rating' => 'required|numeric',
             'users.*.employee_performance_predicate' => 'required|numeric',
@@ -51,6 +52,7 @@ class UpdateTargetHistoryRequest extends FormRequest
             'name.max' => 'Nama target tidak boleh lebih dari 160 karakter.',
             'appraisal_period.required' => 'Periode penilaian tidak boleh kosong.',
             'year.date_format' => 'Tahun target harus dengan format YYYY.',
+            'users.*.id.numeric' => 'ID harus berupa angka.',
             'users.*.user_id.required' => 'User ID tidak boleh kosong.',
             'users.*.user_id.numeric' => 'User ID harus berupa angka.',
             'users.*.work_behavior_rating.required' => 'Rating perilaku kerja tidak boleh kosong.',
@@ -90,21 +92,25 @@ class UpdateTargetHistoryRequest extends FormRequest
                 'description' => 'Refers to the Year of Employee Target.',
                 'example' => '2020',
             ],
+            'users.*.id' => [
+                'description' => 'Refers to the ID of List Employee Recognition.',
+                'example' => 1,
+            ],
             'users.*.user_id' => [
                 'description' => 'Refers to the User ID of List Employee Recognition.',
                 'example' => 1,
             ],
             'users.*.work_behavior_rating' => [
                 'description' => 'Refers to the Work Behavior Rating of Employee Target.',
-                'example' => 1,
+                'example' => 80.50,
             ],
             'users.*.employee_performance_predicate' => [
                 'description' => 'Refers to the Employee Performance Predicate of Employee Target.',
-                'example' => 1,
+                'example' => 80.00,
             ],
             'users.*.organizational_performance_achievement' => [
                 'description' => 'Refers to the Orginizational Performance Achievement of Employee Target.',
-                'example' => 1,
+                'example' => 80.00,
             ],
         ];
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\TargetHistory\CreateTargetHistoryRequest;
 use App\Http\Requests\TargetHistory\UpdateTargetHistoryRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -114,7 +115,7 @@ class TargetHistoryController extends Controller
         $users = DB::table('user_targets as ut');
         $users->join('users as u', 'u.id', '=', 'ut.user_id');
         $users->where('target_id', $target->id);
-        $users->select('ut.id', 'ut.created_at', 'ut.employee_performance_predicate', 'ut.organizational_performance_achievement', 'ut.work_behavior_rating', 'u.name', 'u.employee_id_number');
+        $users->select('ut.id', 'ut.employee_performance_predicate', 'ut.organizational_performance_achievement', 'ut.work_behavior_rating', 'u.name', 'u.employee_id_number', 'ut.created_at');
         $users = $users->get();
 
         $target->users = $users;
@@ -151,14 +152,31 @@ class TargetHistoryController extends Controller
 
         if (isset($this->request->users)) {
 
-            DB::table('user_targets')->where('target_id', $this->request->id)->delete();
+            // Get existing data
+            $userTargets = DB::table('user_targets');
+            $userTargets->where('target_id', $this->request->id);
+            $userTargets->select('id');
+            $userTargets = $userTargets->get();
+
+            // Delete data
+            $array1 = Arr::pluck($userTargets, 'id');
+            $array2 = Arr::pluck($this->request->users, 'id');
+            $result = array_diff($array1, $array2);
+            DB::table('user_trainings')->whereIn('id', $result)->delete();
 
             foreach ($this->request->users as $user) {
-                $user['target_id'] = $this->request->id;
-                array_push($users, $user);
+                if (!is_null($user['id'])) {
+                    // Update existing data
+                    DB::table('user_targets')->where('id', $user['id'])->updateTs($user);
+                } else {
+                    // Insert new item
+                    $user['target_id'] = $this->request->id;
+                    array_push($users, $user);
+                }
             }
-
-            DB::table('user_targets')->insertTs($users);
+            if (count($users) > 0) {
+                DB::table('user_targets')->insertTs($users);
+            }
         }
         return $this->response(200, 'SKP berhasil diupdate.');
     }

@@ -96,15 +96,15 @@ class CreateTargetHistoryRequest extends FormRequest
             ],
             'users.*.work_behavior_rating' => [
                 'description' => 'Refers to the Work Behavior Rating of Employee Target.',
-                'example' => 1,
+                'example' => 80.50,
             ],
             'users.*.employee_performance_predicate' => [
                 'description' => 'Refers to the Employee Performance Predicate of Employee Target.',
-                'example' => 1,
+                'example' => 80.00,
             ],
             'users.*.organizational_performance_achievement' => [
                 'description' => 'Refers to the Orginizational Performance Achievement of Employee Target.',
-                'example' => 1,
+                'example' => 80.00,
             ],
         ];
     }
