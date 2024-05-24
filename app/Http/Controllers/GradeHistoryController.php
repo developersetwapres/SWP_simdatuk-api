@@ -168,7 +168,7 @@ class GradeHistoryController extends Controller
             DB::table('grade_history_users')->whereIn('id', $result)->delete();
 
             foreach ($this->request->users as $user) {
-                // Upload Document
+                // Upload document
                 if (isset($user['decree_document']) && is_file($user['decree_document'])) {
                     $user['decree_document'] = $this->uploadDocument($user['decree_document'], 'decree_document');
                 }
