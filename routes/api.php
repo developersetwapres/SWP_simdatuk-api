@@ -96,15 +96,15 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('performance-histories')->group(function () {
         Route::get('/', [PerformanceHistoryController::class, 'index']);
-        Route::get('/{id}', [PerformanceHistoryController::class, 'show']);
         Route::post('/', [PerformanceHistoryController::class, 'create']);
+        Route::get('/{id}', [PerformanceHistoryController::class, 'show']);
         Route::post('/{id}', [PerformanceHistoryController::class, 'update']);
     });
 
     Route::prefix('disciplinary-histories')->group(function () {
         Route::get('/', [DisciplinaryHistoryController::class, 'index']);
-        Route::get('/{id}', [DisciplinaryHistoryController::class, 'show']);
         Route::post('/', [DisciplinaryHistoryController::class, 'create']);
+        Route::get('/{id}', [DisciplinaryHistoryController::class, 'show']);
         Route::post('/{id}', [DisciplinaryHistoryController::class, 'update']);
     });
 
