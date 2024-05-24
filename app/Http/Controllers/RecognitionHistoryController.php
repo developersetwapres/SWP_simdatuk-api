@@ -173,8 +173,7 @@ class RecognitionHistoryController extends Controller
                     array_push($users, $user);
                 }
             }
-
-            if (count($users > 0)) {
+            if (count($users) > 0) {
                 DB::table('user_recognitions')->insertTs($users);
             }
         }
