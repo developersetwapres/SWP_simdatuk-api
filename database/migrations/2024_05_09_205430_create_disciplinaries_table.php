@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('disciplinaries', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 160);
-            $table->tinyInteger('period_month');
-            $table->year('period_year');
+            $table->string('description');
+            $table->float('performance_allowance_deduction')->nullable()->comment('persentase pemontongan tunjangan kinerja');
+            $table->unsignedInteger('performance_allowance_duration')->nullable()->comment('jangka waktu pemotongan (dalam bulan)');
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
         });

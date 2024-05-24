@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('disciplinary_types', function (Blueprint $table) {
+        Schema::create('disciplinary_histories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 160);
-            $table->string('description');
-            $table->float('performance_allowance_deduction')->nullable()->comment('persentase pemontongan tunjangan kinerja');
-            $table->unsignedInteger('performance_allowance_duration')->nullable()->comment('jangka waktu pemotongan (dalam bulan)');
+            $table->tinyInteger('period_month');
+            $table->year('period_year');
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
         });
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('disciplinary_types');
+        Schema::dropIfExists('disciplinary_histories');
     }
 };

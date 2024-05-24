@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_disciplinaries', function (Blueprint $table) {
+        Schema::create('disciplinary_history_users', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('disciplinary_id');
+            $table->unsignedBigInteger('disciplinary_history_id');
             $table->string('grade');
             $table->string('position');
-            $table->unsignedBigInteger('disciplinary_type_id');
+            $table->unsignedBigInteger('disciplinary_id');
             $table->string('decree_number', 160)->nullable();
             $table->date('date_of_decree')->nullable();
             $table->date('start_date');
@@ -29,8 +29,8 @@ return new class extends Migration
             $table->timestamp('updated_at')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('disciplinary_history_id')->references('id')->on('disciplinary_histories')->onDelete('cascade');
             $table->foreign('disciplinary_id')->references('id')->on('disciplinaries')->onDelete('cascade');
-            $table->foreign('disciplinary_type_id')->references('id')->on('disciplinary_types')->onDelete('cascade');
         });
     }
 
@@ -39,6 +39,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_disciplinaries');
+        Schema::dropIfExists('disciplinary_history_users');
     }
 };

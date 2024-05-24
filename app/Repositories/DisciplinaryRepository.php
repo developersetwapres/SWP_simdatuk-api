@@ -8,18 +8,18 @@ class DisciplinaryRepository
 {
     public function getDetail($userId)
     {
-        $disciplinaries = DB::table('user_disciplinaries as ud');
-        $disciplinaries->join('disciplinaries as d', 'ud.disciplinary_id', '=', 'd.id');
-        $disciplinaries->join('disciplinary_types as dt', 'ud.disciplinary_type_id', '=', 'dt.id');
+        $disciplinaries = DB::table('disciplinary_history_users as ud');
+        $disciplinaries->join('disciplinary_histories as d', 'ud.disciplinary_history_id', '=', 'd.id');
+        $disciplinaries->join('disciplinaries as dt', 'ud.disciplinary_id', '=', 'dt.id');
         $disciplinaries->where('ud.user_id', $userId);
         $disciplinaries->select(
             'd.period_month',
             'd.period_year',
             'ud.grade',
             'ud.position',
-            'dt.id as disciplinary_type_id',
-            'dt.name as disciplinary_type_name',
-            'dt.description as disciplinary_type_description',
+            'dt.id as disciplinary_id',
+            'dt.name as disciplinary_name',
+            'dt.description as disciplinary_description',
             'dt.performance_allowance_deduction',
             'dt.performance_allowance_duration',
             'ud.decree_number',

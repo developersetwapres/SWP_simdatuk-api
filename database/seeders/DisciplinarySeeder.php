@@ -12,7 +12,7 @@ class DisciplinarySeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('disciplinary_types')->delete();
+        DB::table('disciplinaries')->delete();
         $disciplinaryTypes = [
             [
                 "name" => "Teguran Lisan",
@@ -81,7 +81,7 @@ class DisciplinarySeeder extends Seeder
                 "performance_allowance_duration" => null,
             ],
         ];
-        DB::table('disciplinary_types')->insertTs($disciplinaryTypes);
+        DB::table('disciplinaries')->insertTs($disciplinaryTypes);
 
     }
 }

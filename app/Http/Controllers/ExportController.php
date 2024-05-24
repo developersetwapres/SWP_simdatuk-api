@@ -457,9 +457,9 @@ class ExportController extends Controller
         }
 
         //Discipline
-        $userPunishment = DB::table('user_disciplinaries as ud');
-        $userPunishment->join('disciplinaries as d', 'd.id', '=', 'ud.disciplinary_id');
-        $userPunishment->join('disciplinary_types as dt', 'dt.id', '=', 'ud.disciplinary_type_id');
+        $userPunishment = DB::table('disciplinary_history_users as ud');
+        $userPunishment->join('disciplinary_histories as d', 'd.id', '=', 'ud.disciplinary_history_id');
+        $userPunishment->join('disciplinaries as dt', 'dt.id', '=', 'ud.disciplinary_id');
         $userPunishment->join('users', 'users.id', '=', 'ud.user_id');
         $userPunishment->where('ud.user_id', $user->id);
         $userPunishment->select('ud.grade', 'ud.position', 'ud.decree_number', 'ud.date_of_decree', 'ud.start_date',
@@ -467,7 +467,7 @@ class ExportController extends Controller
             'dt.name', 'dt.performance_allowance_duration');
         $userPunishment = $userPunishment->get();
         $userPunishmentData = array();
-        foreach ($userPunishment as $punishment){
+        foreach ($userPunishment as $punishment) {
             $userPunishmentData[] = [
                 'grade' => $punishment->grade,
                 'position' => $punishment->position,
@@ -491,7 +491,7 @@ class ExportController extends Controller
         $userFamily->select('uf.*');
         $userFamily = $userFamily->get();
         $userFamilyData = array();
-        foreach ($userFamily as $family){
+        foreach ($userFamily as $family) {
             $userFamilyData[] = [
                 'card_number' => $family->card_number,
                 'name' => $family->name,
@@ -520,7 +520,7 @@ class ExportController extends Controller
         $userNote->select('un.description', 'un.created_at', 'un.giver_id');
         $userNote = $userNote->get();
         $userNoteData = array();
-        foreach ($userNote as $note){
+        foreach ($userNote as $note) {
             $noteGiver = DB::table('user_notes as un');
             $noteGiver->join('users', 'users.id', '=', 'un.giver_id');
             $noteGiver->where('un.giver_id', $note->giver_id);
@@ -595,21 +595,21 @@ class ExportController extends Controller
             5 => 'Duda',
             default => '-',
         };
-        $housingComplex = match ($user->inner_housing_complex){
+        $housingComplex = match ($user->inner_housing_complex) {
             1 => 'Dalam',
             2 => 'Luar',
             default => '-',
         };
         $pdf = Pdf::loadview('exports/user', [
             'userProfile' => [
-                'Tempat, tanggal lahir' => $user->place_of_birth.', '.$user->date_of_birth,
+                'Tempat, tanggal lahir' => $user->place_of_birth . ', ' . $user->date_of_birth,
                 'Agama' => $religion,
                 'Jenis Kelamin' => ($user->gender ? 'Pria' : 'Wanita'),
                 'Status Perkawinan' => $maritalStatus,
                 'Instansi Induk' => $userInstitution->name,
                 'Satuan Organisasi' => 'Lorem ipsum',
                 'Unit Kerja' => $user->work_unit_id,
-                'No. Karpeg/No. Karis/No. Karsu' => $user->wife_id_card_number. '/'.$user->husband_id_card_number,
+                'No. Karpeg/No. Karis/No. Karsu' => $user->wife_id_card_number . '/' . $user->husband_id_card_number,
                 'Masa Kerja Keseluruhan' => 'Lorem ipsum',
                 'Masa Kerja Golongan' => 'Lorem ipsum',
                 'NPWP' => $user->id_tax,
@@ -648,7 +648,8 @@ class ExportController extends Controller
         $pdf->set_option('tempDir', $tmp);
         return $pdf->download('user-pdf.pdf');
     }
-    public function rekapitulasi(){
+    public function rekapitulasi()
+    {
         $tmp = sys_get_temp_dir();
         $pdf = pdf::loadView('exports/rekapitulasi', []);
         $pdf->setOption('isHtml5ParserEnabled', true);
@@ -686,5 +687,3 @@ class ExportController extends Controller
         return $pdf->download('rekapitulasi-asn-pdf.pdf');
     }
 }
-
-

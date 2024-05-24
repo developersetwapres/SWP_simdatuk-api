@@ -46,16 +46,16 @@ class DisciplinaryHistoryController extends Controller
         ], $messages);
         $this->request->limit = ($this->request->limit) ? $this->request->limit : 10;
 
-        $disciplinaries = DB::table('disciplinaries as d');
-        $disciplinaries->leftjoin('user_disciplinaries as ud', 'd.id', '=', 'ud.disciplinary_id');
-        $disciplinaries->select('d.id', 'd.created_at', 'd.name', 'd.period_month', 'd.period_year', DB::raw("COUNT(ud.id) AS total"));
-        $disciplinaries->where('d.name', 'like', '%' . $this->request->search . '%');
-        $disciplinaries->groupby('d.id');
-        $disciplinaries = $disciplinaries->paginate($this->request->limit);
-        if ($disciplinaries->isEmpty()) {
-            return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $disciplinaries);
+        $disciplinaryHistories = DB::table('disciplinary_histories as d');
+        $disciplinaryHistories->leftjoin('disciplinary_history_users as ud', 'd.id', '=', 'ud.disciplinary_history_id');
+        $disciplinaryHistories->select('d.id', 'd.created_at', 'd.name', 'd.period_month', 'd.period_year', DB::raw("COUNT(ud.id) AS total"));
+        $disciplinaryHistories->where('d.name', 'like', '%' . $this->request->search . '%');
+        $disciplinaryHistories->groupby('d.id');
+        $disciplinaryHistories = $disciplinaryHistories->paginate($this->request->limit);
+        if ($disciplinaryHistories->isEmpty()) {
+            return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $disciplinaryHistories);
         }
-        return $this->paginateResponse(200, 'success', $disciplinaries);
+        return $this->paginateResponse(200, 'success', $disciplinaryHistories);
     }
 
     /**
@@ -70,16 +70,14 @@ class DisciplinaryHistoryController extends Controller
     {
         try {
             DB::beginTransaction();
-            $disciplinaryId = DB::table('disciplinaries')->insertGetIdTs($this->request->except('users'));
-
-            // Insert Users
+            $disciplinaryHistoryId = DB::table('disciplinary_histories')->insertGetIdTs($this->request->except('users'));
             if (isset($this->request->users)) {
                 $users = array();
                 foreach ($this->request->users as $user) {
-                    $user['disciplinary_id'] = $disciplinaryId;
+                    $user['disciplinary_history_id'] = $disciplinaryHistoryId;
                     array_push($users, $user);
                 }
-                DB::table('user_disciplinaries')->insertTs($users);
+                DB::table('disciplinary_history_users')->insertTs($users);
             }
             DB::commit();
             return $this->response(200, 'Hukuman disiplin berhasil ditambah.');
@@ -102,25 +100,25 @@ class DisciplinaryHistoryController extends Controller
      */
     public function show()
     {
-        $disciplinary = DB::table('disciplinaries');
-        $disciplinary->where('id', $this->request->id);
-        $disciplinary->select('id', 'period_month', 'period_year', 'name', 'created_at');
-        $disciplinary = $disciplinary->first();
+        $disciplinaryHistory = DB::table('disciplinary_histories');
+        $disciplinaryHistory->where('id', $this->request->id);
+        $disciplinaryHistory->select('id', 'period_month', 'period_year', 'name', 'created_at');
+        $disciplinaryHistory = $disciplinaryHistory->first();
 
-        if (!$disciplinary) {
+        if (!$disciplinaryHistory) {
             return $this->response(404, 'Hukuman disiplin tidak ditemukan.');
         }
 
-        $users = DB::table('user_disciplinaries as ud');
+        $users = DB::table('disciplinary_history_users as ud');
         $users->join('users as u', 'u.id', '=', 'ud.user_id');
-        $users->leftjoin('disciplinary_types as dt', 'ud.disciplinary_id', '=', 'dt.id');
-        $users->where('ud.disciplinary_id', $disciplinary->id);
+        $users->leftjoin('disciplinaries as dt', 'ud.disciplinary_id', '=', 'dt.id');
+        $users->where('ud.disciplinary_history_id', $disciplinaryHistory->id);
         $users->select('ud.id', 'ud.user_id', 'u.name', 'u.employee_id_number', 'ud.grade', 'ud.position', 'dt.id as disciplinary_type_id', 'dt.name as disciplinary_type_name', 'dt.description as disciplinary_type_description', 'dt.performance_allowance_deduction', 'dt.performance_allowance_duration', 'ud.decree_number', 'ud.date_of_decree', 'ud.start_date', 'ud.end_date', 'ud.authorizing_officer', 'ud.name_of_authorizing_officer', 'ud.description', 'ud.created_at');
         $users = $users->get();
 
-        $disciplinary->users = $users;
+        $disciplinaryHistory->users = $users;
 
-        return $this->response(200, 'success', $disciplinary);
+        return $this->response(200, 'success', $disciplinaryHistory);
     }
 
     /**
@@ -135,47 +133,47 @@ class DisciplinaryHistoryController extends Controller
      */
     public function update(UpdateDisciplinaryHistoryRequest $request)
     {
-        $disciplinary = DB::table('disciplinaries');
-        $disciplinary->where('id', $this->request->id);
-        $disciplinary->select('id');
-        $disciplinary = $disciplinary->first();
+        $disciplinaryHistory = DB::table('disciplinary_histories');
+        $disciplinaryHistory->where('id', $this->request->id);
+        $disciplinaryHistory->select('id');
+        $disciplinaryHistory = $disciplinaryHistory->first();
 
-        if (!$disciplinary) {
+        if (!$disciplinaryHistory) {
             return $this->response(404, 'Hukuman disiplin tidak ditemukan.');
         }
 
-        $disciplinary = DB::table('disciplinaries');
-        $disciplinary->where('id', $this->request->id);
-        $disciplinary = $disciplinary->updateTs($this->request->except('users'));
+        $disciplinaryHistory = DB::table('disciplinary_histories');
+        $disciplinaryHistory->where('id', $this->request->id);
+        $disciplinaryHistory = $disciplinaryHistory->updateTs($this->request->except('users'));
 
         $users = array();
 
         if (isset($this->request->users)) {
 
             // Get existing data
-            $userDisciplinaries = DB::table('user_disciplinaries');
-            $userDisciplinaries->where('disciplinary_id', $this->request->id);
-            $userDisciplinaries->select('id');
-            $userDisciplinaries = $userDisciplinaries->get();
+            $disciplinaryHistoryUsers = DB::table('disciplinary_history_users');
+            $disciplinaryHistoryUsers->where('disciplinary_history_id', $this->request->id);
+            $disciplinaryHistoryUsers->select('id');
+            $disciplinaryHistoryUsers = $disciplinaryHistoryUsers->get();
 
             // Delete data
-            $array1 = Arr::pluck($userDisciplinaries, 'id');
+            $array1 = Arr::pluck($disciplinaryHistoryUsers, 'id');
             $array2 = Arr::pluck($this->request->users, 'id');
             $result = array_diff($array1, $array2);
-            DB::table('user_disciplinaries')->whereIn('id', $result)->delete();
+            DB::table('disciplinary_history_users')->whereIn('id', $result)->delete();
 
             foreach ($this->request->users as $user) {
                 if (!is_null($user['id'])) {
                     // Update existing data
-                    DB::table('user_disciplinaries')->where('id', $user['id'])->updateTs($user);
+                    DB::table('disciplinary_history_users')->where('id', $user['id'])->updateTs($user);
                 } else {
                     // Insert new item
-                    $user['disciplinary_id'] = $this->request->id;
+                    $user['disciplinary_history_id'] = $this->request->id;
                     array_push($users, $user);
                 }
             }
             if (count($users) > 0) {
-                DB::table('user_disciplinaries')->insertTs($users);
+                DB::table('disciplinary_history_users')->insertTs($users);
             }
         }
         return $this->response(200, 'Hukuman disiplin berhasil diupdate.');

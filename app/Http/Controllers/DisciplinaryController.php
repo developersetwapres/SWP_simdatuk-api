@@ -44,15 +44,15 @@ class DisciplinaryController extends Controller
 
         $this->request->limit = ($this->request->limit) ? $this->request->limit : 10;
 
-        $disciplinaryTypes = DB::table('disciplinary_types');
-        $disciplinaryTypes->select('id', 'name', 'description', 'performance_allowance_deduction', 'performance_allowance_duration');
-        $disciplinaryTypes->where('name', 'like', '%' . $this->request->search . '%');
-        $disciplinaryTypes = $disciplinaryTypes->paginate($this->request->limit);
+        $disciplinaries = DB::table('disciplinaries');
+        $disciplinaries->select('id', 'name', 'description', 'performance_allowance_deduction', 'performance_allowance_duration');
+        $disciplinaries->where('name', 'like', '%' . $this->request->search . '%');
+        $disciplinaries = $disciplinaries->paginate($this->request->limit);
 
-        if ($disciplinaryTypes->isEmpty()) {
-            return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $disciplinaryTypes);
+        if ($disciplinaries->isEmpty()) {
+            return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $disciplinaries);
         }
 
-        return $this->paginateResponse(200, 'success', $disciplinaryTypes);
+        return $this->paginateResponse(200, 'success', $disciplinaries);
     }
 }

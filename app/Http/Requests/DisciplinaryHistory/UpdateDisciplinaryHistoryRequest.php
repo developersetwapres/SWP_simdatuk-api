@@ -30,7 +30,7 @@ class UpdateDisciplinaryHistoryRequest extends FormRequest
             'users.*.user_id' => 'required|numeric',
             'users.*.grade' => 'max:160',
             'users.*.position' => 'max:160',
-            'users.*.disciplinary_type_id' => 'required|numeric',
+            'users.*.disciplinary_id' => 'required|numeric',
             'users.*.decree_number' => 'max:160',
             'users.*.date_of_decree' => 'date',
             'users.*.start_date' => 'required|date',
@@ -61,8 +61,8 @@ class UpdateDisciplinaryHistoryRequest extends FormRequest
             'users.*.user_id.numeric' => 'User ID harus berupa angka.',
             'users.*.grade.max' => 'Golongan tidak boleh lebih dari 160 karakter.',
             'users.*.position.max' => 'Jabatan tidak boleh lebih dari 160 karakter.',
-            'users.*.disciplinary_type_id.required' => 'Jenis hukuman tidak boleh kosong.',
-            'users.*.disciplinary_type_id.numeric' => 'Jenis hukuman harus berupa angka.',
+            'users.*.disciplinary_id.required' => 'Jenis hukuman tidak boleh kosong.',
+            'users.*.disciplinary_id.numeric' => 'Jenis hukuman harus berupa angka.',
             'users.*.decree_number.max' => 'No SK hukuman tidak boleh lebih dari 160 karakter.',
             'users.*.date_of_decree.date' => 'Tanggal SK harus berupa tanggal.',
             'users.*.start_date.required' => 'Tanggal mulai hukuman tidak boleh kosong.',
@@ -111,7 +111,7 @@ class UpdateDisciplinaryHistoryRequest extends FormRequest
                 'description' => 'Refers to the Jabatan of Employee Disciplinary.',
                 'example' => 'Kepala Subbagian Administrasi',
             ],
-            'users.*.disciplinary_type_id' => [
+            'users.*.disciplinary_id' => [
                 'description' => 'Refers to the Jenis Hukuman of Employee Disciplinary.',
                 'example' => 1,
             ],
