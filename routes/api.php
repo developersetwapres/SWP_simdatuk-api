@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DecreeController;
+use App\Http\Controllers\DiagramController;
 use App\Http\Controllers\DisciplinaryController;
 use App\Http\Controllers\DisciplinaryHistoryController;
 use App\Http\Controllers\EchelonController;
@@ -50,6 +51,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('summaries')->group(function () {
         Route::get('/', [SummaryController::class, 'index']);
+    });
+
+    Route::prefix('diagrams')->group(function () {
+        Route::get('/', [DiagramController::class, 'index']);
     });
 
     Route::prefix('employees')->group(function () {

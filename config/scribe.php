@@ -172,6 +172,7 @@ INTRO
         'order'=>[
             'Authentication',
             'Summary',
+            'Diagram',
             'Employee',
             'History',
             'Master Data',

@@ -8,46 +8,99 @@ class EmployeeRepository
 {
     public function getDetail($userId)
     {
-        $user = DB::table('users');
-        $user->where('id', $userId);
+        $user = DB::table('users as u');
+        $user->leftJoin('positions as p', 'u.position_id', '=', 'p.id');
+        $user->leftJoin('grades as g', 'u.grade_id', '=', 'g.id');
+        $user->leftJoin('echelons as e', 'u.echelon_id', '=', 'e.id');
+        $user->where('u.id', $userId);
         $user->select(
-            'id',
-            'email',
-            'name',
-            'photo_profile',
-            'id_number',
-            'employee_id_number',
-            'employee_registration_number',
-            'place_of_birth',
-            'date_of_birth',
-            'religion',
-            'gender',
-            'marital_status',
-            'employment_type_id',
-            'grade_id',
-            'grade_effective_date',
-            'position_id',
-            'echelon_id',
-            'echelon_effective_date',
-            'institution_id',
-            'organization_id',
-            'work_unit_id',
-            'employee_id_card_number',
-            'employee_id_card',
-            'wife_id_card_number',
-            'husband_id_card_number',
-            'id_tax',
-            'employment_status',
-            'inner_housing_complex',
-            'current_address',
-            'home_phone_number',
-            'mobile_phone',
-            'office_address',
-            'office_phone_number',
-            'description',
-            'type',
-            'created_at'
+            'u.id',
+            'u.email',
+            'u.name',
+            'u.photo_profile',
+            'u.id_number',
+            'u.employee_id_number',
+            'u.employee_registration_number',
+            'u.place_of_birth',
+            'u.date_of_birth',
+            'u.religion',
+            'u.gender',
+            'u.marital_status',
+            'u.employment_type_id',
+            'u.grade_id',
+            'g.name as grade_name',
+            'u.grade_effective_date',
+            'u.position_id',
+            'p.name as position_name',
+            'u.echelon_id',
+            'e.name as echelon_name',
+            'u.echelon_effective_date',
+            'u.institution_id',
+            'u.organization_id',
+            'u.work_unit_id',
+            'u.employee_id_card_number',
+            'u.employee_id_card',
+            'u.wife_id_card_number',
+            'u.husband_id_card_number',
+            'u.id_tax',
+            'u.employment_status',
+            'u.inner_housing_complex',
+            'u.current_address',
+            'u.home_phone_number',
+            'u.mobile_phone',
+            'u.office_address',
+            'u.office_phone_number',
+            'u.description',
+            'u.type',
+            'u.created_at'
         );
-        return $user = $user->first();
+        $user = $user->first();
+        if (!is_null($user->position_id)) {
+            $user->position_merged = $this->getRecursivePosition($user->position_id);
+        }
+        return $user;
+    }
+
+    /**
+     * Get recursive position data
+     *
+     * @param int $positionId
+     * @return void
+     */
+    private function getRecursivePosition($positionId)
+    {
+        $sql =
+            "WITH RECURSIVE hierarchy AS (
+            -- Anchor member: Select the initial child row
+            SELECT
+                id,
+                name,
+                parent_id
+            FROM
+                positions
+            WHERE
+                id = '$positionId' -- Replace ? with the specific child employee_id
+
+            UNION ALL
+
+            -- Recursive member: Select the parent row
+            SELECT
+                p.id,
+                p.name,
+                p.parent_id
+            FROM
+                positions p
+            INNER JOIN
+                hierarchy h ON p.id = h.parent_id
+            WHERE
+                p.entity = 1
+        )
+        SELECT
+            *
+        FROM
+            hierarchy;";
+        $position = DB::select($sql);
+        $names = array_column($position, 'name');
+        return implode(', ', $names);
     }
 }

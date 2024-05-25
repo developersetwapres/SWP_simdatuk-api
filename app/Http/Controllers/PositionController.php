@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 /**
  * @group Master Data
  * These endpoints would allow you to track and manage the master data of position, grade, institution, employment type, decree type, and other pertinent events.
- * @subgroupDescription These endpoints allow you to perform CRUD operations on position data, enabling the retrieval, creation, updating and deleting of position records as needed.
+ * @subgroupDescription These endpoints allow you to perform CRUD operations on position data, enabling the retrieval, creation, updating, and deleting of position records as needed.
  */
 class PositionController extends Controller
 {
@@ -31,5 +31,6 @@ class PositionController extends Controller
      */
     public function index()
     {
+        // Implementation here...
     }
 }

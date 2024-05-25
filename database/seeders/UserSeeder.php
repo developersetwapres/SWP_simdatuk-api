@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -14,7 +15,71 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         DB::table('users')->delete();
+        if (config('app.env') == 'production') {
+            $this->realDatabese();
+        } else {
+            $this->dummyDatabase();
+        }
+    }
 
+    /**
+     * Generate with dummy data
+     *
+     * @return void
+     */
+    private function dummyDatabase()
+    {
+        $faker = Faker::create('id_ID');
+        DB::table('users')->delete();
+
+        // Added administrator
+        $role = DB::table('roles')->select('id')->where('name', 'administrator')->first();
+        $admin = [
+            [
+                'role_id' => $role->id,
+                'email' => 'admin' . config('mail.domain'),
+                'username' => 'admin',
+                'password' => Hash::make('password'), // default password
+                'name' => 'administrator',
+                'employee_id_number' => '0000000000000',
+                'employee_registration_number' => '0000000000000',
+                'status' => true,
+            ],
+        ];
+        DB::table('users')->insertTs($admin);
+
+        // Sample user
+        $users = [];
+        for ($i = 0; $i < 365; $i++) {
+            $items = array("Male", "Female");
+            // Generate a random number (0 or 1) to select one of the items
+            $randomIndex = rand(0, 1);
+            // Select the item based on the random index
+            $gender = $items[$randomIndex];
+
+            $data = [
+                'name' => $faker->name($gender),
+                'employee_id_number' => $faker->numberBetween($min = 0000000000000, $max = 9999999999999),
+                'employee_registration_number' => $faker->numberBetween($min = 0000000000, $max = 9999999999),
+                'place_of_birth' => $faker->city(),
+                'date_of_birth' => $faker->date($format = 'Y-m-d', $min = '1990-01-01', $max = '1970-01-01'),
+                'religion' => $faker->numberBetween($min = 1, $max = 6),
+                'gender' => ($gender == 'Male') ? 1 : 0,
+                'marital_status' => $faker->numberBetween($min = 1, $max = 5),
+            ];
+            array_push($users, $data);
+        }
+
+        DB::table('users')->insertTs($users);
+    }
+
+    /**
+     * Generate data from real database
+     *
+     * @return void
+     */
+    private function realDatabese()
+    {
         // Added administrator
         $role = DB::table('roles')->select('id')->where('name', 'administrator')->first();
 
@@ -257,5 +322,114 @@ class UserSeeder extends Seeder
         ";
 
         DB::statement($outsource);
+
+        DB::table('users')->where('employee_id_number', '197303221997021001')->update([
+            'position_id' => 2,
+        ]);
+        DB::table('users')->where('employee_id_number', '2019111401')->update([
+            'position_id' => 4,
+        ]);
+        DB::table('users')->where('employee_id_number', '2019111402')->update([
+            'position_id' => 5,
+        ]);
+        DB::table('users')->where('employee_id_number', '2019111403')->update([
+            'position_id' => 6,
+        ]);
+        DB::table('users')->where('employee_id_number', '2019111404')->update([
+            'position_id' => 7,
+        ]);
+        DB::table('users')->where('employee_id_number', '2019111405')->update([
+            'position_id' => 8,
+        ]);
+        DB::table('users')->where('employee_id_number', '2022120101')->update([
+            'position_id' => 9,
+        ]);
+        DB::table('users')->where('employee_id_number', '2019111406')->update([
+            'position_id' => 10,
+        ]);
+        DB::table('users')->where('employee_id_number', '2019111407')->update([
+            'position_id' => 11,
+        ]);
+        DB::table('users')->where('employee_id_number', '2022120102')->update([
+            'position_id' => 12,
+        ]);
+        DB::table('users')->where('employee_id_number', '2020123101')->update([
+            'position_id' => 13,
+        ]);
+        DB::table('users')->where('employee_id_number', '2019122002')->update([
+            'position_id' => 14,
+        ]);
+        DB::table('users')->where('employee_id_number', '2020012801')->update([
+            'position_id' => 14,
+        ]);
+        DB::table('users')->where('employee_id_number', '2019122003')->update([
+            'position_id' => 15,
+        ]);
+        DB::table('users')->where('employee_id_number', '2019122008')->update([
+            'position_id' => 15,
+        ]);
+        DB::table('users')->where('employee_id_number', '2019122005')->update([
+            'position_id' => 16,
+        ]);
+        DB::table('users')->where('employee_id_number', '2022120103')->update([
+            'position_id' => 16,
+        ]);
+        DB::table('users')->where('employee_id_number', '2019122007')->update([
+            'position_id' => 17,
+        ]);
+        DB::table('users')->where('employee_id_number', '2020040701')->update([
+            'position_id' => 17,
+        ]);
+        DB::table('users')->where('employee_id_number', '2020010801')->update([
+            'position_id' => 18,
+        ]);
+        DB::table('users')->where('employee_id_number', '2022120104')->update([
+            'position_id' => 18,
+        ]);
+        DB::table('users')->where('employee_id_number', '2022120105')->update([
+            'position_id' => 19,
+        ]);
+        DB::table('users')->where('employee_id_number', '2022120106')->update([
+            'position_id' => 19,
+        ]);
+        DB::table('users')->where('employee_id_number', '2019122006')->update([
+            'position_id' => 20,
+        ]);
+        DB::table('users')->where('employee_id_number', '2019110109')->update([
+            'position_id' => 20,
+        ]);
+        DB::table('users')->where('employee_id_number', '2019122004')->update([
+            'position_id' => 21,
+        ]);
+        DB::table('users')->where('employee_id_number', '2019122001')->update([
+            'position_id' => 21,
+        ]);
+        DB::table('users')->where('employee_id_number', '198008042010012004')->update([
+            'position_id' => 22,
+        ]);
+        DB::table('users')->where('employee_id_number', '2020090701')->update([
+            'position_id' => 22,
+        ]);
+        DB::table('users')->where('employee_id_number', '2019110110')->update([
+            'position_id' => 23,
+        ]);
+        DB::table('users')->where('employee_id_number', '2022120107')->update([
+            'position_id' => 24,
+        ]);
+        DB::table('users')->where('employee_id_number', '2020090301')->update([
+            'position_id' => 25,
+        ]);
+        DB::table('users')->where('employee_id_number', '2020090702')->update([
+            'position_id' => 26,
+        ]);
+        DB::table('users')->where('employee_id_number', '2020090703')->update([
+            'position_id' => 27,
+        ]);
+        DB::table('users')->where('employee_id_number', '2022120110')->update([
+            'position_id' => 29,
+        ]);
+        DB::table('users')->where('employee_id_number', '2022120109')->update([
+            'position_id' => 30,
+        ]);
     }
 }
