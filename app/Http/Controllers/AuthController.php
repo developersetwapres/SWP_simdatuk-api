@@ -36,9 +36,9 @@ class AuthController extends Controller
      */
     public function login(LoginRequest $request)
     {
-        $user = User::where('username', $request->username)->first();
+        $user = User::where('username', $this->request->username)->first();
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
+        if (!$user || !Hash::check($this->request->password, $user->password)) {
             return $this->response(401, 'Kata sandi yang anda masukkan salah.');
         } else if (is_null($user->role_id)) {
             return $this->response(401, 'Anda tidak terdaftar sebagai pengguna, silakan hubungi tim IT.');
@@ -52,6 +52,7 @@ class AuthController extends Controller
 
         $user = DB::table('users');
         $user->select('users.id', 'users.email', 'users.username', 'users.photo_profile', 'users.employee_id_number', 'users.employee_registration_number');
+        $user->where('username', $this->request->username);
         $user = $user->first();
         $user->photo_profile = $this->getDocument($user->photo_profile, true);
 
