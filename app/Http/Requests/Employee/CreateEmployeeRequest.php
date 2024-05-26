@@ -28,7 +28,9 @@ class CreateEmployeeRequest extends FormRequest
     {
         $userRules = [
             'email' => 'email|unique:users,email',
+            'title_prefix' => 'max:160',
             'name' => 'required|max:160',
+            'title_suffix' => 'max:160',
             'photo_profile' => 'file|extensions:jpg,jpeg,png|max:2048|dimensions:width=350,height=500',
             'id_number' => 'numeric|digits:16|unique:users,id_number',
             'employee_id_number' => 'required|numeric|min:00000|max:9999999999|unique:users,employee_id_number',
@@ -53,7 +55,7 @@ class CreateEmployeeRequest extends FormRequest
             'husband_id_card_number' => 'numeric|min:00000|max:9999999999|unique:users,husband_id_card_number',
             'id_tax' => 'max:16|unique:users,id_tax',
             'employment_status' => 'required|boolean',
-            'inner_housing_complex' => 'required|boolean',
+            'residence_id' => 'required|numeric',
             'current_address' => 'max:160',
             'home_phone_number' => 'numeric|max:99999999999999',
             'mobile_phone' => 'numeric|max:99999999999999',
@@ -82,8 +84,10 @@ class CreateEmployeeRequest extends FormRequest
         $userMessages = [
             'email.email' => 'Format email harus sesuai.',
             'email.unique' => 'Email sudah terdaftar.',
+            'title_prefix.max' => 'Gelar tidak boleh lebih dari 160 karakter.',
             'name.required' => 'Nama tidak boleh kosong.',
             'name.max' => 'Nama tidak boleh lebih dari 160 karakter.',
+            'title_suffix.max' => 'Gelar tidak boleh lebih dari 160 karakter.',
             'photo_profile.file' => 'Foto profil harus berupa file.',
             'photo_profile.extensions' => 'Foto profil harus berupa jpg, jpeg atau png.',
             'photo_profile.max' => 'Ukuran foto profil tidak boleh lebih dari 2MB.',
@@ -142,7 +146,8 @@ class CreateEmployeeRequest extends FormRequest
             'id_tax.max' => 'NPWP tidak boleh lebih dari 16 digit.',
             'id_tax.unique' => 'NPWP sudah terdaftar.',
             'employment_status.boolean' => 'Status pegawai harus boolean.',
-            'inner_housing_complex.boolean' => 'Komplek harus berupa boolean.',
+            'residence_id.required' => 'Komplek tidak boleh kosong.',
+            'residence_id.numeric' => 'Komplek harus berupa angka.',
             'current_address.max' => 'Alamat saat ini tidak boleh lebih dari 160 karakter.',
             'home_phone_number.numeric' => 'Nomor telepon rumah harus berupa angka.',
             'home_phone_number.max' => 'Nomor telepon rumah tidak boleh lebih dari 14 digit angka.',
@@ -178,9 +183,17 @@ class CreateEmployeeRequest extends FormRequest
                 'description' => 'Refers to the Email of Employee.',
                 'example' => 'padmi@wapresri.go.id',
             ],
+            'title_prefix' => [
+                'description' => 'Refers to the Title Prefix of Employee.',
+                'example' => 'Dr',
+            ],
             'name' => [
                 'description' => 'Refers to the Name of Employee.',
-                'example' => 'Padmi Riyanti S.Sos',
+                'example' => 'Padmi Riyanti',
+            ],
+            'title_suffix' => [
+                'description' => 'Refers to the Title Suffix of Employee.',
+                'example' => 'S.sos',
             ],
             'photo_profile' => [
                 'description' => 'Refers to the Photo Profile of Employee.',
@@ -278,8 +291,8 @@ class CreateEmployeeRequest extends FormRequest
                 'description' => 'Refers to the Employment Status of Employee. true=aktif, false=tidak aktif',
                 'example' => 1,
             ],
-            'inner_housing_complex' => [
-                'description' => 'Refers to the Inner Housing Complex of Employee. true=dalam, false=luar',
+            'residence_id' => [
+                'description' => 'Refers to the Residence ID of Employee.',
                 'example' => 1,
             ],
             'current_address' => [

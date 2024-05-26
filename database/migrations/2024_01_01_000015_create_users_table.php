@@ -45,7 +45,7 @@ return new class extends Migration
             $table->string('husband_id_card_number', 20)->nullable();
             $table->string('id_tax', 20)->nullable();
             $table->boolean('employment_status')->default(true)->comment('true=aktif, false=tidak aktif');
-            $table->boolean('inner_housing_complex')->default(true)->comment('true=dalam, false=luar');
+            $table->insignedBigInteger('residence_id')->nullable();
             $table->text('current_address')->nullable();
             $table->string('home_phone_number', 20)->nullable();
             $table->string('mobile_phone', 20)->nullable();
@@ -61,6 +61,7 @@ return new class extends Migration
 
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('set null');
             $table->foreign('employment_type_id')->references('id')->on('employment_types')->onDelete('set null');
+            $table->foreign('residence_id')->references('id')->on('residences')->onDelete('set null');
         });
     }
 

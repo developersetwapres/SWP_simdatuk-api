@@ -19,6 +19,7 @@ use App\Http\Controllers\PositionController;
 use App\Http\Controllers\PositionHistoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RecognitionHistoryController;
+use App\Http\Controllers\ResidenceController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SummaryController;
 use App\Http\Controllers\TargetHistoryController;
@@ -151,6 +152,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('disciplinaries')->group(function () {
         Route::get('/', [DisciplinaryController::class, 'index']);
+    });
+
+    Route::prefix('residences')->group(function () {
+        Route::get('/', [ResidenceController::class, 'index']);
     });
 
     Route::prefix('permissions')->group(function () {

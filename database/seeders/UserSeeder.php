@@ -356,58 +356,31 @@ class UserSeeder extends Seeder
         DB::table('users')->where('employee_id_number', '2020123101')->update([
             'position_id' => 13,
         ]);
-        DB::table('users')->where('employee_id_number', '2019122002')->update([
+        DB::table('users')->whereIn('employee_id_number', ['2019122002', '2020012801'])->update([
             'position_id' => 14,
         ]);
-        DB::table('users')->where('employee_id_number', '2020012801')->update([
-            'position_id' => 14,
-        ]);
-        DB::table('users')->where('employee_id_number', '2019122003')->update([
+        DB::table('users')->whereIn('employee_id_number', ['2019122003', '2019122008'])->update([
             'position_id' => 15,
         ]);
-        DB::table('users')->where('employee_id_number', '2019122008')->update([
-            'position_id' => 15,
-        ]);
-        DB::table('users')->where('employee_id_number', '2019122005')->update([
+        DB::table('users')->whereIn('employee_id_number', ['2019122005', '2022120103'])->update([
             'position_id' => 16,
         ]);
-        DB::table('users')->where('employee_id_number', '2022120103')->update([
-            'position_id' => 16,
-        ]);
-        DB::table('users')->where('employee_id_number', '2019122007')->update([
+        DB::table('users')->whereIn('employee_id_number', ['2019122007', '2020040701'])->update([
             'position_id' => 17,
         ]);
-        DB::table('users')->where('employee_id_number', '2020040701')->update([
-            'position_id' => 17,
-        ]);
-        DB::table('users')->where('employee_id_number', '2020010801')->update([
+        DB::table('users')->whereIn('employee_id_number', ['2020010801', '2022120104'])->update([
             'position_id' => 18,
         ]);
-        DB::table('users')->where('employee_id_number', '2022120104')->update([
-            'position_id' => 18,
-        ]);
-        DB::table('users')->where('employee_id_number', '2022120105')->update([
+        DB::table('users')->whereIn('employee_id_number', ['2022120105', '2022120106'])->update([
             'position_id' => 19,
         ]);
-        DB::table('users')->where('employee_id_number', '2022120106')->update([
-            'position_id' => 19,
-        ]);
-        DB::table('users')->where('employee_id_number', '2019122006')->update([
+        DB::table('users')->whereIn('employee_id_number', ['2019122006', '2019110109'])->update([
             'position_id' => 20,
         ]);
-        DB::table('users')->where('employee_id_number', '2019110109')->update([
-            'position_id' => 20,
-        ]);
-        DB::table('users')->where('employee_id_number', '2019122004')->update([
+        DB::table('users')->whereIn('employee_id_number', ['2019122004', '2019122001'])->update([
             'position_id' => 21,
         ]);
-        DB::table('users')->where('employee_id_number', '2019122001')->update([
-            'position_id' => 21,
-        ]);
-        DB::table('users')->where('employee_id_number', '198008042010012004')->update([
-            'position_id' => 22,
-        ]);
-        DB::table('users')->where('employee_id_number', '2020090701')->update([
+        DB::table('users')->whereIn('employee_id_number', ['198008042010012004', '2020090701'])->update([
             'position_id' => 22,
         ]);
         DB::table('users')->where('employee_id_number', '2019110110')->update([
@@ -430,6 +403,34 @@ class UserSeeder extends Seeder
         ]);
         DB::table('users')->where('employee_id_number', '2022120109')->update([
             'position_id' => 30,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['2019102002', '2022021701', '2022112401', '2023080901'])->update([
+            'position_id' => 31,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['2019102001', '2019102003', '2019102004', '2019102005'])->update([
+            'position_id' => 32,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['2020040601', '2020040602', '2021093001', '2022011101'])->update([
+            'position_id' => 33,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', [
+            '2019120302',
+            '2019120306',
+            '2020072101',
+            '2019120308',
+            '2019120400',
+            '2019120305',
+            '2019120401',
+            '2019120309',
+            '2019120304',
+            '2019120303',
+            '2019120404',
+            '2019110106',
+        ])->update([
+            'position_id' => 34,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['2021012101', '2019120101'])->update([
+            'position_id' => 35,
         ]);
     }
 }
