@@ -12,6 +12,7 @@ class EmployeeRepository
         $user->leftJoin('positions as p', 'u.position_id', '=', 'p.id');
         $user->leftJoin('grades as g', 'u.grade_id', '=', 'g.id');
         $user->leftJoin('echelons as e', 'u.echelon_id', '=', 'e.id');
+        $user->leftJoin('residences as r', 'u.residence_id', '=', 'r.id');
         $user->where('u.id', $userId);
         $user->select(
             'u.id',
@@ -44,7 +45,8 @@ class EmployeeRepository
             'u.husband_id_card_number',
             'u.id_tax',
             'u.employment_status',
-            'u.inner_housing_complex',
+            'u.residence_id',
+            'r.name as residence_name',
             'u.current_address',
             'u.home_phone_number',
             'u.mobile_phone',
