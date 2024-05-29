@@ -93,6 +93,7 @@ class RoleController extends Controller
             DB::commit();
             return $this->response(200, 'Role berhasil ditambah.');
         } catch (\Throwable $th) {
+            \Log::error($th);
             DB::rollback();
             return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
         }
@@ -180,6 +181,7 @@ class RoleController extends Controller
             DB::commit();
             return $this->response(200, 'Role telah berhasil diupdate.');
         } catch (\Throwable $th) {
+            \Log::error($th);
             DB::rollback();
             return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
         }
