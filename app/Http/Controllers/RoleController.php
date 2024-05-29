@@ -75,7 +75,7 @@ class RoleController extends Controller
             ]);
 
             $data = [];
-            foreach ($this->request->roles as $item) {
+            foreach ($this->request->permissions as $item) {
                 $array = [
                     'role_id' => $role,
                     'permission_id' => $item['id'],
