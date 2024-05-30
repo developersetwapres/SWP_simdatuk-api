@@ -131,7 +131,7 @@ class UserController extends Controller
         $user = DB::table('users');
         $user->where('id', $this->request->id);
         $user->where('role_id', '!=', null);
-        $user->select('role_id', 'id', 'username', 'email', 'name', 'employee_id_number');
+        $user->select('role_id', 'id', 'username', 'email', 'name', 'employee_id_number', 'status');
         $user = $user->first();
         if (!$user) {
             return $this->response(404, 'Pengguna tidak ditemukan.');
