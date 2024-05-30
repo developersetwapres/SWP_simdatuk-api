@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Role\CreateRoleRequest;
+use App\Http\Requests\Role\DeleteRoleRequest;
 use App\Http\Requests\Role\UpdateRoleRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -210,14 +211,27 @@ class RoleController extends Controller
      * @urlParam id Refers to the ID of Role. Example: 1
      * @response 200 {"code": 200,"message": "Role berhasil dihapus.","data": null}
      */
-    public function delete()
+    public function delete(DeleteRoleRequest $request)
     {
-        $role = DB::table('roles');
-        $role->where('id', $this->request->id);
-        $role = $role->delete();
-        if (!$role) {
-            return $this->response(404, 'Role tidak ditemukan.');
+        try {
+            DB::beginTransaction();
+
+            // update currently role id
+            DB::table('users')->where('role_id', $this->request->id)->updateTs(['role_id' => $this->request->role_id]);
+
+            // delete role
+            $role = DB::table('roles');
+            $role->where('id', $this->request->id);
+            $role = $role->delete();
+            if (!$role) {
+                return $this->response(404, 'Role tidak ditemukan.');
+            }
+            DB::commit();
+            return $this->response(200, 'Role berhasil dihapus.');
+        } catch (\Throwable $th) {
+            \Log::error($th);
+            DB::rollback();
+            return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
         }
-        return $this->response(200, 'Role berhasil dihapus.');
     }
 }
