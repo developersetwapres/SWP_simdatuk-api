@@ -1526,7 +1526,7 @@
 
         </div>
         <div class="sl-flex sl-items-center sl-px-4 sl-py-3 sl-border-t">
-            Last updated: May 26, 2024
+            Last updated: May 30, 2024
         </div>
 
         <div class="sl-flex sl-items-center sl-px-4 sl-py-3 sl-border-t">
@@ -42020,7 +42020,7 @@ You can check the Dev Tools console for debugging information.</p>
     --data "{
     \"name\": \"admin\",
     \"permissions\": [
-        \"dolor\"
+        \"exercitationem\"
     ]
 }"
 </code></pre>                                        </div>
@@ -42043,7 +42043,7 @@ const headers = {
 let body = {
     "name": "admin",
     "permissions": [
-        "dolor"
+        "exercitationem"
     ]
 };
 
@@ -42246,6 +42246,39 @@ fetch(url, {
                     
 
                     
+                                            <div class="sl-stack sl-stack--vertical sl-stack--6 sl-flex sl-flex-col sl-items-stretch">
+                            <h3 class="sl-text-2xl sl-leading-snug sl-font-prose">Body Parameters</h3>
+
+                                <div class="sl-text-sm">
+                                    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">role_id</div>
+                                            <span class="sl-truncate sl-text-muted">number</span>
+                                    </div>
+                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
+                    <span class="sl-ml-2 sl-text-warning">required</span>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the ID of Role.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        2
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+                            </div>
+                        </div>
                     
                                     </div>
             </div>
@@ -42260,7 +42293,7 @@ fetch(url, {
               data-method="DELETE"
               data-path="api/roles/{id}"
               data-hasfiles="0"
-              data-hasjsonbody="0">
+              data-hasjsonbody="1">
                             <div class="sl-panel sl-outline-none sl-w-full expandable">
                     <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
                          role="button">
@@ -42377,6 +42410,33 @@ fetch(url, {
                 </div>
             
             
+                            <div class="sl-panel sl-outline-none sl-w-full expandable">
+                    <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
+                         role="button">
+                        <div class="sl-flex sl-flex-1 sl-items-center sl-h-lg">
+                            <div class="sl-flex sl-items-center sl-mr-1.5 expansion-chevrons expansion-chevrons-solid expanded">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas"
+                                     data-icon="caret-down"
+                                     class="svg-inline--fa fa-caret-down fa-fw sl-icon" role="img"
+                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                    <path fill="currentColor"
+                                          d="M310.6 246.6l-127.1 128C176.4 380.9 168.2 384 160 384s-16.38-3.125-22.63-9.375l-127.1-128C.2244 237.5-2.516 223.7 2.438 211.8S19.07 192 32 192h255.1c12.94 0 24.62 7.781 29.58 19.75S319.8 237.5 310.6 246.6z"></path>
+                                </svg>
+                            </div>
+                            Body
+                        </div>
+                    </div>
+                    <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
+                                                    <div class="TextRequestBody sl-p-4">
+                                <div class="code-editor language-json"
+                                     id="json-body-DELETEapi-roles--id-"
+                                     style="font-family: var(--font-code); font-size: 12px; line-height: var(--lh-code);"
+                                >{
+    "role_id": 2
+}</div>
+                            </div>
+                                            </div>
+                </div>
             
             <div class="SendButtonHolder sl-mt-4 sl-p-4 sl-pt-0">
                 <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-center">
@@ -42467,7 +42527,11 @@ You can check the Dev Tools console for debugging information.</p>
     "http://localhost/api/roles/1" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
-    --header "Accept: application/json"</code></pre>                                        </div>
+    --header "Accept: application/json" \
+    --data "{
+    \"role_id\": 2
+}"
+</code></pre>                                        </div>
                                     </div>
                                 </div>
                                                             <div class="sl-bg-canvas-100 example-request example-request-javascript"
@@ -42484,9 +42548,14 @@ const headers = {
     "Accept": "application/json",
 };
 
+let body = {
+    "role_id": 2
+};
+
 fetch(url, {
     method: "DELETE",
     headers,
+    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre>                                        </div>
                                     </div>
                                 </div>
@@ -47017,7 +47086,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        beatae
+                        animi
                     </div>
                 </div>
             </div>
@@ -47150,7 +47219,7 @@ fetch(url, {
                                         <input aria-label="id" name="id"
                                                id="urlparam-GETapi-export-employees--id--id"
                                                placeholder="The ID of the employee."
-                                               value="beatae" data-component="url"
+                                               value="animi" data-component="url"
                                                class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
                                     </div>
                                 </div>
@@ -47246,7 +47315,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/export/employees/beatae" \
+    --get "http://localhost/api/export/employees/animi" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -47257,7 +47326,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost/api/export/employees/beatae"
+    "http://localhost/api/export/employees/animi"
 );
 
 const headers = {

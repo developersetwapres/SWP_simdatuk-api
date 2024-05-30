@@ -124,7 +124,7 @@ class RoleController extends Controller
         $permissions = DB::table('permissions as p');
         $permissions->leftJoin('role_permissions as rp', 'rp.permission_id', '=', 'p.id');
         $permissions->select('p.id', 'p.name', 'p.permitted_actions', 'rp.create', 'rp.read', 'rp.update', 'rp.delete');
-        $permissions->orderBy('p.created_at', 'asc');
+        $permissions->orderBy('p.id', 'asc');
         $permissions = $permissions->get();
         $role->permissions = $permissions;
 
