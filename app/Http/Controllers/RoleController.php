@@ -49,6 +49,7 @@ class RoleController extends Controller
         $roles = DB::table('roles');
         $roles->select('id', 'name');
         $roles->where('name', 'like', '%' . $this->request->search . '%');
+        $roles->orderBy('created_at', 'desc');
         $roles = $roles->paginate($this->request->limit);
         if ($roles->isEmpty()) {
             return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $roles);
@@ -121,9 +122,22 @@ class RoleController extends Controller
 
         $permissions = DB::table('role_permissions');
         $permissions->join('permissions', 'role_permissions.permission_id', 'permissions.id');
-        $permissions->select('permissions.id', 'permissions.name', 'role_permissions.create', 'role_permissions.read', 'role_permissions.update', 'role_permissions.delete');
+        $permissions->select('permissions.id', 'role_permissions.create', 'role_permissions.read', 'role_permissions.update', 'role_permissions.delete');
         $permissions->where('role_permissions.role_id', $role->id);
         $permissions = $permissions->get();
+
+        foreach ($permissions as $permission) {
+            $permittedActions = '';
+            $permittedActions .= ($permission->create == true) ? 'c' : '';
+            $permittedActions .= ($permission->read == true) ? 'r' : '';
+            $permittedActions .= ($permission->update == true) ? 'u' : '';
+            $permittedActions .= ($permission->delete == true) ? 'd' : '';
+            $permission->permitted_actions = $permittedActions;
+            unset($permission->create);
+            unset($permission->read);
+            unset($permission->update);
+            unset($permission->delete);
+        }
 
         $role->permissions = $permissions;
 
