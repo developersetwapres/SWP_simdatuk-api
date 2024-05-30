@@ -6,7 +6,9 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use App\Exports\employee;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Storage;
 /**
  * @group Export Data
  */
@@ -345,11 +347,15 @@ class ExportController extends Controller
      * @group Export Data
      * @authenticated
      */
-    public function detailEmployee()
+    public function detailEmployee($employeeId =  null)
     {
+        $employeeId = $employeeId ?? $this->request->id;
+        if (empty($employeeId)) {
+            return response()->json(['error' => 'No employee ID provided'], 400);
+        }
         $tmp = sys_get_temp_dir();
         $user = DB::table('users as u');
-        $user->where('id', $this->request->id);
+        $user->where('id', $employeeId);
         $user->select('*');
         $user = $user->first();
 
@@ -456,6 +462,79 @@ class ExportController extends Controller
             ];
         }
 
+        //Grade
+        $userGrade = DB::table('grade_history_users as ug');
+        $userGrade->join('grades as g', 'g.id', '=', 'ug.grade_id');
+        $userGrade->join('users', 'users.id', '=', 'ug.user_id');
+        $userGrade->join('decrees', 'decrees.id', '=', 'ug.type_of_decree');
+        $userGrade->select('g.name', 'g.code', 'ug.effective_date', 'ug.decree_name', 'ug.decree_document', 'decrees.name as type_of_decree',
+        'ug.decree_number', 'ug.decree_date', 'ug.description', 'ug.status');
+        $userGrade->where('ug.user_id', $user->id);
+        $userGrade = $userGrade->get();
+        $userGradeData = array();
+        foreach ($userGrade as $grade) {
+            $userGradeData[] = [
+                'name' => $grade->name,
+                'code' => $grade->code,
+                'effective_date' => $grade->effective_date,
+                'decree_name' => $grade->decree_name,
+                'decree_document' => $grade->decree_document,
+                'type' => $grade->type_of_decree,
+                'decree_number' => $grade->decree_number,
+                'decree_date' => $grade->decree_date,
+                'description' => $grade->description,
+                'status' => $grade->status
+            ];
+        }
+
+        //Position
+        $userPosition = DB::table('position_history_users as up');
+        $userPosition->join('users', 'users.id', '=', 'up.user_id');
+        $userPosition->join('groups', 'groups.id', '=', 'up.group_id');
+        $userPosition->join('decrees', 'decrees.id', '=', 'up.type_of_decree');
+        $userPosition->join('decrees as termination', 'termination.id', '=', 'up.type_of_termination_decree');
+        $userPosition->join('echelons', 'echelons.id', '=', 'up.echelon_id');
+        $userPosition->select(
+                'up.position',
+                'groups.name as group_name',
+                'up.effective_date',
+                'up.decree',
+                'up.decree_document',
+                'up.decree_date',
+                'decrees.name as decree_name',
+                'up.decree_number',
+                'echelons.name as echelons_name',
+                'up.position_status',
+                'up.termination_date',
+                'up.termination_decree',
+                'termination.name as termination_name',
+                'up.termination_decree_number',
+                'up.termination_decree_date',
+                'up.status'
+            );
+        $userPosition->where('users.id', $user->id);
+        $userPosition = $userPosition->get();
+        $userPositionData = array();
+        foreach ($userPosition as $position){
+            $userPositionData[] = [
+                'position' => $position->position,
+                'group' => $position->group_name,
+                'effective_date' => $position->effective_date,
+                'decree' => $position->decree,
+                'decree_document' => $position->decree_document,
+                'decree_name' => $position->decree_name,
+                'decree_number' => $position->decree_number,
+                'decree_date' => $position->decree_date,
+                'echelons_name' => $position->echelons_name,
+                'position_status' => $position->position_status,
+                'termination_date' => $position->termination_date,
+                'termination_decree' => $position->termination_decree,
+                'termination_name' => $position->termination_name,
+                'termination_decree_number' => $position->termination_decree_number,
+                'termination_decree_date' => $position->termination_decree_date,
+                'status' => $position->status
+            ];
+        }
         //Discipline
         $userPunishment = DB::table('disciplinary_history_users as ud');
         $userPunishment->join('disciplinary_histories as d', 'd.id', '=', 'ud.disciplinary_history_id');
@@ -595,7 +674,7 @@ class ExportController extends Controller
             5 => 'Duda',
             default => '-',
         };
-        $housingComplex = match ($user->inner_housing_complex) {
+        $housingComplex = match ($user->residence_id) {
             1 => 'Dalam',
             2 => 'Luar',
             default => '-',
@@ -606,7 +685,7 @@ class ExportController extends Controller
                 'Agama' => $religion,
                 'Jenis Kelamin' => ($user->gender ? 'Pria' : 'Wanita'),
                 'Status Perkawinan' => $maritalStatus,
-                'Instansi Induk' => $userInstitution->name,
+                'Instansi Induk' => ($userInstitution->name ?? 'N/A'),
                 'Satuan Organisasi' => 'Lorem ipsum',
                 'Unit Kerja' => $user->work_unit_id,
                 'No. Karpeg/No. Karis/No. Karsu' => $user->wife_id_card_number . '/' . $user->husband_id_card_number,
@@ -627,8 +706,8 @@ class ExportController extends Controller
             'photoProfile' => $user->photo_profile,
             'userName' => $user->name,
             'userCollege' => $userCollegeData,
-            'userGrade' => [0, 0],
-            'userGolongan' => [0, 0],
+            'userPosition' => $userPositionData,
+            'userGrade' => $userGradeData,
             'userTrainingStructural' => $trainingStructural,
             'userTrainingFunctional' => $trainingFunctional,
             'userTrainingTechnical' => $trainingTechnique,
@@ -647,6 +726,90 @@ class ExportController extends Controller
         $pdf->set_option('fontCache', $tmp);
         $pdf->set_option('tempDir', $tmp);
         return $pdf->download('user-pdf.pdf');
+    }
+        public function zipDetailEmployee(request $request)
+    {
+//        set_time_limit(1800);
+        $user = DB::table('users');
+        $user->leftJoin('echelons', 'echelons.id', '=', 'users.echelon_id');
+        $user->leftJoin('user_educations', 'user_educations.user_id', '=', 'users.id');
+        $user->leftJoin('groups', 'groups.id', '=', 'users.organization_id');
+        $user->leftJoin('grades', 'grades.id', '=', 'users.grade_id');
+        if (isset($request->organization)){
+            $user->whereIn('users.organization_id', $request->organization);
+        }
+        if (isset($request->echelons)){
+            $user->whereIn('echelons.name', $request->echelons);
+        }
+        if (isset($request->grades)){
+            $user->whereIn('users.grade_id', $request->grades);
+        }
+        if (isset($request->education)){
+            $user->whereIn('user_educations.level', $request->education);
+        }
+        if (isset($request->gender)){
+            $user->whereIn('users.gender', $request->gender);
+        }
+        if (isset($request->marital_status)){
+            $user->whereIn('users.marital_status', $request->marital_status);
+        }
+        if (isset($request->employee_type)){
+           $user->whereIn('users.type', $request->employee_type);
+        }
+        if (isset($request->age_range)){
+            $ageRanges = $request->age_ranges;
+            $today = Carbon::today();
+            foreach ($ageRanges as $range) {
+                list($minAge, $maxAge) = explode('-', $range);
+
+                $minDateOfBirth = $today->copy()->subYears($maxAge)->toDateString();
+                $maxDateOfBirth = $today->copy()->subYears($minAge)->endOfDay()->toDateString();
+
+                $user->orWhereBetween('user.date_of_birth', [$minDateOfBirth, $maxDateOfBirth]);
+            }
+        }
+        if (isset($request->pension_age)){
+            $pensionRanges = $request->pension_age;
+            $today = Carbon::now();
+            foreach ($pensionRanges as $range){
+                list($minAge, $maxAge) = explode('-', $range);
+                $minPensionAge = $today->copy()->subYears($maxAge)->toDateString();
+                $maxPensionAge = $today->copy()->subYears($minAge +1)->addDay()->toDateString();
+
+               $user->orWhereBetween('user.expire_at', [$minPensionAge, $maxPensionAge]);
+            }
+        }
+        $userIds = $user->pluck('users.id')->toArray();
+        if (! $userIds){
+            return $this->response( 400, 'Data pegawai tidak ditemukan');
+        }
+        $zip = new \Madnest\Madzipper\Madzipper;
+        $zipFileName = "Employee-" . Carbon::now()->format('Y-m-d_H-i-s') . ".zip";
+        $zipFileLocation = storage_path('app/public/document/' . $zipFileName);
+        $zip->make($zipFileLocation);
+        $directory = 'app/public/document';
+        if (!Storage::exists($directory)) {
+            Storage::makeDirectory($directory);
+        }
+        print_r($userIds);
+        foreach ($userIds as $employeeId) {
+            $pdfContent = $this->detailEmployee($employeeId);
+            $pdfFileName = 'employee_' . $employeeId . '.pdf';
+            $pdfFilePath = 'public/document/' . $pdfFileName;
+            Storage::put($pdfFilePath, $pdfContent);
+            $zip->add(storage_path('app/' . $pdfFilePath));
+        }
+        $zip->close();
+        if (file_exists($zipFileLocation)) {
+            $headers = [
+                'Content-Type: application/zip',
+                'Content-Disposition: attachment; filename="' . $zipFileName . '"',
+                'Content-Length: ' . filesize($zipFileLocation),
+            ];
+            return response()->json(['error' => 'succeSS'], 200);
+        } else {
+            return response()->json(['error' => 'Zip file not found'], 404);
+        }
     }
     public function rekapitulasi()
     {
@@ -685,5 +848,10 @@ class ExportController extends Controller
         $pdf->set_option('fontCache', $tmp);
         $pdf->set_option('tempDir', $tmp);
         return $pdf->download('rekapitulasi-asn-pdf.pdf');
+    }
+
+    public function userExcel()
+    {
+        return Excel::download(new employee(10, 0, false), 'testing.xlsx');
     }
 }

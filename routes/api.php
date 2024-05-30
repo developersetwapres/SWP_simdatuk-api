@@ -42,6 +42,7 @@ Route::get('/', function () {
     return 'api enabled!';
 });
 
+Route::get('testing', [ExportController::class, 'userExcel']);
 Route::post('login', [AuthController::class, 'login']);
 Route::post('forgot-password', [AuthController::class, 'forgotPassword']);
 Route::post('code-verification', [AuthController::class, 'codeVerification']);
@@ -186,6 +187,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/recapitulations', [ExportController::class, 'recapitulations']);
         Route::get('/employees', [ExportController::class, 'employees']);
         Route::get('/employees/{id}', [ExportController::class, 'detailEmployee']);
+        Route::get('/employees-zip', [ExportController::class, 'zipDetailEmployee']);
         Route::get('/rekapitulasi', [ExportController::class, 'rekapitulasi']);
         Route::get('/rekapitulasi-non-asn', [ExportController::class, 'rekapitulasiNonASN']);
         Route::get('/rekapitulasi-asn', [ExportController::class, 'rekapitulasiASN']);

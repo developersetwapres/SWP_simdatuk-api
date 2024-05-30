@@ -258,25 +258,42 @@
         </thead>
 
         <tbody>
-            @php $indexGrade=1 @endphp
-            @foreach($userGrade as $value)
+            @php $indexPosition=1 @endphp
+            @foreach($userPosition as $value)
             <tr style="border-bottom: 1px solid #F0F0F0;">
-                <td class="table-section-3-body">{{ $indexGrade++ }}</td>
-                <td class="table-section-3-body">Lorem Ipsummmm</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
+                <td class="table-section-3-body">{{ $indexPosition++ }}</td>
+                <td class="table-section-3-body">{{ $value['position'] }}</td>
+                <td class="table-section-3-body">{{ $value['group'] }}</td>
+                <td class="table-section-3-body">{{ $value['effective_date'] }}</td>
+                <td class="table-section-3-body">{{ $value['decree'] }}</td>
+                <td class="table-section-3-body"><a href="{{ $value['decree_document'] }}"></a></td>
+                <td class="table-section-3-body">{{ $value['decree_name'] }}</td>
+                <td class="table-section-3-body">{{ $value['decree_number'] }}</td>
+                <td class="table-section-3-body">{{ $value['decree_date'] }}</td>
+                <td class="table-section-3-body">{{ $value['echelons_name'] }}</td>
+                <td class="table-section-3-body">
+                    @switch($value['position_status'])
+                        @case(1)
+                            Promosi
+                            @break
+                        @case(2)
+                            Mutasi
+                            @break
+                        @case(3)
+                            Impassing
+                            @break
+                        @case(4)
+                            Konversi
+                            @break
+                        @default
+                            -
+                    @endswitch</td>
+                <td class="table-section-3-body">{{ $value['termination_date'] }}</td>
+                <td class="table-section-3-body">{{ $value['termination_decree'] }}</td>
+                <td class="table-section-3-body">{{ $value['termination_name'] }}</td>
+                <td class="table-section-3-body">{{ $value['termination_decree_number'] }}</td>
+                <td class="table-section-3-body">{{ $value['termination_decree_date'] }}</td>
+                <td class="table-section-3-body">{{ $value['status'] === 1 ? 'Aktif' : 'Tidak Aktif' }}</td>
             </tr>
             @endforeach
         </tbody>
@@ -299,19 +316,19 @@
         </thead>
 
         <tbody>
-            @php $indexGolongan=1 @endphp
-            @foreach($userGolongan as $value)
+            @php $indexGrade=1 @endphp
+            @foreach($userGrade as $value)
             <tr style="border-bottom: 1px solid #F0F0F0;">
-                <td class="table-section-3-body">{{ $indexGolongan++ }}</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
-                <td class="table-section-3-body">Lorem Ipsum</td>
+                <td class="table-section-3-body">{{ $indexGrade++ }}</td>
+                <td class="table-section-3-body">{{ $value['name'] }} ({{ $value['code'] }})</td>
+                <td class="table-section-3-body">{{ $value['effective_date'] }}</td>
+                <td class="table-section-3-body">{{ $value['decree_name'] }}</td>
+                <td class="table-section-3-body">{{ $value['decree_document'] }}</td>
+                <td class="table-section-3-body">{{ $value['type'] }}</td>
+                <td class="table-section-3-body">{{ $value['decree_number'] }}</td>
+                <td class="table-section-3-body">{{ $value['decree_date'] }}</td>
+                <td class="table-section-3-body">{{ $value['description'] }}</td>
+                <td class="table-section-3-body">{{ $value['status'] === 1 ? 'Aktif' : 'Tidak Aktif' }}</td>
             </tr>
             @endforeach
         </tbody>

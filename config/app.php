@@ -171,6 +171,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\QueryServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+        App\Providers\PHPExcelMacroServiceProvider::class,
+        Madnest\Madzipper\MadzipperServiceProvider::class,
     ])->toArray(),
 
     /*
@@ -186,6 +189,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ])->toArray(),
 
 ];
