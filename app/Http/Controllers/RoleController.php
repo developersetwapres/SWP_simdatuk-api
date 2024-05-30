@@ -121,25 +121,11 @@ class RoleController extends Controller
             return $this->response(404, 'Role tidak ditemukan.');
         }
 
-        $permissions = DB::table('role_permissions');
-        $permissions->join('permissions', 'role_permissions.permission_id', 'permissions.id');
-        $permissions->select('permissions.id', 'role_permissions.create', 'role_permissions.read', 'role_permissions.update', 'role_permissions.delete');
-        $permissions->where('role_permissions.role_id', $role->id);
+        $permissions = DB::table('permissions as p');
+        $permissions->leftJoin('role_permissions as rp', 'rp.permission_id', '=', 'p.id');
+        $permissions->select('p.id', 'p.name', 'p.permitted_actions', 'rp.create', 'rp.read', 'rp.update', 'rp.delete');
+        $permissions->orderBy('p.created_at', 'asc');
         $permissions = $permissions->get();
-
-        foreach ($permissions as $permission) {
-            $permittedActions = '';
-            $permittedActions .= ($permission->create == true) ? 'c' : '';
-            $permittedActions .= ($permission->read == true) ? 'r' : '';
-            $permittedActions .= ($permission->update == true) ? 'u' : '';
-            $permittedActions .= ($permission->delete == true) ? 'd' : '';
-            $permission->permitted_actions = $permittedActions;
-            unset($permission->create);
-            unset($permission->read);
-            unset($permission->update);
-            unset($permission->delete);
-        }
-
         $role->permissions = $permissions;
 
         return $this->response(200, 'success', $role);
