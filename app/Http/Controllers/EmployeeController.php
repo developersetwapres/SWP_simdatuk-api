@@ -90,6 +90,7 @@ class EmployeeController extends Controller
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
      * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
      * @queryParam search string The keyword search field for the name or employee id number. Example: administrator
+     * @queryParam type string Referst to the type of employee 1=ASN 2=NON ASN 3=OUTSOURCE.
      * @response 200 {"code": 200, "message": "success", "data": [{"id": 32, "username": "admin", "employee_id_number": "0000000000000", "employee_registration_number": "0000000000000", "role_name": "administrator", "status": "Aktif"}], "pagination": {"total": 1, "count": 1, "per_page": 1, "current_page": 1, "total_pages": 1, "links": {"first_page": "http://localhost/api/users?page=1", "last_page": "http://localhost/api/users?page=1", "next_page": null, "prev_page": null}}}
      */
     public function index()
@@ -109,14 +110,17 @@ class EmployeeController extends Controller
 
         $users = DB::table('users');
         $users->select('users.id', 'users.photo_profile', 'users.name', 'users.employee_id_number', 'users.employee_registration_number');
-        $users->where('users.name', 'like', '%' . $this->request->search . '%');
-        $users->orWhere('users.employee_id_number', 'like', '%' . $this->request->search . '%');
+        $users->where(function ($query) {
+            $query->where('users.name', 'like', '%' . $this->request->search . '%')
+                ->orWhere('users.employee_id_number', 'like', '%' . $this->request->search . '%');
+        });
+        if (!is_null($this->request->type)) {
+            $users->where('users.type', $this->request->type);
+        }
         $users = $users->paginate($this->request->limit);
+
         if ($users->isEmpty()) {
             return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $users);
-        }
-        foreach ($users->items() as $key => $item) {
-            $item->status = ($item == true) ? 'Aktif' : 'Nonaktif';
         }
         return $this->paginateResponse(200, 'success', $users);
     }

@@ -50,7 +50,7 @@ class UserSeeder extends Seeder
 
         // Sample user
         $users = [];
-        for ($i = 0; $i < 365; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             $items = array("Male", "Female");
             // Generate a random number (0 or 1) to select one of the items
             $randomIndex = rand(0, 1);
@@ -66,6 +66,7 @@ class UserSeeder extends Seeder
                 'religion' => $faker->numberBetween($min = 1, $max = 6),
                 'gender' => ($gender == 'Male') ? 1 : 0,
                 'marital_status' => $faker->numberBetween($min = 1, $max = 5),
+                'type' => mt_rand(1, 3),
             ];
             array_push($users, $data);
         }
