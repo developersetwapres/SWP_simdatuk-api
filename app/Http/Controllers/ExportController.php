@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Export\ExportEmployeesRequest;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -344,6 +345,7 @@ class ExportController extends Controller
      * Export Detail Employee
      *
      * Export detail employee data to .CSV, .XLSX and .PDF.
+     * @urlParam id Refers to the ID of Employee. Example: 1
      * @group Export Data
      * @authenticated
      */
@@ -366,6 +368,16 @@ class ExportController extends Controller
         $userInstitution = $userInstitution->first();
 
         //Organization
+        $userEchelons = DB::table('echelons as e');
+        $userEchelons->join('users', 'users.echelon_id', '=', 'e.id');
+        $userEchelons->select('e.name', 'users.echelon_effective_date');
+        $userEchelons = $userEchelons->first();
+
+        //CurrentGrade
+        $userCurrentGrade = DB::table('grades as g');
+        $userCurrentGrade->join('users', 'users.grade_id', '=', 'g.id');
+        $userCurrentGrade->select('g.name', 'g.code', 'users.grade_effective_date as date');
+        $userCurrentGrade = $userCurrentGrade->first();
 
         // Education
         $userEducation = DB::table('user_educations as ue');
@@ -685,12 +697,12 @@ class ExportController extends Controller
                 'Agama' => $religion,
                 'Jenis Kelamin' => ($user->gender ? 'Pria' : 'Wanita'),
                 'Status Perkawinan' => $maritalStatus,
-                'Instansi Induk' => ($userInstitution->name ?? 'N/A'),
+                'Instansi Induk' => ($userInstitution->name ?? ''),
                 'Satuan Organisasi' => 'Lorem ipsum',
                 'Unit Kerja' => $user->work_unit_id,
                 'No. Karpeg/No. Karis/No. Karsu' => $user->wife_id_card_number . '/' . $user->husband_id_card_number,
                 'Masa Kerja Keseluruhan' => 'Lorem ipsum',
-                'Masa Kerja Golongan' => 'Lorem ipsum',
+                'Masa Kerja Golongan' => 'Lorem',
                 'NPWP' => $user->id_tax,
                 'Status Pegawai' => ($user->employment_status ? 'Aktif' : 'Tidak Aktif'),
                 'Komplek' => $housingComplex,
@@ -704,7 +716,10 @@ class ExportController extends Controller
                 'Batas Usia Pensiun' => $user->expire_at,
             ],
             'photoProfile' => $user->photo_profile,
+            'userNIP' => $user->employee_id_number,
             'userName' => $user->name,
+            'userEchelons' => ($userEchelons->name ?? ''). ', '. ($userEchelons->date ?? ' '),
+            'userCurrentGrade' => ($userCurrentGrade->name ?? ''). '(' .($userCurrentGrade->code ?? '') . '), '. ($userCurrentGrade->date ?? ''),
             'userCollege' => $userCollegeData,
             'userPosition' => $userPositionData,
             'userGrade' => $userGradeData,
@@ -727,14 +742,32 @@ class ExportController extends Controller
         $pdf->set_option('tempDir', $tmp);
         return $pdf->download('user-pdf.pdf');
     }
-        public function zipDetailEmployee(request $request)
+    /**
+     * Export Detail Employee
+     *
+     * Export detail of multiple employees data to .PDF inside a zip file.
+     * @urlParam id Refers to the ID of Employee. Example: 1
+     * @group Export Data
+     * @bodyParam organization int[] list of organization's ids. Example [1,2]
+     * @bodyParam employee_type int[] list of employee's type. Example [1,2]
+     * @bodyParam echelons int[] list of echelons' id. Example [1,2]
+     * @bodyParam grades int[] list of employee's grade. Example [1,2]
+     * @bodyParam position_status int[] list of employee's position status. Example [1,2]
+     * @bodyParam education int[] list of employee's education level. Example [1, 6]
+     * @bodyParam gender int[] list of employee's gender.
+     * @bodyParam marital_status int[] list of employee's marital status. Example [1,4]
+     * @bodyParam age_range string[] list of employee's age range. Example ["30-40", "40-50"]
+     * @authenticated
+     */
+        public function zipDetailEmployee(ExportEmployeesRequest $request)
     {
-//        set_time_limit(1800);
+
         $user = DB::table('users');
         $user->leftJoin('echelons', 'echelons.id', '=', 'users.echelon_id');
         $user->leftJoin('user_educations', 'user_educations.user_id', '=', 'users.id');
         $user->leftJoin('groups', 'groups.id', '=', 'users.organization_id');
         $user->leftJoin('grades', 'grades.id', '=', 'users.grade_id');
+        $user->leftJoin('position_history_users', 'position_history_users.user_id', '=', 'users.id');
         if (isset($request->organization)){
             $user->whereIn('users.organization_id', $request->organization);
         }
@@ -747,6 +780,10 @@ class ExportController extends Controller
         if (isset($request->education)){
             $user->whereIn('user_educations.level', $request->education);
         }
+        if (isset($request->position_status)){
+            $user->whereIn('position_history_users.position_status', $request->position_status);
+            $user->where('position_history_users.status', 1);
+        }
         if (isset($request->gender)){
             $user->whereIn('users.gender', $request->gender);
         }
@@ -757,7 +794,7 @@ class ExportController extends Controller
            $user->whereIn('users.type', $request->employee_type);
         }
         if (isset($request->age_range)){
-            $ageRanges = $request->age_ranges;
+            $ageRanges = $request->age_range;
             $today = Carbon::today();
             foreach ($ageRanges as $range) {
                 list($minAge, $maxAge) = explode('-', $range);
@@ -768,17 +805,17 @@ class ExportController extends Controller
                 $user->orWhereBetween('user.date_of_birth', [$minDateOfBirth, $maxDateOfBirth]);
             }
         }
-        if (isset($request->pension_age)){
-            $pensionRanges = $request->pension_age;
-            $today = Carbon::now();
-            foreach ($pensionRanges as $range){
-                list($minAge, $maxAge) = explode('-', $range);
-                $minPensionAge = $today->copy()->subYears($maxAge)->toDateString();
-                $maxPensionAge = $today->copy()->subYears($minAge +1)->addDay()->toDateString();
-
-               $user->orWhereBetween('user.expire_at', [$minPensionAge, $maxPensionAge]);
-            }
-        }
+//        if (isset($request->pension_age)){
+//            $pensionRanges = $request->pension_age;
+//            $today = Carbon::now();
+//            foreach ($pensionRanges as $range){
+//                list($minAge, $maxAge) = explode('-', $range);
+//                $minPensionAge = $today->copy()->subYears($maxAge)->toDateString();
+//                $maxPensionAge = $today->copy()->subYears($minAge)->endOfDay()->toDateString();
+//
+//               $user->orWhereBetween('user.expire_at', [$minPensionAge, $maxPensionAge]);
+//            }
+//        }
         $userIds = $user->pluck('users.id')->toArray();
         if (! $userIds){
             return $this->response( 400, 'Data pegawai tidak ditemukan');
@@ -791,22 +828,29 @@ class ExportController extends Controller
         if (!Storage::exists($directory)) {
             Storage::makeDirectory($directory);
         }
-        print_r($userIds);
+        set_time_limit(0);
+        $pdfFiles = [];
         foreach ($userIds as $employeeId) {
             $pdfContent = $this->detailEmployee($employeeId);
             $pdfFileName = 'employee_' . $employeeId . '.pdf';
             $pdfFilePath = 'public/document/' . $pdfFileName;
             Storage::put($pdfFilePath, $pdfContent);
+            $pdfFiles[] = $pdfFilePath;
             $zip->add(storage_path('app/' . $pdfFilePath));
         }
         $zip->close();
+        foreach ($pdfFiles as $pdfFile) {
+            Storage::delete($pdfFile);
+        }
+
         if (file_exists($zipFileLocation)) {
             $headers = [
                 'Content-Type: application/zip',
                 'Content-Disposition: attachment; filename="' . $zipFileName . '"',
                 'Content-Length: ' . filesize($zipFileLocation),
             ];
-            return response()->json(['error' => 'succeSS'], 200);
+//            return response()->download($zipFileLocation, $zipFileName, $headers)->deleteFileAfterSend(true);
+            return response()->json(['message' => 'success'], 200);
         } else {
             return response()->json(['error' => 'Zip file not found'], 404);
         }

@@ -172,13 +172,13 @@
                             </tr>
                             <tr>
                                 <td class="table-section-1-body">
-                                    Eselon IV, 02-05-2023
+                                    {{ $userEchelons }}
                                 </td>
                                 <td class="table-section-1-body">
-                                    Penata Tingkat I (III/d), 01-10-2019
+                                    {{ $userCurrentGrade }}
                                 </td>
                                 <td class="table-section-1-body">
-                                    197901032005012001
+                                    {{ $userNIP }}
                                 </td>
                             </tr>
                         </table>
