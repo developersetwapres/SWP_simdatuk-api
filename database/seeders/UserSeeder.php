@@ -162,27 +162,6 @@ class UserSeeder extends Seeder
 
         // Get pegawai perbantuan
         $nonAsn = "
-            INSERT INTO
-                simdatuk.users (
-                    email,
-                    title_prefix,
-                    name,
-                    title_suffix,
-                    id_number,
-                    employee_id_number,
-                    employee_registration_number,
-                    place_of_birth,
-                    date_of_birth,
-                    religion,
-                    gender,
-                    employment_type_id,
-                    grade_effective_date,
-                    position_effective_date,
-                    organization_id,
-                    current_address,
-                    type,
-                    created_at
-                )
             SELECT
                 CASE
                     WHEN email = NULL THEN NULL
@@ -190,14 +169,14 @@ class UserSeeder extends Seeder
                     WHEN email = '-' THEN NULL
                     ELSE LOWER(email)
                 END AS email,
-                gelar_dpn,
-                nm_perbantuan,
-                gelar_blk,
-                no_ktp,
-                id_perbantuan,
-                IF(id_lama = '', id_perbantuan, id_lama),
-                tmpt_lahir,
-                tgl_lahir,
+                gelar_dpn AS title_prefix,
+                nm_perbantuan AS name,
+                gelar_blk AS title_suffix,
+                no_ktp AS id_number,
+                id_perbantuan AS employee_id_number,
+                IF(id_lama = '', id_perbantuan, id_lama) AS employee_registration_number,
+                tmpt_lahir AS place_of_birth,
+                tgl_lahir AS date_of_birth,
                 CASE
                     WHEN agama = 'Islam' THEN '1'
                     WHEN agama = 'Kristen P' THEN '2'
@@ -228,36 +207,23 @@ class UserSeeder extends Seeder
                     WHEN jns_perbantuan = 'Sespri' THEN '18'
                     ELSE NULL
                 END AS employment_type_id,
-                tmt_golpangkat,
-                tmt_jabatan,
-                '1',
-                alamat,
-                '2',
+                tmt_golpangkat AS grade_effective_date,
+                tmt_jabatan AS position_effective_date,
+                '1' AS organization_id,
+                alamat AS current_address,
+                tlp_rumah AS home_phone_number,
+                no_tlp AS mobile_phone,
+                '2' AS type,
                 CURRENT_TIMESTAMP AS created_at
             FROM
                 simdatuk_dump.tbl_2perbantuan
         ";
 
-        DB::statement($nonAsn);
+        $nonAsn = DB::select($nonAsn);
+        DB::table('users')->insertTs(json_decode(json_encode($nonAsn), true));
 
         // Get pegawai outsource
         $outsource = "
-            INSERT INTO
-                simdatuk.users (
-                    email,
-                    name,
-                    id_number,
-                    employee_id_number,
-                    place_of_birth,
-                    date_of_birth,
-                    religion,
-                    gender,
-                    employment_type_id,
-                    organization_id,
-                    current_address,
-                    type,
-                    created_at
-                )
             SELECT
                 CASE
                     WHEN email = NULL THEN NULL
@@ -265,11 +231,11 @@ class UserSeeder extends Seeder
                     WHEN email = '-' THEN NULL
                     ELSE LOWER(email)
                 END AS email,
-                nm_outsorce,
-                no_ktp,
-                id_outsorce,
-                tmp_lahir,
-                tgl_lahir,
+                nm_outsorce AS name,
+                no_ktp AS id_number,
+                id_outsorce AS employee_id_number,
+                tmp_lahir AS place_of_birth,
+                tgl_lahir AS date_of_birth,
                 CASE
                     WHEN agama = 'Islam' THEN '1'
                     WHEN agama = 'Protestan' THEN '2'
@@ -286,15 +252,16 @@ class UserSeeder extends Seeder
                     WHEN jns_outsorce = 'rekanan' THEN '20'
                     ELSE NULL
                 END AS employment_type_id,
-                '1',
-                alamat,
-                '3',
+                '1' AS organization_id,
+                alamat AS current_address,
+                '3' AS type,
                 CURRENT_TIMESTAMP AS created_at
             FROM
                 simdatuk_dump.tbl_3outsorce
         ";
 
-        DB::statement($outsource);
+        $outsource = DB::select($outsource);
+        DB::table('users')->insertTs(json_decode(json_encode($outsource), true));
 
         DB::table('users')->where('employee_id_number', '197303221997021001')->update([
             'position_id' => 2,
