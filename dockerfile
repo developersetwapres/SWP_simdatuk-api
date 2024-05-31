@@ -46,7 +46,7 @@ RUN chown -R www-data:www-data /app
 RUN docker-php-ext-install pdo pdo_mysql
 
 # Install application dependencies
-RUN composer install --no-scripts --no-autoloader
+RUN composer install
 
 # Generate the optimized autoload files
 RUN composer clear-cache && composer dump-autoload --no-scripts --optimize
