@@ -60,7 +60,7 @@ class CreateEducationRequest
     {
         return [
             'educations.*.level' => [
-                'description' => 'Refers to the Level of Employee Education. 1=SD/Sederajat, 2=SLTP/Sederajat, 3=SLTA/Sederajat, 4=Akademik/D3/S.Muda, 5=Diploma IV, 6=Strata I, 7=Strata II, 8=Strata III',
+                'description' => 'Refers to the Level of Employee Education. 1=SD/Sederajat, 2=SLTP/Sederajat, 3=SLTA/Sederajat, 4=Diploma I/II, 5=Akademik/D3/S.Muda, 6=Diploma IV/Strata I, 7=Strata II, 8=Strata III',
                 'example' => 1,
             ],
             'educations.*.name' => [

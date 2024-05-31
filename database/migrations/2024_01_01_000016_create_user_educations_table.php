@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('user_educations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
-            $table->tinyInteger('level')->default(1)->comment('1=SD/Sederajat, 2=SLTP/Sederajat, 3=SLTA/Sederajat, 4=Akademik/D3/S.Muda, 5=Diploma IV, 6=Strata I, 7=Strata II, 8=Strata III');
-            $table->string('name', 160);
+            $table->tinyInteger('level')->nullable()->comment('1=SD/Sederajat, 2=SLTP/Sederajat, 3=SLTA/Sederajat, 4=Diploma I/II, 5=Akademik/D3/S.Muda, 6=Diploma IV/Strata I, 7=Strata II, 8=Strata III');
+            $table->string('name', 160)->nullable();
             $table->string('faculty', 160)->nullable();
             $table->string('major', 160)->nullable();
-            $table->tinyInteger('status')->default(1)->comment('1=Lulus, 2=DO, 3=Aktif, 4=Non-Aktif, 5=Mengundurkan diri');
-            $table->year('year_of_graduation');
+            $table->tinyInteger('status')->nullable()->comment('1=Lulus, 2=DO, 3=Aktif, 4=Non-Aktif, 5=Mengundurkan diri');
+            $table->year('year_of_graduation')->nullable();
             $table->text('description')->nullable();
             $table->text('degree_document')->nullable();
             $table->timestamp('created_at');
