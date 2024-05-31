@@ -90,7 +90,13 @@ class EmployeeController extends Controller
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
      * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
      * @queryParam search string The keyword search field for the name or employee id number. Example: administrator
-     * @queryParam type string Referst to the type of employee 1=ASN 2=NON ASN 3=OUTSOURCE. Example: 1
+     * @queryParam type integer Refers to the type of employee 1=ASN 2=NON ASN 3=OUTSOURCE. Example: 1
+     * @queryParam position_id integer Refers to the position of employee. Example: 1
+     * @queryParam grade_id integer Refers to the grade of employee. Example: 1
+     * @queryParam employment_type_id integer Refers to the employment type of employee. Example: 1
+     * @queryParam religion integer Refers to the religion of employee 1=Islam 2=Kristen 3=Katolik 4=Hindu 5=Buddha 6=Konghucu. Example: 1
+     * @queryParam month_of_birth integer Refers to the month of birth of employee 1-12. Example: 1
+     * @queryParam employment_status integer Refers to the employment status 1=Aktif, 2=Pensiun, 3=Berhenti, 4=Meninggal, 5=Alih Status, 6=Aktif PS, 7=CLTN, 8=TBL, 9=Non Aktif. Example: 1
      * @response 200 {"code": 200, "message": "success", "data": [{"id": 32, "username": "admin", "employee_id_number": "0000000000000", "employee_registration_number": "0000000000000", "role_name": "administrator", "status": "Aktif"}], "pagination": {"total": 1, "count": 1, "per_page": 1, "current_page": 1, "total_pages": 1, "links": {"first_page": "http://localhost/api/users?page=1", "last_page": "http://localhost/api/users?page=1", "next_page": null, "prev_page": null}}}
      */
     public function index()
@@ -108,20 +114,56 @@ class EmployeeController extends Controller
         ], $messages);
         $this->request->limit = ($this->request->limit) ? $this->request->limit : 10;
 
-        $users = DB::table('users');
-        $users->select('users.id', 'users.photo_profile', 'users.name', 'users.employee_id_number', 'users.employee_registration_number');
+        $users = DB::table('users as u');
+        $users->leftJoin('positions as p', 'u.position_id', '=', 'p.id');
+        $users->leftJoin('grades as g', 'u.grade_id', '=', 'g.id');
+        $users->leftJoin('employment_types as et', 'u.employment_type_id', '=', 'et.id');
+        $users->select(
+            'u.id',
+            'u.photo_profile',
+            'u.name',
+            'u.employee_id_number',
+            'u.employee_registration_number',
+            'p.name as position_name',
+            'g.name as grade_name',
+            'g.code as grade_code',
+            'et.name as employment_type',
+        );
         $users->where(function ($query) {
-            $query->where('users.name', 'like', '%' . $this->request->search . '%')
-                ->orWhere('users.employee_id_number', 'like', '%' . $this->request->search . '%');
+            $query->where('u.name', 'like', '%' . $this->request->search . '%')
+                ->orWhere('u.employee_id_number', 'like', '%' . $this->request->search . '%');
         });
         if (!is_null($this->request->type)) {
-            $users->where('users.type', $this->request->type);
+            $users->where('u.type', $this->request->type);
+        }
+        if (!is_null($this->request->position_id)) {
+            $users->where('u.position_id', $this->request->position_id);
+        }
+        if (!is_null($this->request->grade_id)) {
+            $users->where('u.grade_id', $this->request->grade_id);
+        }
+        if (!is_null($this->request->employment_type_id)) {
+            $users->where('u.employment_type_id', $this->request->employment_type_id);
+        }
+        if (!is_null($this->request->religion)) {
+            $users->where('u.religion', $this->request->religion);
+        }
+        if (!is_null($this->request->employment_status)) {
+            $users->where('u.employment_status', $this->request->employment_status);
+        }
+        if (!is_null($this->request->month_of_birth)) {
+            $users->whereMonth('u.date_of_birth', $this->request->month_of_birth);
         }
         $users = $users->paginate($this->request->limit);
 
         if ($users->isEmpty()) {
             return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $users);
         }
+
+        foreach ($users->items() as $key => $item) {
+            $item->photo_profile = $this->getDocument($item->photo_profile, true);
+        }
+
         return $this->paginateResponse(200, 'success', $users);
     }
 
