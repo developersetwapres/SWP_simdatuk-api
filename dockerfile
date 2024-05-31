@@ -31,6 +31,7 @@ RUN curl -sSL https://github.com/mlocati/docker-php-extension-installer/releases
   tokenizer \
   xml \
   gd \
+  zip \
   @composer
 
 # Copy the rest of the application code to the container
@@ -46,7 +47,7 @@ RUN chown -R www-data:www-data /app
 RUN docker-php-ext-install pdo pdo_mysql
 
 # Install application dependencies
-RUN composer install
+RUN composer install --no-scripts --no-autoloader
 
 # Generate the optimized autoload files
 RUN composer clear-cache && composer dump-autoload --no-scripts --optimize
