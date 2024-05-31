@@ -25,5 +25,6 @@ class DatabaseSeeder extends Seeder
         $this->call(DisciplinarySeeder::class);
         $this->call(GroupSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(PerformanceSeeder::class);
     }
 }

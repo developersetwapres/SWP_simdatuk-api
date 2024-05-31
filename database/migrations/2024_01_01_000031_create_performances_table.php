@@ -17,7 +17,6 @@ return new class extends Migration
             $table->tinyInteger('period_month');
             $table->year('period_year');
             $table->string('performance_period', 160);
-            $table->string('description', 160)->nullable();
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
         });

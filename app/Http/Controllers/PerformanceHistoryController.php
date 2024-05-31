@@ -29,7 +29,6 @@ class PerformanceHistoryController extends Controller
      * @authenticated
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
      * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
-     * @queryParam type integer Refers to the types of items to be displayed per page. Example: 1
      * @queryParam search string The keyword search field for the name. Example: PPK Mei 2024
      * @response 200 {"code":200,"message":"success","data":[{"id":1,"created_at":"2024-05-10 04:36:41","name":"PPK Mei 2024","period_month":5,"period_year":"2024","performance_period":"PPK Mei 2024","total":1}],"pagination":{"total":1,"count":1,"per_page":10,"current_page":1,"total_pages":1,"links":{"first_page":"http://localhost:8000/api/performances?page=1","last_page":"http://localhost:8000/api/performances?page=1","next_page":null,"prev_page":null}}}
      */
@@ -106,7 +105,7 @@ class PerformanceHistoryController extends Controller
     {
         $performance = DB::table('performances');
         $performance->where('id', $this->request->id);
-        $performance->select('id', 'name', 'performance_period', 'period_year', 'period_month', 'description');
+        $performance->select('id', 'name', 'performance_period', 'period_year', 'period_month');
         $performance = $performance->first();
 
         if (!$performance) {
@@ -116,7 +115,14 @@ class PerformanceHistoryController extends Controller
         $users = DB::table('user_performances as up');
         $users->join('users as u', 'u.id', '=', 'up.user_id');
         $users->where('performance_id', $performance->id);
-        $users->select('up.id', 'up.user_id', 'u.name', 'u.employee_id_number', 'up.work_performance_score', 'up.created_at');
+        $users->select(
+            'up.id',
+            'up.user_id',
+            'u.name',
+            'u.employee_id_number',
+            'up.work_performance_score',
+            'up.created_at'
+        );
         $users = $users->get();
 
         $performance->users = $users;

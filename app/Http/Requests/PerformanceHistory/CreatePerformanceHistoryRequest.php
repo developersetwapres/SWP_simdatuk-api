@@ -27,7 +27,6 @@ class CreatePerformanceHistoryRequest extends FormRequest
             'period_year' => 'required|date_format:Y',
             'performance_period' => 'required|max:160',
             'name' => 'required|max:160',
-            'description' => 'max:160',
             'users.*.user_id' => 'required|numeric',
             'users.*.work_performance_score' => 'required|numeric',
         ];
@@ -50,7 +49,6 @@ class CreatePerformanceHistoryRequest extends FormRequest
             'performance_period.max' => 'PPK periode tidak boleh lebih dari 160 karakter.',
             'name.required' => 'Nama nilai prestasi kerja tidak boleh kosong.',
             'name.max' => 'Nama nilai prestasi tidak boleh lebih dari 160 karakter.',
-            'description.max' => 'Keterangan tidak boleh lebih dari 160 karakter.',
             'users.*.user_id.required' => 'User ID tidak boleh kosong.',
             'users.*.user_id.numeric' => 'User ID harus berupa angka.',
             'users.*.work_performance_score.required' => 'Nilai prestasi kerja tidak boleh kosong.',
@@ -81,10 +79,6 @@ class CreatePerformanceHistoryRequest extends FormRequest
             'name' => [
                 'description' => 'Refers to name of Work Performance Score',
                 'example' => 'PPK December 2020',
-            ],
-            'description' => [
-                'description' => 'Refers to the Description of Employee Performance.',
-                'example' => 'Penilaian Bulanan',
             ],
             'users.*.user_id' => [
                 'description' => 'Refers to the ID of employee',
