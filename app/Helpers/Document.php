@@ -37,4 +37,20 @@ trait Document
             return (is_null($path)) ? null : Storage::disk('s3')->url($path);
         }
     }
+
+    /**
+     * get status document available or not
+     *
+     * @param string $path
+     * @param boolean $status
+     * @return void
+     */
+    public function getDocumentExist($path)
+    {
+        if (Storage::disk('s3')->exists($path)) {
+            return $path;
+        } else {
+            return null;
+        }
+    }
 }

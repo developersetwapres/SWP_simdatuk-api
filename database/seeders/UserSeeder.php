@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Helpers\Document;
 use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -9,6 +10,8 @@ use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
+    use Document;
+
     /**
      * Run the database seeds.
      */
@@ -30,7 +33,6 @@ class UserSeeder extends Seeder
     private function dummyDatabase()
     {
         $faker = Faker::create('id_ID');
-        DB::table('users')->delete();
 
         // Added administrator
         $role = DB::table('roles')->select('id')->where('name', 'administrator')->first();
@@ -89,42 +91,8 @@ class UserSeeder extends Seeder
 
         // Get pegawai swp
         $asn = "
-            INSERT INTO
-                simdatuk.users (
-                    role_id,
-                    email,
-                    username,
-                    password,
-                    title_prefix,
-                    name,
-                    title_suffix,
-                    photo_profile,
-                    id_number,
-                    employee_id_number,
-                    employee_registration_number,
-                    place_of_birth,
-                    date_of_birth,
-                    religion,
-                    gender,
-                    marital_status,
-                    employment_type_id,
-                    grade_effective_date,
-                    position_effective_date,
-                    organization_id,
-                    employee_id_card_number,
-                    wife_id_card_number,
-                    husband_id_card_number,
-                    id_tax,
-                    current_address,
-                    home_phone_number,
-                    mobile_phone,
-                    office_phone_number,
-                    type,
-                    status,
-                    created_at
-                )
             SELECT
-                IF(id_pegawai = '198503022009021001' OR id_pegawai = '198605282009122001', '$role->id', NULL),
+                IF(id_pegawai = '198503022009021001' OR id_pegawai = '198605282009122001', '$role->id', NULL) as role_id,
                 CASE
                     WHEN email = NULL THEN NULL
                     WHEN email = '' THEN NULL
@@ -133,15 +101,15 @@ class UserSeeder extends Seeder
                 END AS email,
                 CONCAT(SUBSTRING(LOWER(REPLACE(REPLACE(nm_pegawai, '.', ''), ' ', '')), 1, 5), DATE_FORMAT(DATE(tgl_lahir), '%y%m%d')) as username,
                 IF(id_pegawai = '198503022009021001' OR id_pegawai = '198605282009122001', '$hashedPassword', NULL) AS password,
-                gelar_dpn,
-                nm_pegawai,
-                gelar_blk,
+                gelar_dpn as title_prefix,
+                nm_pegawai as name,
+                gelar_blk as title_suffix,
                 CONCAT('photo_profile/', id_pegawai, '.jpg') AS photo_profile,
-                no_nik,
-                id_pegawai,
-                IF(nip_lama = '', id_pegawai, nip_lama),
-                tmpt_lahir,
-                tgl_lahir,
+                no_nik as id_number,
+                id_pegawai as employee_id_number,
+                IF(nip_lama = '', id_pegawai, nip_lama) as employee_registration_number,
+                tmpt_lahir as place_of_birth,
+                tgl_lahir as date_of_birth,
                 CASE
                     WHEN agama = 'Islam' THEN '1'
                     WHEN agama = 'Hindu' THEN '4'
@@ -160,7 +128,7 @@ class UserSeeder extends Seeder
                     WHEN status_nkh = 'Cerai' THEN '4'
                     WHEN status_nkh = 'Cerai Hidup' THEN '3'
                     ELSE NULL
-                END AS marital_staus,
+                END AS marital_status,
                 CASE
                     WHEN jns_kepeg = 'TNI/POLRI' THEN '1'
                     WHEN jns_kepeg = 'Sipil' THEN '2'
@@ -168,25 +136,29 @@ class UserSeeder extends Seeder
                     WHEN jns_kepeg = 'PPPK' THEN '4'
                     ELSE NULL
                 END AS employment_type_id,
-                tmt_golongan,
-                tmt_jabatan,
-                '1',
-                no_karpeg,
-                no_karisu,
-                no_karisu,
-                npwp,
-                al_rumah,
-                tlp_rumah,
-                no_seluler,
-                tlp_kntr,
-                '1',
+                tmt_golongan as grade_effective_date,
+                tmt_jabatan as position_effective_date,
+                '1' as organization_id,
+                no_karpeg as employee_id_card_number,
+                no_karisu as wife_id_card_number,
+                no_karisu as husband_id_card_number,
+                npwp as id_tax,
+                al_rumah as current_address,
+                tlp_rumah as home_phone_number,
+                no_seluler as mobile_phone,
+                tlp_kntr as office_phone_number,
+                '1' as type,
                 IF(id_pegawai = '198503022009021001' OR id_pegawai = '198605282009122001', TRUE, FALSE) AS status,
                 CURRENT_TIMESTAMP AS created_at
             FROM
                 simdatuk_dump.tbl_1pegawai_swp
         ";
 
-        DB::statement($asn);
+        $asn = DB::select($asn);
+        foreach ($asn as $item) {
+            $item->photo_profile = $this->getDocumentExist($item->photo_profile);
+        }
+        DB::table('users')->insertTs(json_decode(json_encode($asn), true));
 
         // Get pegawai perbantuan
         $nonAsn = "
