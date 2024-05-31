@@ -51,7 +51,7 @@ class UserController extends Controller
         $this->request->limit = ($this->request->limit) ? $this->request->limit : 10;
 
         $users = DB::table('users');
-        $users->join('roles', 'users.role_id', 'role_id');
+        $users->join('roles', 'users.role_id', '=', 'roles.id');
         $users->select('users.id', 'users.username', 'users.employee_id_number', 'users.employee_registration_number', 'roles.name as role_name', 'users.status');
         $users->where('users.username', 'like', '%' . $this->request->search . '%');
         $users = $users->paginate($this->request->limit);
