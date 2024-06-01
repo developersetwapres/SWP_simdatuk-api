@@ -28,7 +28,7 @@ class CreateFamilyRequest
             'families.*.occupation_description' => 'max:160',
             'families.*.marital_status' => 'required|numeric|in:1,2,3,4,5',
             'families.*.mobile_phone' => 'max:16',
-            'families.*.order' => 'numeric',
+            'families.*.sequence_number' => 'numeric',
         ];
     }
 
@@ -69,7 +69,7 @@ class CreateFamilyRequest
             'families.*.marital_status.numeric' => 'Status perkawinan harus berupa angka.',
             'families.*.marital_status.in' => 'Status perkawinan harus diantara 1,2,3,4 atau 5.',
             'families.*.mobile_phone.max' => 'Nomor handphone tidak boleh lebih dari 16 karakter.',
-            'families.*.order.numeric' => 'Urutan harus berupa angka.',
+            'families.*.sequence_number.numeric' => 'Urutan harus berupa angka.',
         ];
     }
 
@@ -94,11 +94,11 @@ class CreateFamilyRequest
                 'example' => '1234567890123456',
             ],
             'families.*.gender' => [
-                'description' => 'Refers to the Gender of Employee Family.',
+                'description' => 'Refers to the Gender of Employee Family. true=Pria, false=Wanita',
                 'example' => 1,
             ],
             'families.*.religion' => [
-                'description' => 'Refers to the Religion of Employee Family.',
+                'description' => 'Refers to the Religion of Employee Family. 1=Islam, 2=Kristen, 3=Katolik, 4=Hindu, 5=Buddha, 6=Konghucu',
                 'example' => 1,
             ],
             'families.*.place_of_birth' => [
@@ -122,7 +122,7 @@ class CreateFamilyRequest
                 'example' => 1,
             ],
             'families.*.education' => [
-                'description' => 'Refers to the Level of Employee Family.',
+                'description' => 'Refers to the Level of Employee Family. 1=Tidak/Belum Sekolah, 2=Belum Tamat SD/Sederajat, 3=Tamat SD/Sederajat, 4=SLTP/Sederajat, 5=SLTA/Sederajat, 6=Diploma I/II, 7=Akademi/Diploma III/Sarjana Muda, 8=Diploma IV/Strata I, 9=Strata II, 10=Strata III',
                 'example' => 1,
             ],
             'families.*.occupation' => [
@@ -134,15 +134,15 @@ class CreateFamilyRequest
                 'example' => 'Wirausaha Menengah',
             ],
             'families.*.marital_status' => [
-                'description' => 'Refers to the Marital Status of Employee Family.',
+                'description' => 'Refers to the Marital Status of Employee Family. 1=Belum Menikah, 2=Menikah, 3=Cerai Hidup, 4=Cerai Mati',
                 'example' => 1,
             ],
             'families.*.mobile_phone' => [
                 'description' => 'Refers to the Mobile Phone of Employee Family.',
                 'example' => '086552417331',
             ],
-            'families.*.order' => [
-                'description' => 'Refers to the Order of Employee Family.',
+            'families.*.sequence_number' => [
+                'description' => 'Refers to the Sequence Number of Employee Family.',
                 'example' => 3,
             ],
         ];
