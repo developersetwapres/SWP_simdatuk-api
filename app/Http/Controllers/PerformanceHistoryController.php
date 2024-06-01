@@ -121,6 +121,7 @@ class PerformanceHistoryController extends Controller
             'u.name',
             'u.employee_id_number',
             'up.work_performance_score',
+            'up.description',
             'up.created_at'
         );
         $users = $users->get();

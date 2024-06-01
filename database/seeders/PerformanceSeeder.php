@@ -76,6 +76,18 @@ class PerformanceSeeder extends Seeder
             $numericString = str_replace(",", ".", $numericString);
 
             $performance->work_performance_score = floatval($numericString);
+
+            if ($performance->work_performance_score >= 51 && $performance->work_performance_score < 61) {
+                $performance->description = 2;
+            } else if ($performance->work_performance_score >= 61 && $performance->work_performance_score < 76) {
+                $performance->description = 3;
+            } else if ($performance->work_performance_score >= 76 && $performance->work_performance_score < 91) {
+                $performance->description = 4;
+            } else if ($performance->work_performance_score >= 91) {
+                $performance->description = 5;
+            } else {
+                $performance->description = 1;
+            }
         }
         DB::table('user_performances')->insertTs(json_decode(json_encode($performances), true));
     }

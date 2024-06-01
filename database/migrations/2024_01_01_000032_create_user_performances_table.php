@@ -15,7 +15,8 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('performance_id');
-            $table->float('work_performance_score', 5, 2)->comment('Kurang (<50), Sedang (51-60), Cukup (61-75), Baik (76-90), Sangat Baik (91-100)');
+            $table->float('work_performance_score', 5, 2);
+            $table->tinyInteger('description')->nullable()->comment('1=Kurang (<50), 2=Sedang (51-60), 3=Cukup (61-75), 4=Baik (76-90), 5=Sangat Baik (91-100)');
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
 

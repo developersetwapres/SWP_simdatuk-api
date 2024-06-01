@@ -29,6 +29,7 @@ class UpdatePerformanceHistoryRequest extends FormRequest
             'users.*.id' => 'numeric|nullable',
             'users.*.user_id' => 'required|numeric',
             'users.*.work_performance_score' => 'required|numeric',
+            'users.*.description' => 'numeric|in:1,2,3,4,5|nullable',
         ];
     }
 
@@ -54,6 +55,8 @@ class UpdatePerformanceHistoryRequest extends FormRequest
             'users.*.user_id.numeric' => 'User ID harus berupa angka.',
             'users.*.work_performance_score.required' => 'Nilai prestasi kerja tidak boleh kosong.',
             'users.*.work_performance_score.numeric' => 'Nilai prestasi kerja harus berupa angka.',
+            'users.*.description.numeric' => 'Deskripsi harus berupa angka.',
+            'users.*.description.in' => 'Deskripsi harus diantara 1, 2, 3, 4 atau 5.',
         ];
     }
 
@@ -87,6 +90,10 @@ class UpdatePerformanceHistoryRequest extends FormRequest
             'users.*.work_performance_score' => [
                 'description' => 'Refers to the Work Performance Score of Employee Performance.',
                 'example' => 80,
+            ],
+            'users.*.description' => [
+                'description' => 'Refers to the Description of Employee Performance. 1=Kurang, 2=Sedang, 3=Cukup, 4=Baik, 5=Sangat Baik',
+                'example' => 1,
             ],
         ];
     }
