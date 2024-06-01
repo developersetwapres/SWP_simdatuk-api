@@ -15,13 +15,13 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('disciplinary_history_id');
-            $table->string('grade');
-            $table->string('position');
-            $table->unsignedBigInteger('disciplinary_id');
+            $table->string('grade')->nullable();
+            $table->string('position')->nullable();
+            $table->unsignedBigInteger('disciplinary_id')->nullable();
             $table->string('decree_number', 160)->nullable();
             $table->date('date_of_decree')->nullable();
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->string('authorizing_officer')->nullable();
             $table->string('name_of_authorizing_officer', 160)->nullable();
             $table->string('description', 160)->nullable();

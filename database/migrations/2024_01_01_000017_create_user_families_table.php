@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('card_number', 160)->nullable();
             $table->string('name', 160)->nullable();
-            $table->string('id_number', 17)->nullable();
+            $table->string('id_number', 20)->nullable();
             $table->boolean('gender')->nullable()->comment('true=Pria, false=Wanita');
             $table->tinyInteger('religion')->nullable()->comment('1=Islam, 2=Kristen, 3=Katolik, 4=Hindu, 5=Buddha, 6=Konghucu');
             $table->string('place_of_birth', 160)->nullable();
@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('occupation_description', 160)->nullable();
             $table->tinyInteger('marital_status')->nullable()->comment('1=Belum Menikah, 2=Menikah, 3=Cerai Hidup, 4=Cerai Mati');
             $table->string('mobile_phone', 16)->nullable();
-            $table->tinyInteger('sequence_number')->default(1);
+            $table->tinyInteger('sequence_number')->nullable();
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
 

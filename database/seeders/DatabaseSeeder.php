@@ -22,11 +22,11 @@ class DatabaseSeeder extends Seeder
         $this->call(InstitutionSeeder::class);
         $this->call(EmploymentTypeSeeder::class);
         $this->call(DecreeSeeder::class);
-        $this->call(DisciplinarySeeder::class);
         $this->call(GroupSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(EducationSeeder::class);
         $this->call(PerformanceSeeder::class);
         $this->call(FamilySeeder::class);
+        $this->call(DisciplinarySeeder::class);
     }
 }
