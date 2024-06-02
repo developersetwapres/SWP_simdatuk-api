@@ -28,5 +28,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PerformanceSeeder::class);
         $this->call(FamilySeeder::class);
         $this->call(DisciplinarySeeder::class);
+        $this->call(LeaveSeeder::class);
     }
 }

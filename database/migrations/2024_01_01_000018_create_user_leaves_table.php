@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('user_leaves', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('grade_id');
-            $table->unsignedBigInteger('position');
-            $table->date('start_date');
-            $table->date('end_date');
-            $table->string('reason', 160);
-            $table->string('number', 160);
-            $table->string('purpose', 160);
+            $table->string('grade')->nullable();
+            $table->string('position')->nullable();
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
+            $table->text('reason')->nullable();
+            $table->text('number')->nullable();
+            $table->text('purpose')->nullable();
             $table->string('leave_letter')->nullable();
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();

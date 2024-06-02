@@ -13,8 +13,8 @@ class CreateLeaveRequest
     public static function rules(): array
     {
         return [
-            'leaves.*.grade_id' => 'required|numeric',
-            'leaves.*.position' => 'required|numeric',
+            'leaves.*.grade' => 'nullable',
+            'leaves.*.position' => 'nullable',
             'leaves.*.start_date' => 'required|date',
             'leaves.*.end_date' => 'required|date',
             'leaves.*.reason' => 'required|max:160',
@@ -32,10 +32,6 @@ class CreateLeaveRequest
     public static function messages(): array
     {
         return [
-            'leaves.*.grade_id.required' => 'Golongan tidak boleh kosong.',
-            'leaves.*.grade_id.numeric' => 'Golongan harus berupa angka.',
-            'leaves.*.position.required' => 'Jabatan tidak boleh kosong.',
-            'leaves.*.position.numeric' => 'Jabatan harus berupa angka.',
             'leaves.*.start_date.required' => 'Periode mulai tidak boleh kosong.',
             'leaves.*.start_date.date' => 'Periode mulai harus berupa tanggal.',
             'leaves.*.end_date.required' => 'Periode akhir tidak boleh kosong.',
@@ -60,13 +56,13 @@ class CreateLeaveRequest
     public static function bodyParameters(): array
     {
         return [
-            'leaves.*.grade_id' => [
+            'leaves.*.grade' => [
                 'description' => 'Refers to the ID Grade of Employee Leave.',
-                'example' => 1,
+                'example' => 'Penata (III/c)',
             ],
             'leaves.*.position' => [
                 'description' => 'Refers to the Position of Employee Leave.',
-                'example' => 1,
+                'example' => 'Kepala Subbagian, Bagian Protokol, dan Kerumahtanggaan, Deputi Bidang Administrasi',
             ],
             'leaves.*.start_date' => [
                 'description' => 'Refers to the Start Date of Employee Leave.',
