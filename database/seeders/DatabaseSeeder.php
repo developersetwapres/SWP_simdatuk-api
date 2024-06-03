@@ -22,12 +22,20 @@ class DatabaseSeeder extends Seeder
         $this->call(InstitutionSeeder::class);
         $this->call(EmploymentTypeSeeder::class);
         $this->call(DecreeSeeder::class);
+        $this->call(DisciplinarySeeder::class);
         $this->call(GroupSeeder::class);
         $this->call(UserSeeder::class);
-        $this->call(EducationSeeder::class);
-        $this->call(PerformanceSeeder::class);
-        $this->call(FamilySeeder::class);
-        $this->call(DisciplinarySeeder::class);
-        $this->call(LeaveSeeder::class);
+
+        // Migrate Old Data to New Database
+        $this->call(OldUserSeeder::class);
+        $this->call(OldEducationSeeder::class);
+        $this->call(OldPositionSeeder::class);
+        // $this->call(OldGradeSeeder::class);
+        // $this->call(OldTrainingSeeder::class);
+        // $this->call(OldRecognitionSeeder::class);
+        $this->call(OldPerformanceSeeder::class);
+        $this->call(OldDisciplinarySeeder::class);
+        $this->call(OldFamilySeeder::class);
+        $this->call(OldLeaveSeeder::class);
     }
 }

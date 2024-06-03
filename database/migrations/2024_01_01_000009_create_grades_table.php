@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('grades', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 30);
-            $table->string('code', 5);
+            $table->string('code', 10);
             $table->tinyInteger('type')->default(1)->comment('1=PNS, 2=PPPK');
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();

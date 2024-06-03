@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Laravel Documentation</title>
+    <title>Simdatuk Documentation</title>
 
     <link href="https://fonts.googleapis.com/css?family=PT+Sans&display=swap" rel="stylesheet">
 
@@ -271,7 +271,7 @@
                 <img src="img/logo.svg" height="30px" width="30px" alt="logo">
             </div>
                 <h4 class="sl-text-paragraph sl-leading-snug sl-font-prose sl-font-semibold sl-text-heading">
-            Laravel Documentation
+            Simdatuk Documentation
         </h4>
     </div>
 
@@ -1550,7 +1550,7 @@
 
         </div>
         <div class="sl-flex sl-items-center sl-px-4 sl-py-3 sl-border-t">
-            Last updated: May 31, 2024
+            Last updated: June 2, 2024
         </div>
 
         <div class="sl-flex sl-items-center sl-px-4 sl-py-3 sl-border-t">
@@ -1564,7 +1564,7 @@
         <div class="sl-mb-10">
             <div class="sl-mb-4">
                 <h1 class="sl-text-5xl sl-leading-tight sl-font-prose sl-font-semibold sl-text-heading">
-                    Laravel Documentation
+                    Simdatuk Documentation
                 </h1>
                                     <a title="Download Postman collection" class="sl-mx-1"
                        href="{{ route("scribe.postman") }}" target="_blank">
@@ -4849,11 +4849,143 @@ fetch(url, {
         <div class="sl-flex sl-items-center sl-max-w-full">
                                         <div class="sl-flex sl-items-baseline sl-text-base">
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">type</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
+                                            <span class="sl-truncate sl-text-muted">integer</span>
                                     </div>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Referst to the type of employee 1=ASN 2=NON ASN 3=OUTSOURCE.</p>
+            <p>Refers to the type of employee 1=ASN 2=NON ASN 3=OUTSOURCE.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        1
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+                                                                            <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">position_id</div>
+                                            <span class="sl-truncate sl-text-muted">integer</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the position of employee.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        1
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+                                                                            <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">grade_id</div>
+                                            <span class="sl-truncate sl-text-muted">integer</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the grade of employee.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        1
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+                                                                            <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">employment_type_id</div>
+                                            <span class="sl-truncate sl-text-muted">integer</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the employment type of employee.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        1
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+                                                                            <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">religion</div>
+                                            <span class="sl-truncate sl-text-muted">integer</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the religion of employee 1=Islam 2=Kristen 3=Katolik 4=Hindu 5=Buddha 6=Konghucu.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        1
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+                                                                            <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">month_of_birth</div>
+                                            <span class="sl-truncate sl-text-muted">integer</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the month of birth of employee 1-12.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        1
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+                                                                            <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">employment_status</div>
+                                            <span class="sl-truncate sl-text-muted">integer</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the employment status 1=Aktif, 2=Pensiun, 3=Berhenti, 4=Meninggal, 5=Alih Status, 6=Aktif PS, 7=CLTN, 8=TBL, 9=Non Aktif.</p>
         </div>
                                             <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
@@ -5029,7 +5161,85 @@ fetch(url, {
                                     <div class="sl-input sl-flex-1 sl-relative">
                                                                                     <input aria-label="type" name="type"
                                                    id="queryparam-GETapi-employees-type"
-                                                   placeholder="Referst to the type of employee 1=ASN 2=NON ASN 3=OUTSOURCE."
+                                                   placeholder="Refers to the type of employee 1=ASN 2=NON ASN 3=OUTSOURCE."
+                                                   value="1" data-component="query"
+                                                   class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
+                                            >
+                                                                            </div>
+                                </div>
+                                                                                            <label aria-hidden="true"
+                                       for="queryparam-GETapi-employees-position_id">position_id</label>
+                                <span class="sl-mx-3">:</span>
+                                <div class="sl-flex sl-flex-1">
+                                    <div class="sl-input sl-flex-1 sl-relative">
+                                                                                    <input aria-label="position_id" name="position_id"
+                                                   id="queryparam-GETapi-employees-position_id"
+                                                   placeholder="Refers to the position of employee."
+                                                   value="1" data-component="query"
+                                                   class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
+                                            >
+                                                                            </div>
+                                </div>
+                                                                                            <label aria-hidden="true"
+                                       for="queryparam-GETapi-employees-grade_id">grade_id</label>
+                                <span class="sl-mx-3">:</span>
+                                <div class="sl-flex sl-flex-1">
+                                    <div class="sl-input sl-flex-1 sl-relative">
+                                                                                    <input aria-label="grade_id" name="grade_id"
+                                                   id="queryparam-GETapi-employees-grade_id"
+                                                   placeholder="Refers to the grade of employee."
+                                                   value="1" data-component="query"
+                                                   class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
+                                            >
+                                                                            </div>
+                                </div>
+                                                                                            <label aria-hidden="true"
+                                       for="queryparam-GETapi-employees-employment_type_id">employment_type_id</label>
+                                <span class="sl-mx-3">:</span>
+                                <div class="sl-flex sl-flex-1">
+                                    <div class="sl-input sl-flex-1 sl-relative">
+                                                                                    <input aria-label="employment_type_id" name="employment_type_id"
+                                                   id="queryparam-GETapi-employees-employment_type_id"
+                                                   placeholder="Refers to the employment type of employee."
+                                                   value="1" data-component="query"
+                                                   class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
+                                            >
+                                                                            </div>
+                                </div>
+                                                                                            <label aria-hidden="true"
+                                       for="queryparam-GETapi-employees-religion">religion</label>
+                                <span class="sl-mx-3">:</span>
+                                <div class="sl-flex sl-flex-1">
+                                    <div class="sl-input sl-flex-1 sl-relative">
+                                                                                    <input aria-label="religion" name="religion"
+                                                   id="queryparam-GETapi-employees-religion"
+                                                   placeholder="Refers to the religion of employee 1=Islam 2=Kristen 3=Katolik 4=Hindu 5=Buddha 6=Konghucu."
+                                                   value="1" data-component="query"
+                                                   class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
+                                            >
+                                                                            </div>
+                                </div>
+                                                                                            <label aria-hidden="true"
+                                       for="queryparam-GETapi-employees-month_of_birth">month_of_birth</label>
+                                <span class="sl-mx-3">:</span>
+                                <div class="sl-flex sl-flex-1">
+                                    <div class="sl-input sl-flex-1 sl-relative">
+                                                                                    <input aria-label="month_of_birth" name="month_of_birth"
+                                                   id="queryparam-GETapi-employees-month_of_birth"
+                                                   placeholder="Refers to the month of birth of employee 1-12."
+                                                   value="1" data-component="query"
+                                                   class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
+                                            >
+                                                                            </div>
+                                </div>
+                                                                                            <label aria-hidden="true"
+                                       for="queryparam-GETapi-employees-employment_status">employment_status</label>
+                                <span class="sl-mx-3">:</span>
+                                <div class="sl-flex sl-flex-1">
+                                    <div class="sl-input sl-flex-1 sl-relative">
+                                                                                    <input aria-label="employment_status" name="employment_status"
+                                                   id="queryparam-GETapi-employees-employment_status"
+                                                   placeholder="Refers to the employment status 1=Aktif, 2=Pensiun, 3=Berhenti, 4=Meninggal, 5=Alih Status, 6=Aktif PS, 7=CLTN, 8=TBL, 9=Non Aktif."
                                                    value="1" data-component="query"
                                                    class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
                                             >
@@ -5126,7 +5336,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/employees?page=1&amp;limit=10&amp;search=administrator&amp;type=1" \
+    --get "http://localhost/api/employees?page=1&amp;limit=10&amp;search=administrator&amp;type=1&amp;position_id=1&amp;grade_id=1&amp;employment_type_id=1&amp;religion=1&amp;month_of_birth=1&amp;employment_status=1" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -5145,6 +5355,12 @@ const params = {
     "limit": "10",
     "search": "administrator",
     "type": "1",
+    "position_id": "1",
+    "grade_id": "1",
+    "employment_type_id": "1",
+    "religion": "1",
+    "month_of_birth": "1",
+    "employment_status": "1",
 };
 Object.keys(params)
     .forEach(key =&gt; url.searchParams.append(key, params[key]));
@@ -5457,7 +5673,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        C:\xampp\htdocs\simdatuk\api\public\/img/logo.svg
+                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -5962,7 +6178,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        C:\xampp\htdocs\simdatuk\api\public\/img/logo.svg
+                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -6313,7 +6529,7 @@ fetch(url, {
                     <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Level of Employee Education. 1=SD/Sederajat, 2=SLTP/Sederajat, 3=SLTA/Sederajat, 4=Akademik/D3/S.Muda, 5=Diploma IV, 6=Strata I, 7=Strata II, 8=Strata III.</p>
+            <p>Refers to the Level of Employee Education. 1=SD/Sederajat, 2=SLTP/Sederajat, 3=SLTA/Sederajat, 4=Diploma I/II, 5=Akademik/D3/S.Muda, 6=Diploma IV/Strata I, 7=Strata II, 8=Strata III.</p>
         </div>
                             Must be one of:
             <ul style="list-style-position: inside; list-style-type: square;"><li><code>1</code></li> <li><code>2</code></li> <li><code>3</code></li> <li><code>4</code></li> <li><code>5</code></li> <li><code>6</code></li> <li><code>7</code></li> <li><code>8</code></li> <li><code></code></li></ul>
@@ -6504,7 +6720,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        C:\xampp\htdocs\simdatuk\api\public\/img/logo.svg
+                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -6630,7 +6846,7 @@ fetch(url, {
                     <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Gender of Employee Family.</p>
+            <p>Refers to the Gender of Employee Family. true=Pria, false=Wanita.</p>
         </div>
                                             <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
@@ -6657,7 +6873,7 @@ fetch(url, {
                     <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Religion of Employee Family.</p>
+            <p>Refers to the Religion of Employee Family. 1=Islam, 2=Kristen, 3=Katolik, 4=Hindu, 5=Buddha, 6=Konghucu.</p>
         </div>
                             Must be one of:
             <ul style="list-style-position: inside; list-style-type: square;"><li><code>1</code></li> <li><code>2</code></li> <li><code>3</code></li> <li><code>4</code></li> <li><code>5</code></li> <li><code>6</code></li></ul>
@@ -6819,7 +7035,7 @@ fetch(url, {
                     <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Level of Employee Family.</p>
+            <p>Refers to the Level of Employee Family. 1=Tidak/Belum Sekolah, 2=Belum Tamat SD/Sederajat, 3=Tamat SD/Sederajat, 4=SLTP/Sederajat, 5=SLTA/Sederajat, 6=Diploma I/II, 7=Akademi/Diploma III/Sarjana Muda, 8=Diploma IV/Strata I, 9=Strata II, 10=Strata III.</p>
         </div>
                             Must be one of:
             <ul style="list-style-position: inside; list-style-type: square;"><li><code>1</code></li> <li><code>2</code></li> <li><code>3</code></li> <li><code>4</code></li> <li><code>5</code></li> <li><code>6</code></li> <li><code>7</code></li> <li><code>8</code></li> <li><code>9</code></li></ul>
@@ -6898,7 +7114,7 @@ fetch(url, {
                     <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Marital Status of Employee Family.</p>
+            <p>Refers to the Marital Status of Employee Family. 1=Belum Menikah, 2=Menikah, 3=Cerai Hidup, 4=Cerai Mati.</p>
         </div>
                             Must be one of:
             <ul style="list-style-position: inside; list-style-type: square;"><li><code>1</code></li> <li><code>2</code></li> <li><code>3</code></li> <li><code>4</code></li> <li><code>5</code></li></ul>
@@ -6945,12 +7161,12 @@ fetch(url, {
     <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
         <div class="sl-flex sl-items-center sl-max-w-full">
                                         <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">order</div>
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">sequence_number</div>
                                             <span class="sl-truncate sl-text-muted">number</span>
                                     </div>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Order of Employee Family.</p>
+            <p>Refers to the Sequence Number of Employee Family.</p>
         </div>
                                             <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
@@ -6994,11 +7210,9 @@ fetch(url, {
     <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
         <div class="sl-flex sl-items-center sl-max-w-full">
                                         <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">grade_id</div>
-                                            <span class="sl-truncate sl-text-muted">number</span>
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">grade</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
                                     </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the ID Grade of Employee Leave.</p>
@@ -7007,7 +7221,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        1
+                        Penata (III/c)
                     </div>
                 </div>
             </div>
@@ -7022,10 +7236,8 @@ fetch(url, {
         <div class="sl-flex sl-items-center sl-max-w-full">
                                         <div class="sl-flex sl-items-baseline sl-text-base">
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">position</div>
-                                            <span class="sl-truncate sl-text-muted">number</span>
+                                            <span class="sl-truncate sl-text-muted">string</span>
                                     </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Position of Employee Leave.</p>
@@ -7034,7 +7246,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        1
+                        Kepala Subbagian, Bagian Protokol, dan Kerumahtanggaan, Deputi Bidang Administrasi
                     </div>
                 </div>
             </div>
@@ -7194,7 +7406,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        C:\xampp\htdocs\simdatuk\api\public\/img/logo.svg
+                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -7371,7 +7583,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        C:\xampp\htdocs\simdatuk\api\public\/img/logo.svg
+                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -8209,9 +8421,9 @@ You can check the Dev Tools console for debugging information.</p>
     --form "families[][occupation_description]=Wirausaha Menengah"\
     --form "families[][marital_status]=1"\
     --form "families[][mobile_phone]=086552417331"\
-    --form "families[][order]=3"\
-    --form "leaves[][grade_id]=1"\
-    --form "leaves[][position]=1"\
+    --form "families[][sequence_number]=3"\
+    --form "leaves[][grade]=Penata (III/c)"\
+    --form "leaves[][position]=Kepala Subbagian, Bagian Protokol, dan Kerumahtanggaan, Deputi Bidang Administrasi"\
     --form "leaves[][start_date]=2020-10-22"\
     --form "leaves[][end_date]=2022-10-22"\
     --form "leaves[][reason]=Mudik lebaran"\
@@ -8222,11 +8434,11 @@ You can check the Dev Tools console for debugging information.</p>
     --form "assessments[][point]=10"\
     --form "assessments[][organizer]=PPKASN"\
     --form "assessments[][type]=1"\
-    --form "photo_profile=@C:\xampp\htdocs\simdatuk\api\public\img\logo.svg" \
-    --form "employee_id_card=@C:\xampp\htdocs\simdatuk\api\public\img\logo.svg" \
-    --form "educations[][degree_document]=@C:\xampp\htdocs\simdatuk\api\public\img\logo.svg" \
-    --form "leaves[][leave_letter]=@C:\xampp\htdocs\simdatuk\api\public\img\logo.svg" \
-    --form "assessments[][assessment_document]=@C:\xampp\htdocs\simdatuk\api\public\img\logo.svg" </code></pre>                                        </div>
+    --form "photo_profile=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" \
+    --form "employee_id_card=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" \
+    --form "educations[][degree_document]=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" \
+    --form "leaves[][leave_letter]=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" \
+    --form "assessments[][assessment_document]=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" </code></pre>                                        </div>
                                     </div>
                                 </div>
                                                             <div class="sl-bg-canvas-100 example-request example-request-javascript"
@@ -8300,9 +8512,9 @@ body.append('families[][occupation]', 'Wirausaha');
 body.append('families[][occupation_description]', 'Wirausaha Menengah');
 body.append('families[][marital_status]', '1');
 body.append('families[][mobile_phone]', '086552417331');
-body.append('families[][order]', '3');
-body.append('leaves[][grade_id]', '1');
-body.append('leaves[][position]', '1');
+body.append('families[][sequence_number]', '3');
+body.append('leaves[][grade]', 'Penata (III/c)');
+body.append('leaves[][position]', 'Kepala Subbagian, Bagian Protokol, dan Kerumahtanggaan, Deputi Bidang Administrasi');
 body.append('leaves[][start_date]', '2020-10-22');
 body.append('leaves[][end_date]', '2022-10-22');
 body.append('leaves[][reason]', 'Mudik lebaran');
@@ -9071,7 +9283,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        C:\xampp\htdocs\simdatuk\api\public\/img/logo.svg
+                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -9576,7 +9788,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        C:\xampp\htdocs\simdatuk\api\public\/img/logo.svg
+                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -9927,7 +10139,7 @@ fetch(url, {
                     <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Level of Employee Education. 1=SD/Sederajat, 2=SLTP/Sederajat, 3=SLTA/Sederajat, 4=Akademik/D3/S.Muda, 5=Diploma IV, 6=Strata I, 7=Strata II, 8=Strata III.</p>
+            <p>Refers to the Level of Employee Education. 1=SD/Sederajat, 2=SLTP/Sederajat, 3=SLTA/Sederajat, 4=Diploma I/II, 5=Akademik/D3/S.Muda, 6=Diploma IV/Strata I, 7=Strata II, 8=Strata III.</p>
         </div>
                             Must be one of:
             <ul style="list-style-position: inside; list-style-type: square;"><li><code>1</code></li> <li><code>2</code></li> <li><code>3</code></li> <li><code>4</code></li> <li><code>5</code></li> <li><code>6</code></li> <li><code>7</code></li> <li><code>8</code></li> <li><code></code></li></ul>
@@ -10118,7 +10330,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        C:\xampp\htdocs\simdatuk\api\public\/img/logo.svg
+                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -10244,7 +10456,7 @@ fetch(url, {
                     <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Gender of Employee Family.</p>
+            <p>Refers to the Gender of Employee Family. true=Pria, false=Wanita.</p>
         </div>
                                             <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
@@ -10271,7 +10483,7 @@ fetch(url, {
                     <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Religion of Employee Family.</p>
+            <p>Refers to the Religion of Employee Family. 1=Islam, 2=Kristen, 3=Katolik, 4=Hindu, 5=Buddha, 6=Konghucu.</p>
         </div>
                             Must be one of:
             <ul style="list-style-position: inside; list-style-type: square;"><li><code>1</code></li> <li><code>2</code></li> <li><code>3</code></li> <li><code>4</code></li> <li><code>5</code></li> <li><code>6</code></li></ul>
@@ -10433,7 +10645,7 @@ fetch(url, {
                     <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Level of Employee Family.</p>
+            <p>Refers to the Level of Employee Family. 1=Tidak/Belum Sekolah, 2=Belum Tamat SD/Sederajat, 3=Tamat SD/Sederajat, 4=SLTP/Sederajat, 5=SLTA/Sederajat, 6=Diploma I/II, 7=Akademi/Diploma III/Sarjana Muda, 8=Diploma IV/Strata I, 9=Strata II, 10=Strata III.</p>
         </div>
                             Must be one of:
             <ul style="list-style-position: inside; list-style-type: square;"><li><code>1</code></li> <li><code>2</code></li> <li><code>3</code></li> <li><code>4</code></li> <li><code>5</code></li> <li><code>6</code></li> <li><code>7</code></li> <li><code>8</code></li> <li><code>9</code></li></ul>
@@ -10512,7 +10724,7 @@ fetch(url, {
                     <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Marital Status of Employee Family.</p>
+            <p>Refers to the Marital Status of Employee Family. 1=Belum Menikah, 2=Menikah, 3=Cerai Hidup, 4=Cerai Mati.</p>
         </div>
                             Must be one of:
             <ul style="list-style-position: inside; list-style-type: square;"><li><code>1</code></li> <li><code>2</code></li> <li><code>3</code></li> <li><code>4</code></li> <li><code>5</code></li></ul>
@@ -10559,12 +10771,12 @@ fetch(url, {
     <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
         <div class="sl-flex sl-items-center sl-max-w-full">
                                         <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">order</div>
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">sequence_number</div>
                                             <span class="sl-truncate sl-text-muted">number</span>
                                     </div>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Order of Employee Family.</p>
+            <p>Refers to the Sequence Number of Employee Family.</p>
         </div>
                                             <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
@@ -10608,11 +10820,9 @@ fetch(url, {
     <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
         <div class="sl-flex sl-items-center sl-max-w-full">
                                         <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">grade_id</div>
-                                            <span class="sl-truncate sl-text-muted">number</span>
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">grade</div>
+                                            <span class="sl-truncate sl-text-muted">string</span>
                                     </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the ID Grade of Employee Leave.</p>
@@ -10621,7 +10831,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        1
+                        Penata (III/c)
                     </div>
                 </div>
             </div>
@@ -10636,10 +10846,8 @@ fetch(url, {
         <div class="sl-flex sl-items-center sl-max-w-full">
                                         <div class="sl-flex sl-items-baseline sl-text-base">
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">position</div>
-                                            <span class="sl-truncate sl-text-muted">number</span>
+                                            <span class="sl-truncate sl-text-muted">string</span>
                                     </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Position of Employee Leave.</p>
@@ -10648,7 +10856,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        1
+                        Kepala Subbagian, Bagian Protokol, dan Kerumahtanggaan, Deputi Bidang Administrasi
                     </div>
                 </div>
             </div>
@@ -10808,7 +11016,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        C:\xampp\htdocs\simdatuk\api\public\/img/logo.svg
+                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -10985,7 +11193,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        C:\xampp\htdocs\simdatuk\api\public\/img/logo.svg
+                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -11856,9 +12064,9 @@ You can check the Dev Tools console for debugging information.</p>
     --form "families[][occupation_description]=Wirausaha Menengah"\
     --form "families[][marital_status]=1"\
     --form "families[][mobile_phone]=086552417331"\
-    --form "families[][order]=3"\
-    --form "leaves[][grade_id]=1"\
-    --form "leaves[][position]=1"\
+    --form "families[][sequence_number]=3"\
+    --form "leaves[][grade]=Penata (III/c)"\
+    --form "leaves[][position]=Kepala Subbagian, Bagian Protokol, dan Kerumahtanggaan, Deputi Bidang Administrasi"\
     --form "leaves[][start_date]=2020-10-22"\
     --form "leaves[][end_date]=2022-10-22"\
     --form "leaves[][reason]=Mudik lebaran"\
@@ -11869,11 +12077,11 @@ You can check the Dev Tools console for debugging information.</p>
     --form "assessments[][point]=10"\
     --form "assessments[][organizer]=PPKASN"\
     --form "assessments[][type]=1"\
-    --form "photo_profile=@C:\xampp\htdocs\simdatuk\api\public\img\logo.svg" \
-    --form "employee_id_card=@C:\xampp\htdocs\simdatuk\api\public\img\logo.svg" \
-    --form "educations[][degree_document]=@C:\xampp\htdocs\simdatuk\api\public\img\logo.svg" \
-    --form "leaves[][leave_letter]=@C:\xampp\htdocs\simdatuk\api\public\img\logo.svg" \
-    --form "assessments[][assessment_document]=@C:\xampp\htdocs\simdatuk\api\public\img\logo.svg" </code></pre>                                        </div>
+    --form "photo_profile=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" \
+    --form "employee_id_card=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" \
+    --form "educations[][degree_document]=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" \
+    --form "leaves[][leave_letter]=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" \
+    --form "assessments[][assessment_document]=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" </code></pre>                                        </div>
                                     </div>
                                 </div>
                                                             <div class="sl-bg-canvas-100 example-request example-request-javascript"
@@ -11947,9 +12155,9 @@ body.append('families[][occupation]', 'Wirausaha');
 body.append('families[][occupation_description]', 'Wirausaha Menengah');
 body.append('families[][marital_status]', '1');
 body.append('families[][mobile_phone]', '086552417331');
-body.append('families[][order]', '3');
-body.append('leaves[][grade_id]', '1');
-body.append('leaves[][position]', '1');
+body.append('families[][sequence_number]', '3');
+body.append('leaves[][grade]', 'Penata (III/c)');
+body.append('leaves[][position]', 'Kepala Subbagian, Bagian Protokol, dan Kerumahtanggaan, Deputi Bidang Administrasi');
 body.append('leaves[][start_date]', '2020-10-22');
 body.append('leaves[][end_date]', '2022-10-22');
 body.append('leaves[][reason]', 'Mudik lebaran');
@@ -12793,11 +13001,9 @@ fetch(url, {
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">position</div>
                                             <span class="sl-truncate sl-text-muted">string</span>
                                     </div>
-                                    <div class="sl-flex-1 sl-h-px sl-mx-3"></div>
-                    <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the ID Position of Employee Position. Must not be greater than 160 characters.</p>
+            <p>Refers to the ID Position of Employee Position.</p>
         </div>
                                             <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
@@ -12842,14 +13048,16 @@ fetch(url, {
     <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
         <div class="sl-flex sl-items-center sl-max-w-full">
                                         <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">echelon_id</div>
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">echelon</div>
                                             <span class="sl-truncate sl-text-muted">number</span>
                                     </div>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the ID Echelon of Employee Position.</p>
+            <p>Refers to the ID Echelon of Employee Position. 1=Eselon I, 2=Eselon II, 3=Eselon III, 4=Fungsional, 5=Pelaksana, 6=Staf.</p>
         </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                            Must be one of:
+            <ul style="list-style-position: inside; list-style-type: square;"><li><code>1</code></li> <li><code>2</code></li> <li><code>3</code></li> <li><code>4</code></li> <li><code>5</code></li> <li><code>6</code></li></ul>
+                                    <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
@@ -12872,7 +13080,7 @@ fetch(url, {
                                     </div>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Position Status of Employee Position.</p>
+            <p>Refers to the Position Status of Employee Position. 1=Promosi, 2=Mutasi, 3=Inpassing, 4=Konversi.</p>
         </div>
                             Must be one of:
             <ul style="list-style-position: inside; list-style-type: square;"><li><code>1</code></li> <li><code>2</code></li> <li><code>3</code></li> <li><code>4</code></li></ul>
@@ -12955,7 +13163,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        C:\xampp\htdocs\simdatuk\api\public\/img/logo.svg
+                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -13460,7 +13668,7 @@ You can check the Dev Tools console for debugging information.</p>
     --form "users[][user_id]=1"\
     --form "users[][position]=Staf pada Pembantu Asisten Wakil Presiden Bidang Monitoring dan Kontrol Masyarakat, Asisten Wakil Presiden Bidang Pengawasan (th.1979-1984)"\
     --form "users[][group_id]=1"\
-    --form "users[][echelon_id]=1"\
+    --form "users[][echelon]=1"\
     --form "users[][position_status]=1"\
     --form "users[][effective_date]=2019-10-22"\
     --form "users[][decree]=Kepmensesneg, Nomor 334 Tahun 2020"\
@@ -13473,7 +13681,7 @@ You can check the Dev Tools console for debugging information.</p>
     --form "users[][termination_decree_number]=Nomor 334 Tahun 2020"\
     --form "users[][termination_decree_date]=2020-10-22"\
     --form "users[][status]=1"\
-    --form "users[][decree_document]=@C:\xampp\htdocs\simdatuk\api\public\img\logo.svg" </code></pre>                                        </div>
+    --form "users[][decree_document]=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" </code></pre>                                        </div>
                                     </div>
                                 </div>
                                                             <div class="sl-bg-canvas-100 example-request example-request-javascript"
@@ -13497,7 +13705,7 @@ body.append('name', 'Riwayat Jabatan 2024');
 body.append('users[][user_id]', '1');
 body.append('users[][position]', 'Staf pada Pembantu Asisten Wakil Presiden Bidang Monitoring dan Kontrol Masyarakat, Asisten Wakil Presiden Bidang Pengawasan (th.1979-1984)');
 body.append('users[][group_id]', '1');
-body.append('users[][echelon_id]', '1');
+body.append('users[][echelon]', '1');
 body.append('users[][position_status]', '1');
 body.append('users[][effective_date]', '2019-10-22');
 body.append('users[][decree]', 'Kepmensesneg, Nomor 334 Tahun 2020');
@@ -14351,14 +14559,11 @@ fetch(url, {
                                             <span class="sl-truncate sl-text-muted">number</span>
                                     </div>
                                     </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the ID Echelon of Employee Position.</p>
-        </div>
                                             <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        1
+                        2099262.9528
                     </div>
                 </div>
             </div>
@@ -14377,7 +14582,7 @@ fetch(url, {
                                     </div>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Position Status of Employee Position.</p>
+            <p>Refers to the Position Status of Employee Position. 1=Promosi, 2=Mutasi, 3=Inpassing, 4=Konversi.</p>
         </div>
                             Must be one of:
             <ul style="list-style-position: inside; list-style-type: square;"><li><code>1</code></li> <li><code>2</code></li> <li><code>3</code></li> <li><code>4</code></li></ul>
@@ -14460,7 +14665,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        C:\xampp\htdocs\simdatuk\api\public\/img/logo.svg
+                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -14999,7 +15204,7 @@ You can check the Dev Tools console for debugging information.</p>
     --form "users[][user_id]=1"\
     --form "users[][position]=Staf pada Pembantu Asisten Wakil Presiden Bidang Monitoring dan Kontrol Masyarakat, Asisten Wakil Presiden Bidang Pengawasan (th.1979-1984)"\
     --form "users[][group_id]=1"\
-    --form "users[][echelon_id]=1"\
+    --form "users[][echelon_id]=2099262.9528"\
     --form "users[][position_status]=1"\
     --form "users[][effective_date]=2019-10-22"\
     --form "users[][decree]=Kepmensesneg, Nomor 334 Tahun 2020"\
@@ -15012,7 +15217,7 @@ You can check the Dev Tools console for debugging information.</p>
     --form "users[][termination_decree_number]=Nomor 334 Tahun 2020"\
     --form "users[][termination_decree_date]=2020-10-22"\
     --form "users[][status]=1"\
-    --form "users[][decree_document]=@C:\xampp\htdocs\simdatuk\api\public\img\logo.svg" </code></pre>                                        </div>
+    --form "users[][decree_document]=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" </code></pre>                                        </div>
                                     </div>
                                 </div>
                                                             <div class="sl-bg-canvas-100 example-request example-request-javascript"
@@ -15037,7 +15242,7 @@ body.append('users[][id]', '1');
 body.append('users[][user_id]', '1');
 body.append('users[][position]', 'Staf pada Pembantu Asisten Wakil Presiden Bidang Monitoring dan Kontrol Masyarakat, Asisten Wakil Presiden Bidang Pengawasan (th.1979-1984)');
 body.append('users[][group_id]', '1');
-body.append('users[][echelon_id]', '1');
+body.append('users[][echelon_id]', '2099262.9528');
 body.append('users[][position_status]', '1');
 body.append('users[][effective_date]', '2019-10-22');
 body.append('users[][decree]', 'Kepmensesneg, Nomor 334 Tahun 2020');
@@ -15984,7 +16189,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        C:\xampp\htdocs\simdatuk\api\public\/img/logo.svg
+                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -16395,7 +16600,7 @@ You can check the Dev Tools console for debugging information.</p>
     --form "users[][decree_date]=2020-10-22"\
     --form "users[][description]=Kenaikan Pangkat Reguler"\
     --form "users[][status]=1"\
-    --form "users[][decree_document]=@C:\xampp\htdocs\simdatuk\api\public\img\logo.svg" </code></pre>                                        </div>
+    --form "users[][decree_document]=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" </code></pre>                                        </div>
                                     </div>
                                 </div>
                                                             <div class="sl-bg-canvas-100 example-request example-request-javascript"
@@ -17324,7 +17529,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        C:\xampp\htdocs\simdatuk\api\public\/img/logo.svg
+                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -17769,7 +17974,7 @@ You can check the Dev Tools console for debugging information.</p>
     --form "users[][decree_date]=2020-10-22"\
     --form "users[][description]=Kenaikan Pangkat Reguler"\
     --form "users[][status]=1"\
-    --form "users[][decree_document]=@C:\xampp\htdocs\simdatuk\api\public\img\logo.svg" </code></pre>                                        </div>
+    --form "users[][decree_document]=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" </code></pre>                                        </div>
                                     </div>
                                 </div>
                                                             <div class="sl-bg-canvas-100 example-request example-request-javascript"
@@ -18875,7 +19080,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        C:\xampp\htdocs\simdatuk\api\public\/img/logo.svg
+                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -19251,7 +19456,7 @@ You can check the Dev Tools console for debugging information.</p>
     --form "link=https://google.com"\
     --form "type=1"\
     --form "users[][user_id]=1"\
-    --form "users[][certificate]=@C:\xampp\htdocs\simdatuk\api\public\img\logo.svg" </code></pre>                                        </div>
+    --form "users[][certificate]=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" </code></pre>                                        </div>
                                     </div>
                                 </div>
                                                             <div class="sl-bg-canvas-100 example-request example-request-javascript"
@@ -20284,7 +20489,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        C:\xampp\htdocs\simdatuk\api\public\/img/logo.svg
+                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -20694,7 +20899,7 @@ You can check the Dev Tools console for debugging information.</p>
     --form "type=1"\
     --form "users[][id]=1"\
     --form "users[][user_id]=1"\
-    --form "users[][certificate]=@C:\xampp\htdocs\simdatuk\api\public\img\logo.svg" </code></pre>                                        </div>
+    --form "users[][certificate]=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" </code></pre>                                        </div>
                                     </div>
                                 </div>
                                                             <div class="sl-bg-canvas-100 example-request example-request-javascript"
@@ -23567,28 +23772,6 @@ fetch(url, {
     <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
         <div class="sl-flex sl-items-center sl-max-w-full">
                                         <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">type</div>
-                                            <span class="sl-truncate sl-text-muted">integer</span>
-                                    </div>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the types of items to be displayed per page.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        1
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-                                                                            <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">search</div>
                                             <span class="sl-truncate sl-text-muted">string</span>
                                     </div>
@@ -23751,19 +23934,6 @@ fetch(url, {
                                                                             </div>
                                 </div>
                                                                                             <label aria-hidden="true"
-                                       for="queryparam-GETapi-target-histories-type">type</label>
-                                <span class="sl-mx-3">:</span>
-                                <div class="sl-flex sl-flex-1">
-                                    <div class="sl-input sl-flex-1 sl-relative">
-                                                                                    <input aria-label="type" name="type"
-                                                   id="queryparam-GETapi-target-histories-type"
-                                                   placeholder="Refers to the types of items to be displayed per page."
-                                                   value="1" data-component="query"
-                                                   class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
-                                            >
-                                                                            </div>
-                                </div>
-                                                                                            <label aria-hidden="true"
                                        for="queryparam-GETapi-target-histories-search">search</label>
                                 <span class="sl-mx-3">:</span>
                                 <div class="sl-flex sl-flex-1">
@@ -23867,7 +24037,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/target-histories?page=1&amp;limit=10&amp;type=1&amp;search=SKP+Desember+2023" \
+    --get "http://localhost/api/target-histories?page=1&amp;limit=10&amp;search=SKP+Desember+2023" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -23884,7 +24054,6 @@ You can check the Dev Tools console for debugging information.</p>
 const params = {
     "page": "1",
     "limit": "10",
-    "type": "1",
     "search": "SKP Desember 2023",
 };
 Object.keys(params)
@@ -24148,7 +24317,7 @@ fetch(url, {
                     <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to name of Work Performance Score. Must not be greater than 160 characters.</p>
+            <p>Refers to the Name of Employee Target. Must not be greater than 160 characters.</p>
         </div>
                                             <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
@@ -24175,9 +24344,11 @@ fetch(url, {
                     <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Appraisal Period of Employee Target.</p>
+            <p>Refers to the Appraisal Period of Employee Target. Q1, Q2, Q3, Q4, Tahunan.</p>
         </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                            Must be one of:
+            <ul style="list-style-position: inside; list-style-type: square;"><li><code>Q1</code></li> <li><code>Q2</code></li> <li><code>Q3</code></li> <li><code>Q4</code></li> <li><code>Tahunan</code></li></ul>
+                                    <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
@@ -24249,7 +24420,7 @@ fetch(url, {
                     <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the User ID of List Employee Recognition.</p>
+            <p>Refers to the User ID of List Employee Target.</p>
         </div>
                                             <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
@@ -24276,13 +24447,13 @@ fetch(url, {
                     <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Work Behavior Rating of Employee Target.</p>
+            <p>Refers to the Work Behavior Rating of Employee Target. 1=Diatas Ekspektasi, 2=Sesuai Ekspektasi, 3=Dibawah Ekspektasi.</p>
         </div>
                                             <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        80.5
+                        1
                     </div>
                 </div>
             </div>
@@ -24303,13 +24474,13 @@ fetch(url, {
                     <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Employee Performance Predicate of Employee Target.</p>
+            <p>Refers to the Employee Performance Predicate of Employee Target. 1=Sangat Baik, 2=Baik, 3=Butuh Perbaikan, 4=Kurang, 5=Sangat Kurang.</p>
         </div>
                                             <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        80
+                        1
                     </div>
                 </div>
             </div>
@@ -24330,13 +24501,13 @@ fetch(url, {
                     <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Orginizational Performance Achievement of Employee Target.</p>
+            <p>Refers to the Orginizational Performance Achievement of Employee Target. 1=Sangat Baik, 2=Baik, 3=Cukup.</p>
         </div>
                                             <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        80
+                        1
                     </div>
                 </div>
             </div>
@@ -24476,9 +24647,9 @@ fetch(url, {
     "users": [
         {
             "user_id": 1,
-            "work_behavior_rating": 80.5,
-            "employee_performance_predicate": 80,
-            "organizational_performance_achievement": 80
+            "work_behavior_rating": 1,
+            "employee_performance_predicate": 1,
+            "organizational_performance_achievement": 1
         }
     ]
 }</div>
@@ -24585,9 +24756,9 @@ You can check the Dev Tools console for debugging information.</p>
     \"users\": [
         {
             \"user_id\": 1,
-            \"work_behavior_rating\": 80.5,
-            \"employee_performance_predicate\": 80,
-            \"organizational_performance_achievement\": 80
+            \"work_behavior_rating\": 1,
+            \"employee_performance_predicate\": 1,
+            \"organizational_performance_achievement\": 1
         }
     ]
 }"
@@ -24617,9 +24788,9 @@ let body = {
     "users": [
         {
             "user_id": 1,
-            "work_behavior_rating": 80.5,
-            "employee_performance_predicate": 80,
-            "organizational_performance_achievement": 80
+            "work_behavior_rating": 1,
+            "employee_performance_predicate": 1,
+            "organizational_performance_achievement": 1
         }
     ]
 };
@@ -25333,7 +25504,7 @@ fetch(url, {
                     <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to name of Work Performance Score. Must not be greater than 160 characters.</p>
+            <p>Refers to name of Employee Target. Must not be greater than 160 characters.</p>
         </div>
                                             <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
@@ -25360,9 +25531,11 @@ fetch(url, {
                     <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Appraisal Period of Employee Target.</p>
+            <p>Refers to the Appraisal Period of Employee Target. Q1, Q2, Q3, Q4, Tahunan.</p>
         </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                            Must be one of:
+            <ul style="list-style-position: inside; list-style-type: square;"><li><code>Q1</code></li> <li><code>Q2</code></li> <li><code>Q3</code></li> <li><code>Q4</code></li> <li><code>Tahunan</code></li></ul>
+                                    <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
@@ -25432,7 +25605,7 @@ fetch(url, {
                                     </div>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the ID of List Employee Recognition.</p>
+            <p>Refers to the ID of List Employee Target.</p>
         </div>
                                             <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
@@ -25459,7 +25632,7 @@ fetch(url, {
                     <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the User ID of List Employee Recognition.</p>
+            <p>Refers to the User ID of List Employee Target.</p>
         </div>
                                             <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
@@ -25486,13 +25659,13 @@ fetch(url, {
                     <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Work Behavior Rating of Employee Target.</p>
+            <p>Refers to the Work Behavior Rating of Employee Target. 1=Diatas Ekspektasi, 2=Sesuai Ekspektasi, 3=Dibawah Ekspektasi.</p>
         </div>
                                             <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        80.5
+                        1
                     </div>
                 </div>
             </div>
@@ -25513,13 +25686,13 @@ fetch(url, {
                     <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Employee Performance Predicate of Employee Target.</p>
+            <p>Refers to the Employee Performance Predicate of Employee Target. 1=Sangat Baik, 2=Baik, 3=Butuh Perbaikan, 4=Kurang, 5=Sangat Kurang.</p>
         </div>
                                             <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        80
+                        1
                     </div>
                 </div>
             </div>
@@ -25540,13 +25713,13 @@ fetch(url, {
                     <span class="sl-ml-2 sl-text-warning">required</span>
                                     </div>
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Orginizational Performance Achievement of Employee Target.</p>
+            <p>Refers to the Orginizational Performance Achievement of Employee Target. 1=Sangat Baik, 2=Baik, 3=Cukup.</p>
         </div>
                                             <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        80
+                        1
                     </div>
                 </div>
             </div>
@@ -25720,9 +25893,9 @@ fetch(url, {
         {
             "id": 1,
             "user_id": 1,
-            "work_behavior_rating": 80.5,
-            "employee_performance_predicate": 80,
-            "organizational_performance_achievement": 80
+            "work_behavior_rating": 1,
+            "employee_performance_predicate": 1,
+            "organizational_performance_achievement": 1
         }
     ]
 }</div>
@@ -25830,9 +26003,9 @@ You can check the Dev Tools console for debugging information.</p>
         {
             \"id\": 1,
             \"user_id\": 1,
-            \"work_behavior_rating\": 80.5,
-            \"employee_performance_predicate\": 80,
-            \"organizational_performance_achievement\": 80
+            \"work_behavior_rating\": 1,
+            \"employee_performance_predicate\": 1,
+            \"organizational_performance_achievement\": 1
         }
     ]
 }"
@@ -25863,9 +26036,9 @@ let body = {
         {
             "id": 1,
             "user_id": 1,
-            "work_behavior_rating": 80.5,
-            "employee_performance_predicate": 80,
-            "organizational_performance_achievement": 80
+            "work_behavior_rating": 1,
+            "employee_performance_predicate": 1,
+            "organizational_performance_achievement": 1
         }
     ]
 };
@@ -26100,28 +26273,6 @@ fetch(url, {
     <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
         <div class="sl-flex sl-items-center sl-max-w-full">
                                         <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">type</div>
-                                            <span class="sl-truncate sl-text-muted">integer</span>
-                                    </div>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the types of items to be displayed per page.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        1
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-                                                                            <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">search</div>
                                             <span class="sl-truncate sl-text-muted">string</span>
                                     </div>
@@ -26284,19 +26435,6 @@ fetch(url, {
                                                                             </div>
                                 </div>
                                                                                             <label aria-hidden="true"
-                                       for="queryparam-GETapi-performance-histories-type">type</label>
-                                <span class="sl-mx-3">:</span>
-                                <div class="sl-flex sl-flex-1">
-                                    <div class="sl-input sl-flex-1 sl-relative">
-                                                                                    <input aria-label="type" name="type"
-                                                   id="queryparam-GETapi-performance-histories-type"
-                                                   placeholder="Refers to the types of items to be displayed per page."
-                                                   value="1" data-component="query"
-                                                   class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
-                                            >
-                                                                            </div>
-                                </div>
-                                                                                            <label aria-hidden="true"
                                        for="queryparam-GETapi-performance-histories-search">search</label>
                                 <span class="sl-mx-3">:</span>
                                 <div class="sl-flex sl-flex-1">
@@ -26400,7 +26538,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost/api/performance-histories?page=1&amp;limit=10&amp;type=1&amp;search=PPK+Mei+2024" \
+    --get "http://localhost/api/performance-histories?page=1&amp;limit=10&amp;search=PPK+Mei+2024" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -26417,7 +26555,6 @@ You can check the Dev Tools console for debugging information.</p>
 const params = {
     "page": "1",
     "limit": "10",
-    "type": "1",
     "search": "PPK Mei 2024",
 };
 Object.keys(params)
@@ -26724,31 +26861,6 @@ fetch(url, {
     <div class="expandable sl-text-sm sl-border-l sl-ml-px">
         <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
     <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">description</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Description of Employee Performance. Must not be greater than 160 characters.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        Penilaian Bulanan
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
     <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2  sl-cursor-pointer ">
         <div class="sl-flex sl-items-center sl-max-w-full">
                             <div class="sl-flex sl-justify-center sl-w-8 sl--ml-8 sl-pl-3 sl-text-muted expansion-chevrons" role="button">
@@ -26815,6 +26927,33 @@ fetch(url, {
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
                         80
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">description</div>
+                                            <span class="sl-truncate sl-text-muted">number</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Descripion of Employee Performance. 1=Kurang, 2=Sedang, 3=Cukup, 4=Baik, 5=Sangat Baik.</p>
+        </div>
+                            Must be one of:
+            <ul style="list-style-position: inside; list-style-type: square;"><li><code>1</code></li> <li><code>2</code></li> <li><code>3</code></li> <li><code>4</code></li> <li><code>5</code></li></ul>
+                                    <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        1
                     </div>
                 </div>
             </div>
@@ -26950,11 +27089,11 @@ fetch(url, {
     "period_year": "2020",
     "performance_period": "PPK Desember 2020",
     "name": "PPK December 2020",
-    "description": "Penilaian Bulanan",
     "users": [
         {
             "user_id": 1,
-            "work_performance_score": 80
+            "work_performance_score": 80,
+            "description": 1
         }
     ]
 }</div>
@@ -27057,11 +27196,11 @@ You can check the Dev Tools console for debugging information.</p>
     \"period_year\": \"2020\",
     \"performance_period\": \"PPK Desember 2020\",
     \"name\": \"PPK December 2020\",
-    \"description\": \"Penilaian Bulanan\",
     \"users\": [
         {
             \"user_id\": 1,
-            \"work_performance_score\": 80
+            \"work_performance_score\": 80,
+            \"description\": 1
         }
     ]
 }"
@@ -27087,11 +27226,11 @@ let body = {
     "period_year": "2020",
     "performance_period": "PPK Desember 2020",
     "name": "PPK December 2020",
-    "description": "Penilaian Bulanan",
     "users": [
         {
             "user_id": 1,
-            "work_performance_score": 80
+            "work_performance_score": 80,
+            "description": 1
         }
     ]
 };
@@ -27848,31 +27987,6 @@ fetch(url, {
     <div class="expandable sl-text-sm sl-border-l sl-ml-px">
         <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
     <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">description</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Description of Employee Performance. Must not be greater than 160 characters.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        Penilaian Bulanan
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
     <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2  sl-cursor-pointer ">
         <div class="sl-flex sl-items-center sl-max-w-full">
                             <div class="sl-flex sl-justify-center sl-w-8 sl--ml-8 sl-pl-3 sl-text-muted expansion-chevrons" role="button">
@@ -27964,6 +28078,33 @@ fetch(url, {
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
                         80
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">description</div>
+                                            <span class="sl-truncate sl-text-muted">number</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>Refers to the Description of Employee Performance. 1=Kurang, 2=Sedang, 3=Cukup, 4=Baik, 5=Sangat Baik.</p>
+        </div>
+                            Must be one of:
+            <ul style="list-style-position: inside; list-style-type: square;"><li><code>1</code></li> <li><code>2</code></li> <li><code>3</code></li> <li><code>4</code></li> <li><code>5</code></li></ul>
+                                    <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        1
                     </div>
                 </div>
             </div>
@@ -28132,12 +28273,12 @@ fetch(url, {
     "period_year": "2020",
     "performance_period": "PPK Desember 2020",
     "name": "PPK December 2020",
-    "description": "Penilaian Bulanan",
     "users": [
         {
             "id": 1,
             "user_id": 1,
-            "work_performance_score": 80
+            "work_performance_score": 80,
+            "description": 1
         }
     ]
 }</div>
@@ -28240,12 +28381,12 @@ You can check the Dev Tools console for debugging information.</p>
     \"period_year\": \"2020\",
     \"performance_period\": \"PPK Desember 2020\",
     \"name\": \"PPK December 2020\",
-    \"description\": \"Penilaian Bulanan\",
     \"users\": [
         {
             \"id\": 1,
             \"user_id\": 1,
-            \"work_performance_score\": 80
+            \"work_performance_score\": 80,
+            \"description\": 1
         }
     ]
 }"
@@ -28271,12 +28412,12 @@ let body = {
     "period_year": "2020",
     "performance_period": "PPK Desember 2020",
     "name": "PPK December 2020",
-    "description": "Penilaian Bulanan",
     "users": [
         {
             "id": 1,
             "user_id": 1,
-            "work_performance_score": 80
+            "work_performance_score": 80,
+            "description": 1
         }
     ]
 };
@@ -42080,7 +42221,7 @@ You can check the Dev Tools console for debugging information.</p>
     --data "{
     \"name\": \"admin\",
     \"permissions\": [
-        \"consequatur\"
+        \"quisquam\"
     ]
 }"
 </code></pre>                                        </div>
@@ -42103,7 +42244,7 @@ const headers = {
 let body = {
     "name": "admin",
     "permissions": [
-        "consequatur"
+        "quisquam"
     ]
 };
 
@@ -45737,7 +45878,7 @@ issue at <a href="https://github.com/knuckleswtf/scribe/issues/831">https://gith
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        C:\xampp\htdocs\simdatuk\api\public\/img/logo.svg
+                        /Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -46168,7 +46309,7 @@ You can check the Dev Tools console for debugging information.</p>
     --form "old_password=current_password"\
     --form "password=new_password"\
     --form "password_confirmation=new_password"\
-    --form "photo_profile=@C:\xampp\htdocs\simdatuk\api\public\img\logo.svg" </code></pre>                                        </div>
+    --form "photo_profile=@/Users/eginugraha/www/project/setneg/simdatuk/api/public/img/logo.svg" </code></pre>                                        </div>
                                     </div>
                                 </div>
                                                             <div class="sl-bg-canvas-100 example-request example-request-javascript"
@@ -46570,7 +46711,7 @@ fetch(url, {
                                                                                                                     x-ratelimit-limit
                                                             : 60
                                                                                                                     x-ratelimit-remaining
-                                                            : 59
+                                                            : 58
                                                                                                                     access-control-allow-origin
                                                             : *
                                                          </code></pre>
@@ -47951,7 +48092,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [7]
+                        [8]
                     </div>
                 </div>
             </div>
@@ -47976,7 +48117,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [9]
+                        [7]
                     </div>
                 </div>
             </div>
@@ -48001,7 +48142,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [8]
+                        [12]
                     </div>
                 </div>
             </div>
@@ -48051,7 +48192,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [6]
+                        [14]
                     </div>
                 </div>
             </div>
@@ -48076,7 +48217,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [15]
+                        [1]
                     </div>
                 </div>
             </div>
@@ -48101,7 +48242,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [5]
+                        [7]
                     </div>
                 </div>
             </div>
@@ -48126,7 +48267,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [&quot;consequatur&quot;]
+                        [&quot;sunt&quot;]
                     </div>
                 </div>
             </div>
@@ -48151,7 +48292,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [17]
+                        [12]
                     </div>
                 </div>
             </div>
@@ -48315,31 +48456,31 @@ fetch(url, {
                                      style="font-family: var(--font-code); font-size: 12px; line-height: var(--lh-code);"
                                 >{
     "organization": [
-        7
+        8
     ],
     "employee_type": [
-        9
+        7
     ],
     "echelons": [
-        8
+        12
     ],
     "grades": [
         19
     ],
     "position_status": [
-        6
+        14
     ],
     "education": [
-        15
+        1
     ],
     "gender": [
-        5
+        7
     ],
     "age_range": [
-        "consequatur"
+        "sunt"
     ],
     "marital_status": [
-        17
+        12
     ]
 }</div>
                             </div>
@@ -48438,31 +48579,31 @@ You can check the Dev Tools console for debugging information.</p>
     --header "Accept: application/json" \
     --data "{
     \"organization\": [
-        7
+        8
     ],
     \"employee_type\": [
-        9
+        7
     ],
     \"echelons\": [
-        8
+        12
     ],
     \"grades\": [
         19
     ],
     \"position_status\": [
-        6
+        14
     ],
     \"education\": [
-        15
+        1
     ],
     \"gender\": [
-        5
+        7
     ],
     \"age_range\": [
-        \"consequatur\"
+        \"sunt\"
     ],
     \"marital_status\": [
-        17
+        12
     ]
 }"
 </code></pre>                                        </div>
@@ -48484,31 +48625,31 @@ const headers = {
 
 let body = {
     "organization": [
-        7
+        8
     ],
     "employee_type": [
-        9
+        7
     ],
     "echelons": [
-        8
+        12
     ],
     "grades": [
         19
     ],
     "position_status": [
-        6
+        14
     ],
     "education": [
-        15
+        1
     ],
     "gender": [
-        5
+        7
     ],
     "age_range": [
-        "consequatur"
+        "sunt"
     ],
     "marital_status": [
-        17
+        12
     ]
 };
 
