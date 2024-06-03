@@ -15,8 +15,8 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('grade_history_id');
-            $table->unsignedBigInteger('grade_id');
-            $table->date('effective_date');
+            $table->unsignedBigInteger('grade_id')->nullable();
+            $table->date('effective_date')->nullable();
             $table->string('decree_name', 160)->nullable();
             $table->string('decree_document')->nullable();
             $table->unsignedBigInteger('type_of_decree')->nullable();
@@ -30,6 +30,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('grade_history_id')->references('id')->on('grade_histories')->onDelete('cascade');
             $table->foreign('grade_id')->references('id')->on('grades')->onDelete('cascade');
+            $table->foreign('type_of_decree')->references('id')->on('decrees')->onDelete('cascade');
         });
     }
 

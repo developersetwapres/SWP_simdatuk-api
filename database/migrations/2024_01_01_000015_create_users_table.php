@@ -62,6 +62,7 @@ return new class extends Migration
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('set null');
             $table->foreign('employment_type_id')->references('id')->on('employment_types')->onDelete('set null');
             $table->foreign('residence_id')->references('id')->on('residences')->onDelete('set null');
+            $table->foreign('position_id')->references('id')->on('positions')->onDelete('set null');
         });
     }
 
