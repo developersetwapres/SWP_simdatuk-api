@@ -388,7 +388,7 @@ class PositionSeeder extends Seeder
             ],
             [
                 'id' => 32,
-                'parent_id' => 4,
+                'parent_id' => 3,
                 'name' => 'Ajudan Wakil Presiden',
                 'available' => 4,
                 'filled' => 4,
@@ -400,7 +400,7 @@ class PositionSeeder extends Seeder
             ],
             [
                 'id' => 33,
-                'parent_id' => 4,
+                'parent_id' => 3,
                 'name' => 'Ajudan Istri Wakil Presiden',
                 'available' => 4,
                 'filled' => 4,
@@ -412,7 +412,7 @@ class PositionSeeder extends Seeder
             ],
             [
                 'id' => 34,
-                'parent_id' => 4,
+                'parent_id' => 3,
                 'name' => 'Dokter Pribadi Wakil Presiden',
                 'available' => 4,
                 'filled' => 4,
@@ -424,7 +424,7 @@ class PositionSeeder extends Seeder
             ],
             [
                 'id' => 35,
-                'parent_id' => 4,
+                'parent_id' => 3,
                 'name' => 'Anggota Tim Ahli Wakil Presiden',
                 'available' => 12,
                 'filled' => 12,
@@ -436,7 +436,7 @@ class PositionSeeder extends Seeder
             ],
             [
                 'id' => 36,
-                'parent_id' => 4,
+                'parent_id' => 3,
                 'name' => 'Staff Pendukung Wakil Presiden',
                 'available' => 2,
                 'filled' => 2,
