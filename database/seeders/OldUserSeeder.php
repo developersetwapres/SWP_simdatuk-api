@@ -318,5 +318,352 @@ class OldUserSeeder extends Seeder
         DB::table('users')->whereIn('employee_id_number', ['2021012101', '2019120101'])->update([
             'position_id' => 36,
         ]);
+
+        //new
+        DB::table('users')->whereIn('employee_id_number', ['196505301991031002'])->update([
+            'position_id' => 38,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197202161998031005'])->update([
+            'position_id' => 39,
+        ]);
+
+        DB::table('users')->whereIn('employee_id_number', ['197010271995031001'])->update([
+            'position_id' => 40,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['196809261994031001'])->update([
+            'position_id' => 42,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['196605111995031002'])->update([
+            'position_id' => 43,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['196809271995032001'])->update([
+            'position_id' => 44,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['198806042010122004'])->update([
+            'position_id' => 46,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['196911021996032002'])->update([
+            'position_id' => 50,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197511122005011001'])->update([
+            'position_id' => 54,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197305121998031002'])->update([
+            'position_id' => 59,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197405171998032001'])->update([
+            'position_id' => 60,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['196806171996031001'])->update([
+            'position_id' => 61,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197911152005011005'])->update([
+            'position_id' => 63,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['198512292009012001'])->update([
+            'position_id' => 67,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197108091998032002'])->update([
+            'position_id' => 70,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['196901311997101001'])->update([
+            'position_id' => 75,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['198206302005011007'])->update([
+            'position_id' => 76,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['198210182006041002'])->update([
+            'position_id' => 77,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197112211997031002'])->update([
+            'position_id' => 78,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197405011994032001'])->update([
+            'position_id' => 80,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['198112282008012007'])->update([
+            'position_id' => 85,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['198212132008012005'])->update([
+            'position_id' => 90,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['198408072008011006'])->update([
+            'position_id' => 94,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197802202002121001'])->update([
+            'position_id' => 97,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['196606021992031004'])->update([
+            'position_id' => 98,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['196909081990031001'])->update([
+            'position_id' => 99,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197404071999031001'])->update([
+            'position_id' => 100,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['196407261986031001'])->update([
+            'position_id' => 101,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197501272005012003'])->update([
+            'position_id' => 105,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197911142005012002'])->update([
+            'position_id' => 106,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197901032005012001'])->update([
+            'position_id' => 107,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['198312012010121003'])->update([
+            'position_id' => 108,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['198401232008012004'])->update([
+            'position_id' => 109,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197109082005011008'])->update([
+            'position_id' => 110,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', [
+            '196611062007011002',
+            '199106142018012001',
+            '199705162019022001',
+            '108308',
+            '21130217090494',
+            '21150230590695',
+            '542613',
+            '97030748',
+            '00010015',
+            '98010487',
+            '01050182'
+        ])->update([
+            'position_id' => 111,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', [
+            '198711252015031001',
+            '199404062019021001',
+            '199506052020122018'
+        ])->update([
+            'position_id' => 112,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', [
+            '198807152018011001',
+            '199606032018012001',
+            '199408082019021001',
+            '21090271240990',
+            '536831',
+            '115225',
+            '21050102560486',
+            '542630',
+            '21150240321293'
+        ])->update([
+            'position_id' => 113,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197106261998031001', '199304052018012003'])->update([
+            'position_id' => 114,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197312092007011002'])->update([
+            'position_id' => 116,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['198502122012122001'])->update([
+            'position_id' => 117,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['196704241995031001'])->update([
+            'position_id' => 118,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197204011996032001'])->update([
+            'position_id' => 119,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197004152006041006'])->update([
+            'position_id' => 120,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197308152007011003', '197003181998031001', '197211192006041011'])->update([
+            'position_id' => 121,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197004212006041001', '197607132005011001'])->update([
+            'position_id' => 124,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197801182002122001'])->update([
+            'position_id' => 125,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['198007052005012001', '199512262018012001'])->update([
+            'position_id' => 126,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197006021995032001', '197806172009011004'])->update([
+            'position_id' => 127,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['198607292009012001'])->update([
+            'position_id' => 128,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197506192002121001'])->update([
+            'position_id' => 129,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197804082005012001'])->update([
+            'position_id' => 130,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['199106252015032001'])->update([
+            'position_id' => 132,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['198209242005011001'])->update([
+            'position_id' => 134,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197706122007101007'])->update([
+            'position_id' => 135,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['199503282019022001'])->update([
+            'position_id' => 138,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197911172005011006'])->update([
+            'position_id' => 139,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197502091997031001'])->update([
+            'position_id' => 140,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197408082007012002'])->update([
+            'position_id' => 141,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', [
+            '198407072005012001',
+            '197210022005011001',
+            '197405142005011001',
+            '198108222005012001',
+        ])->update([
+            'position_id' => 145,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['198110162005012002'])->update([
+            'position_id' => 146,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', [
+            '197209071994032001',
+            '197002051993031004',
+            '197808221998032001',
+            '196905282007012001',
+        ])->update([
+            'position_id' => 148,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197111031996032001'])->update([
+            'position_id' => 149,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['198511192008012003'])->update([
+            'position_id' => 151,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197206082005011006', '197807152009011003'])->update([
+            'position_id' => 153,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197209141995032001', '196903012007011004'])->update([
+            'position_id' => 154,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197504192007011001'])->update([
+            'position_id' => 155,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['198203282005011001'])->update([
+            'position_id' => 157,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['196706091988031001'])->update([
+            'position_id' => 159,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197211181992082001'])->update([
+            'position_id' => 160,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197203271998031001'])->update([
+            'position_id' => 161,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['198202032005011004'])->update([
+            'position_id' => 164,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['196804271995031001', '198510312005012002'])->update([
+            'position_id' => 166,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['199002112015031001'])->update([
+            'position_id' => 167,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197601192009011001'])->update([
+            'position_id' => 168,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197805202005012026'])->update([
+            'position_id' => 169,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['198505092009012005'])->update([
+            'position_id' => 170,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197203022005011010'])->update([
+            'position_id' => 172,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['198910212015031001'])->update([
+            'position_id' => 174,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['196807151990031001', '196710072006041001'])->update([
+            'position_id' => 176,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['198006302005011006'])->update([
+            'position_id' => 178,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['198706212015032002'])->update([
+            'position_id' => 179,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197206172005011007'])->update([
+            'position_id' => 182,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197904042007011002'])->update([
+            'position_id' => 183,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['196912261998031001', '197205012005011001'])->update([
+            'position_id' => 184,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', [
+            '197107052006041009',
+            '197004022007011004',
+            '196910082009011001',
+            '197303262007011003',
+            '197104072006041006',
+            '197402262007011002',
+            '3920722450173',
+            '78314',
+        ])->update([
+            'position_id' => 185,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197206172005011007'])->update([
+            'position_id' => 187,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', [
+            '31940570830974',
+            '518595',
+            '31940334640871',
+            '31940365900873',
+            '21040027590683',
+            '536843',
+            '86082000',
+            '21040039060985',
+            '21050097950682',
+            '3194047850773',
+            '110190',
+            '529045',
+            '538157',
+            '21120081020192',
+            '131224',
+        ])->update([
+            'position_id' => 188,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197011111997032001', '197903292005011001', '197407052007011006'])->update([
+            'position_id' => 189,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', [
+            '196312121986021001',
+            '198705042009121001',
+            '197901102005012001',
+            '196604171992022001',
+            '197202241993102002',
+            '197806092005012001',
+            '198110212005012001',
+            '199309042019022001',
+            '198705162010121004',
+        ])->update([
+            'position_id' => 190,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['199409132017121005'])->update([
+            'position_id' => 191,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['196605021994032001', '196804141996032001'])->update([
+            'position_id' => 192,
+        ]);
     }
 }
