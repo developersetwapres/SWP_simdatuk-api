@@ -388,8 +388,7 @@ class PositionSeeder extends Seeder
                 'vertical_order' => 2,
                 'horizontal_order' => 1,
                 'child' => [
-
-                    //child of Kepala Sekretariat Wakil Presiden
+                    // child of Kepala Sekretariat Wakil Presiden
                     [
                         'id' => 37,
                         'parent_id' => 2,
@@ -427,7 +426,7 @@ class PositionSeeder extends Seeder
                                 'vertical_order' => 1,
                                 'horizontal_order' => 2,
                                 'child' => [
-                                    //child of Asisten Deputi Ekonomi dan Keuangan
+                                    // child of Asisten Deputi Ekonomi dan Keuangan
                                     [   //TBD
                                         'id' => 45,
                                         'parent_id' => 42,
@@ -452,7 +451,7 @@ class PositionSeeder extends Seeder
                                         'vertical_order' => 1,
                                         'horizontal_order' => 2,
                                         'child' => [
-                                            //child of Kepala Subbagian Dukungan Administrasi
+                                            // child of Kepala Subbagian Dukungan Administrasi
                                             [   //TBD
                                                 'id' => 47,
                                                 'parent_id' => 46,
@@ -493,7 +492,7 @@ class PositionSeeder extends Seeder
                                 'vertical_order' => 1,
                                 'horizontal_order' => 3,
                                 'child' => [
-                                    //child of Asisten Deputi Industri, Perdagangan, Pariwisata, dan Ekonomi Kreatif
+                                    // child of Asisten Deputi Industri, Perdagangan, Pariwisata, dan Ekonomi Kreatif
                                     [   //TBD
                                         'id' => 49,
                                         'parent_id' => 43,
@@ -518,7 +517,7 @@ class PositionSeeder extends Seeder
                                         'vertical_order' => 1,
                                         'horizontal_order' => 2,
                                         'child' => [
-                                            //child of Kepala Subbagian Dukungan Administrasi
+                                            // child of Kepala Subbagian Dukungan Administrasi
                                             [   //TBD
                                                 'id' => 51,
                                                 'parent_id' => 50,
@@ -559,7 +558,7 @@ class PositionSeeder extends Seeder
                                 'vertical_order' => 1,
                                 'horizontal_order' => 4,
                                 'child' => [
-                                    //child of Asisten Deputi Infrastruktur, Ketahanan Energi, dan Sumber Daya Alam
+                                    // child of Asisten Deputi Infrastruktur, Ketahanan Energi, dan Sumber Daya Alam
                                     [   //TBD
                                         'id' => 53,
                                         'parent_id' => 44,
@@ -584,7 +583,7 @@ class PositionSeeder extends Seeder
                                         'vertical_order' => 1,
                                         'horizontal_order' => 2,
                                         'child' => [
-                                            //child of Kepala Bagian Dukungan Administrasi
+                                            // child of Kepala Bagian Dukungan Administrasi
                                             [   //TBD
                                                 'id' => 55,
                                                 'parent_id' => 54,
@@ -639,7 +638,7 @@ class PositionSeeder extends Seeder
                         'vertical_order' => 1,
                         'horizontal_order' => 2,
                         'child' => [
-                            //child of Deputi Bidang Dukungan Kebijakan Pembangunan Manusia dan Pemerataan Pembangunan
+                            // child of Deputi Bidang Dukungan Kebijakan Pembangunan Manusia dan Pemerataan Pembangunan
                             [   //TBD
                                 'id' => 58,
                                 'parent_id' => 38,
@@ -730,7 +729,7 @@ class PositionSeeder extends Seeder
                                 'vertical_order' => 1,
                                 'horizontal_order' => 3,
                                 'child' => [
-                                    //child of Asisten Deputi Pembangunan Sumber Daya Manusia
+                                    // child of Asisten Deputi Pembangunan Sumber Daya Manusia
                                     [   //TBD
                                         'id' => 66,
                                         'parent_id' => 60,
@@ -781,7 +780,7 @@ class PositionSeeder extends Seeder
                                 'vertical_order' => 1,
                                 'horizontal_order' => 4,
                                 'child' => [
-                                    //child of Asisten Deputi Pemberdayaan Masyarakat dan Penanggulangan Bencana
+                                    // child of Asisten Deputi Pemberdayaan Masyarakat dan Penanggulangan Bencana
                                     [   //TBD
                                         'id' => 69,
                                         'parent_id' => 61,
@@ -806,7 +805,7 @@ class PositionSeeder extends Seeder
                                         'vertical_order' => 1,
                                         'horizontal_order' => 2,
                                         'child' => [
-                                            //child of Kepala Bagian Dukungan Administrasi
+                                            // child of Kepala Bagian Dukungan Administrasi
                                             [   //TBD
                                                 'id' => 71,
                                                 'parent_id' => 70,
@@ -886,7 +885,7 @@ class PositionSeeder extends Seeder
                                 'vertical_order' => 1,
                                 'horizontal_order' => 2,
                                 'child' => [
-                                    //child of Asisten Deputi Hubungan Luar Negeri
+                                    // child of Asisten Deputi Hubungan Luar Negeri
                                     [   //TBD
                                         'id' => 79,
                                         'parent_id' => 75,
@@ -911,7 +910,7 @@ class PositionSeeder extends Seeder
                                         'vertical_order' => 1,
                                         'horizontal_order' => 2,
                                         'child' => [
-                                            //child of Kepala Subbagian Dukungan Administrasi
+                                            // child of Kepala Subbagian Dukungan Administrasi
                                             [   //TBD
                                                 'id' => 82,
                                                 'parent_id' => 80,
@@ -964,7 +963,7 @@ class PositionSeeder extends Seeder
                                 'vertical_order' => 1,
                                 'horizontal_order' => 3,
                                 'child' => [
-                                    //child of Asisten Deputi Politik, Hukum, dan Otonomi Daerah
+                                    // child of Asisten Deputi Politik, Hukum, dan Otonomi Daerah
                                     [   //TBD
                                         'id' => 84,
                                         'parent_id' => 76,
@@ -989,7 +988,7 @@ class PositionSeeder extends Seeder
                                         'vertical_order' => 1,
                                         'horizontal_order' => 2,
                                         'child' => [
-                                            //child of Kepala Subbagian Dukungan Administrasi
+                                            // child of Kepala Subbagian Dukungan Administrasi
                                             [   //TBD
                                                 'id' => 87,
                                                 'parent_id' => 85,
@@ -1042,7 +1041,7 @@ class PositionSeeder extends Seeder
                                 'vertical_order' => 1,
                                 'horizontal_order' => 4,
                                 'child' => [
-                                    //child of Asisten Deputi Wawasan Kebangsaan, Pertahanan, dan Keamanan
+                                    // child of Asisten Deputi Wawasan Kebangsaan, Pertahanan, dan Keamanan
                                     [   //TBD
                                         'id' => 89,
                                         'parent_id' => 77,
@@ -1067,7 +1066,7 @@ class PositionSeeder extends Seeder
                                         'vertical_order' => 1,
                                         'horizontal_order' => 2,
                                         'child' => [
-                                            //child of Kepala Subbagian Dukungan Administrasi
+                                            // child of Kepala Subbagian Dukungan Administrasi
                                             [   //TBD
                                                 'id' => 91,
                                                 'parent_id' => 90,
@@ -1108,7 +1107,7 @@ class PositionSeeder extends Seeder
                                 'vertical_order' => 1,
                                 'horizontal_order' => 5,
                                 'child' => [
-                                    //child of Asisten Deputi Tata Kelola Pemerintahan
+                                    // child of Asisten Deputi Tata Kelola Pemerintahan
                                     [   //TBD
                                         'id' => 93,
                                         'parent_id' => 78,
@@ -1133,7 +1132,7 @@ class PositionSeeder extends Seeder
                                         'vertical_order' => 1,
                                         'horizontal_order' => 2,
                                         'child' => [
-                                            //child of Kepala Bagian Dukungan Administrasi
+                                            // child of Kepala Bagian Dukungan Administrasi
                                             [   //TBD
                                                 'id' => 95,
                                                 'parent_id' => 94,
@@ -1176,7 +1175,7 @@ class PositionSeeder extends Seeder
                         'vertical_order' => 1,
                         'horizontal_order' => 4,
                         'child' => [
-                            //child of Deputi Bidang Administrasi
+                            // child of Deputi Bidang Administrasi
                             [
                                 'id' => 97,
                                 'parent_id' => 40,
@@ -1189,7 +1188,7 @@ class PositionSeeder extends Seeder
                                 'vertical_order' => 1,
                                 'horizontal_order' => 1,
                                 'child' => [
-                                    //child of Kepala Biro Protokol dan Kerumahtanggaan
+                                    // child of Kepala Biro Protokol dan Kerumahtanggaan
                                     [   //TBD
                                         'id' => 102,
                                         'parent_id' => 97,
@@ -1226,7 +1225,7 @@ class PositionSeeder extends Seeder
                                         'vertical_order' => 1,
                                         'horizontal_order' => 3,
                                         'child' => [
-                                            //child of Kepala Bagian Protokol
+                                            // child of Kepala Bagian Protokol
                                             [
                                                 'id' => 107,
                                                 'parent_id' => 104,
@@ -1239,7 +1238,7 @@ class PositionSeeder extends Seeder
                                                 'vertical_order' => 1,
                                                 'horizontal_order' => 1,
                                                 'child' => [
-                                                    //child of Kepala Subbagian Acara
+                                                    // child of Kepala Subbagian Acara
                                                     [
                                                         'id' => 110,
                                                         'parent_id' => 107,
@@ -1278,7 +1277,7 @@ class PositionSeeder extends Seeder
                                                 'vertical_order' => 1,
                                                 'horizontal_order' => 2,
                                                 'child' => [
-                                                    //child of Kepala Subbagian Pelayanan Protokol
+                                                    // child of Kepala Subbagian Pelayanan Protokol
                                                     [
                                                         'id' => 112,
                                                         'parent_id' => 108,
@@ -1317,7 +1316,7 @@ class PositionSeeder extends Seeder
                                                 'vertical_order' => 1,
                                                 'horizontal_order' => 3,
                                                 'child' => [
-                                                    //child of Kepala Subbagian Persidangan
+                                                    // child of Kepala Subbagian Persidangan
                                                     [
                                                         'id' => 114,
                                                         'parent_id' => 109,
@@ -1370,7 +1369,7 @@ class PositionSeeder extends Seeder
                                         'vertical_order' => 1,
                                         'horizontal_order' => 4,
                                         'child' => [
-                                            //child of Kepala Bagian Kerumahtanggaan
+                                            // child of Kepala Bagian Kerumahtanggaan
                                             [
                                                 'id' => 117,
                                                 'parent_id' => 105,
@@ -1383,7 +1382,7 @@ class PositionSeeder extends Seeder
                                                 'vertical_order' => 1,
                                                 'horizontal_order' => 1,
                                                 'child' => [
-                                                    //child of Kepala Subbagian Istana Wakil Presiden
+                                                    // child of Kepala Subbagian Istana Wakil Presiden
                                                     [
                                                         'id' => 120,
                                                         'parent_id' => 117,
@@ -1422,7 +1421,7 @@ class PositionSeeder extends Seeder
                                                 'vertical_order' => 1,
                                                 'horizontal_order' => 2,
                                                 'child' => [
-                                                    //child of Kepala Subbagian Kediaman Wakil Presiden
+                                                    // child of Kepala Subbagian Kediaman Wakil Presiden
                                                     [
                                                         'id' => 122,
                                                         'parent_id' => 118,
@@ -1473,7 +1472,7 @@ class PositionSeeder extends Seeder
                                                 'vertical_order' => 1,
                                                 'horizontal_order' => 3,
                                                 'child' => [
-                                                    //child of Kepala Subbagian Jamuan dan Pelayanan Rapat
+                                                    // child of Kepala Subbagian Jamuan dan Pelayanan Rapat
                                                     [
                                                         'id' => 125,
                                                         'parent_id' => 119,
@@ -1526,7 +1525,7 @@ class PositionSeeder extends Seeder
                                         'vertical_order' => 1,
                                         'horizontal_order' => 5,
                                         'child' => [
-                                            //child of Kepala Bagian Perjalanan
+                                            // child of Kepala Bagian Perjalanan
                                             [
                                                 'id' => 128,
                                                 'parent_id' => 106,
@@ -1539,7 +1538,7 @@ class PositionSeeder extends Seeder
                                                 'vertical_order' => 1,
                                                 'horizontal_order' => 1,
                                                 'child' => [
-                                                    //child of Kepala Subbagian Perjalanan Dinas
+                                                    // child of Kepala Subbagian Perjalanan Dinas
                                                     [
                                                         'id' => 131,
                                                         'parent_id' => 128,
@@ -1566,7 +1565,7 @@ class PositionSeeder extends Seeder
                                                 'vertical_order' => 1,
                                                 'horizontal_order' => 2,
                                                 'child' => [
-                                                    //child of Kepala Subbagian Sarana dan Prasarana Perjalanan
+                                                    // child of Kepala Subbagian Sarana dan Prasarana Perjalanan
                                                     [
                                                         'id' => 132,
                                                         'parent_id' => 129,
@@ -1605,7 +1604,7 @@ class PositionSeeder extends Seeder
                                                 'vertical_order' => 1,
                                                 'horizontal_order' => 3,
                                                 'child' => [
-                                                    //child of Kepala Subbagian Administrasi Perjalanan
+                                                    // child of Kepala Subbagian Administrasi Perjalanan
                                                     [
                                                         'id' => 134,
                                                         'parent_id' => 130,
@@ -1648,7 +1647,7 @@ class PositionSeeder extends Seeder
                                 'vertical_order' => 1,
                                 'horizontal_order' => 2,
                                 'child' => [
-                                    //child of Kepala Biro Pers, Media, dan Informasi
+                                    // child of Kepala Biro Pers, Media, dan Informasi
                                     [   //TBD
                                         'id' => 136,
                                         'parent_id' => 98,
@@ -1735,7 +1734,7 @@ class PositionSeeder extends Seeder
                                 'vertical_order' => 1,
                                 'horizontal_order' => 3,
                                 'child' => [
-                                    //child of Kepala Biro Perencanaan dan Keuangan
+                                    // child of Kepala Biro Perencanaan dan Keuangan
                                     [   //TBD
                                         'id' => 142,
                                         'parent_id' => 99,
@@ -1810,7 +1809,7 @@ class PositionSeeder extends Seeder
                                 'vertical_order' => 1,
                                 'horizontal_order' => 4,
                                 'child' => [
-                                    //child of Kepala Biro Tata Usaha, Teknologi Informasi dan Kepegawaian
+                                    // child of Kepala Biro Tata Usaha, Teknologi Informasi dan Kepegawaian
                                     [   //TBD
                                         'id' => 147,
                                         'parent_id' => 100,
@@ -1847,7 +1846,7 @@ class PositionSeeder extends Seeder
                                         'vertical_order' => 1,
                                         'horizontal_order' => 3,
                                         'child' => [
-                                            //child of Kepala Bagian Tata Usaha
+                                            // child of Kepala Bagian Tata Usaha
                                             [   //TBD
                                                 'id' => 150,
                                                 'parent_id' => 149,
@@ -1872,7 +1871,7 @@ class PositionSeeder extends Seeder
                                                 'vertical_order' => 1,
                                                 'horizontal_order' => 2,
                                                 'child' => [
-                                                    //child of Kepala Subbagian Tata Usaha Kepala Sekretariat Wakil Presiden
+                                                    // child of Kepala Subbagian Tata Usaha Kepala Sekretariat Wakil Presiden
                                                     [
                                                         'id' => 156,
                                                         'parent_id' => 151,
@@ -1963,7 +1962,7 @@ class PositionSeeder extends Seeder
                                 'vertical_order' => 1,
                                 'horizontal_order' => 5,
                                 'child' => [
-                                    //child of Kepala Biro Umum
+                                    // child of Kepala Biro Umum
                                     [   //TBD
                                         'id' => 158,
                                         'parent_id' => 101,
@@ -1988,7 +1987,7 @@ class PositionSeeder extends Seeder
                                         'vertical_order' => 1,
                                         'horizontal_order' => 2,
                                         'child' => [
-                                            //child of Kepala Bagian Perlengkapan dan Layanan Pengadaan
+                                            // child of Kepala Bagian Perlengkapan dan Layanan Pengadaan
                                             [   //TBD
                                                 'id' => 162,
                                                 'parent_id' => 159,
@@ -2063,7 +2062,7 @@ class PositionSeeder extends Seeder
                                         'vertical_order' => 1,
                                         'horizontal_order' => 3,
                                         'child' => [
-                                            //child of Kepala Bagian Bangunan
+                                            // child of Kepala Bagian Bangunan
                                             [
                                                 'id' => 167,
                                                 'parent_id' => 160,
@@ -2076,7 +2075,7 @@ class PositionSeeder extends Seeder
                                                 'vertical_order' => 1,
                                                 'horizontal_order' => 1,
                                                 'child' => [
-                                                    //child of Kepala Subbagian Perencanaan Bangunan
+                                                    // child of Kepala Subbagian Perencanaan Bangunan
                                                     [
                                                         'id' => 170,
                                                         'parent_id' => 167,
@@ -2127,7 +2126,7 @@ class PositionSeeder extends Seeder
                                                 'vertical_order' => 1,
                                                 'horizontal_order' => 2,
                                                 'child' => [
-                                                    //child of Kepala Subbagian Pemeliharaan Bangunan
+                                                    // child of Kepala Subbagian Pemeliharaan Bangunan
                                                     [
                                                         'id' => 173,
                                                         'parent_id' => 168,
@@ -2178,7 +2177,7 @@ class PositionSeeder extends Seeder
                                                 'vertical_order' => 1,
                                                 'horizontal_order' => 3,
                                                 'child' => [
-                                                    //child of Kepala Subbagian Penataan dan Pemeliharaan Lingkungan
+                                                    // child of Kepala Subbagian Penataan dan Pemeliharaan Lingkungan
                                                     [
                                                         'id' => 176,
                                                         'parent_id' => 169,
@@ -2219,7 +2218,7 @@ class PositionSeeder extends Seeder
                                         'vertical_order' => 1,
                                         'horizontal_order' => 4,
                                         'child' => [
-                                            //child of Kepala Bagian Kendaraan dan Keamanan Dalam
+                                            // child of Kepala Bagian Kendaraan dan Keamanan Dalam
                                             [
                                                 'id' => 178,
                                                 'parent_id' => 161,
@@ -2232,7 +2231,7 @@ class PositionSeeder extends Seeder
                                                 'vertical_order' => 1,
                                                 'horizontal_order' => 1,
                                                 'child' => [
-                                                    //child of Kepala Subbagian Administrasi Kendaraan
+                                                    // child of Kepala Subbagian Administrasi Kendaraan
                                                     [
                                                         'id' => 181,
                                                         'parent_id' => 178,
@@ -2271,7 +2270,7 @@ class PositionSeeder extends Seeder
                                                 'vertical_order' => 1,
                                                 'horizontal_order' => 2,
                                                 'child' => [
-                                                    //child of Kepala Subbagian Operasional Kendaraan
+                                                    // child of Kepala Subbagian Operasional Kendaraan
                                                     [
                                                         'id' => 183,
                                                         'parent_id' => 179,
@@ -2334,7 +2333,7 @@ class PositionSeeder extends Seeder
                                                 'vertical_order' => 1,
                                                 'horizontal_order' => 3,
                                                 'child' => [
-                                                    //child of Kepala Subbagian Keamanan Dalam
+                                                    // child of Kepala Subbagian Keamanan Dalam
                                                     [
                                                         'id' => 187,
                                                         'parent_id' => 180,
@@ -2455,7 +2454,7 @@ class PositionSeeder extends Seeder
                 'vertical_order' => 3,
                 'horizontal_order' => 1,
                 'child' => [
-                    //child of Pejabat Kemensetneg yang Diperbantukan di Sekretariat Wakil Presiden
+                    // child of Pejabat Kemensetneg yang Diperbantukan di Sekretariat Wakil Presiden
                     [
                         'id' => 190,
                         'parent_id' => 4,
