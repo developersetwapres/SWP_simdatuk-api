@@ -319,7 +319,6 @@ class OldUserSeeder extends Seeder
             'position_id' => 36,
         ]);
 
-        //new
         DB::table('users')->whereIn('employee_id_number', ['196505301991031002'])->update([
             'position_id' => 38,
         ]);
