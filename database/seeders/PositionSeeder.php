@@ -613,7 +613,7 @@ class PositionSeeder extends Seeder
                                                 'parent_id' => 54,
                                                 'name' => 'Pengadministrasi Umum',
                                                 'available' => 1,
-                                                'filled' => 1,
+                                                'filled' => 0,
                                                 'children' => 0,
                                                 'type' => 1,
                                                 'entity' => 1,
@@ -2347,7 +2347,7 @@ class PositionSeeder extends Seeder
                                                         'horizontal_order' => 1,
                                                     ],
                                                     [
-                                                        'id' => 189,
+                                                        'id' => 188,
                                                         'parent_id' => 180,
                                                         'name' => 'Petugas Keamanan',
                                                         'available' => 15,
@@ -2456,7 +2456,7 @@ class PositionSeeder extends Seeder
                 'child' => [
                     // child of Pejabat Kemensetneg yang Diperbantukan di Sekretariat Wakil Presiden
                     [
-                        'id' => 190,
+                        'id' => 189,
                         'parent_id' => 4,
                         'name' => 'Biro SDM, Deputi Bidang Administrasi Aparatur, Kemensetneg',
                         'available' => 3,
@@ -2468,7 +2468,7 @@ class PositionSeeder extends Seeder
                         'horizontal_order' => 1,
                     ],
                     [
-                        'id' => 191,
+                        'id' => 190,
                         'parent_id' => 4,
                         'name' => 'Bagian Pelayanan Kesehatan, Biro Umum, Setmensesneg',
                         'available' => 9,
@@ -2480,7 +2480,7 @@ class PositionSeeder extends Seeder
                         'horizontal_order' => 2,
                     ],
                     [
-                        'id' => 192,
+                        'id' => 191,
                         'parent_id' => 4,
                         'name' => 'Biro Informasi, Data, dan Teknologi Setmensesneg',
                         'available' => 1,
@@ -2492,7 +2492,7 @@ class PositionSeeder extends Seeder
                         'horizontal_order' => 3,
                     ],
                     [
-                        'id' => 193,
+                        'id' => 192,
                         'parent_id' => 4,
                         'name' => 'Pusat Pengembangan Kompentensi ASN, Kemensetneg',
                         'available' => 2,
