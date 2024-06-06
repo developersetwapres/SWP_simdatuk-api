@@ -16,7 +16,7 @@ class CreateAssessmentRequest
             'assessments.*.assessment_date' => 'date',
             'assessments.*.point' => 'required|numeric',
             'assessments.*.organizer' => 'max:160',
-            'assessments.*.assessment_document' => 'file|extensions:jpg,jpeg,png,pdf|max:2048',
+            'assessments.*.assessment_document' => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
             'assessments.*.type' => 'required|numeric|in:1,2,3',
         ];
     }

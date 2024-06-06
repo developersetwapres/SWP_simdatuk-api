@@ -20,7 +20,7 @@ class CreateLeaveRequest
             'leaves.*.reason' => 'required|max:160',
             'leaves.*.number' => 'required|max:160',
             'leaves.*.purpose' => 'required|max:160',
-            'leaves.*.leave_letter' => 'file|extensions:jpg,jpeg,png,pdf|max:2048',
+            'leaves.*.leave_letter' => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
         ];
     }
 

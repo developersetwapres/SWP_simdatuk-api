@@ -33,7 +33,7 @@ class UpdatePositionHistoryRequest extends FormRequest
             'users.*.position_status' => 'numeric|in:1,2,3,4|nullable',
             'users.*.effective_date' => 'date|nullable',
             'users.*.decree' => 'max:160|nullable',
-            'users.*.decree_document' => 'file|extensions:jpg,jpeg,png,pdf|max:2048',
+            'users.*.decree_document' => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
             'users.*.type_of_decree' => 'numeric|nullable',
             'users.*.decree_number' => 'max:160|nullable',
             'users.*.decree_date' => 'date|nullable',
