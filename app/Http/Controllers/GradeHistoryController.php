@@ -76,9 +76,7 @@ class GradeHistoryController extends Controller
             if (isset($this->request->users)) {
                 $users = array();
                 foreach ($this->request->users as $user) {
-                    if (isset($user['decree_document']) && is_file($user['decree_document'])) {
-                        $user['decree_document'] = $this->uploadDocument($user['decree_document'], 'decree_document');
-                    }
+                    $user['status'] = 1;
                     $user['grade_history_id'] = $gradeHistoryId;
                     array_push($users, $user);
                 }
@@ -168,19 +166,10 @@ class GradeHistoryController extends Controller
             DB::table('grade_history_users')->whereIn('id', $result)->delete();
 
             foreach ($this->request->users as $user) {
-                // Upload document
-                if (isset($user['decree_document']) && is_file($user['decree_document'])) {
-                    $user['decree_document'] = $this->uploadDocument($user['decree_document'], 'decree_document');
-                }
-
-                if (!is_null($user['id'])) {
-                    // Update existing data
-                    DB::table('grade_history_users')->where('id', $user['id'])->updateTs($user);
-                } else {
-                    // Insert new item
-                    $user['grade_history_id'] = $this->request->id;
-                    array_push($users, $user);
-                }
+                // Insert new item
+                $user['grade_history_id'] = $this->request->id;
+                $user['status'] = 1;
+                array_push($users, $user);
             }
             if (count($users) > 0) {
                 DB::table('grade_history_users')->insertTs($users);

@@ -422,7 +422,7 @@ class ExportController extends Controller
 
         //Leaves
         $userLeave = DB::table('user_leaves as ul');
-        $userLeave->join('grades as g', 'g.id', '=', 'ul.grade_id');
+        $userLeave->join('grades as g', 'g.id', '=', 'ul.grade');
         $userLeave->join('users as u', 'u.id', '=', 'ul.user_id');
         $userLeave->where('ul.user_id', $user->id);
         $userLeave->select('g.name', 'ul.start_date', 'ul.end_date', 'ul.reason', 'ul.number', 'ul.purpose', 'ul.leave_letter');
@@ -463,7 +463,7 @@ class ExportController extends Controller
         $userPerformance->join('performances as p', 'p.id', '=', 'up.performance_id');
         $userPerformance->join('users as u', 'u.id', '=', 'up.user_id');
         $userPerformance->where('up.user_id', $user->id);
-        $userPerformance->select('p.description', 'p.performance_period', 'up.work_performance_score');
+        $userPerformance->select('up.description', 'p.performance_period', 'up.work_performance_score');
         $userPerformance = $userPerformance->get();
         $userPerformanceData = array();
         foreach ($userPerformance as $performance) {
@@ -505,7 +505,7 @@ class ExportController extends Controller
         $userPosition->join('groups', 'groups.id', '=', 'up.group_id');
         $userPosition->join('decrees', 'decrees.id', '=', 'up.type_of_decree');
         $userPosition->join('decrees as termination', 'termination.id', '=', 'up.type_of_termination_decree');
-        $userPosition->join('echelons', 'echelons.id', '=', 'up.echelon_id');
+        $userPosition->join('echelons', 'echelons.id', '=', 'up.echelon');
         $userPosition->select(
                 'up.position',
                 'groups.name as group_name',
@@ -624,6 +624,43 @@ class ExportController extends Controller
             ];
         }
 
+        $userAssessment = DB::table('user_assessments as ua');
+        $userAssessment->join('users', 'users.id', '=', 'ua.user_id');
+        $userAssessment->select('ua.assessment_date', 'ua.point', 'ua.organizer', 'ua.assessment_document', 'ua.type');
+        $userAssessment =  $userAssessment->get();
+        $assessmentResult = array();
+        $assessmentCompetency = array();
+        $assessmentTalent = array();
+        foreach ($userAssessment as $assessment) {
+            switch ($assessment->type) {
+                case '1':
+                    $assessmentResult[] = [
+                        'date' => $assessment->assessment_date,
+                        'result' => $assessment->point,
+                        'organizer' => $assessment->organizer,
+                        'document' => $assessment->document
+                    ];
+                    break;
+                case '2':
+                    $assessmentCompetency[] = [
+                        'date' => $assessment->assessment_date,
+                        'result' => $assessment->point,
+                        'organizer' => $assessment->organizer,
+                        'document' => $assessment->document
+                    ];
+                    break;
+                case '3':
+                    $assessmentTalent[] = [
+                        'date' => $assessment->assessment_date,
+                        'result' => $assessment->point,
+                        'organizer' => $assessment->organizer,
+                        'document' => $assessment->document
+                    ];
+                    break;
+            }
+        }
+
+
         //Training
         $userTraining = DB::table('user_trainings as ut');
         $userTraining->join('trainings as t', 't.id', '=', 'ut.training_id');
@@ -733,6 +770,9 @@ class ExportController extends Controller
             'userFamily' => $userFamilyData,
             'userPaidLeave' => $userLeaveData,
             'userNotes' => $userNoteData,
+            'userAssessment' => $assessmentResult,
+            'userAssessmentCompetency' => $assessmentCompetency,
+            'userAssessmentTalent' => $assessmentTalent
         ]);
         $pdf->set_option('isHtml5ParserEnabled', true);
         $pdf->set_paper("A4", "portrait");
@@ -894,8 +934,93 @@ class ExportController extends Controller
         return $pdf->download('rekapitulasi-asn-pdf.pdf');
     }
 
-    public function userExcel()
+    public function userExcel(request $request)
     {
-        return Excel::download(new employee(10, 0, false), 'testing.xlsx');
+        $toggleFieldBio = array();
+        if ($request->isName = 1){
+            $toggleFieldBio['isName'] = true;
+        }
+        if ($request->isPosition = 1){
+            $toggleFieldBio['isPosition'] = true;
+        }
+        if ($request->isPositionDescription = 1){
+            $toggleFieldBio['isPositionDescription'] = true;
+        }
+        if ($request->isEchelons = 1){
+            $toggleFieldBio['isEchelons'] = true;
+        }
+        if ($request->isGrade = 1){
+            $toggleFieldBio['isGrade'] = true;
+        }
+        if ($request->isNip = 1){
+            $toggleFieldBio['isNip'] = true;
+        }
+        if ($request->isBirthPlaceDate = 1){
+            $toggleFieldBio['isBirthPlaceDate'] = true;
+        }
+        if ($request->isAge = 1){
+            $toggleFieldBio['isAge'] = true;
+        }
+        if ($request->isReligion = 1){
+            $toggleFieldBio['isReligion'] = true;
+        }
+        if ($request->isGender = 1){
+            $toggleFieldBio['isGender'] = true;
+        }
+        if ($request->isMaritalStatus = 1){
+            $toggleFieldBio['isMaritalStatus'] = true;
+        }
+        if ($request->isAgency = 1){
+            $toggleFieldBio['isAgency'] = true;
+        }
+        if ($request->isOrganization = 1){
+            $toggleFieldBio['isOrganization'] = true;
+        }
+        if ($request->isWorkUnit = 1){
+            $toggleFieldBio['isWorkUnit'] = true;
+        }
+        if ($request->isNoWorker = 1){
+            $toggleFieldBio['isNoWorker'] = true;
+        }
+        if ($request->workDuration = 1){
+            $toggleFieldBio['workDuration'] = true;
+        }
+        if ($request->isGradeDuration = 1){
+            $toggleFieldBio['isGradeDuration'] = true;
+        }
+        if ($request->isNPWP = 1){
+            $toggleFieldBio['isNPWP'] = true;
+        }
+        if ($request->isEmployeeStatus = 1){
+            $toggleFieldBio['isEmployeeStatus'] = true;
+        }
+        if ($request->isCurrentAddress = 1){
+            $toggleFieldBio['isCurrentAddress'] = true;
+        }
+        if ($request->isComplex = 1){
+            $toggleFieldBio['isComplex'] = true;
+        }
+        if ($request->isHomeNumber = 1){
+            $toggleFieldBio['isHomeNumber'] = true;
+        }
+        if ($request->isPhoneNumber = 1){
+            $toggleFieldBio['isPhoneNumber'] = true;
+        }
+        if ($request->isOfficeAddress = 1){
+            $toggleFieldBio['isOfficeAddress'] = true;
+        }
+        if ($request->isOfficeNumber = 1){
+            $toggleFieldBio['isOfficeNumber'] = true;
+        }
+        if ($request->isEmail = 1){
+            $toggleFieldBio['isEmail'] = true;
+        }
+        if ($request->isPensionCap = 1){
+            $toggleFieldBio['isPensionCap'] = true;
+        }
+        if ($request->isPositionHistory = 1){
+            $toggleFieldBio['isPositionHistory'] = true;
+        }
+        return Excel::download(new employee(10,  $toggleFieldBio), 'testing.xlsx');
     }
 }

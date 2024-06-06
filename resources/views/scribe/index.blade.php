@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Simdatuk Documentation</title>
+    <title>Laravel Documentation</title>
 
     <link href="https://fonts.googleapis.com/css?family=PT+Sans&display=swap" rel="stylesheet">
 
@@ -22,7 +22,7 @@
     </script>
 
             <script>
-            var tryItOutBaseUrl = "http://localhost:8001";
+            var tryItOutBaseUrl = "http://localhost";
             var useCsrf = Boolean(1);
             var csrfUrl = "/sanctum/csrf-cookie";
         </script>
@@ -271,7 +271,7 @@
                 <img src="img/logo.svg" height="30px" width="30px" alt="logo">
             </div>
                 <h4 class="sl-text-paragraph sl-leading-snug sl-font-prose sl-font-semibold sl-text-heading">
-            Simdatuk Documentation
+            Laravel Documentation
         </h4>
     </div>
 
@@ -1550,7 +1550,7 @@
 
         </div>
         <div class="sl-flex sl-items-center sl-px-4 sl-py-3 sl-border-t">
-            Last updated: June 4, 2024
+            Last updated: June 6, 2024
         </div>
 
         <div class="sl-flex sl-items-center sl-px-4 sl-py-3 sl-border-t">
@@ -1564,7 +1564,7 @@
         <div class="sl-mb-10">
             <div class="sl-mb-4">
                 <h1 class="sl-text-5xl sl-leading-tight sl-font-prose sl-font-semibold sl-text-heading">
-                    Simdatuk Documentation
+                    Laravel Documentation
                 </h1>
                                     <a title="Download Postman collection" class="sl-mx-1"
                        href="{{ route("scribe.postman") }}" target="_blank">
@@ -1579,7 +1579,7 @@
             <div class="sl-prose sl-markdown-viewer sl-my-4">
                 <h1 id="introduction">Introduction</h1>
 <aside>
-    <strong>Base URL</strong>: <code>http://localhost:8001</code>
+    <strong>Base URL</strong>: <code>http://localhost</code>
 </aside>
 <p>This documentation aims to provide all the information you need to work with our API.</p>
 <aside>As you scroll, you'll see code examples for working with the API in different programming languages in the dark area to the right (or as part of the content on mobile).
@@ -1612,7 +1612,7 @@ You can switch the language used with the tabs at the top right (or from the nav
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/login"
+            <div title="http://localhost/api/login"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -1622,7 +1622,7 @@ You can switch the language used with the tabs at the top right (or from the nav
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/login</div>
                     </div>
 
@@ -1919,7 +1919,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8001/api/login" \
+    "http://localhost/api/login" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -1934,7 +1934,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/login"
+    "http://localhost/api/login"
 );
 
 const headers = {
@@ -2068,7 +2068,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/forgot-password"
+            <div title="http://localhost/api/forgot-password"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -2078,7 +2078,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/forgot-password</div>
                     </div>
 
@@ -2347,7 +2347,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8001/api/forgot-password" \
+    "http://localhost/api/forgot-password" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -2361,7 +2361,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/forgot-password"
+    "http://localhost/api/forgot-password"
 );
 
 const headers = {
@@ -2465,7 +2465,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/code-verification"
+            <div title="http://localhost/api/code-verification"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -2475,7 +2475,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/code-verification</div>
                     </div>
 
@@ -2764,7 +2764,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8001/api/code-verification" \
+    "http://localhost/api/code-verification" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -2779,7 +2779,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/code-verification"
+    "http://localhost/api/code-verification"
 );
 
 const headers = {
@@ -2884,7 +2884,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/reset-password"
+            <div title="http://localhost/api/reset-password"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -2894,7 +2894,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/reset-password</div>
                     </div>
 
@@ -3239,7 +3239,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8001/api/reset-password" \
+    "http://localhost/api/reset-password" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
@@ -3256,7 +3256,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/reset-password"
+    "http://localhost/api/reset-password"
 );
 
 const headers = {
@@ -3350,7 +3350,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/logout"
+            <div title="http://localhost/api/logout"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -3360,7 +3360,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/logout</div>
                     </div>
 
@@ -3627,7 +3627,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8001/api/logout" \
+    "http://localhost/api/logout" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -3638,7 +3638,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/logout"
+    "http://localhost/api/logout"
 );
 
 const headers = {
@@ -3733,7 +3733,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/summaries"
+            <div title="http://localhost/api/summaries"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -3743,7 +3743,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/summaries</div>
                     </div>
 
@@ -4072,7 +4072,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/summaries?month=1" \
+    --get "http://localhost/api/summaries?month=1" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -4083,7 +4083,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/summaries"
+    "http://localhost/api/summaries"
 );
 
 const params = {
@@ -4203,7 +4203,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/diagrams"
+            <div title="http://localhost/api/diagrams"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -4213,7 +4213,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/diagrams</div>
                     </div>
 
@@ -4538,7 +4538,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/diagrams" \
+    --get "http://localhost/api/diagrams" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -4553,7 +4553,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/diagrams"
+    "http://localhost/api/diagrams"
 );
 
 const headers = {
@@ -4682,7 +4682,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/employees"
+            <div title="http://localhost/api/employees"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -4692,7 +4692,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/employees</div>
                     </div>
 
@@ -5336,7 +5336,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/employees?page=1&amp;limit=10&amp;search=administrator&amp;type=1&amp;position_id=1&amp;grade_id=1&amp;employment_type_id=1&amp;religion=1&amp;month_of_birth=1&amp;employment_status=1" \
+    --get "http://localhost/api/employees?page=1&amp;limit=10&amp;search=administrator&amp;type=1&amp;position_id=1&amp;grade_id=1&amp;employment_type_id=1&amp;religion=1&amp;month_of_birth=1&amp;employment_status=1" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -5347,7 +5347,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/employees"
+    "http://localhost/api/employees"
 );
 
 const params = {
@@ -5458,7 +5458,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/employees"
+            <div title="http://localhost/api/employees"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -5468,7 +5468,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/employees</div>
                     </div>
 
@@ -5673,7 +5673,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        /Users/bayu/Documents/Project/DST/simdatuk/api/public/img/logo.svg
+                        C:\xampp\htdocs\simdatuk\api\public\/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -6178,7 +6178,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        /Users/bayu/Documents/Project/DST/simdatuk/api/public/img/logo.svg
+                        C:\xampp\htdocs\simdatuk\api\public\/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -6720,7 +6720,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        /Users/bayu/Documents/Project/DST/simdatuk/api/public/img/logo.svg
+                        C:\xampp\htdocs\simdatuk\api\public\/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -7406,7 +7406,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        /Users/bayu/Documents/Project/DST/simdatuk/api/public/img/logo.svg
+                        C:\xampp\htdocs\simdatuk\api\public\/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -7583,7 +7583,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        /Users/bayu/Documents/Project/DST/simdatuk/api/public/img/logo.svg
+                        C:\xampp\htdocs\simdatuk\api\public\/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -8361,7 +8361,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8001/api/employees" \
+    "http://localhost/api/employees" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
@@ -8434,11 +8434,11 @@ You can check the Dev Tools console for debugging information.</p>
     --form "assessments[][point]=10"\
     --form "assessments[][organizer]=PPKASN"\
     --form "assessments[][type]=1"\
-    --form "photo_profile=@/Users/bayu/Documents/Project/DST/simdatuk/api/public/img/logo.svg" \
-    --form "employee_id_card=@/Users/bayu/Documents/Project/DST/simdatuk/api/public/img/logo.svg" \
-    --form "educations[][degree_document]=@/Users/bayu/Documents/Project/DST/simdatuk/api/public/img/logo.svg" \
-    --form "leaves[][leave_letter]=@/Users/bayu/Documents/Project/DST/simdatuk/api/public/img/logo.svg" \
-    --form "assessments[][assessment_document]=@/Users/bayu/Documents/Project/DST/simdatuk/api/public/img/logo.svg" </code></pre>                                        </div>
+    --form "photo_profile=@C:\xampp\htdocs\simdatuk\api\public\img\logo.svg" \
+    --form "employee_id_card=@C:\xampp\htdocs\simdatuk\api\public\img\logo.svg" \
+    --form "educations[][degree_document]=@C:\xampp\htdocs\simdatuk\api\public\img\logo.svg" \
+    --form "leaves[][leave_letter]=@C:\xampp\htdocs\simdatuk\api\public\img\logo.svg" \
+    --form "assessments[][assessment_document]=@C:\xampp\htdocs\simdatuk\api\public\img\logo.svg" </code></pre>                                        </div>
                                     </div>
                                 </div>
                                                             <div class="sl-bg-canvas-100 example-request example-request-javascript"
@@ -8446,7 +8446,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/employees"
+    "http://localhost/api/employees"
 );
 
 const headers = {
@@ -8597,7 +8597,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/employees/{id}"
+            <div title="http://localhost/api/employees/{id}"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -8607,7 +8607,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/employees/{id}</div>
                     </div>
 
@@ -8935,7 +8935,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/employees/1" \
+    --get "http://localhost/api/employees/1" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -8946,7 +8946,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/employees/1"
+    "http://localhost/api/employees/1"
 );
 
 const headers = {
@@ -9040,7 +9040,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/employees/{id}"
+            <div title="http://localhost/api/employees/{id}"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -9050,7 +9050,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/employees/{id}</div>
                     </div>
 
@@ -9283,7 +9283,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        /Users/bayu/Documents/Project/DST/simdatuk/api/public/img/logo.svg
+                        C:\xampp\htdocs\simdatuk\api\public\/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -9788,7 +9788,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        /Users/bayu/Documents/Project/DST/simdatuk/api/public/img/logo.svg
+                        C:\xampp\htdocs\simdatuk\api\public\/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -10330,7 +10330,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        /Users/bayu/Documents/Project/DST/simdatuk/api/public/img/logo.svg
+                        C:\xampp\htdocs\simdatuk\api\public\/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -11016,7 +11016,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        /Users/bayu/Documents/Project/DST/simdatuk/api/public/img/logo.svg
+                        C:\xampp\htdocs\simdatuk\api\public\/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -11193,7 +11193,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        /Users/bayu/Documents/Project/DST/simdatuk/api/public/img/logo.svg
+                        C:\xampp\htdocs\simdatuk\api\public\/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -12004,7 +12004,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8001/api/employees/1" \
+    "http://localhost/api/employees/1" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
@@ -12077,11 +12077,11 @@ You can check the Dev Tools console for debugging information.</p>
     --form "assessments[][point]=10"\
     --form "assessments[][organizer]=PPKASN"\
     --form "assessments[][type]=1"\
-    --form "photo_profile=@/Users/bayu/Documents/Project/DST/simdatuk/api/public/img/logo.svg" \
-    --form "employee_id_card=@/Users/bayu/Documents/Project/DST/simdatuk/api/public/img/logo.svg" \
-    --form "educations[][degree_document]=@/Users/bayu/Documents/Project/DST/simdatuk/api/public/img/logo.svg" \
-    --form "leaves[][leave_letter]=@/Users/bayu/Documents/Project/DST/simdatuk/api/public/img/logo.svg" \
-    --form "assessments[][assessment_document]=@/Users/bayu/Documents/Project/DST/simdatuk/api/public/img/logo.svg" </code></pre>                                        </div>
+    --form "photo_profile=@C:\xampp\htdocs\simdatuk\api\public\img\logo.svg" \
+    --form "employee_id_card=@C:\xampp\htdocs\simdatuk\api\public\img\logo.svg" \
+    --form "educations[][degree_document]=@C:\xampp\htdocs\simdatuk\api\public\img\logo.svg" \
+    --form "leaves[][leave_letter]=@C:\xampp\htdocs\simdatuk\api\public\img\logo.svg" \
+    --form "assessments[][assessment_document]=@C:\xampp\htdocs\simdatuk\api\public\img\logo.svg" </code></pre>                                        </div>
                                     </div>
                                 </div>
                                                             <div class="sl-bg-canvas-100 example-request example-request-javascript"
@@ -12089,7 +12089,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/employees/1"
+    "http://localhost/api/employees/1"
 );
 
 const headers = {
@@ -12268,7 +12268,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/position-histories"
+            <div title="http://localhost/api/position-histories"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -12278,7 +12278,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/position-histories</div>
                     </div>
 
@@ -12677,7 +12677,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/position-histories?page=1&amp;limit=10&amp;search=Asisten+Wakil+Presiden" \
+    --get "http://localhost/api/position-histories?page=1&amp;limit=10&amp;search=Asisten+Wakil+Presiden" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -12688,7 +12688,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/position-histories"
+    "http://localhost/api/position-histories"
 );
 
 const params = {
@@ -12766,7 +12766,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/position-histories"
+            <div title="http://localhost/api/position-histories"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -12776,7 +12776,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/position-histories</div>
                     </div>
 
@@ -13163,7 +13163,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        /Users/bayu/Documents/Project/DST/simdatuk/api/public/img/logo.svg
+                        C:\xampp\htdocs\simdatuk\api\public\/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -13658,7 +13658,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8001/api/position-histories" \
+    "http://localhost/api/position-histories" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
@@ -13681,7 +13681,7 @@ You can check the Dev Tools console for debugging information.</p>
     --form "users[][termination_decree_number]=Nomor 334 Tahun 2020"\
     --form "users[][termination_decree_date]=2020-10-22"\
     --form "users[][status]=1"\
-    --form "users[][decree_document]=@/Users/bayu/Documents/Project/DST/simdatuk/api/public/img/logo.svg" </code></pre>                                        </div>
+    --form "users[][decree_document]=@C:\xampp\htdocs\simdatuk\api\public\img\logo.svg" </code></pre>                                        </div>
                                     </div>
                                 </div>
                                                             <div class="sl-bg-canvas-100 example-request example-request-javascript"
@@ -13689,7 +13689,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/position-histories"
+    "http://localhost/api/position-histories"
 );
 
 const headers = {
@@ -13786,7 +13786,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/position-histories/{id}"
+            <div title="http://localhost/api/position-histories/{id}"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -13796,7 +13796,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/position-histories/{id}</div>
                     </div>
 
@@ -14124,7 +14124,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/position-histories/1" \
+    --get "http://localhost/api/position-histories/1" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -14135,7 +14135,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/position-histories/1"
+    "http://localhost/api/position-histories/1"
 );
 
 const headers = {
@@ -14218,7 +14218,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/position-histories/{id}"
+            <div title="http://localhost/api/position-histories/{id}"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -14228,7 +14228,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/position-histories/{id}</div>
                     </div>
 
@@ -14643,7 +14643,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        /Users/bayu/Documents/Project/DST/simdatuk/api/public/img/logo.svg
+                        C:\xampp\htdocs\simdatuk\api\public\/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -15171,7 +15171,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8001/api/position-histories/1" \
+    "http://localhost/api/position-histories/1" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
@@ -15194,7 +15194,7 @@ You can check the Dev Tools console for debugging information.</p>
     --form "users[][termination_decree_number]=Nomor 334 Tahun 2020"\
     --form "users[][termination_decree_date]=2020-10-22"\
     --form "users[][status]=1"\
-    --form "users[][decree_document]=@/Users/bayu/Documents/Project/DST/simdatuk/api/public/img/logo.svg" </code></pre>                                        </div>
+    --form "users[][decree_document]=@C:\xampp\htdocs\simdatuk\api\public\img\logo.svg" </code></pre>                                        </div>
                                     </div>
                                 </div>
                                                             <div class="sl-bg-canvas-100 example-request example-request-javascript"
@@ -15202,7 +15202,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/position-histories/1"
+    "http://localhost/api/position-histories/1"
 );
 
 const headers = {
@@ -15319,7 +15319,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/grade-histories"
+            <div title="http://localhost/api/grade-histories"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -15329,7 +15329,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/grade-histories</div>
                     </div>
 
@@ -15728,7 +15728,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/grade-histories?page=1&amp;limit=10&amp;search=Penata+Tingkat+I+%28III%2Fd%29" \
+    --get "http://localhost/api/grade-histories?page=1&amp;limit=10&amp;search=Penata+Tingkat+I+%28III%2Fd%29" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -15739,7 +15739,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/grade-histories"
+    "http://localhost/api/grade-histories"
 );
 
 const params = {
@@ -15843,7 +15843,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/grade-histories"
+            <div title="http://localhost/api/grade-histories"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -15853,7 +15853,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/grade-histories</div>
                     </div>
 
@@ -15905,7 +15905,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        multipart/form-data
+                        application/json
                     </div>
                 </div>
             </div>
@@ -16129,81 +16129,6 @@ fetch(url, {
     <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
         <div class="sl-flex sl-items-center sl-max-w-full">
                                         <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">decree_name</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Decree Name of Employee Grade. Must not be greater than 160 characters.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        Kepmensesneg, Nomor 50 Tahun 2008, 06-March-2007
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">decree_document</div>
-                                            <span class="sl-truncate sl-text-muted">file</span>
-                                    </div>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Decree Document of Employee Grade. Must be a file. Must not be greater than 2048 kilobytes.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        /Users/bayu/Documents/Project/DST/simdatuk/api/public/img/logo.svg
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">type_of_decree</div>
-                                            <span class="sl-truncate sl-text-muted">number</span>
-                                    </div>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Type of Decree of Employee Grade.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        1
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">decree_number</div>
                                             <span class="sl-truncate sl-text-muted">string</span>
                                     </div>
@@ -16216,81 +16141,6 @@ fetch(url, {
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
                         Nomor 50 Tahun 2008
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">decree_date</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Decree Date of Employee Grade. Must be a valid date.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        2020-10-22
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">description</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Description of Employee Grade. Must not be greater than 160 characters.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        Kenaikan Pangkat Reguler
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">status</div>
-                                            <span class="sl-truncate sl-text-muted">number</span>
-                                    </div>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Status of Employee Grade.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        1
                     </div>
                 </div>
             </div>
@@ -16315,8 +16165,8 @@ fetch(url, {
         <form class="TryItPanel sl-bg-canvas-100 sl-rounded-lg"
               data-method="POST"
               data-path="api/grade-histories"
-              data-hasfiles="1"
-              data-hasjsonbody="0">
+              data-hasfiles="0"
+              data-hasjsonbody="1">
                             <div class="sl-panel sl-outline-none sl-w-full expandable">
                     <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
                          role="button">
@@ -16379,7 +16229,7 @@ fetch(url, {
                                     <div class="sl-input sl-flex-1 sl-relative">
                                         <input aria-label="Content-Type" name="Content-Type"
                                                id="header-POSTapi-grade-histories-Content-Type"
-                                               value="multipart/form-data" data-component="header"
+                                               value="application/json" data-component="header"
                                                class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
                                     </div>
                                 </div>
@@ -16417,60 +16267,24 @@ fetch(url, {
                         </div>
                     </div>
                     <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
-                                                    <div class="ParameterGrid sl-p-4">
-                                                                                                        <label aria-hidden="true"
-                                           for="bodyparam-POSTapi-grade-histories-period_month">period_month</label>
-                                    <span class="sl-mx-3">:</span>
-                                    <div class="sl-flex sl-flex-1">
-                                        <div class="sl-input sl-flex-1 sl-relative">
-                                                                                            <input aria-label="period_month" name="period_month"
-                                                       id="bodyparam-POSTapi-grade-histories-period_month"
-                                                       placeholder="Refers to the Period Month of Employee Grade. Must be between 1 and 12 digits."
-                                                       value="3" data-component="body"
-                                                       class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
-                                                >
-                                                                                    </div>
-                                    </div>
-                                                                                                        <label aria-hidden="true"
-                                           for="bodyparam-POSTapi-grade-histories-period_year">period_year</label>
-                                    <span class="sl-mx-3">:</span>
-                                    <div class="sl-flex sl-flex-1">
-                                        <div class="sl-input sl-flex-1 sl-relative">
-                                                                                            <input aria-label="period_year" name="period_year"
-                                                       id="bodyparam-POSTapi-grade-histories-period_year"
-                                                       placeholder="Refers to the Period Year of Employee Grade. Must be a valid date in the format &lt;code&gt;Y&lt;/code&gt;."
-                                                       value="2010" data-component="body"
-                                                       class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
-                                                >
-                                                                                    </div>
-                                    </div>
-                                                                                                        <label aria-hidden="true"
-                                           for="bodyparam-POSTapi-grade-histories-name">name</label>
-                                    <span class="sl-mx-3">:</span>
-                                    <div class="sl-flex sl-flex-1">
-                                        <div class="sl-input sl-flex-1 sl-relative">
-                                                                                            <input aria-label="name" name="name"
-                                                       id="bodyparam-POSTapi-grade-histories-name"
-                                                       placeholder="Refers to the Name of Employee Grade. Must not be greater than 160 characters."
-                                                       value="Riwayat Desember 2023" data-component="body"
-                                                       class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
-                                                >
-                                                                                    </div>
-                                    </div>
-                                                                                                        <label aria-hidden="true"
-                                           for="bodyparam-POSTapi-grade-histories-users">users</label>
-                                    <span class="sl-mx-3">:</span>
-                                    <div class="sl-flex sl-flex-1">
-                                        <div class="sl-input sl-flex-1 sl-relative">
-                                                                                            <input aria-label="users" name="users"
-                                                       id="bodyparam-POSTapi-grade-histories-users"
-                                                       placeholder=""
-                                                       value="[[]]" data-component="body"
-                                                       class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
-                                                >
-                                                                                    </div>
-                                    </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                    </div>
+                                                    <div class="TextRequestBody sl-p-4">
+                                <div class="code-editor language-json"
+                                     id="json-body-POSTapi-grade-histories"
+                                     style="font-family: var(--font-code); font-size: 12px; line-height: var(--lh-code);"
+                                >{
+    "period_month": 3,
+    "period_year": "2010",
+    "name": "Riwayat Desember 2023",
+    "users": [
+        {
+            "user_id": 1,
+            "grade_id": 1,
+            "effective_date": "2020-10-22",
+            "decree_number": "Nomor 50 Tahun 2008"
+        }
+    ]
+}</div>
+                            </div>
                                             </div>
                 </div>
             
@@ -16560,23 +16374,24 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8001/api/grade-histories" \
+    "http://localhost/api/grade-histories" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
-    --header "Content-Type: multipart/form-data" \
+    --header "Content-Type: application/json" \
     --header "Accept: application/json" \
-    --form "period_month=3"\
-    --form "period_year=2010"\
-    --form "name=Riwayat Desember 2023"\
-    --form "users[][user_id]=1"\
-    --form "users[][grade_id]=1"\
-    --form "users[][effective_date]=2020-10-22"\
-    --form "users[][decree_name]=Kepmensesneg, Nomor 50 Tahun 2008, 06-March-2007"\
-    --form "users[][type_of_decree]=1"\
-    --form "users[][decree_number]=Nomor 50 Tahun 2008"\
-    --form "users[][decree_date]=2020-10-22"\
-    --form "users[][description]=Kenaikan Pangkat Reguler"\
-    --form "users[][status]=1"\
-    --form "users[][decree_document]=@/Users/bayu/Documents/Project/DST/simdatuk/api/public/img/logo.svg" </code></pre>                                        </div>
+    --data "{
+    \"period_month\": 3,
+    \"period_year\": \"2010\",
+    \"name\": \"Riwayat Desember 2023\",
+    \"users\": [
+        {
+            \"user_id\": 1,
+            \"grade_id\": 1,
+            \"effective_date\": \"2020-10-22\",
+            \"decree_number\": \"Nomor 50 Tahun 2008\"
+        }
+    ]
+}"
+</code></pre>                                        </div>
                                     </div>
                                 </div>
                                                             <div class="sl-bg-canvas-100 example-request example-request-javascript"
@@ -16584,34 +16399,33 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/grade-histories"
+    "http://localhost/api/grade-histories"
 );
 
 const headers = {
     "Authorization": "Bearer {YOUR_AUTH_KEY}",
-    "Content-Type": "multipart/form-data",
+    "Content-Type": "application/json",
     "Accept": "application/json",
 };
 
-const body = new FormData();
-body.append('period_month', '3');
-body.append('period_year', '2010');
-body.append('name', 'Riwayat Desember 2023');
-body.append('users[][user_id]', '1');
-body.append('users[][grade_id]', '1');
-body.append('users[][effective_date]', '2020-10-22');
-body.append('users[][decree_name]', 'Kepmensesneg, Nomor 50 Tahun 2008, 06-March-2007');
-body.append('users[][type_of_decree]', '1');
-body.append('users[][decree_number]', 'Nomor 50 Tahun 2008');
-body.append('users[][decree_date]', '2020-10-22');
-body.append('users[][description]', 'Kenaikan Pangkat Reguler');
-body.append('users[][status]', '1');
-body.append('users[][decree_document]', document.querySelector('input[name="users[][decree_document]"]').files[0]);
+let body = {
+    "period_month": 3,
+    "period_year": "2010",
+    "name": "Riwayat Desember 2023",
+    "users": [
+        {
+            "user_id": 1,
+            "grade_id": 1,
+            "effective_date": "2020-10-22",
+            "decree_number": "Nomor 50 Tahun 2008"
+        }
+    ]
+};
 
 fetch(url, {
     method: "POST",
     headers,
-    body,
+    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre>                                        </div>
                                     </div>
                                 </div>
@@ -16674,7 +16488,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/grade-histories/{id}"
+            <div title="http://localhost/api/grade-histories/{id}"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -16684,7 +16498,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/grade-histories/{id}</div>
                     </div>
 
@@ -17012,7 +16826,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/grade-histories/1" \
+    --get "http://localhost/api/grade-histories/1" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -17023,7 +16837,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/grade-histories/1"
+    "http://localhost/api/grade-histories/1"
 );
 
 const headers = {
@@ -17130,7 +16944,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/grade-histories/{id}"
+            <div title="http://localhost/api/grade-histories/{id}"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -17140,7 +16954,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/grade-histories/{id}</div>
                     </div>
 
@@ -17192,7 +17006,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        multipart/form-data
+                        application/json
                     </div>
                 </div>
             </div>
@@ -17469,81 +17283,6 @@ fetch(url, {
     <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
         <div class="sl-flex sl-items-center sl-max-w-full">
                                         <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">decree_name</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Decree Name of Employee Grade. Must not be greater than 160 characters.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        Kepmensesneg, Nomor 50 Tahun 2008, 06-March-2007
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">decree_document</div>
-                                            <span class="sl-truncate sl-text-muted">file</span>
-                                    </div>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Decree Document of Employee Grade. Must be a file. Must not be greater than 2048 kilobytes.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        /Users/bayu/Documents/Project/DST/simdatuk/api/public/img/logo.svg
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">type_of_decree</div>
-                                            <span class="sl-truncate sl-text-muted">number</span>
-                                    </div>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Type of Decree of Employee Grade.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        1
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
                     <div class="sl-font-mono sl-font-semibold sl-mr-2">decree_number</div>
                                             <span class="sl-truncate sl-text-muted">string</span>
                                     </div>
@@ -17556,81 +17295,6 @@ fetch(url, {
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
                         Nomor 50 Tahun 2008
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">decree_date</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Decree Date of Employee Grade. Must be a valid date.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        2020-10-22
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">description</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Description of Employee Grade. Must not be greater than 160 characters.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        Kenaikan Pangkat Reguler
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">status</div>
-                                            <span class="sl-truncate sl-text-muted">number</span>
-                                    </div>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Status of Employee Grade.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        1
                     </div>
                 </div>
             </div>
@@ -17655,8 +17319,8 @@ fetch(url, {
         <form class="TryItPanel sl-bg-canvas-100 sl-rounded-lg"
               data-method="POST"
               data-path="api/grade-histories/{id}"
-              data-hasfiles="1"
-              data-hasjsonbody="0">
+              data-hasfiles="0"
+              data-hasjsonbody="1">
                             <div class="sl-panel sl-outline-none sl-w-full expandable">
                     <div class="sl-panel__titlebar sl-flex sl-items-center sl-relative focus:sl-z-10 sl-text-base sl-leading-none sl-pr-4 sl-pl-3 sl-bg-canvas-200 sl-text-body sl-border-input focus:sl-border-primary sl-cursor-pointer sl-select-none"
                          role="button">
@@ -17719,7 +17383,7 @@ fetch(url, {
                                     <div class="sl-input sl-flex-1 sl-relative">
                                         <input aria-label="Content-Type" name="Content-Type"
                                                id="header-POSTapi-grade-histories--id--Content-Type"
-                                               value="multipart/form-data" data-component="header"
+                                               value="application/json" data-component="header"
                                                class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border">
                                     </div>
                                 </div>
@@ -17790,60 +17454,25 @@ fetch(url, {
                         </div>
                     </div>
                     <div class="sl-panel__content-wrapper sl-bg-canvas-100 children" role="region">
-                                                    <div class="ParameterGrid sl-p-4">
-                                                                                                        <label aria-hidden="true"
-                                           for="bodyparam-POSTapi-grade-histories--id--period_month">period_month</label>
-                                    <span class="sl-mx-3">:</span>
-                                    <div class="sl-flex sl-flex-1">
-                                        <div class="sl-input sl-flex-1 sl-relative">
-                                                                                            <input aria-label="period_month" name="period_month"
-                                                       id="bodyparam-POSTapi-grade-histories--id--period_month"
-                                                       placeholder="Refers to the Period Month of Employee Grade. Must be between 1 and 12 digits."
-                                                       value="3" data-component="body"
-                                                       class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
-                                                >
-                                                                                    </div>
-                                    </div>
-                                                                                                        <label aria-hidden="true"
-                                           for="bodyparam-POSTapi-grade-histories--id--period_year">period_year</label>
-                                    <span class="sl-mx-3">:</span>
-                                    <div class="sl-flex sl-flex-1">
-                                        <div class="sl-input sl-flex-1 sl-relative">
-                                                                                            <input aria-label="period_year" name="period_year"
-                                                       id="bodyparam-POSTapi-grade-histories--id--period_year"
-                                                       placeholder="Refers to the Period Year of Employee Grade. Must be a valid date in the format &lt;code&gt;Y&lt;/code&gt;."
-                                                       value="2010" data-component="body"
-                                                       class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
-                                                >
-                                                                                    </div>
-                                    </div>
-                                                                                                        <label aria-hidden="true"
-                                           for="bodyparam-POSTapi-grade-histories--id--name">name</label>
-                                    <span class="sl-mx-3">:</span>
-                                    <div class="sl-flex sl-flex-1">
-                                        <div class="sl-input sl-flex-1 sl-relative">
-                                                                                            <input aria-label="name" name="name"
-                                                       id="bodyparam-POSTapi-grade-histories--id--name"
-                                                       placeholder="Refers to the Name of Employee Grade. Must not be greater than 160 characters."
-                                                       value="Riwayat Desember 2023" data-component="body"
-                                                       class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
-                                                >
-                                                                                    </div>
-                                    </div>
-                                                                                                        <label aria-hidden="true"
-                                           for="bodyparam-POSTapi-grade-histories--id--users">users</label>
-                                    <span class="sl-mx-3">:</span>
-                                    <div class="sl-flex sl-flex-1">
-                                        <div class="sl-input sl-flex-1 sl-relative">
-                                                                                            <input aria-label="users" name="users"
-                                                       id="bodyparam-POSTapi-grade-histories--id--users"
-                                                       placeholder=""
-                                                       value="[[]]" data-component="body"
-                                                       class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
-                                                >
-                                                                                    </div>
-                                    </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </div>
+                                                    <div class="TextRequestBody sl-p-4">
+                                <div class="code-editor language-json"
+                                     id="json-body-POSTapi-grade-histories--id-"
+                                     style="font-family: var(--font-code); font-size: 12px; line-height: var(--lh-code);"
+                                >{
+    "period_month": 3,
+    "period_year": "2010",
+    "name": "Riwayat Desember 2023",
+    "users": [
+        {
+            "id": 1,
+            "user_id": 1,
+            "grade_id": 1,
+            "effective_date": "2020-10-22",
+            "decree_number": "Nomor 50 Tahun 2008"
+        }
+    ]
+}</div>
+                            </div>
                                             </div>
                 </div>
             
@@ -17933,24 +17562,25 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8001/api/grade-histories/1" \
+    "http://localhost/api/grade-histories/1" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
-    --header "Content-Type: multipart/form-data" \
+    --header "Content-Type: application/json" \
     --header "Accept: application/json" \
-    --form "period_month=3"\
-    --form "period_year=2010"\
-    --form "name=Riwayat Desember 2023"\
-    --form "users[][id]=1"\
-    --form "users[][user_id]=1"\
-    --form "users[][grade_id]=1"\
-    --form "users[][effective_date]=2020-10-22"\
-    --form "users[][decree_name]=Kepmensesneg, Nomor 50 Tahun 2008, 06-March-2007"\
-    --form "users[][type_of_decree]=1"\
-    --form "users[][decree_number]=Nomor 50 Tahun 2008"\
-    --form "users[][decree_date]=2020-10-22"\
-    --form "users[][description]=Kenaikan Pangkat Reguler"\
-    --form "users[][status]=1"\
-    --form "users[][decree_document]=@/Users/bayu/Documents/Project/DST/simdatuk/api/public/img/logo.svg" </code></pre>                                        </div>
+    --data "{
+    \"period_month\": 3,
+    \"period_year\": \"2010\",
+    \"name\": \"Riwayat Desember 2023\",
+    \"users\": [
+        {
+            \"id\": 1,
+            \"user_id\": 1,
+            \"grade_id\": 1,
+            \"effective_date\": \"2020-10-22\",
+            \"decree_number\": \"Nomor 50 Tahun 2008\"
+        }
+    ]
+}"
+</code></pre>                                        </div>
                                     </div>
                                 </div>
                                                             <div class="sl-bg-canvas-100 example-request example-request-javascript"
@@ -17958,35 +17588,34 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/grade-histories/1"
+    "http://localhost/api/grade-histories/1"
 );
 
 const headers = {
     "Authorization": "Bearer {YOUR_AUTH_KEY}",
-    "Content-Type": "multipart/form-data",
+    "Content-Type": "application/json",
     "Accept": "application/json",
 };
 
-const body = new FormData();
-body.append('period_month', '3');
-body.append('period_year', '2010');
-body.append('name', 'Riwayat Desember 2023');
-body.append('users[][id]', '1');
-body.append('users[][user_id]', '1');
-body.append('users[][grade_id]', '1');
-body.append('users[][effective_date]', '2020-10-22');
-body.append('users[][decree_name]', 'Kepmensesneg, Nomor 50 Tahun 2008, 06-March-2007');
-body.append('users[][type_of_decree]', '1');
-body.append('users[][decree_number]', 'Nomor 50 Tahun 2008');
-body.append('users[][decree_date]', '2020-10-22');
-body.append('users[][description]', 'Kenaikan Pangkat Reguler');
-body.append('users[][status]', '1');
-body.append('users[][decree_document]', document.querySelector('input[name="users[][decree_document]"]').files[0]);
+let body = {
+    "period_month": 3,
+    "period_year": "2010",
+    "name": "Riwayat Desember 2023",
+    "users": [
+        {
+            "id": 1,
+            "user_id": 1,
+            "grade_id": 1,
+            "effective_date": "2020-10-22",
+            "decree_number": "Nomor 50 Tahun 2008"
+        }
+    ]
+};
 
 fetch(url, {
     method: "POST",
     headers,
-    body,
+    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre>                                        </div>
                                     </div>
                                 </div>
@@ -18069,7 +17698,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/training-histories"
+            <div title="http://localhost/api/training-histories"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -18079,7 +17708,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/training-histories</div>
                     </div>
 
@@ -18513,7 +18142,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/training-histories?page=1&amp;limit=10&amp;type=1&amp;search=Diklat+PIM+Tk.III" \
+    --get "http://localhost/api/training-histories?page=1&amp;limit=10&amp;type=1&amp;search=Diklat+PIM+Tk.III" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -18524,7 +18153,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/training-histories"
+    "http://localhost/api/training-histories"
 );
 
 const params = {
@@ -18630,7 +18259,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/training-histories"
+            <div title="http://localhost/api/training-histories"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -18640,7 +18269,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/training-histories</div>
                     </div>
 
@@ -19056,7 +18685,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        /Users/bayu/Documents/Project/DST/simdatuk/api/public/img/logo.svg
+                        C:\xampp\htdocs\simdatuk\api\public\/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -19417,7 +19046,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8001/api/training-histories" \
+    "http://localhost/api/training-histories" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
@@ -19432,7 +19061,7 @@ You can check the Dev Tools console for debugging information.</p>
     --form "link=https://google.com"\
     --form "type=1"\
     --form "users[][user_id]=1"\
-    --form "users[][certificate]=@/Users/bayu/Documents/Project/DST/simdatuk/api/public/img/logo.svg" </code></pre>                                        </div>
+    --form "users[][certificate]=@C:\xampp\htdocs\simdatuk\api\public\img\logo.svg" </code></pre>                                        </div>
                                     </div>
                                 </div>
                                                             <div class="sl-bg-canvas-100 example-request example-request-javascript"
@@ -19440,7 +19069,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/training-histories"
+    "http://localhost/api/training-histories"
 );
 
 const headers = {
@@ -19529,7 +19158,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/training-histories/{id}"
+            <div title="http://localhost/api/training-histories/{id}"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -19539,7 +19168,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/training-histories/{id}</div>
                     </div>
 
@@ -19867,7 +19496,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/training-histories/1" \
+    --get "http://localhost/api/training-histories/1" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -19878,7 +19507,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/training-histories/1"
+    "http://localhost/api/training-histories/1"
 );
 
 const headers = {
@@ -19986,7 +19615,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/training-histories/{id}"
+            <div title="http://localhost/api/training-histories/{id}"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -19996,7 +19625,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/training-histories/{id}</div>
                     </div>
 
@@ -20465,7 +20094,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        /Users/bayu/Documents/Project/DST/simdatuk/api/public/img/logo.svg
+                        C:\xampp\htdocs\simdatuk\api\public\/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -20859,7 +20488,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8001/api/training-histories/1" \
+    "http://localhost/api/training-histories/1" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
@@ -20875,7 +20504,7 @@ You can check the Dev Tools console for debugging information.</p>
     --form "type=1"\
     --form "users[][id]=1"\
     --form "users[][user_id]=1"\
-    --form "users[][certificate]=@/Users/bayu/Documents/Project/DST/simdatuk/api/public/img/logo.svg" </code></pre>                                        </div>
+    --form "users[][certificate]=@C:\xampp\htdocs\simdatuk\api\public\img\logo.svg" </code></pre>                                        </div>
                                     </div>
                                 </div>
                                                             <div class="sl-bg-canvas-100 example-request example-request-javascript"
@@ -20883,7 +20512,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/training-histories/1"
+    "http://localhost/api/training-histories/1"
 );
 
 const headers = {
@@ -20993,7 +20622,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/recognition-histories"
+            <div title="http://localhost/api/recognition-histories"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -21003,7 +20632,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/recognition-histories</div>
                     </div>
 
@@ -21402,7 +21031,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/recognition-histories?page=1&amp;limit=10&amp;search=Satya+Lencana" \
+    --get "http://localhost/api/recognition-histories?page=1&amp;limit=10&amp;search=Satya+Lencana" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -21413,7 +21042,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/recognition-histories"
+    "http://localhost/api/recognition-histories"
 );
 
 const params = {
@@ -21518,7 +21147,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/recognition-histories"
+            <div title="http://localhost/api/recognition-histories"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -21528,7 +21157,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/recognition-histories</div>
                     </div>
 
@@ -22155,7 +21784,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8001/api/recognition-histories" \
+    "http://localhost/api/recognition-histories" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -22184,7 +21813,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/recognition-histories"
+    "http://localhost/api/recognition-histories"
 );
 
 const headers = {
@@ -22277,7 +21906,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/recognition-histories/{id}"
+            <div title="http://localhost/api/recognition-histories/{id}"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -22287,7 +21916,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/recognition-histories/{id}</div>
                     </div>
 
@@ -22615,7 +22244,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/recognition-histories/1" \
+    --get "http://localhost/api/recognition-histories/1" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -22626,7 +22255,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/recognition-histories/1"
+    "http://localhost/api/recognition-histories/1"
 );
 
 const headers = {
@@ -22736,7 +22365,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/recognition-histories/{id}"
+            <div title="http://localhost/api/recognition-histories/{id}"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -22746,7 +22375,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/recognition-histories/{id}</div>
                     </div>
 
@@ -23460,7 +23089,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8001/api/recognition-histories/1" \
+    "http://localhost/api/recognition-histories/1" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -23490,7 +23119,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/recognition-histories/1"
+    "http://localhost/api/recognition-histories/1"
 );
 
 const headers = {
@@ -23604,7 +23233,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/target-histories"
+            <div title="http://localhost/api/target-histories"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -23614,7 +23243,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/target-histories</div>
                     </div>
 
@@ -24013,7 +23642,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/target-histories?page=1&amp;limit=10&amp;search=SKP+Desember+2023" \
+    --get "http://localhost/api/target-histories?page=1&amp;limit=10&amp;search=SKP+Desember+2023" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -24024,7 +23653,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/target-histories"
+    "http://localhost/api/target-histories"
 );
 
 const params = {
@@ -24130,7 +23759,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/target-histories"
+            <div title="http://localhost/api/target-histories"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -24140,7 +23769,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/target-histories</div>
                     </div>
 
@@ -24425,7 +24054,9 @@ fetch(url, {
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Work Behavior Rating of Employee Target. 1=Diatas Ekspektasi, 2=Sesuai Ekspektasi, 3=Dibawah Ekspektasi.</p>
         </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                            Must be one of:
+            <ul style="list-style-position: inside; list-style-type: square;"><li><code>1</code></li> <li><code>2</code></li> <li><code>3</code></li></ul>
+                                    <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
@@ -24452,7 +24083,9 @@ fetch(url, {
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Employee Performance Predicate of Employee Target. 1=Sangat Baik, 2=Baik, 3=Butuh Perbaikan, 4=Kurang, 5=Sangat Kurang.</p>
         </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                            Must be one of:
+            <ul style="list-style-position: inside; list-style-type: square;"><li><code>1</code></li> <li><code>2</code></li> <li><code>3</code></li> <li><code>4</code></li> <li><code>5</code></li></ul>
+                                    <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
@@ -24479,7 +24112,9 @@ fetch(url, {
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Orginizational Performance Achievement of Employee Target. 1=Sangat Baik, 2=Baik, 3=Cukup.</p>
         </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                            Must be one of:
+            <ul style="list-style-position: inside; list-style-type: square;"><li><code>1</code></li> <li><code>2</code></li> <li><code>3</code></li></ul>
+                                    <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
@@ -24719,7 +24354,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8001/api/target-histories" \
+    "http://localhost/api/target-histories" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -24746,7 +24381,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/target-histories"
+    "http://localhost/api/target-histories"
 );
 
 const headers = {
@@ -24837,7 +24472,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/target-histories/{id}"
+            <div title="http://localhost/api/target-histories/{id}"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -24847,7 +24482,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/target-histories/{id}</div>
                     </div>
 
@@ -25175,7 +24810,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/target-histories/1" \
+    --get "http://localhost/api/target-histories/1" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -25186,7 +24821,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/target-histories/1"
+    "http://localhost/api/target-histories/1"
 );
 
 const headers = {
@@ -25289,7 +24924,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/target-histories/{id}"
+            <div title="http://localhost/api/target-histories/{id}"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -25299,7 +24934,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/target-histories/{id}</div>
                     </div>
 
@@ -25637,7 +25272,9 @@ fetch(url, {
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Work Behavior Rating of Employee Target. 1=Diatas Ekspektasi, 2=Sesuai Ekspektasi, 3=Dibawah Ekspektasi.</p>
         </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                            Must be one of:
+            <ul style="list-style-position: inside; list-style-type: square;"><li><code>1</code></li> <li><code>2</code></li> <li><code>3</code></li> <li><code>4</code></li> <li><code>5</code></li></ul>
+                                    <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
@@ -25664,7 +25301,9 @@ fetch(url, {
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Employee Performance Predicate of Employee Target. 1=Sangat Baik, 2=Baik, 3=Butuh Perbaikan, 4=Kurang, 5=Sangat Kurang.</p>
         </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                            Must be one of:
+            <ul style="list-style-position: inside; list-style-type: square;"><li><code>1</code></li> <li><code>2</code></li> <li><code>3</code></li> <li><code>4</code></li> <li><code>5</code></li></ul>
+                                    <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
@@ -25691,7 +25330,9 @@ fetch(url, {
                 <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
             <p>Refers to the Orginizational Performance Achievement of Employee Target. 1=Sangat Baik, 2=Baik, 3=Cukup.</p>
         </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                            Must be one of:
+            <ul style="list-style-position: inside; list-style-type: square;"><li><code>1</code></li> <li><code>2</code></li> <li><code>3</code></li> <li><code>4</code></li> <li><code>5</code></li></ul>
+                                    <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
@@ -25965,7 +25606,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8001/api/target-histories/1" \
+    "http://localhost/api/target-histories/1" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -25993,7 +25634,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/target-histories/1"
+    "http://localhost/api/target-histories/1"
 );
 
 const headers = {
@@ -26105,7 +25746,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/performance-histories"
+            <div title="http://localhost/api/performance-histories"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -26115,7 +25756,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/performance-histories</div>
                     </div>
 
@@ -26514,7 +26155,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/performance-histories?page=1&amp;limit=10&amp;search=PPK+Mei+2024" \
+    --get "http://localhost/api/performance-histories?page=1&amp;limit=10&amp;search=PPK+Mei+2024" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -26525,7 +26166,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/performance-histories"
+    "http://localhost/api/performance-histories"
 );
 
 const params = {
@@ -26630,7 +26271,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/performance-histories"
+            <div title="http://localhost/api/performance-histories"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -26640,7 +26281,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/performance-histories</div>
                     </div>
 
@@ -27163,7 +26804,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8001/api/performance-histories" \
+    "http://localhost/api/performance-histories" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -27188,7 +26829,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/performance-histories"
+    "http://localhost/api/performance-histories"
 );
 
 const headers = {
@@ -27277,7 +26918,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/performance-histories/{id}"
+            <div title="http://localhost/api/performance-histories/{id}"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -27287,7 +26928,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/performance-histories/{id}</div>
                     </div>
 
@@ -27615,7 +27256,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/performance-histories/1" \
+    --get "http://localhost/api/performance-histories/1" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -27626,7 +27267,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/performance-histories/1"
+    "http://localhost/api/performance-histories/1"
 );
 
 const headers = {
@@ -27728,7 +27369,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/performance-histories/{id}"
+            <div title="http://localhost/api/performance-histories/{id}"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -27738,7 +27379,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/performance-histories/{id}</div>
                     </div>
 
@@ -28348,7 +27989,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8001/api/performance-histories/1" \
+    "http://localhost/api/performance-histories/1" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -28374,7 +28015,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/performance-histories/1"
+    "http://localhost/api/performance-histories/1"
 );
 
 const headers = {
@@ -28484,7 +28125,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/disciplinary-histories"
+            <div title="http://localhost/api/disciplinary-histories"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -28494,7 +28135,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/disciplinary-histories</div>
                     </div>
 
@@ -28893,7 +28534,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/disciplinary-histories?page=1&amp;limit=10&amp;search=Hukuman+Disiplin" \
+    --get "http://localhost/api/disciplinary-histories?page=1&amp;limit=10&amp;search=Hukuman+Disiplin" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -28904,7 +28545,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/disciplinary-histories"
+    "http://localhost/api/disciplinary-histories"
 );
 
 const params = {
@@ -29008,7 +28649,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/disciplinary-histories"
+            <div title="http://localhost/api/disciplinary-histories"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -29018,7 +28659,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/disciplinary-histories</div>
                     </div>
 
@@ -29723,7 +29364,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8001/api/disciplinary-histories" \
+    "http://localhost/api/disciplinary-histories" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -29755,7 +29396,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/disciplinary-histories"
+    "http://localhost/api/disciplinary-histories"
 );
 
 const headers = {
@@ -29851,7 +29492,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/disciplinary-histories/{id}"
+            <div title="http://localhost/api/disciplinary-histories/{id}"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -29861,7 +29502,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/disciplinary-histories/{id}</div>
                     </div>
 
@@ -30189,7 +29830,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/disciplinary-histories/1" \
+    --get "http://localhost/api/disciplinary-histories/1" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -30200,7 +29841,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/disciplinary-histories/1"
+    "http://localhost/api/disciplinary-histories/1"
 );
 
 const headers = {
@@ -30316,7 +29957,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/disciplinary-histories/{id}"
+            <div title="http://localhost/api/disciplinary-histories/{id}"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -30326,7 +29967,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/disciplinary-histories/{id}</div>
                     </div>
 
@@ -31118,7 +30759,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8001/api/disciplinary-histories/1" \
+    "http://localhost/api/disciplinary-histories/1" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -31151,7 +30792,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/disciplinary-histories/1"
+    "http://localhost/api/disciplinary-histories/1"
 );
 
 const headers = {
@@ -31276,7 +30917,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/positions"
+            <div title="http://localhost/api/positions"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -31286,7 +30927,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/positions</div>
                     </div>
 
@@ -31685,7 +31326,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/positions?page=1&amp;limit=10&amp;keyword=pembina+utama" \
+    --get "http://localhost/api/positions?page=1&amp;limit=10&amp;keyword=pembina+utama" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -31696,7 +31337,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/positions"
+    "http://localhost/api/positions"
 );
 
 const params = {
@@ -31805,7 +31446,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/grades"
+            <div title="http://localhost/api/grades"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -31815,7 +31456,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/grades</div>
                     </div>
 
@@ -32214,7 +31855,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/grades?page=1&amp;limit=10&amp;search=pembina+utama" \
+    --get "http://localhost/api/grades?page=1&amp;limit=10&amp;search=pembina+utama" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -32225,7 +31866,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/grades"
+    "http://localhost/api/grades"
 );
 
 const params = {
@@ -32334,7 +31975,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/institutions"
+            <div title="http://localhost/api/institutions"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -32344,7 +31985,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/institutions</div>
                     </div>
 
@@ -32743,7 +32384,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/institutions?page=1&amp;limit=10&amp;search=kementerian" \
+    --get "http://localhost/api/institutions?page=1&amp;limit=10&amp;search=kementerian" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -32754,7 +32395,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/institutions"
+    "http://localhost/api/institutions"
 );
 
 const params = {
@@ -32854,7 +32495,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/institutions"
+            <div title="http://localhost/api/institutions"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -32864,7 +32505,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/institutions</div>
                     </div>
 
@@ -33191,7 +32832,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8001/api/institutions" \
+    "http://localhost/api/institutions" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -33206,7 +32847,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/institutions"
+    "http://localhost/api/institutions"
 );
 
 const headers = {
@@ -33285,7 +32926,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/institutions/{id}"
+            <div title="http://localhost/api/institutions/{id}"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -33295,7 +32936,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/institutions/{id}</div>
                     </div>
 
@@ -33623,7 +33264,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/institutions/1" \
+    --get "http://localhost/api/institutions/1" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -33634,7 +33275,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/institutions/1"
+    "http://localhost/api/institutions/1"
 );
 
 const headers = {
@@ -33724,7 +33365,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/institutions/{id}"
+            <div title="http://localhost/api/institutions/{id}"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -33734,7 +33375,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/institutions/{id}</div>
                     </div>
 
@@ -34122,7 +33763,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8001/api/institutions/1" \
+    "http://localhost/api/institutions/1" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -34137,7 +33778,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/institutions/1"
+    "http://localhost/api/institutions/1"
 );
 
 const headers = {
@@ -34229,7 +33870,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/institutions/{id}"
+            <div title="http://localhost/api/institutions/{id}"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -34239,7 +33880,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/institutions/{id}</div>
                     </div>
 
@@ -34567,7 +34208,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8001/api/institutions/1" \
+    "http://localhost/api/institutions/1" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -34578,7 +34219,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/institutions/1"
+    "http://localhost/api/institutions/1"
 );
 
 const headers = {
@@ -34672,7 +34313,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/employment-types"
+            <div title="http://localhost/api/employment-types"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -34682,7 +34323,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/employment-types</div>
                     </div>
 
@@ -35135,7 +34776,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/employment-types?page=1&amp;limit=10&amp;status=&amp;type=&amp;search=ORGANIK" \
+    --get "http://localhost/api/employment-types?page=1&amp;limit=10&amp;status=&amp;type=&amp;search=ORGANIK" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -35146,7 +34787,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/employment-types"
+    "http://localhost/api/employment-types"
 );
 
 const params = {
@@ -35250,7 +34891,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/employment-types"
+            <div title="http://localhost/api/employment-types"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -35260,7 +34901,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/employment-types</div>
                     </div>
 
@@ -35637,7 +35278,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8001/api/employment-types" \
+    "http://localhost/api/employment-types" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -35654,7 +35295,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/employment-types"
+    "http://localhost/api/employment-types"
 );
 
 const headers = {
@@ -35735,7 +35376,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/employment-types/{id}"
+            <div title="http://localhost/api/employment-types/{id}"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -35745,7 +35386,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/employment-types/{id}</div>
                     </div>
 
@@ -36073,7 +35714,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/employment-types/1" \
+    --get "http://localhost/api/employment-types/1" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -36084,7 +35725,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/employment-types/1"
+    "http://localhost/api/employment-types/1"
 );
 
 const headers = {
@@ -36174,7 +35815,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/employment-types/{id}"
+            <div title="http://localhost/api/employment-types/{id}"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -36184,7 +35825,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/employment-types/{id}</div>
                     </div>
 
@@ -36622,7 +36263,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8001/api/employment-types/1" \
+    "http://localhost/api/employment-types/1" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -36639,7 +36280,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/employment-types/1"
+    "http://localhost/api/employment-types/1"
 );
 
 const headers = {
@@ -36733,7 +36374,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/employment-types/{id}"
+            <div title="http://localhost/api/employment-types/{id}"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -36743,7 +36384,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/employment-types/{id}</div>
                     </div>
 
@@ -37071,7 +36712,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8001/api/employment-types/1" \
+    "http://localhost/api/employment-types/1" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -37082,7 +36723,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/employment-types/1"
+    "http://localhost/api/employment-types/1"
 );
 
 const headers = {
@@ -37176,7 +36817,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/decrees"
+            <div title="http://localhost/api/decrees"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -37186,7 +36827,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/decrees</div>
                     </div>
 
@@ -37585,7 +37226,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/decrees?page=1&amp;limit=10&amp;search=Keputusan+Presiden" \
+    --get "http://localhost/api/decrees?page=1&amp;limit=10&amp;search=Keputusan+Presiden" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -37596,7 +37237,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/decrees"
+    "http://localhost/api/decrees"
 );
 
 const params = {
@@ -37705,7 +37346,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/echelons"
+            <div title="http://localhost/api/echelons"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -37715,7 +37356,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/echelons</div>
                     </div>
 
@@ -38114,7 +37755,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/echelons?page=1&amp;limit=10&amp;search=Eselon+I" \
+    --get "http://localhost/api/echelons?page=1&amp;limit=10&amp;search=Eselon+I" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -38125,7 +37766,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/echelons"
+    "http://localhost/api/echelons"
 );
 
 const params = {
@@ -38236,7 +37877,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/groups"
+            <div title="http://localhost/api/groups"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -38246,7 +37887,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/groups</div>
                     </div>
 
@@ -38645,7 +38286,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/groups?page=1&amp;limit=10&amp;search=Arsip" \
+    --get "http://localhost/api/groups?page=1&amp;limit=10&amp;search=Arsip" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -38656,7 +38297,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/groups"
+    "http://localhost/api/groups"
 );
 
 const params = {
@@ -38765,7 +38406,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/disciplinaries"
+            <div title="http://localhost/api/disciplinaries"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -38775,7 +38416,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/disciplinaries</div>
                     </div>
 
@@ -39174,7 +38815,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/disciplinaries?page=1&amp;limit=10&amp;search=Teguran+Tertulis" \
+    --get "http://localhost/api/disciplinaries?page=1&amp;limit=10&amp;search=Teguran+Tertulis" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -39185,7 +38826,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/disciplinaries"
+    "http://localhost/api/disciplinaries"
 );
 
 const params = {
@@ -39295,7 +38936,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/residences"
+            <div title="http://localhost/api/residences"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -39305,7 +38946,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/residences</div>
                     </div>
 
@@ -39704,7 +39345,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/residences?page=1&amp;limit=10&amp;search=Luar+Komplek" \
+    --get "http://localhost/api/residences?page=1&amp;limit=10&amp;search=Luar+Komplek" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -39715,7 +39356,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/residences"
+    "http://localhost/api/residences"
 );
 
 const params = {
@@ -39832,7 +39473,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/permissions"
+            <div title="http://localhost/api/permissions"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -39842,7 +39483,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/permissions</div>
                     </div>
 
@@ -40109,7 +39750,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/permissions" \
+    --get "http://localhost/api/permissions" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -40120,7 +39761,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/permissions"
+    "http://localhost/api/permissions"
 );
 
 const headers = {
@@ -40212,7 +39853,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/roles"
+            <div title="http://localhost/api/roles"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -40222,7 +39863,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/roles</div>
                     </div>
 
@@ -40621,7 +40262,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/roles?page=1&amp;limit=10&amp;search=administrator" \
+    --get "http://localhost/api/roles?page=1&amp;limit=10&amp;search=administrator" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -40632,7 +40273,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/roles"
+    "http://localhost/api/roles"
 );
 
 const params = {
@@ -40732,7 +40373,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/roles"
+            <div title="http://localhost/api/roles"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -40742,7 +40383,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/roles</div>
                     </div>
 
@@ -41153,7 +40794,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8001/api/roles" \
+    "http://localhost/api/roles" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -41174,7 +40815,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/roles"
+    "http://localhost/api/roles"
 );
 
 const headers = {
@@ -41259,7 +40900,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/roles/{id}"
+            <div title="http://localhost/api/roles/{id}"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -41269,7 +40910,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/roles/{id}</div>
                     </div>
 
@@ -41597,7 +41238,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/roles/1" \
+    --get "http://localhost/api/roles/1" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -41608,7 +41249,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/roles/1"
+    "http://localhost/api/roles/1"
 );
 
 const headers = {
@@ -41708,7 +41349,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/roles/{id}"
+            <div title="http://localhost/api/roles/{id}"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -41718,7 +41359,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/roles/{id}</div>
                     </div>
 
@@ -42190,14 +41831,14 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8001/api/roles/1" \
+    "http://localhost/api/roles/1" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
     \"name\": \"admin\",
     \"permissions\": [
-        \"temporibus\"
+        \"animi\"
     ]
 }"
 </code></pre>                                        </div>
@@ -42208,7 +41849,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/roles/1"
+    "http://localhost/api/roles/1"
 );
 
 const headers = {
@@ -42220,7 +41861,7 @@ const headers = {
 let body = {
     "name": "admin",
     "permissions": [
-        "temporibus"
+        "animi"
     ]
 };
 
@@ -42303,7 +41944,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/roles/{id}"
+            <div title="http://localhost/api/roles/{id}"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -42313,7 +41954,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/roles/{id}</div>
                     </div>
 
@@ -42701,7 +42342,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8001/api/roles/1" \
+    "http://localhost/api/roles/1" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -42716,7 +42357,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/roles/1"
+    "http://localhost/api/roles/1"
 );
 
 const headers = {
@@ -42802,7 +42443,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/users"
+            <div title="http://localhost/api/users"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -42812,7 +42453,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/users</div>
                     </div>
 
@@ -43211,7 +42852,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/users?page=1&amp;limit=10&amp;search=admin" \
+    --get "http://localhost/api/users?page=1&amp;limit=10&amp;search=admin" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -43222,7 +42863,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/users"
+    "http://localhost/api/users"
 );
 
 const params = {
@@ -43326,7 +42967,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/users"
+            <div title="http://localhost/api/users"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -43336,7 +42977,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/users</div>
                     </div>
 
@@ -43747,7 +43388,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8001/api/users" \
+    "http://localhost/api/users" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -43765,7 +43406,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/users"
+    "http://localhost/api/users"
 );
 
 const headers = {
@@ -43873,7 +43514,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/users/{id}"
+            <div title="http://localhost/api/users/{id}"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -43883,7 +43524,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/users/{id}</div>
                     </div>
 
@@ -44211,7 +43852,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/users/1" \
+    --get "http://localhost/api/users/1" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -44222,7 +43863,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/users/1"
+    "http://localhost/api/users/1"
 );
 
 const headers = {
@@ -44319,7 +43960,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/users/{id}"
+            <div title="http://localhost/api/users/{id}"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -44329,7 +43970,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/users/{id}</div>
                     </div>
 
@@ -44767,7 +44408,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8001/api/users/1" \
+    "http://localhost/api/users/1" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -44784,7 +44425,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/users/1"
+    "http://localhost/api/users/1"
 );
 
 const headers = {
@@ -44887,7 +44528,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/users/status"
+            <div title="http://localhost/api/users/status"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -44897,7 +44538,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/users/status</div>
                     </div>
 
@@ -45252,7 +44893,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8001/api/users/status" \
+    "http://localhost/api/users/status" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
@@ -45268,7 +44909,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/users/status"
+    "http://localhost/api/users/status"
 );
 
 const headers = {
@@ -45369,7 +45010,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/profile"
+            <div title="http://localhost/api/profile"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -45379,7 +45020,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/profile</div>
                     </div>
 
@@ -45646,7 +45287,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/profile" \
+    --get "http://localhost/api/profile" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -45657,7 +45298,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/profile"
+    "http://localhost/api/profile"
 );
 
 const headers = {
@@ -45739,7 +45380,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/profile"
+            <div title="http://localhost/api/profile"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -45749,7 +45390,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/profile</div>
                     </div>
 
@@ -45854,7 +45495,7 @@ issue at <a href="https://github.com/knuckleswtf/scribe/issues/831">https://gith
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        /Users/bayu/Documents/Project/DST/simdatuk/api/public/img/logo.svg
+                        C:\xampp\htdocs\simdatuk\api\public\/img/logo.svg
                     </div>
                 </div>
             </div>
@@ -46276,7 +45917,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request POST \
-    "http://localhost:8001/api/profile" \
+    "http://localhost/api/profile" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
@@ -46285,7 +45926,7 @@ You can check the Dev Tools console for debugging information.</p>
     --form "old_password=current_password"\
     --form "password=new_password"\
     --form "password_confirmation=new_password"\
-    --form "photo_profile=@/Users/bayu/Documents/Project/DST/simdatuk/api/public/img/logo.svg" </code></pre>                                        </div>
+    --form "photo_profile=@C:\xampp\htdocs\simdatuk\api\public\img\logo.svg" </code></pre>                                        </div>
                                     </div>
                                 </div>
                                                             <div class="sl-bg-canvas-100 example-request example-request-javascript"
@@ -46293,7 +45934,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/profile"
+    "http://localhost/api/profile"
 );
 
 const headers = {
@@ -46384,7 +46025,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/testing"
+            <div title="http://localhost/api/testing"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -46394,7 +46035,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/testing</div>
                     </div>
 
@@ -46603,7 +46244,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/testing" \
+    --get "http://localhost/api/testing" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
                                     </div>
@@ -46613,7 +46254,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/testing"
+    "http://localhost/api/testing"
 );
 
 const headers = {
@@ -46687,7 +46328,7 @@ fetch(url, {
                                                                                                                     x-ratelimit-limit
                                                             : 60
                                                                                                                     x-ratelimit-remaining
-                                                            : 58
+                                                            : 59
                                                                                                                     access-control-allow-origin
                                                             : *
                                                          </code></pre>
@@ -46714,7 +46355,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/export/recapitulations"
+            <div title="http://localhost/api/export/recapitulations"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -46724,7 +46365,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/export/recapitulations</div>
                     </div>
 
@@ -46991,7 +46632,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/export/recapitulations" \
+    --get "http://localhost/api/export/recapitulations" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -47002,7 +46643,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/export/recapitulations"
+    "http://localhost/api/export/recapitulations"
 );
 
 const headers = {
@@ -47077,9 +46718,7 @@ fetch(url, {
                                                                                                                                                                         
                                             <pre><code style="max-height: 300px;"
                                                        class="language-json sl-overflow-x-auto sl-overflow-y-auto">{
-    &quot;code&quot;: 401,
-    &quot;message&quot;: &quot;Anda harus login terlebih dahulu!&quot;,
-    &quot;data&quot;: null
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
 }</code></pre>
                                                                             </div>
                                 </div>
@@ -47100,7 +46739,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/export/employees"
+            <div title="http://localhost/api/export/employees"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -47110,7 +46749,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/export/employees</div>
                     </div>
 
@@ -47377,7 +47016,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/export/employees" \
+    --get "http://localhost/api/export/employees" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -47388,7 +47027,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/export/employees"
+    "http://localhost/api/export/employees"
 );
 
 const headers = {
@@ -47463,9 +47102,7 @@ fetch(url, {
                                                                                                                                                                         
                                             <pre><code style="max-height: 300px;"
                                                        class="language-json sl-overflow-x-auto sl-overflow-y-auto">{
-    &quot;code&quot;: 401,
-    &quot;message&quot;: &quot;Anda harus login terlebih dahulu!&quot;,
-    &quot;data&quot;: null
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
 }</code></pre>
                                                                             </div>
                                 </div>
@@ -47486,7 +47123,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/export/employees/{id}"
+            <div title="http://localhost/api/export/employees/{id}"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -47496,7 +47133,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/export/employees/{id}</div>
                     </div>
 
@@ -47824,7 +47461,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/export/employees/1" \
+    --get "http://localhost/api/export/employees/1" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -47835,7 +47472,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/export/employees/1"
+    "http://localhost/api/export/employees/1"
 );
 
 const headers = {
@@ -47910,9 +47547,7 @@ fetch(url, {
                                                                                                                                                                         
                                             <pre><code style="max-height: 300px;"
                                                        class="language-json sl-overflow-x-auto sl-overflow-y-auto">{
-    &quot;code&quot;: 401,
-    &quot;message&quot;: &quot;Anda harus login terlebih dahulu!&quot;,
-    &quot;data&quot;: null
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
 }</code></pre>
                                                                             </div>
                                 </div>
@@ -47933,7 +47568,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/export/employees-zip"
+            <div title="http://localhost/api/export/employees-zip"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -47943,7 +47578,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/export/employees-zip</div>
                     </div>
 
@@ -48074,7 +47709,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [1]
+                        [6]
                     </div>
                 </div>
             </div>
@@ -48099,7 +47734,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [17]
+                        [7]
                     </div>
                 </div>
             </div>
@@ -48124,7 +47759,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [15]
+                        [10]
                     </div>
                 </div>
             </div>
@@ -48174,7 +47809,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [2]
+                        [13]
                     </div>
                 </div>
             </div>
@@ -48199,7 +47834,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [7]
+                        [18]
                     </div>
                 </div>
             </div>
@@ -48224,7 +47859,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [2]
+                        [1]
                     </div>
                 </div>
             </div>
@@ -48249,7 +47884,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [&quot;perferendis&quot;]
+                        [&quot;et&quot;]
                     </div>
                 </div>
             </div>
@@ -48274,7 +47909,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [13]
+                        [9]
                     </div>
                 </div>
             </div>
@@ -48438,31 +48073,31 @@ fetch(url, {
                                      style="font-family: var(--font-code); font-size: 12px; line-height: var(--lh-code);"
                                 >{
     "organization": [
-        1
+        6
     ],
     "employee_type": [
-        17
+        7
     ],
     "echelons": [
-        15
+        10
     ],
     "grades": [
         7
     ],
     "position_status": [
-        2
+        13
     ],
     "education": [
-        7
+        18
     ],
     "gender": [
-        2
+        1
     ],
     "age_range": [
-        "perferendis"
+        "et"
     ],
     "marital_status": [
-        13
+        9
     ]
 }</div>
                             </div>
@@ -48555,37 +48190,37 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/export/employees-zip" \
+    --get "http://localhost/api/export/employees-zip" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
     \"organization\": [
-        1
+        6
     ],
     \"employee_type\": [
-        17
+        7
     ],
     \"echelons\": [
-        15
+        10
     ],
     \"grades\": [
         7
     ],
     \"position_status\": [
-        2
+        13
     ],
     \"education\": [
-        7
+        18
     ],
     \"gender\": [
-        2
+        1
     ],
     \"age_range\": [
-        \"perferendis\"
+        \"et\"
     ],
     \"marital_status\": [
-        13
+        9
     ]
 }"
 </code></pre>                                        </div>
@@ -48596,7 +48231,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/export/employees-zip"
+    "http://localhost/api/export/employees-zip"
 );
 
 const headers = {
@@ -48607,31 +48242,31 @@ const headers = {
 
 let body = {
     "organization": [
-        1
+        6
     ],
     "employee_type": [
-        17
+        7
     ],
     "echelons": [
-        15
+        10
     ],
     "grades": [
         7
     ],
     "position_status": [
-        2
+        13
     ],
     "education": [
-        7
+        18
     ],
     "gender": [
-        2
+        1
     ],
     "age_range": [
-        "perferendis"
+        "et"
     ],
     "marital_status": [
-        13
+        9
     ]
 };
 
@@ -48702,9 +48337,7 @@ fetch(url, {
                                                                                                                                                                         
                                             <pre><code style="max-height: 300px;"
                                                        class="language-json sl-overflow-x-auto sl-overflow-y-auto">{
-    &quot;code&quot;: 401,
-    &quot;message&quot;: &quot;Anda harus login terlebih dahulu!&quot;,
-    &quot;data&quot;: null
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
 }</code></pre>
                                                                             </div>
                                 </div>
@@ -48725,7 +48358,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/export/rekapitulasi"
+            <div title="http://localhost/api/export/rekapitulasi"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -48735,7 +48368,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/export/rekapitulasi</div>
                     </div>
 
@@ -48944,7 +48577,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/export/rekapitulasi" \
+    --get "http://localhost/api/export/rekapitulasi" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
                                     </div>
@@ -48954,7 +48587,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/export/rekapitulasi"
+    "http://localhost/api/export/rekapitulasi"
 );
 
 const headers = {
@@ -49028,9 +48661,7 @@ fetch(url, {
                                                                                                                                                                         
                                             <pre><code style="max-height: 300px;"
                                                        class="language-json sl-overflow-x-auto sl-overflow-y-auto">{
-    &quot;code&quot;: 401,
-    &quot;message&quot;: &quot;Anda harus login terlebih dahulu!&quot;,
-    &quot;data&quot;: null
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
 }</code></pre>
                                                                             </div>
                                 </div>
@@ -49051,7 +48682,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/export/rekapitulasi-non-asn"
+            <div title="http://localhost/api/export/rekapitulasi-non-asn"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -49061,7 +48692,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/export/rekapitulasi-non-asn</div>
                     </div>
 
@@ -49270,7 +48901,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/export/rekapitulasi-non-asn" \
+    --get "http://localhost/api/export/rekapitulasi-non-asn" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
                                     </div>
@@ -49280,7 +48911,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/export/rekapitulasi-non-asn"
+    "http://localhost/api/export/rekapitulasi-non-asn"
 );
 
 const headers = {
@@ -49354,9 +48985,7 @@ fetch(url, {
                                                                                                                                                                         
                                             <pre><code style="max-height: 300px;"
                                                        class="language-json sl-overflow-x-auto sl-overflow-y-auto">{
-    &quot;code&quot;: 401,
-    &quot;message&quot;: &quot;Anda harus login terlebih dahulu!&quot;,
-    &quot;data&quot;: null
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
 }</code></pre>
                                                                             </div>
                                 </div>
@@ -49377,7 +49006,7 @@ fetch(url, {
         </div>
 
         <div class="sl-relative">
-            <div title="http://localhost:8001/api/export/rekapitulasi-asn"
+            <div title="http://localhost/api/export/rekapitulasi-asn"
                      class="sl-stack sl-stack--horizontal sl-stack--3 sl-inline-flex sl-flex-row sl-items-center sl-max-w-full sl-font-mono sl-py-2 sl-pr-4 sl-bg-canvas-50 sl-rounded-lg"
                 >
                                             <div class="sl-text-lg sl-font-semibold sl-px-2.5 sl-py-1 sl-text-on-primary sl-rounded-lg"
@@ -49387,7 +49016,7 @@ fetch(url, {
                         </div>
                                         <div class="sl-flex sl-overflow-x-hidden sl-text-lg sl-select-all">
                         <div dir="rtl"
-                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost:8001</div>
+                             class="sl-overflow-x-hidden sl-truncate sl-text-muted">http://localhost</div>
                         <div class="sl-flex-1 sl-font-semibold">/api/export/rekapitulasi-asn</div>
                     </div>
 
@@ -49596,7 +49225,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/export/rekapitulasi-asn" \
+    --get "http://localhost/api/export/rekapitulasi-asn" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
                                     </div>
@@ -49606,7 +49235,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8001/api/export/rekapitulasi-asn"
+    "http://localhost/api/export/rekapitulasi-asn"
 );
 
 const headers = {
@@ -49680,9 +49309,7 @@ fetch(url, {
                                                                                                                                                                         
                                             <pre><code style="max-height: 300px;"
                                                        class="language-json sl-overflow-x-auto sl-overflow-y-auto">{
-    &quot;code&quot;: 401,
-    &quot;message&quot;: &quot;Anda harus login terlebih dahulu!&quot;,
-    &quot;data&quot;: null
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
 }</code></pre>
                                                                             </div>
                                 </div>
