@@ -29,6 +29,7 @@ class CreateGradeHistoryRequest extends FormRequest
             'users.*.grade_id' => 'required|numeric',
             'users.*.effective_date' => 'required|date',
             'users.*.decree_number' => 'max:160',
+            'users.*.status' => 'required|boolean',
         ];
     }
 
@@ -54,6 +55,8 @@ class CreateGradeHistoryRequest extends FormRequest
             'users.*.effective_date.required' => 'Tanggal efektif golongan tidak boleh kosong.',
             'users.*.effective_date.date' => 'Tanggal efektif golongan harus berupa tanggal.',
             'users.*.decree_number.max' => 'Nomor SK golongan tidak beloh lebih dari 160 karakter.',
+            'users.*.status.required' => 'Status tidak boleh kosong.',
+            'users.*.status.boolean' => 'Status harus berupa boolean.',
         ];
     }
 
@@ -92,6 +95,10 @@ class CreateGradeHistoryRequest extends FormRequest
             'users.*.decree_number' => [
                 'description' => 'Refers to the Decree Number of Employee Grade.',
                 'example' => 'Nomor 50 Tahun 2008',
+            ],
+            'users.*.status' => [
+                'description' => 'Refers to the Status of Employee Grade.',
+                'example' => 1,
             ],
         ];
     }

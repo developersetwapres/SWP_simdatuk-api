@@ -29,7 +29,7 @@ class GradeHistoryController extends Controller
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
      * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
      * @queryParam search string The keyword search field for the name. Example: Penata Tingkat I (III/d)
-     * @response 200 {"code": 200,"message": "success","data": [{"id": 1,"created_at": "2024-05-16 05:07:27","name": "Riwayat Desember 2023","period_month": 3,"period_year": "2010","total": 1}],"pagination": {"total": 2,"count": 2,"per_page": 10,"current_page": 1,"total_pages": 1,"links": {"first_page": "http://localhost/api/grade-histories?page=1","last_page": "http://localhost/api/grade-histories?page=1","next_page": null,"prev_page": null}}}
+     * @response 200 {"code": 200,"message": "success","data": [{"id": 1,"created_at": "2024-06-07 04:15:43","name": "Perubahan Golongan Mei ","period_month": 5,"period_year": "2024","total": 2}],"pagination": {"total": 251,"count": 10,"per_page": 10,"current_page": 1,"total_pages": 26,"links": {"first_page": "http://localhost/api/grade-histories?page=1","last_page": "http://localhost/api/grade-histories?page=26","next_page": "http://localhost/api/grade-histories?page=2","prev_page": null}}}
      */
     public function index()
     {
@@ -99,7 +99,7 @@ class GradeHistoryController extends Controller
      * @authenticated
      * @urlParam id Refers to the ID of Grade. Example: 1
      * @response 404 {"code": 404,"message": "Riwayat golongan tidak ditemukan.","data": null}
-     * @response 200 {"code": 200,"message": "success","data": {"id": 1,"period_month": 3,"period_year": "2010","name": "Riwayat Desember 2023","created_at": "2024-05-16 05:07:27","users": [{"id": 1,"user_id": 1,"name": "administrator","employee_id_number": "0000000000000","grade_id": 1,"grade_name": "Juru Muda","grade_code": "I/a","effective_date": "2020-10-22","decree_number": "Nomor 50 Tahun 2008","created_at": "2024-05-16 05:07:27"}]}}
+     * @response 200 {"code": 200,"message": "success","data": {"id": 1,"period_month": 5,"period_year": "2024","name": "Perubahan Golongan Mei ","created_at": "2024-06-07 04:15:43","users": [{"id": 1,"user_id": 1,"name": "Mellinia Fitrika Irjayanti","employee_id_number": "00010015","grade_id": 1,"grade_name": "Pembina Utama","grade_code": "(IV/e)","effective_date": "2020-10-22","decree_number": "Nomor 50 Tahun 2008","status": 1,"created_at": "2024-06-07 04:15:43"}]}}
      */
     public function show()
     {
@@ -116,7 +116,19 @@ class GradeHistoryController extends Controller
         $users->join('users as u', 'u.id', '=', 'ghu.user_id');
         $users->join('grades as g', 'ghu.grade_id', '=', 'g.id');
         $users->where('ghu.grade_history_id', $gradeHistory->id);
-        $users->select('ghu.id', 'ghu.user_id', 'u.name', 'u.employee_id_number', 'g.id as grade_id', 'g.name as grade_name', 'g.code as grade_code', 'ghu.effective_date', 'ghu.decree_number', 'ghu.created_at');
+        $users->select(
+            'ghu.id',
+            'ghu.user_id',
+            'u.name',
+            'u.employee_id_number',
+            'g.id as grade_id',
+            'g.name as grade_name',
+            'g.code as grade_code',
+            'ghu.effective_date',
+            'ghu.decree_number',
+            'ghu.status',
+            'ghu.created_at'
+        );
         $users = $users->get();
 
         $gradeHistory->users = $users;
@@ -166,10 +178,14 @@ class GradeHistoryController extends Controller
             DB::table('grade_history_users')->whereIn('id', $result)->delete();
 
             foreach ($this->request->users as $user) {
-                // Insert new item
-                $user['grade_history_id'] = $this->request->id;
-                $user['status'] = 1;
-                array_push($users, $user);
+                if (!is_null($user['id'])) {
+                    // Update existing data
+                    DB::table('grade_history_users')->where('id', $user['id'])->updateTs($user);
+                } else {
+                    // Insert new item
+                    $user['grade_history_id'] = $this->request->id;
+                    array_push($users, $user);
+                }
             }
             if (count($users) > 0) {
                 DB::table('grade_history_users')->insertTs($users);
