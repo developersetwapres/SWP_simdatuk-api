@@ -808,8 +808,28 @@ class ExportController extends Controller
         $user->leftJoin('groups', 'groups.id', '=', 'users.organization_id');
         $user->leftJoin('grades', 'grades.id', '=', 'users.grade_id');
         $user->leftJoin('position_history_users', 'position_history_users.user_id', '=', 'users.id');
+
         if (isset($request->organization)){
             $user->whereIn('users.organization_id', $request->organization);
+        }
+        if (isset($request->age_range)) {
+            $ageRanges = $request->age_range;
+            $today = Carbon::today();
+
+            $user->where(function ($query) use ($ageRanges, $today) {
+                foreach ($ageRanges as $range) {
+                    list($minAge, $maxAge) = explode('-', $range);
+
+                    $minDateOfBirth = $today->copy()->subYears($maxAge)->addDay()->toDateString();
+                    $maxDateOfBirth = $today->copy()->subYears($minAge)->toDateString();
+
+                    // Debugging: Log the calculated date ranges
+                    logger()->info("Filtering users with birth dates between $minDateOfBirth and $maxDateOfBirth for age range $minAge-$maxAge");
+
+                    // Add the age range condition with OR where clauses
+                    $query->orWhereBetween('users.date_of_birth', [$minDateOfBirth, $maxDateOfBirth]);
+                }
+            });
         }
         if (isset($request->echelons)){
             $user->whereIn('echelons.name', $request->echelons);
@@ -822,7 +842,6 @@ class ExportController extends Controller
         }
         if (isset($request->position_status)){
             $user->whereIn('position_history_users.position_status', $request->position_status);
-            $user->where('position_history_users.status', 1);
         }
         if (isset($request->gender)){
             $user->whereIn('users.gender', $request->gender);
@@ -833,29 +852,7 @@ class ExportController extends Controller
         if (isset($request->employee_type)){
            $user->whereIn('users.type', $request->employee_type);
         }
-        if (isset($request->age_range)){
-            $ageRanges = $request->age_range;
-            $today = Carbon::today();
-            foreach ($ageRanges as $range) {
-                list($minAge, $maxAge) = explode('-', $range);
 
-                $minDateOfBirth = $today->copy()->subYears($maxAge)->toDateString();
-                $maxDateOfBirth = $today->copy()->subYears($minAge)->endOfDay()->toDateString();
-
-                $user->orWhereBetween('user.date_of_birth', [$minDateOfBirth, $maxDateOfBirth]);
-            }
-        }
-//        if (isset($request->pension_age)){
-//            $pensionRanges = $request->pension_age;
-//            $today = Carbon::now();
-//            foreach ($pensionRanges as $range){
-//                list($minAge, $maxAge) = explode('-', $range);
-//                $minPensionAge = $today->copy()->subYears($maxAge)->toDateString();
-//                $maxPensionAge = $today->copy()->subYears($minAge)->endOfDay()->toDateString();
-//
-//               $user->orWhereBetween('user.expire_at', [$minPensionAge, $maxPensionAge]);
-//            }
-//        }
         $userIds = $user->pluck('users.id')->toArray();
         if (! $userIds){
             return $this->response( 400, 'Data pegawai tidak ditemukan');
@@ -936,91 +933,99 @@ class ExportController extends Controller
 
     public function userExcel(request $request)
     {
+        // filter user to get ids
+        $users = DB::table('users')
+            ->leftJoin('echelons', 'users.echelon_id', '=', 'echelons.id')
+            ->leftJoin('user_educations', 'users.id', '=', 'user_educations.user_id')
+            ->leftJoin('position_history_users', 'users.id', '=', 'position_history_users.user_id')
+            ->select('users.*'); // Add more fields as needed
+        if (isset($request->organization)){
+            $users->whereIn('users.organization_id', $request->organization);
+        }
+        if (isset($request->age_range)) {
+            $ageRanges = $request->age_range;
+            $today = Carbon::today();
+            $users->where(function ($query) use ($ageRanges, $today) {
+                foreach ($ageRanges as $range) {
+                    list($minAge, $maxAge) = explode('-', $range);
+
+                    $minDateOfBirth = $today->copy()->subYears($maxAge)->addDay()->toDateString();
+                    $maxDateOfBirth = $today->copy()->subYears($minAge)->toDateString();
+
+                    $query->orWhereBetween('users.date_of_birth', [$minDateOfBirth, $maxDateOfBirth]);
+                }
+            });
+        }
+        if (isset($request->echelons)){
+            $users->whereIn('echelons.name', $request->echelons);
+        }
+        if (isset($request->grades)){
+            $users->whereIn('users.grade_id', $request->grades);
+        }
+        if (isset($request->education)){
+            $users->whereIn('user_educations.level', $request->education);
+        }
+        if (isset($request->position_status)){
+            $users->whereIn('position_history_users.position_status', $request->position_status);
+        }
+        if (isset($request->gender)){
+            $users->whereIn('users.gender', $request->gender);
+        }
+        if (isset($request->marital_status)){
+            $users->whereIn('users.marital_status', $request->marital_status);
+        }
+        if (isset($request->employee_type)){
+            $users->whereIn('users.type', $request->employee_type);
+        }
+        $userIds = $users->pluck('users.id')->toArray();
+        if (! $userIds){
+            return $this->response( 400, 'Data pegawai tidak ditemukan');
+        }
+
+        // toggle field
         $toggleFieldBio = array();
-        if ($request->isName = 1){
-            $toggleFieldBio['isName'] = true;
-        }
-        if ($request->isPosition = 1){
-            $toggleFieldBio['isPosition'] = true;
-        }
-        if ($request->isPositionDescription = 1){
-            $toggleFieldBio['isPositionDescription'] = true;
-        }
-        if ($request->isEchelons = 1){
-            $toggleFieldBio['isEchelons'] = true;
-        }
-        if ($request->isGrade = 1){
-            $toggleFieldBio['isGrade'] = true;
-        }
-        if ($request->isNip = 1){
-            $toggleFieldBio['isNip'] = true;
-        }
-        if ($request->isBirthPlaceDate = 1){
-            $toggleFieldBio['isBirthPlaceDate'] = true;
-        }
-        if ($request->isAge = 1){
-            $toggleFieldBio['isAge'] = true;
-        }
-        if ($request->isReligion = 1){
-            $toggleFieldBio['isReligion'] = true;
-        }
-        if ($request->isGender = 1){
-            $toggleFieldBio['isGender'] = true;
-        }
-        if ($request->isMaritalStatus = 1){
-            $toggleFieldBio['isMaritalStatus'] = true;
-        }
-        if ($request->isAgency = 1){
-            $toggleFieldBio['isAgency'] = true;
-        }
-        if ($request->isOrganization = 1){
-            $toggleFieldBio['isOrganization'] = true;
-        }
-        if ($request->isWorkUnit = 1){
-            $toggleFieldBio['isWorkUnit'] = true;
-        }
-        if ($request->isNoWorker = 1){
-            $toggleFieldBio['isNoWorker'] = true;
-        }
-        if ($request->workDuration = 1){
-            $toggleFieldBio['workDuration'] = true;
-        }
-        if ($request->isGradeDuration = 1){
-            $toggleFieldBio['isGradeDuration'] = true;
-        }
-        if ($request->isNPWP = 1){
-            $toggleFieldBio['isNPWP'] = true;
-        }
-        if ($request->isEmployeeStatus = 1){
-            $toggleFieldBio['isEmployeeStatus'] = true;
-        }
-        if ($request->isCurrentAddress = 1){
-            $toggleFieldBio['isCurrentAddress'] = true;
-        }
-        if ($request->isComplex = 1){
-            $toggleFieldBio['isComplex'] = true;
-        }
-        if ($request->isHomeNumber = 1){
-            $toggleFieldBio['isHomeNumber'] = true;
-        }
-        if ($request->isPhoneNumber = 1){
-            $toggleFieldBio['isPhoneNumber'] = true;
-        }
-        if ($request->isOfficeAddress = 1){
-            $toggleFieldBio['isOfficeAddress'] = true;
-        }
-        if ($request->isOfficeNumber = 1){
-            $toggleFieldBio['isOfficeNumber'] = true;
-        }
-        if ($request->isEmail = 1){
-            $toggleFieldBio['isEmail'] = true;
-        }
-        if ($request->isPensionCap = 1){
-            $toggleFieldBio['isPensionCap'] = true;
-        }
-        if ($request->isPositionHistory = 1){
-            $toggleFieldBio['isPositionHistory'] = true;
-        }
-        return Excel::download(new employee(10,  $toggleFieldBio), 'testing.xlsx');
+        $toggleFieldBio['isName'] = $request->isName == 1;
+        $toggleFieldBio['isPosition'] = $request->isPosition == 1;
+        $toggleFieldBio['isPositionDescription'] = $request->isPositionDescription == 1;
+        $toggleFieldBio['isEchelons'] = $request->isEchelons == 1;
+        $toggleFieldBio['isGrade'] = $request->isGrade == 1;
+        $toggleFieldBio['isNip'] = $request->isNip == 1;
+        $toggleFieldBio['isBirthPlaceDate'] = $request->isBirthPlaceDate == 1;
+        $toggleFieldBio['isAge'] = $request->isAge == 1;
+        $toggleFieldBio['isReligion'] = $request->isReligion == 1;
+        $toggleFieldBio['isGender'] = $request->isGender == 1;
+        $toggleFieldBio['isMaritalStatus'] = $request->isMaritalStatus == 1;
+        $toggleFieldBio['isAgency'] = $request->isAgency == 1;
+        $toggleFieldBio['isOrganization'] = $request->isOrganization == 1;
+        $toggleFieldBio['isWorkUnit'] = $request->isWorkUnit == 1;
+        $toggleFieldBio['isNoWorker'] = $request->isNoWorker == 1;
+        $toggleFieldBio['workDuration'] = $request->workDuration == 1;
+        $toggleFieldBio['isGradeDuration'] = $request->isGradeDuration == 1;
+        $toggleFieldBio['isNPWP'] = $request->isNPWP == 1;
+        $toggleFieldBio['isEmployeeStatus'] = $request->isEmployeeStatus == 1;
+        $toggleFieldBio['isCurrentAddress'] = $request->isCurrentAddress == 1;
+        $toggleFieldBio['isComplex'] = $request->isComplex == 1;
+        $toggleFieldBio['isHomeNumber'] = $request->isHomeNumber == 1;
+        $toggleFieldBio['isPhoneNumber'] = $request->isPhoneNumber == 1;
+        $toggleFieldBio['isOfficeAddress'] = $request->isOfficeAddress == 1;
+        $toggleFieldBio['isOfficeNumber'] = $request->isOfficeNumber == 1;
+        $toggleFieldBio['isEmail'] = $request->isEmail == 1;
+        $toggleFieldBio['isPensionCap'] = $request->isPensionCap == 1;
+        $toggleFieldBio['isPositionHistory'] = $request->isPositionHistory == 1;
+        $toggleFieldBio['isGradeHistory'] = $request->isGradeHistory == 1;
+        $toggleFieldBio['isTrainingStructural'] = $request->isTrainingStructural == 1;
+        $toggleFieldBio['isTrainingFunctional'] = $request->isTrainingFunctional == 1;
+        $toggleFieldBio['isTrainingTechnique'] = $request->isTrainingTechnique == 1;
+        $toggleFieldBio['isSKP'] = $request->isSKP == 1;
+        $toggleFieldBio['isRecognition'] = $request->isRecognition == 1;
+        $toggleFieldBio['isNotes'] = $request->isNotes == 1;
+        $toggleFieldBio['isEducationHistory'] = $request->isEducationHistory == 1;
+        $toggleFieldBio['isDisciplinary'] = $request->isDisciplinary == 1;
+        $toggleFieldBio['isFamilyHistory'] = $request->isFamilyHistory == 1;
+        $toggleFieldBio['isLeave'] = $request->isLeave == 1;
+        $toggleFieldBio['isAssessment'] = $request->isAssessment == 1;
+        $toggleFieldBio['isCompetency'] = $request->isCompetency == 1;
+        $toggleFieldBio['isTalentPool'] = $request->isTalentPool == 1;
+        return Excel::download(new employee($toggleFieldBio, $userIds), 'Employees-'.Carbon::now().'.xlsx');
     }
 }

@@ -32,12 +32,11 @@ class UpdateDisciplinaryHistoryRequest extends FormRequest
             'users.*.position' => 'max:160',
             'users.*.disciplinary_id' => 'required|numeric',
             'users.*.decree_number' => 'max:160',
-            'users.*.date_of_decree' => 'date',
+            'users.*.date_of_decree' => 'nullable|date',
             'users.*.start_date' => 'required|date',
             'users.*.end_date' => 'required|date',
             'users.*.authorizing_officer' => 'max:160',
             'users.*.name_of_authorizing_officer' => 'max:160',
-            'users.*.description' => 'max:160',
         ];
     }
 
@@ -71,7 +70,6 @@ class UpdateDisciplinaryHistoryRequest extends FormRequest
             'users.*.end_date.date' => 'Tanggal selesai hukuman harus berupa tanggal.',
             'users.*.authorizing_officer.max' => 'Pejabat berwenang tidak boleh lebih dari 160 karakter.',
             'users.*.name_of_authorizing_officer' => 'Nama pejabat berwenang tidak boleh lebih dari 160 karakter.',
-            'users.*.description' => 'Uraian tidak boleh lebih dari 160 karakter.',
         ];
     }
 
@@ -138,10 +136,6 @@ class UpdateDisciplinaryHistoryRequest extends FormRequest
             'users.*.name_of_authorizing_officer' => [
                 'description' => 'Refers to the Nama Pejabat Berwenang of Employee Disciplinary.',
                 'example' => 'Sapto Harjono Wahjoe Sedjati, S.Sos., M.A.',
-            ],
-            'users.*.description' => [
-                'description' => 'Refers to the Uraian of Employee Disciplinary.',
-                'example' => 'Tidak masuk ke kantor selama 10 hari',
             ],
         ];
     }

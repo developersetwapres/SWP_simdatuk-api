@@ -1550,7 +1550,7 @@
 
         </div>
         <div class="sl-flex sl-items-center sl-px-4 sl-py-3 sl-border-t">
-            Last updated: June 6, 2024
+            Last updated: June 7, 2024
         </div>
 
         <div class="sl-flex sl-items-center sl-px-4 sl-py-3 sl-border-t">
@@ -20006,6 +20006,28 @@ fetch(url, {
     <div class="expandable sl-text-sm sl-border-l sl-ml-px">
         <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
     <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">isDelete</div>
+                                            <span class="sl-truncate sl-text-muted">boolean</span>
+                                    </div>
+                                    </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        1
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+
+            </div>
+    <div class="expandable sl-text-sm sl-border-l sl-ml-px">
+        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
     <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2  sl-cursor-pointer ">
         <div class="sl-flex sl-items-center sl-max-w-full">
                             <div class="sl-flex sl-justify-center sl-w-8 sl--ml-8 sl-pl-3 sl-text-muted expansion-chevrons" role="button">
@@ -20386,6 +20408,19 @@ fetch(url, {
                                                                                     </div>
                                     </div>
                                                                                                         <label aria-hidden="true"
+                                           for="bodyparam-POSTapi-training-histories--id--isDelete">isDelete</label>
+                                    <span class="sl-mx-3">:</span>
+                                    <div class="sl-flex sl-flex-1">
+                                        <div class="sl-input sl-flex-1 sl-relative">
+                                                                                            <input aria-label="isDelete" name="isDelete"
+                                                       id="bodyparam-POSTapi-training-histories--id--isDelete"
+                                                       placeholder=""
+                                                       value="1" data-component="body"
+                                                       class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
+                                                >
+                                                                                    </div>
+                                    </div>
+                                                                                                        <label aria-hidden="true"
                                            for="bodyparam-POSTapi-training-histories--id--users">users</label>
                                     <span class="sl-mx-3">:</span>
                                     <div class="sl-flex sl-flex-1">
@@ -20502,6 +20537,7 @@ You can check the Dev Tools console for debugging information.</p>
     --form "organizer=PPKASN"\
     --form "link=https://google.com"\
     --form "type=1"\
+    --form "isDelete=1"\
     --form "users[][id]=1"\
     --form "users[][user_id]=1"\
     --form "users[][certificate]=@C:\xampp\htdocs\simdatuk\api\public\img\logo.svg" </code></pre>                                        </div>
@@ -20532,6 +20568,7 @@ body.append('duration', '10');
 body.append('organizer', 'PPKASN');
 body.append('link', 'https://google.com');
 body.append('type', '1');
+body.append('isDelete', '1');
 body.append('users[][id]', '1');
 body.append('users[][user_id]', '1');
 body.append('users[][certificate]', document.querySelector('input[name="users[][certificate]"]').files[0]);
@@ -29106,31 +29143,6 @@ fetch(url, {
 </div>
 
             </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">description</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Uraian of Employee Disciplinary. Must not be greater than 160 characters.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        Tidak masuk ke kantor selama 10 hari
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
             </div>
             </div>
                             </div>
@@ -29269,8 +29281,7 @@ fetch(url, {
             "start_date": "2023-10-22",
             "end_date": "2024-10-22",
             "authorizing_officer": "Deputi Bidang Administrasi",
-            "name_of_authorizing_officer": "Sapto Harjono Wahjoe Sedjati, S.Sos., M.A.",
-            "description": "Tidak masuk ke kantor selama 10 hari"
+            "name_of_authorizing_officer": "Sapto Harjono Wahjoe Sedjati, S.Sos., M.A."
         }
     ]
 }</div>
@@ -29383,8 +29394,7 @@ You can check the Dev Tools console for debugging information.</p>
             \"start_date\": \"2023-10-22\",
             \"end_date\": \"2024-10-22\",
             \"authorizing_officer\": \"Deputi Bidang Administrasi\",
-            \"name_of_authorizing_officer\": \"Sapto Harjono Wahjoe Sedjati, S.Sos., M.A.\",
-            \"description\": \"Tidak masuk ke kantor selama 10 hari\"
+            \"name_of_authorizing_officer\": \"Sapto Harjono Wahjoe Sedjati, S.Sos., M.A.\"
         }
     ]
 }"
@@ -29420,8 +29430,7 @@ let body = {
             "start_date": "2023-10-22",
             "end_date": "2024-10-22",
             "authorizing_officer": "Deputi Bidang Administrasi",
-            "name_of_authorizing_officer": "Sapto Harjono Wahjoe Sedjati, S.Sos., M.A.",
-            "description": "Tidak masuk ke kantor selama 10 hari"
+            "name_of_authorizing_officer": "Sapto Harjono Wahjoe Sedjati, S.Sos., M.A."
         }
     ]
 };
@@ -30467,31 +30476,6 @@ fetch(url, {
 </div>
 
             </div>
-    <div class="expandable sl-text-sm sl-border-l sl-ml-7">
-        <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
-    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
-    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
-        <div class="sl-flex sl-items-center sl-max-w-full">
-                                        <div class="sl-flex sl-items-baseline sl-text-base">
-                    <div class="sl-font-mono sl-font-semibold sl-mr-2">description</div>
-                                            <span class="sl-truncate sl-text-muted">string</span>
-                                    </div>
-                                    </div>
-                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
-            <p>Refers to the Uraian of Employee Disciplinary. Must not be greater than 160 characters.</p>
-        </div>
-                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
-                <span>Example:</span> <!-- <span> important for spacing -->
-                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
-                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        Tidak masuk ke kantor selama 10 hari
-                    </div>
-                </div>
-            </div>
-            </div>
-</div>
-
-            </div>
             </div>
             </div>
                             </div>
@@ -30664,8 +30648,7 @@ fetch(url, {
             "start_date": "2023-10-22",
             "end_date": "2024-10-22",
             "authorizing_officer": "Deputi Bidang Administrasi",
-            "name_of_authorizing_officer": "Sapto Harjono Wahjoe Sedjati, S.Sos., M.A.",
-            "description": "Tidak masuk ke kantor selama 10 hari"
+            "name_of_authorizing_officer": "Sapto Harjono Wahjoe Sedjati, S.Sos., M.A."
         }
     ]
 }</div>
@@ -30779,8 +30762,7 @@ You can check the Dev Tools console for debugging information.</p>
             \"start_date\": \"2023-10-22\",
             \"end_date\": \"2024-10-22\",
             \"authorizing_officer\": \"Deputi Bidang Administrasi\",
-            \"name_of_authorizing_officer\": \"Sapto Harjono Wahjoe Sedjati, S.Sos., M.A.\",
-            \"description\": \"Tidak masuk ke kantor selama 10 hari\"
+            \"name_of_authorizing_officer\": \"Sapto Harjono Wahjoe Sedjati, S.Sos., M.A.\"
         }
     ]
 }"
@@ -30817,8 +30799,7 @@ let body = {
             "start_date": "2023-10-22",
             "end_date": "2024-10-22",
             "authorizing_officer": "Deputi Bidang Administrasi",
-            "name_of_authorizing_officer": "Sapto Harjono Wahjoe Sedjati, S.Sos., M.A.",
-            "description": "Tidak masuk ke kantor selama 10 hari"
+            "name_of_authorizing_officer": "Sapto Harjono Wahjoe Sedjati, S.Sos., M.A."
         }
     ]
 };
@@ -41838,7 +41819,7 @@ You can check the Dev Tools console for debugging information.</p>
     --data "{
     \"name\": \"admin\",
     \"permissions\": [
-        \"animi\"
+        \"laboriosam\"
     ]
 }"
 </code></pre>                                        </div>
@@ -41861,7 +41842,7 @@ const headers = {
 let body = {
     "name": "admin",
     "permissions": [
-        "animi"
+        "laboriosam"
     ]
 };
 
@@ -46320,7 +46301,7 @@ fetch(url, {
                                                 <pre><code class="language-http">                                                            cache-control
                                                             : public
                                                                                                                     content-disposition
-                                                            : attachment; filename=testing.xlsx
+                                                            : attachment; filename=&quot;Employees-2024-06-07 08:59:59.xlsx&quot;
                                                                                                                     content-type
                                                             : application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
                                                                                                                     accept-ranges
@@ -47734,7 +47715,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [7]
+                        [14]
                     </div>
                 </div>
             </div>
@@ -47759,7 +47740,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [10]
+                        [3]
                     </div>
                 </div>
             </div>
@@ -47784,7 +47765,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [7]
+                        [18]
                     </div>
                 </div>
             </div>
@@ -47809,7 +47790,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [13]
+                        [19]
                     </div>
                 </div>
             </div>
@@ -47834,7 +47815,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [18]
+                        [16]
                     </div>
                 </div>
             </div>
@@ -47859,7 +47840,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [1]
+                        [14]
                     </div>
                 </div>
             </div>
@@ -47884,7 +47865,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [&quot;et&quot;]
+                        [&quot;esse&quot;]
                     </div>
                 </div>
             </div>
@@ -47909,7 +47890,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [9]
+                        [18]
                     </div>
                 </div>
             </div>
@@ -48076,28 +48057,28 @@ fetch(url, {
         6
     ],
     "employee_type": [
-        7
+        14
     ],
     "echelons": [
-        10
+        3
     ],
     "grades": [
-        7
-    ],
-    "position_status": [
-        13
-    ],
-    "education": [
         18
     ],
+    "position_status": [
+        19
+    ],
+    "education": [
+        16
+    ],
     "gender": [
-        1
+        14
     ],
     "age_range": [
-        "et"
+        "esse"
     ],
     "marital_status": [
-        9
+        18
     ]
 }</div>
                             </div>
@@ -48199,28 +48180,28 @@ You can check the Dev Tools console for debugging information.</p>
         6
     ],
     \"employee_type\": [
-        7
+        14
     ],
     \"echelons\": [
-        10
+        3
     ],
     \"grades\": [
-        7
-    ],
-    \"position_status\": [
-        13
-    ],
-    \"education\": [
         18
     ],
+    \"position_status\": [
+        19
+    ],
+    \"education\": [
+        16
+    ],
     \"gender\": [
-        1
+        14
     ],
     \"age_range\": [
-        \"et\"
+        \"esse\"
     ],
     \"marital_status\": [
-        9
+        18
     ]
 }"
 </code></pre>                                        </div>
@@ -48245,28 +48226,28 @@ let body = {
         6
     ],
     "employee_type": [
-        7
+        14
     ],
     "echelons": [
-        10
+        3
     ],
     "grades": [
-        7
-    ],
-    "position_status": [
-        13
-    ],
-    "education": [
         18
     ],
+    "position_status": [
+        19
+    ],
+    "education": [
+        16
+    ],
     "gender": [
-        1
+        14
     ],
     "age_range": [
-        "et"
+        "esse"
     ],
     "marital_status": [
-        9
+        18
     ]
 };
 

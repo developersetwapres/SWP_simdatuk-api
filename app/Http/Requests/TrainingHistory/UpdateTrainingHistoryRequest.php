@@ -35,6 +35,7 @@ class UpdateTrainingHistoryRequest extends FormRequest
             'users.*.id' => 'numeric|nullable',
             'users.*.user_id' => 'required|numeric',
             'users.*.certificate' => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
+            'isDelete' => 'nullable|bool'
         ];
     }
 

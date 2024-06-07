@@ -202,6 +202,36 @@
                 @if($toggleField['isTrainingTechnique'])
                     <th class="section-header-color">Riwayat Pelatihan Teknik</th>
                 @endif
+                @if($toggleField['isRecognition'])
+                    <th class="section-header-color">Riwayat Penghargaan</th>
+                @endif
+                @if($toggleField['isSKP'])
+                    <th class="section-header-color">Riwayat SKP</th>
+                @endif
+                @if($toggleField['isEducationHistory'])
+                    <th class="section-header-color">Riwayat Edukasi</th>
+                @endif
+                @if($toggleField['isDisciplinary'])
+                    <th class="section-header-color">Riwayat Hukuman</th>
+                @endif
+                @if($toggleField['isFamilyHistory'])
+                    <th class="section-header-color">Riwayat Keluarga</th>
+                @endif
+                @if($toggleField['isLeave'])
+                    <th class="section-header-color">Riwayat Cuti</th>
+                @endif
+                @if($toggleField['isAssessment'])
+                    <th class="section-header-color">Hasil Assessment</th>
+                @endif
+                @if($toggleField['isCompetency'])
+                    <th class="section-header-color">Hasil Uji Kompetensi</th>
+                @endif
+                @if($toggleField['isTalentPool'])
+                    <th class="section-header-color">Hasil Talent Pool</th>
+                @endif
+                @if($toggleField['isNotes'])
+                    <th class="section-header-color">Catatan</th>
+                @endif
             </tr>
         </thead>
         <tbody>
@@ -225,7 +255,7 @@
                     <td>{{ $value['grade_name'] }}</td>
                 @endif
                 @if($toggleField['isNip'])
-                    <td>{{ $value['employee_id_number'] }}</td>
+                    <td>'{{ $value['employee_id_number'] }}</td>
                 @endif
                 @if($toggleField['isBirthPlaceDate'])
                     <td>{{ $value['place_of_birth'] }}, {{ $value['date_of_birth'] }}</td>
@@ -234,13 +264,51 @@
                     <td>{{ $value['age'] }}</td>
                 @endif
                 @if($toggleField['isReligion'])
-                    <td>{{ $value['religion'] }}</td>
+                    <td class="table-section-3-body">
+                        @switch($value['religion'])
+                            @case(1)
+                                Islam
+                                @break
+                            @case(2)
+                                Kristen
+                                @break
+                            @case(3)
+                                Katolik
+                                @break
+                            @case(4)
+                                Hindu
+                                @break
+                            @case(5)
+                                Buddha
+                                @break
+                            @case(6)
+                                Konghucu
+                                @break
+                            @default
+                                -
+                        @endswitch</td>
                 @endif
                 @if($toggleField['isGender'])
-                    <td>{{ $value['gender'] }}</td>
+                    <td>{{ $value['gender'] === 1 ? 'Pria' : 'Wanita' }}</td>
                 @endif
                 @if($toggleField['isMaritalStatus'])
-                    <td>{{ $value['marital_status'] }}</td>
+                    <td class="table-section-3-body">
+                        @switch($value['marital_status'])
+                            @case(1)
+                                Belum Menikah
+                                @break
+                            @case(2)
+                                Menikah
+                                @break
+                            @case(3)
+                                Cerai Hidup
+                                @break
+                            @case(4)
+                                Cerai Mati
+                                @break
+                            @default
+                                -
+                        @endswitch</td>
                 @endif
                 @if($toggleField['isAgency'])
                     <td>{{ $value['institution_name'] }}</td>
@@ -252,7 +320,7 @@
                     <td>{{ $value['work_unit'] }}</td>
                 @endif
                 @if($toggleField['isNoWorker'])
-                    <td>{{ $value['employee_id_number'] }} / {{ $value['employee_id_card_number'] }}</td>
+                    <td>{{ $value['employee_id_number'] }} / {{ $value['employee_registration_number'] }}</td>
                 @endif
                 @if($toggleField['workDuration'])
                     <td>{{ $value['work_duration'] }}</td>
@@ -264,7 +332,38 @@
                     <td>{{ $value['id_tax'] }}</td>
                 @endif
                 @if($toggleField['isEmployeeStatus'])
-                    <td>{{ $value['employee_status'] }}</td>
+                    <td class="table-section-3-body">
+                        @switch($value['employment_status'])
+                            @case(1)
+                                Aktif
+                                @break
+                            @case(2)
+                                Pensiun
+                                @break
+                            @case(3)
+                                Berhenti
+                                @break
+                            @case(4)
+                                Meninggal
+                                @break
+                            @case(5)
+                                Alih Status
+                                @break
+                            @case(6)
+                                Aktif PS
+                                @break
+                            @case(7)
+                                CLTN
+                                @break
+                            @case(8)
+                                TBL
+                                @break
+                            @case(9)
+                                Non Aktif
+                                @break
+                            @default
+                                -
+                        @endswitch</td>
                 @endif
                 @if($toggleField['isCurrentAddress'])
                     <td>{{ $value['current_address'] }}</td>
@@ -291,19 +390,79 @@
                     <td>{{ $value['pension_cap'] }}</td>
                 @endif
                 @if($toggleField['isPositionHistory'])
-                    <td>{{ $value['position_history'] }}</td>
+                    <td>
+                        <ul>{!! $value['position_history'] !!}</ul>
+                    </td>
                 @endif
                 @if($toggleField['isGradeHistory'])
-                    <td>{{ $value['grade_history'] }}</td>
+                    <td>
+                        <ul>{!! $value['grade_history'] !!}</ul>
+                    </td>
                 @endif
                 @if($toggleField['isTrainingStructural'])
-                    <td>{{ $value['structural_training_history'] }}</td>
+                    <td>
+                        <ul>{!! $value['structural_training_history'] !!}</ul>
+                    </td>
                 @endif
                 @if($toggleField['isTrainingFunctional'])
-                    <td>{{ $value['functional_training_history'] }}</td>
+                    <td>
+                        <ul>{!! $value['functional_training_history'] !!}</ul>
+                    </td>
                 @endif
                 @if($toggleField['isTrainingTechnique'])
-                    <td>{{ $value['technique_training_history'] }}</td>
+                    <td>
+                        <ul>{!! $value['technique_training_history'] !!}</ul>
+                    </td>
+                @endif
+                @if($toggleField['isRecognition'])
+                    <td>
+                        <ul>{!! $value['recognition_history'] !!}</ul>
+                    </td>
+                @endif
+                @if($toggleField['isSKP'])
+                    <td>
+                        <ul>{!! $value['skp_history'] !!}</ul>
+                    </td>
+                @endif
+                @if($toggleField['isEducationHistory'])
+                    <td>
+                        <ul>{!! $value['education_history'] !!}</ul>
+                    </td>
+                @endif
+                @if($toggleField['isDisciplinary'])
+                    <td>
+                        <ul>{!! $value['disciplinary_history'] !!}</ul>
+                    </td>
+                @endif
+                @if($toggleField['isFamilyHistory'])
+                    <td>
+                        <ul>{!! $value['family_history'] !!}</ul>
+                    </td>
+                @endif
+                @if($toggleField['isLeave'])
+                    <td>
+                        <ul>{!! $value['leave_history'] !!}</ul>
+                    </td>
+                @endif
+                @if($toggleField['isAssessment'])
+                    <td>
+                        <ul>{!! $value['assessment_history'] !!}</ul>
+                    </td>
+                @endif
+                @if($toggleField['isCompetency'])
+                    <td>
+                        <ul>{!! $value['competency_history'] !!}</ul>
+                    </td>
+                @endif
+                @if($toggleField['isTalentPool'])
+                    <td>
+                        <ul>{!! $value['talent_pool_history'] !!}</ul>
+                    </td>
+                @endif
+                @if($toggleField['isNotes'])
+                    <td>
+                        <ul>{!! $value['notes'] !!}</ul>
+                    </td>
                 @endif
             </tr>
         @endforeach
