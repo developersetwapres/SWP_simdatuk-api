@@ -35,6 +35,7 @@ class UpdateTrainingHistoryRequest extends FormRequest
             'users.*.id' => 'numeric|nullable',
             'users.*.user_id' => 'required|numeric',
             'users.*.certificate' => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
+            'users.*.delete_certificate' => 'required|boolean',
         ];
     }
 
@@ -70,6 +71,8 @@ class UpdateTrainingHistoryRequest extends FormRequest
             'users.*.certificate.file' => 'Sertifikat harus berupa file.',
             'users.*.certificate.extensions' => 'Sertifikat harus berupa jpg, jpeg atau png.',
             'users.*.certificate.max' => 'Ukuran sertifikat tidak boleh lebih dari 2MB.',
+            'users.*.delete_certificate.required' => 'Status hapus sertifikat tidak boleh kosong.',
+            'users.*.delete_certificate.boolean' => 'Status hapus sertifikat harus berupa boolean.',
         ];
     }
 
@@ -132,6 +135,10 @@ class UpdateTrainingHistoryRequest extends FormRequest
             'users.*.certificate' => [
                 'description' => 'Refers to the Certificate of List Employee Training.',
                 'example' => public_path('/img/logo.svg'),
+            ],
+            'users.*.delete_certificate' => [
+                'description' => 'Refers to the Status Delete Certificate of List Employee Training.',
+                'example' => 1,
             ],
         ];
     }

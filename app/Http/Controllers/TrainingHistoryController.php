@@ -185,10 +185,13 @@ class TrainingHistoryController extends Controller
 
                 if (!is_null($user['id'])) {
                     // Update existing data
+                    $user['certificate'] = ($user['delete_certificate'] == true) ? null : $user['certificate'];
+                    unset($user['delete_certificate']);
                     DB::table('user_trainings')->where('id', $user['id'])->updateTs($user);
                 } else {
                     // Insert new item
                     $user['training_id'] = $this->request->id;
+                    unset($user['delete_certificate']);
                     array_push($users, $user);
                 }
             }
