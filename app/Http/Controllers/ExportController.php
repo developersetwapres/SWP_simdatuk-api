@@ -788,15 +788,15 @@ class ExportController extends Controller
      * Export detail of multiple employees data to .PDF inside a zip file.
      * @urlParam id Refers to the ID of Employee. Example: 1
      * @group Export Data
-     * @bodyParam organization int[] list of organization's ids. Example [1,2]
-     * @bodyParam employee_type int[] list of employee's type. Example [1,2]
-     * @bodyParam echelons int[] list of echelons' id. Example [1,2]
-     * @bodyParam grades int[] list of employee's grade. Example [1,2]
-     * @bodyParam position_status int[] list of employee's position status. Example [1,2]
-     * @bodyParam education int[] list of employee's education level. Example [1, 6]
-     * @bodyParam gender int[] list of employee's gender.
-     * @bodyParam marital_status int[] list of employee's marital status. Example [1,4]
-     * @bodyParam age_range string[] list of employee's age range. Example ["30-40", "40-50"]
+     * @bodyParam organization.* int[] list of organization's ids. Example [1,2]
+     * @bodyParam employee_type.* int[] list of employee's type. Example [1,2]
+     * @bodyParam echelons.* int[] list of echelons' id. Example [1,2]
+     * @bodyParam grades.* int[] list of employee's grade. Example [1,2]
+     * @bodyParam position_status.* int[] list of employee's position status. Example [1,2]
+     * @bodyParam education.* int[] list of employee's education level. Example [1, 6]
+     * @bodyParam gender.* int[] list of employee's gender.
+     * @bodyParam marital_status.* int[] list of employee's marital status. Example [1,4]
+     * @bodyParam age_range.* string[] list of employee's age range. Example ["30-40", "40-50"]
      * @authenticated
      */
         public function zipDetailEmployee(ExportEmployeesRequest $request)
