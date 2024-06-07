@@ -42,7 +42,6 @@ Route::get('/', function () {
     return 'api enabled!';
 });
 
-Route::get('testing', [ExportController::class, 'userExcel']);
 Route::post('login', [AuthController::class, 'login']);
 Route::post('forgot-password', [AuthController::class, 'forgotPassword']);
 Route::post('code-verification', [AuthController::class, 'codeVerification']);
