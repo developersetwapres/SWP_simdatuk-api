@@ -786,7 +786,6 @@ class ExportController extends Controller
      * Export Detail Employee
      *
      * Export detail of multiple employees data to .PDF inside a zip file.
-     * @urlParam id Refers to the ID of Employee. Example: 1
      * @group Export Data
      * @bodyParam organization.* int[] list of organization's ids. Example [1,2]
      * @bodyParam employee_type.* int[] list of employee's type. Example [1,2]

@@ -81,32 +81,32 @@ class ExportEmployeesRequest extends FormRequest
     public function bodyParameters(): array
     {
         return [
-            'organization' => [
+            'organization.*' => [
                 'description' => 'Refers to IDs of Organization',
             ],
-            'employee_type' => [
+            'employee_type.*' => [
                 'description' => 'Refers to IDs of type of employee (1: ASN, 2: Non ASN, 3: Outsourcing)',
             ],
-            'echelons' => [
+            'echelons.*' => [
                 'description' => 'Refers to IDs of employee echelons',
             ],
-            'grades' => [
+            'grades.*' => [
                 'description' => 'Refers to IDs of employee grades',
             ],
-            'position_status' => [
+            'position_status.*' => [
                 'description' => 'Refers to IDs of employee position status',
             ],
-            'education' => [
+            'education.*' => [
                 'description' => 'Refers to type of employee education (1=SD/Sederajat, 2=SLTP/Sederajat, 3=SLTA/Sederajat,
                  4=Akademik/D3/S.Muda, 5=Diploma IV, 6=Strata I, 7=Strata II, 8=Strata III )',
             ],
-            'gender' => [
+            'gender.*' => [
                 'description' => 'Refers to gender of employee (1 : Laki - Laki, 0 : Perempuan)',
             ],
-            'marital_status' => [
+            'marital_status.*' => [
                 'description' => 'Refers to marital status of employee (1=Belum Menikah, 2=Menikah, 3=Cerai Hidup, 4=Cerai Mati)',
             ],
-            'age_range' => [
+            'age_range.*' => [
                 'description' => 'Refers to age range of employee',
             ],
         ];
