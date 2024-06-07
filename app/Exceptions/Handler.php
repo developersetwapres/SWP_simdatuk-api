@@ -48,12 +48,11 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $e)
     {
-        if (config('app.debug')) {
-            return parent::render($request, $e);
-        }
-
         if ($request->wantsJson()) {
             if ($e instanceof QueryException) {
+                if (config('app.debug')) {
+                    return parent::render($request, $e);
+                }
                 return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
             } else if ($e instanceof ValidationException) {
                 $messages = $e->validator->errors()->all();
@@ -66,6 +65,11 @@ class Handler extends ExceptionHandler
                 return $this->response(404, 'Endpoint tidak ditemukan!');
             } else if ($e instanceof MethodNotAllowedHttpException) {
                 return $this->response(405, 'Method yang digunakan salah!');
+            } else {
+                if (config('app.debug')) {
+                    return parent::render($request, $e);
+                }
+                return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
             }
         }
 
