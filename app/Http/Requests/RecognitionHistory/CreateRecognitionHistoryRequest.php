@@ -85,7 +85,7 @@ class CreateRecognitionHistoryRequest extends FormRequest
             ],
             'name' => [
                 'description' => 'Refers to the Name of Employee Recognition.',
-                'example' => 'Diklat Komputer Microsoft Excell',
+                'example' => 'Diklat Komputer Microsoft Excel',
             ],
             'description' => [
                 'description' => 'Refers to the Description of Employee Recognition.',
