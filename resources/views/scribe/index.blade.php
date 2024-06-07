@@ -41819,7 +41819,7 @@ You can check the Dev Tools console for debugging information.</p>
     --data "{
     \"name\": \"admin\",
     \"permissions\": [
-        \"laboriosam\"
+        \"ducimus\"
     ]
 }"
 </code></pre>                                        </div>
@@ -41842,7 +41842,7 @@ const headers = {
 let body = {
     "name": "admin",
     "permissions": [
-        "laboriosam"
+        "ducimus"
     ]
 };
 
@@ -46301,7 +46301,7 @@ fetch(url, {
                                                 <pre><code class="language-http">                                                            cache-control
                                                             : public
                                                                                                                     content-disposition
-                                                            : attachment; filename=&quot;Employees-2024-06-07 08:59:59.xlsx&quot;
+                                                            : attachment; filename=&quot;Employees-2024-06-07 09:55:24.xlsx&quot;
                                                                                                                     content-type
                                                             : application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
                                                                                                                     accept-ranges
@@ -47690,7 +47690,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [6]
+                        [20]
                     </div>
                 </div>
             </div>
@@ -47715,7 +47715,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [14]
+                        [5]
                     </div>
                 </div>
             </div>
@@ -47740,7 +47740,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [3]
+                        [11]
                     </div>
                 </div>
             </div>
@@ -47765,7 +47765,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [18]
+                        [8]
                     </div>
                 </div>
             </div>
@@ -47790,7 +47790,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [19]
+                        [18]
                     </div>
                 </div>
             </div>
@@ -47815,7 +47815,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [16]
+                        [1]
                     </div>
                 </div>
             </div>
@@ -47840,7 +47840,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [14]
+                        [9]
                     </div>
                 </div>
             </div>
@@ -47865,7 +47865,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [&quot;esse&quot;]
+                        [&quot;commodi&quot;]
                     </div>
                 </div>
             </div>
@@ -47890,7 +47890,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [18]
+                        [10]
                     </div>
                 </div>
             </div>
@@ -48054,31 +48054,31 @@ fetch(url, {
                                      style="font-family: var(--font-code); font-size: 12px; line-height: var(--lh-code);"
                                 >{
     "organization": [
-        6
+        20
     ],
     "employee_type": [
-        14
+        5
     ],
     "echelons": [
-        3
+        11
     ],
     "grades": [
-        18
+        8
     ],
     "position_status": [
-        19
+        18
     ],
     "education": [
-        16
+        1
     ],
     "gender": [
-        14
+        9
     ],
     "age_range": [
-        "esse"
+        "commodi"
     ],
     "marital_status": [
-        18
+        10
     ]
 }</div>
                             </div>
@@ -48177,31 +48177,31 @@ You can check the Dev Tools console for debugging information.</p>
     --header "Accept: application/json" \
     --data "{
     \"organization\": [
-        6
+        20
     ],
     \"employee_type\": [
-        14
+        5
     ],
     \"echelons\": [
-        3
+        11
     ],
     \"grades\": [
-        18
+        8
     ],
     \"position_status\": [
-        19
+        18
     ],
     \"education\": [
-        16
+        1
     ],
     \"gender\": [
-        14
+        9
     ],
     \"age_range\": [
-        \"esse\"
+        \"commodi\"
     ],
     \"marital_status\": [
-        18
+        10
     ]
 }"
 </code></pre>                                        </div>
@@ -48223,31 +48223,31 @@ const headers = {
 
 let body = {
     "organization": [
-        6
+        20
     ],
     "employee_type": [
-        14
+        5
     ],
     "echelons": [
-        3
+        11
     ],
     "grades": [
-        18
+        8
     ],
     "position_status": [
-        19
+        18
     ],
     "education": [
-        16
+        1
     ],
     "gender": [
-        14
+        9
     ],
     "age_range": [
-        "esse"
+        "commodi"
     ],
     "marital_status": [
-        18
+        10
     ]
 };
 
