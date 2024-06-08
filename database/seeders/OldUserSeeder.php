@@ -79,6 +79,30 @@ class OldUserSeeder extends Seeder
                   no_karisu as wife_id_card_number,
                   no_karisu as husband_id_card_number,
                   npwp as id_tax,
+                  CASE
+                    WHEN status_kepeg = 'Aktif' THEN 1
+                    WHEN status_kepeg = 'Pensiun' THEN 2
+                    WHEN status_kepeg = 'Berhenti' THEN 3
+                    WHEN status_kepeg = 'Meninggal' THEN 4
+                    WHEN status_kepeg = 'Alih Status' THEN 5
+                    WHEN status_kepeg = 'Aktif_PS' THEN 6
+                    WHEN status_kepeg = 'CTLN' THEN 7
+                    WHEN status_kepeg = 'TBL' THEN 8
+                    WHEN status_kepeg = 'Non Aktif' THEN 9
+                  END AS employment_status,
+                    CASE
+                      WHEN id_komplek = 'LK' THEN 1
+                      WHEN id_komplek = 'DKG' THEN 4
+                      WHEN id_komplek = 'DKI' THEN 2
+                      WHEN id_komplek = 'DKC' THEN 8
+                      WHEN id_komplek = 'DKA' THEN 10
+                      WHEN id_komplek = 'DKF' THEN 5
+                      WHEN id_komplek = 'DKE' THEN 6
+                      WHEN id_komplek = 'DKB' THEN 9
+                      WHEN id_komplek = 'DKD' THEN 7
+                      WHEN id_komplek = 'DKH' THEN 3
+                      ELSE NULL
+                  END AS residence_id,
                   al_rumah as current_address,
                   tlp_rumah as home_phone_number,
                   no_seluler as mobile_phone,
@@ -146,6 +170,12 @@ class OldUserSeeder extends Seeder
                   tmt_golpangkat AS grade_effective_date,
                   tmt_jabatan AS position_effective_date,
                   '1' AS organization_id,
+                  CASE
+                    WHEN status_kepeg = 'Aktif' THEN 1
+                    WHEN status_kepeg = 'Pensiun' THEN 2
+                    WHEN status_kepeg = 'Berhenti' THEN 3
+                    WHEN status_kepeg = 'Meninggal' THEN 4
+                  END AS employment_status,
                   alamat AS current_address,
                   tlp_rumah AS home_phone_number,
                   no_tlp AS mobile_phone,
@@ -189,7 +219,14 @@ class OldUserSeeder extends Seeder
                       ELSE NULL
                   END AS employment_type_id,
                   '1' AS organization_id,
+                  CASE
+                    WHEN status = 'Aktif' THEN 1
+                    WHEN status = 'Pensiun' THEN 2
+                    WHEN status = 'Berhenti' THEN 3
+                    WHEN status = 'Meninggal' THEN 4
+                  END AS employment_status,
                   alamat AS current_address,
+                  ket_jabatan AS description,
                   '3' AS type,
                   CURRENT_TIMESTAMP AS created_at
               FROM
@@ -433,14 +470,14 @@ class OldUserSeeder extends Seeder
             '97030748',
             '00010015',
             '98010487',
-            '01050182'
+            '01050182',
         ])->update([
             'position_id' => 111,
         ]);
         DB::table('users')->whereIn('employee_id_number', [
             '198711252015031001',
             '199404062019021001',
-            '199506052020122018'
+            '199506052020122018',
         ])->update([
             'position_id' => 112,
         ]);
@@ -453,7 +490,7 @@ class OldUserSeeder extends Seeder
             '115225',
             '21050102560486',
             '542630',
-            '21150240321293'
+            '21150240321293',
         ])->update([
             'position_id' => 113,
         ]);
