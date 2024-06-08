@@ -45,17 +45,21 @@ class RoleController extends Controller
             'page' => 'nullable|numeric|min:1',
             'limit' => 'nullable|numeric|min:1',
         ], $messages);
-        $this->request->limit = ($this->request->limit) ? $this->request->limit : 10;
 
         $roles = DB::table('roles');
         $roles->select('id', 'name');
         $roles->where('name', 'like', '%' . $this->request->search . '%');
         $roles->orderBy('created_at', 'desc');
-        $roles = $roles->paginate($this->request->limit);
-        if ($roles->isEmpty()) {
-            return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $roles);
+
+        if (is_null($this->request->limit)) {
+            $roles = $roles->get();
+            $message = (count($roles) < 1) ? 'Mohon maaf, data tidak ditemukan.' : 'success';
+            return $this->response(200, $message, $roles);
+        } else {
+            $roles = $roles->paginate($this->request->limit);
+            $message = ($roles->isEmpty()) ? 'Mohon maaf, data tidak ditemukan.' : 'success';
+            return $this->paginateResponse(200, $message, $roles);
         }
-        return $this->paginateResponse(200, 'success', $roles);
     }
 
     /**

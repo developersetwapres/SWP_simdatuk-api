@@ -42,15 +42,19 @@ class EchelonController extends Controller
             'page' => 'nullable|numeric|min:1',
             'limit' => 'nullable|numeric|min:1',
         ], $messages);
-        $this->request->limit = ($this->request->limit) ? $this->request->limit : 10;
 
         $echelons = DB::table('echelons');
         $echelons->select('echelons.id', 'echelons.name');
         $echelons->where('echelons.name', 'like', '%' . $this->request->search . '%');
-        $echelons = $echelons->paginate($this->request->limit);
-        if ($echelons->isEmpty()) {
-            return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $echelons);
+
+        if (is_null($this->request->limit)) {
+            $echelons = $echelons->get();
+            $message = (count($echelons) < 1) ? 'Mohon maaf, data tidak ditemukan.' : 'success';
+            return $this->response(200, $message, $echelons);
+        } else {
+            $echelons = $echelons->paginate($this->request->limit);
+            $message = ($echelons->isEmpty()) ? 'Mohon maaf, data tidak ditemukan.' : 'success';
+            return $this->paginateResponse(200, $message, $echelons);
         }
-        return $this->paginateResponse(200, 'success', $echelons);
     }
 }

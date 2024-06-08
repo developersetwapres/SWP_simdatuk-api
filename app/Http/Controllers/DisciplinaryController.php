@@ -42,17 +42,18 @@ class DisciplinaryController extends Controller
             'limit' => 'nullable|numeric|min:1',
         ], $messages);
 
-        $this->request->limit = ($this->request->limit) ? $this->request->limit : 10;
-
         $disciplinaries = DB::table('disciplinaries');
         $disciplinaries->select('id', 'name', 'description', 'performance_allowance_deduction', 'performance_allowance_duration');
         $disciplinaries->where('name', 'like', '%' . $this->request->search . '%');
-        $disciplinaries = $disciplinaries->paginate($this->request->limit);
 
-        if ($disciplinaries->isEmpty()) {
-            return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $disciplinaries);
+        if (is_null($this->request->limit)) {
+            $disciplinaries = $disciplinaries->get();
+            $message = (count($disciplinaries) < 1) ? 'Mohon maaf, data tidak ditemukan.' : 'success';
+            return $this->response(200, $message, $disciplinaries);
+        } else {
+            $disciplinaries = $disciplinaries->paginate($this->request->limit);
+            $message = ($disciplinaries->isEmpty()) ? 'Mohon maaf, data tidak ditemukan.' : 'success';
+            return $this->paginateResponse(200, $message, $disciplinaries);
         }
-
-        return $this->paginateResponse(200, 'success', $disciplinaries);
     }
 }

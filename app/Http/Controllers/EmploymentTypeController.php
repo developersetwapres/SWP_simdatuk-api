@@ -50,8 +50,6 @@ class EmploymentTypeController extends Controller
             'type' => 'nullable|in:1,2,3',
         ], $messages);
 
-        $this->request->limit = ($this->request->limit) ? $this->request->limit : 10;
-
         $employmentTypes = DB::table('employment_types');
         $employmentTypes->select('id', 'name', 'status', 'type');
         $employmentTypes->where('name', 'like', '%' . $this->request->search . '%');
@@ -61,13 +59,16 @@ class EmploymentTypeController extends Controller
         if ($this->request->type) {
             $employmentTypes->where('type', $this->request->type);
         }
-        $employmentTypes = $employmentTypes->paginate($this->request->limit);
 
-        if ($employmentTypes->isEmpty()) {
-            return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $employmentTypes);
+        if (is_null($this->request->limit)) {
+            $employmentTypes = $employmentTypes->get();
+            $message = (count($employmentTypes) < 1) ? 'Mohon maaf, data tidak ditemukan.' : 'success';
+            return $this->response(200, $message, $employmentTypes);
+        } else {
+            $employmentTypes = $employmentTypes->paginate($this->request->limit);
+            $message = ($employmentTypes->isEmpty()) ? 'Mohon maaf, data tidak ditemukan.' : 'success';
+            return $this->paginateResponse(200, $message, $employmentTypes);
         }
-
-        return $this->paginateResponse(200, 'success', $employmentTypes);
     }
 
     /**

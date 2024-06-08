@@ -42,19 +42,26 @@ class GradeController extends Controller
             'page' => 'nullable|numeric|min:1',
             'limit' => 'nullable|numeric|min:1',
         ], $messages);
-        $this->request->limit = ($this->request->limit) ? $this->request->limit : 10;
 
         $grades = DB::table('grades');
         $grades->select('grades.id', 'grades.name', 'grades.code', 'grades.type');
         $grades->where('grades.name', 'like', '%' . $this->request->search . '%');
         $grades->orWhere('grades.code', 'like', '%' . $this->request->search . '%');
-        $grades = $grades->paginate($this->request->limit);
-        if ($grades->isEmpty()) {
-            return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $grades);
+
+        if (is_null($this->request->limit)) {
+            $grades = $grades->get();
+            $message = (count($grades) < 1) ? 'Mohon maaf, data tidak ditemukan.' : 'success';
+            foreach ($grades as $key => $item) {
+                $item->type = ($item->type == 1) ? 'PNS' : 'PPPK';
+            }
+            return $this->response(200, $message, $grades);
+        } else {
+            $grades = $grades->paginate($this->request->limit);
+            $message = ($grades->isEmpty()) ? 'Mohon maaf, data tidak ditemukan.' : 'success';
+            foreach ($grades->items() as $key => $item) {
+                $item->type = ($item->type == 1) ? 'PNS' : 'PPPK';
+            }
+            return $this->paginateResponse(200, $message, $grades);
         }
-        foreach ($grades->items() as $key => $item) {
-            $item->type = ($item->type == 1) ? 'PNS' : 'PPPK';
-        }
-        return $this->paginateResponse(200, 'success', $grades);
     }
 }

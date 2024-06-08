@@ -43,17 +43,18 @@ class ResidenceController extends Controller
             'limit' => 'nullable|numeric|min:1',
         ], $messages);
 
-        $this->request->limit = ($this->request->limit) ? $this->request->limit : 10;
-
         $residences = DB::table('residences');
         $residences->select('id', 'name', 'created_at');
         $residences->where('name', 'like', '%' . $this->request->search . '%');
-        $residences = $residences->paginate($this->request->limit);
 
-        if ($residences->isEmpty()) {
-            return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $residences);
+        if (is_null($this->request->limit)) {
+            $residences = $residences->get();
+            $message = (count($residences) < 1) ? 'Mohon maaf, data tidak ditemukan.' : 'success';
+            return $this->response(200, $message, $residences);
+        } else {
+            $residences = $residences->paginate($this->request->limit);
+            $message = ($residences->isEmpty()) ? 'Mohon maaf, data tidak ditemukan.' : 'success';
+            return $this->paginateResponse(200, $message, $residences);
         }
-
-        return $this->paginateResponse(200, 'success', $residences);
     }
 }

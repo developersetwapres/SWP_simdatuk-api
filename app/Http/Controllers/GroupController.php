@@ -43,17 +43,18 @@ class GroupController extends Controller
             'limit' => 'nullable|numeric|min:1',
         ], $messages);
 
-        $this->request->limit = ($this->request->limit) ? $this->request->limit : 10;
-
         $groups = DB::table('groups');
         $groups->select('id', 'name', 'created_at');
         $groups->where('name', 'like', '%' . $this->request->search . '%');
-        $groups = $groups->paginate($this->request->limit);
 
-        if ($groups->isEmpty()) {
-            return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $groups);
+        if (is_null($this->request->limit)) {
+            $groups = $groups->get();
+            $message = (count($groups) < 1) ? 'Mohon maaf, data tidak ditemukan.' : 'success';
+            return $this->response(200, $message, $groups);
+        } else {
+            $groups = $groups->paginate($this->request->limit);
+            $message = ($groups->isEmpty()) ? 'Mohon maaf, data tidak ditemukan.' : 'success';
+            return $this->paginateResponse(200, $message, $groups);
         }
-
-        return $this->paginateResponse(200, 'success', $groups);
     }
 }

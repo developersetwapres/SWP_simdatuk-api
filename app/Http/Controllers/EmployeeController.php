@@ -112,7 +112,6 @@ class EmployeeController extends Controller
             'page' => 'nullable|numeric|min:1',
             'limit' => 'nullable|numeric|min:1',
         ], $messages);
-        $this->request->limit = ($this->request->limit) ? $this->request->limit : 10;
 
         $users = DB::table('users as u');
         $users->leftJoin('positions as p', 'u.position_id', '=', 'p.id');
@@ -155,17 +154,22 @@ class EmployeeController extends Controller
         if (!is_null($this->request->month_of_birth)) {
             $users->whereMonth('u.date_of_birth', $this->request->month_of_birth);
         }
-        $users = $users->paginate($this->request->limit);
 
-        if ($users->isEmpty()) {
-            return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $users);
+        if (is_null($this->request->limit)) {
+            $users = $users->get();
+            $message = (count($users) < 1) ? 'Mohon maaf, data tidak ditemukan.' : 'success';
+            foreach ($users as $key => $item) {
+                $item->photo_profile = $this->getDocument($item->photo_profile, true);
+            }
+            return $this->response(200, $message, $users);
+        } else {
+            $users = $users->paginate($this->request->limit);
+            $message = ($users->isEmpty()) ? 'Mohon maaf, data tidak ditemukan.' : 'success';
+            foreach ($users->items() as $key => $item) {
+                $item->photo_profile = $this->getDocument($item->photo_profile, true);
+            }
+            return $this->paginateResponse(200, $message, $users);
         }
-
-        foreach ($users->items() as $key => $item) {
-            $item->photo_profile = $this->getDocument($item->photo_profile, true);
-        }
-
-        return $this->paginateResponse(200, 'success', $users);
     }
 
     /**

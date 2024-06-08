@@ -48,20 +48,27 @@ class UserController extends Controller
             'page' => 'nullable|numeric|min:1',
             'limit' => 'nullable|numeric|min:1',
         ], $messages);
-        $this->request->limit = ($this->request->limit) ? $this->request->limit : 10;
 
         $users = DB::table('users');
         $users->join('roles', 'users.role_id', '=', 'roles.id');
         $users->select('users.id', 'users.username', 'users.employee_id_number', 'users.employee_registration_number', 'roles.name as role_name', 'users.status');
         $users->where('users.username', 'like', '%' . $this->request->search . '%');
-        $users = $users->paginate($this->request->limit);
-        if ($users->isEmpty()) {
-            return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $users);
+
+        if (is_null($this->request->limit)) {
+            $users = $users->get();
+            $message = (count($users) < 1) ? 'Mohon maaf, data tidak ditemukan.' : 'success';
+            foreach ($users as $key => $item) {
+                $item->status = ($item == true) ? 'Aktif' : 'Nonaktif';
+            }
+            return $this->response(200, $message, $users);
+        } else {
+            $users = $users->paginate($this->request->limit);
+            $message = ($users->isEmpty()) ? 'Mohon maaf, data tidak ditemukan.' : 'success';
+            foreach ($users->items() as $key => $item) {
+                $item->status = ($item == true) ? 'Aktif' : 'Nonaktif';
+            }
+            return $this->paginateResponse(200, $message, $users);
         }
-        foreach ($users->items() as $key => $item) {
-            $item->status = ($item == true) ? 'Aktif' : 'Nonaktif';
-        }
-        return $this->paginateResponse(200, 'success', $users);
     }
 
     /**

@@ -43,17 +43,18 @@ class DecreeController extends Controller
             'limit' => 'nullable|numeric|min:1',
         ], $messages);
 
-        $this->request->limit = ($this->request->limit) ? $this->request->limit : 10;
-
         $decrees = DB::table('decrees');
         $decrees->select('id', 'name', 'acronym', 'created_at');
         $decrees->where('name', 'like', '%' . $this->request->search . '%');
-        $decrees = $decrees->paginate($this->request->limit);
 
-        if ($decrees->isEmpty()) {
-            return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $decrees);
+        if (is_null($this->request->limit)) {
+            $decrees = $decrees->get();
+            $message = (count($decrees) < 1) ? 'Mohon maaf, data tidak ditemukan.' : 'success';
+            return $this->response(200, $message, $decrees);
+        } else {
+            $decrees = $decrees->paginate($this->request->limit);
+            $message = ($decrees->isEmpty()) ? 'Mohon maaf, data tidak ditemukan.' : 'success';
+            return $this->paginateResponse(200, $message, $decrees);
         }
-
-        return $this->paginateResponse(200, 'success', $decrees);
     }
 }

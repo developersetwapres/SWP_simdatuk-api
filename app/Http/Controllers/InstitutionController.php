@@ -44,18 +44,19 @@ class InstitutionController extends Controller
             'limit' => 'nullable|numeric|min:1',
         ], $messages);
 
-        $this->request->limit = ($this->request->limit) ? $this->request->limit : 10;
-
         $institutions = DB::table('institutions');
         $institutions->select('id', 'name');
         $institutions->where('name', 'like', '%' . $this->request->search . '%');
-        $institutions = $institutions->paginate($this->request->limit);
 
-        if ($institutions->isEmpty()) {
-            return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $institutions);
+        if (is_null($this->request->limit)) {
+            $institutions = $institutions->get();
+            $message = (count($institutions) < 1) ? 'Mohon maaf, data tidak ditemukan.' : 'success';
+            return $this->response(200, $message, $institutions);
+        } else {
+            $institutions = $institutions->paginate($this->request->limit);
+            $message = ($institutions->isEmpty()) ? 'Mohon maaf, data tidak ditemukan.' : 'success';
+            return $this->paginateResponse(200, $message, $institutions);
         }
-
-        return $this->paginateResponse(200, 'success', $institutions);
     }
 
     /**
