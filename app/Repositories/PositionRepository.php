@@ -15,7 +15,6 @@ class PositionRepository
         $positions->join('users as u', 'u.id', '=', 'phu.user_id');
         $positions->join('position_histories as ph', 'phu.position_history_id', '=', 'ph.id');
         $positions->leftjoin('groups as g', 'phu.group_id', '=', 'g.id');
-        $positions->leftjoin('echelons as e', 'phu.echelon_id', '=', 'e.id');
         $positions->leftjoin('decrees as tod', 'phu.type_of_decree', '=', 'tod.id');
         $positions->leftjoin('decrees as totd', 'phu.type_of_termination_decree', '=', 'totd.id');
         $positions->where('phu.user_id', $userId);
@@ -26,8 +25,7 @@ class PositionRepository
             'phu.position',
             'g.id as group_id',
             'g.name as group_name',
-            'e.id as echelon_id',
-            'e.name as echelon_name',
+            'phu.echelon',
             'phu.position_status',
             'phu.effective_date',
             'phu.decree',

@@ -16,7 +16,6 @@ class PerformanceRepository
             'p.period_year',
             'p.name',
             'p.performance_period',
-            'p.description',
             'up.work_performance_score',
         );
         $performances->orderBy('p.period_year', 'desc');

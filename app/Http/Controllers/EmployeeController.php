@@ -128,6 +128,7 @@ class EmployeeController extends Controller
             'g.name as grade_name',
             'g.code as grade_code',
             'et.name as employment_type',
+            'u.description'
         );
         $users->where(function ($query) {
             $query->where('u.name', 'like', '%' . $this->request->search . '%')

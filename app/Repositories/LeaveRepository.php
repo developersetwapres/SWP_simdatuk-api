@@ -11,7 +11,7 @@ class LeaveRepository
         $leaves = DB::table('user_leaves');
         $leaves->where('user_id', $userId);
         $leaves->select(
-            'grade_id',
+            'grade',
             'position',
             'start_date',
             'end_date',
