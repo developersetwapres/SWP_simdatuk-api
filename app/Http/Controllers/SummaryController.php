@@ -25,30 +25,44 @@ class SummaryController extends Controller
      * Below is the list of all data entities managed by the application.
      * @authenticated
      * @queryParam month integer Refers to the month between 1 - 12 of results being displayed. Default is '1'. Example: 1
-     * @response 200 {"code": 200,"message": "success","data": {"users": [{"name": "Dr. Ir. Suprayoga Hadi, M.S.P.","photo_profile": "http://localhost/img/avatar.jpeg","date_of_birth": "12-12-1974"}],"total_government_employees": {"all": 294,"active": 288},"gender_employees": {"male": 155,"female": 133},"total_non_government_employees": {"assistance": 143,"outsourcing": 190},"work_unit": [{"name": "Kepala Sekretariat Wakil Presiden","quantity": 1}],"education_employees": [{"name": "Strata III","quantity": 8}]}}
+     * @response 200 {"code":200,"message":"success","data":{"users":[{"name":"Syahrul Udjud","photo_profile":"http://localhost/img/avatar.jpeg","date_of_birth":"1943-01-13"},{"name":"Stanislaus Widjanarto","photo_profile":"http://localhost/img/avatar.jpeg","date_of_birth":"1947-01-08"},{"name":"Hadi Sukesto","photo_profile":"http://localhost/img/avatar.jpeg","date_of_birth":"1950-01-17"},{"name":"Bambang Wurjanto","photo_profile":"http://localhost/storage/photo_profile/195101011982031001.jpg","date_of_birth":"1951-01-01"},{"name":"H. Maman Herman Soetardja","photo_profile":"http://localhost/storage/photo_profile/195201031984031001.jpg","date_of_birth":"1952-01-03"},{"name":"R. Widjajanto","photo_profile":"http://localhost/img/avatar.jpeg","date_of_birth":"1952-01-17"},{"name":"Siti Iswari","photo_profile":"http://localhost/storage/photo_profile/195201171985032001.jpg","date_of_birth":"1952-01-17"},{"name":"Baharudin","photo_profile":"http://localhost/storage/photo_profile/060045905.jpg","date_of_birth":"1953-01-21"}],"total_government_employees":{"all":1399,"active":680},"gender_employees":{"male":958,"female":390},"total_non_government_employees":{"assistance":393,"outsource":362},"work_unit":[{"name":"Kepala Sekretariat Wakil Presiden","quantity":1},{"name":"Deputi Bidang Dukungan Kebijakan Pembangunan Ekonomi dan Peningkatan Daya Saing","quantity":24},{"name":"Deputi Bidang Dukungan Kebijakan Pembangunan Manusia dan Pemerataan Pembangunan","quantity":26},{"name":"Deputi Bidang Dukungan Kebijakan Pemerintah dan Wawasan Kebangsaan","quantity":31},{"name":"Deputi Bidang Administrasi","quantity":186},{"name":"Kementerian Sekretariat Negara","quantity":15}],"education_employees":[{"name":"Strata III","quantity":8},{"name":"Strata II","quantity":96},{"name":"Diploma IV / Strata I","quantity":92},{"name":"Akademi / Diploma III / Sarjana Muda","quantity":18},{"name":"Diploma I / II","quantity":1},{"name":"SLTA / Sederajat","quantity":67},{"name":"SLTP / Sederajat","quantity":1}]}}
      */
     public function index()
     {
+        // get users by month of birth
         $users = DB::table('users');
         $users->whereMonth('date_of_birth', $this->request->month);
         $users->select('name', 'photo_profile', 'date_of_birth');
+        $users->orderBy('date_of_birth', 'asc');
         $users = $users->take(8)->get();
         foreach ($users as $item) {
             $item->photo_profile = (is_null($item->photo_profile)) ? asset('img/avatar.jpeg') : Storage::disk('public')->url($item->photo_profile);
         }
+
+        $countable = DB::table('users')
+            ->select(
+                DB::raw('COUNT(id) as total'),
+                DB::raw('COUNT(CASE WHEN employment_status = 1 THEN 1 END) as active'),
+                DB::raw('COUNT(CASE WHEN gender = 1 THEN 1 END) as male'),
+                DB::raw('COUNT(CASE WHEN gender = 0 THEN 1 END) as female'),
+                DB::raw('COUNT(CASE WHEN type = 2 THEN 1 END) as assistance'),
+                DB::raw('COUNT(CASE WHEN type = 3 THEN 1 END) as outsource'),
+            )
+            ->first();
+
         $data = [
             "users" => $users,
             "total_government_employees" => [
-                "all" => 294,
-                "active" => 288,
+                "all" => $countable->total,
+                "active" => $countable->active,
             ],
             "gender_employees" => [
-                "male" => 155,
-                "female" => 133,
+                "male" => $countable->male,
+                "female" => $countable->female,
             ],
             "total_non_government_employees" => [
-                "assistance" => 143,
-                "outsourcing" => 190,
+                "assistance" => $countable->assistance,
+                "outsource" => $countable->outsource,
             ],
             "work_unit" => [
                 [

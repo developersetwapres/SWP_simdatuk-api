@@ -18,6 +18,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\PositionHistoryController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RecapitulationController;
 use App\Http\Controllers\RecognitionHistoryController;
 use App\Http\Controllers\ResidenceController;
 use App\Http\Controllers\RoleController;
@@ -52,6 +53,13 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('summaries')->group(function () {
         Route::get('/', [SummaryController::class, 'index']);
+    });
+
+    Route::prefix('recapitulations')->group(function () {
+        Route::get('/', [RecapitulationController::class, 'index']);
+        Route::get('/asn', [RecapitulationController::class, 'asn']);
+        Route::get('/nonasn', [RecapitulationController::class, 'nonasn']);
+        Route::get('/outsource', [RecapitulationController::class, 'outsource']);
     });
 
     Route::prefix('diagrams')->group(function () {
