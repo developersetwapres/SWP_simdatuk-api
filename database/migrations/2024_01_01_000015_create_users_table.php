@@ -51,6 +51,7 @@ return new class extends Migration
             $table->string('mobile_phone', 20)->nullable();
             $table->text('office_address', 160)->nullable();
             $table->string('office_phone_number', 20)->nullable();
+            $table->string('emergency_contact', 300)->nullable();
             $table->text('description')->nullable();
             $table->tinyInteger('type')->nullable()->comment('1=ASN, 2=NON ASN, 3=OUTSOURCING');
             $table->boolean('status')->default(false)->comment('true=active, false=deactivate');

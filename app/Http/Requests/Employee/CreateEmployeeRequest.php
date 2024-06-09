@@ -61,6 +61,7 @@ class CreateEmployeeRequest extends FormRequest
             'mobile_phone' => 'numeric|max:99999999999999',
             'office_address' => 'max:160',
             'office_phone_number' => 'numeric|max:99999999999999',
+            'emergency_contact' => 'required',
             'description' => 'max:160',
             'type' => 'required|in:1,2,3',
         ];
@@ -156,6 +157,7 @@ class CreateEmployeeRequest extends FormRequest
             'office_address.max' => 'Alamat kantor tidak boleh lebih dari 160 karakter.',
             'office_phone_number.numeric' => 'Nomor telepon kantor harus berupa angka.',
             'office_phone_number.max' => 'Nomor telepon kantor tidak boleh lebih dari 14 digit angka.',
+            'emergency_contact.required' => 'Kontak darurat tidak boleh kosong',
             'description.max' => 'Keterangan tidak boleh lebih dari 160 karakter.',
             'type.required' => 'Tipe pegawai tidak boleh kosong.',
             'type.in' => 'Tipe pegawai diantara 1, 2 atau 3',
@@ -314,6 +316,10 @@ class CreateEmployeeRequest extends FormRequest
             'office_phone_number' => [
                 'description' => 'Refers to the Office Phone Number of Employee.',
                 'example' => '02112345678',
+            ],
+            'emergency_contact' => [
+                'description' => 'Refers to the Emergency Contact of Employee.',
+                'example' => 'Riyanti, 02112345678, Kakak Kandung',
             ],
             'description' => [
                 'description' => 'Refers to the Description of Employee.',

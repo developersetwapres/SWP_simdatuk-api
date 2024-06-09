@@ -52,6 +52,7 @@ class EmployeeRepository
             'u.mobile_phone',
             'u.office_address',
             'u.office_phone_number',
+            'u.emergency_contact',
             'u.description',
             'u.type',
             'u.created_at'
