@@ -173,6 +173,7 @@ INTRO
             'Authentication',
             'Summary',
             'Diagram',
+            'Compare',
             'Employee',
             'History',
             'Master Data',

@@ -13,6 +13,7 @@ use App\Http\Controllers\GradeController;
 use App\Http\Controllers\GradeHistoryController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\InstitutionController;
+use App\Http\Controllers\NoteController;
 use App\Http\Controllers\PerformanceHistoryController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PositionController;
@@ -60,6 +61,11 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/asn', [RecapitulationController::class, 'asn']);
         Route::get('/nonasn', [RecapitulationController::class, 'nonasn']);
         Route::get('/outsource', [RecapitulationController::class, 'outsource']);
+    });
+
+    Route::prefix('notes')->group(function () {
+        Route::get('/{userid}', [NoteController::class, 'show']);
+        Route::post('/{userid}', [NoteController::class, 'update']);
     });
 
     Route::prefix('diagrams')->group(function () {
