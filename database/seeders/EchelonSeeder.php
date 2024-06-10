@@ -18,15 +18,15 @@ class EchelonSeeder extends Seeder
             ['id' => 2, 'name' => 'Eselon II'],
             ['id' => 3, 'name' => 'Eselon III'],
             ['id' => 4, 'name' => 'Eselon IV'],
-            ['id' => 5, 'name' => 'JF Ahli Utama'],
-            ['id' => 6, 'name' => 'JF Ahli Madya'],
-            ['id' => 7, 'name' => 'JF Ahli Muda'],
-            ['id' => 8, 'name' => 'JF Ahli Pertama'],
+            ['id' => 5, 'name' => 'Ahli Utama'],
+            ['id' => 6, 'name' => 'Ahli Madya'],
+            ['id' => 7, 'name' => 'Ahli Muda'],
+            ['id' => 8, 'name' => 'Ahli Pertama'],
             ['id' => 9, 'name' => 'Pelaksana'],
-            ['id' => 10, 'name' => 'JF Penyelia'],
-            ['id' => 11, 'name' => 'JF Mahir'],
-            ['id' => 12, 'name' => 'JF Terampil'],
-            ['id' => 13, 'name' => 'JF Pemula'],
+            ['id' => 10, 'name' => 'Penyelia'],
+            ['id' => 11, 'name' => 'Mahir'],
+            ['id' => 12, 'name' => 'Terampil'],
+            ['id' => 13, 'name' => 'Pemula'],
         ];
         DB::table('echelons')->insertTs($echelons);
     }

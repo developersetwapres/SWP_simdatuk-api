@@ -199,7 +199,44 @@ class OldUserSeeder extends Seeder
             $outsource = DB::select($outsource);
             DB::table('users')->insertTs(json_decode(json_encode($outsource), true));
             $this->setPosition();
+            $this->setEchelon();
         }
+    }
+
+    private static function setEchelon()
+    {
+        $sql = "
+            UPDATE simdatuk.users u
+            JOIN (
+                SELECT
+                    du.nm_pegawai,
+                    du.id_pegawai,
+                    du.ket_eselon,
+                    u.employee_id_number 
+                FROM
+                    simdatuk_dump.tbl_1pegawai_swp AS du
+                LEFT JOIN 
+                    simdatuk.users u ON du.id_pegawai = u.employee_id_number 
+            ) AS subq ON u.employee_id_number = subq.employee_id_number
+            SET u.echelon_id = 
+                CASE 
+                    WHEN subq.ket_eselon = 'Eselon I' THEN 1
+                    WHEN subq.ket_eselon = 'Eselon II' THEN 2
+                    WHEN subq.ket_eselon = 'Eselon III' THEN 3
+                    WHEN subq.ket_eselon = 'Eselon IV' THEN 4
+                    WHEN subq.ket_eselon = 'Ahli Utama' THEN 5
+                    WHEN subq.ket_eselon = 'Ahli Madya' THEN 6
+                    WHEN subq.ket_eselon = 'Ahli Muda' THEN 7
+                    WHEN subq.ket_eselon = 'Ahli Pertama' THEN 8
+                    WHEN subq.ket_eselon = 'Pelaksana' THEN 9
+                    WHEN subq.ket_eselon = 'Penyelia' THEN 10
+                    WHEN subq.ket_eselon = 'Mahir' THEN 11
+                    WHEN subq.ket_eselon = 'Terampil' THEN 12
+                    WHEN subq.ket_eselon = 'Pemula' THEN 13
+                    ELSE NULL
+                END
+        ";
+        DB::statement($sql);
     }
 
     /**
