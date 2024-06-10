@@ -656,7 +656,7 @@
                 <td class="table-section-3-body">{{ $value['occupation_description'] }}</td>
                 <td class="table-section-3-body">{{ $value['marital_status'] }}</td>
                 <td class="table-section-3-body">{{ $value['mobile_phone'] }}</td>
-                <td class="table-section-3-body">{{ $value['order'] }}</td>
+                <td class="table-section-3-body">{{ $value['sequence_number'] }}</td>
             </tr>
             @endforeach
         </tbody>

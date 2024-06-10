@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\employee;
 use App\Http\Requests\Export\ExportEmployeesRequest;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Exports\employee;
-use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
+
 /**
  * @group Export Data
  */
@@ -349,7 +350,7 @@ class ExportController extends Controller
      * @group Export Data
      * @authenticated
      */
-    public function detailEmployee($employeeId =  null)
+    public function detailEmployee($employeeId = null)
     {
         $employeeId = $employeeId ?? $this->request->id;
         if (empty($employeeId)) {
@@ -480,7 +481,7 @@ class ExportController extends Controller
         $userGrade->join('users', 'users.id', '=', 'ug.user_id');
         $userGrade->join('decrees', 'decrees.id', '=', 'ug.type_of_decree');
         $userGrade->select('g.name', 'g.code', 'ug.effective_date', 'ug.decree_name', 'ug.decree_document', 'decrees.name as type_of_decree',
-        'ug.decree_number', 'ug.decree_date', 'ug.description', 'ug.status');
+            'ug.decree_number', 'ug.decree_date', 'ug.description', 'ug.status');
         $userGrade->where('ug.user_id', $user->id);
         $userGrade = $userGrade->get();
         $userGradeData = array();
@@ -495,7 +496,7 @@ class ExportController extends Controller
                 'decree_number' => $grade->decree_number,
                 'decree_date' => $grade->decree_date,
                 'description' => $grade->description,
-                'status' => $grade->status
+                'status' => $grade->status,
             ];
         }
 
@@ -507,27 +508,27 @@ class ExportController extends Controller
         $userPosition->join('decrees as termination', 'termination.id', '=', 'up.type_of_termination_decree');
         $userPosition->join('echelons', 'echelons.id', '=', 'up.echelon');
         $userPosition->select(
-                'up.position',
-                'groups.name as group_name',
-                'up.effective_date',
-                'up.decree',
-                'up.decree_document',
-                'up.decree_date',
-                'decrees.name as decree_name',
-                'up.decree_number',
-                'echelons.name as echelons_name',
-                'up.position_status',
-                'up.termination_date',
-                'up.termination_decree',
-                'termination.name as termination_name',
-                'up.termination_decree_number',
-                'up.termination_decree_date',
-                'up.status'
-            );
+            'up.position',
+            'groups.name as group_name',
+            'up.effective_date',
+            'up.decree',
+            'up.decree_document',
+            'up.decree_date',
+            'decrees.name as decree_name',
+            'up.decree_number',
+            'echelons.name as echelons_name',
+            'up.position_status',
+            'up.termination_date',
+            'up.termination_decree',
+            'termination.name as termination_name',
+            'up.termination_decree_number',
+            'up.termination_decree_date',
+            'up.status'
+        );
         $userPosition->where('users.id', $user->id);
         $userPosition = $userPosition->get();
         $userPositionData = array();
-        foreach ($userPosition as $position){
+        foreach ($userPosition as $position) {
             $userPositionData[] = [
                 'position' => $position->position,
                 'group' => $position->group_name,
@@ -544,7 +545,7 @@ class ExportController extends Controller
                 'termination_name' => $position->termination_name,
                 'termination_decree_number' => $position->termination_decree_number,
                 'termination_decree_date' => $position->termination_decree_date,
-                'status' => $position->status
+                'status' => $position->status,
             ];
         }
         //Discipline
@@ -599,7 +600,7 @@ class ExportController extends Controller
                 'occupation_description' => $family->occupation_description,
                 'marital_status' => $family->marital_status,
                 'mobile_phone' => $family->mobile_phone,
-                'order' => $family->order,
+                'sequence_number' => $family->sequence_number,
             ];
         }
 
@@ -627,7 +628,7 @@ class ExportController extends Controller
         $userAssessment = DB::table('user_assessments as ua');
         $userAssessment->join('users', 'users.id', '=', 'ua.user_id');
         $userAssessment->select('ua.assessment_date', 'ua.point', 'ua.organizer', 'ua.assessment_document', 'ua.type');
-        $userAssessment =  $userAssessment->get();
+        $userAssessment = $userAssessment->get();
         $assessmentResult = array();
         $assessmentCompetency = array();
         $assessmentTalent = array();
@@ -638,7 +639,7 @@ class ExportController extends Controller
                         'date' => $assessment->assessment_date,
                         'result' => $assessment->point,
                         'organizer' => $assessment->organizer,
-                        'document' => $assessment->document
+                        'document' => $assessment->document,
                     ];
                     break;
                 case '2':
@@ -646,7 +647,7 @@ class ExportController extends Controller
                         'date' => $assessment->assessment_date,
                         'result' => $assessment->point,
                         'organizer' => $assessment->organizer,
-                        'document' => $assessment->document
+                        'document' => $assessment->document,
                     ];
                     break;
                 case '3':
@@ -654,12 +655,11 @@ class ExportController extends Controller
                         'date' => $assessment->assessment_date,
                         'result' => $assessment->point,
                         'organizer' => $assessment->organizer,
-                        'document' => $assessment->document
+                        'document' => $assessment->document,
                     ];
                     break;
             }
         }
-
 
         //Training
         $userTraining = DB::table('user_trainings as ut');
@@ -755,8 +755,8 @@ class ExportController extends Controller
             'photoProfile' => $user->photo_profile,
             'userNIP' => $user->employee_id_number,
             'userName' => $user->name,
-            'userEchelons' => ($userEchelons->name ?? ''). ', '. ($userEchelons->date ?? ' '),
-            'userCurrentGrade' => ($userCurrentGrade->name ?? ''). '(' .($userCurrentGrade->code ?? '') . '), '. ($userCurrentGrade->date ?? ''),
+            'userEchelons' => ($userEchelons->name ?? '') . ', ' . ($userEchelons->date ?? ' '),
+            'userCurrentGrade' => ($userCurrentGrade->name ?? '') . '(' . ($userCurrentGrade->code ?? '') . '), ' . ($userCurrentGrade->date ?? ''),
             'userCollege' => $userCollegeData,
             'userPosition' => $userPositionData,
             'userGrade' => $userGradeData,
@@ -772,7 +772,7 @@ class ExportController extends Controller
             'userNotes' => $userNoteData,
             'userAssessment' => $assessmentResult,
             'userAssessmentCompetency' => $assessmentCompetency,
-            'userAssessmentTalent' => $assessmentTalent
+            'userAssessmentTalent' => $assessmentTalent,
         ]);
         $pdf->set_option('isHtml5ParserEnabled', true);
         $pdf->set_paper("A4", "portrait");
@@ -798,7 +798,7 @@ class ExportController extends Controller
      * @bodyParam age_range.* string[] list of employee's age range. Example ["30-40", "40-50"]
      * @authenticated
      */
-        public function zipDetailEmployee(ExportEmployeesRequest $request)
+    public function zipDetailEmployee(ExportEmployeesRequest $request)
     {
 
         $user = DB::table('users');
@@ -808,7 +808,7 @@ class ExportController extends Controller
         $user->leftJoin('grades', 'grades.id', '=', 'users.grade_id');
         $user->leftJoin('position_history_users', 'position_history_users.user_id', '=', 'users.id');
 
-        if (isset($request->organization)){
+        if (isset($request->organization)) {
             $user->whereIn('users.organization_id', $request->organization);
         }
         if (isset($request->age_range)) {
@@ -830,31 +830,31 @@ class ExportController extends Controller
                 }
             });
         }
-        if (isset($request->echelons)){
+        if (isset($request->echelons)) {
             $user->whereIn('echelons.name', $request->echelons);
         }
-        if (isset($request->grades)){
+        if (isset($request->grades)) {
             $user->whereIn('users.grade_id', $request->grades);
         }
-        if (isset($request->education)){
+        if (isset($request->education)) {
             $user->whereIn('user_educations.level', $request->education);
         }
-        if (isset($request->position_status)){
+        if (isset($request->position_status)) {
             $user->whereIn('position_history_users.position_status', $request->position_status);
         }
-        if (isset($request->gender)){
+        if (isset($request->gender)) {
             $user->whereIn('users.gender', $request->gender);
         }
-        if (isset($request->marital_status)){
+        if (isset($request->marital_status)) {
             $user->whereIn('users.marital_status', $request->marital_status);
         }
-        if (isset($request->employee_type)){
-           $user->whereIn('users.type', $request->employee_type);
+        if (isset($request->employee_type)) {
+            $user->whereIn('users.type', $request->employee_type);
         }
 
         $userIds = $user->pluck('users.id')->toArray();
-        if (! $userIds){
-            return $this->response( 400, 'Data pegawai tidak ditemukan');
+        if (!$userIds) {
+            return $this->response(400, 'Data pegawai tidak ditemukan');
         }
         $zip = new \Madnest\Madzipper\Madzipper;
         $zipFileName = "Employee-" . Carbon::now()->format('Y-m-d_H-i-s') . ".zip";
@@ -938,7 +938,7 @@ class ExportController extends Controller
             ->leftJoin('user_educations', 'users.id', '=', 'user_educations.user_id')
             ->leftJoin('position_history_users', 'users.id', '=', 'position_history_users.user_id')
             ->select('users.*'); // Add more fields as needed
-        if (isset($request->organization)){
+        if (isset($request->organization)) {
             $users->whereIn('users.organization_id', $request->organization);
         }
         if (isset($request->age_range)) {
@@ -955,30 +955,30 @@ class ExportController extends Controller
                 }
             });
         }
-        if (isset($request->echelons)){
+        if (isset($request->echelons)) {
             $users->whereIn('echelons.name', $request->echelons);
         }
-        if (isset($request->grades)){
+        if (isset($request->grades)) {
             $users->whereIn('users.grade_id', $request->grades);
         }
-        if (isset($request->education)){
+        if (isset($request->education)) {
             $users->whereIn('user_educations.level', $request->education);
         }
-        if (isset($request->position_status)){
+        if (isset($request->position_status)) {
             $users->whereIn('position_history_users.position_status', $request->position_status);
         }
-        if (isset($request->gender)){
+        if (isset($request->gender)) {
             $users->whereIn('users.gender', $request->gender);
         }
-        if (isset($request->marital_status)){
+        if (isset($request->marital_status)) {
             $users->whereIn('users.marital_status', $request->marital_status);
         }
-        if (isset($request->employee_type)){
+        if (isset($request->employee_type)) {
             $users->whereIn('users.type', $request->employee_type);
         }
         $userIds = $users->pluck('users.id')->toArray();
-        if (! $userIds){
-            return $this->response( 400, 'Data pegawai tidak ditemukan');
+        if (!$userIds) {
+            return $this->response(400, 'Data pegawai tidak ditemukan');
         }
 
         // toggle field
@@ -1025,6 +1025,6 @@ class ExportController extends Controller
         $toggleFieldBio['isAssessment'] = $request->isAssessment == 1;
         $toggleFieldBio['isCompetency'] = $request->isCompetency == 1;
         $toggleFieldBio['isTalentPool'] = $request->isTalentPool == 1;
-        return Excel::download(new employee($toggleFieldBio, $userIds), 'Employees-'.Carbon::now().'.xlsx');
+        return Excel::download(new employee($toggleFieldBio, $userIds), 'Employees-' . Carbon::now() . '.xlsx');
     }
 }
