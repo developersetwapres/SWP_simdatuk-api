@@ -18,15 +18,15 @@ class EchelonSeeder extends Seeder
             ['id' => 2, 'name' => 'Eselon II', "retirement_age" => 60],
             ['id' => 3, 'name' => 'Eselon III', "retirement_age" => 58],
             ['id' => 4, 'name' => 'Eselon IV', "retirement_age" => 58],
-            ['id' => 5, 'name' => 'JF Ahli Utama', "retirement_age" => 65],
-            ['id' => 6, 'name' => 'JF Ahli Madya', "retirement_age" => 60],
-            ['id' => 7, 'name' => 'JF Ahli Muda', "retirement_age" => 60],
-            ['id' => 8, 'name' => 'JF Ahli Pertama', "retirement_age" => 58],
+            ['id' => 5, 'name' => 'Ahli Utama', "retirement_age" => 65],
+            ['id' => 6, 'name' => 'Ahli Madya', "retirement_age" => 60],
+            ['id' => 7, 'name' => 'Ahli Muda', "retirement_age" => 60],
+            ['id' => 8, 'name' => 'Ahli Pertama', "retirement_age" => 58],
             ['id' => 9, 'name' => 'Pelaksana', "retirement_age" => 58],
-            ['id' => 10, 'name' => 'JF Penyelia', "retirement_age" => 58],
-            ['id' => 11, 'name' => 'JF Mahir', "retirement_age" => 58],
-            ['id' => 12, 'name' => 'JF Terampil', "retirement_age" => 58],
-            ['id' => 13, 'name' => 'JF Pemula', "retirement_age" => 58],
+            ['id' => 10, 'name' => 'Penyelia', "retirement_age" => 58],
+            ['id' => 11, 'name' => 'Mahir', "retirement_age" => 58],
+            ['id' => 12, 'name' => 'Terampil', "retirement_age" => 58],
+            ['id' => 13, 'name' => 'Pemula', "retirement_age" => 58],
         ];
         DB::table('echelons')->insertTs($echelons);
     }
