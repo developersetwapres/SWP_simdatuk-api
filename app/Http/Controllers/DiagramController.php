@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\DB;
  */
 class DiagramController extends Controller
 {
+
+    protected $request;
+    protected $posted;
+
     public function __construct(Request $request)
     {
         $this->request = $request;
@@ -36,25 +40,12 @@ class DiagramController extends Controller
 
     private function getTopLevelPositions()
     {
-        $positions = DB::table('positions')
-            ->select(
-                'id',
-                'name',
-                'type',
-                'available',
-                'filled',
-                'children',
-                'entity'
-            )
-            ->whereNull('parent_id')
-            ->orderBy('vertical_order')
-            ->orderBy('horizontal_order')
-            ->get();
+        $positions = $this->getPositions(null, 2, true);
 
         foreach ($positions as $position) {
             $position->users = [];
             if ($position->entity == 1) {
-                $position->users = $this->getUsersByPositionId($position->id);
+                $position->users = $this->getUsers($position->id);
             }
         }
 
@@ -63,69 +54,126 @@ class DiagramController extends Controller
 
     private function getPositionWithChildren($positionId)
     {
-        $position = DB::table('positions')
-            ->select(
-                'id',
-                'name',
-                'type',
-                'entity'
-            )
-            ->where('id', $positionId)
-            ->orderBy('vertical_order')
-            ->orderBy('horizontal_order')
-            ->first();
+        $positions = $this->getPositions($positionId, 1, false);
 
-        if ($position) {
-            $position->users = [];
-            if ($position->entity == 1) {
-                $position->users = $this->getUsersByPositionId($position->id);
+        if ($positions) {
+            $positions->users = [];
+            if ($positions->entity == 1) {
+                $positions->users = $this->getUsers($positions->id);
             }
 
-            $position->children = $this->getChildPositions($positionId);
+            $positions->childs = $this->getPositions($positionId, 2, true);
+            $positions->children = sizeof($positions->childs);
 
-            foreach ($position->children as $childPosition) {
+            foreach ($positions->childs as $childPosition) {
                 $childPosition->users = [];
                 if ($childPosition->entity == 1) {
-                    $childPosition->users = $this->getUsersByPositionId($childPosition->id);
+                    $childPosition->users = $this->getUsers($childPosition->id);
+                }
+
+                $childPosition->childs = [];
+                //jabatan fungsional
+                if ($childPosition->type == 2) {
+                    $childPosition->childs = $this->getPositionEchelons($childPosition->id);
+                    $childPosition->children = sizeof($childPosition->childs);
+                    $childPosition->available = 0;
+                    $childPosition->filled = 0;
+                }
+
+                //special case Pejabat Kemensetneg yang Diperbantukan di Sekretariat Wakil Presiden
+                if ($positions->id == 4) {
+                    $grandchildPositions = $this->getPositions($childPosition->id, 2, true);
+                    foreach ($grandchildPositions as $grandchildPosition) {
+                        $grandchildUsers = $this->getUsers($grandchildPosition->id);
+                        foreach ($grandchildUsers as $value) {
+                            $childPosition->users[] = $value;
+                        }
+                    }
                 }
             }
         }
 
-        return $this->response(200, 'success', $position);
+        return $this->response(200, 'success', $positions);
     }
 
-    private function getChildPositions($parentId)
+    //idType : 1=id, 2=parent_id
+    private function getPositions($id, $idType, $all = true)
     {
-        return DB::table('positions')
+        $positions = DB::table('positions')
             ->select(
-                'id',
-                'name',
-                'type',
-                'available',
-                'filled',
-                'children',
-                'entity'
+                'positions.id',
+                'positions.name',
+                'positions.type',
+                DB::raw('CASE WHEN position_echelons.available IS NOT NULL THEN position_echelons.available ELSE positions.available END as available'),
+                DB::raw('CASE WHEN position_echelons.filled IS NOT NULL THEN position_echelons.filled ELSE positions.filled END as filled'),
+                DB::raw('CASE WHEN position_echelons.children IS NOT NULL THEN position_echelons.children ELSE positions.children END as children'),
+                'positions.entity',
             )
-            ->where('parent_id', $parentId)
-            ->orderBy('vertical_order')
-            ->orderBy('horizontal_order')
-            ->get();
+            ->leftJoin('position_echelons', 'positions.id', '=', 'position_echelons.position_id')
+            ->orderBy('positions.vertical_order')
+            ->orderBy('positions.horizontal_order')
+            ->orderBy('position_echelons.vertical_order')
+            ->orderBy('position_echelons.horizontal_order');
+
+        if ($idType == 1) {
+            $positions->where('positions.id', $id);
+        } else {
+            $positions->where('positions.parent_id', $id);
+        }
+
+        if ($all === true) {
+            return collect($positions->get()->unique('id')->values());
+        } else {
+            return $positions->first();
+        }
     }
 
-    private function getUsersByPositionId($positionId)
+    private function getUsers($positionId, $echelonId = null)
     {
-        return DB::table('users')
+        $users = DB::table('users')
             ->select(
-                'id',
-                'name',
-                'echelon_id',
-                'echelon_effective_date',
-                'grade_id',
-                'grade_effective_date',
-                'employee_id_number',
-                'employee_registration_number'
+                'users.id',
+                'users.name',
+                'users.echelon_id',
+                'users.echelon_effective_date',
+                'users.grade_id',
+                'users.grade_effective_date',
+                'users.employee_id_number',
+                'users.employee_registration_number',
+                'users.type',
+                'positions.name as position_name',
             )
+            ->leftJoin('positions', 'positions.id', '=', 'users.position_id')
+            ->where('users.position_id', $positionId);
+
+        if (isset($echelonId)) {
+            $users->where('users.echelon_id', '=', $echelonId);
+        }
+
+        return $users->get();
+    }
+
+    private function getPositionEchelons($positionId)
+    {
+        $positionEchelons = DB::table('position_echelons')
+            ->select(
+                'echelons.name',
+                'position_echelons.available',
+                'position_echelons.filled',
+                'position_echelons.children',
+                'position_echelons.echelon_id',
+            )
+            ->leftJoin('echelons', 'position_echelons.echelon_id', '=', 'echelons.id')
             ->where('position_id', $positionId)
+            ->orderBy('position_echelons.vertical_order')
+            ->orderBy('position_echelons.horizontal_order')
             ->get();
+
+        foreach ($positionEchelons as $positionEchelon) {
+            $positionEchelon->users = $this->getUsers($positionId, $positionEchelon->echelon_id);
+            $positionEchelon->children = sizeof($positionEchelon->users);
+        }
+
+        return $positionEchelons;
     }
 }
