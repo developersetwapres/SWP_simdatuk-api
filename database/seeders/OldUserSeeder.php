@@ -679,21 +679,38 @@ class OldUserSeeder extends Seeder
         ])->update([
             'position_id' => 188,
         ]);
-        DB::table('users')->whereIn('employee_id_number', ['197011111997032001', '197903292005011001', '197407052007011006'])->update([
+        DB::table('users')->whereIn('employee_id_number', ['197011111997032001'])->update([
             'position_id' => 189,
         ]);
-        DB::table('users')->whereIn('employee_id_number', [
-            '196312121986021001',
-            '198705042009121001',
-            '197901102005012001',
-            '196604171992022001',
-            '197202241993102002',
-            '197806092005012001',
-            '198110212005012001',
-            '199309042019022001',
-            '198705162010121004',
-        ])->update([
+        DB::table('users')->whereIn('employee_id_number', ['197903292005011001'])->update([
+            'position_id' => 210,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197407052007011006'])->update([
+            'position_id' => 211,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['196312121986021001',])->update([
             'position_id' => 190,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['198705042009121001',])->update([
+            'position_id' => 213,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197901102005012001',])->update([
+            'position_id' => 214,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['196604171992022001',])->update([
+            'position_id' => 215,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197202241993102002',])->update([
+            'position_id' => 216,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['197806092005012001', '198110212005012001',])->update([
+            'position_id' => 217,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['199309042019022001',])->update([
+            'position_id' => 218,
+        ]);
+        DB::table('users')->whereIn('employee_id_number', ['198705162010121004',])->update([
+            'position_id' => 219,
         ]);
         DB::table('users')->whereIn('employee_id_number', ['199409132017121005'])->update([
             'position_id' => 191,
