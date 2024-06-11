@@ -2851,7 +2851,7 @@ class PositionSeeder extends Seeder
                         'child' => [
                             [
                                 'id' => 192,
-                                'parent_id' => 220,
+                                'parent_id' => 221,
                                 'name' => 'Pustakawan Ahli Muda',
                                 'available' => 0,
                                 'filled' => 0,
