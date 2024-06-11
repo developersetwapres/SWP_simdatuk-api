@@ -633,7 +633,6 @@
             <td class="table-section-3-title">Keterangan Pekerjaan</td>
             <td class="table-section-3-title">Status Perkawinan</td>
             <td class="table-section-3-title">No HP</td>
-            <td class="table-section-3-title">Urut Keluarga</td>
         </thead>
 
         <tbody>

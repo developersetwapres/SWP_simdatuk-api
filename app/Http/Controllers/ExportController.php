@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Log;
 
 /**
  * @group Export Data
@@ -636,24 +637,24 @@ class ExportController extends Controller
             switch ($assessment->type) {
                 case '1':
                     $assessmentResult[] = [
-                        'date' => $assessment->assessment_date,
-                        'result' => $assessment->point,
+                        'assessment_date' => $assessment->assessment_date,
+                        'point' => $assessment->point,
                         'organizer' => $assessment->organizer,
                         'document' => $assessment->document,
                     ];
                     break;
                 case '2':
                     $assessmentCompetency[] = [
-                        'date' => $assessment->assessment_date,
-                        'result' => $assessment->point,
+                        'assessment_date' => $assessment->assessment_date,
+                        'point' => $assessment->point,
                         'organizer' => $assessment->organizer,
                         'document' => $assessment->document,
                     ];
                     break;
                 case '3':
                     $assessmentTalent[] = [
-                        'date' => $assessment->assessment_date,
-                        'result' => $assessment->point,
+                        'assessment_date' => $assessment->assessment_date,
+                        'point' => $assessment->point,
                         'organizer' => $assessment->organizer,
                         'document' => $assessment->document,
                     ];
@@ -812,21 +813,23 @@ class ExportController extends Controller
             $user->whereIn('users.organization_id', $request->organization);
         }
         if (isset($request->age_range)) {
-            $ageRanges = $request->age_range;
-            $today = Carbon::today();
+            $ageRanges = $request->input('age_range', []);
+            $now = Carbon::now();
 
-            $user->where(function ($query) use ($ageRanges, $today) {
+            // Start a nested query for age range filtering
+            $user->where(function ($query) use ($ageRanges, $now, &$dateRanges) {
                 foreach ($ageRanges as $range) {
-                    list($minAge, $maxAge) = explode('-', $range);
+                    [$minAge, $maxAge] = explode('-', $range);
 
-                    $minDateOfBirth = $today->copy()->subYears($maxAge)->addDay()->toDateString();
-                    $maxDateOfBirth = $today->copy()->subYears($minAge)->toDateString();
+                    // Calculate date range for the current age range
+                    $maxDate = $now->copy()->subYears($minAge)->toDateString();
+                    $minDate = $now->copy()->subYears($maxAge + 1)->addDay()->toDateString();
 
-                    // Debugging: Log the calculated date ranges
-                    logger()->info("Filtering users with birth dates between $minDateOfBirth and $maxDateOfBirth for age range $minAge-$maxAge");
+                    // Store the date range for debugging
+                    $dateRanges[] = ['minAge' => $minAge, 'maxAge' => $maxAge, 'minDate' => $minDate, 'maxDate' => $maxDate];
 
-                    // Add the age range condition with OR where clauses
-                    $query->orWhereBetween('users.date_of_birth', [$minDateOfBirth, $maxDateOfBirth]);
+                    // Add orWhereBetween clause within the nested query
+                    $query->orWhereBetween('users.date_of_birth', [$minDate, $maxDate]);
                 }
             });
         }
@@ -930,28 +933,35 @@ class ExportController extends Controller
         return $pdf->download('rekapitulasi-asn-pdf.pdf');
     }
 
-    public function userExcel(request $request)
+    public function exportExcels(request $request)
     {
         // filter user to get ids
         $users = DB::table('users')
             ->leftJoin('echelons', 'users.echelon_id', '=', 'echelons.id')
             ->leftJoin('user_educations', 'users.id', '=', 'user_educations.user_id')
             ->leftJoin('position_history_users', 'users.id', '=', 'position_history_users.user_id')
-            ->select('users.*'); // Add more fields as needed
-        if (isset($request->organization)) {
+            ->select('users.id');
+        if (isset($request->organization)){
             $users->whereIn('users.organization_id', $request->organization);
         }
         if (isset($request->age_range)) {
-            $ageRanges = $request->age_range;
-            $today = Carbon::today();
-            $users->where(function ($query) use ($ageRanges, $today) {
+            $ageRanges = $request->input('age_range', []);
+            $now = Carbon::now();
+
+            // Start a nested query for age range filtering
+            $users->where(function ($query) use ($ageRanges, $now, &$dateRanges) {
                 foreach ($ageRanges as $range) {
-                    list($minAge, $maxAge) = explode('-', $range);
+                    [$minAge, $maxAge] = explode('-', $range);
 
-                    $minDateOfBirth = $today->copy()->subYears($maxAge)->addDay()->toDateString();
-                    $maxDateOfBirth = $today->copy()->subYears($minAge)->toDateString();
+                    // Calculate date range for the current age range
+                    $maxDate = $now->copy()->subYears($minAge)->toDateString();
+                    $minDate = $now->copy()->subYears($maxAge + 1)->addDay()->toDateString();
 
-                    $query->orWhereBetween('users.date_of_birth', [$minDateOfBirth, $maxDateOfBirth]);
+                    // Store the date range for debugging
+                    $dateRanges[] = ['minAge' => $minAge, 'maxAge' => $maxAge, 'minDate' => $minDate, 'maxDate' => $maxDate];
+
+                    // Add orWhereBetween clause within the nested query
+                    $query->orWhereBetween('users.date_of_birth', [$minDate, $maxDate]);
                 }
             });
         }
