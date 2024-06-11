@@ -2812,9 +2812,9 @@ class PositionSeeder extends Seeder
                         ]
                     ],
                     [
-                        'id' => 191,
+                        'id' => 220,
                         'parent_id' => 4,
-                        'name' => 'Manggala Informatika Ahli Pertama',
+                        'name' => 'Biro Informasi, Data, dan Teknologi Setmensesneg',
                         'available' => 0,
                         'filled' => 0,
                         'children' => 0,
@@ -2822,9 +2822,23 @@ class PositionSeeder extends Seeder
                         'entity' => 1,
                         'vertical_order' => 1,
                         'horizontal_order' => 3,
+                        'child' => [
+                            [
+                                'id' => 191,
+                                'parent_id' => 220,
+                                'name' => 'Manggala Informatika Ahli Pertama',
+                                'available' => 1,
+                                'filled' => 1,
+                                'children' => 0,
+                                'type' => 1,
+                                'entity' => 1,
+                                'vertical_order' => 1,
+                                'horizontal_order' => 1,
+                            ],
+                        ]
                     ],
                     [
-                        'id' => 220,
+                        'id' => 221,
                         'parent_id' => 4,
                         'name' => 'Pusat Pengembangan Kompentensi ASN, Kemensetneg',
                         'available' => 0,
