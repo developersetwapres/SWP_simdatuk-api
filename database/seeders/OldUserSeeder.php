@@ -41,8 +41,6 @@ class OldUserSeeder extends Seeder
                     nm_pegawai as name,
                     gelar_blk as title_suffix,
                     CONCAT('photo_profile/', id_pegawai, '.jpg') AS photo_profile,
-                    no_nik as id_number,
-                    no_kk as family_registration_number,
                     id_pegawai as employee_id_number,
                     IF(nip_lama = '', id_pegawai, nip_lama) as employee_registration_number,
                     tmpt_lahir as place_of_birth,
@@ -97,6 +95,22 @@ class OldUserSeeder extends Seeder
                     tmt_golongan as grade_effective_date,
                     tmt_jabatan as position_effective_date,
                     '1' as organization_id,
+                    CASE
+                        WHEN pddk_akhir = 'Diploma IV/Strata I' THEN '6'
+                        WHEN pddk_akhir = 'SLTA/Sederajat' THEN '3'
+                        WHEN pddk_akhir = 'Strata II' THEN '7'
+                        WHEN pddk_akhir = 'Strata III' THEN '8'
+                        WHEN pddk_akhir = 'SLTP/Sederajat' THEN '2'
+                        WHEN pddk_akhir = 'SD/Sederajat' THEN '1'
+                        WHEN pddk_akhir = 'Akademi/D3/S.Muda' THEN '5'
+                        WHEN pddk_akhir = 'Diploma I/II' THEN '4'
+                        ELSE NULL
+                    END AS education_level,
+                    nm_sekolah AS education_name,
+                    CASE
+                        WHEN thn_lulus = '' THEN NULL
+                        ELSE thn_lulus
+                    END AS education_year,
                     no_karpeg as employee_id_card_number,
                     no_karisu as wife_id_card_number,
                     no_karisu as husband_id_card_number,
@@ -112,6 +126,8 @@ class OldUserSeeder extends Seeder
                         WHEN status_kepeg = 'TBL' THEN 8
                         WHEN status_kepeg = 'Non Aktif' THEN 9
                     END AS employment_status,
+                    no_nik as id_number,
+                    no_kk as family_registration_number,
                     CASE
                         WHEN id_komplek = 'LK' THEN 1
                         WHEN id_komplek = 'DKG' THEN 4
@@ -197,6 +213,22 @@ class OldUserSeeder extends Seeder
                         WHEN status_kepeg = 'Berhenti' THEN 3
                         WHEN status_kepeg = 'Meninggal' THEN 4
                     END AS employment_status,
+                    CASE
+                        WHEN pddk_akhir = 'Akademi/D3/S.Muda' THEN '5'
+                        WHEN pddk_akhir = 'Diploma I/II' THEN '4'
+                        WHEN pddk_akhir = 'Diploma IV/Strata I' THEN '6'
+                        WHEN pddk_akhir = 'SD/Sederajat' THEN '1'
+                        WHEN pddk_akhir = 'SLTA/Sederajat' THEN '3'
+                        WHEN pddk_akhir = 'SLTP/Sederajat' THEN '2'
+                        WHEN pddk_akhir = 'Strata II' THEN '7'
+                        WHEN pddk_akhir = 'Strata III' THEN '8'
+                        ELSE NULL
+                    END AS education_level,
+                    IF(ket_sekolah = '', jurusan_pddk, ket_sekolah) AS education_name,
+                    CASE
+                        WHEN thn_lulus = '' THEN NULL
+                        ELSE thn_lulus
+                    END AS education_year,
                     no_ktp AS id_number,
                     alamat AS current_address,
                     tlp_rumah AS home_phone_number,
@@ -246,6 +278,22 @@ class OldUserSeeder extends Seeder
                         WHEN status = 'Berhenti' THEN 3
                         WHEN status = 'Meninggal' THEN 4
                     END AS employment_status,
+                    CASE
+                        WHEN pddk = 'Akademi/D3/S.Muda' THEN '5'
+                        WHEN pddk = 'Diploma I/II' THEN '4'
+                        WHEN pddk = 'Diploma IV/Strata I' THEN '6'
+                        WHEN pddk = 'SD/Sederajat' THEN '1'
+                        WHEN pddk = 'SLTA/Sederajat' THEN '3'
+                        WHEN pddk = 'SLTP/Sederajat' THEN '2'
+                        WHEN pddk = 'Strata II' THEN '7'
+                        WHEN pddk = 'Strata III' THEN '8'
+                        ELSE NULL
+                    END AS education_level,
+                    IF(nm_sekolah = '', jurusan, nm_sekolah) AS education_name,
+                    CASE
+                        WHEN thn_lulus = '' THEN NULL
+                        ELSE thn_lulus
+                    END AS education_year,
                     no_ktp AS id_number,
                     no_kk AS family_registration_number,
                     alamat AS current_address,
@@ -272,14 +320,14 @@ class OldUserSeeder extends Seeder
                     du.nm_pegawai,
                     du.id_pegawai,
                     du.ket_eselon,
-                    u.employee_id_number 
+                    u.employee_id_number
                 FROM
                     simdatuk_dump.tbl_1pegawai_swp AS du
-                LEFT JOIN 
-                    simdatuk.users u ON du.id_pegawai = u.employee_id_number 
+                LEFT JOIN
+                    simdatuk.users u ON du.id_pegawai = u.employee_id_number
             ) AS subq ON u.employee_id_number = subq.employee_id_number
-            SET u.echelon_id = 
-                CASE 
+            SET u.echelon_id =
+                CASE
                     WHEN subq.ket_eselon = 'Eselon I' THEN 1
                     WHEN subq.ket_eselon = 'Eselon II' THEN 2
                     WHEN subq.ket_eselon = 'Eselon III' THEN 3
@@ -748,28 +796,28 @@ class OldUserSeeder extends Seeder
         DB::table('users')->whereIn('employee_id_number', ['197407052007011006'])->update([
             'position_id' => 211,
         ]);
-        DB::table('users')->whereIn('employee_id_number', ['196312121986021001',])->update([
+        DB::table('users')->whereIn('employee_id_number', ['196312121986021001'])->update([
             'position_id' => 190,
         ]);
-        DB::table('users')->whereIn('employee_id_number', ['198705042009121001',])->update([
+        DB::table('users')->whereIn('employee_id_number', ['198705042009121001'])->update([
             'position_id' => 213,
         ]);
-        DB::table('users')->whereIn('employee_id_number', ['197901102005012001',])->update([
+        DB::table('users')->whereIn('employee_id_number', ['197901102005012001'])->update([
             'position_id' => 214,
         ]);
-        DB::table('users')->whereIn('employee_id_number', ['196604171992022001',])->update([
+        DB::table('users')->whereIn('employee_id_number', ['196604171992022001'])->update([
             'position_id' => 215,
         ]);
-        DB::table('users')->whereIn('employee_id_number', ['197202241993102002',])->update([
+        DB::table('users')->whereIn('employee_id_number', ['197202241993102002'])->update([
             'position_id' => 216,
         ]);
-        DB::table('users')->whereIn('employee_id_number', ['197806092005012001', '198110212005012001',])->update([
+        DB::table('users')->whereIn('employee_id_number', ['197806092005012001', '198110212005012001'])->update([
             'position_id' => 217,
         ]);
-        DB::table('users')->whereIn('employee_id_number', ['199309042019022001',])->update([
+        DB::table('users')->whereIn('employee_id_number', ['199309042019022001'])->update([
             'position_id' => 218,
         ]);
-        DB::table('users')->whereIn('employee_id_number', ['198705162010121004',])->update([
+        DB::table('users')->whereIn('employee_id_number', ['198705162010121004'])->update([
             'position_id' => 219,
         ]);
         DB::table('users')->whereIn('employee_id_number', ['199409132017121005'])->update([

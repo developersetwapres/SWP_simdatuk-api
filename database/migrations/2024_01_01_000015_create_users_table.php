@@ -38,6 +38,9 @@ return new class extends Migration
             $table->unsignedBigInteger('institution_id')->nullable();
             $table->unsignedBigInteger('organization_id')->nullable();
             $table->unsignedBigInteger('work_unit_id')->nullable();
+            $table->tinyInteger('education_level')->nullable()->comment('1=SD/Sederajat, 2=SLTP/Sederajat, 3=SLTA/Sederajat, 4=Diploma I/II, 5=Akademik/D3/S.Muda, 6=Diploma IV/Strata I, 7=Strata II, 8=Strata III');
+            $table->string('education_name', 160)->nullable();
+            $table->year('education_year')->nullable();
             $table->string('employee_id_card_number', 20)->nullable();
             $table->string('employee_id_card', 160)->nullable();
             $table->string('wife_id_card_number', 20)->nullable();
