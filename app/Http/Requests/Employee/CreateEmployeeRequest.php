@@ -32,7 +32,6 @@ class CreateEmployeeRequest extends FormRequest
             'name' => 'required|max:160',
             'title_suffix' => 'max:160',
             'photo_profile' => 'nullable|file|extensions:jpg,jpeg,png|max:2048|dimensions:width=350,height=500',
-            'id_number' => 'numeric|digits:16|unique:users,id_number',
             'employee_id_number' => 'required|numeric|min:00000|max:9999999999|unique:users,employee_id_number',
             'employee_registration_number' => 'numeric|min:00000|max:9999999999|unique:users,employee_registration_number',
             'place_of_birth' => 'required|max:160',
@@ -55,6 +54,8 @@ class CreateEmployeeRequest extends FormRequest
             'husband_id_card_number' => 'numeric|min:00000|max:9999999999|unique:users,husband_id_card_number',
             'id_tax' => 'max:16|unique:users,id_tax',
             'employment_status' => 'required|boolean',
+            'id_number' => 'numeric|digits:16|unique:users,id_number',
+            'family_registration_number' => 'numeric|digits:16|unique:users,family_registration_number',
             'residence_id' => 'required|numeric',
             'current_address' => 'max:160',
             'home_phone_number' => 'numeric|max:99999999999999',
@@ -93,9 +94,6 @@ class CreateEmployeeRequest extends FormRequest
             'photo_profile.extensions' => 'Foto profil harus berupa jpg, jpeg atau png.',
             'photo_profile.max' => 'Ukuran foto profil tidak boleh lebih dari 2MB.',
             'photo_profile.dimensions' => 'Ukuran foto profil harus 350px X 500px.',
-            'id_number.numeric' => 'NIK harus berupa angka.',
-            'id_number.digits' => 'NIK harus terdiri dari 16 digit angka.',
-            'id_number.unique' => 'NIK sudah terdaftar.',
             'employee_id_number.required' => 'NIP tidak boleh kosong.',
             'employee_id_number.numeric' => 'NIP harus berupa angka.',
             'employee_id_number.min' => 'NIP tidak boleh kurang dari 5 digit angka.',
@@ -147,6 +145,12 @@ class CreateEmployeeRequest extends FormRequest
             'id_tax.max' => 'NPWP tidak boleh lebih dari 16 digit.',
             'id_tax.unique' => 'NPWP sudah terdaftar.',
             'employment_status.boolean' => 'Status pegawai harus boolean.',
+            'id_number.numeric' => 'NIK harus berupa angka.',
+            'id_number.digits' => 'NIK harus terdiri dari 16 digit angka.',
+            'id_number.unique' => 'NIK sudah terdaftar.',
+            'family_registration_number.numeric' => 'KK harus berupa angka.',
+            'family_registration_number.digits' => 'KK harus terdiri dari 16 digit angka.',
+            'family_registration_number.unique' => 'KK sudah terdaftar.',
             'residence_id.required' => 'Komplek tidak boleh kosong.',
             'residence_id.numeric' => 'Komplek harus berupa angka.',
             'current_address.max' => 'Alamat saat ini tidak boleh lebih dari 160 karakter.',
@@ -200,10 +204,6 @@ class CreateEmployeeRequest extends FormRequest
             'photo_profile' => [
                 'description' => 'Refers to the Photo Profile of Employee.',
                 'example' => public_path('/img/logo.svg'),
-            ],
-            'id_number' => [
-                'description' => 'Refers to the ID Number of Employee.',
-                'example' => '3279034401000001',
             ],
             'employee_id_number' => [
                 'description' => 'Refers to the Employee ID Number of Employee.',
@@ -292,6 +292,14 @@ class CreateEmployeeRequest extends FormRequest
             'employment_status' => [
                 'description' => 'Refers to the Employment Status of Employee. true=aktif, false=tidak aktif',
                 'example' => 1,
+            ],
+            'id_number' => [
+                'description' => 'Refers to the ID Number of Employee.',
+                'example' => '3279034401000001',
+            ],
+            'family_registration_number' => [
+                'description' => 'Refers to the Family Registration Number of Employee.',
+                'example' => '3279034401000001',
             ],
             'residence_id' => [
                 'description' => 'Refers to the Residence ID of Employee.',

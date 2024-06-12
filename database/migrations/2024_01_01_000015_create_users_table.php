@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('name', 160);
             $table->string('title_suffix', 160)->nullable();
             $table->string('photo_profile', 160)->nullable();
-            $table->string('id_number')->nullable()->unique();
             $table->string('employee_id_number', 20)->nullable()->unique();
             $table->string('employee_registration_number', 20)->nullable()->unique();
             $table->string('place_of_birth', 30)->nullable();
@@ -45,6 +44,8 @@ return new class extends Migration
             $table->string('husband_id_card_number', 20)->nullable();
             $table->string('id_tax', 20)->nullable();
             $table->tinyInteger('employment_status')->nullable()->comment('1=Aktif, 2=Pensiun, 3=Berhenti, 4=Meninggal, 5=Alih Status, 6=Aktif Perbantuan Setneg, 7=CLTN, 8=TBLN, 9=Non Aktif');
+            $table->string('id_number')->nullable();
+            $table->string('family_registration_number')->nullable();
             $table->unsignedBigInteger('residence_id')->nullable();
             $table->text('current_address')->nullable();
             $table->string('home_phone_number', 20)->nullable();

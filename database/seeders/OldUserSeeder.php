@@ -42,6 +42,7 @@ class OldUserSeeder extends Seeder
                     gelar_blk as title_suffix,
                     CONCAT('photo_profile/', id_pegawai, '.jpg') AS photo_profile,
                     no_nik as id_number,
+                    no_kk as family_registration_number,
                     id_pegawai as employee_id_number,
                     IF(nip_lama = '', id_pegawai, nip_lama) as employee_registration_number,
                     tmpt_lahir as place_of_birth,
@@ -153,7 +154,6 @@ class OldUserSeeder extends Seeder
                     gelar_dpn AS title_prefix,
                     nm_perbantuan AS name,
                     gelar_blk AS title_suffix,
-                    no_ktp AS id_number,
                     id_perbantuan AS employee_id_number,
                     IF(id_lama = '', id_perbantuan, id_lama) AS employee_registration_number,
                     tmpt_lahir AS place_of_birth,
@@ -197,6 +197,7 @@ class OldUserSeeder extends Seeder
                         WHEN status_kepeg = 'Berhenti' THEN 3
                         WHEN status_kepeg = 'Meninggal' THEN 4
                     END AS employment_status,
+                    no_ktp AS id_number,
                     alamat AS current_address,
                     tlp_rumah AS home_phone_number,
                     no_tlp AS mobile_phone,
@@ -219,7 +220,6 @@ class OldUserSeeder extends Seeder
                         ELSE LOWER(email)
                     END AS email,
                     nm_outsorce AS name,
-                    no_ktp AS id_number,
                     id_outsorce AS employee_id_number,
                     tmp_lahir AS place_of_birth,
                     tgl_lahir AS date_of_birth,
@@ -246,6 +246,8 @@ class OldUserSeeder extends Seeder
                         WHEN status = 'Berhenti' THEN 3
                         WHEN status = 'Meninggal' THEN 4
                     END AS employment_status,
+                    no_ktp AS id_number,
+                    no_kk AS family_registration_number,
                     alamat AS current_address,
                     ket_jabatan AS description,
                     '3' AS type,
@@ -776,7 +778,6 @@ class OldUserSeeder extends Seeder
         DB::table('users')->whereIn('employee_id_number', ['196605021994032001', '196804141996032001'])->update([
             'position_id' => 192,
         ]);
-
 
         //jabatan fungsional
         DB::table('users')->whereIn('employee_id_number', [
