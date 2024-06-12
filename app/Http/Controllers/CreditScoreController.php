@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\CreditScore\CreateCreditScoreRequest;
+use App\Http\Requests\CreditScore\UpdateCreditScoreRequest;
 /**
  * @group Credit Score
  * @subgroupDescription These endpoints allow you to perform CRUD operations on Credit Score, enabling the retrieval, creation, updating and deleting of credit score records as needed.
@@ -55,8 +56,7 @@ class CreditScoreController extends Controller
      */
     public function create(CreateCreditScoreRequest $request)
     {
-        $validatedData = $request->validated();
-        DB::table('user_credit_score')->insertTs($validatedData);
+        DB::table('user_credit_score')->insertTs($this->posted);
         return $this->response(200, 'Credit Score berhasil ditambahkan');
     }
 
@@ -71,7 +71,7 @@ class CreditScoreController extends Controller
      * @response 404 {"code": 404,"message": "Credit Score tidak ditemukan.","data": null}
      * @response 200 {"code": 200,"message": "Credit Score berhasil diupdate.","data": null}
      */
-    public function update()
+    public function update(UpdateCreditScoreRequest $request)
     {
         $creditScores = DB::table('user_credit_score');
         $creditScores->where('id', $this->request->id);
