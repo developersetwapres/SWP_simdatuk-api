@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\employee;
+use App\Http\Requests\Export\ExportZipEmployeesRequest;
 use App\Http\Requests\Export\ExportEmployeesRequest;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Log;
+use PhpOffice\PhpSpreadsheet\Writer\Csv;
 
 /**
  * @group Export Data
@@ -331,17 +333,6 @@ class ExportController extends Controller
         return $pdf->download('recap-employee.pdf');
     }
 
-    /**
-     * Export List of Employees
-     *
-     * Export list of employees data to .CSV, .XLSX and .PDF.
-     * @group Export Data
-     * @authenticated
-     */
-    public function employees()
-    {
-
-    }
 
     /**
      * Export Detail Employee
@@ -788,18 +779,18 @@ class ExportController extends Controller
      *
      * Export detail of multiple employees data to .PDF inside a zip file.
      * @group Export Data
-     * @bodyParam organization.* int[] list of organization's ids. Example [1,2]
-     * @bodyParam employee_type.* int[] list of employee's type. Example [1,2]
-     * @bodyParam echelons.* int[] list of echelons' id. Example [1,2]
-     * @bodyParam grades.* int[] list of employee's grade. Example [1,2]
-     * @bodyParam position_status.* int[] list of employee's position status. Example [1,2]
-     * @bodyParam education.* int[] list of employee's education level. Example [1, 6]
-     * @bodyParam gender.* int[] list of employee's gender.
-     * @bodyParam marital_status.* int[] list of employee's marital status. Example [1,4]
-     * @bodyParam age_range.* string[] list of employee's age range. Example ["30-40", "40-50"]
+     * @bodyParam organization int[] list of organization's ids. Example [1,2]
+     * @bodyParam employee_type int[] list of employee's type. Example [1,2]
+     * @bodyParam echelons int[] list of echelons' id. Example [1,2]
+     * @bodyParam grades int[] list of employee's grade. Example [1,2]
+     * @bodyParam position_status int[] list of employee's position status. Example [1,2]
+     * @bodyParam education int[] list of employee's education level. Example [1, 6]
+     * @bodyParam gender int[] list of employee's gender.
+     * @bodyParam marital_status int[] list of employee's marital status. Example [1,4]
+     * @bodyParam age_range string[] list of employee's age range. Example ["30-40", "40-50"]
      * @authenticated
      */
-    public function zipDetailEmployee(ExportEmployeesRequest $request)
+    public function zipDetailEmployee(ExportZipEmployeesRequest $request)
     {
 
         $user = DB::table('users');
@@ -816,7 +807,6 @@ class ExportController extends Controller
             $ageRanges = $request->input('age_range', []);
             $now = Carbon::now();
 
-            // Start a nested query for age range filtering
             $user->where(function ($query) use ($ageRanges, $now, &$dateRanges) {
                 foreach ($ageRanges as $range) {
                     [$minAge, $maxAge] = explode('-', $range);
@@ -888,8 +878,7 @@ class ExportController extends Controller
                 'Content-Disposition: attachment; filename="' . $zipFileName . '"',
                 'Content-Length: ' . filesize($zipFileLocation),
             ];
-//            return response()->download($zipFileLocation, $zipFileName, $headers)->deleteFileAfterSend(true);
-            return response()->json(['message' => 'success'], 200);
+            return response()->download($zipFileLocation, $zipFileName, $headers)->deleteFileAfterSend(true);
         } else {
             return response()->json(['error' => 'Zip file not found'], 404);
         }
@@ -932,8 +921,66 @@ class ExportController extends Controller
         $pdf->set_option('tempDir', $tmp);
         return $pdf->download('rekapitulasi-asn-pdf.pdf');
     }
-
-    public function exportExcels(request $request)
+    /**
+     * Export List of Employees
+     *
+     * Export list of employees data to .CSV, .XLSX
+     * @group Export Data
+     * @bodyParam extension string Indicates exported file extension. Example xlsx
+     * @bodyParam organization int[] list of organization's ids. Example [1,2]
+     * @bodyParam employee_type int[] list of employee's type. Example [1,2]
+     * @bodyParam echelons int[] list of echelons' id. Example [1,2]
+     * @bodyParam grades int[] list of employee's grade. Example [1,2]
+     * @bodyParam position_status int[] list of employee's position status. Example [1,2]
+     * @bodyParam education int[] list of employee's education level. Example [1, 6]
+     * @bodyParam gender int[] list of employee's gender. Example [1,0]
+     * @bodyParam marital_status int[] list of employee's marital status. Example [1,4]
+     * @bodyParam age_range string[] list of employee's age range. Example ["30-40", "40-50"]
+     * @bodyParam isName int Indicates whether the name field is included in the request. Example 1
+     * @bodyParam isPosition int Indicates whether the position field is included in the request. Example 1
+     * @bodyParam isPositionDescription int Indicates whether the position description field is included in the request. Example 1
+     * @bodyParam isEchelons int Indicates whether the echelons field is included in the request. Example 1
+     * @bodyParam isGrade int Indicates whether the grade field is included in the request. Example 1
+     * @bodyParam isNip int Indicates whether the NIP (National Identification Number) field is included in the request. Example 1
+     * @bodyParam isBirthPlaceDate int Indicates whether the birth place and date field is included in the request. Example 1
+     * @bodyParam isAge int Indicates whether the age field is included in the request. Example 1
+     * @bodyParam isReligion int Indicates whether the religion field is included in the request. Example 1
+     * @bodyParam isGender int Indicates whether the gender field is included in the request. Example 1
+     * @bodyParam isMaritalStatus int Indicates whether the marital status field is included in the request. Example 1
+     * @bodyParam isAgency int Indicates whether the agency field is included in the request. Example 1
+     * @bodyParam isOrganization int Indicates whether the organization field is included in the request. Example 1
+     * @bodyParam isWorkUnit int Indicates whether the work unit field is included in the request. Example 1
+     * @bodyParam isNoWorker int Indicates whether the worker number field is included in the request. Example 1
+     * @bodyParam workDuration int Indicates the duration of work. Example 1
+     * @bodyParam isGradeDuration int Indicates whether the grade duration field is included in the request. Example 1
+     * @bodyParam isNPWP int Indicates whether the NPWP (Tax Identification Number) field is included in the request. Example 1
+     * @bodyParam isEmployeeStatus int Indicates whether the employee status field is included in the request. Example 1
+     * @bodyParam isCurrentAddress int Indicates whether the current address field is included in the request. Example 1
+     * @bodyParam isComplex int Indicates whether the complex field is included in the request. Example 1
+     * @bodyParam isHomeNumber int Indicates whether the home number field is included in the request. Example 1
+     * @bodyParam isPhoneNumber int Indicates whether the phone number field is included in the request. Example 1
+     * @bodyParam isOfficeAddress int Indicates whether the office address field is included in the request. Example 1
+     * @bodyParam isOfficeNumber int Indicates whether the office number field is included in the request. Example 1
+     * @bodyParam isEmail int Indicates whether the email field is included in the request. Example 1
+     * @bodyParam isPensionCap int Indicates whether the pension cap field is included in the request. Example 1
+     * @bodyParam isPositionHistory int Indicates whether the position history field is included in the request. Example 1
+     * @bodyParam isGradeHistory int Indicates whether the grade history field is included in the request. Example 1
+     * @bodyParam isTrainingStructural int Indicates whether the structural training field is included in the request. Example 1
+     * @bodyParam isTrainingFunctional int Indicates whether the functional training field is included in the request. Example 1
+     * @bodyParam isTrainingTechnique int Indicates whether the technique training field is included in the request. Example 1
+     * @bodyParam isSKP int Indicates whether the SKP (Employee Performance Target) field is included in the request. Example 1
+     * @bodyParam isRecognition int Indicates whether the recognition field is included in the request. Example 1
+     * @bodyParam isNotes int Indicates whether the notes field is included in the request. Example 1
+     * @bodyParam isEducationHistory int Indicates whether the education history field is included in the request. Example 1
+     * @bodyParam isDisciplinary int Indicates whether the disciplinary field is included in the request. Example 1
+     * @bodyParam isFamilyHistory int Indicates whether the family history field is included in the request. Example 1
+     * @bodyParam isLeave int Indicates whether the leave field is included in the request. Example 1
+     * @bodyParam isAssessment int Indicates whether the assessment field is included in the request. Example 1
+     * @bodyParam isCompetency int Indicates whether the competency field is included in the request. Example 1
+     * @bodyParam isTalentPool int Indicates whether the talent pool field is included in the request. Example 1
+     * @authenticated
+     */
+    public function employees(ExportEmployeesRequest $request)
     {
         // filter user to get ids
         $users = DB::table('users')
@@ -948,17 +995,12 @@ class ExportController extends Controller
             $ageRanges = $request->input('age_range', []);
             $now = Carbon::now();
 
-            // Start a nested query for age range filtering
             $users->where(function ($query) use ($ageRanges, $now, &$dateRanges) {
                 foreach ($ageRanges as $range) {
                     [$minAge, $maxAge] = explode('-', $range);
 
-                    // Calculate date range for the current age range
                     $maxDate = $now->copy()->subYears($minAge)->toDateString();
                     $minDate = $now->copy()->subYears($maxAge + 1)->addDay()->toDateString();
-
-                    // Store the date range for debugging
-                    $dateRanges[] = ['minAge' => $minAge, 'maxAge' => $maxAge, 'minDate' => $minDate, 'maxDate' => $maxDate];
 
                     // Add orWhereBetween clause within the nested query
                     $query->orWhereBetween('users.date_of_birth', [$minDate, $maxDate]);
@@ -1035,6 +1077,563 @@ class ExportController extends Controller
         $toggleFieldBio['isAssessment'] = $request->isAssessment == 1;
         $toggleFieldBio['isCompetency'] = $request->isCompetency == 1;
         $toggleFieldBio['isTalentPool'] = $request->isTalentPool == 1;
-        return Excel::download(new employee($toggleFieldBio, $userIds), 'Employees-' . Carbon::now() . '.xlsx');
+        if ($request->extension == "csv"){
+            return Excel::download(new employee($toggleFieldBio, $userIds), 'Employees-' . Carbon::now() . '.csv',  \Maatwebsite\Excel\Excel::CSV);
+        }else if ($request->extension == "xlsx"){
+            return Excel::download(new employee($toggleFieldBio, $userIds), 'Employees-' . Carbon::now() . '.xlsx',  \Maatwebsite\Excel\Excel::XLSX);
+        }
+    }
+
+    /**
+     * Preview Export List of Employees
+     *
+     * Preview Export list of employees data
+     * @group Export Data
+     * @bodyParam organization int[] list of organization's ids. Example [1,2]
+     * @bodyParam employee_type int[] list of employee's type. Example [1,2]
+     * @bodyParam echelons int[] list of echelons' id. Example [1,2]
+     * @bodyParam grades int[] list of employee's grade. Example [1,2]
+     * @bodyParam position_status int[] list of employee's position status. Example [1,2]
+     * @bodyParam education int[] list of employee's education level. Example [1, 6]
+     * @bodyParam gender int[] list of employee's gender. Example [1,0]
+     * @bodyParam marital_status int[] list of employee's marital status. Example [1,4]
+     * @bodyParam age_range string[] list of employee's age range. Example ["30-40", "40-50"]
+     * @bodyParam isName int Indicates whether the name field is included in the request. Example 1
+     * @bodyParam isPosition int Indicates whether the position field is included in the request. Example 1
+     * @bodyParam isPositionDescription int Indicates whether the position description field is included in the request. Example 1
+     * @bodyParam isEchelons int Indicates whether the echelons field is included in the request. Example 1
+     * @bodyParam isGrade int Indicates whether the grade field is included in the request. Example 1
+     * @bodyParam isNip int Indicates whether the NIP (National Identification Number) field is included in the request. Example 1
+     * @bodyParam isBirthPlaceDate int Indicates whether the birth place and date field is included in the request. Example 1
+     * @bodyParam isAge int Indicates whether the age field is included in the request. Example 1
+     * @bodyParam isReligion int Indicates whether the religion field is included in the request. Example 1
+     * @bodyParam isGender int Indicates whether the gender field is included in the request. Example 1
+     * @bodyParam isMaritalStatus int Indicates whether the marital status field is included in the request. Example 1
+     * @bodyParam isAgency int Indicates whether the agency field is included in the request. Example 1
+     * @bodyParam isOrganization int Indicates whether the organization field is included in the request. Example 1
+     * @bodyParam isWorkUnit int Indicates whether the work unit field is included in the request. Example 1
+     * @bodyParam isNoWorker int Indicates whether the worker number field is included in the request. Example 1
+     * @bodyParam workDuration int Indicates the duration of work. Example 1
+     * @bodyParam isGradeDuration int Indicates whether the grade duration field is included in the request. Example 1
+     * @bodyParam isNPWP int Indicates whether the NPWP (Tax Identification Number) field is included in the request. Example 1
+     * @bodyParam isEmployeeStatus int Indicates whether the employee status field is included in the request. Example 1
+     * @bodyParam isCurrentAddress int Indicates whether the current address field is included in the request. Example 1
+     * @bodyParam isComplex int Indicates whether the complex field is included in the request. Example 1
+     * @bodyParam isHomeNumber int Indicates whether the home number field is included in the request. Example 1
+     * @bodyParam isPhoneNumber int Indicates whether the phone number field is included in the request. Example 1
+     * @bodyParam isOfficeAddress int Indicates whether the office address field is included in the request. Example 1
+     * @bodyParam isOfficeNumber int Indicates whether the office number field is included in the request. Example 1
+     * @bodyParam isEmail int Indicates whether the email field is included in the request. Example 1
+     * @bodyParam isPensionCap int Indicates whether the pension cap field is included in the request. Example 1
+     * @bodyParam isPositionHistory int Indicates whether the position history field is included in the request. Example 1
+     * @bodyParam isGradeHistory int Indicates whether the grade history field is included in the request. Example 1
+     * @bodyParam isTrainingStructural int Indicates whether the structural training field is included in the request. Example 1
+     * @bodyParam isTrainingFunctional int Indicates whether the functional training field is included in the request. Example 1
+     * @bodyParam isTrainingTechnique int Indicates whether the technique training field is included in the request. Example 1
+     * @bodyParam isSKP int Indicates whether the SKP (Employee Performance Target) field is included in the request. Example 1
+     * @bodyParam isRecognition int Indicates whether the recognition field is included in the request. Example 1
+     * @bodyParam isNotes int Indicates whether the notes field is included in the request. Example 1
+     * @bodyParam isEducationHistory int Indicates whether the education history field is included in the request. Example 1
+     * @bodyParam isDisciplinary int Indicates whether the disciplinary field is included in the request. Example 1
+     * @bodyParam isFamilyHistory int Indicates whether the family history field is included in the request. Example 1
+     * @bodyParam isLeave int Indicates whether the leave field is included in the request. Example 1
+     * @bodyParam isAssessment int Indicates whether the assessment field is included in the request. Example 1
+     * @bodyParam isCompetency int Indicates whether the competency field is included in the request. Example 1
+     * @bodyParam isTalentPool int Indicates whether the talent pool field is included in the request. Example 1
+     * @authenticated
+     */
+    public function exportExcelsPreview(request $request){
+        // filter user to get ids
+        $users = DB::table('users')
+            ->leftJoin('echelons', 'users.echelon_id', '=', 'echelons.id')
+            ->leftJoin('user_educations', 'users.id', '=', 'user_educations.user_id')
+            ->leftJoin('position_history_users', 'users.id', '=', 'position_history_users.user_id')
+            ->select('users.id');
+        if (isset($request->organization)){
+            $users->whereIn('users.organization_id', $request->organization);
+        }
+        if (isset($request->age_range)) {
+            $ageRanges = $request->input('age_range', []);
+            $now = Carbon::now();
+
+            $users->where(function ($query) use ($ageRanges, $now, &$dateRanges) {
+                foreach ($ageRanges as $range) {
+                    [$minAge, $maxAge] = explode('-', $range);
+
+                    // Calculate date range for the current age range
+                    $maxDate = $now->copy()->subYears($minAge)->toDateString();
+                    $minDate = $now->copy()->subYears($maxAge + 1)->addDay()->toDateString();
+
+                    // Store the date range for debugging
+                    $dateRanges[] = ['minAge' => $minAge, 'maxAge' => $maxAge, 'minDate' => $minDate, 'maxDate' => $maxDate];
+
+                    // Add orWhereBetween clause within the nested query
+                    $query->orWhereBetween('users.date_of_birth', [$minDate, $maxDate]);
+                }
+            });
+        }
+        if (isset($request->echelons)) {
+            $users->whereIn('echelons.name', $request->echelons);
+        }
+        if (isset($request->grades)) {
+            $users->whereIn('users.grade_id', $request->grades);
+        }
+        if (isset($request->education)) {
+            $users->whereIn('user_educations.level', $request->education);
+        }
+        if (isset($request->position_status)) {
+            $users->whereIn('position_history_users.position_status', $request->position_status);
+        }
+        if (isset($request->gender)) {
+            $users->whereIn('users.gender', $request->gender);
+        }
+        if (isset($request->marital_status)) {
+            $users->whereIn('users.marital_status', $request->marital_status);
+        }
+        if (isset($request->employee_type)) {
+            $users->whereIn('users.type', $request->employee_type);
+        }
+        $userIds = $users->pluck('users.id')->toArray();
+        if (!$userIds) {
+            return $this->response(400, 'Data pegawai tidak ditemukan');
+        }
+
+        $usersPreview = DB::table('users');
+        $toggleFieldBio = array();
+
+        if( $this->request->isName == 1){
+            $usersPreview->addSelect('users.name');
+        }
+        if ($this->request->isPosition == 1){
+            $usersPreview->leftJoin('positions', 'users.position_id', '=', 'positions.id' );
+            $usersPreview->addSelect('positions.name as position_name');
+        }
+//        if ($this->toggleField['isPositionDescription']){
+//            //
+//        }
+        if ($this->request->isEchelons){
+            $usersPreview->leftJoin('echelons', 'users.echelon_id', '=', 'echelons.id');
+            $usersPreview->addSelect('echelons.name as echelons_name');
+        }
+        if ($this->request->isGrade == 1){
+            $usersPreview->leftJoin('grades as g', 'users.grade_id', '=', 'g.id');
+            $usersPreview->addSelect('g.name as grade_name');
+        }
+        if ($this->request->isNip == 1){
+            $usersPreview->addSelect(DB::raw("users.employee_id_number"));
+        }
+        if ($this->request->isBirthPlaceDate == 1){
+            $usersPreview->addSelect('users.place_of_birth', 'users.date_of_birth');
+        }
+        if ($this->request->isAge == 1){
+            $usersPreview->addSelect(DB::raw("TIMESTAMPDIFF(YEAR, users.date_of_birth, CURDATE()) AS age"));
+        }
+        if ($this->request->isWorkUnit == 1){
+            $usersPreview->addSelect('users.work_unit_id as work_unit');
+        }
+        if ($this->request->isEmployeeStatus == 1){
+            $usersPreview->addSelect('users.employment_status');
+        }
+        if ($this->request->isReligion == 1){
+            $usersPreview->addSelect('users.religion');
+        }
+        if ($this->request->isGender == 1){
+            $usersPreview->addSelect('users.gender');
+        }
+        if ($this->request->isMaritalStatus == 1){
+            $usersPreview->addSelect('users.marital_status');
+        }
+        if ($this->request->isAgency == 1){
+            $usersPreview->leftJoin('institutions as i', 'users.institution_id', '=', 'i.id');
+            $usersPreview->addSelect('i.name as institution_name');
+        }
+        if ($this->request->isOrganization == 1) {
+            $usersPreview->leftJoin('groups as o', 'users.organization_id', '=', 'o.id');
+            $usersPreview->addSelect('o.name as organization_name');
+        }
+        if ($this->request->isNoWorker == 1){
+            $usersPreview->addSelect('users.employee_id_number', 'users.employee_registration_number');
+        }
+        //add full work duration later
+        if ($this->request->isGradeDuration == 1){
+            $usersPreview->addSelect(['users.grade_effective_date']);
+        }
+        if ($this->request->isNPWP == 1){
+            $usersPreview->addSelect('users.id_tax');
+        }
+        if ($this->request->isCurrentAddress == 1){
+            $usersPreview->addSelect('users.current_address');
+        }
+        if ($this->request->isComplex == 1){
+            $usersPreview->leftJoin('residences as r', 'users.residence_id', '=', 'r.id');
+            $usersPreview->addSelect('r.name as residence_name');
+        }
+        if ($this->request->isHomeNumber == 1){
+            $usersPreview->addSelect('users.home_phone_number');
+        }
+        if ($this->request->isPhoneNumber == 1){
+            $usersPreview->addSelect('users.mobile_phone');
+        }
+        if ($this->request->isOfficeAddress == 1){
+            $usersPreview->addSelect('users.office_address');
+        }
+        if ($this->request->isOfficeNumber == 1){
+            $usersPreview->addSelect('users.office_phone_number');
+        }
+        if ($this->request->isEmail == 1){
+            $usersPreview->addSelect('users.email');
+        }
+        if (isset($this->toggleField['isPositionHistory'])){
+            $gradeHistorySubquery = DB::table('grade_history_users as ghu');
+            $gradeHistorySubquery->join('grades', 'grades.id', '=', 'ghu.grade_id');
+            $gradeHistorySubquery->select('ghu.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li>', grades.name, grades.code,
+            ' (', ghu.decree_date, ',', ghu.decree_number, ')', '</li>') SEPARATOR ' ') as grade_history"));
+            $gradeHistorySubquery->whereIn('ghu.user_id', $this->userIds);
+            $gradeHistorySubquery->groupBy('ghu.user_id');
+            $usersPreview->leftJoinSub($gradeHistorySubquery, 'grade_history', function ($join) {
+                $join->on('users.id', '=', 'grade_history.user_id');
+            });
+            $usersPreview->addSelect('grade_history.grade_history');
+        }
+        if (isset($this->toggleField['isGradeHistory'])){
+            $positionHistorySubquery = DB::table('position_history_users as phu');
+            $positionHistorySubquery->select('phu.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li>', phu.position, '
+            (', phu.decree_date, ',', phu.decree_number, ')' , '</li>') SEPARATOR ' ') as position_history"));
+            $positionHistorySubquery->whereIn('phu.user_id', $this->userIds);
+            $positionHistorySubquery->groupBy('phu.user_id');
+            $usersPreview->leftJoinSub($positionHistorySubquery, 'position_history', function ($join) {
+                $join->on('users.id', '=', 'position_history.user_id');
+            });
+            $usersPreview->addSelect('position_history.position_history');
+        }
+        if (isset($this->toggleField['isTrainingStructural'])){
+            $trainingStructuralSubquery = DB::table('trainings as t');
+            $trainingStructuralSubquery->join('user_trainings as ut', 't.id', '=', 'ut.training_id');
+            $trainingStructuralSubquery->select('ut.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li>', t.name, '
+            (Periode: ', t.period_month, ' ', t.period_year, ', Start Date: ', t.start_date, ') Level: ', t.level, ',
+            Organizer: ', t.organizer ,'</li>') SEPARATOR ' ') as structural_training_history"));
+            $trainingStructuralSubquery->whereIn('ut.user_id', $this->userIds);
+            $trainingStructuralSubquery->where('t.type', 1);
+            $trainingStructuralSubquery->groupBy('ut.user_id');
+
+            $usersPreview->leftJoinSub($trainingStructuralSubquery, 'structural_training_history', function ($join) {
+                $join->on('users.id', '=', 'structural_training_history.user_id');
+            });
+
+            $usersPreview->addSelect('structural_training_history.structural_training_history');
+        }
+
+        if (isset($this->toggleField['isTrainingFunctional'])){
+            $trainingFunctionalSubquery = DB::table('trainings as t');
+            $trainingFunctionalSubquery->join('user_trainings as ut', 't.id', '=', 'ut.training_id');
+            $trainingFunctionalSubquery->select('ut.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li>', t.name, '
+            (Periode: ', t.period_month, ' ', t.period_year, ', Start Date: ', t.start_date, ') Level: ', t.level, ',
+            Organizer: ', t.organizer ,'</li>') SEPARATOR ' ' ) as functional_training_history "));
+            $trainingFunctionalSubquery->whereIn('ut.user_id', $this->userIds);
+            $trainingFunctionalSubquery->where('t.type', 2);
+            $trainingFunctionalSubquery->groupBy('ut.user_id');
+
+            $usersPreview->leftJoinSub($trainingFunctionalSubquery, 'functional_training_history', function ($join) {
+                $join->on('users.id', '=', 'functional_training_history.user_id');
+            });
+
+            $usersPreview->addSelect('functional_training_history.functional_training_history');
+        }
+
+        if (isset($this->toggleField['isTrainingTechnique'])){
+            $trainingTechnicSubquery = DB::table('trainings as t');
+            $trainingTechnicSubquery->join('user_trainings as ut', 't.id', '=', 'ut.training_id');
+            $trainingTechnicSubquery->select('ut.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li>', t.name, '
+            (Periode: ', t.period_month, ' ', t.period_year, ', Start Date: ', t.start_date, ') Level: ', t.level, ',
+            Organizer: ', t.organizer, '</li>') SEPARATOR ' ') as technique_training_history"));
+            $trainingTechnicSubquery->whereIn('ut.user_id', $this->userIds);
+            $trainingTechnicSubquery->where('t.type', 3);
+            $trainingTechnicSubquery->groupBy('ut.user_id');
+
+            $usersPreview->leftJoinSub($trainingTechnicSubquery, 'technique_training_history', function ($join) {
+                $join->on('users.id', '=', 'technique_training_history.user_id');
+            });
+
+            $usersPreview->addSelect('technique_training_history.technique_training_history');
+        }
+        if ($this->request->isRecognition == 1){
+            $recognitionSubquery = DB::table('recognitions as r');
+            $recognitionSubquery->join('user_recognitions as ur', 'r.id', '=', 'ur.recognition_id');
+            $recognitionSubquery->select('ur.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li>',r.name, '
+            (Periode: ', r.period_month, ' ', r.period_year, ', Tanggal Terima: ', r.date_of_receipt, ') Decree: ',
+            r.decree_number, ', Institusi: ', r.awarding_institution,'</li>') SEPARATOR ' ') as recognition_history"));
+            $recognitionSubquery->whereIn('ur.user_id', $this->userIds);
+            $recognitionSubquery->groupBy('ur.user_id');
+
+            $usersPreview->leftJoinSub($recognitionSubquery, 'recognition_history', function ($join) {
+                $join->on('users.id', '=', 'recognition_history.user_id');
+            });
+
+            $usersPreview->addSelect('recognition_history.recognition_history');
+        }
+        if ($this->request->isSKP == 1){
+            $skpSubquery = DB::table('targets as t');
+            $skpSubquery->join('user_targets as ut', 't.id', '=', 'ut.target_id');
+            $skpSubquery->select('ut.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li>',t.name, ' (Tanggal: ', t.period_month, ' ',
+                t.period_year, ', Periode Penilaian: ', t.appraisal_period, ') Penilaian Perilaku : ',
+                 CASE ut.work_behavior_rating
+                        WHEN 1 THEN 'Diatas Ekspektasi'
+                        WHEN 2 THEN 'Sesuai Ekspektasi'
+                        WHEN 3 THEN 'Dibawah Ekspektasi'
+                 END
+                , ', Penilaian Predikat Performa : ',
+                CASE ut.employee_performance_predicate
+                        WHEN 1 THEN 'Sangat Baik'
+                        WHEN 2 THEN 'Baik'
+                        WHEN 3 THEN 'Butuh Perbaikan'
+                        WHEN 4 THEN 'Kurang'
+                        WHEN 5 THEN 'Sangat Kurang'
+                 END
+                 ,', Penilaian Performa Organisasi : ',
+                 CASE ut.employee_performance_predicate
+                        WHEN 1 THEN 'Sangat Baik'
+                        WHEN 2 THEN 'Baik'
+                        WHEN 3 THEN 'Cukup'
+                 END, '</li>') SEPARATOR ' ') as skp_history"));
+            $skpSubquery->whereIn('ut.user_id', $this->userIds);
+            $skpSubquery->groupBy('ut.user_id');
+
+            $usersPreview->leftJoinSub($skpSubquery, 'skp_history', function ($join) {
+                $join->on('users.id', '=', 'skp_history.user_id');
+            });
+
+            $usersPreview->addSelect('skp_history.skp_history');
+        }
+        if ($this->request->isEducationHistory == 1){
+            $educationSubquery = DB::table('user_educations as ut');
+            $educationSubquery->select('ut.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li> Nama Sekolah : ',ut.name, '
+            (Fakultas: ', ut.faculty, ' Jurusan: ', ut.major, ', Tahun Lulus: ', ut.year_of_graduation, ') Level: ',
+                 CASE ut.level
+                        WHEN 1 THEN 'SD/Sederajat'
+                        WHEN 2 THEN 'SLTP/Sederajat'
+                        WHEN 3 THEN 'SLTA/Sederajat'
+                        WHEN 4 THEN 'Diploma I/II'
+                        WHEN 5 THEN 'Akademik/D3/S.Muda'
+                        WHEN 6 THEN 'Diploma IV/Strata I'
+                        WHEN 7 THEN 'Strata II'
+                        WHEN 8 THEN 'Strata III'
+                 END
+                , ', Status: ',
+                CASE ut.status
+                        WHEN 1 THEN 'Lulus'
+                        WHEN 2 THEN 'DO'
+                        WHEN 3 THEN 'Aktif'
+                        WHEN 4 THEN 'Non-Aktif'
+                        WHEN 5 THEN 'Mengundurkan diri'
+                 END
+                 ,', Description: ', ut.description , '</li>') SEPARATOR ' ') as education_history"));
+            $educationSubquery->whereIn('ut.user_id', $this->userIds);
+            $educationSubquery->groupBy('ut.user_id');
+
+            $usersPreview->leftJoinSub($educationSubquery, 'education_history', function ($join) {
+                $join->on('users.id', '=', 'education_history.user_id');
+            });
+
+            $usersPreview->addSelect('education_history.education_history');
+        }
+        if ($this->request->isDisciplinary == 1){
+            $disciplinarySubquery = DB::table('disciplinary_history_users as dhu')
+                ->join('disciplinary_histories as dh', 'dhu.disciplinary_history_id', '=', 'dh.id')
+                ->join('disciplinaries as d', 'dhu.disciplinary_id', '=', 'd.id')
+                ->select('dhu.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li> Golongan: ', dhu.grade, ' Posisi: ', dhu.position, ' (Periode: ', dh.period_month, ' ', dh.period_year, ', Tanggal Awal: ', dhu.start_date, ' Tanggal Akhir: ', dhu.end_date, ') Decree: ', dhu.decree_number, ', Kantor Otorisasi: ', dhu.authorizing_officer, ' Petugas: ', dhu.name_of_authorizing_officer, '</li>') SEPARATOR ' ') as disciplinary_history"))
+                ->whereIn('dhu.user_id', $this->userIds)
+                ->groupBy('dhu.user_id');
+
+            $usersPreview->leftJoinSub($disciplinarySubquery, 'disciplinary_history', function ($join) {
+                $join->on('users.id', '=', 'disciplinary_history.user_id');
+            });
+
+            $usersPreview->addSelect('disciplinary_history.disciplinary_history');
+        }
+        if ($this->request->isFamilyHistory == 1){
+            $familyHistory = DB::table('user_families as uf');
+            $familyHistory->select('uf.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li> Nama : ',uf.name, '
+            Nomor KTP: ', uf.id_number, ' Nomor KK: ', uf.card_number, ', Tempat Tanggal Lahir: ', uf.place_of_birth, ', ', uf.date_of_birth ,' Agama: ',
+            CASE uf.religion
+                WHEN 1 THEN 'Islam'
+                WHEN 2 THEN 'Kristen'
+                WHEN 3 THEN 'Katolik'
+                WHEN 4 THEN 'Hindu'
+                WHEN 5 THEN 'Buddha'
+                WHEN 6 THEN 'Konghucu'
+            END
+            , ', Jenis Kelamin: ',
+            CASE uf.gender
+                WHEN 1 THEN 'Pria'
+                WHEN 2 THEN 'Wanita'
+            END
+            ,', Nama Ayah: ', uf.name_of_father , ' Nama Ibu:', uf.name_of_mother,
+            ' Relasi Keluarga : ',
+            CASE uf.relationship_status
+                WHEN 1 THEN 'Kepala Keluarga'
+                WHEN 2 THEN 'Suami'
+                WHEN 3 THEN 'Istri'
+                WHEN 4 THEN 'Anak'
+                WHEN 5 THEN 'Menantu'
+                WHEN 6 THEN 'Cucu'
+                WHEN 7 THEN 'Orang Tua'
+                WHEN 8 THEN 'Mertua'
+                WHEN 9 THEN 'Famili Lainnya'
+                WHEN 10 THEN 'Pembantu'
+                WHEN 11 THEN 'Lainnya'
+            END
+            ,' Edukasi: ',
+            CASE uf.education
+                WHEN 1 THEN 'Kepala Keluarga'
+                WHEN 2 THEN 'Suami'
+                WHEN 3 THEN 'Istri'
+                WHEN 4 THEN 'Anak'
+                WHEN 5 THEN 'Menantu'
+                WHEN 6 THEN 'Cucu'
+                WHEN 7 THEN 'Orang Tua'
+                WHEN 8 THEN 'Mertua'
+                WHEN 9 THEN 'Famili Lainnya'
+                WHEN 10 THEN 'Pembantu'
+                WHEN 11 THEN 'Lainnya'
+            END
+            ,' Okupasi: ', uf.occupation,' Status Perkawinan',
+            CASE uf.marital_status
+                WHEN 1 THEN 'Belum Menikah'
+                WHEN 2 THEN 'Menikah'
+                WHEN 3 THEN 'Cerai Hidup'
+                WHEN 4 THEN 'Cerai Mati'
+            END
+            ,' Nomor Handphone', uf.mobile_phone,'</li>') SEPARATOR ' ') as family_history"));
+            $familyHistory->whereIn('uf.user_id', $this->userIds);
+            $familyHistory->groupBy('uf.user_id');
+
+            $usersPreview->leftJoinSub($familyHistory, 'family_history', function ($join) {
+                $join->on('users.id', '=', 'family_history.user_id');
+            });
+
+            $usersPreview->addSelect('family_history.family_history');
+        }
+        if ($this->request->isLeave == 1){
+            $leaveSubquery = DB::table('user_leaves as ul');
+            $leaveSubquery->select('ul.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li> Golongan : ',ul.grade, '
+            Jabatan: ', ul.position, ' Tanggal Mulai: ', ul.start_date, ', Tanggal Selesai: ', ul.end_date, ' Alasan: ',
+            ul.reason , ', Tujuan: ', ul.purpose,', Nomor: ', ul.number , '</li>') SEPARATOR ' ') as leave_history"));
+            $leaveSubquery->whereIn('ul.user_id', $this->userIds);
+            $leaveSubquery->groupBy('ul.user_id');
+
+            $usersPreview->leftJoinSub($leaveSubquery, 'leave_history', function ($join) {
+                $join->on('users.id', '=', 'leave_history.user_id');
+            });
+
+            $usersPreview->addSelect('leave_history.leave_history');
+        }
+        if ($this->request->isAssessment == 1){
+            $assessmentSubquery = DB::table('user_assessments as ua');
+            $assessmentSubquery->select('ua.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li> Tanggal Assessment : ', ua.assessment_date, '
+             Point: ', ua.point, ' Organizer : ', ua.organizer,'</li>') SEPARATOR ' ') as assessment_history"));
+            $assessmentSubquery->whereIn('ua.user_id', $this->userIds);
+            $assessmentSubquery->where('ua.type', 1);
+            $assessmentSubquery->groupBy('ua.user_id');
+
+            $usersPreview->leftJoinSub($assessmentSubquery, 'assessment_history', function ($join) {
+                $join->on('users.id', '=', 'assessment_history.user_id');
+            });
+
+            $usersPreview->addSelect('assessment_history.assessment_history');
+        }
+        if ($this->request->isCompetency == 1){
+            $assessmentSubquery = DB::table('user_assessments as ua');
+            $assessmentSubquery->select('ua.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li> Tanggal Assessment : ', ua.assessment_date, '
+             Point: ', ua.point, ' Organizer : ', ua.organizer,'</li>') SEPARATOR ' ') as competency_history"));
+            $assessmentSubquery->whereIn('ua.user_id', $this->userIds);
+            $assessmentSubquery->where('ua.type', 2);
+            $assessmentSubquery->groupBy('ua.user_id');
+
+            $usersPreview->leftJoinSub($assessmentSubquery, 'competency_history', function ($join) {
+                $join->on('users.id', '=', 'competency_history.user_id');
+            });
+
+            $usersPreview->addSelect('competency_history.competency_history');
+        }
+        if ($this->request->isTalentPool == 1){
+            $assessmentSubquery = DB::table('user_assessments as ua');
+            $assessmentSubquery->select('ua.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li> Tanggal Assessment : ', ua.assessment_date, '
+             Point: ', ua.point, ' Organizer : ', ua.organizer,'</li>') SEPARATOR ' ') as talent_pool_history"));
+            $assessmentSubquery->whereIn('ua.user_id', $this->userIds);
+            $assessmentSubquery->where('ua.type', 3);
+            $assessmentSubquery->groupBy('ua.user_id');
+
+            $usersPreview->leftJoinSub($assessmentSubquery, 'talent_pool_history', function ($join) {
+                $join->on('users.id', '=', 'talent_pool_history.user_id');
+            });
+
+            $usersPreview->addSelect('talent_pool_history.talent_pool_history');
+        }
+        if ($this->request->isNotes == 1){
+            $assessmentSubquery = DB::table('user_notes as un');
+            $assessmentSubquery->join('users', 'un.giver_id', '=', 'users.id');
+            $assessmentSubquery->select('un.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li> Catatan : ', un.description, '
+             Pemberi catatan: ', users.name, ' Tanggal : ', un.created_at,'</li>') SEPARATOR ' ') as notes"));
+            $assessmentSubquery->whereIn('un.user_id', $this->userIds);
+            $assessmentSubquery->groupBy('un.user_id');
+
+            $usersPreview->leftJoinSub($assessmentSubquery, 'notes', function ($join) {
+                $join->on('users.id', '=', 'notes.user_id');
+            });
+
+            $usersPreview->addSelect('notes.notes');
+        }
+        $usersPreview->whereIn('users.id', $userIds);
+        $usersPreview->groupBy('users.id');
+        $usersPreview = $usersPreview->get();
+        $usersPreviewData = $usersPreview->map(function($item) {
+            return (array) $item;
+        })->toArray();
+        $toggleFieldBio['isName'] = $request->isName == 1;
+        $toggleFieldBio['isPosition'] = $request->isPosition == 1;
+        $toggleFieldBio['isPositionDescription'] = $request->isPositionDescription == 1;
+        $toggleFieldBio['isEchelons'] = $request->isEchelons == 1;
+        $toggleFieldBio['isGrade'] = $request->isGrade == 1;
+        $toggleFieldBio['isNip'] = $request->isNip == 1;
+        $toggleFieldBio['isBirthPlaceDate'] = $request->isBirthPlaceDate == 1;
+        $toggleFieldBio['isAge'] = $request->isAge == 1;
+        $toggleFieldBio['isReligion'] = $request->isReligion == 1;
+        $toggleFieldBio['isGender'] = $request->isGender == 1;
+        $toggleFieldBio['isMaritalStatus'] = $request->isMaritalStatus == 1;
+        $toggleFieldBio['isAgency'] = $request->isAgency == 1;
+        $toggleFieldBio['isOrganization'] = $request->isOrganization == 1;
+        $toggleFieldBio['isWorkUnit'] = $request->isWorkUnit == 1;
+        $toggleFieldBio['isNoWorker'] = $request->isNoWorker == 1;
+        $toggleFieldBio['workDuration'] = $request->workDuration == 1;
+        $toggleFieldBio['isGradeDuration'] = $request->isGradeDuration == 1;
+        $toggleFieldBio['isNPWP'] = $request->isNPWP == 1;
+        $toggleFieldBio['isEmployeeStatus'] = $request->isEmployeeStatus == 1;
+        $toggleFieldBio['isCurrentAddress'] = $request->isCurrentAddress == 1;
+        $toggleFieldBio['isComplex'] = $request->isComplex == 1;
+        $toggleFieldBio['isHomeNumber'] = $request->isHomeNumber == 1;
+        $toggleFieldBio['isPhoneNumber'] = $request->isPhoneNumber == 1;
+        $toggleFieldBio['isOfficeAddress'] = $request->isOfficeAddress == 1;
+        $toggleFieldBio['isOfficeNumber'] = $request->isOfficeNumber == 1;
+        $toggleFieldBio['isEmail'] = $request->isEmail == 1;
+        $toggleFieldBio['isPensionCap'] = $request->isPensionCap == 1;
+        $toggleFieldBio['isPositionHistory'] = $request->isPositionHistory == 1;
+        $toggleFieldBio['isGradeHistory'] = $request->isGradeHistory == 1;
+        $toggleFieldBio['isTrainingStructural'] = $request->isTrainingStructural == 1;
+        $toggleFieldBio['isTrainingFunctional'] = $request->isTrainingFunctional == 1;
+        $toggleFieldBio['isTrainingTechnique'] = $request->isTrainingTechnique == 1;
+        $toggleFieldBio['isSKP'] = $request->isSKP == 1;
+        $toggleFieldBio['isRecognition'] = $request->isRecognition == 1;
+        $toggleFieldBio['isNotes'] = $request->isNotes == 1;
+        $toggleFieldBio['isEducationHistory'] = $request->isEducationHistory == 1;
+        $toggleFieldBio['isDisciplinary'] = $request->isDisciplinary == 1;
+        $toggleFieldBio['isFamilyHistory'] = $request->isFamilyHistory == 1;
+        $toggleFieldBio['isLeave'] = $request->isLeave == 1;
+        $toggleFieldBio['isAssessment'] = $request->isAssessment == 1;
+        $toggleFieldBio['isCompetency'] = $request->isCompetency == 1;
+        $toggleFieldBio['isTalentPool'] = $request->isTalentPool == 1;
+        return view('exports.preview-employee', [
+            'userData' => $usersPreviewData,
+            'toggleField' => $toggleFieldBio,
+        ]);
     }
 }

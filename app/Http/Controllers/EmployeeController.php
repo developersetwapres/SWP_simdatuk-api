@@ -16,6 +16,7 @@ use App\Repositories\PositionRepository;
 use App\Repositories\RecognitionRepository;
 use App\Repositories\TargetRepository;
 use App\Repositories\TrainingRepository;
+use App\Repositories\CreditScoreRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -38,6 +39,7 @@ class EmployeeController extends Controller
     protected $leaveRepository;
     protected $noteRepository;
     protected $assessmentRepository;
+    protected $creditscoreRepository;
 
     public function __construct(
         Request $request,
@@ -53,6 +55,7 @@ class EmployeeController extends Controller
         LeaveRepository $leaveRepository,
         NoteRepository $noteRepository,
         AssessmentRepository $assessmentRepository,
+        CreditScoreRepository $creditscoreRepository,
     ) {
         $this->request = $request;
         $this->posted = $request->except(
@@ -78,6 +81,7 @@ class EmployeeController extends Controller
         $this->leaveRepository = $leaveRepository;
         $this->noteRepository = $noteRepository;
         $this->assessmentRepository = $assessmentRepository;
+        $this->creditscoreRepository = $creditscoreRepository;
     }
 
     /**
@@ -281,6 +285,14 @@ class EmployeeController extends Controller
                 }
                 DB::table('user_assessments')->insertTs($assessments);
             }
+            if (isset($this->request->credit_score)){
+                $credit_scores = array();
+                foreach ($this->request->credit_score as $credit_score) {
+                    $credit_score['user_id'] = $userId;
+                    array_push($credit_scores, $credit_score);
+                }
+                DB::table('user_credit_score')->insertTs($credit_scores);
+            }
             DB::commit();
         } catch (\Throwable $th) {
             DB::rollback();
@@ -321,6 +333,7 @@ class EmployeeController extends Controller
         $assessments = $this->assessmentRepository->getDetail($this->request->id, 1);
         $competencies = $this->assessmentRepository->getDetail($this->request->id, 2);
         $talents = $this->assessmentRepository->getDetail($this->request->id, 3);
+        $creditScore = $this->creditscoreRepository->getDetail($this->request->id);
 
         $employee->educations = $educations;
         $employee->positions = $positions;
@@ -337,6 +350,7 @@ class EmployeeController extends Controller
         $employee->assessments = $assessments;
         $employee->competencies = $competencies;
         $employee->talents = $talents;
+        $employee->creditScore = $creditScore;
 
         return $this->response(200, 'success', $employee);
     }
