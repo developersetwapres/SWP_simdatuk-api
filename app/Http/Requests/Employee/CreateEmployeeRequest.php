@@ -48,6 +48,9 @@ class CreateEmployeeRequest extends FormRequest
             'institution_id' => 'required|numeric',
             'organization_id' => 'required|numeric',
             'work_unit_id' => 'required|numeric',
+            'education_level' => 'required|numeric|in:1,2,3,4,5,6,7,8',
+            'education_name' => 'required|max:160',
+            'education_year' => 'required|date_format:Y',
             'employee_id_card_number' => 'numeric|min:00000|max:9999999999|unique:users,employee_id_card_number',
             'employee_id_card' => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
             'wife_id_card_number' => 'numeric|min:00000|max:9999999999|unique:users,wife_id_card_number',
@@ -127,6 +130,13 @@ class CreateEmployeeRequest extends FormRequest
             'organization_id.numeric' => 'Organisasi harus berupa angka.',
             'work_unit_id.required' => 'Unit kerja tidak boleh kosong.',
             'work_unit_id.numeric' => 'Unit kerja harus berupa angka.',
+            'education_level.required' => 'Tingkat pendidikan tidak boleh kosong.',
+            'education_level.numeric' => 'Tingkat pendidikan harus berupa angka.',
+            'education_level.in' => 'Tingkat pendidikan harus diantara 1,2,3,4,5,6,7,8 atau 9',
+            'education_name.requird' => 'Nama Sekolah/Universitas tidak boleh kosong.',
+            'education_name.max' => 'Nama Sekolah/Universitas tidak boleh lebih dari 160 karakter.',
+            'education_year.required' => 'Tahun kelulusan tidak boleh kosong.',
+            'education_year.date' => 'Tahun kelulusan harus dengan format YYYY.',
             'employee_id_card_number.numeric' => 'Nomor kartu pegawai harus berupa angka.',
             'employee_id_card_number.min' => 'Nomor kartu pegawai tidak boleh kurang dari 5 digit angka.',
             'employee_id_card_number.max' => 'Nomor kartu pegawai tidak boleh lebih dari 10 digit angka.',
@@ -268,6 +278,18 @@ class CreateEmployeeRequest extends FormRequest
             'work_unit_id' => [
                 'description' => 'Refers to the Work Unit ID of Employee.',
                 'example' => 1,
+            ],
+            'education_level' => [
+                'description' => 'Refers to the Level of Education of Employee. 1=SD/Sederajat, 2=SLTP/Sederajat, 3=SLTA/Sederajat, 4=Diploma I/II, 5=Akademik/D3/S.Muda, 6=Diploma IV/Strata I, 7=Strata II, 8=Strata III',
+                'example' => 1,
+            ],
+            'education_name' => [
+                'description' => 'Refers to the Name of Education of Employee.',
+                'example' => 'Universitas Indonesia',
+            ],
+            'education_year' => [
+                'description' => 'Refers to the Year of Education of Employee.',
+                'example' => '1990',
             ],
             'employee_id_card_number' => [
                 'description' => 'Refers to the Employee ID Card Number of Employee.',
