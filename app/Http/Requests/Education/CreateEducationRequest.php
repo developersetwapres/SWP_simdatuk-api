@@ -13,7 +13,7 @@ class CreateEducationRequest
     public static function rules(): array
     {
         return [
-            'educations.*.level' => 'required|numeric|in:1,2,3,4,5,6,7,8,',
+            'educations.*.level' => 'required|numeric|in:1,2,3,4,5,6,7,8',
             'educations.*.name' => 'required|max:160',
             'educations.*.faculty' => 'max:160',
             'educations.*.major' => 'max:160',
