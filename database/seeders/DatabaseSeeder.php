@@ -38,5 +38,8 @@ class DatabaseSeeder extends Seeder
         $this->call(OldDisciplinarySeeder::class);
         $this->call(OldFamilySeeder::class);
         $this->call(OldLeaveSeeder::class);
+        $this->call(OldStrukturalTrainingSeeder::class);
+        $this->call(OldFungsionalTrainingSeeder::class);
+        $this->call(OldTeknisTrainingSeeder::class);
     }
 }
