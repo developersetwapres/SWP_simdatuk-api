@@ -47,6 +47,15 @@ class SummaryController extends Controller
                 DB::raw('COUNT(CASE WHEN gender = 0 THEN 1 END) as female'),
                 DB::raw('COUNT(CASE WHEN type = 2 THEN 1 END) as assistance'),
                 DB::raw('COUNT(CASE WHEN type = 3 THEN 1 END) as outsource'),
+                DB::raw('COUNT(CASE WHEN education_level IS NOT NULL THEN 1 END) as total_education'),
+                DB::raw('COUNT(CASE WHEN education_level = 1 THEN 1 END) as sd'),
+                DB::raw('COUNT(CASE WHEN education_level = 2 THEN 1 END) as smp'),
+                DB::raw('COUNT(CASE WHEN education_level = 3 THEN 1 END) as sma'),
+                DB::raw('COUNT(CASE WHEN education_level = 4 THEN 1 END) as d1'),
+                DB::raw('COUNT(CASE WHEN education_level = 5 THEN 1 END) as d3'),
+                DB::raw('COUNT(CASE WHEN education_level = 6 THEN 1 END) as s1'),
+                DB::raw('COUNT(CASE WHEN education_level = 7 THEN 1 END) as s2'),
+                DB::raw('COUNT(CASE WHEN education_level = 8 THEN 1 END) as s3'),
             )
             ->first();
 
@@ -93,31 +102,35 @@ class SummaryController extends Controller
             "education_employees" => [
                 [
                     "name" => 'Strata III',
-                    "quantity" => 8,
+                    "quantity" => $countable->s3,
                 ],
                 [
                     "name" => 'Strata II',
-                    "quantity" => 96,
+                    "quantity" => $countable->s2,
                 ],
                 [
                     "name" => 'Diploma IV / Strata I',
-                    "quantity" => 92,
+                    "quantity" => $countable->s1,
                 ],
                 [
                     "name" => 'Akademi / Diploma III / Sarjana Muda',
-                    "quantity" => 18,
+                    "quantity" => $countable->d3,
                 ],
                 [
                     "name" => 'Diploma I / II',
-                    "quantity" => 1,
+                    "quantity" => $countable->d1,
                 ],
                 [
                     "name" => 'SLTA / Sederajat',
-                    "quantity" => 67,
+                    "quantity" => $countable->sma,
                 ],
                 [
                     "name" => 'SLTP / Sederajat',
-                    "quantity" => 1,
+                    "quantity" => $countable->smp,
+                ],
+                [
+                    "name" => 'SD / Sederajat',
+                    "quantity" => $countable->sd,
                 ],
             ],
         ];
