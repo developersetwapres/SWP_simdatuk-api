@@ -14,13 +14,13 @@ return new class extends Migration
     {
         Schema::create('trainings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name', 255)->comment('nama diklat');
+            $table->string('name', 512)->comment('nama diklat');
             $table->string('level', 160)->nullable()->comment('jenjang');
             $table->tinyInteger('period_month')->nullable()->comment('bulan jenjang');
             $table->year('period_year')->nullable()->comment('tahun jenjang');
             $table->date('start_date')->nullable()->comment('tanggal dimulai');
             $table->tinyInteger('duration')->nullable()->comment('in days');
-            $table->text('organizer')->nullable()->comment('penyelenggara');
+            $table->string('organizer', 512)->nullable()->comment('penyelenggara');
             $table->string('reference_number', 160)->nullable();
             $table->text('link')->nullable();
             $table->tinyInteger('type')->default(1)->comment('1=Struktural, 2=Fungsional, 3=Teknis');
