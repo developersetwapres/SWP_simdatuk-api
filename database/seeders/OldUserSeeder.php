@@ -122,7 +122,7 @@ class OldUserSeeder extends Seeder
                         WHEN status_kepeg = 'Meninggal' THEN 4
                         WHEN status_kepeg = 'Alih Status' THEN 5
                         WHEN status_kepeg = 'Aktif_PS' THEN 6
-                        WHEN status_kepeg = 'CTLN' THEN 7
+                        WHEN status_kepeg = 'CLTN' THEN 7
                         WHEN status_kepeg = 'TBL' THEN 8
                         WHEN status_kepeg = 'Non Aktif' THEN 9
                     END AS employment_status,
