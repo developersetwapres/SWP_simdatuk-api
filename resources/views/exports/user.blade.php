@@ -528,6 +528,68 @@
         </tbody>
     </table>
 
+    <div class="title-profile">Riwayat Penetapan Angka Kredit Terakhir</div>
+
+    <table class="table-section-3">
+        <thead class="table-section-3-title-row">
+        <td class="table-section-3-title">No</td>
+        <td class="table-section-3-title">Jabatan</td>
+        <td class="table-section-3-title">Periode</td>
+        <td class="table-section-3-title">Tahun</td>
+        <td class="table-section-3-title">Bulan</td>
+        <td class="table-section-3-title">Angka Kredit Terakhir</td>
+        </thead>
+
+        <tbody>
+        @php $indexScore=1 @endphp
+        @foreach($userCredit as $value)
+            <tr style="border-bottom: 1px solid #F0F0F0;">
+                <td class="table-section-3-body">{{ $indexScore++ }}</td>
+                <td class="table-section-3-body">{{ $value['position'] }}</td>
+                <td class="table-section-3-body">
+                    @switch($value['period'])
+                        @case(1)
+                            Triwulan 1
+                            @break
+                        @case(2)
+                            Triwulan 2
+                            @break
+                        @case(3)
+                            Triwulan 3
+                            @break
+                        @case(4)
+                            Triwulan 4
+                            @break
+                        @case(5)
+                            Tahunan
+                            @break
+                        @default
+                            -
+                    @endswitch</td>
+                <td class="table-section-3-body">{{ $value['year'] }}</td>
+                <td class="table-section-3-body">
+                    @switch($value['period'])
+                        @case(1)
+                            Januari - Maret
+                            @break
+                        @case(2)
+                            April - Juni
+                            @break
+                        @case(3)
+                            Juli - September
+                            @break
+                        @case(4)
+                            Oktober - Desember
+                            @break
+                        @default
+                            -
+                    @endswitch</td>
+                <td class="table-section-3-body">{{ $value['credit_score'] }}</td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+
     <div class="title-profile">Riwayat Penilaian Prestasi Kerja</div>
 
     <table class="table-section-3">

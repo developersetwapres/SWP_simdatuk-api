@@ -377,6 +377,7 @@ class ExportController extends Controller
         $userEducation->join('users', 'users.id', '=', 'ue.user_id');
         $userEducation->where('ue.user_id', $user->id);
         $userEducation->select('ue.level', 'ue.name as school_name', 'ue.faculty', 'ue.major', 'ue.status as education_status', 'ue.year_of_graduation', 'ue.description as education_description');
+        $userEducation->orderBy('ue.level');
         $userEducation = $userEducation->get();
         $userCollegeData = array();
         foreach ($userEducation as $education) {
@@ -448,6 +449,21 @@ class ExportController extends Controller
                 'work_behavior_rating' => $target->work_behavior_rating,
                 'employee_performance_predicate' => $target->employee_performance_predicate,
                 'organizational_performance_achievement' => $target->organizational_performance_achievement,
+            ];
+        }
+
+        //Credit Score
+        $userCredit = DB::table('user_credit_score as ucs');
+        $userCredit->where('ucs.user_id', $user->id);
+        $userCredit->select('ucs.position', 'ucs.period', 'ucs.year', 'ucs.last_credit_score');
+        $userCredit = $userCredit->get();
+        $userCreditData = array();
+        foreach ($userCredit as $credit){
+            $userCreditData[] = [
+                'position' => $credit->position,
+                'period' => $credit->period,
+                'year' => $credit->year,
+                'credit_score' => $credit->last_credit_score
             ];
         }
 
@@ -715,33 +731,72 @@ class ExportController extends Controller
             5 => 'Duda',
             default => '-',
         };
-        $housingComplex = match ($user->residence_id) {
-            1 => 'Dalam',
-            2 => 'Luar',
-            default => '-',
-        };
+        // Housing
+        $housingComplex = DB::table('residences');
+        $housingComplex->join('users as u', 'u.residence_id', '=', 'residences.id');
+        $housingComplex->select('residences.name');
+        $housingComplex = $housingComplex->get();
+
+        //Grade Date
+        $gradeStartDate = $user->grade_effective_date;
+        $gradeDate = new \DateTime($gradeStartDate);
+        $currentDate = new \DateTime();
+        $gradeDate = $currentDate->diff($gradeDate);
+
+        //Main Organization
+        $mainOrganization = DB::table('groups');
+        $mainOrganization->join('users', 'users.organization_id', '=', 'groups.id');
+        $mainOrganization->select('groups.name');
+        $mainOrganization = $mainOrganization->get();
+
+        //Main Education
+        $mainEducation = DB::table('user_educations as ue');
+        $mainEducation->join('users', 'users.id', '=', 'ue.user_id');
+        $mainEducation->where('ue.user_id', $user->id);
+        $mainEducation->select('ue.level as level', 'ue.name as school_name', 'ue.year_of_graduation');
+        $mainEducation->orderBy('ue.level', 'desc');
+        $mainEducation = $mainEducation->first();
+        if ($mainEducation) {
+            $educationLevel = match ($mainEducation->level) {
+                1 => 'SD/Sederajat',
+                2 => 'SLTP/Sederajat',
+                3 => 'SLTA/Sederajat',
+                4 => 'Diploma I/II',
+                5 => 'Akademik/D3/S.Muda',
+                6 => 'Diploma IV/Strata I',
+                7 => 'Strata II',
+                8 => 'Strata III',
+            };
+        }
         $pdf = Pdf::loadview('exports/user', [
             'userProfile' => [
                 'Tempat, tanggal lahir' => $user->place_of_birth . ', ' . $user->date_of_birth,
                 'Agama' => $religion,
                 'Jenis Kelamin' => ($user->gender ? 'Pria' : 'Wanita'),
                 'Status Perkawinan' => $maritalStatus,
+                'Jenis Pegawai' => $user->type,
                 'Instansi Induk' => ($userInstitution->name ?? ''),
-                'Satuan Organisasi' => 'Lorem ipsum',
+                'Tanggal Mulai Menjabat' => ($user->position_effective_date ?? ''),
+                'Satuan Organisasi' => ($mainOrganization ?? ''),
                 'Unit Kerja' => $user->work_unit_id,
+                'Tingkat' => ($educationLevel ?? ''),
+                'Nama Sekolah/Universitas' => ($mainEducation->school_name ?? ''),
+                'Tahun Lulus' => ($mainEducation->year_of_graduation ?? ''),
                 'No. Karpeg/No. Karis/No. Karsu' => $user->wife_id_card_number . '/' . $user->husband_id_card_number,
                 'Masa Kerja Keseluruhan' => 'Lorem ipsum',
-                'Masa Kerja Golongan' => 'Lorem',
+                'Masa Kerja Golongan' => $gradeDate->y.' Tahun'. $gradeDate->m. ' Bulan'. $gradeDate->d. ' Hari',
                 'NPWP' => $user->id_tax,
                 'Status Pegawai' => ($user->employment_status ? 'Aktif' : 'Tidak Aktif'),
-                'Komplek' => $housingComplex,
-                'Nama Komplek' => 'Lorem ipsum',
+                'Nomor NIK' => $user->id_number,
+                'Komplek' => ($housingComplex == 'Luar Komplek') ? 'Luar' : 'Dalam',
+                'Nama Komplek' => ($housingComplex == 'Luar Komplek') ? $housingComplex : '-',
                 'Alamat Tempat Tinggal Saat Ini' => $user->current_address,
                 'No. Telepon Rumah' => $user->home_phone_number,
                 'No. HP' => $user->mobile_phone,
                 'Alamat Kantor' => $user->office_address,
                 'No. Telepon Kantor' => $user->office_phone_number,
                 'Email' => $user->email,
+                'Kontak Darurat' => $user->emergency_contact,
                 'Batas Usia Pensiun' => $user->expire_at,
             ],
             'photoProfile' => $user->photo_profile,
@@ -757,6 +812,7 @@ class ExportController extends Controller
             'userTrainingTechnical' => $trainingTechnique,
             'userAward' => $userRecognitionData,
             'userSKP' => $userTargetData,
+            'userCredit' => $userCreditData,
             'userPerformance' => $userPerformanceData,
             'userPunishment' => $userPunishmentData,
             'userFamily' => $userFamilyData,
