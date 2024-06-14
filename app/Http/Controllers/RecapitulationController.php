@@ -41,20 +41,26 @@ class RecapitulationController extends Controller
             "total" => $users->total,
             "cards" => [
                 [
-                    "name" => 'Aparatur Sipil Negara (ASN) Aktif + Perbantuan TNI/POLRI Pelaksana',
-                    "total" => $users->asn_active,
-                ],
-                [
-                    "name" => 'Aparatur Sipil Negara (ASN) Non Aktif',
-                    "total" => $users->asn_nonactive,
-                ],
-                [
-                    "name" => 'Non Aparatur Sipil Negara (Non ASN) + Tim',
-                    "total" => $users->nonasn,
-                ],
-                [
-                    "name" => 'Tenaga Outsourcing dan Non Outsourcing',
-                    "total" => $users->outsource,
+                    "name" => 'Komposisi Pegawai',
+                    "total" => $users->total,
+                    "cards" => [
+                        [
+                            "name" => 'Aparatur Sipil Negara (ASN) Aktif + Perbantuan TNI/POLRI Pelaksana',
+                            "total" => $users->asn_active,
+                        ],
+                        [
+                            "name" => 'Aparatur Sipil Negara (ASN) Non Aktif',
+                            "total" => $users->asn_nonactive,
+                        ],
+                        [
+                            "name" => 'Non Aparatur Sipil Negara (Non ASN) + Tim',
+                            "total" => $users->nonasn,
+                        ],
+                        [
+                            "name" => 'Tenaga Outsourcing dan Non Outsourcing',
+                            "total" => $users->outsource,
+                        ],
+                    ],
                 ],
             ],
         ];
@@ -237,7 +243,7 @@ class RecapitulationController extends Controller
             "total" => $users->total,
             "cards" => [
                 [
-                    "name" => 'Aparatur Sipil Negara (ASN) Non Aktif',
+                    "name" => "Aparatur Sipil Negara (ASN) Non Aktif",
                     "total" => $users->total,
                     "cards" => [
                         [

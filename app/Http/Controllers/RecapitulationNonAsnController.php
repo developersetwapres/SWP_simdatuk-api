@@ -29,102 +29,120 @@ class RecapitulationNonAsnController extends Controller
     {
         $total = $this->getTotal(2);
         $data = [
-            [
-                "name" => "Jabatan",
-                "total" => 74,
-                "cards" => [
-                    [
-                        "name" => "Staf Khusus Wakil Presiden",
-                        "total" => 10,
-                    ],
-                    [
-                        "name" => "Asisten Staf Khusus Wakil Presiden",
-                        "total" => 20,
-                    ],
-                ],
-            ],
-            [
-                "name" => "Tim",
-                "total" => 88,
-                "cards" => [
-                    [
-                        "name" => "Tim Nasional Percepatan Penanggulangan Kemiskinan (TNP2K)",
-                        "total" => 64,
-                    ],
-                    [
-                        "name" => "Tim Nasional Percepatan Penurunan Stunting (TPPS)",
-                        "total" => 24,
-                    ],
-                ],
-            ],
-            [
-                "name" => "Pendidikan",
-                "total" => $total->total_education,
-                "cards" => [
-                    [
-                        "name" => "Strata III",
-                        "total" => $total->s3,
-                    ],
-                    [
-                        "name" => "Strata II",
-                        "total" => $total->s2,
-                    ],
-                    [
-                        "name" => "Diploma IV/Strata I",
-                        "total" => $total->s1,
-                    ],
-                    [
-                        "name" => "Akademik/D3/S.Muda",
-                        "total" => $total->d3,
-                    ],
-                    [
-                        "name" => "Diploma I/II",
-                        "total" => $total->d1,
-                    ],
-                    [
-                        "name" => "SLTA/Sederajat",
-                        "total" => $total->sma,
-                    ],
-                    [
-                        "name" => "SLTP/Sederajat",
-                        "total" => $total->smp,
-                    ],
-                    [
-                        "name" => "SD/Sederajat",
-                        "total" => $total->sd,
+            "name" => "Rekapitulasi Pegawai Non ASN",
+            "total" => 10,
+            "cards" => [
+                [
+                    "name" => "Jabatan",
+                    "total" => 74,
+                    "cards" => [
+                        [
+                            "name" => "Staf Khusus Wakil Presiden",
+                            "total" => 10,
+                        ],
+                        [
+                            "name" => "Asisten Staf Khusus Wakil Presiden",
+                            "total" => 20,
+                        ],
+                        [
+                            "name" => "Pembantu Asisten Staf Khusus Wakil Presiden",
+                            "total" => 5,
+                        ],
+                        [
+                            "name" => "Anggota Tim Ahli Wakil Presiden",
+                            "total" => 12,
+                        ],
+                        [
+                            "name" => "Staf Pada Sekretaris Pribadi Istri Wakil Presiden",
+                            "total" => 1,
+                        ],
+                        [
+                            "name" => "Staf Kerumahtanggaan Pada Kediaman Wakil Presiden",
+                            "total" => 1,
+                        ],
+                        [
+                            "name" => "Sekretariat Pada Staf Khusus Wakil Presiden (PTT dari SETKAB)",
+                            "total" => 3,
+                        ],
+                        [
+                            "name" => "Ajudan Wakil Presiden dan Istri Wakil Presiden (Perbantuan TNI dan POLRI)",
+                            "total" => 8,
+                        ],
+                        [
+                            "name" => "Dokter Pribadi Wakil Presiden",
+                            "total" => 4,
+                        ],
+                        [
+                            "name" => "Pengemudi VVIP (Perbantuan TNI dan POLRI)",
+                            "total" => 10,
+                        ],
                     ],
                 ],
-            ],
-            [
-                "name" => "Jenis Kelamin",
-                "total" => $total->total_gender,
-                "cards" => [
-                    [
-                        "name" => "Laki-laki",
-                        "total" => $total->male,
+                [
+                    "name" => "Tim",
+                    "total" => 24,
+                    "cards" => [
+                        [
+                            "name" => "Tim Nasional Percepatan Penurunan Stunting (TPPS)",
+                            "total" => 24,
+                        ],
                     ],
-                    [
-                        "name" => "Perempuan",
-                        "total" => $total->female,
+                ],
+                [
+                    "name" => "Pendidikan",
+                    "total" => $total->total_education,
+                    "cards" => [
+                        [
+                            "name" => "Strata III",
+                            "total" => $total->s3,
+                        ],
+                        [
+                            "name" => "Strata II",
+                            "total" => $total->s2,
+                        ],
+                        [
+                            "name" => "Diploma IV/Strata I",
+                            "total" => $total->s1,
+                        ],
+                        [
+                            "name" => "Akademik/D3/S.Muda",
+                            "total" => $total->d3,
+                        ],
+                        [
+                            "name" => "Diploma I/II",
+                            "total" => $total->d1,
+                        ],
+                        [
+                            "name" => "SLTA/Sederajat",
+                            "total" => $total->sma,
+                        ],
+                        [
+                            "name" => "SLTP/Sederajat",
+                            "total" => $total->smp,
+                        ],
+                        [
+                            "name" => "SD/Sederajat",
+                            "total" => $total->sd,
+                        ],
+                    ],
+                ],
+                [
+                    "name" => "Jenis Kelamin",
+                    "total" => $total->total_gender,
+                    "cards" => [
+                        [
+                            "name" => "Laki-laki",
+                            "total" => $total->male,
+                        ],
+                        [
+                            "name" => "Perempuan",
+                            "total" => $total->female,
+                        ],
                     ],
                 ],
             ],
         ];
         return $this->response(200, 'success', $data);
-    }
-
-    /**
-     * Get List of Recap Non ASN by Category
-     *
-     * This endpoint is used to retrieve summary data based on the category parameter.
-     * @subgroup Recapitulation Non ASN
-     * @authenticated
-     * @urlParam category integer Refers to the category of results being displayed. Example: 1
-     * @response 200
-     */
-    public function show()
-    {
-
     }
 
     /**

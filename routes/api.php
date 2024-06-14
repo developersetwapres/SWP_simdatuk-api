@@ -72,12 +72,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('recapitulations-nonasn')->group(function () {
         Route::get('/', [RecapitulationNonAsnController::class, 'index']);
-        Route::get('/{category}', [RecapitulationNonAsnController::class, 'show']);
     });
 
     Route::prefix('recapitulations-outsource')->group(function () {
         Route::get('/', [RecapitulationOutsourceController::class, 'index']);
-        Route::get('/{category}', [RecapitulationOutsourceController::class, 'show']);
     });
 
     Route::prefix('notes')->group(function () {

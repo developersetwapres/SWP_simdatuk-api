@@ -29,102 +29,120 @@ class RecapitulationOutsourceController extends Controller
     {
         $total = $this->getTotal(3);
         $data = [
-            [
-                "name" => "Tenaga Outsourcing",
-                "total" => 191,
-                "cards" => [
-                    [
-                        "name" => "Pengemudi",
-                        "total" => 38,
-                    ],
-                    [
-                        "name" => "Petugas Kebersihan Gedung",
-                        "total" => 51,
-                    ],
-                ],
-            ],
-            [
-                "name" => "Tenaga Non Outsourcing",
-                "total" => 191,
-                "cards" => [
-                    [
-                        "name" => "Teknisi Fotocopy",
-                        "total" => 38,
-                    ],
-                    [
-                        "name" => "Teknisi Road Blocker",
-                        "total" => 51,
-                    ],
-                ],
-            ],
-            [
-                "name" => "Pendidikan",
-                "total" => $total->total_education,
-                "cards" => [
-                    [
-                        "name" => "Strata III",
-                        "total" => $total->s3,
-                    ],
-                    [
-                        "name" => "Strata II",
-                        "total" => $total->s2,
-                    ],
-                    [
-                        "name" => "Diploma IV/Strata I",
-                        "total" => $total->s1,
-                    ],
-                    [
-                        "name" => "Akademik/D3/S.Muda",
-                        "total" => $total->d3,
-                    ],
-                    [
-                        "name" => "Diploma I/II",
-                        "total" => $total->d1,
-                    ],
-                    [
-                        "name" => "SLTA/Sederajat",
-                        "total" => $total->sma,
-                    ],
-                    [
-                        "name" => "SLTP/Sederajat",
-                        "total" => $total->smp,
-                    ],
-                    [
-                        "name" => "SD/Sederajat",
-                        "total" => $total->sd,
+            "name" => "Rekapitulasi Pegawai Outsourcing",
+            "total" => '-',
+            "cards" => [
+                [
+                    "name" => "Tenaga Outsourcing",
+                    "total" => 191,
+                    "cards" => [
+                        [
+                            "name" => "Pengemudi",
+                            "total" => 38,
+                        ],
+                        [
+                            "name" => "Petugas Kebersihan Gedung",
+                            "total" => 51,
+                        ],
+                        [
+                            "name" => "Petugas Perawatan Kolam",
+                            "total" => 2,
+                        ],
+                        [
+                            "name" => "Petugas Taman",
+                            "total" => 24,
+                        ],
+                        [
+                            "name" => "Pramusaji/Pramubakti",
+                            "total" => 39,
+                        ],
+                        [
+                            "name" => "Teknisi Jaringan",
+                            "total" => 2,
+                        ],
+                        [
+                            "name" => "Teknisi Komputer",
+                            "total" => 11,
+                        ],
+                        [
+                            "name" => "Teknisi Mekanikal dan Elektrikal",
+                            "total" => 11,
+                        ],
                     ],
                 ],
-            ],
-            [
-                "name" => "Jenis Kelamin",
-                "total" => $total->total_gender,
-                "cards" => [
-                    [
-                        "name" => "Laki-laki",
-                        "total" => $total->male,
+                [
+                    "name" => "Tenaga Non Outsourcing",
+                    "total" => 7,
+                    "cards" => [
+                        [
+                            "name" => "Teknisi Fotocopy",
+                            "total" => 3,
+                        ],
+                        [
+                            "name" => "Teknisi Road Blocker",
+                            "total" => 2,
+                        ],
+                        [
+                            "name" => "Teknisi Lift",
+                            "total" => 2,
+                        ],
                     ],
-                    [
-                        "name" => "Perempuan",
-                        "total" => $total->female,
+                ],
+                [
+                    "name" => "Pendidikan",
+                    "total" => $total->total_education,
+                    "cards" => [
+                        [
+                            "name" => "Strata III",
+                            "total" => $total->s3,
+                        ],
+                        [
+                            "name" => "Strata II",
+                            "total" => $total->s2,
+                        ],
+                        [
+                            "name" => "Diploma IV/Strata I",
+                            "total" => $total->s1,
+                        ],
+                        [
+                            "name" => "Akademik/D3/S.Muda",
+                            "total" => $total->d3,
+                        ],
+                        [
+                            "name" => "Diploma I/II",
+                            "total" => $total->d1,
+                        ],
+                        [
+                            "name" => "SLTA/Sederajat",
+                            "total" => $total->sma,
+                        ],
+                        [
+                            "name" => "SLTP/Sederajat",
+                            "total" => $total->smp,
+                        ],
+                        [
+                            "name" => "SD/Sederajat",
+                            "total" => $total->sd,
+                        ],
+                    ],
+                ],
+                [
+                    "name" => "Jenis Kelamin",
+                    "total" => $total->total_gender,
+                    "cards" => [
+                        [
+                            "name" => "Laki-laki",
+                            "total" => $total->male,
+                        ],
+                        [
+                            "name" => "Perempuan",
+                            "total" => $total->female,
+                        ],
                     ],
                 ],
             ],
         ];
         return $this->response(200, 'success', $data);
-    }
-
-    /**
-     * Get List of Recap Outsource by Category
-     *
-     * This endpoint is used to retrieve summary data based on the category parameter.
-     * @subgroup Recapitulation Outsource
-     * @authenticated
-     * @urlParam category integer Refers to the category of results being displayed. Example: 1
-     * @response 200
-     */
-    public function show()
-    {
-
     }
 
     /**
