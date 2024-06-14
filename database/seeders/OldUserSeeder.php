@@ -109,6 +109,7 @@ class OldUserSeeder extends Seeder
                     nm_sekolah AS education_name,
                     CASE
                         WHEN thn_lulus = '' THEN NULL
+                        WHEN thn_lulus < 1900 THEN NULL
                         ELSE thn_lulus
                     END AS education_year,
                     no_karpeg as employee_id_card_number,
@@ -227,6 +228,7 @@ class OldUserSeeder extends Seeder
                     IF(ket_sekolah = '', jurusan_pddk, ket_sekolah) AS education_name,
                     CASE
                         WHEN thn_lulus = '' THEN NULL
+                        WHEN thn_lulus < 1900 THEN NULL
                         ELSE thn_lulus
                     END AS education_year,
                     no_ktp AS id_number,
@@ -292,6 +294,7 @@ class OldUserSeeder extends Seeder
                     IF(nm_sekolah = '', jurusan, nm_sekolah) AS education_name,
                     CASE
                         WHEN thn_lulus = '' THEN NULL
+                        WHEN thn_lulus < 1900 THEN NULL
                         ELSE thn_lulus
                     END AS education_year,
                     no_ktp AS id_number,
@@ -322,12 +325,12 @@ class OldUserSeeder extends Seeder
                     du.id_pegawai,
                     go.id_golongan,
                     go.pangkat,
-                    u.employee_id_number 
+                    u.employee_id_number
                 FROM
                     simdatuk_dump.tbl_1pegawai_swp AS du
                 JOIN
                     simdatuk_dump.tbl_mst_golongan AS go ON du.id_golongan = go.id_golongan
-                LEFT JOIN 
+                LEFT JOIN
                     simdatuk.users u ON du.id_pegawai = u.employee_id_number
             )  AS subq ON u.employee_id_number = subq.employee_id_number
             LEFT JOIN simdatuk.grades AS g ON g.name = subq.pangkat
