@@ -200,7 +200,33 @@ class OldUserSeeder extends Seeder
             DB::table('users')->insertTs(json_decode(json_encode($outsource), true));
             $this->setPosition();
             $this->setEchelon();
+            $this->setGrade();
         }
+    }
+
+    private static function setGrade()
+    {
+        $sql = "
+            UPDATE simdatuk.users u
+            JOIN (
+                SELECT
+                    du.nm_pegawai,
+                    du.id_pegawai,
+                    go.id_golongan,
+                    go.pangkat,
+                    u.employee_id_number 
+                FROM
+                    simdatuk_dump.tbl_1pegawai_swp AS du
+                JOIN
+                    simdatuk_dump.tbl_mst_golongan AS go ON du.id_golongan = go.id_golongan
+                LEFT JOIN 
+                    simdatuk.users u ON du.id_pegawai = u.employee_id_number
+            )  AS subq ON u.employee_id_number = subq.employee_id_number
+            LEFT JOIN simdatuk.grades AS g ON g.name = subq.pangkat
+            SET u.grade_id = g.id
+        ";
+
+        DB::statement($sql);
     }
 
     private static function setEchelon()
@@ -306,7 +332,7 @@ class OldUserSeeder extends Seeder
         DB::table('users')->whereIn('employee_id_number', ['198008042010012004', '2020090701'])->update([
             'position_id' => 23,
         ]);
-        DB::table('users')->where('employee_id_number', '2019110110')->update([
+        DB::table('users')->where('employee_id_number', '2019110110', '2022120107')->update([
             'position_id' => 24,
         ]);
         DB::table('users')->where('employee_id_number', '2022120107')->update([
@@ -767,6 +793,7 @@ class OldUserSeeder extends Seeder
             '198003162008012010',
             '198401192008011003',
             '198304042009011003',
+            '199510022019022001',
         ])->update([
             'position_id' => 66,
         ]);
@@ -818,6 +845,7 @@ class OldUserSeeder extends Seeder
             '196906101996031001',
             '198502072008012002',
             '198104072009012003',
+            '199007142015032002',
         ])->update([
             'position_id' => 93,
         ]);

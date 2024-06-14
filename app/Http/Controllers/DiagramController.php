@@ -62,26 +62,35 @@ class DiagramController extends Controller
                 $positions->users = $this->getUsers($positions->id);
             }
 
-            $positions->childs = $this->getPositions($positionId, 2, true);
+            if ($positions->type == 1) {
+                $positions->childs = $this->getPositions($positionId, 2, true);
+            } else {
+                $positions->childs = $this->getNestedJafung([], $positionId);
+            }
+
             $positions->children = sizeof($positions->childs);
 
             foreach ($positions->childs as $childPosition) {
-                $childPosition->users = [];
-                if ($childPosition->entity == 1) {
-                    $childPosition->users = $this->getUsers($childPosition->id);
+                if (isset($childPosition->entity)) {
+                    if ($childPosition->entity == 1) {
+                        $childPosition->users = $this->getUsers($childPosition->id);
+                    } else {
+                        $childPosition->users = [];
+                    }
                 }
 
                 $childPosition->childs = [];
                 //jabatan fungsional
-                if ($childPosition->type == 2) {
-                    $childPosition->childs = $this->getPositionEchelons($childPosition->id);
+                if (isset($childPosition->type) && $childPosition->type == 2) {
+                    $childPosition->childs = $this->getNestedJafung([], $childPosition->id);
+
                     $childPosition->children = sizeof($childPosition->childs);
                     $childPosition->available = 0;
                     $childPosition->filled = 0;
                 }
 
                 //special case Pejabat Kemensetneg yang Diperbantukan di Sekretariat Wakil Presiden
-                if ($positions->id == 4) {
+                if (isset($positions->id) && $positions->id == 4) {
                     $grandchildPositions = $this->getPositions($childPosition->id, 2, true);
                     foreach ($grandchildPositions as $grandchildPosition) {
                         $grandchildUsers = $this->getUsers($grandchildPosition->id);
@@ -94,6 +103,25 @@ class DiagramController extends Controller
         }
 
         return $this->response(200, 'success', $positions);
+    }
+
+    private function getNestedJafung($list, $id)
+    {
+        foreach ($this->getPositionEchelons($id) as $value) {
+            $list[] = $value;
+        }
+
+        foreach ($this->getPositions($id, 2, true) as $value) {
+            if ($value->type == 2) {
+                $value->childs = $this->getNestedJafung([], $value->id);
+                $value->children = sizeof($value->childs);
+            }
+            $value->available = 0;
+            $value->filled = 0;
+            $list[] = $value;
+        }
+
+        return $list;
     }
 
     //idType : 1=id, 2=parent_id
@@ -134,17 +162,23 @@ class DiagramController extends Controller
             ->select(
                 'users.id',
                 'users.name',
-                'users.echelon_id',
-                'users.echelon_effective_date',
-                'users.grade_id',
-                'users.grade_effective_date',
+                'users.title_prefix',
+                'users.title_suffix',
+                'users.position_effective_date',
                 'users.employee_id_number',
                 'users.employee_registration_number',
                 'users.type',
                 'positions.name as position_name',
+                'echelons.name as echelon_name',
+                'grades.name as grade_name',
+                'grades.code as grade_code',
             )
             ->leftJoin('positions', 'positions.id', '=', 'users.position_id')
-            ->where('users.position_id', $positionId);
+            ->leftJoin('echelons', 'echelons.id', '=', 'users.echelon_id')
+            ->leftJoin('grades', 'grades.id', '=', 'users.grade_id')
+            ->where('users.position_id', $positionId)
+            ->orderBy('users.position_effective_date', 'ASC')
+            ->orderBy('users.grade_id', 'ASC');
 
         if (isset($echelonId)) {
             $users->where('users.echelon_id', '=', $echelonId);
