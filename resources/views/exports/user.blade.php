@@ -154,7 +154,7 @@
                     </tr>
                     <tr>
                         <td class="grade">
-                            Kepala Subbagian, Bagian Protokol, dan Kerumahtanggaan, Deputi Bidang Administrasi
+                            {{ $currentPosition }}
                         </td>
                     </tr>
                     <tr>

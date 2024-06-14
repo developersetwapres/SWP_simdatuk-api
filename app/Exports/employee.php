@@ -13,6 +13,7 @@ use Maatwebsite\Excel\Concerns\WithStyles;
 use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class employee implements FromView, WithDrawings, WithEvents
@@ -42,7 +43,7 @@ class employee implements FromView, WithDrawings, WithEvents
                 $event->sheet->getStyle($cellRange)->getAlignment()->setWrapText(true);
                 $event->getDelegate()->getRowDimension('1')->setRowHeight('20');
                 $event->sheet->styleCells(
-                    'A2:K2',
+                    'A2:'.$alphabet.'2',
                     [
                         //Set border Style
                         'borders' => [
@@ -80,7 +81,7 @@ class employee implements FromView, WithDrawings, WithEvents
                     if (!empty($event->sheet->getCell($cellCoordinate)->getValue())) {
                         // Apply the same style as in row 2, columns A to K
                         $event->sheet->duplicateStyle(
-                            $event->sheet->getStyle('A2:K2'),
+                            $event->sheet->getStyle('A2:B2'),
                             $cellCoordinate
                         );
                     }
@@ -96,6 +97,7 @@ class employee implements FromView, WithDrawings, WithEvents
                         ->setHorizontal(Alignment::HORIZONTAL_CENTER);
                 }
             },
+
         ];
     }
 

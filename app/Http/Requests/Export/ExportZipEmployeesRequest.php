@@ -22,15 +22,15 @@ class ExportZipEmployeesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'organization' => 'array|min:1|numeric',
-            'employee_type' => 'array|min:1|numeric',
+            'organization' => 'array|min:1',
+            'employee_type' => 'array|min:1',
             'echelons' => 'array|min:1|numeric',
             'grades' => 'array|min:1|numeric',
             'position_status' => 'array|min:1|numeric',
             'education' => 'array|min:1|numeric',
             'gender' => 'array|min:1|max:2|numeric',
             'age_range' => 'array|min:1|string',
-            'marital_status' => 'array|min:1|numeric',
+            'marital_status' => 'array|min:1',
         ];
     }
 

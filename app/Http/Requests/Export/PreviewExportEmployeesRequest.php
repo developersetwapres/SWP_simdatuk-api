@@ -5,7 +5,7 @@ namespace App\Http\Requests\Export;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class ExportEmployeesRequest extends FormRequest
+class PreviewExportEmployeesRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
