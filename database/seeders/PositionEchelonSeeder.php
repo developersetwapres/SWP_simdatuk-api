@@ -67,16 +67,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 6,
-                'position_id' => 47,
-                'echelon_id' => 7,
-                'available' => 1,
-                'filled' => 0,
-                'children' => 0,
-                'vertical_order' => 1,
-                'horizontal_order' => 1,
-            ],
-            [
                 'id' => 7,
                 'position_id' => 47,
                 'echelon_id' => 8,
