@@ -20,7 +20,10 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\PositionHistoryController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RecapitulationAsnController;
 use App\Http\Controllers\RecapitulationController;
+use App\Http\Controllers\RecapitulationNonAsnController;
+use App\Http\Controllers\RecapitulationOutsourceController;
 use App\Http\Controllers\RecognitionHistoryController;
 use App\Http\Controllers\ResidenceController;
 use App\Http\Controllers\RoleController;
@@ -59,9 +62,22 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('recapitulations')->group(function () {
         Route::get('/', [RecapitulationController::class, 'index']);
-        Route::get('/asn', [RecapitulationController::class, 'asn']);
-        Route::get('/nonasn', [RecapitulationController::class, 'nonasn']);
-        Route::get('/outsource', [RecapitulationController::class, 'outsource']);
+        Route::get('/{category}', [RecapitulationController::class, 'show']);
+    });
+
+    Route::prefix('recapitulations-asn')->group(function () {
+        Route::get('/', [RecapitulationAsnController::class, 'index']);
+        Route::get('/{category}', [RecapitulationAsnController::class, 'show']);
+    });
+
+    Route::prefix('recapitulations-nonasn')->group(function () {
+        Route::get('/', [RecapitulationNonAsnController::class, 'index']);
+        Route::get('/{category}', [RecapitulationNonAsnController::class, 'show']);
+    });
+
+    Route::prefix('recapitulations-outsource')->group(function () {
+        Route::get('/', [RecapitulationOutsourceController::class, 'index']);
+        Route::get('/{category}', [RecapitulationOutsourceController::class, 'show']);
     });
 
     Route::prefix('notes')->group(function () {
