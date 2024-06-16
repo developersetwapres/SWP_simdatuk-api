@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
         $this->call(OldEducationSeeder::class);
         $this->call(OldPositionSeeder::class);
         $this->call(OldGradeSeeder::class);
-        // $this->call(OldTrainingSeeder::class);
+        $this->call(OldTrainingSeeder::class);
         $this->call(OldRecognitionSeeder::class);
         $this->call(OldPerformanceSeeder::class);
         $this->call(OldDisciplinarySeeder::class);
