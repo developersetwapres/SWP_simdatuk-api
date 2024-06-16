@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CreditScoreController;
 use App\Http\Controllers\DecreeController;
 use App\Http\Controllers\DiagramController;
 use App\Http\Controllers\DisciplinaryController;
@@ -220,12 +219,5 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/rekapitulasi', [ExportController::class, 'rekapitulasi']);
         Route::get('/rekapitulasi-non-asn', [ExportController::class, 'rekapitulasiNonASN']);
         Route::get('/rekapitulasi-asn', [ExportController::class, 'rekapitulasiASN']);
-    });
-
-    Route::prefix('credit-scores')->group(function () {
-        Route::post('/', [CreditScoreController::class, 'create']);
-        Route::get('/{id}', [CreditScoreController::class, 'show']);
-        Route::post('/{id}', [CreditScoreController::class, 'update']);
-        Route::delete('/{id}', [CreditScoreController::class, 'delete']);
     });
 });
