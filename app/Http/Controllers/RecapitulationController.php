@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\RecapitulationRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -10,11 +11,15 @@ use Illuminate\Support\Facades\DB;
  */
 class RecapitulationController extends Controller
 {
+    protected $recapitulationRepository;
 
-    public function __construct(Request $request)
-    {
+    public function __construct(
+        Request $request,
+        RecapitulationRepository $recapitulationRepository
+    ) {
         $this->request = $request;
         $this->posted = $request->except('_token', '_method');
+        $this->recapitulationRepository = $recapitulationRepository;
     }
 
     /**
@@ -29,11 +34,11 @@ class RecapitulationController extends Controller
     {
         $users = DB::table('users');
         $users->select(
-            DB::raw('COUNT(id) as total'),
-            DB::raw('COUNT(CASE WHEN type = 1 && employment_status = 1 THEN 1 END) as asn_active'),
-            DB::raw('COUNT(CASE WHEN type = 1 && employment_status != 1 THEN 1 END) as asn_nonactive'),
-            DB::raw('COUNT(CASE WHEN type = 2 THEN 1 END) as nonasn'),
-            DB::raw('COUNT(CASE WHEN type = 3 THEN 1 END) as outsource'),
+            DB::raw('COUNT(CASE WHEN employment_status IN (1, 6, 7, 8, 9) THEN 1 END) as total'),
+            DB::raw('COUNT(CASE WHEN type = 1 AND (employment_status = 1 OR employment_status = 6) THEN 1 END) as asn_active'),
+            DB::raw('COUNT(CASE WHEN type = 1 AND (employment_status = 7 OR employment_status = 8 OR employment_status = 9) THEN 1 END) as asn_nonactive'),
+            DB::raw('COUNT(CASE WHEN type = 2 AND employment_status = 1 THEN 1 END) as nonasn'),
+            DB::raw('COUNT(CASE WHEN type = 3 AND employment_status = 1 THEN 1 END) as outsource'),
         );
         $users = $users->first();
         $data = [
@@ -45,18 +50,22 @@ class RecapitulationController extends Controller
                     "total" => $users->total,
                     "cards" => [
                         [
+                            "id" => 1,
                             "name" => 'Aparatur Sipil Negara (ASN) Aktif + Perbantuan TNI/POLRI Pelaksana',
                             "total" => $users->asn_active,
                         ],
                         [
+                            "id" => 2,
                             "name" => 'Aparatur Sipil Negara (ASN) Non Aktif',
                             "total" => $users->asn_nonactive,
                         ],
                         [
+                            "id" => 3,
                             "name" => 'Non Aparatur Sipil Negara (Non ASN) + Tim',
                             "total" => $users->nonasn,
                         ],
                         [
+                            "id" => 4,
                             "name" => 'Tenaga Outsourcing dan Non Outsourcing',
                             "total" => $users->outsource,
                         ],
@@ -230,33 +239,26 @@ class RecapitulationController extends Controller
 
     private function getCategory2()
     {
-        $users = DB::table('users');
-        $users->select(
-            DB::raw('COUNT(CASE WHEN employment_status IN (7, 8, 9) && type = 1 THEN 1 END) as total'),
-            DB::raw('COUNT(CASE WHEN type = 1 && employment_status = 7 THEN 1 END) as cltn'),
-            DB::raw('COUNT(CASE WHEN type = 1 && employment_status = 8 THEN 1 END) as tbln'),
-            DB::raw('COUNT(CASE WHEN type = 1 && employment_status = 9 THEN 1 END) as nonactive'),
-        );
-        $users = $users->first();
+        $nonActive = $this->recapitulationRepository->getNonActiveAsn();
         $data = [
             "name" => 'Aparatur Sipil Negara (ASN) Non Aktif',
-            "total" => $users->total,
+            "total" => $nonActive->total,
             "cards" => [
                 [
                     "name" => "Aparatur Sipil Negara (ASN) Non Aktif",
-                    "total" => $users->total,
+                    "total" => $nonActive->total,
                     "cards" => [
                         [
                             "name" => "Tugas Belajar Luar Negeri (TBLN)",
-                            "total" => $users->tbln,
+                            "total" => $nonActive->tbln,
                         ],
                         [
                             "name" => "Cuti Diluar Tanggungan Negara (CLTN)",
-                            "total" => $users->cltn,
+                            "total" => $nonActive->cltn,
                         ],
                         [
                             "name" => "Tidak Aktif (Non Jabatan)",
-                            "total" => $users->nonactive,
+                            "total" => $nonActive->nonactive,
                         ],
                     ],
                 ],
@@ -267,6 +269,7 @@ class RecapitulationController extends Controller
 
     private function getCategory3()
     {
+        $tim = $this->recapitulationRepository->getTim(15);
         $data = [
             "name" => 'Non Aparatur Sipil Negara (Non ASN) + Tim',
             "total" => 162,
@@ -319,11 +322,12 @@ class RecapitulationController extends Controller
                 ],
                 [
                     "name" => "Tim",
-                    "total" => 88,
+                    "total" => $tim,
                     "cards" => [
                         [
+                            "id" => 15,
                             "name" => "Tim Nasional Percepatan Penurunan Stunting (TPPS)",
-                            "total" => 24,
+                            "total" => $tim,
                         ],
                     ],
                 ],
@@ -334,65 +338,21 @@ class RecapitulationController extends Controller
 
     private function getCategory4()
     {
+        $outsource = $this->recapitulationRepository->getOutsource(19);
+        $nonOutsource = $this->recapitulationRepository->getOutsource(20);
         $data = [
             "name" => "Tenaga Outsourcing dan Non Outsourcing",
-            "total" => 198,
+            "total" => $outsource[0] + $nonOutsource[0],
             "cards" => [
                 [
                     "name" => 'Tenaga Outsourcing',
-                    "total" => 191,
-                    "cards" => [
-                        [
-                            "name" => "Pengemudi",
-                            "total" => 38,
-                        ],
-                        [
-                            "name" => "Petugas Kebersihan Gedung",
-                            "total" => 51,
-                        ],
-                        [
-                            "name" => "Petugas Perawatan Kolam",
-                            "total" => 2,
-                        ],
-                        [
-                            "name" => "Petugas Taman",
-                            "total" => 24,
-                        ],
-                        [
-                            "name" => "Pramusaji/Pramubakti",
-                            "total" => 39,
-                        ],
-                        [
-                            "name" => "Teknisi Jaringan",
-                            "total" => 2,
-                        ],
-                        [
-                            "name" => "Teknisi Komputer",
-                            "total" => 11,
-                        ],
-                        [
-                            "name" => "Teknisi Mekanikal dan Elektrikal",
-                            "total" => 24,
-                        ],
-                    ],
+                    "total" => $outsource[0],
+                    "cards" => $outsource[1],
                 ],
                 [
                     "name" => 'Tenaga Non Outsourcing',
-                    "total" => 7,
-                    "cards" => [
-                        [
-                            "name" => "Teknisi Fotocopy",
-                            "total" => 3,
-                        ],
-                        [
-                            "name" => "Teknisi Road Blocker",
-                            "total" => 2,
-                        ],
-                        [
-                            "name" => "Teknisi Lift",
-                            "total" => 2,
-                        ],
-                    ],
+                    "total" => $nonOutsource[0],
+                    "cards" => $nonOutsource[1],
                 ],
             ],
         ];

@@ -2,19 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\RecapitulationRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 /**
  * @group Summary
  */
 class RecapitulationNonAsnController extends Controller
 {
+    protected $recapitulationRepository;
 
-    public function __construct(Request $request)
-    {
+    public function __construct(
+        Request $request,
+        RecapitulationRepository $recapitulationRepository
+    ) {
         $this->request = $request;
         $this->posted = $request->except('_token', '_method');
+        $this->recapitulationRepository = $recapitulationRepository;
     }
 
     /**
@@ -27,7 +31,8 @@ class RecapitulationNonAsnController extends Controller
      */
     public function index()
     {
-        $total = $this->getTotal(2);
+        $educationAndGender = $this->recapitulationRepository->getEducationAndGender(2);
+        $tim = $this->recapitulationRepository->getTim(15);
         $data = [
             "name" => "Rekapitulasi Pegawai Non ASN",
             "total" => 10,
@@ -80,118 +85,79 @@ class RecapitulationNonAsnController extends Controller
                 ],
                 [
                     "name" => "Tim",
-                    "total" => 24,
+                    "total" => $tim,
                     "cards" => [
                         [
+                            "id" => 15,
                             "name" => "Tim Nasional Percepatan Penurunan Stunting (TPPS)",
-                            "total" => 24,
+                            "total" => $tim,
                         ],
                     ],
                 ],
                 [
                     "name" => "Pendidikan",
-                    "total" => $total->total_education,
+                    "total" => $educationAndGender->total_education,
                     "cards" => [
                         [
+                            "id" => 8,
                             "name" => "Strata III",
-                            "total" => $total->s3,
+                            "total" => $educationAndGender->s3,
                         ],
                         [
+                            "id" => 7,
                             "name" => "Strata II",
-                            "total" => $total->s2,
+                            "total" => $educationAndGender->s2,
                         ],
                         [
+                            "id" => 6,
                             "name" => "Diploma IV/Strata I",
-                            "total" => $total->s1,
+                            "total" => $educationAndGender->s1,
                         ],
                         [
+                            "id" => 5,
                             "name" => "Akademik/D3/S.Muda",
-                            "total" => $total->d3,
+                            "total" => $educationAndGender->d3,
                         ],
                         [
+                            "id" => 4,
                             "name" => "Diploma I/II",
-                            "total" => $total->d1,
+                            "total" => $educationAndGender->d1,
                         ],
                         [
+                            "id" => 3,
                             "name" => "SLTA/Sederajat",
-                            "total" => $total->sma,
+                            "total" => $educationAndGender->sma,
                         ],
                         [
+                            "id" => 2,
                             "name" => "SLTP/Sederajat",
-                            "total" => $total->smp,
+                            "total" => $educationAndGender->smp,
                         ],
                         [
+                            "id" => 1,
                             "name" => "SD/Sederajat",
-                            "total" => $total->sd,
+                            "total" => $educationAndGender->sd,
                         ],
                     ],
                 ],
                 [
                     "name" => "Jenis Kelamin",
-                    "total" => $total->total_gender,
+                    "total" => $educationAndGender->total_gender,
                     "cards" => [
                         [
+                            "id" => 1,
                             "name" => "Laki-laki",
-                            "total" => $total->male,
+                            "total" => $educationAndGender->male,
                         ],
                         [
+                            "id" => 0,
                             "name" => "Perempuan",
-                            "total" => $total->female,
+                            "total" => $educationAndGender->female,
                         ],
                     ],
                 ],
             ],
         ];
         return $this->response(200, 'success', $data);
-    }
-
-    /**
-     * To get total
-     *
-     * @param string $type
-     * @return void
-     */
-    private static function getTotal($type)
-    {
-        $total = DB::table('users');
-        $total->select(
-            DB::raw('COUNT(CASE WHEN gender IS NOT NULL THEN 1 END) as total_gender'),
-            DB::raw('COUNT(CASE WHEN gender = 0 THEN 1 END) as female'),
-            DB::raw('COUNT(CASE WHEN gender = 1 THEN 1 END) as male'),
-            DB::raw('COUNT(CASE WHEN education_level IS NOT NULL THEN 1 END) as total_education'),
-            DB::raw('COUNT(CASE WHEN education_level = 1 THEN 1 END) as sd'),
-            DB::raw('COUNT(CASE WHEN education_level = 2 THEN 1 END) as smp'),
-            DB::raw('COUNT(CASE WHEN education_level = 3 THEN 1 END) as sma'),
-            DB::raw('COUNT(CASE WHEN education_level = 4 THEN 1 END) as d1'),
-            DB::raw('COUNT(CASE WHEN education_level = 5 THEN 1 END) as d3'),
-            DB::raw('COUNT(CASE WHEN education_level = 6 THEN 1 END) as s1'),
-            DB::raw('COUNT(CASE WHEN education_level = 7 THEN 1 END) as s2'),
-            DB::raw('COUNT(CASE WHEN education_level = 8 THEN 1 END) as s3'),
-        );
-        $total->where('type', $type);
-        $total->whereIn('employment_status', [1, 6, 7, 8]);
-        return $total = $total->first();
-    }
-
-    /**
-     * To get total of grade
-     *
-     * @param string $type
-     * @return void
-     */
-    private static function getGrade($type)
-    {
-        $grade = DB::table('grades as g');
-        $grade->join('users as u', 'u.grade_id', '=', 'g.id');
-        $grade->select(
-            'g.name',
-            'g.code',
-            DB::raw('COUNT(u.id) as total')
-        );
-        $grade->where('g.type', $type);
-        $grade->whereIn('u.employment_status', [1, 6, 7, 8]);
-        $grade->groupBy('u.grade_id');
-        $grade->orderBy('g.id', 'asc');
-        return $grade = $grade->get();
     }
 }
