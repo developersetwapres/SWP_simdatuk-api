@@ -15,10 +15,10 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('name', 512)->nullable();
             $table->string('level', 160)->nullable();
-            $table->smallInteger('period_month')->nullable();
+            $table->tinyInteger('period_month')->nullable();
             $table->year('period_year')->nullable();
             $table->date('start_date')->nullable();
-            $table->tinyInteger('duration')->nullable()->comment('in days');
+            $table->smallInteger('duration')->nullable()->comment('in days');
             $table->string('organizer', 512)->nullable();
             $table->string('reference_number', 160)->nullable();
             $table->text('link')->nullable();
