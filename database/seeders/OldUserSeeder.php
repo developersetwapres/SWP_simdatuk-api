@@ -154,9 +154,9 @@ class OldUserSeeder extends Seeder
             ";
 
             $asn = DB::select($asn);
-            // foreach ($asn as $item) {
-            //     $item->photo_profile = $this->getDocumentExist($item->photo_profile);
-            // }
+            foreach ($asn as $item) {
+                $item->photo_profile = $this->getDocumentExist($item->photo_profile);
+            }
             DB::table('users')->insertTs(json_decode(json_encode($asn), true));
 
             // Get pegawai perbantuan
