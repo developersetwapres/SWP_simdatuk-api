@@ -18,7 +18,7 @@ return new class extends Migration
             $table->tinyInteger('available')->default(0);
             $table->tinyInteger('filled')->default(0);
             $table->tinyInteger('children')->default(0);
-            $table->tinyInteger('type')->comment('1=struktural, 2=fungsional');
+            $table->tinyInteger('type')->comment('1=struktural, 2=fungsional, 3=outsource');
             $table->tinyInteger('entity')->comment('1=personil, 2=badan');
             $table->tinyInteger('vertical_order')->default(0);
             $table->tinyInteger('horizontal_order')->default(0);

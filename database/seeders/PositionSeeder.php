@@ -402,7 +402,7 @@ class PositionSeeder extends Seeder
                         'horizontal_order' => 1,
                         'child' => [
                             // child of Deputi Bidang Dukungan Kebijakan Pembangunan Ekonomi dan Peningkatan Daya Saing
-                            [   //TBD
+                            [ //TBD
                                 'id' => 41,
                                 'parent_id' => 37,
                                 'name' => 'Analis Kebijakan',
@@ -427,7 +427,7 @@ class PositionSeeder extends Seeder
                                 'horizontal_order' => 2,
                                 'child' => [
                                     // child of Asisten Deputi Ekonomi dan Keuangan
-                                    [   //TBD
+                                    [ //TBD
                                         'id' => 45,
                                         'parent_id' => 42,
                                         'name' => 'Analis Kebijakan',
@@ -439,7 +439,7 @@ class PositionSeeder extends Seeder
                                         'vertical_order' => 1,
                                         'horizontal_order' => 1,
                                     ],
-                                    [   //TBD
+                                    [ //TBD
                                         'id' => 193,
                                         'parent_id' => 42,
                                         'name' => 'Arsiparis',
@@ -464,7 +464,7 @@ class PositionSeeder extends Seeder
                                         'horizontal_order' => 3,
                                         'child' => [
                                             // child of Kepala Subbagian Dukungan Administrasi
-                                            [   //TBD
+                                            [ //TBD
                                                 'id' => 47,
                                                 'parent_id' => 46,
                                                 'name' => 'Arsiparis',
@@ -505,7 +505,7 @@ class PositionSeeder extends Seeder
                                 'horizontal_order' => 3,
                                 'child' => [
                                     // child of Asisten Deputi Industri, Perdagangan, Pariwisata, dan Ekonomi Kreatif
-                                    [   //TBD
+                                    [ //TBD
                                         'id' => 49,
                                         'parent_id' => 43,
                                         'name' => 'Analis Kebijakan',
@@ -517,7 +517,7 @@ class PositionSeeder extends Seeder
                                         'vertical_order' => 1,
                                         'horizontal_order' => 1,
                                     ],
-                                    [   //TBD
+                                    [ //TBD
                                         'id' => 194,
                                         'parent_id' => 43,
                                         'name' => 'Arsiparis',
@@ -542,7 +542,7 @@ class PositionSeeder extends Seeder
                                         'horizontal_order' => 3,
                                         'child' => [
                                             // child of Kepala Subbagian Dukungan Administrasi
-                                            [   //TBD
+                                            [ //TBD
                                                 'id' => 51,
                                                 'parent_id' => 50,
                                                 'name' => 'Arsiparis',
@@ -583,7 +583,7 @@ class PositionSeeder extends Seeder
                                 'horizontal_order' => 4,
                                 'child' => [
                                     // child of Asisten Deputi Infrastruktur, Ketahanan Energi, dan Sumber Daya Alam
-                                    [   //TBD
+                                    [ //TBD
                                         'id' => 53,
                                         'parent_id' => 44,
                                         'name' => 'Analis Kebijakan',
@@ -608,7 +608,7 @@ class PositionSeeder extends Seeder
                                         'horizontal_order' => 2,
                                         'child' => [
                                             // child of Kepala Bagian Dukungan Administrasi
-                                            [   //TBD
+                                            [ //TBD
                                                 'id' => 55,
                                                 'parent_id' => 54,
                                                 'name' => 'Arsiparis',
@@ -663,7 +663,7 @@ class PositionSeeder extends Seeder
                         'horizontal_order' => 2,
                         'child' => [
                             // child of Deputi Bidang Dukungan Kebijakan Pembangunan Manusia dan Pemerataan Pembangunan
-                            [   //TBD
+                            [ //TBD
                                 'id' => 58,
                                 'parent_id' => 38,
                                 'name' => 'Analis Kebijakan',
@@ -688,7 +688,7 @@ class PositionSeeder extends Seeder
                                 'horizontal_order' => 2,
                                 'child' => [
                                     // child of Asisten Deputi Penanggulangan Kemiskinan
-                                    [   //TBD
+                                    [ //TBD
                                         'id' => 62,
                                         'parent_id' => 59,
                                         'name' => 'Analis Kebijakan',
@@ -700,7 +700,7 @@ class PositionSeeder extends Seeder
                                         'vertical_order' => 1,
                                         'horizontal_order' => 1,
                                     ],
-                                    [   //TBD
+                                    [ //TBD
                                         'id' => 195,
                                         'parent_id' => 59,
                                         'name' => 'Arsiparis',
@@ -725,7 +725,7 @@ class PositionSeeder extends Seeder
                                         'horizontal_order' => 3,
                                         'child' => [
                                             // child of Kepala Subbagian Dukungan Administrasi
-                                            [   //TBD
+                                            [ //TBD
                                                 'id' => 64,
                                                 'parent_id' => 63,
                                                 'name' => 'Arsiparis',
@@ -766,7 +766,7 @@ class PositionSeeder extends Seeder
                                 'horizontal_order' => 3,
                                 'child' => [
                                     // child of Asisten Deputi Pembangunan Sumber Daya Manusia
-                                    [   //TBD
+                                    [ //TBD
                                         'id' => 66,
                                         'parent_id' => 60,
                                         'name' => 'Analis Kebijakan',
@@ -778,7 +778,7 @@ class PositionSeeder extends Seeder
                                         'vertical_order' => 1,
                                         'horizontal_order' => 1,
                                     ],
-                                    [   //TBD
+                                    [ //TBD
                                         'id' => 196,
                                         'parent_id' => 60,
                                         'name' => 'Arsiparis',
@@ -829,7 +829,7 @@ class PositionSeeder extends Seeder
                                 'horizontal_order' => 4,
                                 'child' => [
                                     // child of Asisten Deputi Pemberdayaan Masyarakat dan Penanggulangan Bencana
-                                    [   //TBD
+                                    [ //TBD
                                         'id' => 69,
                                         'parent_id' => 61,
                                         'name' => 'Analis Kebijakan',
@@ -854,7 +854,7 @@ class PositionSeeder extends Seeder
                                         'horizontal_order' => 2,
                                         'child' => [
                                             // child of Kepala Bagian Dukungan Administrasi
-                                            [   //TBD
+                                            [ //TBD
                                                 'id' => 71,
                                                 'parent_id' => 70,
                                                 'name' => 'Arsiparis',
@@ -909,7 +909,7 @@ class PositionSeeder extends Seeder
                         'horizontal_order' => 3,
                         'child' => [
                             // child of Deputi Bidang Dukungan Kebijakan Pemerintahan dan Wawasan Kebangsaan
-                            [   //TBD
+                            [ //TBD
                                 'id' => 74,
                                 'parent_id' => 39,
                                 'name' => 'Analis Kebijakan',
@@ -934,7 +934,7 @@ class PositionSeeder extends Seeder
                                 'horizontal_order' => 2,
                                 'child' => [
                                     // child of Asisten Deputi Hubungan Luar Negeri
-                                    [   //TBD
+                                    [ //TBD
                                         'id' => 79,
                                         'parent_id' => 75,
                                         'name' => 'Analis Kebijakan',
@@ -946,7 +946,7 @@ class PositionSeeder extends Seeder
                                         'vertical_order' => 1,
                                         'horizontal_order' => 1,
                                     ],
-                                    [   //TBD
+                                    [ //TBD
                                         'id' => 197,
                                         'parent_id' => 75,
                                         'name' => 'Arsiparis',
@@ -971,7 +971,7 @@ class PositionSeeder extends Seeder
                                         'horizontal_order' => 3,
                                         'child' => [
                                             // child of Kepala Subbagian Dukungan Administrasi
-                                            [   //TBD
+                                            [ //TBD
                                                 'id' => 82,
                                                 'parent_id' => 80,
                                                 'name' => 'Arsiparis',
@@ -1024,7 +1024,7 @@ class PositionSeeder extends Seeder
                                 'horizontal_order' => 3,
                                 'child' => [
                                     // child of Asisten Deputi Politik, Hukum, dan Otonomi Daerah
-                                    [   //TBD
+                                    [ //TBD
                                         'id' => 84,
                                         'parent_id' => 76,
                                         'name' => 'Analis Kebijakan',
@@ -1036,7 +1036,7 @@ class PositionSeeder extends Seeder
                                         'vertical_order' => 1,
                                         'horizontal_order' => 1,
                                     ],
-                                    [   //TBD
+                                    [ //TBD
                                         'id' => 198,
                                         'parent_id' => 76,
                                         'name' => 'Arsiparis',
@@ -1061,7 +1061,7 @@ class PositionSeeder extends Seeder
                                         'horizontal_order' => 3,
                                         'child' => [
                                             // child of Kepala Subbagian Dukungan Administrasi
-                                            [   //TBD
+                                            [ //TBD
                                                 'id' => 87,
                                                 'parent_id' => 85,
                                                 'name' => 'Arsiparis',
@@ -1114,7 +1114,7 @@ class PositionSeeder extends Seeder
                                 'horizontal_order' => 4,
                                 'child' => [
                                     // child of Asisten Deputi Wawasan Kebangsaan, Pertahanan, dan Keamanan
-                                    [   //TBD
+                                    [ //TBD
                                         'id' => 89,
                                         'parent_id' => 77,
                                         'name' => 'Analis Kebijakan',
@@ -1126,7 +1126,7 @@ class PositionSeeder extends Seeder
                                         'vertical_order' => 1,
                                         'horizontal_order' => 1,
                                     ],
-                                    [   //TBD
+                                    [ //TBD
                                         'id' => 199,
                                         'parent_id' => 77,
                                         'name' => 'Arsiparis',
@@ -1151,7 +1151,7 @@ class PositionSeeder extends Seeder
                                         'horizontal_order' => 3,
                                         'child' => [
                                             // child of Kepala Subbagian Dukungan Administrasi
-                                            [   //TBD
+                                            [ //TBD
                                                 'id' => 91,
                                                 'parent_id' => 90,
                                                 'name' => 'Arsiparis',
@@ -1192,7 +1192,7 @@ class PositionSeeder extends Seeder
                                 'horizontal_order' => 5,
                                 'child' => [
                                     // child of Asisten Deputi Tata Kelola Pemerintahan
-                                    [   //TBD
+                                    [ //TBD
                                         'id' => 93,
                                         'parent_id' => 78,
                                         'name' => 'Analis Kebijakan',
@@ -1217,7 +1217,7 @@ class PositionSeeder extends Seeder
                                         'horizontal_order' => 2,
                                         'child' => [
                                             // child of Kepala Bagian Dukungan Administrasi
-                                            [   //TBD
+                                            [ //TBD
                                                 'id' => 95,
                                                 'parent_id' => 94,
                                                 'name' => 'Arsiparis',
@@ -1273,7 +1273,7 @@ class PositionSeeder extends Seeder
                                 'horizontal_order' => 1,
                                 'child' => [
                                     // child of Kepala Biro Protokol dan Kerumahtanggaan
-                                    [   //TBD
+                                    [ //TBD
                                         'id' => 102,
                                         'parent_id' => 97,
                                         'name' => 'Arsiparis',
@@ -1285,7 +1285,7 @@ class PositionSeeder extends Seeder
                                         'vertical_order' => 1,
                                         'horizontal_order' => 1,
                                     ],
-                                    [   //TBD
+                                    [ //TBD
                                         'id' => 103,
                                         'parent_id' => 97,
                                         'name' => 'Pranata Humas',
@@ -1732,7 +1732,7 @@ class PositionSeeder extends Seeder
                                 'horizontal_order' => 2,
                                 'child' => [
                                     // child of Kepala Biro Pers, Media, dan Informasi
-                                    [   //TBD
+                                    [ //TBD
                                         'id' => 136,
                                         'parent_id' => 98,
                                         'name' => 'Pranata Humas',
@@ -1744,7 +1744,7 @@ class PositionSeeder extends Seeder
                                         'vertical_order' => 1,
                                         'horizontal_order' => 1,
                                     ],
-                                    [   //TBD
+                                    [ //TBD
                                         'id' => 200,
                                         'parent_id' => 98,
                                         'name' => 'Pranata Komputer',
@@ -1756,7 +1756,7 @@ class PositionSeeder extends Seeder
                                         'vertical_order' => 1,
                                         'horizontal_order' => 2,
                                     ],
-                                    [   //TBD
+                                    [ //TBD
                                         'id' => 201,
                                         'parent_id' => 98,
                                         'name' => 'Arsiparis',
@@ -1768,7 +1768,7 @@ class PositionSeeder extends Seeder
                                         'vertical_order' => 1,
                                         'horizontal_order' => 3,
                                     ],
-                                    [   //TBD
+                                    [ //TBD
                                         'id' => 202,
                                         'parent_id' => 98,
                                         'name' => 'Penerjemah',
@@ -1855,7 +1855,7 @@ class PositionSeeder extends Seeder
                                 'horizontal_order' => 3,
                                 'child' => [
                                     // child of Kepala Biro Perencanaan dan Keuangan
-                                    [   //TBD
+                                    [ //TBD
                                         'id' => 142,
                                         'parent_id' => 99,
                                         'name' => 'Analis Pengelola Keuangan APBN',
@@ -1879,9 +1879,9 @@ class PositionSeeder extends Seeder
                                                 'vertical_order' => 1,
                                                 'horizontal_order' => 1,
                                             ],
-                                        ]
+                                        ],
                                     ],
-                                    [   //TBD
+                                    [ //TBD
                                         'id' => 203,
                                         'parent_id' => 99,
                                         'name' => 'Analis Anggaran',
@@ -1893,7 +1893,7 @@ class PositionSeeder extends Seeder
                                         'vertical_order' => 1,
                                         'horizontal_order' => 2,
                                     ],
-                                    [   //TBD
+                                    [ //TBD
                                         'id' => 204,
                                         'parent_id' => 99,
                                         'name' => 'Arsiparis',
@@ -1968,7 +1968,7 @@ class PositionSeeder extends Seeder
                                 'horizontal_order' => 4,
                                 'child' => [
                                     // child of Kepala Biro Tata Usaha, Teknologi Informasi dan Kepegawaian
-                                    [   //TBD
+                                    [ //TBD
                                         'id' => 147,
                                         'parent_id' => 100,
                                         'name' => 'Analis SDM Aparatur',
@@ -1979,7 +1979,7 @@ class PositionSeeder extends Seeder
                                         'entity' => 2,
                                         'vertical_order' => 1,
                                         'horizontal_order' => 1,
-                                        'child' => [   //TBD
+                                        'child' => [ //TBD
                                             [
                                                 'id' => 208,
                                                 'parent_id' => 147,
@@ -1994,7 +1994,7 @@ class PositionSeeder extends Seeder
                                             ],
                                         ],
                                     ],
-                                    [   //TBD
+                                    [ //TBD
                                         'id' => 206,
                                         'parent_id' => 100,
                                         'name' => 'Pranata Komputer',
@@ -2006,7 +2006,7 @@ class PositionSeeder extends Seeder
                                         'vertical_order' => 1,
                                         'horizontal_order' => 2,
                                     ],
-                                    [   //TBD
+                                    [ //TBD
                                         'id' => 207,
                                         'parent_id' => 100,
                                         'name' => 'Arsiparis',
@@ -2043,7 +2043,7 @@ class PositionSeeder extends Seeder
                                         'horizontal_order' => 5,
                                         'child' => [
                                             // child of Kepala Bagian Tata Usaha
-                                            [   //TBD
+                                            [ //TBD
                                                 'id' => 150,
                                                 'parent_id' => 149,
                                                 'name' => 'Arsiparis',
@@ -2159,7 +2159,7 @@ class PositionSeeder extends Seeder
                                 'horizontal_order' => 5,
                                 'child' => [
                                     // child of Kepala Biro Umum
-                                    [   //TBD
+                                    [ //TBD
                                         'id' => 158,
                                         'parent_id' => 101,
                                         'name' => 'Arsiparis',
@@ -2184,7 +2184,7 @@ class PositionSeeder extends Seeder
                                         'horizontal_order' => 2,
                                         'child' => [
                                             // child of Kepala Bagian Perlengkapan dan Layanan Pengadaan
-                                            [   //TBD
+                                            [ //TBD
                                                 'id' => 162,
                                                 'parent_id' => 159,
                                                 'name' => 'Pengelola Pengadaan Barang / Jasa',
@@ -2699,7 +2699,7 @@ class PositionSeeder extends Seeder
                                 'vertical_order' => 1,
                                 'horizontal_order' => 3,
                             ],
-                        ]
+                        ],
                     ],
                     [
                         'id' => 212,
@@ -2809,7 +2809,7 @@ class PositionSeeder extends Seeder
                                 'vertical_order' => 1,
                                 'horizontal_order' => 9,
                             ],
-                        ]
+                        ],
                     ],
                     [
                         'id' => 220,
@@ -2835,7 +2835,7 @@ class PositionSeeder extends Seeder
                                 'vertical_order' => 1,
                                 'horizontal_order' => 1,
                             ],
-                        ]
+                        ],
                     ],
                     [
                         'id' => 221,
@@ -2869,9 +2869,10 @@ class PositionSeeder extends Seeder
 
         $positions = $this->flattenArray($positions);
         DB::table('positions')->insertTs($positions);
+        $this->insertOutsourcePosition();
     }
 
-    function flattenArray($array, &$result = [])
+    public function flattenArray($array, &$result = [])
     {
         foreach ($array as $item) {
             // Remove 'child' key if it exists and add current item to the result
@@ -2887,5 +2888,27 @@ class PositionSeeder extends Seeder
             }
         }
         return $result;
+    }
+
+    private function insertOutsourcePosition()
+    {
+        $positions = [
+            'Pengemudi', 'Petugas Kebersihan Gedung', 'Petugas Perawatan Kolam', 'Petugas Taman', 'Pramusaji/Pramubakti', 'Teknisi Jaringan', 'Teknisi Komputer', 'Teknisi Mekanikal dan Elektrikal', 'Teknisi Fotocopy', 'Teknisi Road Blocker', 'Teknisi Lift',
+        ];
+        $data = array();
+        foreach ($positions as $item) {
+            $array = [
+                'name' => $item,
+                'available' => 0,
+                'filled' => 0,
+                'children' => 0,
+                'type' => 3,
+                'entity' => 1,
+                'vertical_order' => 0,
+                'horizontal_order' => 0,
+            ];
+            array_push($data, $array);
+        }
+        DB::table('positions')->insertTs($data);
     }
 }

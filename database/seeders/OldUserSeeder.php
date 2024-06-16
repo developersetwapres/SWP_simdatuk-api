@@ -154,9 +154,9 @@ class OldUserSeeder extends Seeder
             ";
 
             $asn = DB::select($asn);
-            foreach ($asn as $item) {
-                $item->photo_profile = $this->getDocumentExist($item->photo_profile);
-            }
+            // foreach ($asn as $item) {
+            //     $item->photo_profile = $this->getDocumentExist($item->photo_profile);
+            // }
             DB::table('users')->insertTs(json_decode(json_encode($asn), true));
 
             // Get pegawai perbantuan
@@ -248,63 +248,72 @@ class OldUserSeeder extends Seeder
             $outsource = "
                 SELECT
                     CASE
-                        WHEN email = NULL THEN NULL
-                        WHEN email = '' THEN NULL
-                        WHEN email = '-' THEN NULL
-                        ELSE LOWER(email)
+                        WHEN db_lama_outsource.email = NULL THEN NULL
+                        WHEN db_lama_outsource.email = '' THEN NULL
+                        WHEN db_lama_outsource.email = '-' THEN NULL
+                        ELSE LOWER(db_lama_outsource.email)
                     END AS email,
-                    nm_outsorce AS name,
-                    id_outsorce AS employee_id_number,
-                    tmp_lahir AS place_of_birth,
-                    tgl_lahir AS date_of_birth,
+                    db_lama_outsource.nm_outsorce AS name,
+                    db_lama_outsource.id_outsorce AS employee_id_number,
+                    db_lama_outsource.tmp_lahir AS place_of_birth,
+                    db_lama_outsource.tgl_lahir AS date_of_birth,
                     CASE
-                        WHEN agama = 'Islam' THEN '1'
-                        WHEN agama = 'Protestan' THEN '2'
-                        WHEN agama = 'Katholik' THEN '3'
+                        WHEN db_lama_outsource.agama = 'Islam' THEN '1'
+                        WHEN db_lama_outsource.agama = 'Protestan' THEN '2'
+                        WHEN db_lama_outsource.agama = 'Katholik' THEN '3'
                         ELSE NULL
                     END AS religion,
                     CASE
-                        WHEN kelamin = 'Laki-laki' THEN '1'
-                        WHEN kelamin = 'Perempuan' THEN '0'
+                        WHEN db_lama_outsource.kelamin = 'Laki-laki' THEN '1'
+                        WHEN db_lama_outsource.kelamin = 'Perempuan' THEN '0'
                         ELSE NULL
                     END AS gender,
                     CASE
-                        WHEN jns_outsorce = 'outsorce' THEN '19'
-                        WHEN jns_outsorce = 'rekanan' THEN '20'
+                        WHEN db_lama_outsource.jns_outsorce = 'outsorce' THEN '19'
+                        WHEN db_lama_outsource.jns_outsorce = 'rekanan' THEN '20'
                         ELSE NULL
                     END AS employment_type_id,
+                    db_baru_position.id as position_id,
                     '1' AS organization_id,
                     CASE
-                        WHEN status = 'Aktif' THEN 1
-                        WHEN status = 'Pensiun' THEN 2
-                        WHEN status = 'Berhenti' THEN 3
-                        WHEN status = 'Meninggal' THEN 4
+                        WHEN db_lama_outsource.status = 'Aktif' THEN 1
+                        WHEN db_lama_outsource.status = 'Pensiun' THEN 2
+                        WHEN db_lama_outsource.status = 'Berhenti' THEN 3
+                        WHEN db_lama_outsource.status = 'Meninggal' THEN 4
                     END AS employment_status,
                     CASE
-                        WHEN pddk = 'Akademi/D3/S.Muda' THEN '5'
-                        WHEN pddk = 'Diploma I/II' THEN '4'
-                        WHEN pddk = 'Diploma IV/Strata I' THEN '6'
-                        WHEN pddk = 'SD/Sederajat' THEN '1'
-                        WHEN pddk = 'SLTA/Sederajat' THEN '3'
-                        WHEN pddk = 'SLTP/Sederajat' THEN '2'
-                        WHEN pddk = 'Strata II' THEN '7'
-                        WHEN pddk = 'Strata III' THEN '8'
+                        WHEN db_lama_outsource.pddk = 'Akademi/D3/S.Muda' THEN '5'
+                        WHEN db_lama_outsource.pddk = 'Diploma I/II' THEN '4'
+                        WHEN db_lama_outsource.pddk = 'Diploma IV/Strata I' THEN '6'
+                        WHEN db_lama_outsource.pddk = 'SD/Sederajat' THEN '1'
+                        WHEN db_lama_outsource.pddk = 'SLTA/Sederajat' THEN '3'
+                        WHEN db_lama_outsource.pddk = 'SLTP/Sederajat' THEN '2'
+                        WHEN db_lama_outsource.pddk = 'Strata II' THEN '7'
+                        WHEN db_lama_outsource.pddk = 'Strata III' THEN '8'
                         ELSE NULL
                     END AS education_level,
-                    IF(nm_sekolah = '', jurusan, nm_sekolah) AS education_name,
+                    IF(db_lama_outsource.nm_sekolah = '', db_lama_outsource.jurusan, db_lama_outsource.nm_sekolah) AS education_name,
                     CASE
-                        WHEN thn_lulus = '' THEN NULL
-                        WHEN thn_lulus < 1900 THEN NULL
-                        ELSE thn_lulus
+                        WHEN db_lama_outsource.thn_lulus = '' THEN NULL
+                        WHEN db_lama_outsource.thn_lulus < 1900 THEN NULL
+                        ELSE db_lama_outsource.thn_lulus
                     END AS education_year,
-                    no_ktp AS id_number,
-                    no_kk AS family_registration_number,
-                    alamat AS current_address,
-                    ket_jabatan AS description,
+                    db_lama_outsource.no_ktp AS id_number,
+                    db_lama_outsource.no_kk AS family_registration_number,
+                    db_lama_outsource.alamat AS current_address,
+                    db_lama_outsource.ket_jabatan AS description,
                     '3' AS type,
                     CURRENT_TIMESTAMP AS created_at
                 FROM
-                    simdatuk_dump.tbl_3outsorce
+                    simdatuk_dump.tbl_3outsorce as db_lama_outsource
+                LEFT JOIN
+                    simdatuk.positions as db_baru_position
+                ON
+                    db_lama_outsource.jabatan = db_baru_position.name
+                WHERE
+                    db_baru_position.name
+                IN
+                    ('Pengemudi', 'Petugas Kebersihan Gedung', 'Petugas Perawatan Kolam', 'Petugas Taman', 'Pramusaji/Pramubakti', 'Teknisi Jaringan', 'Teknisi Komputer', 'Teknisi Mekanikal dan Elektrikal', 'Teknisi Fotocopy', 'Teknisi Road Blocker', 'Teknisi Lift')
             ";
 
             $outsource = DB::select($outsource);
