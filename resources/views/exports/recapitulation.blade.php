@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-
     <style type="text/css">
         html * {
             font-family: Inter !important;
@@ -116,7 +114,7 @@
 
     <center>
         <div class="title">
-            Rekapitulasi Pegawai Sekretariat Wakil Presiden RI
+            {{$title}}
         </div>
         <div class="sub-title">
             Per Tanggal : {{$date}}
@@ -132,5 +130,4 @@
         @endforeach
     </table>
 </body>
-
 </html>

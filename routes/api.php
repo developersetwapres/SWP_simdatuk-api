@@ -9,6 +9,7 @@ use App\Http\Controllers\EchelonController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmploymentTypeController;
 use App\Http\Controllers\ExportController;
+use App\Http\Controllers\ExportRecapitulationController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\GradeHistoryController;
 use App\Http\Controllers\GroupController;
@@ -211,13 +212,10 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::prefix('export')->group(function () {
-        Route::get('/recapitulations', [ExportController::class, 'recapitulations']);
+        Route::get('/recapitulations/{type}', [ExportRecapitulationController::class, 'recapitulation']);
         Route::get('/employees', [ExportController::class, 'employees']);
         Route::get('/employees/{id}', [ExportController::class, 'detailEmployee']);
         Route::get('/employees-zip', [ExportController::class, 'zipDetailEmployee']);
         Route::get('/preview', [ExportController::class, 'exportExcelsPreview']);
-        Route::get('/rekapitulasi', [ExportController::class, 'rekapitulasi']);
-        Route::get('/rekapitulasi-non-asn', [ExportController::class, 'rekapitulasiNonASN']);
-        Route::get('/rekapitulasi-asn', [ExportController::class, 'rekapitulasiASN']);
     });
 });

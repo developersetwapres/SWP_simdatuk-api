@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Exports\employee;
-use App\Http\Requests\Export\ExportZipEmployeesRequest;
 use App\Http\Requests\Export\ExportEmployeesRequest;
+use App\Http\Requests\Export\ExportZipEmployeesRequest;
 use App\Http\Requests\Export\PreviewExportEmployeesRequest;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
@@ -12,11 +12,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Support\Facades\Log;
 use PhpOffice\PhpSpreadsheet\Writer\Csv;
 
 /**
- * @group Export Data
+ * @group Export
  */
 class ExportController extends Controller
 {
@@ -31,316 +30,11 @@ class ExportController extends Controller
     }
 
     /**
-     * Export Recapitulation Data
-     *
-     * Export recapitulation data to .CSV, .XLSX and .PDF.
-     * @group Export Data
-     * Below are the endpoints for export recapitulation, list of employees and detail of employees to .CSV, .XLSX and .PDF.
-     * @authenticated
-     */
-    public function recapitulations()
-    {
-        $tmp = sys_get_temp_dir();
-
-        $pdf = Pdf::loadview('exports/recap-employee', [
-            'date' => Carbon::now()
-                ->timezone('Asia/Jakarta')
-                ->locale('id')
-                ->isoFormat('D MMMM Y'),
-            'data' => [
-                [
-                    'title' => 'Pejabat Pimpinan',
-                    'body' => 'Total : 52',
-                    'type' => 1,
-                ],
-                [
-                    'title' => 'Lorem Ipsum Dolor Sit Amet',
-                    'body' => '23',
-                    'type' => 2,
-                ],
-                [
-                    'title' => 'Lorem Ipsum Dolor Sit Amet',
-                    'body' => '23',
-                    'type' => 2,
-                ],
-                [
-                    'title' => 'Lorem Ipsum Dolor Sit Amet',
-                    'body' => '23',
-                    'type' => 2,
-                ],
-                [
-                    'title' => 'Lorem Ipsum Dolor Sit Amet',
-                    'body' => '23',
-                    'type' => 2,
-                ],
-                [
-                    'title' => 'Pejabat Pelaksana',
-                    'body' => 'Total : 96',
-                    'type' => 1,
-                ],
-                [
-                    'title' => 'Lorem Ipsum Dolor Sit Amet',
-                    'body' => '23',
-                    'type' => 2,
-                ],
-                [
-                    'title' => 'Lorem Ipsum Dolor Sit Amet',
-                    'body' => '23',
-                    'type' => 2,
-                ],
-                [
-                    'title' => 'Lorem Ipsum Dolor Sit Amet',
-                    'body' => '23',
-                    'type' => 2,
-                ],
-                [
-                    'title' => 'Lorem Ipsum Dolor Sit Amet',
-                    'body' => '23',
-                    'type' => 2,
-                ],
-                [
-                    'title' => 'Pejabat Fungsional Keahlian',
-                    'body' => 'Total : 14',
-                    'type' => 1,
-                ],
-                [
-                    'title' => 'Lorem Ipsum Dolor Sit Amet',
-                    'body' => '23',
-                    'type' => 2,
-                ],
-                [
-                    'title' => 'Lorem Ipsum Dolor Sit Amet',
-                    'body' => '23',
-                    'type' => 2,
-                ],
-                [
-                    'title' => 'Lorem Ipsum Dolor Sit Amet',
-                    'body' => '23',
-                    'type' => 2,
-                ],
-                [
-                    'title' => 'Lorem Ipsum Dolor Sit Amet',
-                    'body' => '23',
-                    'type' => 2,
-                ],
-                [
-                    'title' => 'Pejabat Fungsional Keterampilan',
-                    'body' => 'Total : 22',
-                    'type' => 1,
-                ],
-                [
-                    'title' => 'Lorem Ipsum Dolor Sit Amet',
-                    'body' => '23',
-                    'type' => 2,
-                ],
-                [
-                    'title' => 'Lorem Ipsum Dolor Sit Amet',
-                    'body' => '23',
-                    'type' => 2,
-                ],
-                [
-                    'title' => 'Lorem Ipsum Dolor Sit Amet',
-                    'body' => '23',
-                    'type' => 2,
-                ],
-                [
-                    'title' => 'Lorem Ipsum Dolor Sit Amet',
-                    'body' => '23',
-                    'type' => 2,
-                ],
-                [
-                    'title' => 'Pejabat Kemensetneg Yang Diperbantukan di Setwapres',
-                    'body' => 'Total : 66',
-                    'type' => 1,
-                ],
-                [
-                    'title' => 'Lorem Ipsum Dolor Sit Amet',
-                    'body' => '23',
-                    'type' => 2,
-                ],
-                [
-                    'title' => 'Lorem Ipsum Dolor Sit Amet',
-                    'body' => '23',
-                    'type' => 2,
-                ],
-                [
-                    'title' => 'Aparatur Sipil Negara (ASN) Aktif + Perbantuan TNI/POLRI Pelaksana',
-                    'body' => 'Total : 99',
-                    'type' => 3,
-                ],
-                [
-                    'title' => 'Lorem Ipsum',
-                    'body' => '3',
-                    'type' => 1,
-                ],
-                [
-                    'title' => 'Lorem Ipsum',
-                    'body' => '2',
-                    'type' => 1,
-                ],
-                [
-                    'title' => 'Lorem Ipsum',
-                    'body' => '1',
-                    'type' => 1,
-                ],
-                [
-                    'title' => 'Aparatur Sipil Negara (ASN) Non Aktif',
-                    'body' => 'Total : 6',
-                    'type' => 3,
-                ],
-                [
-                    'title' => 'Lorem Ipsum',
-                    'body' => 'Total : 88',
-                    'type' => 1,
-                ],
-                [
-                    'title' => 'Lorem Ipsum Dolor Sit Amet',
-                    'body' => '23',
-                    'type' => 2,
-                ],
-                [
-                    'title' => 'Lorem Ipsum Dolor Sit Amet',
-                    'body' => '23',
-                    'type' => 2,
-                ],
-                [
-                    'title' => 'Lorem Ipsum Dolor Sit Amet',
-                    'body' => '23',
-                    'type' => 2,
-                ],
-                [
-                    'title' => 'Lorem Ipsum Dolor Sit Amet',
-                    'body' => '23',
-                    'type' => 2,
-                ],
-                [
-                    'title' => 'Lorem Ipsum Dolor Sit Amet',
-                    'body' => '23',
-                    'type' => 2,
-                ],
-                [
-                    'title' => 'Lorem Ipsum Dolor Sit Amet',
-                    'body' => '23',
-                    'type' => 2,
-                ],
-                [
-                    'title' => 'Lorem Ipsum Dolor Sit Amet',
-                    'body' => '23',
-                    'type' => 2,
-                ],
-                [
-                    'title' => 'Lorem Ipsum Dolor Sit Amet',
-                    'body' => '23',
-                    'type' => 2,
-                ],
-                [
-                    'title' => 'Lorem Ipsum Dolor Sit Amet',
-                    'body' => '23',
-                    'type' => 2,
-                ],
-                [
-                    'title' => 'Lorem Ipsum',
-                    'body' => 'Total : 77',
-                    'type' => 1,
-                ],
-                [
-                    'title' => 'Lorem Ipsum Dolor Sit Amet',
-                    'body' => '23',
-                    'type' => 2,
-                ],
-                [
-                    'title' => 'Lorem Ipsum Dolor Sit Amet',
-                    'body' => '23',
-                    'type' => 2,
-                ],
-                [
-                    'title' => 'Non Aparatur Sipil Negara (Non ASN) + Tim',
-                    'body' => 'Total : 4',
-                    'type' => 3,
-                ],
-                [
-                    'title' => 'Lorem Ipsum',
-                    'body' => 'Total : 88',
-                    'type' => 1,
-                ],
-                [
-                    'title' => 'Lorem Ipsum Dolor Sit Amet',
-                    'body' => '23',
-                    'type' => 2,
-                ],
-                [
-                    'title' => 'Lorem Ipsum Dolor Sit Amet',
-                    'body' => '23',
-                    'type' => 2,
-                ],
-                [
-                    'title' => 'Lorem Ipsum Dolor Sit Amet',
-                    'body' => '23',
-                    'type' => 2,
-                ],
-                [
-                    'title' => 'Lorem Ipsum Dolor Sit Amet',
-                    'body' => '23',
-                    'type' => 2,
-                ],
-                [
-                    'title' => 'Lorem Ipsum Dolor Sit Amet',
-                    'body' => '23',
-                    'type' => 2,
-                ],
-                [
-                    'title' => 'Lorem Ipsum Dolor Sit Amet',
-                    'body' => '23',
-                    'type' => 2,
-                ],
-                [
-                    'title' => 'Lorem Ipsum Dolor Sit Amet',
-                    'body' => '23',
-                    'type' => 2,
-                ],
-                [
-                    'title' => 'Lorem Ipsum Dolor Sit Amet',
-                    'body' => '23',
-                    'type' => 2,
-                ],
-                [
-                    'title' => 'Lorem Ipsum',
-                    'body' => 'Total : 77',
-                    'type' => 1,
-                ],
-                [
-                    'title' => 'Lorem Ipsum Dolor Sit Amet',
-                    'body' => '23',
-                    'type' => 2,
-                ],
-                [
-                    'title' => 'Lorem Ipsum Dolor Sit Amet',
-                    'body' => '23',
-                    'type' => 2,
-                ],
-                [
-                    'title' => 'Tenaga Outsourcing dan Non Outsourcing',
-                    'body' => 'Total : 193',
-                    'type' => 3,
-                ],
-            ],
-        ]);
-        $pdf->set_option('isHtml5ParserEnabled', true);
-        $pdf->set_paper("A4", "portrait");
-        $pdf->set_option('isRemoteEnabled', true);
-        $pdf->set_option('fontDir', $tmp);
-        $pdf->set_option('fontCache', $tmp);
-        $pdf->set_option('tempDir', $tmp);
-        return $pdf->download('recap-employee.pdf');
-    }
-
-
-    /**
      * Export Detail Employee
      *
      * Export detail employee data to .CSV, .XLSX and .PDF.
      * @urlParam id Refers to the ID of Employee. Example: 1
-     * @group Export Data
+     * @group Export
      * @authenticated
      */
     public function detailEmployee($employeeId = null)
@@ -465,12 +159,12 @@ class ExportController extends Controller
         $userCredit->select('ucs.position', 'ucs.period', 'ucs.year', 'ucs.last_credit_score');
         $userCredit = $userCredit->get();
         $userCreditData = array();
-        foreach ($userCredit as $credit){
+        foreach ($userCredit as $credit) {
             $userCreditData[] = [
                 'position' => $credit->position,
                 'period' => $credit->period,
                 'year' => $credit->year,
-                'credit_score' => $credit->last_credit_score
+                'credit_score' => $credit->last_credit_score,
             ];
         }
 
@@ -791,7 +485,7 @@ class ExportController extends Controller
                 'Tahun Lulus' => ($mainEducation->year_of_graduation ?? ''),
                 'No. Karpeg/No. Karis/No. Karsu' => $user->wife_id_card_number . '/' . $user->husband_id_card_number,
                 'Masa Kerja Keseluruhan' => 'Lorem ipsum',
-                'Masa Kerja Golongan' => $gradeDate->y.' Tahun'. $gradeDate->m. ' Bulan'. $gradeDate->d. ' Hari',
+                'Masa Kerja Golongan' => $gradeDate->y . ' Tahun' . $gradeDate->m . ' Bulan' . $gradeDate->d . ' Hari',
                 'NPWP' => $user->id_tax,
                 'Status Pegawai' => ($user->employment_status ? 'Aktif' : 'Tidak Aktif'),
                 'Nomor NIK' => $user->id_number,
@@ -842,7 +536,7 @@ class ExportController extends Controller
      * Export Detail Employee
      *
      * Export detail of multiple employees data to .PDF inside a zip file.
-     * @group Export Data
+     * @group Export
      * @bodyParam organization int[] list of organization's ids. Example [1,2]
      * @bodyParam employee_type int[] list of employee's type. Example [1,2]
      * @bodyParam echelons int[] list of echelons' id. Example [1,2]
@@ -947,49 +641,12 @@ class ExportController extends Controller
             return response()->json(['error' => 'Zip file not found'], 404);
         }
     }
-    public function rekapitulasi()
-    {
-        $tmp = sys_get_temp_dir();
-        $pdf = pdf::loadView('exports/rekapitulasi', []);
-        $pdf->setOption('isHtml5ParserEnabled', true);
-        $pdf->setPaper("A4", "portrait");
-        $pdf->setOption('isRemoteEnabled', true);
-        $pdf->set_option('fontDir', $tmp);
-        $pdf->set_option('fontCache', $tmp);
-        $pdf->set_option('tempDir', $tmp);
-        return $pdf->download('rekapitulasi-pdf.pdf');
-    }
 
-    public function rekapitulasiNonASN()
-    {
-        $tmp = sys_get_temp_dir();
-        $pdf = pdf::loadView('exports/rekapitulasi-non-asn', []);
-        $pdf->setOption('isHtml5ParserEnabled', true);
-        $pdf->setPaper("A4", "portrait");
-        $pdf->setOption('isRemoteEnabled', true);
-        $pdf->set_option('fontDir', $tmp);
-        $pdf->set_option('fontCache', $tmp);
-        $pdf->set_option('tempDir', $tmp);
-        return $pdf->download('rekapitulasi-non-asn-pdf.pdf');
-    }
-
-    public function rekapitulasiASN()
-    {
-        $tmp = sys_get_temp_dir();
-        $pdf = pdf::loadView('exports/rekapitulasi-asn', []);
-        $pdf->setOption('isHtml5ParserEnabled', true);
-        $pdf->setPaper("A4", "portrait");
-        $pdf->setOption('isRemoteEnabled', true);
-        $pdf->set_option('fontDir', $tmp);
-        $pdf->set_option('fontCache', $tmp);
-        $pdf->set_option('tempDir', $tmp);
-        return $pdf->download('rekapitulasi-asn-pdf.pdf');
-    }
     /**
      * Export List of Employees
      *
      * Export list of employees data to .CSV, .XLSX
-     * @group Export Data
+     * @group Export
      * @bodyParam extension string Indicates exported file extension. Example xlsx
      * @bodyParam organization int[] list of organization's ids. Example [1,2]
      * @bodyParam employee_type int[] list of employee's type. Example [1,2]
@@ -1062,7 +719,7 @@ class ExportController extends Controller
             ->leftJoin('user_targets', 'users.id', '=', 'user_targets.user_id')
             ->leftJoin('targets', 'user_targets.target_id', '=', 'targets.id')
             ->select('users.id');
-        if (isset($request->organization)){
+        if (isset($request->organization)) {
             $users->whereIn('users.organization_id', $request->organization);
         }
         if (isset($request->age_range)) {
@@ -1096,25 +753,25 @@ class ExportController extends Controller
         if (isset($request->gender)) {
             $users->whereIn('users.gender', $request->gender);
         }
-        if (isset($request->credit_period)){
+        if (isset($request->credit_period)) {
             $users->where('user_credit_score.period', $request->credit_period);
         }
-        if (isset($request->credit_year)){
+        if (isset($request->credit_year)) {
             $users->where('user_credit_score.year', $request->credit_year);
         }
-        if (isset($request->target_period)){
+        if (isset($request->target_period)) {
             $users->where('targets.appraisal_period', $request->target_period);
         }
-        if (isset ($request->target_year)){
+        if (isset($request->target_year)) {
             $users->where('targets.period_year', $request->target_year);
         }
-        if (isset ($request->work_behavior_rating )){
+        if (isset($request->work_behavior_rating)) {
             $users->where('user_targets.work_behavior_rating', $request->work_behavior_rating);
         }
-        if (isset($request->employee_performance_predicate)){
+        if (isset($request->employee_performance_predicate)) {
             $users->where('user_targets.employee_performance_predicate', $request->employee_performance_predicate);
         }
-        if (isset($request->organizational_performance_achievement)){
+        if (isset($request->organizational_performance_achievement)) {
             $users->where('user_targets.organizational_performance_achievement', $request->organizational_performance_achievement);
         }
         if (isset($request->marital_status)) {
@@ -1172,56 +829,56 @@ class ExportController extends Controller
         $toggleFieldBio['isAssessment'] = $request->isAssessment == 1;
         $toggleFieldBio['isCompetency'] = $request->isCompetency == 1;
         $toggleFieldBio['isTalentPool'] = $request->isTalentPool == 1;
-        if ($request->extension == "csv"){
-            return Excel::download(new employee($toggleFieldBio, $userIds), 'Employees-' . Carbon::now() . '.csv',  \Maatwebsite\Excel\Excel::CSV);
-        }else if ($request->extension == "xlsx"){
-            return Excel::download(new employee($toggleFieldBio, $userIds), 'Employees-' . Carbon::now() . '.xlsx',  \Maatwebsite\Excel\Excel::XLSX);
-        }else if ($request->extension == "pdf"){
+        if ($request->extension == "csv") {
+            return Excel::download(new employee($toggleFieldBio, $userIds), 'Employees-' . Carbon::now() . '.csv', \Maatwebsite\Excel\Excel::CSV);
+        } else if ($request->extension == "xlsx") {
+            return Excel::download(new employee($toggleFieldBio, $userIds), 'Employees-' . Carbon::now() . '.xlsx', \Maatwebsite\Excel\Excel::XLSX);
+        } else if ($request->extension == "pdf") {
             $tmp = sys_get_temp_dir();
             $usersData = DB::table('users');
             if ($toggleFieldBio['isName']) {
                 $usersData->addSelect('users.name');
             }
-            if ($toggleFieldBio['isPosition']){
-                $usersData->leftJoin('positions', 'users.position_id', '=', 'positions.id' );
+            if ($toggleFieldBio['isPosition']) {
+                $usersData->leftJoin('positions', 'users.position_id', '=', 'positions.id');
                 $usersData->addSelect('positions.name as position_name');
             }
 //        if ($toggleField['isPositionDescription']){
 //            //
 //        }
-            if ($toggleFieldBio['isEchelons']){
+            if ($toggleFieldBio['isEchelons']) {
                 $usersData->leftJoin('echelons', 'users.echelon_id', '=', 'echelons.id');
                 $usersData->addSelect('echelons.name as echelons_name');
             }
-            if ($toggleFieldBio['isGrade']){
+            if ($toggleFieldBio['isGrade']) {
                 $usersData->leftJoin('grades as g', 'users.grade_id', '=', 'g.id');
                 $usersData->addSelect('g.name as grade_name');
             }
-            if ($toggleFieldBio['isNip']){
+            if ($toggleFieldBio['isNip']) {
                 $usersData->addSelect(DB::raw("users.employee_id_number"));
             }
-            if ($toggleFieldBio['isBirthPlaceDate']){
+            if ($toggleFieldBio['isBirthPlaceDate']) {
                 $usersData->addSelect('users.place_of_birth', 'users.date_of_birth');
             }
-            if ($toggleFieldBio['isAge']){
+            if ($toggleFieldBio['isAge']) {
                 $usersData->addSelect(DB::raw("TIMESTAMPDIFF(YEAR, users.date_of_birth, CURDATE()) AS age"));
             }
-            if ($toggleFieldBio['isWorkUnit']){
+            if ($toggleFieldBio['isWorkUnit']) {
                 $usersData->addSelect('users.work_unit_id as work_unit');
             }
-            if ($toggleFieldBio['isEmployeeStatus']){
+            if ($toggleFieldBio['isEmployeeStatus']) {
                 $usersData->addSelect('users.employment_status');
             }
-            if ($toggleFieldBio['isReligion']){
+            if ($toggleFieldBio['isReligion']) {
                 $usersData->addSelect('users.religion');
             }
-            if ($toggleFieldBio['isGender']){
+            if ($toggleFieldBio['isGender']) {
                 $usersData->addSelect('users.gender');
             }
-            if ($toggleFieldBio['isMaritalStatus']){
+            if ($toggleFieldBio['isMaritalStatus']) {
                 $usersData->addSelect('users.marital_status');
             }
-            if ($toggleFieldBio['isAgency']){
+            if ($toggleFieldBio['isAgency']) {
                 $usersData->leftJoin('institutions as i', 'users.institution_id', '=', 'i.id');
                 $usersData->addSelect('i.name as institution_name');
             }
@@ -1229,39 +886,39 @@ class ExportController extends Controller
                 $usersData->leftJoin('groups as o', 'users.organization_id', '=', 'o.id');
                 $usersData->addSelect('o.name as organization_name');
             }
-            if ($toggleFieldBio['isNoWorker']){
+            if ($toggleFieldBio['isNoWorker']) {
                 $usersData->addSelect('users.employee_id_number', 'users.employee_registration_number');
             }
 //add full work duration later
-            if ($toggleFieldBio['isGradeDuration']){
+            if ($toggleFieldBio['isGradeDuration']) {
                 $usersData->addSelect(['users.grade_effective_date']);
             }
-            if ($toggleFieldBio['isNPWP']){
+            if ($toggleFieldBio['isNPWP']) {
                 $usersData->addSelect('users.id_tax');
             }
-            if ($toggleFieldBio['isCurrentAddress']){
+            if ($toggleFieldBio['isCurrentAddress']) {
                 $usersData->addSelect('users.current_address');
             }
-            if ($toggleFieldBio['isComplex']){
+            if ($toggleFieldBio['isComplex']) {
                 $usersData->leftJoin('residences as r', 'users.residence_id', '=', 'r.id');
                 $usersData->addSelect('r.name as residence_name');
             }
-            if ($toggleFieldBio['isHomeNumber']){
+            if ($toggleFieldBio['isHomeNumber']) {
                 $usersData->addSelect('users.home_phone_number');
             }
-            if ($toggleFieldBio['isPhoneNumber']){
+            if ($toggleFieldBio['isPhoneNumber']) {
                 $usersData->addSelect('users.mobile_phone');
             }
-            if ($toggleFieldBio['isOfficeAddress']){
+            if ($toggleFieldBio['isOfficeAddress']) {
                 $usersData->addSelect('users.office_address');
             }
-            if ($toggleFieldBio['isOfficeNumber']){
+            if ($toggleFieldBio['isOfficeNumber']) {
                 $usersData->addSelect('users.office_phone_number');
             }
-            if ($toggleFieldBio['isEmail']){
+            if ($toggleFieldBio['isEmail']) {
                 $usersData->addSelect('users.email');
             }
-            if ($toggleFieldBio['isPositionHistory']){
+            if ($toggleFieldBio['isPositionHistory']) {
                 $gradeHistorySubquery = DB::table('grade_history_users as ghu');
                 $gradeHistorySubquery->join('grades', 'grades.id', '=', 'ghu.grade_id');
                 $gradeHistorySubquery->select('ghu.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li>', grades.name, grades.code,
@@ -1273,7 +930,7 @@ class ExportController extends Controller
                 });
                 $usersData->addSelect('grade_history.grade_history');
             }
-            if ($toggleFieldBio['isGradeHistory']){
+            if ($toggleFieldBio['isGradeHistory']) {
                 $positionHistorySubquery = DB::table('position_history_users as phu');
                 $positionHistorySubquery->select('phu.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li>', phu.position, '
             (', phu.decree_date, ',', phu.decree_number, ')' , '</li>') SEPARATOR ' ') as position_history"));
@@ -1284,7 +941,7 @@ class ExportController extends Controller
                 });
                 $usersData->addSelect('position_history.position_history');
             }
-            if ($toggleFieldBio['isTrainingStructural']){
+            if ($toggleFieldBio['isTrainingStructural']) {
                 $trainingStructuralSubquery = DB::table('trainings as t');
                 $trainingStructuralSubquery->join('user_trainings as ut', 't.id', '=', 'ut.training_id');
                 $trainingStructuralSubquery->select('ut.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li>', t.name, '
@@ -1301,7 +958,7 @@ class ExportController extends Controller
                 $usersData->addSelect('structural_training_history.structural_training_history');
             }
 
-            if ($toggleFieldBio['isTrainingFunctional']){
+            if ($toggleFieldBio['isTrainingFunctional']) {
                 $trainingFunctionalSubquery = DB::table('trainings as t');
                 $trainingFunctionalSubquery->join('user_trainings as ut', 't.id', '=', 'ut.training_id');
                 $trainingFunctionalSubquery->select('ut.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li>', t.name, '
@@ -1318,7 +975,7 @@ class ExportController extends Controller
                 $usersData->addSelect('functional_training_history.functional_training_history');
             }
 
-            if ($toggleFieldBio['isTrainingTechnique']){
+            if ($toggleFieldBio['isTrainingTechnique']) {
                 $trainingTechnicSubquery = DB::table('trainings as t');
                 $trainingTechnicSubquery->join('user_trainings as ut', 't.id', '=', 'ut.training_id');
                 $trainingTechnicSubquery->select('ut.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li>', t.name, '
@@ -1334,7 +991,7 @@ class ExportController extends Controller
 
                 $usersData->addSelect('technique_training_history.technique_training_history');
             }
-            if ($toggleFieldBio['isRecognition']){
+            if ($toggleFieldBio['isRecognition']) {
                 $recognitionSubquery = DB::table('recognitions as r');
                 $recognitionSubquery->join('user_recognitions as ur', 'r.id', '=', 'ur.recognition_id');
                 $recognitionSubquery->select('ur.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li>',r.name, '
@@ -1349,7 +1006,7 @@ class ExportController extends Controller
 
                 $usersData->addSelect('recognition_history.recognition_history');
             }
-            if ($toggleFieldBio['isSKP']){
+            if ($toggleFieldBio['isSKP']) {
                 $skpSubquery = DB::table('targets as t');
                 $skpSubquery->join('user_targets as ut', 't.id', '=', 'ut.target_id');
                 $skpSubquery->select('ut.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li>',t.name, ' (Tanggal: ', t.period_month, ' ',
@@ -1382,7 +1039,7 @@ class ExportController extends Controller
 
                 $usersData->addSelect('skp_history.skp_history');
             }
-            if ($toggleFieldBio['isEducationHistory']){
+            if ($toggleFieldBio['isEducationHistory']) {
                 $educationSubquery = DB::table('user_educations as ut');
                 $educationSubquery->select('ut.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li> Nama Sekolah : ',ut.name, '
             (Fakultas: ', ut.faculty, ' Jurusan: ', ut.major, ', Tahun Lulus: ', ut.year_of_graduation, ') Level: ',
@@ -1414,7 +1071,7 @@ class ExportController extends Controller
 
                 $usersData->addSelect('education_history.education_history');
             }
-            if ($toggleFieldBio['isDisciplinary']){
+            if ($toggleFieldBio['isDisciplinary']) {
                 $disciplinarySubquery = DB::table('disciplinary_history_users as dhu')
                     ->join('disciplinary_histories as dh', 'dhu.disciplinary_history_id', '=', 'dh.id')
                     ->join('disciplinaries as d', 'dhu.disciplinary_id', '=', 'd.id')
@@ -1428,7 +1085,7 @@ class ExportController extends Controller
 
                 $usersData->addSelect('disciplinary_history.disciplinary_history');
             }
-            if ($toggleFieldBio['isFamilyHistory']){
+            if ($toggleFieldBio['isFamilyHistory']) {
                 $familyHistory = DB::table('user_families as uf');
                 $familyHistory->select('uf.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li> Nama : ',uf.name, '
             Nomor KTP: ', uf.id_number, ' Nomor KK: ', uf.card_number, ', Tempat Tanggal Lahir: ', uf.place_of_birth, ', ', uf.date_of_birth ,' Agama: ',
@@ -1491,7 +1148,7 @@ class ExportController extends Controller
 
                 $usersData->addSelect('family_history.family_history');
             }
-            if ($toggleFieldBio['isLeave']){
+            if ($toggleFieldBio['isLeave']) {
                 $leaveSubquery = DB::table('user_leaves as ul');
                 $leaveSubquery->select('ul.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li> Golongan : ',ul.grade, '
             Jabatan: ', ul.position, ' Tanggal Mulai: ', ul.start_date, ', Tanggal Selesai: ', ul.end_date, ' Alasan: ',
@@ -1505,7 +1162,7 @@ class ExportController extends Controller
 
                 $usersData->addSelect('leave_history.leave_history');
             }
-            if ($toggleFieldBio['isAssessment']){
+            if ($toggleFieldBio['isAssessment']) {
                 $assessmentSubquery = DB::table('user_assessments as ua');
                 $assessmentSubquery->select('ua.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li> Tanggal Assessment : ', ua.assessment_date, '
              Point: ', ua.point, ' Organizer : ', ua.organizer,'</li>') SEPARATOR ' ') as assessment_history"));
@@ -1519,7 +1176,7 @@ class ExportController extends Controller
 
                 $usersData->addSelect('assessment_history.assessment_history');
             }
-            if ($toggleFieldBio['isCompetency']){
+            if ($toggleFieldBio['isCompetency']) {
                 $assessmentSubquery = DB::table('user_assessments as ua');
                 $assessmentSubquery->select('ua.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li> Tanggal Assessment : ', ua.assessment_date, '
              Point: ', ua.point, ' Organizer : ', ua.organizer,'</li>') SEPARATOR ' ') as competency_history"));
@@ -1533,7 +1190,7 @@ class ExportController extends Controller
 
                 $usersData->addSelect('competency_history.competency_history');
             }
-            if ($toggleFieldBio['isTalentPool']){
+            if ($toggleFieldBio['isTalentPool']) {
                 $assessmentSubquery = DB::table('user_assessments as ua');
                 $assessmentSubquery->select('ua.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li> Tanggal Assessment : ', ua.assessment_date, '
              Point: ', ua.point, ' Organizer : ', ua.organizer,'</li>') SEPARATOR ' ') as talent_pool_history"));
@@ -1547,7 +1204,7 @@ class ExportController extends Controller
 
                 $usersData->addSelect('talent_pool_history.talent_pool_history');
             }
-            if ($toggleFieldBio['isNotes']){
+            if ($toggleFieldBio['isNotes']) {
                 $assessmentSubquery = DB::table('user_notes as un');
                 $assessmentSubquery->join('users', 'un.giver_id', '=', 'users.id');
                 $assessmentSubquery->select('un.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li> Catatan : ', un.description, '
@@ -1564,7 +1221,7 @@ class ExportController extends Controller
             $usersData->whereIn('users.id', $userIds);
             $usersData->groupBy('users.id');
             $usersData = $usersData->get();
-            $usersDatas = $usersData->map(function($item) {
+            $usersDatas = $usersData->map(function ($item) {
                 return (array) $item;
             })->toArray();
             $pdf = pdf::loadView('exports/employee-excel-pdf', [
@@ -1577,7 +1234,7 @@ class ExportController extends Controller
             $pdf->set_option('fontDir', $tmp);
             $pdf->set_option('fontCache', $tmp);
             $pdf->set_option('tempDir', $tmp);
-            return $pdf->download('Employees-' . Carbon::now(). '.pdf');
+            return $pdf->download('Employees-' . Carbon::now() . '.pdf');
 //            return Excel::download(new employee($toggleFieldBio, $userIds), 'Employees-' . Carbon::now(). '.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
         }
     }
@@ -1586,7 +1243,7 @@ class ExportController extends Controller
      * Preview Export List of Employees
      *
      * Preview Export list of employees data
-     * @group Export Data
+     * @group Export
      * @bodyParam organization int[] list of organization's ids. Example [1,2]
      * @bodyParam employee_type int[] list of employee's type. Example [1,2]
      * @bodyParam echelons int[] list of echelons' id. Example [1,2]
@@ -1647,7 +1304,8 @@ class ExportController extends Controller
      * @bodyParam isTalentPool int Indicates whether the talent pool field is included in the request. Example 1
      * @authenticated
      */
-    public function exportExcelsPreview(PreviewExportEmployeesRequest $request){
+    public function exportExcelsPreview(PreviewExportEmployeesRequest $request)
+    {
         // filter user to get ids
         $users = DB::table('users')
             ->leftJoin('echelons', 'users.echelon_id', '=', 'echelons.id')
@@ -1657,7 +1315,7 @@ class ExportController extends Controller
             ->leftJoin('user_targets', 'users.id', '=', 'user_targets.user_id')
             ->leftJoin('targets', 'user_targets.target_id', '=', 'targets.id')
             ->select('users.id');
-        if (isset($request->organization)){
+        if (isset($request->organization)) {
             $users->whereIn('users.organization_id', $request->organization);
         }
         if (isset($request->age_range)) {
@@ -1701,25 +1359,25 @@ class ExportController extends Controller
         if (isset($request->employee_type)) {
             $users->whereIn('users.type', $request->employee_type);
         }
-        if (isset($request->credit_period)){
+        if (isset($request->credit_period)) {
             $users->where('user_credit_score.period', $request->credit_period);
         }
-        if (isset($request->credit_year)){
+        if (isset($request->credit_year)) {
             $users->where('user_credit_score.year', $request->credit_year);
         }
-        if (isset($request->target_period)){
+        if (isset($request->target_period)) {
             $users->where('targets.appraisal_period', $request->target_period);
         }
-        if (isset ($request->target_year)){
+        if (isset($request->target_year)) {
             $users->where('targets.period_year', $request->target_year);
         }
-        if (isset ($request->work_behavior_rating )){
+        if (isset($request->work_behavior_rating)) {
             $users->where('user_targets.work_behavior_rating', $request->work_behavior_rating);
         }
-        if (isset($request->employee_performance_predicate)){
+        if (isset($request->employee_performance_predicate)) {
             $users->where('user_targets.employee_performance_predicate', $request->employee_performance_predicate);
         }
-        if (isset($request->organizational_performance_achievement)){
+        if (isset($request->organizational_performance_achievement)) {
             $users->where('user_targets.organizational_performance_achievement', $request->organizational_performance_achievement);
         }
         $userIds = $users->pluck('users.id')->toArray();
@@ -1730,49 +1388,49 @@ class ExportController extends Controller
         $usersPreview = DB::table('users');
         $toggleFieldBio = array();
 
-        if( $this->request->isName == 1){
+        if ($this->request->isName == 1) {
             $usersPreview->addSelect('users.name');
         }
-        if ($this->request->isPosition == 1){
-            $usersPreview->leftJoin('positions', 'users.position_id', '=', 'positions.id' );
+        if ($this->request->isPosition == 1) {
+            $usersPreview->leftJoin('positions', 'users.position_id', '=', 'positions.id');
             $usersPreview->addSelect('positions.name as position_name');
         }
 //        if ($this->toggleField['isPositionDescription']){
 //            //
 //        }
-        if ($this->request->isEchelons){
+        if ($this->request->isEchelons) {
             $usersPreview->leftJoin('echelons', 'users.echelon_id', '=', 'echelons.id');
             $usersPreview->addSelect('echelons.name as echelons_name');
         }
-        if ($this->request->isGrade == 1){
+        if ($this->request->isGrade == 1) {
             $usersPreview->leftJoin('grades as g', 'users.grade_id', '=', 'g.id');
             $usersPreview->addSelect('g.name as grade_name');
         }
-        if ($this->request->isNip == 1){
+        if ($this->request->isNip == 1) {
             $usersPreview->addSelect(DB::raw("users.employee_id_number"));
         }
-        if ($this->request->isBirthPlaceDate == 1){
+        if ($this->request->isBirthPlaceDate == 1) {
             $usersPreview->addSelect('users.place_of_birth', 'users.date_of_birth');
         }
-        if ($this->request->isAge == 1){
+        if ($this->request->isAge == 1) {
             $usersPreview->addSelect(DB::raw("TIMESTAMPDIFF(YEAR, users.date_of_birth, CURDATE()) AS age"));
         }
-        if ($this->request->isWorkUnit == 1){
+        if ($this->request->isWorkUnit == 1) {
             $usersPreview->addSelect('users.work_unit_id as work_unit');
         }
-        if ($this->request->isEmployeeStatus == 1){
+        if ($this->request->isEmployeeStatus == 1) {
             $usersPreview->addSelect('users.employment_status');
         }
-        if ($this->request->isReligion == 1){
+        if ($this->request->isReligion == 1) {
             $usersPreview->addSelect('users.religion');
         }
-        if ($this->request->isGender == 1){
+        if ($this->request->isGender == 1) {
             $usersPreview->addSelect('users.gender');
         }
-        if ($this->request->isMaritalStatus == 1){
+        if ($this->request->isMaritalStatus == 1) {
             $usersPreview->addSelect('users.marital_status');
         }
-        if ($this->request->isAgency == 1){
+        if ($this->request->isAgency == 1) {
             $usersPreview->leftJoin('institutions as i', 'users.institution_id', '=', 'i.id');
             $usersPreview->addSelect('i.name as institution_name');
         }
@@ -1780,39 +1438,39 @@ class ExportController extends Controller
             $usersPreview->leftJoin('groups as o', 'users.organization_id', '=', 'o.id');
             $usersPreview->addSelect('o.name as organization_name');
         }
-        if ($this->request->isNoWorker == 1){
+        if ($this->request->isNoWorker == 1) {
             $usersPreview->addSelect('users.employee_id_number', 'users.employee_registration_number');
         }
         //add full work duration later
-        if ($this->request->isGradeDuration == 1){
+        if ($this->request->isGradeDuration == 1) {
             $usersPreview->addSelect(['users.grade_effective_date']);
         }
-        if ($this->request->isNPWP == 1){
+        if ($this->request->isNPWP == 1) {
             $usersPreview->addSelect('users.id_tax');
         }
-        if ($this->request->isCurrentAddress == 1){
+        if ($this->request->isCurrentAddress == 1) {
             $usersPreview->addSelect('users.current_address');
         }
-        if ($this->request->isComplex == 1){
+        if ($this->request->isComplex == 1) {
             $usersPreview->leftJoin('residences as r', 'users.residence_id', '=', 'r.id');
             $usersPreview->addSelect('r.name as residence_name');
         }
-        if ($this->request->isHomeNumber == 1){
+        if ($this->request->isHomeNumber == 1) {
             $usersPreview->addSelect('users.home_phone_number');
         }
-        if ($this->request->isPhoneNumber == 1){
+        if ($this->request->isPhoneNumber == 1) {
             $usersPreview->addSelect('users.mobile_phone');
         }
-        if ($this->request->isOfficeAddress == 1){
+        if ($this->request->isOfficeAddress == 1) {
             $usersPreview->addSelect('users.office_address');
         }
-        if ($this->request->isOfficeNumber == 1){
+        if ($this->request->isOfficeNumber == 1) {
             $usersPreview->addSelect('users.office_phone_number');
         }
-        if ($this->request->isEmail == 1){
+        if ($this->request->isEmail == 1) {
             $usersPreview->addSelect('users.email');
         }
-        if (isset($this->toggleField['isPositionHistory'])){
+        if (isset($this->toggleField['isPositionHistory'])) {
             $gradeHistorySubquery = DB::table('grade_history_users as ghu');
             $gradeHistorySubquery->join('grades', 'grades.id', '=', 'ghu.grade_id');
             $gradeHistorySubquery->select('ghu.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li>', grades.name, grades.code,
@@ -1824,7 +1482,7 @@ class ExportController extends Controller
             });
             $usersPreview->addSelect('grade_history.grade_history');
         }
-        if (isset($this->toggleField['isGradeHistory'])){
+        if (isset($this->toggleField['isGradeHistory'])) {
             $positionHistorySubquery = DB::table('position_history_users as phu');
             $positionHistorySubquery->select('phu.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li>', phu.position, '
             (', phu.decree_date, ',', phu.decree_number, ')' , '</li>') SEPARATOR ' ') as position_history"));
@@ -1835,7 +1493,7 @@ class ExportController extends Controller
             });
             $usersPreview->addSelect('position_history.position_history');
         }
-        if (isset($this->toggleField['isTrainingStructural'])){
+        if (isset($this->toggleField['isTrainingStructural'])) {
             $trainingStructuralSubquery = DB::table('trainings as t');
             $trainingStructuralSubquery->join('user_trainings as ut', 't.id', '=', 'ut.training_id');
             $trainingStructuralSubquery->select('ut.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li>', t.name, '
@@ -1852,7 +1510,7 @@ class ExportController extends Controller
             $usersPreview->addSelect('structural_training_history.structural_training_history');
         }
 
-        if (isset($this->toggleField['isTrainingFunctional'])){
+        if (isset($this->toggleField['isTrainingFunctional'])) {
             $trainingFunctionalSubquery = DB::table('trainings as t');
             $trainingFunctionalSubquery->join('user_trainings as ut', 't.id', '=', 'ut.training_id');
             $trainingFunctionalSubquery->select('ut.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li>', t.name, '
@@ -1869,7 +1527,7 @@ class ExportController extends Controller
             $usersPreview->addSelect('functional_training_history.functional_training_history');
         }
 
-        if (isset($this->toggleField['isTrainingTechnique'])){
+        if (isset($this->toggleField['isTrainingTechnique'])) {
             $trainingTechnicSubquery = DB::table('trainings as t');
             $trainingTechnicSubquery->join('user_trainings as ut', 't.id', '=', 'ut.training_id');
             $trainingTechnicSubquery->select('ut.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li>', t.name, '
@@ -1885,7 +1543,7 @@ class ExportController extends Controller
 
             $usersPreview->addSelect('technique_training_history.technique_training_history');
         }
-        if ($this->request->isRecognition == 1){
+        if ($this->request->isRecognition == 1) {
             $recognitionSubquery = DB::table('recognitions as r');
             $recognitionSubquery->join('user_recognitions as ur', 'r.id', '=', 'ur.recognition_id');
             $recognitionSubquery->select('ur.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li>',r.name, '
@@ -1900,7 +1558,7 @@ class ExportController extends Controller
 
             $usersPreview->addSelect('recognition_history.recognition_history');
         }
-        if ($this->request->isSKP == 1){
+        if ($this->request->isSKP == 1) {
             $skpSubquery = DB::table('targets as t');
             $skpSubquery->join('user_targets as ut', 't.id', '=', 'ut.target_id');
             $skpSubquery->select('ut.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li>',t.name, ' (Tanggal: ', t.period_month, ' ',
@@ -1933,7 +1591,7 @@ class ExportController extends Controller
 
             $usersPreview->addSelect('skp_history.skp_history');
         }
-        if ($this->request->isEducationHistory == 1){
+        if ($this->request->isEducationHistory == 1) {
             $educationSubquery = DB::table('user_educations as ut');
             $educationSubquery->select('ut.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li> Nama Sekolah : ',ut.name, '
             (Fakultas: ', ut.faculty, ' Jurusan: ', ut.major, ', Tahun Lulus: ', ut.year_of_graduation, ') Level: ',
@@ -1965,7 +1623,7 @@ class ExportController extends Controller
 
             $usersPreview->addSelect('education_history.education_history');
         }
-        if ($this->request->isDisciplinary == 1){
+        if ($this->request->isDisciplinary == 1) {
             $disciplinarySubquery = DB::table('disciplinary_history_users as dhu')
                 ->join('disciplinary_histories as dh', 'dhu.disciplinary_history_id', '=', 'dh.id')
                 ->join('disciplinaries as d', 'dhu.disciplinary_id', '=', 'd.id')
@@ -1979,7 +1637,7 @@ class ExportController extends Controller
 
             $usersPreview->addSelect('disciplinary_history.disciplinary_history');
         }
-        if ($this->request->isFamilyHistory == 1){
+        if ($this->request->isFamilyHistory == 1) {
             $familyHistory = DB::table('user_families as uf');
             $familyHistory->select('uf.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li> Nama : ',uf.name, '
             Nomor KTP: ', uf.id_number, ' Nomor KK: ', uf.card_number, ', Tempat Tanggal Lahir: ', uf.place_of_birth, ', ', uf.date_of_birth ,' Agama: ',
@@ -2042,7 +1700,7 @@ class ExportController extends Controller
 
             $usersPreview->addSelect('family_history.family_history');
         }
-        if ($this->request->isLeave == 1){
+        if ($this->request->isLeave == 1) {
             $leaveSubquery = DB::table('user_leaves as ul');
             $leaveSubquery->select('ul.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li> Golongan : ',ul.grade, '
             Jabatan: ', ul.position, ' Tanggal Mulai: ', ul.start_date, ', Tanggal Selesai: ', ul.end_date, ' Alasan: ',
@@ -2056,7 +1714,7 @@ class ExportController extends Controller
 
             $usersPreview->addSelect('leave_history.leave_history');
         }
-        if ($this->request->isAssessment == 1){
+        if ($this->request->isAssessment == 1) {
             $assessmentSubquery = DB::table('user_assessments as ua');
             $assessmentSubquery->select('ua.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li> Tanggal Assessment : ', ua.assessment_date, '
              Point: ', ua.point, ' Organizer : ', ua.organizer,'</li>') SEPARATOR ' ') as assessment_history"));
@@ -2070,7 +1728,7 @@ class ExportController extends Controller
 
             $usersPreview->addSelect('assessment_history.assessment_history');
         }
-        if ($this->request->isCompetency == 1){
+        if ($this->request->isCompetency == 1) {
             $assessmentSubquery = DB::table('user_assessments as ua');
             $assessmentSubquery->select('ua.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li> Tanggal Assessment : ', ua.assessment_date, '
              Point: ', ua.point, ' Organizer : ', ua.organizer,'</li>') SEPARATOR ' ') as competency_history"));
@@ -2084,7 +1742,7 @@ class ExportController extends Controller
 
             $usersPreview->addSelect('competency_history.competency_history');
         }
-        if ($this->request->isTalentPool == 1){
+        if ($this->request->isTalentPool == 1) {
             $assessmentSubquery = DB::table('user_assessments as ua');
             $assessmentSubquery->select('ua.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li> Tanggal Assessment : ', ua.assessment_date, '
              Point: ', ua.point, ' Organizer : ', ua.organizer,'</li>') SEPARATOR ' ') as talent_pool_history"));
@@ -2098,7 +1756,7 @@ class ExportController extends Controller
 
             $usersPreview->addSelect('talent_pool_history.talent_pool_history');
         }
-        if ($this->request->isNotes == 1){
+        if ($this->request->isNotes == 1) {
             $assessmentSubquery = DB::table('user_notes as un');
             $assessmentSubquery->join('users', 'un.giver_id', '=', 'users.id');
             $assessmentSubquery->select('un.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li> Catatan : ', un.description, '
@@ -2115,7 +1773,7 @@ class ExportController extends Controller
         $usersPreview->whereIn('users.id', $userIds);
         $usersPreview->groupBy('users.id');
         $usersPreview = $usersPreview->get();
-        $usersPreviewData = $usersPreview->map(function($item) {
+        $usersPreviewData = $usersPreview->map(function ($item) {
             return (array) $item;
         })->toArray();
         $toggleFieldBio['isName'] = $request->isName == 1;
