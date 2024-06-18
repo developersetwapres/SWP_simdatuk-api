@@ -32,15 +32,7 @@ class RecapitulationController extends Controller
      */
     public function index()
     {
-        $users = DB::table('users');
-        $users->select(
-            DB::raw('COUNT(CASE WHEN employment_status IN (1, 6, 7, 8, 9) THEN 1 END) as total'),
-            DB::raw('COUNT(CASE WHEN type = 1 AND (employment_status = 1 OR employment_status = 6) THEN 1 END) as asn_active'),
-            DB::raw('COUNT(CASE WHEN type = 1 AND (employment_status = 7 OR employment_status = 8 OR employment_status = 9) THEN 1 END) as asn_nonactive'),
-            DB::raw('COUNT(CASE WHEN type = 2 AND employment_status = 1 THEN 1 END) as nonasn'),
-            DB::raw('COUNT(CASE WHEN type = 3 AND employment_status = 1 THEN 1 END) as outsource'),
-        );
-        $users = $users->first();
+        $users = $this->getTotalRecapitulation();
         $data = [
             "name" => 'Komposisi Pegawai',
             "total" => $users->total,
@@ -100,27 +92,8 @@ class RecapitulationController extends Controller
 
     private function getCategory1()
     {
-        $users = DB::table('position_echelons as pe');
-        $users->join('echelons as e', 'pe.echelon_id', '=', 'e.id');
-        $users->select(
-            DB::raw('SUM(CASE WHEN pe.echelon_id IN (1, 2, 3, 4) THEN filled ELSE 0 END) AS total_pejabat_pimpinan'),
-            DB::raw('SUM(CASE WHEN pe.echelon_id = 1 THEN filled ELSE 0 END) AS echelon1'),
-            DB::raw('SUM(CASE WHEN pe.echelon_id = 2 THEN filled ELSE 0 END) AS echelon2'),
-            DB::raw('SUM(CASE WHEN pe.echelon_id = 3 THEN filled ELSE 0 END) AS echelon3'),
-            DB::raw('SUM(CASE WHEN pe.echelon_id = 4 THEN filled ELSE 0 END) AS echelon4'),
-            DB::raw('SUM(CASE WHEN pe.echelon_id IN (5, 6, 7, 8) THEN filled ELSE 0 END) AS total_pejabat_fungsional_keahlian'),
-            DB::raw('SUM(CASE WHEN pe.echelon_id = 5 THEN filled ELSE 0 END) AS ahli_utama'),
-            DB::raw('SUM(CASE WHEN pe.echelon_id = 6 THEN filled ELSE 0 END) AS ahli_madya'),
-            DB::raw('SUM(CASE WHEN pe.echelon_id = 7 THEN filled ELSE 0 END) AS ahli_muda'),
-            DB::raw('SUM(CASE WHEN pe.echelon_id = 8 THEN filled ELSE 0 END) AS ahli_pertama'),
-            DB::raw('SUM(CASE WHEN pe.echelon_id IN (10, 11, 12, 13) THEN filled ELSE 0 END) AS total_pejabat_fungsional_keterampilan'),
-            DB::raw('SUM(CASE WHEN pe.echelon_id = 10 THEN filled ELSE 0 END) AS penyelia'),
-            DB::raw('SUM(CASE WHEN pe.echelon_id = 11 THEN filled ELSE 0 END) AS mahir'),
-            DB::raw('SUM(CASE WHEN pe.echelon_id = 12 THEN filled ELSE 0 END) AS terampil'),
-            DB::raw('SUM(CASE WHEN pe.echelon_id = 13 THEN filled ELSE 0 END) AS pemula'),
-        );
-        $users->orderBy('e.id', 'asc');
-        $users = $users->first();
+        $pejabat = $this->recapitulationRepository->getPejabatPimpinanAndFungsional();
+        $pelaksana = $this->recapitulationRepository->getPejabatPelaksana();
 
         $data = [
             "name" => 'Apartur Sipil Negara (ASN) Aktif + Perbantuan TNI/POLRI Pelaksana',
@@ -128,89 +101,89 @@ class RecapitulationController extends Controller
             "cards" => [
                 [
                     "name" => 'Pejabat Pimpinan',
-                    "total" => $users->total_pejabat_pimpinan,
+                    "total" => $pejabat->total_pejabat_pimpinan,
                     "cards" => [
                         [
                             "name" => "Pejabat Pimpinan Tinggi Madya (Eselon I)",
-                            "total" => $users->echelon1,
+                            "total" => $pejabat->echelon1,
                         ],
                         [
                             "name" => "Pejabat Pimpinan Tinggi Pratama (Eselon II)",
-                            "total" => $users->echelon2,
+                            "total" => $pejabat->echelon2,
                         ],
                         [
                             "name" => "Pejabat Administrator (Eselon III)",
-                            "total" => $users->echelon3,
+                            "total" => $pejabat->echelon3,
                         ],
                         [
                             "name" => "Pejabat Pengawas (Eselon IV)",
-                            "total" => $users->echelon4,
+                            "total" => $pejabat->echelon4,
                         ],
                     ],
                 ],
                 [
                     "name" => 'Pejabat Pelaksana',
-                    "total" => 95,
+                    "total" => $pelaksana->total,
                     "cards" => [
                         [
                             "name" => "Pejabat Pelaksana Golongan IV",
-                            "total" => 0,
+                            "total" => $pelaksana->golongan4,
                         ],
                         [
                             "name" => "Pejabat Pelaksana Golongan III",
-                            "total" => 47,
+                            "total" => $pelaksana->golongan3,
                         ],
                         [
                             "name" => "Pejabat Pelaksana Golongan II",
-                            "total" => 17,
+                            "total" => $pelaksana->golongan2,
                         ],
                         [
                             "name" => "Pejabat Pelaksana Perbantuan TNI dan POLRI",
-                            "total" => 31,
+                            "total" => $pelaksana->tnipolri,
                         ],
                     ],
                 ],
                 [
                     "name" => 'Pejabat Fungsional Keahlian',
-                    "total" => $users->total_pejabat_fungsional_keahlian,
+                    "total" => $pejabat->total_pejabat_fungsional_keahlian,
                     "cards" => [
                         [
                             "name" => "Pejabat Fungsional Ahli Utama",
-                            "total" => $users->ahli_utama,
+                            "total" => $pejabat->ahli_utama,
                         ],
                         [
                             "name" => "Pejabat Fungsional Ahli Madya",
-                            "total" => $users->ahli_madya,
+                            "total" => $pejabat->ahli_madya,
                         ],
                         [
                             "name" => "Pejabat Fungsional Ahli Muda",
-                            "total" => $users->ahli_muda,
+                            "total" => $pejabat->ahli_muda,
                         ],
                         [
                             "name" => "Pejabat Fungsional Ahli Pertama",
-                            "total" => $users->ahli_pertama,
+                            "total" => $pejabat->ahli_pertama,
                         ],
                     ],
                 ],
                 [
                     "name" => 'Pejabat Fungsional Keterampilan',
-                    "total" => $users->total_pejabat_fungsional_keterampilan,
+                    "total" => $pejabat->total_pejabat_fungsional_keterampilan,
                     "cards" => [
                         [
                             "name" => "Pejabat Fungsional Penyelia",
-                            "total" => $users->penyelia,
+                            "total" => $pejabat->penyelia,
                         ],
                         [
                             "name" => "Pejabat Fungsional Mahir",
-                            "total" => $users->mahir,
+                            "total" => $pejabat->mahir,
                         ],
                         [
                             "name" => "Pejabat Fungsional Terampil",
-                            "total" => $users->terampil,
+                            "total" => $pejabat->terampil,
                         ],
                         [
                             "name" => "Pejabat Fungsional Pemula",
-                            "total" => $users->pemula,
+                            "total" => $pejabat->pemula,
                         ],
                     ],
                 ],
@@ -357,5 +330,18 @@ class RecapitulationController extends Controller
             ],
         ];
         return $this->response(200, 'success', $data);
+    }
+
+    private function getTotalRecapitulation()
+    {
+        $users = DB::table('users');
+        $users->select(
+            DB::raw('COUNT(CASE WHEN employment_status IN (1, 6, 7, 8, 9) THEN 1 END) as total'),
+            DB::raw('COUNT(CASE WHEN type = 1 AND (employment_status = 1 OR employment_status = 6) THEN 1 END) as asn_active'),
+            DB::raw('COUNT(CASE WHEN type = 1 AND (employment_status = 7 OR employment_status = 8 OR employment_status = 9) THEN 1 END) as asn_nonactive'),
+            DB::raw('COUNT(CASE WHEN type = 2 AND employment_status = 1 THEN 1 END) as nonasn'),
+            DB::raw('COUNT(CASE WHEN type = 3 AND employment_status = 1 THEN 1 END) as outsource'),
+        );
+        return $users = $users->first();
     }
 }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Repositories\RecapitulationRepository;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 /**
  * @group Summary
@@ -32,16 +31,7 @@ class RecapitulationAsnController extends Controller
      */
     public function index()
     {
-        $position = DB::table('position_echelons as pe');
-        $position->join('echelons as e', 'pe.echelon_id', '=', 'e.id');
-        $position->select(
-            DB::raw('SUM(CASE WHEN pe.echelon_id IN (1, 2, 3, 4, 9) THEN filled ELSE 0 END) AS total'),
-            DB::raw('SUM(CASE WHEN pe.echelon_id IN (1, 2) THEN filled ELSE 0 END) AS total_pimpinan_tinggi'),
-            DB::raw('SUM(CASE WHEN pe.echelon_id IN (3, 4, 9) THEN filled ELSE 0 END) AS total_administrasi'),
-        );
-        $position->orderBy('e.id', 'asc');
-        $position = $position->first();
-
+        $pejabat = $this->recapitulationRepository->getKeteranganJabatan();
         $nonActive = $this->recapitulationRepository->getNonActiveAsn();
         $grade = $this->recapitulationRepository->getGrade(1);
         $gradePPPK = $this->recapitulationRepository->getGrade(2);
@@ -83,19 +73,19 @@ class RecapitulationAsnController extends Controller
                 ],
                 [
                     "name" => "Keterangan Jabatan",
-                    "total" => $position->total,
+                    "total" => $pejabat->total_pejabat_pimpinan,
                     "cards" => [
                         [
                             "name" => "Jabatan Pimpinan Tinggi",
-                            "total" => $position->total_pimpinan_tinggi,
+                            "total" => $pejabat->jabatan_pimpinan_tinggi,
                         ],
                         [
                             "name" => "Jabatan Administrasi",
-                            "total" => $position->total_administrasi,
+                            "total" => $pejabat->jabatan_administrasi,
                         ],
                         [
                             "name" => "Jabatan Fungsional",
-                            "total" => 121,
+                            "total" => $pejabat->jabatan_fungsional,
                         ],
                     ],
                 ],
