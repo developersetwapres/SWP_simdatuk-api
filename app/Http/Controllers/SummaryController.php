@@ -32,7 +32,8 @@ class SummaryController extends Controller
         // get users by month of birth
         $users = DB::table('users');
         $users->whereMonth('date_of_birth', $this->request->month);
-        $users->select('name', 'photo_profile', 'date_of_birth');
+        $users->select('title_prefix', 'name', 'title_suffix', 'photo_profile', 'date_of_birth');
+        $users->where('type', 1);
         $users->orderBy('date_of_birth', 'asc');
         $users = $users->take(8)->get();
         foreach ($users as $item) {
@@ -41,21 +42,21 @@ class SummaryController extends Controller
 
         $countable = DB::table('users')
             ->select(
-                DB::raw('COUNT(id) as total'),
-                DB::raw('COUNT(CASE WHEN employment_status = 1 THEN 1 END) as active'),
-                DB::raw('COUNT(CASE WHEN gender = 1 THEN 1 END) as male'),
-                DB::raw('COUNT(CASE WHEN gender = 0 THEN 1 END) as female'),
-                DB::raw('COUNT(CASE WHEN type = 2 THEN 1 END) as assistance'),
-                DB::raw('COUNT(CASE WHEN type = 3 THEN 1 END) as outsource'),
-                DB::raw('COUNT(CASE WHEN education_level IS NOT NULL THEN 1 END) as total_education'),
-                DB::raw('COUNT(CASE WHEN education_level = 1 THEN 1 END) as sd'),
-                DB::raw('COUNT(CASE WHEN education_level = 2 THEN 1 END) as smp'),
-                DB::raw('COUNT(CASE WHEN education_level = 3 THEN 1 END) as sma'),
-                DB::raw('COUNT(CASE WHEN education_level = 4 THEN 1 END) as d1'),
-                DB::raw('COUNT(CASE WHEN education_level = 5 THEN 1 END) as d3'),
-                DB::raw('COUNT(CASE WHEN education_level = 6 THEN 1 END) as s1'),
-                DB::raw('COUNT(CASE WHEN education_level = 7 THEN 1 END) as s2'),
-                DB::raw('COUNT(CASE WHEN education_level = 8 THEN 1 END) as s3'),
+                DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND type = 1 THEN 1 END) as total'),
+                DB::raw('COUNT(CASE WHEN employment_status IN (1) AND type = 1 THEN 1 END) as active'),
+                DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND type = 1 AND gender = 1 THEN 1 END) as male'),
+                DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND type = 1 AND gender = 0 THEN 1 END) as female'),
+                DB::raw('COUNT(CASE WHEN employment_status IN (1) AND type = 2 THEN 1 END) as assistance'),
+                DB::raw('COUNT(CASE WHEN employment_status IN (1) AND type = 3 THEN 1 END) as outsource'),
+                DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND education_level IS NOT NULL THEN 1 END) as total_education'),
+                DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND education_level = 1 THEN 1 END) as sd'),
+                DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND education_level = 2 THEN 1 END) as smp'),
+                DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND education_level = 3 THEN 1 END) as sma'),
+                DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND education_level = 4 THEN 1 END) as d1'),
+                DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND education_level = 5 THEN 1 END) as d3'),
+                DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND education_level = 6 THEN 1 END) as s1'),
+                DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND education_level = 7 THEN 1 END) as s2'),
+                DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND education_level = 8 THEN 1 END) as s3'),
             )
             ->first();
 

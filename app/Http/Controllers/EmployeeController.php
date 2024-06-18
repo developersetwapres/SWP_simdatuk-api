@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Employee\CreateEmployeeRequest;
 use App\Http\Requests\Employee\UpdateEmployeeRequest;
 use App\Repositories\AssessmentRepository;
+use App\Repositories\CreditScoreRepository;
 use App\Repositories\DisciplinaryRepository;
 use App\Repositories\EducationRepository;
 use App\Repositories\EmployeeRepository;
@@ -16,7 +17,6 @@ use App\Repositories\PositionRepository;
 use App\Repositories\RecognitionRepository;
 use App\Repositories\TargetRepository;
 use App\Repositories\TrainingRepository;
-use App\Repositories\CreditScoreRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -124,7 +124,9 @@ class EmployeeController extends Controller
         $users->select(
             'u.id',
             'u.photo_profile',
+            'u.title_prefix',
             'u.name',
+            'u.title_suffix',
             'u.employee_id_number',
             'u.employee_registration_number',
             'p.name as position_name',
@@ -285,7 +287,7 @@ class EmployeeController extends Controller
                 }
                 DB::table('user_assessments')->insertTs($assessments);
             }
-            if (isset($this->request->credit_score)){
+            if (isset($this->request->credit_score)) {
                 $credit_scores = array();
                 foreach ($this->request->credit_score as $credit_score) {
                     $credit_score['user_id'] = $userId;
