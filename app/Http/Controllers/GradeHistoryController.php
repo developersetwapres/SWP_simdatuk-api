@@ -50,6 +50,8 @@ class GradeHistoryController extends Controller
         $gradeHistories->leftjoin('grade_history_users as ghu', 'gh.id', '=', 'ghu.grade_history_id');
         $gradeHistories->select('gh.id', 'gh.created_at', 'gh.name', 'gh.period_month', 'gh.period_year', DB::raw("COUNT(ghu.id) AS total"));
         $gradeHistories->where('gh.name', 'like', '%' . $this->request->search . '%');
+        $gradeHistories->orderBy('gh.updated_at', 'desc');
+        $gradeHistories->orderBy('gh.created_at', 'desc');
         $gradeHistories->groupby('gh.id');
         $gradeHistories = $gradeHistories->paginate($this->request->limit);
         if ($gradeHistories->isEmpty()) {

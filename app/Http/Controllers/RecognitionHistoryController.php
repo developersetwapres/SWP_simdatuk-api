@@ -50,6 +50,8 @@ class RecognitionHistoryController extends Controller
         $recognitions->leftjoin('user_recognitions as ur', 'r.id', '=', 'ur.recognition_id');
         $recognitions->select('r.id', 'r.created_at', 'r.name', 'r.period_month', 'r.period_year', 'r.awarding_institution', DB::raw("COUNT(ur.id) AS total"));
         $recognitions->where('r.name', 'like', '%' . $this->request->search . '%');
+        $recognitions->orderBy('r.updated_at', 'desc');
+        $recognitions->orderBy('r.created_at', 'desc');
         $recognitions->groupby('r.id');
         $recognitions = $recognitions->paginate($this->request->limit);
         if ($recognitions->isEmpty()) {

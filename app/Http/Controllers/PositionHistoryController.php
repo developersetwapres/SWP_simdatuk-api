@@ -50,6 +50,8 @@ class PositionHistoryController extends Controller
         $positionHistories->leftjoin('position_history_users as phu', 'ph.id', '=', 'phu.position_history_id');
         $positionHistories->select('ph.id', 'ph.name', 'ph.period_month', 'ph.period_year', 'ph.created_at', DB::raw("COUNT(phu.id) AS total"));
         $positionHistories->where('ph.name', 'like', '%' . $this->request->search . '%');
+        $positionHistories->orderBy('ph.updated_at', 'desc');
+        $positionHistories->orderBy('ph.created_at', 'desc');
         $positionHistories->groupby('ph.id');
         $positionHistories = $positionHistories->paginate($this->request->limit);
         if ($positionHistories->isEmpty()) {

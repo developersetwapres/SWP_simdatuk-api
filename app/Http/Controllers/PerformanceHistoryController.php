@@ -51,6 +51,8 @@ class PerformanceHistoryController extends Controller
         $performances->leftjoin('user_performances as up', 'p.id', '=', 'up.performance_id');
         $performances->select('p.id', 'p.created_at', 'p.name', 'p.period_month', 'p.period_year', 'p.performance_period', DB::raw("COUNT(up.id) AS total"));
         $performances->where('p.name', 'like', '%' . $this->request->search . '%');
+        $performances->orderBy('p.updated_at', 'desc');
+        $performances->orderBy('p.created_at', 'desc');
         $performances->groupby('p.id');
         $performances = $performances->paginate($this->request->limit);
         if ($performances->isEmpty()) {

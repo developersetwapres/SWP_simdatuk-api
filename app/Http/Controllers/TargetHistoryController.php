@@ -50,6 +50,8 @@ class TargetHistoryController extends Controller
         $targets->leftjoin('user_targets as ut', 't.id', '=', 'ut.target_id');
         $targets->select('t.id', 't.created_at', 't.name', 't.period_month', 't.period_year', 't.appraisal_period', DB::raw("COUNT(ut.id) AS total"));
         $targets->where('t.name', 'like', '%' . $this->request->search . '%');
+        $targets->orderBy('t.updated_at', 'desc');
+        $targets->orderBy('t.created_at', 'desc');
         $targets->groupby('t.id');
         $targets = $targets->paginate($this->request->limit);
         if ($targets->isEmpty()) {

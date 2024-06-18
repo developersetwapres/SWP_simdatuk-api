@@ -56,6 +56,8 @@ class TrainingHistoryController extends Controller
         $trainings->select('t.id', 't.created_at', 't.name', 't.period_month', 't.period_year', 't.start_date', DB::raw("COUNT(ut.id) AS total"));
         $trainings->where('t.name', 'like', '%' . $this->request->search . '%');
         $trainings->where('t.type', $this->request->type);
+        $trainings->orderBy('t.updated_at', 'desc');
+        $trainings->orderBy('t.created_at', 'desc');
         $trainings->groupby('t.id');
         $trainings = $trainings->paginate($this->request->limit);
         if ($trainings->isEmpty()) {

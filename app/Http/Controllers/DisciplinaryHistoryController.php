@@ -50,6 +50,8 @@ class DisciplinaryHistoryController extends Controller
         $disciplinaryHistories->leftjoin('disciplinary_history_users as ud', 'd.id', '=', 'ud.disciplinary_history_id');
         $disciplinaryHistories->select('d.id', 'd.created_at', 'd.name', 'd.period_month', 'd.period_year', DB::raw("COUNT(ud.id) AS total"));
         $disciplinaryHistories->where('d.name', 'like', '%' . $this->request->search . '%');
+        $disciplinaryHistories->orderBy('d.updated_at', 'desc');
+        $disciplinaryHistories->orderBy('d.created_at', 'desc');
         $disciplinaryHistories->groupby('d.id');
         $disciplinaryHistories = $disciplinaryHistories->paginate($this->request->limit);
         if ($disciplinaryHistories->isEmpty()) {
