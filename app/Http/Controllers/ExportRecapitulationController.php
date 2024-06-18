@@ -678,7 +678,7 @@ class ExportRecapitulationController extends Controller
                 [
                     'title' => 'Jabatan',
                     'body' => 'Total : 74',
-                    'type' => 2,
+                    'type' => 3,
                 ],
                 [
                     'title' => 'Tim Nasional Percepatan Penurunan Stunting (TPPS)',
@@ -687,7 +687,7 @@ class ExportRecapitulationController extends Controller
                 ],
                 [
                     'title' => 'Tim',
-                    'body' => '24',
+                    'body' => 'Total : 24',
                     'type' => 3,
                 ],
                 [
