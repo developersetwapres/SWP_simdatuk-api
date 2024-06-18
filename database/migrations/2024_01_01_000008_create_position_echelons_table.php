@@ -22,6 +22,9 @@ return new class extends Migration
             $table->tinyInteger('horizontal_order')->default(0);
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
+
+            $table->foreign('position_id')->references('id')->on('positions')->onDelete('cascade');
+            $table->foreign('echelon_id')->references('id')->on('echelons')->onDelete('cascade');
         });
     }
 
