@@ -34,7 +34,7 @@ class SummaryController extends Controller
         $users->whereMonth('date_of_birth', $this->request->month);
         $users->select('title_prefix', 'name', 'title_suffix', 'photo_profile', 'date_of_birth');
         $users->where('type', 1);
-        $users->where('employment_type', 1);
+        $users->where('employment_status', 1);
         $users->orderBy('date_of_birth', 'asc');
         $users = $users->take(8)->get();
         foreach ($users as $item) {
