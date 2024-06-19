@@ -38,7 +38,7 @@ class RecapitulationNonAsnController extends Controller
             "total" => 10,
             "cards" => [
                 [
-                    "name" => "Jabatan",
+                    "name" => "Berdasarkan Jabatan",
                     "total" => 74,
                     "cards" => [
                         [

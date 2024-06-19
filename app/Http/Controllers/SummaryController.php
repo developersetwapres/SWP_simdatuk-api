@@ -32,7 +32,11 @@ class SummaryController extends Controller
         // get users by month of birth
         $users = DB::table('users');
         $users->whereMonth('date_of_birth', $this->request->month);
-        $users->select('title_prefix', 'name', 'title_suffix', 'photo_profile', 'date_of_birth');
+        $users->select(
+            DB::raw("CONCAT(title_prefix, ' ', name, ' ', title_suffix) as name"),
+            'photo_profile',
+            'date_of_birth'
+        );
         $users->where('type', 1);
         $users->where('employment_status', 1);
         $users->orderBy('date_of_birth', 'asc');
@@ -43,8 +47,8 @@ class SummaryController extends Controller
 
         $countable = DB::table('users')
             ->select(
-                DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND type = 1 THEN 1 END) as total'),
-                DB::raw('COUNT(CASE WHEN employment_status IN (1) AND type = 1 THEN 1 END) as active'),
+                DB::raw('COUNT(CASE WHEN employment_status IN (1, 6, 7, 8, 9) AND type = 1 THEN 1 END) as total'),
+                DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND type = 1 THEN 1 END) as active'),
                 DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND type = 1 AND gender = 1 THEN 1 END) as male'),
                 DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND type = 1 AND gender = 0 THEN 1 END) as female'),
                 DB::raw('COUNT(CASE WHEN employment_status IN (1) AND type = 2 THEN 1 END) as assistance'),

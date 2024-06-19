@@ -124,14 +124,11 @@ class EmployeeController extends Controller
         $users->select(
             'u.id',
             'u.photo_profile',
-            'u.title_prefix',
-            'u.name',
-            'u.title_suffix',
+            DB::raw("CONCAT(u.title_prefix, ' ', u.name, ' ', u.title_suffix) as name"),
             'u.employee_id_number',
             'u.employee_registration_number',
             'p.name as position_name',
-            'g.name as grade_name',
-            'g.code as grade_code',
+            DB::raw("CONCAT(g.name, ' ', g.code) as grade_name"),
             'et.name as employment_type',
             'u.description'
         );

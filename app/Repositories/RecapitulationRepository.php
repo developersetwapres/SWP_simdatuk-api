@@ -85,8 +85,7 @@ class RecapitulationRepository
         $grade = DB::table('grades as g');
         $grade->join('users as u', 'u.grade_id', '=', 'g.id');
         $grade->select(
-            'g.name',
-            'g.code',
+            DB::raw("CONCAT(g.name, ' ', g.code) as name"),
             DB::raw('COUNT(u.id) as total')
         );
         $grade->where('g.type', $type);

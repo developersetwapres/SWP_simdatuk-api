@@ -46,7 +46,7 @@ class RecapitulationAsnController extends Controller
                     "total" => 283,
                     "cards" => [
                         [
-                            "name" => "Kepala Sektretariat Wakil Presiden",
+                            "name" => "Kepala Sekretariat Wakil Presiden",
                             "total" => 1,
                         ],
                         [
@@ -90,7 +90,7 @@ class RecapitulationAsnController extends Controller
                     ],
                 ],
                 [
-                    "name" => "Golongan ASN",
+                    "name" => "Pangkat/Golongan ASN",
                     "total" => $grade[0],
                     "cards" => $grade[1],
                 ],
