@@ -311,4 +311,35 @@ class PositionController extends Controller
             return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
         }
     }
+
+    public function delete()
+    {
+        try {
+            $position = DB::table('positions')
+                ->select('id')
+                ->where('id', $this->request->id);
+            $position = $position->first();
+
+            if (!$position) {
+                return $this->response(404, 'Jabatan tidak ditemukan.');
+            }
+
+            $existUser = DB::table('users')
+                ->where('position_id', $position->id)
+                ->count();
+
+            if ($existUser > 0) {
+                return $this->response(404, 'Jabatan ini masih digunakan oleh beberapa pegawai.');
+            }
+
+            DB::table('positions')
+                ->where('id', $position->id)
+                ->delete();
+
+            return $this->response(200, 'Jabatan berhasil dihapus.');
+        } catch (\Throwable $th) {
+            Log::warning($th);
+            return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
+        }
+    }
 }

@@ -148,6 +148,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/', [PositionController::class, 'create']);
         Route::get('/{id}', [PositionController::class, 'show']);
         Route::post('/{id}', [PositionController::class, 'update']);
+        Route::delete('/{id}', [PositionController::class, 'delete']);
     });
 
     Route::prefix('grades')->group(function () {
