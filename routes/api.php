@@ -213,9 +213,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('export')->group(function () {
         Route::get('/recapitulations/{type}', [ExportRecapitulationController::class, 'recapitulation']);
-        Route::get('/employees', [ExportController::class, 'employees']);
-        Route::get('/employees/{id}', [ExportController::class, 'detailEmployee']);
-        Route::get('/employees-zip', [ExportController::class, 'zipDetailEmployee']);
-        Route::get('/preview', [ExportController::class, 'exportExcelsPreview']);
+        Route::post('/employees', [ExportController::class, 'employees']);
+        Route::post('/employees/{id}', [ExportController::class, 'detailEmployee']);
+        Route::post('/employees-zip', [ExportController::class, 'zipDetailEmployee']);
+        Route::post('/preview', [ExportController::class, 'exportExcelsPreview']);
     });
 });

@@ -29,7 +29,8 @@ class ExportZipEmployeesRequest extends FormRequest
             'position_status' => 'array|min:1|numeric',
             'education' => 'array|min:1|numeric',
             'gender' => 'array|min:1|max:2|numeric',
-            'age_range' => 'array|min:1|string',
+            'min_age' => 'numeric|min:1',
+            'max_age' => 'numeric',
             'marital_status' => 'array|min:1',
         ];
     }
@@ -67,9 +68,9 @@ class ExportZipEmployeesRequest extends FormRequest
             'marital_status.array' => 'harus dalam rupa array',
             'marital_status.min' => 'minimal 1 angka didalam array',
             'marital_status.numeric' => 'isi array harus berupa angka',
-            'age_range.array' => 'harus dalam rupa array',
-            'age_range.min' => 'array minimal harus ada 1 value',
-            'age_range.string' => 'harus dalam rupa range umur',
+            'min_age.min' => 'array minimal harus ada 1 value',
+            'min_age.numeric' => 'harus dalam rupa angka',
+            'max_age.numeric' => 'harus dalam rupa angka',
         ];
     }
 
@@ -113,9 +114,13 @@ class ExportZipEmployeesRequest extends FormRequest
                 'description' => 'Refers to marital status of employee (1=Belum Menikah, 2=Menikah, 3=Cerai Hidup, 4=Cerai Mati)',
                 'example' => [1]
             ],
-            'age_range' => [
-                'description' => 'Refers to age range of employee',
-                'example' => "40-50", "50-60"
+            'min_age' => [
+                'description' => 'Refers to minimum age of employee',
+                'example' => 50
+            ],
+            'max_age' => [
+                'description' => 'Refers to maximum age of employee',
+                'example' => 55
             ],
         ];
     }

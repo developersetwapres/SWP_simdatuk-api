@@ -436,7 +436,7 @@ class ExportController extends Controller
         $housingComplex = DB::table('residences');
         $housingComplex->join('users as u', 'u.residence_id', '=', 'residences.id');
         $housingComplex->select('residences.name');
-        $housingComplex = $housingComplex->get();
+        $housingComplex = $housingComplex->first();
 
         //Grade Date
         $gradeStartDate = $user->grade_effective_date;
@@ -448,27 +448,8 @@ class ExportController extends Controller
         $mainOrganization = DB::table('groups');
         $mainOrganization->join('users', 'users.organization_id', '=', 'groups.id');
         $mainOrganization->select('groups.name');
-        $mainOrganization = $mainOrganization->get();
+        $mainOrganization = $mainOrganization->first();
 
-        //Main Education
-        $mainEducation = DB::table('user_educations as ue');
-        $mainEducation->join('users', 'users.id', '=', 'ue.user_id');
-        $mainEducation->where('ue.user_id', $user->id);
-        $mainEducation->select('ue.level as level', 'ue.name as school_name', 'ue.year_of_graduation');
-        $mainEducation->orderBy('ue.level', 'desc');
-        $mainEducation = $mainEducation->first();
-        if ($mainEducation) {
-            $educationLevel = match ($mainEducation->level) {
-                1 => 'SD/Sederajat',
-                2 => 'SLTP/Sederajat',
-                3 => 'SLTA/Sederajat',
-                4 => 'Diploma I/II',
-                5 => 'Akademik/D3/S.Muda',
-                6 => 'Diploma IV/Strata I',
-                7 => 'Strata II',
-                8 => 'Strata III',
-            };
-        }
         $pdf = Pdf::loadview('exports/user', [
             'userProfile' => [
                 'Tempat, tanggal lahir' => $user->place_of_birth . ', ' . $user->date_of_birth,
@@ -478,19 +459,19 @@ class ExportController extends Controller
                 'Jenis Pegawai' => $user->type,
                 'Instansi Induk' => ($userInstitution->name ?? ''),
                 'Tanggal Mulai Menjabat' => ($user->position_effective_date ?? ''),
-                'Satuan Organisasi' => ($mainOrganization ?? ''),
+                'Satuan Organisasi' => ($mainOrganization->name ?? ''),
                 'Unit Kerja' => $user->work_unit_id,
-                'Tingkat' => ($educationLevel ?? ''),
-                'Nama Sekolah/Universitas' => ($mainEducation->school_name ?? ''),
-                'Tahun Lulus' => ($mainEducation->year_of_graduation ?? ''),
+                'Tingkat' => $user->education_level,
+                'Nama Sekolah/Universitas' => $user->education_name,
+                'Tahun Lulus' => $user->education_year,
                 'No. Karpeg/No. Karis/No. Karsu' => $user->wife_id_card_number . '/' . $user->husband_id_card_number,
                 'Masa Kerja Keseluruhan' => 'Lorem ipsum',
-                'Masa Kerja Golongan' => $gradeDate->y . ' Tahun' . $gradeDate->m . ' Bulan' . $gradeDate->d . ' Hari',
+                'Masa Kerja Golongan' => $gradeDate->y . ' Tahun ' . $gradeDate->m . ' Bulan' . $gradeDate->d . ' Hari',
                 'NPWP' => $user->id_tax,
                 'Status Pegawai' => ($user->employment_status ? 'Aktif' : 'Tidak Aktif'),
                 'Nomor NIK' => $user->id_number,
-                'Komplek' => ($housingComplex == 'Luar Komplek') ? 'Luar' : 'Dalam',
-                'Nama Komplek' => ($housingComplex == 'Luar Komplek') ? $housingComplex : '-',
+                'Komplek' => ($housingComplex == 'Luar Komplek') ? 'Dalam' : 'Luar',
+                'Nama Komplek' => ($housingComplex == 'Luar Komplek') ? '-' : $housingComplex->name,
                 'Alamat Tempat Tinggal Saat Ini' => $user->current_address,
                 'No. Telepon Rumah' => $user->home_phone_number,
                 'No. HP' => $user->mobile_phone,
@@ -500,7 +481,7 @@ class ExportController extends Controller
                 'Kontak Darurat' => $user->emergency_contact,
                 'Batas Usia Pensiun' => $user->expire_at,
             ],
-            'currentPosition' => $userCurrentPosition,
+            'currentPosition' => $userCurrentPosition->name,
             'photoProfile' => $user->photo_profile,
             'userNIP' => $user->employee_id_number,
             'userName' => $user->name,
@@ -545,7 +526,8 @@ class ExportController extends Controller
      * @bodyParam education int[] list of employee's education level. Example [1, 6]
      * @bodyParam gender int[] list of employee's gender.
      * @bodyParam marital_status int[] list of employee's marital status. Example [1,4]
-     * @bodyParam age_range string[] list of employee's age range. Example ["30-40", "40-50"]
+     * @bodyParam max_range int maximum age of employees. Example 50
+     * @bodyParam min_range int minimum age of employees. Example 50
      * @authenticated
      */
     public function zipDetailEmployee(ExportZipEmployeesRequest $request)
@@ -561,25 +543,22 @@ class ExportController extends Controller
         if (isset($request->organization)) {
             $user->whereIn('users.organization_id', $request->organization);
         }
-        if (isset($request->age_range)) {
-            $ageRanges = $request->input('age_range', []);
+        if (isset($request->min_age)) {
+            $minAge = $request->input('min_age');
             $now = Carbon::now();
 
-            $user->where(function ($query) use ($ageRanges, $now, &$dateRanges) {
-                foreach ($ageRanges as $range) {
-                    [$minAge, $maxAge] = explode('-', $range);
+            $minDate = $now->copy()->subYears($minAge + 1)->addDay()->toDateString();
 
-                    // Calculate date range for the current age range
-                    $maxDate = $now->copy()->subYears($minAge)->toDateString();
-                    $minDate = $now->copy()->subYears($maxAge + 1)->addDay()->toDateString();
+            $user->where('users.date_of_birth', '<=', $minDate);
+        }
 
-                    // Store the date range for debugging
-                    $dateRanges[] = ['minAge' => $minAge, 'maxAge' => $maxAge, 'minDate' => $minDate, 'maxDate' => $maxDate];
+        if (isset($request->max_age)) {
+            $maxAge = $request->input('max_age');
+            $now = Carbon::now();
 
-                    // Add orWhereBetween clause within the nested query
-                    $query->orWhereBetween('users.date_of_birth', [$minDate, $maxDate]);
-                }
-            });
+            $maxDate = $now->copy()->subYears($maxAge)->toDateString();
+
+            $user->where('users.date_of_birth', '>=', $maxDate);
         }
         if (isset($request->echelons)) {
             $user->whereIn('echelons.name', $request->echelons);
