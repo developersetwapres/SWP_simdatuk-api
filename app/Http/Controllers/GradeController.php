@@ -47,6 +47,7 @@ class GradeController extends Controller
         $grades->select('grades.id', 'grades.name', 'grades.code', 'grades.type');
         $grades->where('grades.name', 'like', '%' . $this->request->search . '%');
         $grades->orWhere('grades.code', 'like', '%' . $this->request->search . '%');
+        $grades->orderBy('id', 'asc');
 
         if (is_null($this->request->limit)) {
             $grades = $grades->get();

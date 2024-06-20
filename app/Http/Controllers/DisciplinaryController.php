@@ -45,6 +45,7 @@ class DisciplinaryController extends Controller
         $disciplinaries = DB::table('disciplinaries');
         $disciplinaries->select('id', 'name', 'description', 'performance_allowance_deduction', 'performance_allowance_duration');
         $disciplinaries->where('name', 'like', '%' . $this->request->search . '%');
+        $disciplinaries->orderBy('id', 'asc');
 
         if (is_null($this->request->limit)) {
             $disciplinaries = $disciplinaries->get();

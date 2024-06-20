@@ -46,6 +46,7 @@ class DecreeController extends Controller
         $decrees = DB::table('decrees');
         $decrees->select('id', 'name', 'acronym', 'created_at');
         $decrees->where('name', 'like', '%' . $this->request->search . '%');
+        $decrees->orderBy('id', 'asc');
 
         if (is_null($this->request->limit)) {
             $decrees = $decrees->get();

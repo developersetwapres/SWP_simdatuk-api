@@ -59,6 +59,7 @@ class EmploymentTypeController extends Controller
         if ($this->request->type) {
             $employmentTypes->where('type', $this->request->type);
         }
+        $employmentTypes->orderBy('id', 'asc');
 
         if (is_null($this->request->limit)) {
             $employmentTypes = $employmentTypes->get();

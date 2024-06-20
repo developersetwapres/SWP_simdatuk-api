@@ -46,6 +46,7 @@ class ResidenceController extends Controller
         $residences = DB::table('residences');
         $residences->select('id', 'name', 'created_at');
         $residences->where('name', 'like', '%' . $this->request->search . '%');
+        $residences->orderBy('id', 'asc');
 
         if (is_null($this->request->limit)) {
             $residences = $residences->get();

@@ -46,6 +46,7 @@ class GroupController extends Controller
         $groups = DB::table('groups');
         $groups->select('id', 'name', 'created_at');
         $groups->where('name', 'like', '%' . $this->request->search . '%');
+        $groups->orderBy('id', 'asc');
 
         if (is_null($this->request->limit)) {
             $groups = $groups->get();

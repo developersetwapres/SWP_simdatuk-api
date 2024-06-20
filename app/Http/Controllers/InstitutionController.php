@@ -47,6 +47,7 @@ class InstitutionController extends Controller
         $institutions = DB::table('institutions');
         $institutions->select('id', 'name');
         $institutions->where('name', 'like', '%' . $this->request->search . '%');
+        $institutions->orderBy('id', 'asc');
 
         if (is_null($this->request->limit)) {
             $institutions = $institutions->get();

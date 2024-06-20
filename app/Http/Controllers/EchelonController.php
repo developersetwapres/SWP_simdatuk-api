@@ -46,6 +46,7 @@ class EchelonController extends Controller
         $echelons = DB::table('echelons');
         $echelons->select('echelons.id', 'echelons.name');
         $echelons->where('echelons.name', 'like', '%' . $this->request->search . '%');
+        $echelons->orderBy('id', 'asc');
 
         if (is_null($this->request->limit)) {
             $echelons = $echelons->get();
