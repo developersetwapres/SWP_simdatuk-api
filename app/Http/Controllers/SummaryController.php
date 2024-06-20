@@ -33,7 +33,14 @@ class SummaryController extends Controller
         $users = DB::table('users');
         $users->whereMonth('date_of_birth', $this->request->month);
         $users->select(
-            DB::raw("CONCAT(title_prefix, ' ', name, ' ', title_suffix) as name"),
+            DB::raw("
+                CASE
+                    WHEN title_prefix IS NULL && title_suffix IS NULL THEN name
+                    WHEN title_prefix IS NOT NULL && title_suffix IS NULL THEN CONCAT(title_prefix, ' ', name)
+                    WHEN title_prefix IS NULL && title_suffix IS NOT NULL THEN CONCAT(name, ' ', title_suffix)
+                    ELSE CONCAT(title_prefix, ' ',name, ' ',title_suffix)
+                END AS name
+            "),
             'photo_profile',
             'date_of_birth'
         );

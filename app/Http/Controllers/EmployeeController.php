@@ -124,7 +124,15 @@ class EmployeeController extends Controller
         $users->select(
             'u.id',
             'u.photo_profile',
-            DB::raw("CONCAT(u.title_prefix, ' ', u.name, ' ', u.title_suffix) as name"),
+            'u.name as coda',
+            DB::raw("
+                CASE
+                    WHEN u.title_prefix IS NULL && u.title_suffix IS NULL THEN u.name
+                    WHEN u.title_prefix IS NOT NULL && u.title_suffix IS NULL THEN CONCAT(u.title_prefix, ' ', u.name)
+                    WHEN u.title_prefix IS NULL && u.title_suffix IS NOT NULL THEN CONCAT(u.name, ' ', u.title_suffix)
+                    ELSE CONCAT(u.title_prefix, ' ',u.name, ' ',u.title_suffix)
+                END AS name
+            "),
             'u.employee_id_number',
             'u.employee_registration_number',
             'p.name as position_name',
