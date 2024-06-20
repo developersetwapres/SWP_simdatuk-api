@@ -16,8 +16,6 @@ return new class extends Migration
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->string('name');
             $table->tinyInteger('available')->default(0);
-            $table->tinyInteger('filled')->default(0);
-            $table->tinyInteger('children')->default(0);
             $table->tinyInteger('type')->comment('1=struktural, 2=fungsional, 3=outsource');
             $table->tinyInteger('entity')->comment('1=personil, 2=badan');
             $table->tinyInteger('vertical_order')->default(0);
