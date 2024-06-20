@@ -145,6 +145,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('positions')->group(function () {
         Route::get('/', [PositionController::class, 'index']);
+        Route::post('/', [PositionController::class, 'create']);
+        Route::get('/{id}', [PositionController::class, 'show']);
+        Route::post('/{id}', [PositionController::class, 'update']);
     });
 
     Route::prefix('grades')->group(function () {

@@ -51,4 +51,50 @@ class PositionRepository
         }
         return $positions;
     }
+
+    /**
+     * Get recursive position data
+     *
+     * @param int $positionId
+     * @return void
+     */
+    public function getRecursivePosition($positionId, $limit = null)
+    {
+        $sql =
+            "WITH RECURSIVE hierarchy AS (
+            -- Anchor member: Select the initial child row
+            SELECT
+                id,
+                name,
+                parent_id
+            FROM
+                positions
+            WHERE
+                id = '$positionId' -- Replace ? with the specific child employee_id
+
+            UNION ALL
+
+            -- Recursive member: Select the parent row
+            SELECT
+                p.id,
+                p.name,
+                p.parent_id
+            FROM
+                positions p
+            INNER JOIN
+                hierarchy h ON p.id = h.parent_id
+            WHERE
+                p.entity = 1
+        )
+        SELECT
+            *
+        FROM
+            hierarchy";
+
+        if (isset($limit)) {
+            $sql .= " LIMIT $limit";
+        }
+        $positions = DB::select($sql);
+        return $positions;
+    }
 }
