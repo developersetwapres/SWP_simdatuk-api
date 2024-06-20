@@ -49,7 +49,7 @@ class SummaryController extends Controller
         $users->orderBy('date_of_birth', 'asc');
         $users = $users->take(8)->get();
         foreach ($users as $item) {
-            $item->photo_profile = (is_null($item->photo_profile)) ? asset('img/avatar.jpeg') : Storage::disk('public')->url($item->photo_profile);
+            $item->photo_profile = $this->getDocument($item->photo_profile, true);
         }
 
         $countable = DB::table('users')
