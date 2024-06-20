@@ -118,7 +118,7 @@ class CreateFamilyRequest
                 'example' => 'Maemunah',
             ],
             'families.*.relationship_status' => [
-                'description' => 'Refers to the Relationship Status of Employee Family.',
+                'description' => 'Refers to the Relationship Status of Employee Family. 1=Kepala Keluarga, 2=Suami, 3=Istri, 4=Anak, 5=Menantu, 6=Cucu, 7=Orang Tua, 8=Mertua, 9=Famili Lainnya, 10=Pembantu, 11=Lainnya',
                 'example' => 1,
             ],
             'families.*.education' => [
