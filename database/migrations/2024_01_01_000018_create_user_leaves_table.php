@@ -14,14 +14,12 @@ return new class extends Migration
         Schema::create('user_leaves', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
-            $table->string('grade')->nullable();
-            $table->string('position')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
-            $table->text('reason')->nullable();
+            $table->tinyInteger('type')->nullable()->comment('1=Cuti diluar Tanggungan Negara, 2=Cuti Sakit, 3=Cuti Besar, 4=Cuti Bersalin, 5=Cuti Belajar Luar Negeri, 6=Cuti Tahunan Luar Negeri');
             $table->text('number')->nullable();
-            $table->text('purpose')->nullable();
-            $table->string('leave_letter')->nullable();
+            $table->text('description')->nullable();
+            $table->string('letter')->nullable();
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
 

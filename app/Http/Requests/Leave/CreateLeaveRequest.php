@@ -13,14 +13,12 @@ class CreateLeaveRequest
     public static function rules(): array
     {
         return [
-            'leaves.*.grade' => 'nullable',
-            'leaves.*.position' => 'nullable',
             'leaves.*.start_date' => 'required|date',
             'leaves.*.end_date' => 'required|date',
-            'leaves.*.reason' => 'required|max:160',
+            'leaves.*.type' => 'required|in:1,2,3,4,5,6',
             'leaves.*.number' => 'required|max:160',
-            'leaves.*.purpose' => 'required|max:160',
-            'leaves.*.leave_letter' => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
+            'leaves.*.description' => 'required|max:160',
+            'leaves.*.letter' => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
         ];
     }
 
@@ -36,15 +34,15 @@ class CreateLeaveRequest
             'leaves.*.start_date.date' => 'Periode mulai harus berupa tanggal.',
             'leaves.*.end_date.required' => 'Periode akhir tidak boleh kosong.',
             'leaves.*.end_date.date' => 'Periode akhir harus berupa tanggal.',
-            'leaves.*.reason.required' => 'Alasan tidak boleh kosong.',
-            'leaves.*.reason.max' => 'Alasan tidak boleh lebih dari 160 karakter.',
+            'leaves.*.type.required' => 'Jenis cuti tidak boleh kosong.',
+            'leaves.*.type.in' => 'Jenis cuti harus diantara 1,2,3,4,5 atau 6.',
             'leaves.*.number.required' => 'Nomor cuti tidak boleh kosong.',
             'leaves.*.number.max' => 'Nomor cuti tidak boleh lebih dari 160 karakter.',
             'leaves.*.purpose.required' => 'Tujuan tidak boleh kosong.',
             'leaves.*.purpose.max' => 'Tujuan tidak boleh lebih dari 160 karakter',
-            'leaves.*.leave_letter.file' => 'Surat cuti harus berupa file.',
-            'leaves.*.leave_letter.extensions' => 'Surat cuti harus berupa jpg, jpeg atau png.',
-            'leaves.*.leave_letter.max' => 'Ukuran surat cuti tidak boleh lebih dari 2MB.',
+            'leaves.*.letter.file' => 'Surat cuti harus berupa file.',
+            'leaves.*.letter.extensions' => 'Surat cuti harus berupa jpg, jpeg atau png.',
+            'leaves.*.letter.max' => 'Ukuran surat cuti tidak boleh lebih dari 2MB.',
         ];
     }
 
@@ -56,14 +54,6 @@ class CreateLeaveRequest
     public static function bodyParameters(): array
     {
         return [
-            'leaves.*.grade' => [
-                'description' => 'Refers to the ID Grade of Employee Leave.',
-                'example' => 'Penata (III/c)',
-            ],
-            'leaves.*.position' => [
-                'description' => 'Refers to the Position of Employee Leave.',
-                'example' => 'Kepala Subbagian, Bagian Protokol, dan Kerumahtanggaan, Deputi Bidang Administrasi',
-            ],
             'leaves.*.start_date' => [
                 'description' => 'Refers to the Start Date of Employee Leave.',
                 'example' => '2020-10-22',
@@ -72,20 +62,20 @@ class CreateLeaveRequest
                 'description' => 'Refers to the End Date of Employee Leave.',
                 'example' => '2022-10-22',
             ],
-            'leaves.*.reason' => [
-                'description' => 'Refers to the Reason of Employee Leave.',
-                'example' => 'Mudik lebaran',
+            'leaves.*.type' => [
+                'description' => 'Refers to the Type of Employee Leave. 1=Cuti diluar Tanggungan Negara, 2=Cuti Sakit, 3=Cuti Besar, 4=Cuti Bersalin, 5=Cuti Belajar Luar Negeri, 6=Cuti Tahunan Luar Negeri',
+                'example' => 1,
             ],
             'leaves.*.number' => [
                 'description' => 'Refers to the Leave Number of Employee Leave.',
                 'example' => 'CT/1000.000.00',
             ],
-            'leaves.*.purpose' => [
-                'description' => 'Refers to the Purpose of Employee Leave.',
-                'example' => 'Semarang',
+            'leaves.*.description' => [
+                'description' => 'Refers to the Description of Employee Leave.',
+                'example' => 'Mudik lebaran',
             ],
-            'leaves.*.leave_letter' => [
-                'description' => 'Refers to the Leave Letter of Employee Leave.',
+            'leaves.*.letter' => [
+                'description' => 'Refers to the Letter of Employee Leave.',
                 'example' => public_path('/img/logo.svg'),
             ],
         ];

@@ -2,24 +2,31 @@
 
 namespace App\Repositories;
 
+use App\Helpers\Document;
 use Illuminate\Support\Facades\DB;
 
 class LeaveRepository
 {
+    use Document;
+
     public function getDetail($userId)
     {
         $leaves = DB::table('user_leaves');
         $leaves->where('user_id', $userId);
         $leaves->select(
-            'grade',
-            'position',
             'start_date',
             'end_date',
-            'reason',
+            'type',
             'number',
-            'purpose',
-            'leave_letter',
+            'description',
+            'letter',
         );
-        return $leaves = $leaves->get();
+        $leaves = $leaves->get();
+
+        foreach ($leaves as $leave) {
+            $leave->letter = $this->getDocument($leave->letter);
+        }
+
+        return $leaves;
     }
 }

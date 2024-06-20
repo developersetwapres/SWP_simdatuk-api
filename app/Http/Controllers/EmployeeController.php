@@ -257,8 +257,8 @@ class EmployeeController extends Controller
             if (isset($this->request->leaves)) {
                 $leaves = array();
                 foreach ($this->request->leaves as $leave) {
-                    if (isset($leave['leave_letter']) && is_file($leave['leave_letter'])) {
-                        $leave['leave_letter'] = $this->uploadDocument($leave['leave_letter'], 'leave_letter');
+                    if (isset($leave['letter']) && is_file($leave['letter'])) {
+                        $leave['letter'] = $this->uploadDocument($leave['letter'], 'letter');
                     }
                     $leave['user_id'] = $userId;
                     array_push($leaves, $leave);

@@ -19,8 +19,16 @@ class OldLeaveSeeder extends Seeder
                     db_baru_users.id as user_id,
                     db_lama_cuti.mulai as start_date,
                     db_lama_cuti.sampai as end_date,
-                    db_lama_cuti.keterangan as reason,
+                    CASE
+                        WHEN db_lama_cuti.jns_cuti = 'CBR' THEN 3
+                        WHEN db_lama_cuti.jns_cuti = 'CBL' THEN 4
+                        WHEN db_lama_cuti.jns_cuti = 'CLTN' THEN 1
+                        WHEN db_lama_cuti.jns_cuti = 'CSK' THEN 2
+                        WHEN db_lama_cuti.jns_cuti = 'TBL' THEN 5
+                        ELSE NULL
+                    END as type,
                     db_lama_cuti.no_sk_cuti as number,
+                    db_lama_cuti.keterangan as description,
                     CURRENT_TIMESTAMP AS created_at
                 FROM
                     simdatuk_dump.tbl_r_cuti as db_lama_cuti
