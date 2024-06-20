@@ -46,6 +46,7 @@ class DiagramController extends Controller
             $position->users = [];
             if ($position->entity == 1) {
                 $position->users = $this->getUsers($position->id);
+                $position->filled = sizeof($position->users);
             }
         }
 
@@ -60,6 +61,7 @@ class DiagramController extends Controller
             $positions->users = [];
             if ($positions->entity == 1) {
                 $positions->users = $this->getUsers($positions->id);
+                $positions->filled = sizeof($positions->users);
             }
 
             if ($positions->type == 1) {
@@ -79,6 +81,8 @@ class DiagramController extends Controller
                     }
                 }
 
+                $childPosition->filled = sizeof($childPosition->users);
+
                 $childPosition->childs = [];
                 //jabatan fungsional
                 if (isset($childPosition->type) && $childPosition->type == 2) {
@@ -92,12 +96,15 @@ class DiagramController extends Controller
                 //special case Pejabat Kemensetneg yang Diperbantukan di Sekretariat Wakil Presiden
                 if (isset($positions->id) && $positions->id == 4) {
                     $grandchildPositions = $this->getPositions($childPosition->id, 2, true);
+
                     foreach ($grandchildPositions as $grandchildPosition) {
                         $grandchildUsers = $this->getUsers($grandchildPosition->id);
                         foreach ($grandchildUsers as $value) {
                             $childPosition->users[] = $value;
                         }
                     }
+
+                    $childPosition->filled = sizeof($childPosition->users);
                 }
             }
         }
@@ -133,8 +140,6 @@ class DiagramController extends Controller
                 'positions.name',
                 'positions.type',
                 DB::raw('CASE WHEN position_echelons.available IS NOT NULL THEN position_echelons.available ELSE positions.available END as available'),
-                DB::raw('CASE WHEN position_echelons.filled IS NOT NULL THEN position_echelons.filled ELSE positions.filled END as filled'),
-                DB::raw('CASE WHEN position_echelons.children IS NOT NULL THEN position_echelons.children ELSE positions.children END as children'),
                 'positions.entity',
             )
             ->leftJoin('position_echelons', 'positions.id', '=', 'position_echelons.position_id')
@@ -193,8 +198,6 @@ class DiagramController extends Controller
             ->select(
                 'echelons.name',
                 'position_echelons.available',
-                'position_echelons.filled',
-                'position_echelons.children',
                 'position_echelons.echelon_id',
             )
             ->leftJoin('echelons', 'position_echelons.echelon_id', '=', 'echelons.id')
@@ -205,7 +208,8 @@ class DiagramController extends Controller
 
         foreach ($positionEchelons as $positionEchelon) {
             $positionEchelon->users = $this->getUsers($positionId, $positionEchelon->echelon_id);
-            $positionEchelon->children = sizeof($positionEchelon->users);
+            $positionEchelon->filled = sizeof($positionEchelon->users);
+            $positionEchelon->children = 0;
         }
 
         return $positionEchelons;
