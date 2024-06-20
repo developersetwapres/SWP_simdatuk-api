@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Employee\CreateEmployeeRequest;
 use App\Http\Requests\Employee\UpdateEmployeeRequest;
 use App\Repositories\AssessmentRepository;
-use App\Repositories\CreditScoreRepository;
 use App\Repositories\DisciplinaryRepository;
 use App\Repositories\EducationRepository;
 use App\Repositories\EmployeeRepository;
@@ -55,7 +54,6 @@ class EmployeeController extends Controller
         LeaveRepository $leaveRepository,
         NoteRepository $noteRepository,
         AssessmentRepository $assessmentRepository,
-        CreditScoreRepository $creditscoreRepository,
     ) {
         $this->request = $request;
         $this->posted = $request->except(
@@ -81,7 +79,6 @@ class EmployeeController extends Controller
         $this->leaveRepository = $leaveRepository;
         $this->noteRepository = $noteRepository;
         $this->assessmentRepository = $assessmentRepository;
-        $this->creditscoreRepository = $creditscoreRepository;
     }
 
     /**
@@ -227,7 +224,7 @@ class EmployeeController extends Controller
             if (isset($this->request->educations)) {
                 $educations = array();
                 foreach ($this->request->educations as $education) {
-                    if (is_file($education['degree_document'])) {
+                    if (isset($education['degree_document']) && is_file($education['degree_document'])) {
                         $education['degree_document'] = $this->uploadDocument($education['degree_document'], 'degree_document');
                     }
                     $education['user_id'] = $userId;
@@ -260,7 +257,7 @@ class EmployeeController extends Controller
             if (isset($this->request->leaves)) {
                 $leaves = array();
                 foreach ($this->request->leaves as $leave) {
-                    if (is_file($leave['leave_letter'])) {
+                    if (isset($leave['leave_letter']) && is_file($leave['leave_letter'])) {
                         $leave['leave_letter'] = $this->uploadDocument($leave['leave_letter'], 'leave_letter');
                     }
                     $leave['user_id'] = $userId;
@@ -284,7 +281,7 @@ class EmployeeController extends Controller
             if (isset($this->request->assessments)) {
                 $assessments = array();
                 foreach ($this->request->assessments as $assessment) {
-                    if (is_file($assessment['assessment_document'])) {
+                    if (isset($assessment['assessment_document']) && is_file($assessment['assessment_document'])) {
                         $assessment['assessment_document'] = $this->uploadDocument($assessment['assessment_document'], 'assessment_document');
                     }
                     $assessment['user_id'] = $userId;
@@ -292,20 +289,13 @@ class EmployeeController extends Controller
                 }
                 DB::table('user_assessments')->insertTs($assessments);
             }
-            if (isset($this->request->credit_score)) {
-                $credit_scores = array();
-                foreach ($this->request->credit_score as $credit_score) {
-                    $credit_score['user_id'] = $userId;
-                    array_push($credit_scores, $credit_score);
-                }
-                DB::table('user_credit_score')->insertTs($credit_scores);
-            }
             DB::commit();
+            return $this->response(200, 'Pegawai berhasil ditambah.');
         } catch (\Throwable $th) {
             DB::rollback();
+            \Log::warning($th);
+            return $this->response(500, 'Pegawai gagal ditambah.');
         }
-
-        return $this->response(200, 'Pegawai berhasil ditambah.');
     }
 
     /**
@@ -340,7 +330,6 @@ class EmployeeController extends Controller
         $assessments = $this->assessmentRepository->getDetail($this->request->id, 1);
         $competencies = $this->assessmentRepository->getDetail($this->request->id, 2);
         $talents = $this->assessmentRepository->getDetail($this->request->id, 3);
-        $creditScore = $this->creditscoreRepository->getDetail($this->request->id);
 
         $employee->educations = $educations;
         $employee->positions = $positions;
@@ -357,7 +346,6 @@ class EmployeeController extends Controller
         $employee->assessments = $assessments;
         $employee->competencies = $competencies;
         $employee->talents = $talents;
-        $employee->creditScore = $creditScore;
 
         return $this->response(200, 'success', $employee);
     }

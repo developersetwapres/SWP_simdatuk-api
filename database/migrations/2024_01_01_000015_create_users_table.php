@@ -43,8 +43,7 @@ return new class extends Migration
             $table->year('education_year')->nullable();
             $table->string('employee_id_card_number', 20)->nullable();
             $table->string('employee_id_card', 160)->nullable();
-            $table->string('wife_id_card_number', 20)->nullable();
-            $table->string('husband_id_card_number', 20)->nullable();
+            $table->string('karisu_number', 20)->nullable();
             $table->string('id_tax', 20)->nullable();
             $table->tinyInteger('employment_status')->nullable()->comment('1=Aktif, 2=Pensiun, 3=Berhenti, 4=Meninggal, 5=Alih Status, 6=Aktif Perbantuan Setneg, 7=CLTN, 8=TBLN, 9=Non Aktif');
             $table->string('id_number')->nullable();

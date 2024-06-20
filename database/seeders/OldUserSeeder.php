@@ -119,8 +119,7 @@ class OldUserSeeder extends Seeder
                         ELSE thn_lulus
                     END AS education_year,
                     no_karpeg as employee_id_card_number,
-                    no_karisu as wife_id_card_number,
-                    no_karisu as husband_id_card_number,
+                    no_karisu as karisu_number,
                     npwp as id_tax,
                     CASE
                         WHEN status_kepeg = 'Aktif' THEN 1
