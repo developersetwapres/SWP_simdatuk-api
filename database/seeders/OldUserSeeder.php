@@ -37,9 +37,15 @@ class OldUserSeeder extends Seeder
                     END AS email,
                     CONCAT(SUBSTRING(LOWER(REPLACE(REPLACE(nm_pegawai, '.', ''), ' ', '')), 1, 5), DATE_FORMAT(DATE(tgl_lahir), '%y%m%d')) as username,
                     IF(id_pegawai = '198503022009021001' OR id_pegawai = '198605282009122001', '$hashedPassword', NULL) AS password,
-                    gelar_dpn as title_prefix,
+                    CASE
+                        WHEN gelar_dpn = '' THEN NULL
+                        ELSE gelar_dpn
+                    END AS title_prefix,
                     nm_pegawai as name,
-                    gelar_blk as title_suffix,
+                    CASE
+                        WHEN gelar_blk = '' THEN NULL
+                        ELSE gelar_blk
+                    END AS title_suffix,
                     CONCAT('photo_profile/', id_pegawai, '.jpg') AS photo_profile,
                     id_pegawai as employee_id_number,
                     IF(nip_lama = '', id_pegawai, nip_lama) as employee_registration_number,
@@ -168,9 +174,15 @@ class OldUserSeeder extends Seeder
                         WHEN email = '-' THEN NULL
                         ELSE LOWER(email)
                     END AS email,
-                    gelar_dpn AS title_prefix,
+                    CASE
+                        WHEN gelar_dpn = '' THEN NULL
+                        ELSE gelar_dpn
+                    END AS title_prefix,
                     nm_perbantuan AS name,
-                    gelar_blk AS title_suffix,
+                    CASE
+                        WHEN gelar_blk = '' THEN NULL
+                        ELSE gelar_blk
+                    END AS title_suffix,
                     id_perbantuan AS employee_id_number,
                     IF(id_lama = '', id_perbantuan, id_lama) AS employee_registration_number,
                     tmpt_lahir AS place_of_birth,
