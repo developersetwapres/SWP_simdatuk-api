@@ -14,13 +14,13 @@ trait Document
      * @param string $directory
      * @return void
      */
-    public function uploadDocument($file, $directory)
+    public function uploadDocument($file, $directory, $filename = null)
     {
         $directory = '/' . $directory . '/';
         $fileExtension = '.' . $file->getClientOriginalExtension();
-        $fileName = Str::random(32) . $fileExtension;
-        Storage::disk('s3')->putFileAs($directory, $file, $fileName);
-        return $directory . $fileName;
+        $filename = (is_null($filename)) ? Str::random(32) . $fileExtension : $filename . $fileExtension;
+        Storage::disk('s3')->putFileAs($directory, $file, $filename);
+        return $directory . $filename;
     }
 
     /**

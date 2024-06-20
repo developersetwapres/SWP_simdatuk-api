@@ -2,10 +2,13 @@
 
 namespace App\Repositories;
 
+use App\Helpers\Document;
 use Illuminate\Support\Facades\DB;
 
 class EmployeeRepository
 {
+    use Document;
+
     public function getDetail($userId)
     {
         $user = DB::table('users as u');
@@ -61,6 +64,7 @@ class EmployeeRepository
             'u.created_at'
         );
         $user = $user->first();
+        $user->photo_profile = $this->getDocument($user->photo_profile, true);
         if (!is_null($user->position_id)) {
             $user->position_merged = $this->getRecursivePosition($user->position_id);
         }

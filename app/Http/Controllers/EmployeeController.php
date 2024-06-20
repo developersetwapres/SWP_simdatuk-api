@@ -207,12 +207,12 @@ class EmployeeController extends Controller
         }
 
         if ($this->request->hasFile('photo_profile')) {
-            $path = $this->uploadDocument($this->request->file('photo_profile'), 'photo_profile');
+            $path = $this->uploadDocument($this->request->file('photo_profile'), 'photo_profile', $this->request->employee_id_number);
             $this->posted['photo_profile'] = $path;
         }
 
         if ($this->request->hasFile('employee_id_card')) {
-            $path = $this->uploadDocument($this->request->file('employee_id_card'), 'employee_id_card');
+            $path = $this->uploadDocument($this->request->file('employee_id_card'), 'employee_id_card', $this->request->employee_id_number);
             $this->posted['employee_id_card'] = $path;
         }
 
