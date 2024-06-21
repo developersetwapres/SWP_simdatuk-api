@@ -232,6 +232,9 @@
                 @if($toggleField['isNotes'])
                     <th class="section-header-color">Catatan</th>
                 @endif
+                @if($toggleField['isPositionDescription'])
+                    <th class="section-header-color">Deskripsi Jabatan</th>
+                @endif
             </tr>
         </thead>
         <tbody>
@@ -464,6 +467,12 @@
                         <ul>{!! $value['notes'] !!}</ul>
                     </td>
                 @endif
+                @if($toggleField['isPositionDescription'])
+                    <td>
+                        <ul>{!! $value['position_description'] !!}</ul>
+                    </td>
+                @endif
+
             </tr>
         @endforeach
 

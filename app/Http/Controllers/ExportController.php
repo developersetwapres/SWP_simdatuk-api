@@ -822,9 +822,9 @@ class ExportController extends Controller
                 $usersData->leftJoin('positions', 'users.position_id', '=', 'positions.id');
                 $usersData->addSelect('positions.name as position_name');
             }
-//        if ($toggleField['isPositionDescription']){
-//            //
-//        }
+            if ($toggleFieldBio['isPositionDescription']){
+                $usersData->addSelect('users.description');
+            }
             if ($toggleFieldBio['isEchelons']) {
                 $usersData->leftJoin('echelons', 'users.echelon_id', '=', 'echelons.id');
                 $usersData->addSelect('echelons.name as echelons_name');

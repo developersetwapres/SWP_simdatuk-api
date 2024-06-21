@@ -115,18 +115,17 @@ class employee implements FromView, WithDrawings, WithEvents
 
     public function view(): View
     {
-        $usersId = [3, 4];
         $users = DB::table('users');
-        if ($this->toggleField['isName']) {
+        if (isset($this->toggleField['isName'])) {
             $users->addSelect('users.name');
         }
-        if ($this->toggleField['isPosition']){
+        if (isset($this->toggleField['isPosition'])){
             $users->leftJoin('positions', 'users.position_id', '=', 'positions.id' );
             $users->addSelect('positions.name as position_name');
         }
-//        if ($this->toggleField['isPositionDescription']){
-//            //
-//        }
+        if (isset($this->toggleField['isPositionDescription'])){
+            $users->addSelect('users.description as position_description');
+        }
         if (isset($this->toggleField['isEchelons'])){
             $users->leftJoin('echelons', 'users.echelon_id', '=', 'echelons.id');
             $users->addSelect('echelons.name as echelons_name');

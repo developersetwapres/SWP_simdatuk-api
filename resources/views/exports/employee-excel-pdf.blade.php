@@ -1,66 +1,11 @@
-    <style>
-        html * {
-            font-family: Inter !important;
-            color: #394346;
-        }
-        .logo {
-            width: 200px;
-        }
-        header {
-            position: fixed !important;
-            top: -42px;
-            left: 0px;
-            right: 0px;
-        }
-        @page {
-            margin: 72px 32px;
-        }
-        body {
-            /*margin: 20px;*/
-        }
-        .container {
-            /*max-width: 90%;*/
-            /*margin: auto;*/
-        }
-        .title {
-            text-align: center;
-            font-size: 15px;
-            font-weight: 700;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-            font-size: 10px;
-            font-weight: 400;
-        }
-        th, td {
-            /*padding: 8px;*/
-            text-align: left;
-            font-size: 10px;
-            font-weight: 400;
-        }
-        th {
-            font-size: 10px;
-            font-weight: 400;
-        }
-        .right {
-            text-align: right;
-        }
-        .section-table td {
-            /*padding: 4px 8px;*/
-        }
-        .section-table {
-            margin-bottom: 10px;
-        }
-        .section-header-color{
-            padding: 8px;
-            background-color: #394346;
-            color: white;
-            word-wrap: break-word;
-            font-size: 10px;
-            font-weight: 400;
-        }
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
+    <style type="text/css">
         html * {
             font-family: Inter !important;
             color: #394346;
@@ -82,390 +27,394 @@
         }
 
         p:last-child {
-            /*page-break-after: never;*/
-        }
-
-        .page-break {
-            page-break-after: always;
+            page-break-after: never;
         }
 
         .logo {
             width: 200px;
         }
 
+        .page_break {
+            page-break-after: always;
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 160px;
+        }
+
         .title {
             font-size: 15px;
             font-weight: 700;
         }
-    </style>
 
-    <table class="section-table" style="border: none">
-        <thead>
-            <tr>
-                <th colspan="11"></th>
-            </tr>
-            <tr bgcolor="#394346" style="color: #394346">
-                <th class="section-header-color">No</th>
-                @if($toggleField['isName'])
-                    <th class="section-header-color">Nama</th>
-                @endif
-                @if($toggleField['isPosition'])
-                    <th class="section-header-color">Jabatan</th>
-                @endif
-                @if($toggleField['isPositionDescription'])
-                    <th class="section-header-color">Deskripsi Jabatan</th>
-                @endif
-                @if($toggleField['isEchelons'])
-                    <th class="section-header-color">Eselon</th>
-                @endif
-                @if($toggleField['isGrade'])
-                    <th class="section-header-color">Grade</th>
-                @endif
-                @if($toggleField['isNip'])
-                    <th class="section-header-color">NIP</th>
-                @endif
-                @if($toggleField['isBirthPlaceDate'])
-                    <th class="section-header-color">Tempat, Tanggal Lahir</th>
-                @endif
-                @if($toggleField['isAge'])
-                    <th class="section-header-color">Usia</th>
-                @endif
-                @if($toggleField['isReligion'])
-                    <th class="section-header-color">Agama</th>
-                @endif
-                @if($toggleField['isGender'])
-                    <th class="section-header-color">Jenis Kelamin</th>
-                @endif
-                @if($toggleField['isMaritalStatus'])
-                    <th class="section-header-color">Status Perkawinan</th>
-                @endif
-                @if($toggleField['isAgency'])
-                    <th class="section-header-color">Instansi</th>
-                @endif
-                @if($toggleField['isOrganization'])
-                    <th class="section-header-color">Organisasi</th>
-                @endif
-                @if($toggleField['isWorkUnit'])
-                    <th class="section-header-color">Unit Kerja</th>
-                @endif
-                @if($toggleField['isNoWorker'])
-                    <th class="section-header-color">No. Pegawai</th>
-                @endif
-                @if($toggleField['workDuration'])
-                    <th class="section-header-color">Lama Bekerja</th>
-                @endif
-                @if($toggleField['isGradeDuration'])
-                    <th class="section-header-color">Lama Grade</th>
-                @endif
-                @if($toggleField['isNPWP'])
-                    <th class="section-header-color">NPWP</th>
-                @endif
-                @if($toggleField['isEmployeeStatus'])
-                    <th class="section-header-color">Status Kepegawaian</th>
-                @endif
-                @if($toggleField['isCurrentAddress'])
-                    <th class="section-header-color">Alamat Sekarang</th>
-                @endif
-                @if($toggleField['isComplex'])
-                    <th class="section-header-color">Perumahan / Kompleks</th>
-                @endif
-                @if($toggleField['isHomeNumber'])
-                    <th class="section-header-color">No. Rumah</th>
-                @endif
-                @if($toggleField['isPhoneNumber'])
-                    <th class="section-header-color">No. Telepon</th>
-                @endif
-                @if($toggleField['isOfficeAddress'])
-                    <th class="section-header-color">Alamat Kantor</th>
-                @endif
-                @if($toggleField['isOfficeNumber'])
-                    <th class="section-header-color">No. Kantor</th>
-                @endif
-                @if($toggleField['isEmail'])
-                    <th class="section-header-color">Email</th>
-                @endif
-                @if($toggleField['isPensionCap'])
-                    <th class="section-header-color">Maksimal Pensiun</th>
-                @endif
-                @if($toggleField['isPositionHistory'])
-                    <th class="section-header-color">Riwayat Jabatan</th>
-                @endif
-                @if($toggleField['isGradeHistory'])
-                    <th class="section-header-color">Riwayat Golongan</th>
-                @endif
-                @if($toggleField['isTrainingStructural'])
-                    <th class="section-header-color">Riwayat Pelatihan Struktural</th>
-                @endif
-                @if($toggleField['isTrainingFunctional'])
-                    <th class="section-header-color">Riwayat Pelatihan Fungsional</th>
-                @endif
-                @if($toggleField['isTrainingTechnique'])
-                    <th class="section-header-color">Riwayat Pelatihan Teknik</th>
-                @endif
-                @if($toggleField['isRecognition'])
-                    <th class="section-header-color">Riwayat Penghargaan</th>
-                @endif
-                @if($toggleField['isSKP'])
-                    <th class="section-header-color">Riwayat SKP</th>
-                @endif
-                @if($toggleField['isEducationHistory'])
-                    <th class="section-header-color">Riwayat Edukasi</th>
-                @endif
-                @if($toggleField['isDisciplinary'])
-                    <th class="section-header-color">Riwayat Hukuman</th>
-                @endif
-                @if($toggleField['isFamilyHistory'])
-                    <th class="section-header-color">Riwayat Keluarga</th>
-                @endif
-                @if($toggleField['isLeave'])
-                    <th class="section-header-color">Riwayat Cuti</th>
-                @endif
-                @if($toggleField['isAssessment'])
-                    <th class="section-header-color">Hasil Assessment</th>
-                @endif
-                @if($toggleField['isCompetency'])
-                    <th class="section-header-color">Hasil Uji Kompetensi</th>
-                @endif
-                @if($toggleField['isTalentPool'])
-                    <th class="section-header-color">Hasil Talent Pool</th>
-                @endif
-                @if($toggleField['isNotes'])
-                    <th class="section-header-color">Catatan</th>
-                @endif
-            </tr>
+        .name {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .grade {
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        .table-section-1-title {
+            font-size: 10px;
+            font-weight: 400;
+            word-wrap: break-word;
+        }
+
+        .table-section-1-body {
+            font-size: 10px;
+            font-weight: 600;
+            word-wrap: break-word;
+        }
+
+        .title-profile {
+            font-size: 12px;
+            font-weight: 700;
+            margin-top: 12px;
+            text-align: center;
+        }
+
+        .table-section-2-title {
+            min-width: 200px;
+            font-size: 10px;
+            font-weight: 400;
+            width: 0.1%;
+            white-space: nowrap;
+            padding-bottom: 4px;
+            padding-top: 6px;
+            word-wrap: break-word;
+        }
+
+        .table-section-2-body {
+            font-size: 10px;
+            font-weight: 500;
+            text-align: left;
+            padding-bottom: 4px;
+            padding-top: 6px;
+            word-wrap: break-word;
+        }
+
+        .table-section-3 {
+            table-layout: fixed;
+            width: 100%;
+            margin-top: 8px;
+        }
+
+        .table-section-3-title {
+            font-size: 10px;
+            font-weight: 700;
+            padding: 4px;
+            color: white;
+            word-wrap: break-word;
+        }
+
+        .table-section-3-title-row {
+            background-color: #394346;
+        }
+
+        .table-section-3-body {
+            font-size: 10px;
+            font-weight: 400;
+            text-align: left;
+            padding-bottom: 4px;
+            padding-top: 4px;
+            padding-left: 4px;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <img src='img/setneg-logo.png' class="logo" />
+</header>
+
+<div class="title-profile">Export Data Pegawai</div>
+
+@php
+$columns = [
+        "No" => true,
+        "Nama" => $toggleField['isName'],
+        "Jabatan" => $toggleField['isPosition'],
+        "Deskripsi Jabatan" => $toggleField['isPositionDescription'],
+        "Eselon" => $toggleField['isEchelons'],
+        "Grade" => $toggleField['isGrade'],
+        "NIP" => $toggleField['isNip'],
+        "Tempat, Tanggal Lahir" => $toggleField['isBirthPlaceDate'],
+        "Usia" => $toggleField['isAge'],
+        "Agama" => $toggleField['isReligion'],
+        "Jenis Kelamin" => $toggleField['isGender'],
+        "Status Perkawinan" => $toggleField['isMaritalStatus'],
+        "Instansi" => $toggleField['isAgency'],
+        "Organisasi" => $toggleField['isOrganization'],
+        "Unit Kerja" => $toggleField['isWorkUnit'],
+        "No. Pegawai" => $toggleField['isNoWorker'],
+        "Lama Bekerja" => $toggleField['workDuration'],
+        "Lama Grade" => $toggleField['isGradeDuration'],
+        "NPWP" => $toggleField['isNPWP'],
+        "Status Kepegawaian" => $toggleField['isEmployeeStatus'],
+        "Alamat Sekarang" => $toggleField['isCurrentAddress'],
+        "Perumahan / Kompleks" => $toggleField['isComplex'],
+        "No. Rumah" => $toggleField['isHomeNumber'],
+        "No. Telepon" => $toggleField['isPhoneNumber'],
+        "Alamat Kantor" => $toggleField['isOfficeAddress'],
+        "No. Kantor" => $toggleField['isOfficeNumber'],
+        "Email" => $toggleField['isEmail'],
+        "Maksimal Pensiun" => $toggleField['isPensionCap'],
+        "Riwayat Jabatan" => $toggleField['isPositionHistory'],
+        "Riwayat Golongan" => $toggleField['isGradeHistory'],
+        "Riwayat Pelatihan Struktural" => $toggleField['isTrainingStructural'],
+        "Riwayat Pelatihan Fungsional" => $toggleField['isTrainingFunctional'],
+        "Riwayat Pelatihan Teknik" => $toggleField['isTrainingTechnique'],
+        "Riwayat Penghargaan" => $toggleField['isRecognition'],
+        "Riwayat SKP" => $toggleField['isSKP'],
+        "Riwayat Edukasi" => $toggleField['isEducationHistory'],
+        "Riwayat Hukuman" => $toggleField['isDisciplinary'],
+        "Riwayat Keluarga" => $toggleField['isFamilyHistory'],
+        "Riwayat Cuti" => $toggleField['isLeave'],
+        "Hasil Assessment" => $toggleField['isAssessment'],
+        "Hasil Uji Kompetensi" => $toggleField['isCompetency'],
+        "Hasil Talent Pool" => $toggleField['isTalentPool'],
+        "Catatan" => $toggleField['isNotes'],
+        "Deskripsi Jabatan" => $toggleField['isPositionDescription'],
+    ];
+
+    $filteredColumns = array_filter($columns);
+    $chunks = array_chunk($filteredColumns, 7, true);
+    $totalColumns = count($filteredColumns);
+@endphp
+
+@foreach($chunks as $chunkIndex => $chunkColumns)
+    @if($chunkIndex > 0)
+        <div class="page_break"></div>
+    @endif
+
+    <table class="table-section-3">
+        <thead class="table-section-3-title-row">
+        <tr>
+            @foreach($chunkColumns as $column => $isEnabled)
+                <th class="table-section-3-title">{{ $column }}</th>
+            @endforeach
+        </tr>
         </thead>
         <tbody>
-        @php $indexData = 1 @endphp
+        @php $indexData = 1; @endphp
         @foreach($userData as $value)
             <tr>
-                <td>{{ $indexData++ }}</td>
-                @if($toggleField['isName'])
-                    <td>{{ $value['name'] }}</td>
-                @endif
-                @if($toggleField['isPosition'])
-                    <td>{{ $value['position_name'] }}</td>
-                @endif
-                @if($toggleField['isPositionDescription'])
-                    <td>{{ $value['position_description'] }}</td>
-                @endif
-                @if($toggleField['isEchelons'])
-                    <td>{{ $value['echelons_name'] }}</td>
-                @endif
-                @if($toggleField['isGrade'])
-                    <td>{{ $value['grade_name'] }}</td>
-                @endif
-                @if($toggleField['isNip'])
-                    <td>'{{ $value['employee_id_number'] }}</td>
-                @endif
-                @if($toggleField['isBirthPlaceDate'])
-                    <td>{{ $value['place_of_birth'] }}, {{ $value['date_of_birth'] }}</td>
-                @endif
-                @if($toggleField['isAge'])
-                    <td>{{ $value['age'] }}</td>
-                @endif
-                @if($toggleField['isReligion'])
+                @foreach($chunkColumns as $column => $isEnabled)
                     <td class="table-section-3-body">
-                        @switch($value['religion'])
-                            @case(1)
-                                Islam
+                        @switch($column)
+                            @case("No")
+                                {{ $indexData++ }}
                                 @break
-                            @case(2)
-                                Kristen
+                            @case("Nama")
+                                {{ $value['name'] }}
                                 @break
-                            @case(3)
-                                Katolik
+                            @case("Jabatan")
+                                {{ $value['position_name'] }}
                                 @break
-                            @case(4)
-                                Hindu
+                            @case("Deskripsi Jabatan")
+                                {{ $value['position_description'] }}
                                 @break
-                            @case(5)
-                                Buddha
+                            @case("Eselon")
+                                {{ $value['echelons_name'] }}
                                 @break
-                            @case(6)
-                                Konghucu
+                            @case("Grade")
+                                {{ $value['grade_name'] }}
+                                @break
+                            @case("NIP")
+                                '{{ $value['employee_id_number'] }}
+                                @break
+                            @case("Tempat, Tanggal Lahir")
+                                {{ $value['place_of_birth'] }}, {{ $value['date_of_birth'] }}
+                                @break
+                            @case("Usia")
+                                {{ $value['age'] }}
+                                @break
+                            @case("Agama")
+                                @switch($value['religion'])
+                                    @case(1)
+                                        Islam
+                                        @break
+                                    @case(2)
+                                        Kristen
+                                        @break
+                                    @case(3)
+                                        Katolik
+                                        @break
+                                    @case(4)
+                                        Hindu
+                                        @break
+                                    @case(5)
+                                        Buddha
+                                        @break
+                                    @case(6)
+                                        Konghucu
+                                        @break
+                                    @default
+                                        -
+                                @endswitch
+                                @break
+                            @case("Jenis Kelamin")
+                                {{ $value['gender'] === 1 ? 'Pria' : 'Wanita' }}
+                                @break
+                            @case("Status Perkawinan")
+                                @switch($value['marital_status'])
+                                    @case(1)
+                                        Belum Menikah
+                                        @break
+                                    @case(2)
+                                        Menikah
+                                        @break
+                                    @case(3)
+                                        Cerai Hidup
+                                        @break
+                                    @case(4)
+                                        Cerai Mati
+                                        @break
+                                    @default
+                                        -
+                                @endswitch
+                                @break
+                            @case("Instansi")
+                                {{ $value['institution_name'] }}
+                                @break
+                            @case("Organisasi")
+                                {{ $value['organization_name'] }}
+                                @break
+                            @case("Unit Kerja")
+                                {{ $value['work_unit'] }}
+                                @break
+                            @case("No. Pegawai")
+                                {{ $value['employee_id_number'] }} / {{ $value['employee_registration_number'] }}
+                                @break
+                            @case("Lama Bekerja")
+                                {{ $value['work_duration'] }}
+                                @break
+                            @case("Lama Grade")
+                                {{ $value['grade_effective_date'] }}
+                                @break
+                            @case("NPWP")
+                                {{ $value['id_tax'] }}
+                                @break
+                            @case("Status Kepegawaian")
+                                @switch($value['employment_status'])
+                                    @case(1)
+                                        Aktif
+                                        @break
+                                    @case(2)
+                                        Pensiun
+                                        @break
+                                    @case(3)
+                                        Berhenti
+                                        @break
+                                    @case(4)
+                                        Meninggal
+                                        @break
+                                    @case(5)
+                                        Alih Status
+                                        @break
+                                    @case(6)
+                                        Aktif PS
+                                        @break
+                                    @case(7)
+                                        CLTN
+                                        @break
+                                    @case(8)
+                                        TBL
+                                        @break
+                                    @case(9)
+                                        Non Aktif
+                                        @break
+                                    @default
+                                        -
+                                @endswitch
+                                @break
+                            @case("Alamat Sekarang")
+                                {{ $value['current_address'] }}
+                                @break
+                            @case("Perumahan / Kompleks")
+                                {{ $value['residence_name'] }}
+                                @break
+                            @case("No. Rumah")
+                                {{ $value['home_phone_number'] }}
+                                @break
+                            @case("No. Telepon")
+                                {{ $value['mobile_phone'] }}
+                                @break
+                            @case("Alamat Kantor")
+                                {{ $value['office_address'] }}
+                                @break
+                            @case("No. Kantor")
+                                {{ $value['office_phone_number'] }}
+                                @break
+                            @case("Email")
+                                {{ $value['email'] }}
+                                @break
+                            @case("Maksimal Pensiun")
+                                {{ $value['pension_cap'] }}
+                                @break
+                            @case("Riwayat Jabatan")
+                                <ul>{!! $value['position_history'] !!}</ul>
+                                @break
+                            @case("Riwayat Golongan")
+                                <ul>{!! $value['grade_history'] !!}</ul>
+                                @break
+                            @case("Riwayat Pelatihan Struktural")
+                                <ul>{!! $value['structural_training_history'] !!}</ul>
+                                @break
+                            @case("Riwayat Pelatihan Fungsional")
+                                <ul>{!! $value['functional_training_history'] !!}</ul>
+                                @break
+                            @case("Riwayat Pelatihan Teknik")
+                                <ul>{!! $value['technique_training_history'] !!}</ul>
+                                @break
+                            @case("Riwayat Penghargaan")
+                                <ul>{!! $value['recognition_history'] !!}</ul>
+                                @break
+                            @case("Riwayat SKP")
+                                <ul>{!! $value['skp_history'] !!}</ul>
+                                @break
+                            @case("Riwayat Edukasi")
+                                <ul>{!! $value['education_history'] !!}</ul>
+                                @break
+                            @case("Riwayat Hukuman")
+                                <ul>{!! $value['disciplinary_history'] !!}</ul>
+                                @break
+                            @case("Riwayat Keluarga")
+                                <ul>{!! $value['family_history'] !!}</ul>
+                                @break
+                            @case("Riwayat Cuti")
+                                <ul>{!! $value['leave_history'] !!}</ul>
+                                @break
+                            @case("Hasil Assessment")
+                                <ul>{!! $value['assessment_history'] !!}</ul>
+                                @break
+                            @case("Hasil Uji Kompetensi")
+                                <ul>{!! $value['competency_history'] !!}</ul>
+                                @break
+                            @case("Hasil Talent Pool")
+                                <ul>{!! $value['talent_pool_history'] !!}</ul>
+                                @break
+                            @case("Catatan")
+                                <ul>{!! $value['notes'] !!}</ul>
                                 @break
                             @default
                                 -
-                        @endswitch</td>
-                @endif
-                @if($toggleField['isGender'])
-                    <td>{{ $value['gender'] === 1 ? 'Pria' : 'Wanita' }}</td>
-                @endif
-                @if($toggleField['isMaritalStatus'])
-                    <td class="table-section-3-body">
-                        @switch($value['marital_status'])
-                            @case(1)
-                                Belum Menikah
-                                @break
-                            @case(2)
-                                Menikah
-                                @break
-                            @case(3)
-                                Cerai Hidup
-                                @break
-                            @case(4)
-                                Cerai Mati
-                                @break
-                            @default
-                                -
-                        @endswitch</td>
-                @endif
-                @if($toggleField['isAgency'])
-                    <td>{{ $value['institution_name'] }}</td>
-                @endif
-                @if($toggleField['isOrganization'])
-                    <td>{{ $value['organization_name'] }}</td>
-                @endif
-                @if($toggleField['isWorkUnit'])
-                    <td>{{ $value['work_unit'] }}</td>
-                @endif
-                @if($toggleField['isNoWorker'])
-                    <td>{{ $value['employee_id_number'] }} / {{ $value['employee_registration_number'] }}</td>
-                @endif
-                @if($toggleField['workDuration'])
-                    <td>{{ $value['work_duration'] }}</td>
-                @endif
-                @if($toggleField['isGradeDuration'])
-                    <td>{{ $value['grade_effective_date'] }}</td>
-                @endif
-                @if($toggleField['isNPWP'])
-                    <td>{{ $value['id_tax'] }}</td>
-                @endif
-                @if($toggleField['isEmployeeStatus'])
-                    <td class="table-section-3-body">
-                        @switch($value['employment_status'])
-                            @case(1)
-                                Aktif
-                                @break
-                            @case(2)
-                                Pensiun
-                                @break
-                            @case(3)
-                                Berhenti
-                                @break
-                            @case(4)
-                                Meninggal
-                                @break
-                            @case(5)
-                                Alih Status
-                                @break
-                            @case(6)
-                                Aktif PS
-                                @break
-                            @case(7)
-                                CLTN
-                                @break
-                            @case(8)
-                                TBL
-                                @break
-                            @case(9)
-                                Non Aktif
-                                @break
-                            @default
-                                -
-                        @endswitch</td>
-                @endif
-                @if($toggleField['isCurrentAddress'])
-                    <td>{{ $value['current_address'] }}</td>
-                @endif
-                @if($toggleField['isComplex'])
-                    <td>{{ $value['residence_name'] }}</td>
-                @endif
-                @if($toggleField['isHomeNumber'])
-                    <td>{{ $value['home_phone_number'] }}</td>
-                @endif
-                @if($toggleField['isPhoneNumber'])
-                    <td>{{ $value['mobile_phone'] }}</td>
-                @endif
-                @if($toggleField['isOfficeAddress'])
-                    <td>{{ $value['office_address'] }}</td>
-                @endif
-                @if($toggleField['isOfficeNumber'])
-                    <td>{{ $value['office_phone_number'] }}</td>
-                @endif
-                @if($toggleField['isEmail'])
-                    <td>{{ $value['email'] }}</td>
-                @endif
-                @if($toggleField['isPensionCap'])
-                    <td>{{ $value['pension_cap'] }}</td>
-                @endif
-                @if($toggleField['isPositionHistory'])
-                    <td>
-                        <ul>{!! $value['position_history'] !!}</ul>
+                        @endswitch
                     </td>
-                @endif
-                @if($toggleField['isGradeHistory'])
-                    <td>
-                        <ul>{!! $value['grade_history'] !!}</ul>
-                    </td>
-                @endif
-                @if($toggleField['isTrainingStructural'])
-                    <td>
-                        <ul>{!! $value['structural_training_history'] !!}</ul>
-                    </td>
-                @endif
-                @if($toggleField['isTrainingFunctional'])
-                    <td>
-                        <ul>{!! $value['functional_training_history'] !!}</ul>
-                    </td>
-                @endif
-                @if($toggleField['isTrainingTechnique'])
-                    <td>
-                        <ul>{!! $value['technique_training_history'] !!}</ul>
-                    </td>
-                @endif
-                @if($toggleField['isRecognition'])
-                    <td>
-                        <ul>{!! $value['recognition_history'] !!}</ul>
-                    </td>
-                @endif
-                @if($toggleField['isSKP'])
-                    <td>
-                        <ul>{!! $value['skp_history'] !!}</ul>
-                    </td>
-                @endif
-                @if($toggleField['isEducationHistory'])
-                    <td>
-                        <ul>{!! $value['education_history'] !!}</ul>
-                    </td>
-                @endif
-                @if($toggleField['isDisciplinary'])
-                    <td>
-                        <ul>{!! $value['disciplinary_history'] !!}</ul>
-                    </td>
-                @endif
-                @if($toggleField['isFamilyHistory'])
-                    <td>
-                        <ul>{!! $value['family_history'] !!}</ul>
-                    </td>
-                @endif
-                @if($toggleField['isLeave'])
-                    <td>
-                        <ul>{!! $value['leave_history'] !!}</ul>
-                    </td>
-                @endif
-                @if($toggleField['isAssessment'])
-                    <td>
-                        <ul>{!! $value['assessment_history'] !!}</ul>
-                    </td>
-                @endif
-                @if($toggleField['isCompetency'])
-                    <td>
-                        <ul>{!! $value['competency_history'] !!}</ul>
-                    </td>
-                @endif
-                @if($toggleField['isTalentPool'])
-                    <td>
-                        <ul>{!! $value['talent_pool_history'] !!}</ul>
-                    </td>
-                @endif
-                @if($toggleField['isNotes'])
-                    <td>
-                        <ul>{!! $value['notes'] !!}</ul>
-                    </td>
-                @endif
+                @endforeach
             </tr>
         @endforeach
-
         </tbody>
     </table>
+@endforeach
+
+</body>
+
+</html>
