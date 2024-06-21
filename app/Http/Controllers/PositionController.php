@@ -34,12 +34,12 @@ class PositionController extends Controller
     /**
      * Get List of Positions
      *
-     * Retrieve the position of master data.
+     * Retrieve list of the position on master data.
      * @subgroup Position
      * @authenticated
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
      * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
-     * @queryParam keyword string The keyword search field for the name or code. Example: pembina utama
+     * @queryParam keyword string The keyword search field for the name or code. Example: kepala sekretariat
      * @response 200 {"code": 200,"message": "success","data": [{"id": 1,"name": "Pembina Utama","code": "IV/e","type": "PNS"}],"pagination": {"total": 32,"count": 1,"per_page": 1,"current_page": 1,"total_pages": 32,"links": {"first_page": "http://localhost/api/grades?page=1","last_page": "http://localhost/api/grades?page=32","next_page": "http://localhost/api/grades?page=2","prev_page": null}}}
      *
      */
@@ -129,6 +129,14 @@ class PositionController extends Controller
         }
     }
 
+    /**
+     * Create a New Position
+     *
+     * Add a new position entry.
+     * @subgroup Position
+     * @authenticated
+     * @response 200 {"code": 200,"message": "Jabatan berhasil ditambah.","data": null}
+     */
     public function create(CreatePositionRequest $request)
     {
         try {
@@ -147,7 +155,8 @@ class PositionController extends Controller
                 $this->request->request->remove('order');
             }
 
-            $positionId = DB::table('positions')->insertGetIdTs($this->request->except('position_echelons'));
+            $positionId = DB::table('positions')
+                ->insertGetIdTs($this->request->except('position_echelons'));
 
             //insert position_echelons if any
             if (sizeof($this->request->position_echelons)) {
@@ -169,6 +178,16 @@ class PositionController extends Controller
         }
     }
 
+    /**
+     * Get Detail Positions by ID
+     *
+     * Retrieve the detail position for specific ID.
+     * @subgroup Position
+     * @authenticated
+     * @urlParam id integer Refers to the id of position. Example: 1
+     * @response 200 {"code":200,"message":"success","data":{"id":142,"name":"Analis Pengelola Keuangan APBN","available":0,"type":{"id":2,"name":"Fungsional"},"entity":{"id":2,"name":"Kelompok"},"filled":16,"order":1,"echelons":[{"id":102,"name":"Ahli Madya","available":5,"filled":0},{"id":103,"name":"Ahli Muda","available":9,"filled":0},{"id":104,"name":"Ahli Pertama","available":6,"filled":0}],"hierarchies":[{"id":2,"name":"Kepala Sekretariat Wakil Presiden","parent_id":null},{"id":40,"name":"Deputi Bidang Administrasi","parent_id":2},{"id":99,"name":"Kepala Biro Perencanaan dan Keuangan","parent_id":40}]}}
+     *
+     */
     public function show()
     {
         try {
@@ -183,8 +202,8 @@ class PositionController extends Controller
                     'horizontal_order',
                     'parent_id'
                 )
-                ->where('id', $this->request->id);
-            $position = $position->first();
+                ->where('id', $this->request->id)
+                ->first();
 
             if (!$position) {
                 return $this->response(404, 'Jabatan tidak ditemukan.');
@@ -246,6 +265,16 @@ class PositionController extends Controller
         }
     }
 
+    /**
+     * Update Position by ID
+     *
+     * Update an existing position entry.
+     * @subgroup Position
+     * @authenticated
+     * @urlParam id Refers to the ID of Position History. Example: 1
+     * @response 404 {"code": 404,"message": "Jabatan tidak ditemukan.","data": null}
+     * @response 200 {"code": 200,"message": "Jabatan berhasil diubah.","data": null}
+     */
     public function update(UpdatePositionRequest $request)
     {
         try {
@@ -254,8 +283,8 @@ class PositionController extends Controller
                 ->select(
                     'id'
                 )
-                ->where('id', $this->request->id);
-            $position = $position->first();
+                ->where('id', $this->request->id)
+                ->first();
 
             if (!$position) {
                 return $this->response(404, 'Jabatan tidak ditemukan.');
@@ -312,13 +341,23 @@ class PositionController extends Controller
         }
     }
 
+    /**
+     * Delete Positions by ID
+     *
+     * Delete position with specific ID.
+     * @subgroup Position
+     * @authenticated
+     * @urlParam id integer Refers to the id of position. Example: 1
+     * @response 200 {"code":200,"message":"Jabatan berhasil dihapus.","data":null}
+     *
+     */
     public function delete()
     {
         try {
             $position = DB::table('positions')
                 ->select('id')
-                ->where('id', $this->request->id);
-            $position = $position->first();
+                ->where('id', $this->request->id)
+                ->first();
 
             if (!$position) {
                 return $this->response(404, 'Jabatan tidak ditemukan.');
@@ -337,6 +376,43 @@ class PositionController extends Controller
                 ->delete();
 
             return $this->response(200, 'Jabatan berhasil dihapus.');
+        } catch (\Throwable $th) {
+            Log::warning($th);
+            return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
+        }
+    }
+
+    /**
+     * Available Order by parent ID
+     *
+     * Get available of position for specific Parent ID.
+     * @subgroup Position
+     * @authenticated
+     * @queryParam id integer Refers to the id of parent position. Example: 1
+     * @response 200 {"code":200,"message":"success","data":{"4":5,"5":6,"6":7,"7":8,"8":9,"9":10,"10":11,"11":12,"12":13,"13":14,"14":15,"15":16,"16":17,"17":18,"18":19,"19":20}}
+     *
+     */
+    public function availableOrder()
+    {
+        try {
+            $positions = DB::table('positions')
+                ->select('id', 'horizontal_order', 'vertical_order')
+                ->where('positions.type', '!=', 3)
+                ->where('parent_id', $this->request->id)
+                ->get();
+
+            if (isset($this->request->id)) {
+                $existOrder = $positions->pluck('horizontal_order')->toArray();
+            } else {
+                $existOrder = $positions->pluck('vertical_order')->toArray();
+            }
+
+            $allowedOrder = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+            $availableOrder = array_filter($allowedOrder, function ($item) use ($existOrder) {
+                return !in_array($item, $existOrder);
+            });
+
+            return $this->response(200, 'success', array_values($availableOrder));
         } catch (\Throwable $th) {
             Log::warning($th);
             return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
