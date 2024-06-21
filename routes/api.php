@@ -146,6 +146,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('positions')->group(function () {
         Route::get('/', [PositionController::class, 'index']);
         Route::post('/', [PositionController::class, 'create']);
+        Route::get('/available-order', [PositionController::class, 'availableOrder']);
         Route::get('/{id}', [PositionController::class, 'show']);
         Route::post('/{id}', [PositionController::class, 'update']);
         Route::delete('/{id}', [PositionController::class, 'delete']);
