@@ -73,7 +73,7 @@ class PositionController extends Controller
                 $positions->where('positions.name', 'LIKE', '%' . $this->request->keyword . '%');
             }
 
-            if (($this->request->filter_parent === true || $this->request->filter_parent === 'true') && isset($this->request->parent_id)) {
+            if (($this->request->filter_parent === true || $this->request->filter_parent === 'true')) {
                 $positions->where('parent_id', $this->request->parent_id);
             }
 
