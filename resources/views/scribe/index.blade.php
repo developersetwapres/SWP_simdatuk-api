@@ -34899,6 +34899,50 @@ fetch(url, {
             </div>
             </div>
 </div>
+                                                                            <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">filter_parent</div>
+                                            <span class="sl-truncate sl-text-muted">boolean</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>flagging to filter based on parent_id.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        1
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
+                                                                            <div class="sl-flex sl-relative sl-max-w-full sl-py-2 sl-pl-3">
+    <div class="sl-w-1 sl-mt-2 sl-mr-3 sl--ml-3 sl-border-t"></div>
+    <div class="sl-stack sl-stack--vertical sl-stack--1 sl-flex sl-flex-1 sl-flex-col sl-items-stretch sl-max-w-full sl-ml-2 ">
+        <div class="sl-flex sl-items-center sl-max-w-full">
+                                        <div class="sl-flex sl-items-baseline sl-text-base">
+                    <div class="sl-font-mono sl-font-semibold sl-mr-2">parent_id</div>
+                                            <span class="sl-truncate sl-text-muted">integer</span>
+                                    </div>
+                                    </div>
+                <div class="sl-prose sl-markdown-viewer" style="font-size: 12px;">
+            <p>filter position based on parent_id, filter_parent must be set to true.</p>
+        </div>
+                                            <div class="sl-stack sl-stack--horizontal sl-stack--2 sl-flex sl-flex-row sl-items-baseline sl-text-muted">
+                <span>Example:</span> <!-- <span> important for spacing -->
+                <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
+                    <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
+                        1
+                    </div>
+                </div>
+            </div>
+            </div>
+</div>
                                                                 </div>
                         </div>
                     
@@ -35056,6 +35100,32 @@ fetch(url, {
                                             >
                                                                             </div>
                                 </div>
+                                                                                            <label aria-hidden="true"
+                                       for="queryparam-GETapi-positions-filter_parent">filter_parent</label>
+                                <span class="sl-mx-3">:</span>
+                                <div class="sl-flex sl-flex-1">
+                                    <div class="sl-input sl-flex-1 sl-relative">
+                                                                                    <input aria-label="filter_parent" name="filter_parent"
+                                                   id="queryparam-GETapi-positions-filter_parent"
+                                                   placeholder="flagging to filter based on parent_id."
+                                                   value="1" data-component="query"
+                                                   class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
+                                            >
+                                                                            </div>
+                                </div>
+                                                                                            <label aria-hidden="true"
+                                       for="queryparam-GETapi-positions-parent_id">parent_id</label>
+                                <span class="sl-mx-3">:</span>
+                                <div class="sl-flex sl-flex-1">
+                                    <div class="sl-input sl-flex-1 sl-relative">
+                                                                                    <input aria-label="parent_id" name="parent_id"
+                                                   id="queryparam-GETapi-positions-parent_id"
+                                                   placeholder="filter position based on parent_id, filter_parent must be set to true."
+                                                   value="1" data-component="query"
+                                                   class="sl-relative sl-w-full sl-h-md sl-text-base sl-pr-2.5 sl-pl-2.5 sl-rounded sl-border-transparent hover:sl-border-input focus:sl-border-primary sl-border"
+                                            >
+                                                                            </div>
+                                </div>
                                                     </div>
                     </div>
                 </div>
@@ -35147,7 +35217,7 @@ You can check the Dev Tools console for debugging information.</p>
                                     <div class="sl-px-0 sl-py-1">
                                         <div style="max-height: 400px;" class="sl-overflow-y-auto sl-rounded">
                                             <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8001/api/positions?page=1&amp;limit=10&amp;keyword=kepala+sekretariat" \
+    --get "http://localhost:8001/api/positions?page=1&amp;limit=10&amp;keyword=kepala+sekretariat&amp;filter_parent=1&amp;parent_id=1" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json"</code></pre>                                        </div>
@@ -35165,6 +35235,8 @@ const params = {
     "page": "1",
     "limit": "10",
     "keyword": "kepala sekretariat",
+    "filter_parent": "1",
+    "parent_id": "1",
 };
 Object.keys(params)
     .forEach(key =&gt; url.searchParams.append(key, params[key]));
@@ -37201,7 +37273,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        1470085
+                        6545.6
                     </div>
                 </div>
             </div>
@@ -37429,7 +37501,7 @@ fetch(url, {
     ],
     "position_echelons": [
         {
-            "id": 1470085,
+            "id": 6545.6,
             "echelon_id": 1,
             "available": 1
         }
@@ -37543,7 +37615,7 @@ You can check the Dev Tools console for debugging information.</p>
     ],
     \"position_echelons\": [
         {
-            \"id\": 1470085,
+            \"id\": 6545.6,
             \"echelon_id\": 1,
             \"available\": 1
         }
@@ -37580,7 +37652,7 @@ let body = {
     ],
     "position_echelons": [
         {
-            "id": 1470085,
+            "id": 6545.6,
             "echelon_id": 1,
             "available": 1
         }
@@ -48488,7 +48560,7 @@ You can check the Dev Tools console for debugging information.</p>
     --data "{
     \"name\": \"admin\",
     \"permissions\": [
-        \"sed\"
+        \"dicta\"
     ]
 }"
 </code></pre>                                        </div>
@@ -48511,7 +48583,7 @@ const headers = {
 let body = {
     "name": "admin",
     "permissions": [
-        "sed"
+        "dicta"
     ]
 };
 
@@ -53248,7 +53320,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        nemo
+                        magni
                     </div>
                 </div>
             </div>
@@ -53273,7 +53345,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [5]
+                        [9]
                     </div>
                 </div>
             </div>
@@ -53298,7 +53370,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [19]
+                        [1]
                     </div>
                 </div>
             </div>
@@ -53323,7 +53395,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [2]
+                        [20]
                     </div>
                 </div>
             </div>
@@ -53348,7 +53420,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [6]
+                        [5]
                     </div>
                 </div>
             </div>
@@ -53373,7 +53445,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [6]
+                        [10]
                     </div>
                 </div>
             </div>
@@ -53398,7 +53470,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [8]
+                        [20]
                     </div>
                 </div>
             </div>
@@ -53423,7 +53495,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [20]
+                        [7]
                     </div>
                 </div>
             </div>
@@ -53448,7 +53520,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [&quot;est&quot;]
+                        [&quot;eum&quot;]
                     </div>
                 </div>
             </div>
@@ -53473,7 +53545,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [9]
+                        [15]
                     </div>
                 </div>
             </div>
@@ -53498,7 +53570,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        alias
+                        nemo
                     </div>
                 </div>
             </div>
@@ -53523,7 +53595,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        2
+                        1
                     </div>
                 </div>
             </div>
@@ -53548,7 +53620,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        6
+                        14
                     </div>
                 </div>
             </div>
@@ -53573,7 +53645,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        12
+                        16
                     </div>
                 </div>
             </div>
@@ -53598,7 +53670,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        20
+                        14
                     </div>
                 </div>
             </div>
@@ -53623,7 +53695,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        14
+                        4
                     </div>
                 </div>
             </div>
@@ -53648,7 +53720,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        7
+                        18
                     </div>
                 </div>
             </div>
@@ -53673,7 +53745,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        12
+                        6
                     </div>
                 </div>
             </div>
@@ -53698,7 +53770,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        17
+                        20
                     </div>
                 </div>
             </div>
@@ -53723,7 +53795,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        19
+                        5
                     </div>
                 </div>
             </div>
@@ -53748,7 +53820,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        15
+                        17
                     </div>
                 </div>
             </div>
@@ -53773,7 +53845,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        15
+                        9
                     </div>
                 </div>
             </div>
@@ -53798,7 +53870,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        6
+                        4
                     </div>
                 </div>
             </div>
@@ -53823,7 +53895,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        13
+                        8
                     </div>
                 </div>
             </div>
@@ -53848,7 +53920,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        20
+                        1
                     </div>
                 </div>
             </div>
@@ -53873,7 +53945,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        9
+                        4
                     </div>
                 </div>
             </div>
@@ -53898,7 +53970,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        5
+                        2
                     </div>
                 </div>
             </div>
@@ -53923,7 +53995,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        3
+                        9
                     </div>
                 </div>
             </div>
@@ -53948,7 +54020,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        6
+                        4
                     </div>
                 </div>
             </div>
@@ -53973,7 +54045,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        11
+                        6
                     </div>
                 </div>
             </div>
@@ -53998,7 +54070,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        16
+                        17
                     </div>
                 </div>
             </div>
@@ -54048,7 +54120,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        3
+                        7
                     </div>
                 </div>
             </div>
@@ -54073,7 +54145,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        4
+                        5
                     </div>
                 </div>
             </div>
@@ -54098,7 +54170,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        2
+                        1
                     </div>
                 </div>
             </div>
@@ -54123,7 +54195,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        15
+                        4
                     </div>
                 </div>
             </div>
@@ -54148,7 +54220,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        18
+                        2
                     </div>
                 </div>
             </div>
@@ -54173,7 +54245,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        14
+                        4
                     </div>
                 </div>
             </div>
@@ -54198,7 +54270,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        12
+                        5
                     </div>
                 </div>
             </div>
@@ -54223,7 +54295,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        11
+                        15
                     </div>
                 </div>
             </div>
@@ -54248,7 +54320,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        2
+                        17
                     </div>
                 </div>
             </div>
@@ -54298,7 +54370,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        rosario39@example.net
+                        kohler.rosalind@example.com
                     </div>
                 </div>
             </div>
@@ -54323,7 +54395,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        7
+                        8
                     </div>
                 </div>
             </div>
@@ -54348,7 +54420,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        19
+                        20
                     </div>
                 </div>
             </div>
@@ -54373,7 +54445,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        10
+                        20
                     </div>
                 </div>
             </div>
@@ -54398,7 +54470,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        20
+                        14
                     </div>
                 </div>
             </div>
@@ -54423,7 +54495,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        4
+                        11
                     </div>
                 </div>
             </div>
@@ -54448,7 +54520,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        19
+                        16
                     </div>
                 </div>
             </div>
@@ -54473,7 +54545,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        3
+                        17
                     </div>
                 </div>
             </div>
@@ -54498,7 +54570,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        13
+                        7
                     </div>
                 </div>
             </div>
@@ -54523,7 +54595,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        7
+                        20
                     </div>
                 </div>
             </div>
@@ -54548,7 +54620,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        6
+                        20
                     </div>
                 </div>
             </div>
@@ -54573,7 +54645,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        8
+                        10
                     </div>
                 </div>
             </div>
@@ -54598,7 +54670,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        9
+                        16
                     </div>
                 </div>
             </div>
@@ -54623,7 +54695,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        3
+                        16
                     </div>
                 </div>
             </div>
@@ -54648,7 +54720,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        7
+                        18
                     </div>
                 </div>
             </div>
@@ -54673,7 +54745,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        20
+                        10
                     </div>
                 </div>
             </div>
@@ -54698,7 +54770,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        19
+                        14
                     </div>
                 </div>
             </div>
@@ -54828,83 +54900,83 @@ fetch(url, {
                                      id="json-body-POSTapi-export-employees"
                                      style="font-family: var(--font-code); font-size: 12px; line-height: var(--lh-code);"
                                 >{
-    "extension": "nemo",
+    "extension": "magni",
     "organization": [
-        5
-    ],
-    "employee_type": [
-        19
-    ],
-    "echelons": [
-        2
-    ],
-    "grades": [
-        6
-    ],
-    "position_status": [
-        6
-    ],
-    "education": [
-        8
-    ],
-    "gender": [
-        20
-    ],
-    "age_range": [
-        "est"
-    ],
-    "marital_status": [
         9
     ],
-    "target_period": "alias",
-    "target_year": 2,
-    "work_behavior_rating": 6,
-    "employee_performance_predicate": 12,
-    "organizational_performance_achievement": 20,
-    "credit_period": 14,
-    "credit_year": 7,
-    "isName": 12,
-    "isPosition": 17,
-    "isPositionDescription": 19,
-    "isEchelons": 15,
-    "isGrade": 15,
-    "isNip": 6,
-    "isBirthPlaceDate": 13,
-    "isAge": 20,
-    "isReligion": 9,
-    "isGender": 5,
-    "isMaritalStatus": 3,
-    "isAgency": 6,
-    "isOrganization": 11,
-    "isWorkUnit": 16,
+    "employee_type": [
+        1
+    ],
+    "echelons": [
+        20
+    ],
+    "grades": [
+        5
+    ],
+    "position_status": [
+        10
+    ],
+    "education": [
+        20
+    ],
+    "gender": [
+        7
+    ],
+    "age_range": [
+        "eum"
+    ],
+    "marital_status": [
+        15
+    ],
+    "target_period": "nemo",
+    "target_year": 1,
+    "work_behavior_rating": 14,
+    "employee_performance_predicate": 16,
+    "organizational_performance_achievement": 14,
+    "credit_period": 4,
+    "credit_year": 18,
+    "isName": 6,
+    "isPosition": 20,
+    "isPositionDescription": 5,
+    "isEchelons": 17,
+    "isGrade": 9,
+    "isNip": 4,
+    "isBirthPlaceDate": 8,
+    "isAge": 1,
+    "isReligion": 4,
+    "isGender": 2,
+    "isMaritalStatus": 9,
+    "isAgency": 4,
+    "isOrganization": 6,
+    "isWorkUnit": 17,
     "isNoWorker": 15,
-    "workDuration": 3,
-    "isGradeDuration": 4,
-    "isNPWP": 2,
-    "isEmployeeStatus": 15,
-    "isCurrentAddress": 18,
-    "isComplex": 14,
-    "isHomeNumber": 12,
-    "isPhoneNumber": 11,
-    "isOfficeAddress": 2,
+    "workDuration": 7,
+    "isGradeDuration": 5,
+    "isNPWP": 1,
+    "isEmployeeStatus": 4,
+    "isCurrentAddress": 2,
+    "isComplex": 4,
+    "isHomeNumber": 5,
+    "isPhoneNumber": 15,
+    "isOfficeAddress": 17,
     "isOfficeNumber": 5,
-    "isEmail": "rosario39@example.net",
-    "isPensionCap": 7,
-    "isPositionHistory": 19,
-    "isGradeHistory": 10,
-    "isTrainingStructural": 20,
-    "isTrainingFunctional": 4,
-    "isTrainingTechnique": 19,
-    "isSKP": 3,
-    "isRecognition": 13,
-    "isNotes": 7,
-    "isEducationHistory": 6,
-    "isDisciplinary": 8,
-    "isFamilyHistory": 9,
-    "isLeave": 3,
-    "isAssessment": 7,
-    "isCompetency": 20,
-    "isTalentPool": 19
+    "isEmail": "kohler.rosalind@example.com",
+    "isPensionCap": 8,
+    "isPositionHistory": 20,
+    "isGradeHistory": 20,
+    "isTrainingStructural": 14,
+    "isTrainingFunctional": 11,
+    "isTrainingTechnique": 16,
+    "isSKP": 17,
+    "isRecognition": 7,
+    "isNotes": 20,
+    "isEducationHistory": 20,
+    "isDisciplinary": 10,
+    "isFamilyHistory": 16,
+    "isLeave": 16,
+    "isAssessment": 18,
+    "isCompetency": 10,
+    "isTalentPool": 14
 }</div>
                             </div>
                                             </div>
@@ -55001,83 +55073,83 @@ You can check the Dev Tools console for debugging information.</p>
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --data "{
-    \"extension\": \"nemo\",
+    \"extension\": \"magni\",
     \"organization\": [
-        5
-    ],
-    \"employee_type\": [
-        19
-    ],
-    \"echelons\": [
-        2
-    ],
-    \"grades\": [
-        6
-    ],
-    \"position_status\": [
-        6
-    ],
-    \"education\": [
-        8
-    ],
-    \"gender\": [
-        20
-    ],
-    \"age_range\": [
-        \"est\"
-    ],
-    \"marital_status\": [
         9
     ],
-    \"target_period\": \"alias\",
-    \"target_year\": 2,
-    \"work_behavior_rating\": 6,
-    \"employee_performance_predicate\": 12,
-    \"organizational_performance_achievement\": 20,
-    \"credit_period\": 14,
-    \"credit_year\": 7,
-    \"isName\": 12,
-    \"isPosition\": 17,
-    \"isPositionDescription\": 19,
-    \"isEchelons\": 15,
-    \"isGrade\": 15,
-    \"isNip\": 6,
-    \"isBirthPlaceDate\": 13,
-    \"isAge\": 20,
-    \"isReligion\": 9,
-    \"isGender\": 5,
-    \"isMaritalStatus\": 3,
-    \"isAgency\": 6,
-    \"isOrganization\": 11,
-    \"isWorkUnit\": 16,
+    \"employee_type\": [
+        1
+    ],
+    \"echelons\": [
+        20
+    ],
+    \"grades\": [
+        5
+    ],
+    \"position_status\": [
+        10
+    ],
+    \"education\": [
+        20
+    ],
+    \"gender\": [
+        7
+    ],
+    \"age_range\": [
+        \"eum\"
+    ],
+    \"marital_status\": [
+        15
+    ],
+    \"target_period\": \"nemo\",
+    \"target_year\": 1,
+    \"work_behavior_rating\": 14,
+    \"employee_performance_predicate\": 16,
+    \"organizational_performance_achievement\": 14,
+    \"credit_period\": 4,
+    \"credit_year\": 18,
+    \"isName\": 6,
+    \"isPosition\": 20,
+    \"isPositionDescription\": 5,
+    \"isEchelons\": 17,
+    \"isGrade\": 9,
+    \"isNip\": 4,
+    \"isBirthPlaceDate\": 8,
+    \"isAge\": 1,
+    \"isReligion\": 4,
+    \"isGender\": 2,
+    \"isMaritalStatus\": 9,
+    \"isAgency\": 4,
+    \"isOrganization\": 6,
+    \"isWorkUnit\": 17,
     \"isNoWorker\": 15,
-    \"workDuration\": 3,
-    \"isGradeDuration\": 4,
-    \"isNPWP\": 2,
-    \"isEmployeeStatus\": 15,
-    \"isCurrentAddress\": 18,
-    \"isComplex\": 14,
-    \"isHomeNumber\": 12,
-    \"isPhoneNumber\": 11,
-    \"isOfficeAddress\": 2,
+    \"workDuration\": 7,
+    \"isGradeDuration\": 5,
+    \"isNPWP\": 1,
+    \"isEmployeeStatus\": 4,
+    \"isCurrentAddress\": 2,
+    \"isComplex\": 4,
+    \"isHomeNumber\": 5,
+    \"isPhoneNumber\": 15,
+    \"isOfficeAddress\": 17,
     \"isOfficeNumber\": 5,
-    \"isEmail\": \"rosario39@example.net\",
-    \"isPensionCap\": 7,
-    \"isPositionHistory\": 19,
-    \"isGradeHistory\": 10,
-    \"isTrainingStructural\": 20,
-    \"isTrainingFunctional\": 4,
-    \"isTrainingTechnique\": 19,
-    \"isSKP\": 3,
-    \"isRecognition\": 13,
-    \"isNotes\": 7,
-    \"isEducationHistory\": 6,
-    \"isDisciplinary\": 8,
-    \"isFamilyHistory\": 9,
-    \"isLeave\": 3,
-    \"isAssessment\": 7,
-    \"isCompetency\": 20,
-    \"isTalentPool\": 19
+    \"isEmail\": \"kohler.rosalind@example.com\",
+    \"isPensionCap\": 8,
+    \"isPositionHistory\": 20,
+    \"isGradeHistory\": 20,
+    \"isTrainingStructural\": 14,
+    \"isTrainingFunctional\": 11,
+    \"isTrainingTechnique\": 16,
+    \"isSKP\": 17,
+    \"isRecognition\": 7,
+    \"isNotes\": 20,
+    \"isEducationHistory\": 20,
+    \"isDisciplinary\": 10,
+    \"isFamilyHistory\": 16,
+    \"isLeave\": 16,
+    \"isAssessment\": 18,
+    \"isCompetency\": 10,
+    \"isTalentPool\": 14
 }"
 </code></pre>                                        </div>
                                     </div>
@@ -55097,83 +55169,83 @@ const headers = {
 };
 
 let body = {
-    "extension": "nemo",
+    "extension": "magni",
     "organization": [
-        5
-    ],
-    "employee_type": [
-        19
-    ],
-    "echelons": [
-        2
-    ],
-    "grades": [
-        6
-    ],
-    "position_status": [
-        6
-    ],
-    "education": [
-        8
-    ],
-    "gender": [
-        20
-    ],
-    "age_range": [
-        "est"
-    ],
-    "marital_status": [
         9
     ],
-    "target_period": "alias",
-    "target_year": 2,
-    "work_behavior_rating": 6,
-    "employee_performance_predicate": 12,
-    "organizational_performance_achievement": 20,
-    "credit_period": 14,
-    "credit_year": 7,
-    "isName": 12,
-    "isPosition": 17,
-    "isPositionDescription": 19,
-    "isEchelons": 15,
-    "isGrade": 15,
-    "isNip": 6,
-    "isBirthPlaceDate": 13,
-    "isAge": 20,
-    "isReligion": 9,
-    "isGender": 5,
-    "isMaritalStatus": 3,
-    "isAgency": 6,
-    "isOrganization": 11,
-    "isWorkUnit": 16,
+    "employee_type": [
+        1
+    ],
+    "echelons": [
+        20
+    ],
+    "grades": [
+        5
+    ],
+    "position_status": [
+        10
+    ],
+    "education": [
+        20
+    ],
+    "gender": [
+        7
+    ],
+    "age_range": [
+        "eum"
+    ],
+    "marital_status": [
+        15
+    ],
+    "target_period": "nemo",
+    "target_year": 1,
+    "work_behavior_rating": 14,
+    "employee_performance_predicate": 16,
+    "organizational_performance_achievement": 14,
+    "credit_period": 4,
+    "credit_year": 18,
+    "isName": 6,
+    "isPosition": 20,
+    "isPositionDescription": 5,
+    "isEchelons": 17,
+    "isGrade": 9,
+    "isNip": 4,
+    "isBirthPlaceDate": 8,
+    "isAge": 1,
+    "isReligion": 4,
+    "isGender": 2,
+    "isMaritalStatus": 9,
+    "isAgency": 4,
+    "isOrganization": 6,
+    "isWorkUnit": 17,
     "isNoWorker": 15,
-    "workDuration": 3,
-    "isGradeDuration": 4,
-    "isNPWP": 2,
-    "isEmployeeStatus": 15,
-    "isCurrentAddress": 18,
-    "isComplex": 14,
-    "isHomeNumber": 12,
-    "isPhoneNumber": 11,
-    "isOfficeAddress": 2,
+    "workDuration": 7,
+    "isGradeDuration": 5,
+    "isNPWP": 1,
+    "isEmployeeStatus": 4,
+    "isCurrentAddress": 2,
+    "isComplex": 4,
+    "isHomeNumber": 5,
+    "isPhoneNumber": 15,
+    "isOfficeAddress": 17,
     "isOfficeNumber": 5,
-    "isEmail": "rosario39@example.net",
-    "isPensionCap": 7,
-    "isPositionHistory": 19,
-    "isGradeHistory": 10,
-    "isTrainingStructural": 20,
-    "isTrainingFunctional": 4,
-    "isTrainingTechnique": 19,
-    "isSKP": 3,
-    "isRecognition": 13,
-    "isNotes": 7,
-    "isEducationHistory": 6,
-    "isDisciplinary": 8,
-    "isFamilyHistory": 9,
-    "isLeave": 3,
-    "isAssessment": 7,
-    "isCompetency": 20,
-    "isTalentPool": 19
+    "isEmail": "kohler.rosalind@example.com",
+    "isPensionCap": 8,
+    "isPositionHistory": 20,
+    "isGradeHistory": 20,
+    "isTrainingStructural": 14,
+    "isTrainingFunctional": 11,
+    "isTrainingTechnique": 16,
+    "isSKP": 17,
+    "isRecognition": 7,
+    "isNotes": 20,
+    "isEducationHistory": 20,
+    "isDisciplinary": 10,
+    "isFamilyHistory": 16,
+    "isLeave": 16,
+    "isAssessment": 18,
+    "isCompetency": 10,
+    "isTalentPool": 14
 };
 
 fetch(url, {
@@ -55696,7 +55768,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [5]
+                        [15]
                     </div>
                 </div>
             </div>
@@ -55721,7 +55793,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [7]
+                        [8]
                     </div>
                 </div>
             </div>
@@ -55746,7 +55818,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [3]
+                        [18]
                     </div>
                 </div>
             </div>
@@ -55771,7 +55843,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [13]
+                        [17]
                     </div>
                 </div>
             </div>
@@ -55796,7 +55868,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [18]
+                        [15]
                     </div>
                 </div>
             </div>
@@ -55821,7 +55893,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [13]
+                        [20]
                     </div>
                 </div>
             </div>
@@ -55846,7 +55918,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [16]
+                        [17]
                     </div>
                 </div>
             </div>
@@ -55921,7 +55993,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [10]
+                        [8]
                     </div>
                 </div>
             </div>
@@ -55946,7 +56018,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        2
+                        20
                     </div>
                 </div>
             </div>
@@ -55971,7 +56043,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        11
+                        5
                     </div>
                 </div>
             </div>
@@ -56102,33 +56174,33 @@ fetch(url, {
                                      style="font-family: var(--font-code); font-size: 12px; line-height: var(--lh-code);"
                                 >{
     "organization": [
-        5
+        15
     ],
     "employee_type": [
-        7
+        8
     ],
     "echelons": [
-        3
-    ],
-    "grades": [
-        13
-    ],
-    "position_status": [
         18
     ],
+    "grades": [
+        17
+    ],
+    "position_status": [
+        15
+    ],
     "education": [
-        13
+        20
     ],
     "gender": [
-        16
+        17
     ],
     "min_age": 50,
     "max_age": 55,
     "marital_status": [
-        10
+        8
     ],
-    "max_range": 2,
-    "min_range": 11
+    "max_range": 20,
+    "min_range": 5
 }</div>
                             </div>
                                             </div>
@@ -56226,33 +56298,33 @@ You can check the Dev Tools console for debugging information.</p>
     --header "Accept: application/json" \
     --data "{
     \"organization\": [
-        5
+        15
     ],
     \"employee_type\": [
-        7
+        8
     ],
     \"echelons\": [
-        3
-    ],
-    \"grades\": [
-        13
-    ],
-    \"position_status\": [
         18
     ],
+    \"grades\": [
+        17
+    ],
+    \"position_status\": [
+        15
+    ],
     \"education\": [
-        13
+        20
     ],
     \"gender\": [
-        16
+        17
     ],
     \"min_age\": 50,
     \"max_age\": 55,
     \"marital_status\": [
-        10
+        8
     ],
-    \"max_range\": 2,
-    \"min_range\": 11
+    \"max_range\": 20,
+    \"min_range\": 5
 }"
 </code></pre>                                        </div>
                                     </div>
@@ -56273,33 +56345,33 @@ const headers = {
 
 let body = {
     "organization": [
-        5
+        15
     ],
     "employee_type": [
-        7
+        8
     ],
     "echelons": [
-        3
-    ],
-    "grades": [
-        13
-    ],
-    "position_status": [
         18
     ],
+    "grades": [
+        17
+    ],
+    "position_status": [
+        15
+    ],
     "education": [
-        13
+        20
     ],
     "gender": [
-        16
+        17
     ],
     "min_age": 50,
     "max_age": 55,
     "marital_status": [
-        10
+        8
     ],
-    "max_range": 2,
-    "min_range": 11
+    "max_range": 20,
+    "min_range": 5
 };
 
 fetch(url, {
@@ -56469,7 +56541,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [7]
+                        [3]
                     </div>
                 </div>
             </div>
@@ -56494,7 +56566,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [3]
+                        [16]
                     </div>
                 </div>
             </div>
@@ -56519,7 +56591,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [18]
+                        [12]
                     </div>
                 </div>
             </div>
@@ -56544,7 +56616,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [3]
+                        [9]
                     </div>
                 </div>
             </div>
@@ -56569,7 +56641,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [3]
+                        [9]
                     </div>
                 </div>
             </div>
@@ -56594,7 +56666,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [19]
+                        [7]
                     </div>
                 </div>
             </div>
@@ -56644,7 +56716,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [&quot;cupiditate&quot;]
+                        [&quot;esse&quot;]
                     </div>
                 </div>
             </div>
@@ -56669,7 +56741,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        [19]
+                        [5]
                     </div>
                 </div>
             </div>
@@ -56694,7 +56766,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        esse
+                        laudantium
                     </div>
                 </div>
             </div>
@@ -56719,7 +56791,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        17
+                        11
                     </div>
                 </div>
             </div>
@@ -56744,7 +56816,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        3
+                        16
                     </div>
                 </div>
             </div>
@@ -56769,7 +56841,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        18
+                        3
                     </div>
                 </div>
             </div>
@@ -56794,7 +56866,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        10
+                        16
                     </div>
                 </div>
             </div>
@@ -56819,7 +56891,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        19
+                        16
                     </div>
                 </div>
             </div>
@@ -56869,7 +56941,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        4
+                        12
                     </div>
                 </div>
             </div>
@@ -56894,7 +56966,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        17
+                        10
                     </div>
                 </div>
             </div>
@@ -56919,7 +56991,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        2
+                        11
                     </div>
                 </div>
             </div>
@@ -56944,7 +57016,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        4
+                        8
                     </div>
                 </div>
             </div>
@@ -56969,7 +57041,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        2
+                        13
                     </div>
                 </div>
             </div>
@@ -56994,7 +57066,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        2
+                        1
                     </div>
                 </div>
             </div>
@@ -57019,7 +57091,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        5
+                        16
                     </div>
                 </div>
             </div>
@@ -57044,7 +57116,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        6
+                        4
                     </div>
                 </div>
             </div>
@@ -57069,7 +57141,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        4
+                        19
                     </div>
                 </div>
             </div>
@@ -57094,7 +57166,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        6
+                        7
                     </div>
                 </div>
             </div>
@@ -57119,7 +57191,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        14
+                        2
                     </div>
                 </div>
             </div>
@@ -57144,7 +57216,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        4
+                        10
                     </div>
                 </div>
             </div>
@@ -57169,7 +57241,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        14
+                        10
                     </div>
                 </div>
             </div>
@@ -57194,7 +57266,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        20
+                        16
                     </div>
                 </div>
             </div>
@@ -57219,7 +57291,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        20
+                        6
                     </div>
                 </div>
             </div>
@@ -57244,7 +57316,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        10
+                        3
                     </div>
                 </div>
             </div>
@@ -57269,7 +57341,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        20
+                        12
                     </div>
                 </div>
             </div>
@@ -57294,7 +57366,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        10
+                        18
                     </div>
                 </div>
             </div>
@@ -57319,7 +57391,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        17
+                        18
                     </div>
                 </div>
             </div>
@@ -57344,7 +57416,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        4
+                        19
                     </div>
                 </div>
             </div>
@@ -57369,7 +57441,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        16
+                        17
                     </div>
                 </div>
             </div>
@@ -57394,7 +57466,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        17
+                        9
                     </div>
                 </div>
             </div>
@@ -57419,7 +57491,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        8
+                        3
                     </div>
                 </div>
             </div>
@@ -57444,7 +57516,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        13
+                        15
                     </div>
                 </div>
             </div>
@@ -57469,7 +57541,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        17
+                        9
                     </div>
                 </div>
             </div>
@@ -57494,7 +57566,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        dedric.ankunding@example.com
+                        cornell.lakin@example.com
                     </div>
                 </div>
             </div>
@@ -57519,7 +57591,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        9
+                        6
                     </div>
                 </div>
             </div>
@@ -57544,7 +57616,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        18
+                        7
                     </div>
                 </div>
             </div>
@@ -57569,7 +57641,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        18
+                        16
                     </div>
                 </div>
             </div>
@@ -57594,7 +57666,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        6
+                        10
                     </div>
                 </div>
             </div>
@@ -57619,7 +57691,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        20
+                        5
                     </div>
                 </div>
             </div>
@@ -57644,7 +57716,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        20
+                        13
                     </div>
                 </div>
             </div>
@@ -57669,7 +57741,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        1
+                        13
                     </div>
                 </div>
             </div>
@@ -57694,7 +57766,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        17
+                        12
                     </div>
                 </div>
             </div>
@@ -57719,7 +57791,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        16
+                        19
                     </div>
                 </div>
             </div>
@@ -57744,7 +57816,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        10
+                        7
                     </div>
                 </div>
             </div>
@@ -57769,7 +57841,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        3
+                        6
                     </div>
                 </div>
             </div>
@@ -57794,7 +57866,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        17
+                        11
                     </div>
                 </div>
             </div>
@@ -57844,7 +57916,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        17
+                        8
                     </div>
                 </div>
             </div>
@@ -57869,7 +57941,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        20
+                        11
                     </div>
                 </div>
             </div>
@@ -57894,7 +57966,7 @@ fetch(url, {
                 <span>Example:</span> <!-- <span> important for spacing -->
                 <div class="sl-flex sl-flex-1 sl-flex-wrap" style="gap: 4px;">
                     <div class="sl-max-w-full sl-break-all sl-px-1 sl-bg-canvas-tint sl-text-muted sl-rounded sl-border">
-                        3
+                        14
                     </div>
                 </div>
             </div>
@@ -58026,81 +58098,81 @@ fetch(url, {
                                 >{
     "extension": "csv",
     "organization": [
-        7
+        3
     ],
     "employee_type": [
-        3
+        16
     ],
     "echelons": [
-        18
+        12
     ],
     "grades": [
-        3
+        9
     ],
     "position_status": [
-        3
+        9
     ],
     "education": [
-        19
+        7
     ],
     "gender": [
         20
     ],
     "age_range": [
-        "cupiditate"
+        "esse"
     ],
     "marital_status": [
-        19
+        5
     ],
-    "target_period": "esse",
-    "target_year": 17,
-    "work_behavior_rating": 3,
-    "employee_performance_predicate": 18,
-    "organizational_performance_achievement": 10,
-    "credit_period": 19,
+    "target_period": "laudantium",
+    "target_year": 11,
+    "work_behavior_rating": 16,
+    "employee_performance_predicate": 3,
+    "organizational_performance_achievement": 16,
+    "credit_period": 16,
     "credit_year": 17,
-    "isName": 4,
-    "isPosition": 17,
-    "isPositionDescription": 2,
-    "isEchelons": 4,
-    "isGrade": 2,
-    "isNip": 2,
-    "isBirthPlaceDate": 5,
-    "isAge": 6,
-    "isReligion": 4,
-    "isGender": 6,
-    "isMaritalStatus": 14,
-    "isAgency": 4,
-    "isOrganization": 14,
-    "isWorkUnit": 20,
-    "isNoWorker": 20,
-    "workDuration": 10,
-    "isGradeDuration": 20,
-    "isNPWP": 10,
-    "isEmployeeStatus": 17,
-    "isCurrentAddress": 4,
-    "isComplex": 16,
-    "isHomeNumber": 17,
-    "isPhoneNumber": 8,
-    "isOfficeAddress": 13,
-    "isOfficeNumber": 17,
-    "isEmail": "dedric.ankunding@example.com",
-    "isPensionCap": 9,
-    "isPositionHistory": 18,
-    "isGradeHistory": 18,
-    "isTrainingStructural": 6,
-    "isTrainingFunctional": 20,
-    "isTrainingTechnique": 20,
-    "isSKP": 1,
-    "isRecognition": 17,
-    "isNotes": 16,
-    "isEducationHistory": 10,
-    "isDisciplinary": 3,
-    "isFamilyHistory": 17,
+    "isName": 12,
+    "isPosition": 10,
+    "isPositionDescription": 11,
+    "isEchelons": 8,
+    "isGrade": 13,
+    "isNip": 1,
+    "isBirthPlaceDate": 16,
+    "isAge": 4,
+    "isReligion": 19,
+    "isGender": 7,
+    "isMaritalStatus": 2,
+    "isAgency": 10,
+    "isOrganization": 10,
+    "isWorkUnit": 16,
+    "isNoWorker": 6,
+    "workDuration": 3,
+    "isGradeDuration": 12,
+    "isNPWP": 18,
+    "isEmployeeStatus": 18,
+    "isCurrentAddress": 19,
+    "isComplex": 17,
+    "isHomeNumber": 9,
+    "isPhoneNumber": 3,
+    "isOfficeAddress": 15,
+    "isOfficeNumber": 9,
+    "isEmail": "cornell.lakin@example.com",
+    "isPensionCap": 6,
+    "isPositionHistory": 7,
+    "isGradeHistory": 16,
+    "isTrainingStructural": 10,
+    "isTrainingFunctional": 5,
+    "isTrainingTechnique": 13,
+    "isSKP": 13,
+    "isRecognition": 12,
+    "isNotes": 19,
+    "isEducationHistory": 7,
+    "isDisciplinary": 6,
+    "isFamilyHistory": 11,
     "isLeave": 2,
-    "isAssessment": 17,
-    "isCompetency": 20,
-    "isTalentPool": 3
+    "isAssessment": 8,
+    "isCompetency": 11,
+    "isTalentPool": 14
 }</div>
                             </div>
                                             </div>
@@ -58199,81 +58271,81 @@ You can check the Dev Tools console for debugging information.</p>
     --data "{
     \"extension\": \"csv\",
     \"organization\": [
-        7
+        3
     ],
     \"employee_type\": [
-        3
+        16
     ],
     \"echelons\": [
-        18
+        12
     ],
     \"grades\": [
-        3
+        9
     ],
     \"position_status\": [
-        3
+        9
     ],
     \"education\": [
-        19
+        7
     ],
     \"gender\": [
         20
     ],
     \"age_range\": [
-        \"cupiditate\"
+        \"esse\"
     ],
     \"marital_status\": [
-        19
+        5
     ],
-    \"target_period\": \"esse\",
-    \"target_year\": 17,
-    \"work_behavior_rating\": 3,
-    \"employee_performance_predicate\": 18,
-    \"organizational_performance_achievement\": 10,
-    \"credit_period\": 19,
+    \"target_period\": \"laudantium\",
+    \"target_year\": 11,
+    \"work_behavior_rating\": 16,
+    \"employee_performance_predicate\": 3,
+    \"organizational_performance_achievement\": 16,
+    \"credit_period\": 16,
     \"credit_year\": 17,
-    \"isName\": 4,
-    \"isPosition\": 17,
-    \"isPositionDescription\": 2,
-    \"isEchelons\": 4,
-    \"isGrade\": 2,
-    \"isNip\": 2,
-    \"isBirthPlaceDate\": 5,
-    \"isAge\": 6,
-    \"isReligion\": 4,
-    \"isGender\": 6,
-    \"isMaritalStatus\": 14,
-    \"isAgency\": 4,
-    \"isOrganization\": 14,
-    \"isWorkUnit\": 20,
-    \"isNoWorker\": 20,
-    \"workDuration\": 10,
-    \"isGradeDuration\": 20,
-    \"isNPWP\": 10,
-    \"isEmployeeStatus\": 17,
-    \"isCurrentAddress\": 4,
-    \"isComplex\": 16,
-    \"isHomeNumber\": 17,
-    \"isPhoneNumber\": 8,
-    \"isOfficeAddress\": 13,
-    \"isOfficeNumber\": 17,
-    \"isEmail\": \"dedric.ankunding@example.com\",
-    \"isPensionCap\": 9,
-    \"isPositionHistory\": 18,
-    \"isGradeHistory\": 18,
-    \"isTrainingStructural\": 6,
-    \"isTrainingFunctional\": 20,
-    \"isTrainingTechnique\": 20,
-    \"isSKP\": 1,
-    \"isRecognition\": 17,
-    \"isNotes\": 16,
-    \"isEducationHistory\": 10,
-    \"isDisciplinary\": 3,
-    \"isFamilyHistory\": 17,
+    \"isName\": 12,
+    \"isPosition\": 10,
+    \"isPositionDescription\": 11,
+    \"isEchelons\": 8,
+    \"isGrade\": 13,
+    \"isNip\": 1,
+    \"isBirthPlaceDate\": 16,
+    \"isAge\": 4,
+    \"isReligion\": 19,
+    \"isGender\": 7,
+    \"isMaritalStatus\": 2,
+    \"isAgency\": 10,
+    \"isOrganization\": 10,
+    \"isWorkUnit\": 16,
+    \"isNoWorker\": 6,
+    \"workDuration\": 3,
+    \"isGradeDuration\": 12,
+    \"isNPWP\": 18,
+    \"isEmployeeStatus\": 18,
+    \"isCurrentAddress\": 19,
+    \"isComplex\": 17,
+    \"isHomeNumber\": 9,
+    \"isPhoneNumber\": 3,
+    \"isOfficeAddress\": 15,
+    \"isOfficeNumber\": 9,
+    \"isEmail\": \"cornell.lakin@example.com\",
+    \"isPensionCap\": 6,
+    \"isPositionHistory\": 7,
+    \"isGradeHistory\": 16,
+    \"isTrainingStructural\": 10,
+    \"isTrainingFunctional\": 5,
+    \"isTrainingTechnique\": 13,
+    \"isSKP\": 13,
+    \"isRecognition\": 12,
+    \"isNotes\": 19,
+    \"isEducationHistory\": 7,
+    \"isDisciplinary\": 6,
+    \"isFamilyHistory\": 11,
     \"isLeave\": 2,
-    \"isAssessment\": 17,
-    \"isCompetency\": 20,
-    \"isTalentPool\": 3
+    \"isAssessment\": 8,
+    \"isCompetency\": 11,
+    \"isTalentPool\": 14
 }"
 </code></pre>                                        </div>
                                     </div>
@@ -58295,81 +58367,81 @@ const headers = {
 let body = {
     "extension": "csv",
     "organization": [
-        7
+        3
     ],
     "employee_type": [
-        3
+        16
     ],
     "echelons": [
-        18
+        12
     ],
     "grades": [
-        3
+        9
     ],
     "position_status": [
-        3
+        9
     ],
     "education": [
-        19
+        7
     ],
     "gender": [
         20
     ],
     "age_range": [
-        "cupiditate"
+        "esse"
     ],
     "marital_status": [
-        19
+        5
     ],
-    "target_period": "esse",
-    "target_year": 17,
-    "work_behavior_rating": 3,
-    "employee_performance_predicate": 18,
-    "organizational_performance_achievement": 10,
-    "credit_period": 19,
+    "target_period": "laudantium",
+    "target_year": 11,
+    "work_behavior_rating": 16,
+    "employee_performance_predicate": 3,
+    "organizational_performance_achievement": 16,
+    "credit_period": 16,
     "credit_year": 17,
-    "isName": 4,
-    "isPosition": 17,
-    "isPositionDescription": 2,
-    "isEchelons": 4,
-    "isGrade": 2,
-    "isNip": 2,
-    "isBirthPlaceDate": 5,
-    "isAge": 6,
-    "isReligion": 4,
-    "isGender": 6,
-    "isMaritalStatus": 14,
-    "isAgency": 4,
-    "isOrganization": 14,
-    "isWorkUnit": 20,
-    "isNoWorker": 20,
-    "workDuration": 10,
-    "isGradeDuration": 20,
-    "isNPWP": 10,
-    "isEmployeeStatus": 17,
-    "isCurrentAddress": 4,
-    "isComplex": 16,
-    "isHomeNumber": 17,
-    "isPhoneNumber": 8,
-    "isOfficeAddress": 13,
-    "isOfficeNumber": 17,
-    "isEmail": "dedric.ankunding@example.com",
-    "isPensionCap": 9,
-    "isPositionHistory": 18,
-    "isGradeHistory": 18,
-    "isTrainingStructural": 6,
-    "isTrainingFunctional": 20,
-    "isTrainingTechnique": 20,
-    "isSKP": 1,
-    "isRecognition": 17,
-    "isNotes": 16,
-    "isEducationHistory": 10,
-    "isDisciplinary": 3,
-    "isFamilyHistory": 17,
+    "isName": 12,
+    "isPosition": 10,
+    "isPositionDescription": 11,
+    "isEchelons": 8,
+    "isGrade": 13,
+    "isNip": 1,
+    "isBirthPlaceDate": 16,
+    "isAge": 4,
+    "isReligion": 19,
+    "isGender": 7,
+    "isMaritalStatus": 2,
+    "isAgency": 10,
+    "isOrganization": 10,
+    "isWorkUnit": 16,
+    "isNoWorker": 6,
+    "workDuration": 3,
+    "isGradeDuration": 12,
+    "isNPWP": 18,
+    "isEmployeeStatus": 18,
+    "isCurrentAddress": 19,
+    "isComplex": 17,
+    "isHomeNumber": 9,
+    "isPhoneNumber": 3,
+    "isOfficeAddress": 15,
+    "isOfficeNumber": 9,
+    "isEmail": "cornell.lakin@example.com",
+    "isPensionCap": 6,
+    "isPositionHistory": 7,
+    "isGradeHistory": 16,
+    "isTrainingStructural": 10,
+    "isTrainingFunctional": 5,
+    "isTrainingTechnique": 13,
+    "isSKP": 13,
+    "isRecognition": 12,
+    "isNotes": 19,
+    "isEducationHistory": 7,
+    "isDisciplinary": 6,
+    "isFamilyHistory": 11,
     "isLeave": 2,
-    "isAssessment": 17,
-    "isCompetency": 20,
-    "isTalentPool": 3
+    "isAssessment": 8,
+    "isCompetency": 11,
+    "isTalentPool": 14
 };
 
 fetch(url, {
