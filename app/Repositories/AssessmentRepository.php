@@ -2,22 +2,29 @@
 
 namespace App\Repositories;
 
+use App\Helpers\Document;
 use Illuminate\Support\Facades\DB;
 
 class AssessmentRepository
 {
-    public function getDetail($userId, $type)
+    use Document;
+
+    public function getDetail($userId)
     {
         $assessements = DB::table('user_assessments');
         $assessements->where('user_id', $userId);
-        $assessements->where('type', $type);
         $assessements->select(
-            'assessment_date',
+            'id',
+            'event_date',
             'point',
             'organizer',
-            'assessment_document',
-            'type',
+            'assessment_document'
         );
-        return $assessements = $assessements->get();
+        $assessements->orderBy('event_date', 'desc');
+        $assessements = $assessements->get();
+        foreach ($assessements as $assessment) {
+            $assessment->assessment_document = $this->getDocument($assessment->assessment_document);
+        }
+        return $assessements;
     }
 }

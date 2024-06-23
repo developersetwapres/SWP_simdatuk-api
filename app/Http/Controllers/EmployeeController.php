@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Employee\CreateEmployeeRequest;
 use App\Http\Requests\Employee\UpdateEmployeeRequest;
 use App\Repositories\AssessmentRepository;
+use App\Repositories\CompetencyRepository;
+use App\Repositories\CreditRepository;
 use App\Repositories\DisciplinaryRepository;
 use App\Repositories\EducationRepository;
 use App\Repositories\EmployeeRepository;
@@ -14,6 +16,7 @@ use App\Repositories\NoteRepository;
 use App\Repositories\PerformanceRepository;
 use App\Repositories\PositionRepository;
 use App\Repositories\RecognitionRepository;
+use App\Repositories\TalentRepository;
 use App\Repositories\TargetRepository;
 use App\Repositories\TrainingRepository;
 use Illuminate\Http\Request;
@@ -37,8 +40,10 @@ class EmployeeController extends Controller
     protected $disciplinaryRepository;
     protected $leaveRepository;
     protected $noteRepository;
+    protected $creditRepository;
     protected $assessmentRepository;
-    protected $creditscoreRepository;
+    protected $competencyRepository;
+    protected $talentRepository;
 
     public function __construct(
         Request $request,
@@ -53,7 +58,10 @@ class EmployeeController extends Controller
         DisciplinaryRepository $disciplinaryRepository,
         LeaveRepository $leaveRepository,
         NoteRepository $noteRepository,
+        CreditRepository $creditRepository,
         AssessmentRepository $assessmentRepository,
+        CompetencyRepository $competencyRepository,
+        TalentRepository $talentRepository,
     ) {
         $this->request = $request;
         $this->posted = $request->except(
@@ -65,7 +73,10 @@ class EmployeeController extends Controller
             'families',
             'leaves',
             'notes',
-            'assessments'
+            'credits',
+            'assessments',
+            'competencies',
+            'talents'
         );
         $this->employeeRepository = $employeeRepository;
         $this->educationRepository = $educationRepository;
@@ -78,7 +89,10 @@ class EmployeeController extends Controller
         $this->disciplinaryRepository = $disciplinaryRepository;
         $this->leaveRepository = $leaveRepository;
         $this->noteRepository = $noteRepository;
+        $this->creditRepository = $creditRepository;
         $this->assessmentRepository = $assessmentRepository;
+        $this->competencyRepository = $competencyRepository;
+        $this->talentRepository = $talentRepository;
     }
 
     /**
@@ -121,7 +135,6 @@ class EmployeeController extends Controller
         $users->select(
             'u.id',
             'u.photo_profile',
-            'u.name as coda',
             DB::raw("
                 CASE
                     WHEN u.title_prefix IS NULL && u.title_suffix IS NULL THEN u.name
@@ -277,6 +290,16 @@ class EmployeeController extends Controller
                 DB::table('user_notes')->insertTs($notes);
             }
 
+            // Insert Scores
+            if (isset($this->request->credits)) {
+                $credits = array();
+                foreach ($this->request->credits as $credit) {
+                    $credit['user_id'] = $userId;
+                    array_push($credits, $credit);
+                }
+                DB::table('user_credits')->insertTs($credits);
+            }
+
             // Insert Assessments
             if (isset($this->request->assessments)) {
                 $assessments = array();
@@ -289,6 +312,33 @@ class EmployeeController extends Controller
                 }
                 DB::table('user_assessments')->insertTs($assessments);
             }
+
+            // Insert Competencies
+            if (isset($this->request->competencies)) {
+                $competencies = array();
+                foreach ($this->request->competencies as $competency) {
+                    if (isset($competency['competency_document']) && is_file($competency['competency_document'])) {
+                        $competency['competency_document'] = $this->uploadDocument($competency['competency_document'], 'competency_document');
+                    }
+                    $competency['user_id'] = $userId;
+                    array_push($competencies, $competency);
+                }
+                DB::table('user_competencies')->insertTs($competencies);
+            }
+
+            // Insert Talents
+            if (isset($this->request->talents)) {
+                $talents = array();
+                foreach ($this->request->talents as $talent) {
+                    if (isset($talent['talent_document']) && is_file($talent['talent_document'])) {
+                        $talent['talent_document'] = $this->uploadDocument($talent['talent_document'], 'talent_document');
+                    }
+                    $talent['user_id'] = $userId;
+                    array_push($talents, $talent);
+                }
+                DB::table('user_talents')->insertTs($talents);
+            }
+
             DB::commit();
             return $this->response(200, 'Pegawai berhasil ditambah.');
         } catch (\Throwable $th) {
@@ -327,9 +377,10 @@ class EmployeeController extends Controller
         $disciplinaries = $this->disciplinaryRepository->getDetail($this->request->id);
         $leaves = $this->leaveRepository->getDetail($this->request->id);
         $notes = $this->noteRepository->getDetail($this->request->id);
-        $assessments = $this->assessmentRepository->getDetail($this->request->id, 1);
-        $competencies = $this->assessmentRepository->getDetail($this->request->id, 2);
-        $talents = $this->assessmentRepository->getDetail($this->request->id, 3);
+        $credits = $this->creditRepository->getDetail($this->request->id);
+        $assessments = $this->assessmentRepository->getDetail($this->request->id);
+        $competencies = $this->competencyRepository->getDetail($this->request->id);
+        $talents = $this->talentRepository->getDetail($this->request->id);
 
         $employee->educations = $educations;
         $employee->positions = $positions;
@@ -343,6 +394,7 @@ class EmployeeController extends Controller
         $employee->disciplinaries = $disciplinaries;
         $employee->leaves = $leaves;
         $employee->notes = $notes;
+        $employee->credits = $credits;
         $employee->assessments = $assessments;
         $employee->competencies = $competencies;
         $employee->talents = $talents;

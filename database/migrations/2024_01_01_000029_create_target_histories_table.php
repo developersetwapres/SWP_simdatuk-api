@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('performances', function (Blueprint $table) {
+        Schema::create('target_histories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 160);
             $table->tinyInteger('period_month');
             $table->year('period_year');
-            $table->string('performance_period', 160);
+            $table->enum('appraisal_period', ['Q1', 'Q2', 'Q3', 'Q4', 'Tahunan']);
+            $table->year('year')->nullable();
             $table->timestamp('created_at');
-            $table->timestamp('updated_at')->nullable();
+            $table->timestamp('updated_at')->nullable();;
         });
     }
 
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('performances');
+        Schema::dropIfExists('target_histories');
     }
 };

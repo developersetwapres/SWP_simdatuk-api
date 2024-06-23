@@ -14,6 +14,7 @@ class LeaveRepository
         $leaves = DB::table('user_leaves');
         $leaves->where('user_id', $userId);
         $leaves->select(
+            'id',
             'start_date',
             'end_date',
             'type',
@@ -21,12 +22,11 @@ class LeaveRepository
             'description',
             'letter',
         );
+        $leaves->orderBy('start_date', 'desc');
         $leaves = $leaves->get();
-
         foreach ($leaves as $leave) {
             $leave->letter = $this->getDocument($leave->letter);
         }
-
         return $leaves;
     }
 }

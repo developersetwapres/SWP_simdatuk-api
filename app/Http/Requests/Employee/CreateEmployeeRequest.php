@@ -3,10 +3,13 @@
 namespace App\Http\Requests\Employee;
 
 use App\Http\Requests\Assessment\CreateAssessmentRequest;
+use App\Http\Requests\Competency\CreateCompetencyRequest;
+use App\Http\Requests\Credit\CreateCreditRequest;
 use App\Http\Requests\Education\CreateEducationRequest;
 use App\Http\Requests\Family\CreateFamilyRequest;
 use App\Http\Requests\Leave\CreateLeaveRequest;
 use App\Http\Requests\Note\CreateNoteRequest;
+use App\Http\Requests\Talent\CreateTalentRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateEmployeeRequest extends FormRequest
@@ -74,7 +77,10 @@ class CreateEmployeeRequest extends FormRequest
             CreateFamilyRequest::rules(),
             CreateLeaveRequest::rules(),
             CreateNoteRequest::rules(),
+            CreateCreditRequest::rules(),
             CreateAssessmentRequest::rules(),
+            CreateCompetencyRequest::rules(),
+            CreateTalentRequest::rules(),
         );
     }
 
@@ -178,7 +184,10 @@ class CreateEmployeeRequest extends FormRequest
             CreateFamilyRequest::messages(),
             CreateLeaveRequest::messages(),
             CreateNoteRequest::messages(),
+            CreateCreditRequest::messages(),
             CreateAssessmentRequest::messages(),
+            CreateCompetencyRequest::messages(),
+            CreateTalentRequest::messages(),
         );
     }
 
@@ -358,7 +367,10 @@ class CreateEmployeeRequest extends FormRequest
             CreateFamilyRequest::bodyParameters(),
             CreateLeaveRequest::bodyParameters(),
             CreateNoteRequest::bodyParameters(),
+            CreateCreditRequest::bodyParameters(),
             CreateAssessmentRequest::bodyParameters(),
+            CreateCompetencyRequest::bodyParameters(),
+            CreateTalentRequest::bodyParameters(),
         );
     }
 }

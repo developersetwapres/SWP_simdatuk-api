@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 /**
  * @group History
  * These endpoints would allow you to track and manage the history of various activities related to employee recognition, training, and other pertinent events.
- * @subgroupDescription These endpoints allow you to perform CRUD operations on training data, enabling the retrieval, creation, and updating of training records as needed.
+ * @subgroupDescription These endpoints allow you to perform CRUD operations on training history data, enabling the retrieval, creation, and updating of position history records as needed.
  */
 class TrainingHistoryController extends Controller
 {
@@ -22,15 +22,15 @@ class TrainingHistoryController extends Controller
     }
 
     /**
-     * Get List of Trainings
+     * Get List of Training Histories
      *
-     * Retrieve the history of employee training sessions.
+     * Retrieve the training histories.
      * @subgroup Training
      * @authenticated
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
      * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
      * @queryParam type integer Refers to the types of items to be displayed per page. Example: 1
-     * @queryParam search string The keyword search field for the name. Example: Diklat PIM Tk.III
+     * @queryParam search string The keyword search field for the name. Example: Sepadya tahun 1994
      * @response 200 {"code": 200,"message": "success","data": [{"id": 1,"created_at": "2024-05-03 05:29:30","name": "Sepadya tahun 1994","period_month": 3,"period_year": "2020","start_date": "2020-10-22","total": 2}],"pagination": {"total": 4,"count": 4,"per_page": 10,"current_page": 1,"total_pages": 1,"links": {"first_page": "http://localhost/api/trainings?page=1","last_page": "http://localhost/api/trainings?page=1","next_page": null,"prev_page": null}}}
      */
     public function index()
@@ -51,25 +51,25 @@ class TrainingHistoryController extends Controller
         ], $messages);
         $this->request->limit = ($this->request->limit) ? $this->request->limit : 10;
 
-        $trainings = DB::table('trainings as t');
-        $trainings->leftjoin('user_trainings as ut', 't.id', '=', 'ut.training_id');
-        $trainings->select('t.id', 't.created_at', 't.name', 't.period_month', 't.period_year', 't.start_date', DB::raw("COUNT(ut.id) AS total"));
-        $trainings->where('t.name', 'like', '%' . $this->request->search . '%');
-        $trainings->where('t.type', $this->request->type);
-        $trainings->orderBy('t.updated_at', 'desc');
-        $trainings->orderBy('t.created_at', 'desc');
-        $trainings->groupby('t.id');
-        $trainings = $trainings->paginate($this->request->limit);
-        if ($trainings->isEmpty()) {
-            return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $trainings);
+        $trainingHistories = DB::table('training_histories as th');
+        $trainingHistories->leftjoin('training_history_users as thu', 'th.id', '=', 'thu.training_history_id');
+        $trainingHistories->select('th.id', 'th.created_at', 'th.name', 'th.period_month', 'th.period_year', 'th.start_date', DB::raw("COUNT(thu.id) AS total"));
+        $trainingHistories->where('th.name', 'like', '%' . $this->request->search . '%');
+        $trainingHistories->where('th.type', $this->request->type);
+        $trainingHistories->orderBy('th.updated_at', 'desc');
+        $trainingHistories->orderBy('th.created_at', 'desc');
+        $trainingHistories->groupby('th.id');
+        $trainingHistories = $trainingHistories->paginate($this->request->limit);
+        if ($trainingHistories->isEmpty()) {
+            return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $trainingHistories);
         }
-        return $this->paginateResponse(200, 'success', $trainings);
+        return $this->paginateResponse(200, 'success', $trainingHistories);
     }
 
     /**
-     * Create a New Training
+     * Create a New Training History
      *
-     * Add a new training session entry for an employee.
+     * Add a new training history entry.
      * @subgroup Training
      * @authenticated
      * @response 200 {"code": 200,"message": "Pelatihan berhasil ditambah.","data": null}
@@ -78,7 +78,7 @@ class TrainingHistoryController extends Controller
     {
         try {
             DB::beginTransaction();
-            $trainingId = DB::table('trainings')->insertGetIdTs($this->request->except('users'));
+            $trainingHistoryId = DB::table('training_histories')->insertGetIdTs($this->request->except('users'));
 
             // Insert Users
             if (isset($this->request->users)) {
@@ -89,10 +89,10 @@ class TrainingHistoryController extends Controller
                     } else {
                         $user['certificate'] = null;
                     }
-                    $user['training_id'] = $trainingId;
+                    $user['training_history_id'] = $trainingHistoryId;
                     array_push($users, $user);
                 }
-                DB::table('user_trainings')->insertTs($users);
+                DB::table('training_history_users')->insertTs($users);
             }
             DB::commit();
             return $this->response(200, 'Pelatihan berhasil ditambah.');
@@ -104,81 +104,79 @@ class TrainingHistoryController extends Controller
     }
 
     /**
-     * Get Detail Training by ID
+     * Get Detail Training History by ID
      *
-     * Retrieve training history for a specific employee.
+     * Retrieve training history for specific ID.
      * @subgroup Training
      * @authenticated
-     * @urlParam id Refers to the ID of Training. Example: 1
+     * @urlParam id Refers to the ID of Training History. Example: 1
      * @response 404 {"code": 404,"message": "Pelatihan tidak ditemukan.","data": null}
-     * @response 200 {"code": 200,"message": "success","data": {"id": 1,"period_month": 3,"period_year": "2020","name": "Sepadya tahun 1994","reference_number": "13936/PPKASN/09/2021","level": "Diklat PIM Tk.III","start_date": "2020-10-22","duration": 10,"organizer": "PPKASN","link": "https://google.com","users": [{"id": 1,"user_id": 1,"name": "Mellinia Fitrika Irjayanti","employee_id_number": "00010015","certificate": null,"created_at": "2024-05-24 09:13:35"}]}}
+     * @response 200 {"code": 200,"message": "success","data": {"id": 14800,"period_month": 3,"period_year": "2020","name": "Sepadya tahun 1994","reference_number": "13936/PPKASN/09/2021","level": "Diklat PIM Tk.III","start_date": "2020-10-22","duration": 10,"organizer": "PPKASN","link": "https://google.com","users": [{"id": 15578,"user_id": 9069,"name": "Stanislaus Widjanarto","employee_id_number": "020002268","certificate": null,"created_at": "2024-06-21 11:09:38"}]}}
      */
     public function show()
     {
-        $training = DB::table('trainings');
-        $training->where('id', $this->request->id);
-        $training->select('id', 'period_month', 'period_year', 'name', 'reference_number', 'level', 'start_date', 'duration', 'organizer', 'link');
-        $training = $training->first();
+        $trainingHistory = DB::table('training_histories');
+        $trainingHistory->where('id', $this->request->id);
+        $trainingHistory->select('id', 'period_month', 'period_year', 'name', 'reference_number', 'level', 'start_date', 'duration', 'organizer', 'link');
+        $trainingHistory = $trainingHistory->first();
 
-        if (!$training) {
+        if (!$trainingHistory) {
             return $this->response(404, 'Pelatihan tidak ditemukan.');
         }
 
-        $users = DB::table('user_trainings as ut');
-        $users->join('users as u', 'u.id', '=', 'ut.user_id');
-        $users->where('ut.training_id', $training->id);
-        $users->select('ut.id', 'ut.user_id', 'u.name', 'u.employee_id_number', 'ut.certificate', 'ut.created_at');
+        $users = DB::table('training_history_users as thu');
+        $users->join('users as u', 'u.id', '=', 'thu.user_id');
+        $users->where('thu.training_history_id', $trainingHistory->id);
+        $users->select('thu.id', 'thu.user_id', 'u.name', 'u.employee_id_number', 'thu.certificate', 'thu.created_at');
         $users = $users->get();
 
         foreach ($users as $user) {
             $user->certificate = $this->getDocument($user->certificate);
         }
-
-        $training->users = $users;
-
-        return $this->response(200, 'success', $training);
+        $trainingHistory->users = $users;
+        return $this->response(200, 'success', $trainingHistory);
     }
 
     /**
-     * Update Training by ID
+     * Update Training History by ID
      *
-     * Update an existing training session entry.
+     * Update an existing training history entry.
      * @subgroup Training
      * @authenticated
-     * @urlParam id Refers to the ID of Training. Example: 1
+     * @urlParam id Refers to the ID of Training History. Example: 1
      * @response 404 {"code": 404,"message": "Pelatihan tidak ditemukan.","data": null}
      * @response 200 {"code": 200,"message": "Pelatihan berhasil diupdate.","data": null}
      */
     public function update(UpdateTrainingHistoryRequest $request)
     {
-        $training = DB::table('trainings');
-        $training->where('id', $this->request->id);
-        $training->select('id');
-        $training = $training->first();
+        $trainingHistory = DB::table('training_histories');
+        $trainingHistory->where('id', $this->request->id);
+        $trainingHistory->select('id');
+        $trainingHistory = $trainingHistory->first();
 
-        if (!$training) {
+        if (!$trainingHistory) {
             return $this->response(404, 'Pelatihan tidak ditemukan.');
         }
 
-        $training = DB::table('trainings');
-        $training->where('id', $this->request->id);
-        $training = $training->updateTs($this->request->except('users'));
+        $trainingHistory = DB::table('training_histories');
+        $trainingHistory->where('id', $this->request->id);
+        $trainingHistory = $trainingHistory->updateTs($this->request->except('users'));
 
         $users = array();
 
         if (isset($this->request->users)) {
 
             // Get existing data
-            $userTrainings = DB::table('user_trainings');
-            $userTrainings->where('training_id', $this->request->id);
-            $userTrainings->select('id');
-            $userTrainings = $userTrainings->get();
+            $trainingHistoryUsers = DB::table('training_history_users');
+            $trainingHistoryUsers->where('training_history_id', $this->request->id);
+            $trainingHistoryUsers->select('id');
+            $trainingHistoryUsers = $trainingHistoryUsers->get();
 
             // Delete data
-            $array1 = Arr::pluck($userTrainings, 'id');
+            $array1 = Arr::pluck($trainingHistoryUsers, 'id');
             $array2 = Arr::pluck($this->request->users, 'id');
             $result = array_diff($array1, $array2);
-            DB::table('user_trainings')->whereIn('id', $result)->delete();
+            DB::table('training_history_users')->whereIn('id', $result)->delete();
 
             foreach ($this->request->users as $user) {
                 if (isset($user['certificate']) && is_file($user['certificate'])) {
@@ -189,16 +187,16 @@ class TrainingHistoryController extends Controller
                     // Update existing data
                     $user['certificate'] = ($user['delete_certificate'] == true) ? null : $user['certificate'];
                     unset($user['delete_certificate']);
-                    DB::table('user_trainings')->where('id', $user['id'])->updateTs($user);
+                    DB::table('training_history_users')->where('id', $user['id'])->updateTs($user);
                 } else {
                     // Insert new item
-                    $user['training_id'] = $this->request->id;
+                    $user['training_history_id'] = $this->request->id;
                     unset($user['delete_certificate']);
                     array_push($users, $user);
                 }
             }
             if (count($users) > 0) {
-                DB::table('user_trainings')->insertTs($users);
+                DB::table('training_history_users')->insertTs($users);
             }
         }
         return $this->response(200, 'Pelatihan berhasil diupdate.');

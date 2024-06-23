@@ -25,7 +25,7 @@ class UpdateRecognitionHistoryRequest extends FormRequest
         return [
             'period_month' => 'required|numeric|digits_between:1,12',
             'period_year' => 'required|date_format:Y',
-            'name' => 'required|max:160',
+            'recognition_id' => 'required|numeric',
             'description' => 'max:160',
             'type_of_decree' => 'required|numeric',
             'decree_date' => 'required|date',
@@ -51,8 +51,8 @@ class UpdateRecognitionHistoryRequest extends FormRequest
             'period_month.digits_between' => 'Bulan periode riwayat harus diantara 1 hingga 12.',
             'period_year.required' => 'Tahun periode riwayat tidak boleh kosong.',
             'period_year.date_format' => 'Tahun periode riwayat harus dengan format YYYY.',
-            'name.required' => 'Nama penghargaan tidak boleh kosong.',
-            'name.max' => 'Nama penghargaan tidak boleh lebih dari 160 karakter.',
+            'recognition_id.required' => 'Penghargaan tidak boleh kosong.',
+            'recognition_id.numeric' => 'Penghargaan harus berupa angka.',
             'description.max' => 'Keterangan penghargaan tidak boleh lebih dari 160 karakter.',
             'type_of_decree.required' => 'Jenis SK tidak boleh kosong.',
             'type_of_decree.numeric' => 'Jenis SK harus berupa angka.',
@@ -85,9 +85,9 @@ class UpdateRecognitionHistoryRequest extends FormRequest
                 'description' => 'Refers to the Period Year of Employee Recognition.',
                 'example' => '2020',
             ],
-            'name' => [
-                'description' => 'Refers to the Name of Employee Recognition.',
-                'example' => 'Diklat Komputer Microsoft Excel',
+            'recognition_id' => [
+                'description' => 'Refers to the ID of List Recognition.',
+                'example' => 1,
             ],
             'description' => [
                 'description' => 'Refers to the Description of Employee Recognition.',

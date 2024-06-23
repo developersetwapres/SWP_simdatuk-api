@@ -8,21 +8,22 @@ class TargetRepository
 {
     public function getDetail($userId)
     {
-        $targets = DB::table('user_targets as ut');
-        $targets->join('targets as t', 't.id', '=', 'ut.target_id');
-        $targets->where('ut.user_id', $userId);
+        $targets = DB::table('target_histories as th');
+        $targets->join('target_history_users as thu', 'th.id', '=', 'thu.target_history_id');
+        $targets->where('thu.user_id', $userId);
         $targets->select(
-            't.period_month',
-            't.period_year',
-            't.name',
-            't.appraisal_period',
-            't.year',
-            'ut.work_behavior_rating',
-            'ut.employee_performance_predicate',
-            'ut.organizational_performance_achievement',
+            'thu.id',
+            'th.period_month',
+            'th.period_year',
+            'th.name',
+            'th.appraisal_period',
+            'th.year',
+            'thu.work_behavior_rating',
+            'thu.employee_performance_predicate',
+            'thu.organizational_performance_achievement',
         );
-        $targets->orderBy('t.period_year', 'desc');
-        $targets->orderBy('t.period_month', 'desc');
+        $targets->orderBy('th.period_year', 'desc');
+        $targets->orderBy('th.period_month', 'desc');
         return $targets = $targets->get();
     }
 }

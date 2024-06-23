@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_targets', function (Blueprint $table) {
+        Schema::create('target_history_users', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('target_history_id');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('target_id');
             $table->tinyInteger('work_behavior_rating')->comment('1=Diatas Ekspektasi, 2=Sesuai Ekspektasi, 3=Dibawah Ekspektasi');
             $table->tinyInteger('employee_performance_predicate')->comment('1=Sangat Baik, 2=Baik, 3=Butuh Perbaikan, 4=Kurang, 5=Sangat Kurang');
             $table->tinyInteger('organizational_performance_achievement')->comment('1=Sangat Baik, 2=Baik, 3=Cukup');
@@ -22,7 +22,7 @@ return new class extends Migration
             $table->timestamp('updated_at')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('target_id')->references('id')->on('targets')->onDelete('cascade');
+            $table->foreign('target_history_id')->references('id')->on('target_histories')->onDelete('cascade');
         });
     }
 
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_targets');
+        Schema::dropIfExists('target_history_users');
     }
 };

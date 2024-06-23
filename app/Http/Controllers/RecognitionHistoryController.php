@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 /**
  * @group History
- * @subgroupDescription These endpoints allow you to perform CRUD operations on recognition data, enabling the retrieval, creation, and updating of recognition records as needed.
+ * @subgroupDescription These endpoints allow you to perform CRUD operations on target recognition data, enabling the retrieval, creation, and updating of position history records as needed.
  */
 class RecognitionHistoryController extends Controller
 {
@@ -21,15 +21,15 @@ class RecognitionHistoryController extends Controller
     }
 
     /**
-     * Get List of Recognitions
+     * Get List of Recognition Histories
      *
-     * Retrieve the history of employee recognitions.
+     * Retrieve the recognition histories.
      * @subgroup Recognition
      * @authenticated
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
      * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
      * @queryParam search string The keyword search field for the name. Example: Satya Lencana
-     * @response 200 {"code": 200,"message": "success","data": [{"id": 1,"created_at": "2024-05-05 11:14:44","name": "Diklat Komputer Microsoft Excell","period_month": 3,"period_year": "2020","awarding_institution": "Setwapres","total": 1}],"pagination": {"total": 2,"count": 2,"per_page": 10,"current_page": 1,"total_pages": 1,"links": {"first_page": "http://localhost/api/recognitions?page=1","last_page": "http://localhost/api/recognitions?page=1","next_page": null,"prev_page": null}}}
+     * @response 200 {"code": 200,"message": "success","data": [{"id": 2,"created_at": "2024-06-23 04:49:42","name": "Satyalancana Karya Satya 10th","period_month": 8,"period_year": "2008","awarding_institution": null,"total": 7}],"pagination": {"total": 34,"count": 10,"per_page": 10,"current_page": 1,"total_pages": 4,"links": {"first_page": "http://localhost/api/recognition-histories?page=1","last_page": "http://localhost/api/recognition-histories?page=4","next_page": "http://localhost/api/recognition-histories?page=2","prev_page": null}}}
      */
     public function index()
     {
@@ -46,24 +46,25 @@ class RecognitionHistoryController extends Controller
         ], $messages);
         $this->request->limit = ($this->request->limit) ? $this->request->limit : 10;
 
-        $recognitions = DB::table('recognitions as r');
-        $recognitions->leftjoin('user_recognitions as ur', 'r.id', '=', 'ur.recognition_id');
-        $recognitions->select('r.id', 'r.created_at', 'r.name', 'r.period_month', 'r.period_year', 'r.awarding_institution', DB::raw("COUNT(ur.id) AS total"));
-        $recognitions->where('r.name', 'like', '%' . $this->request->search . '%');
-        $recognitions->orderBy('r.updated_at', 'desc');
-        $recognitions->orderBy('r.created_at', 'desc');
-        $recognitions->groupby('r.id');
-        $recognitions = $recognitions->paginate($this->request->limit);
-        if ($recognitions->isEmpty()) {
-            return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $recognitions);
+        $recognitionHistories = DB::table('recognition_histories as rh');
+        $recognitionHistories->leftjoin('recognition_history_users as rhu', 'rh.id', '=', 'rhu.recognition_history_id');
+        $recognitionHistories->leftjoin('recognitions as r', 'rh.recognition_id', '=', 'r.id');
+        $recognitionHistories->select('rh.id', 'rh.created_at', 'r.name', 'rh.period_month', 'rh.period_year', 'rh.awarding_institution', DB::raw("COUNT(rhu.id) AS total"));
+        $recognitionHistories->where('r.name', 'like', '%' . $this->request->search . '%');
+        $recognitionHistories->orderBy('rh.updated_at', 'desc');
+        $recognitionHistories->orderBy('rh.created_at', 'desc');
+        $recognitionHistories->groupby('rh.id');
+        $recognitionHistories = $recognitionHistories->paginate($this->request->limit);
+        if ($recognitionHistories->isEmpty()) {
+            return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $recognitionHistories);
         }
-        return $this->paginateResponse(200, 'success', $recognitions);
+        return $this->paginateResponse(200, 'success', $recognitionHistories);
     }
 
     /**
-     * Create a New Recognition
+     * Create a New Recognition History
      *
-     * Add a new recognition entry for an employee.
+     * Add a new recognition history entry.
      * @subgroup Recognition
      * @authenticated
      * @response 200 {"code": 200,"message": "Penghargaan berhasil ditambah.","data": null}
@@ -72,16 +73,16 @@ class RecognitionHistoryController extends Controller
     {
         try {
             DB::beginTransaction();
-            $recognitionId = DB::table('recognitions')->insertGetIdTs($this->request->except('users'));
+            $recognitionHistoryId = DB::table('recognition_histories')->insertGetIdTs($this->request->except('users'));
 
             // Insert Users
             if (isset($this->request->users)) {
                 $users = array();
                 foreach ($this->request->users as $user) {
-                    $user['recognition_id'] = $recognitionId;
+                    $user['recognition_history_id'] = $recognitionHistoryId;
                     array_push($users, $user);
                 }
-                DB::table('user_recognitions')->insertTs($users);
+                DB::table('recognition_history_users')->insertTs($users);
             }
             DB::commit();
             return $this->response(200, 'Penghargaan berhasil ditambah.');
@@ -100,34 +101,47 @@ class RecognitionHistoryController extends Controller
      * @authenticated
      * @urlParam id Refers to the ID of Recognition. Example: 1
      * @response 404 {"code": 404,"message": "Penghargaan tidak ditemukan.","data": null}
-     * @response 200 {"code": 200,"message": "success","data": {"id": 2,"period_month": 3,"period_year": "2020","name": "Diklat Komputer Microsoft Excell","description": "Excel","type_of_decree": 1,"decree_date": "2020-10-22","decree_number": "Keppres Nomor 031/TK/tahun 2008, 17-Aug-08","decree_year": "2020","awarding_institution": "Setwapres","date_of_receipt": "2020-10-22","created_at": "2024-05-05 11:16:15","users": [{"id": 2,"name": "Umi Yance Puspita"},{"id": 3,"name": "Digdaya Ardianto"}]}}
+     * @response 200 {"code": 200,"message": "success","data": {"id": 1,"period_month": 8,"period_year": "2008","recognition_id": 2,"recognition_name": "Satyalancana Karya Satya 20th","description": "ASN yang telah berbakti selama 20 tahun","type_of_decree": 1,"decree_date": "2008-08-17","decree_number": null,"decree_year": "2008","awarding_institution": null,"date_of_receipt": "2008-08-17","created_at": "2024-06-23 04:49:42","users": [{"id": 34,"user_id": 1428,"name": "M. Hatta Sulaiman","employee_id_number": "195709231985031001","created_at": "2024-06-23 04:49:42"}]}}
      */
     public function show()
     {
-        $recognition = DB::table('recognitions');
-        $recognition->where('id', $this->request->id);
-        $recognition->select('id', 'period_month', 'period_year', 'name', 'description', 'type_of_decree', 'decree_date', 'decree_number', 'decree_year', 'awarding_institution', 'date_of_receipt', 'created_at');
-        $recognition = $recognition->first();
+        $recognitionHistory = DB::table('recognition_histories as rh');
+        $recognitionHistory->leftJoin('recognitions as r', 'rh.recognition_id', '=', 'r.id');
+        $recognitionHistory->where('rh.id', $this->request->id);
+        $recognitionHistory->select(
+            'rh.id',
+            'rh.period_month',
+            'rh.period_year',
+            'rh.recognition_id',
+            'r.name as recognition_name',
+            'rh.description',
+            'rh.type_of_decree',
+            'rh.decree_date',
+            'rh.decree_number',
+            'rh.decree_year',
+            'rh.awarding_institution',
+            'rh.date_of_receipt',
+            'rh.created_at'
+        );
+        $recognitionHistory = $recognitionHistory->first();
 
-        if (!$recognition) {
+        if (!$recognitionHistory) {
             return $this->response(404, 'Penghargaan tidak ditemukan.');
         }
 
-        $users = DB::table('user_recognitions as ur');
-        $users->join('users as u', 'u.id', '=', 'ur.user_id');
-        $users->where('ur.recognition_id', $recognition->id);
-        $users->select('ur.id', 'ur.user_id', 'u.name', 'ur.created_at', 'u.employee_id_number');
+        $users = DB::table('recognition_history_users as rhu');
+        $users->join('users as u', 'u.id', '=', 'rhu.user_id');
+        $users->where('rhu.recognition_history_id', $recognitionHistory->id);
+        $users->select('rhu.id', 'rhu.user_id', 'u.name', 'u.employee_id_number', 'rhu.created_at');
         $users = $users->get();
-
-        $recognition->users = $users;
-
-        return $this->response(200, 'success', $recognition);
+        $recognitionHistory->users = $users;
+        return $this->response(200, 'success', $recognitionHistory);
     }
 
     /**
-     * Update Recognition by ID
+     * Update Recognition History by ID
      *
-     * Update an existing recognition entry.
+     * Update an existing recognition history entry.
      * @subgroup Recognition
      * @authenticated
      * @urlParam id Refers to the ID of Training. Example: 1
@@ -136,47 +150,47 @@ class RecognitionHistoryController extends Controller
      */
     public function update(UpdateRecognitionHistoryRequest $request)
     {
-        $recognition = DB::table('recognitions');
-        $recognition->where('id', $this->request->id);
-        $recognition->select('id');
-        $recognition = $recognition->first();
+        $recognitionHistory = DB::table('recognition_histories');
+        $recognitionHistory->where('id', $this->request->id);
+        $recognitionHistory->select('id');
+        $recognitionHistory = $recognitionHistory->first();
 
-        if (!$recognition) {
+        if (!$recognitionHistory) {
             return $this->response(404, 'Penghargaan tidak ditemukan.');
         }
 
-        $recognition = DB::table('recognitions');
-        $recognition->where('id', $this->request->id);
-        $recognition = $recognition->updateTs($this->request->except('users'));
+        $recognitionHistory = DB::table('recognition_histories');
+        $recognitionHistory->where('id', $this->request->id);
+        $recognitionHistory = $recognitionHistory->updateTs($this->request->except('users'));
 
         $users = array();
 
         if (isset($this->request->users)) {
 
             // Get existing data
-            $userRecognitions = DB::table('user_recognitions');
-            $userRecognitions->where('recognition_id', $this->request->id);
-            $userRecognitions->select('id');
-            $userRecognitions = $userRecognitions->get();
+            $recognitionHistoryUsers = DB::table('recognition_history_users');
+            $recognitionHistoryUsers->where('recognition_history_id', $this->request->id);
+            $recognitionHistoryUsers->select('id');
+            $recognitionHistoryUsers = $recognitionHistoryUsers->get();
 
             // Delete data
-            $array1 = Arr::pluck($userRecognitions, 'id');
+            $array1 = Arr::pluck($recognitionHistoryUsers, 'id');
             $array2 = Arr::pluck($this->request->users, 'id');
             $result = array_diff($array1, $array2);
-            DB::table('user_recognitions')->whereIn('id', $result)->delete();
+            DB::table('recognition_history_users')->whereIn('id', $result)->delete();
 
             foreach ($this->request->users as $user) {
                 if (!is_null($user['id'])) {
                     // Update existing data
-                    DB::table('user_recognitions')->where('id', $user['id'])->updateTs($user);
+                    DB::table('recognition_history_users')->where('id', $user['id'])->updateTs($user);
                 } else {
                     // Insert new item
-                    $user['recognition_id'] = $this->request->id;
+                    $user['recognition_history_id'] = $this->request->id;
                     array_push($users, $user);
                 }
             }
             if (count($users) > 0) {
-                DB::table('user_recognitions')->insertTs($users);
+                DB::table('recognition_history_users')->insertTs($users);
             }
         }
         return $this->response(200, 'Penghargaan berhasil diupdate.');

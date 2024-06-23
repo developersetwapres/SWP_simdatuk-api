@@ -93,23 +93,23 @@ class SummaryController extends Controller
                 ],
                 [
                     "name" => 'Deputi Bidang Dukungan Kebijakan Pembangunan Ekonomi dan Peningkatan Daya Saing',
-                    "quantity" => 24,
+                    "quantity" => $this->getTotalUnitKerja(37),
                 ],
                 [
                     "name" => 'Deputi Bidang Dukungan Kebijakan Pembangunan Manusia dan Pemerataan Pembangunan',
-                    "quantity" => 26,
+                    "quantity" => $this->getTotalUnitKerja(38),
                 ],
                 [
                     "name" => 'Deputi Bidang Dukungan Kebijakan Pemerintah dan Wawasan Kebangsaan',
-                    "quantity" => 31,
+                    "quantity" => $this->getTotalUnitKerja(39),
                 ],
                 [
                     "name" => 'Deputi Bidang Administrasi',
-                    "quantity" => 186,
+                    "quantity" => $this->getTotalUnitKerja(40),
                 ],
                 [
                     "name" => 'Kementerian Sekretariat Negara',
-                    "quantity" => 15,
+                    "quantity" => $this->getTotalUnitKerja(4),
                 ],
             ],
             "education_employees" => [
@@ -148,5 +148,53 @@ class SummaryController extends Controller
             ],
         ];
         return $this->response(200, 'success', $data);
+    }
+
+    /**
+     * Get total unit kerja
+     *
+     * @param int $parentId
+     * @return void
+     */
+    private static function getTotalUnitKerja($parentId)
+    {
+        $sql = "
+            WITH RECURSIVE hierarchy AS (
+                -- Anchor member: Select the initial parent row
+                SELECT
+                    po.id,
+                    po.name,
+                    po.parent_id
+                FROM
+                    positions po
+                WHERE
+                    po.id = '$parentId' -- Replace ? with the specific parent id
+
+                UNION ALL
+
+                -- Recursive member: Select the child row
+                SELECT
+                    p.id,
+                    p.name,
+                    p.parent_id
+                FROM
+                    positions p
+                INNER JOIN
+                    hierarchy h ON p.parent_id = h.id
+                WHERE
+                    p.entity = 1
+            )
+            SELECT
+                COUNT(*) as total
+            FROM
+                hierarchy
+            JOIN users ON hierarchy.id=users.position_id
+            WHERE
+                users.employment_status
+            IN
+                (1,6);
+        ";
+        $users = DB::select($sql);
+        return $users[0]->total;
     }
 }

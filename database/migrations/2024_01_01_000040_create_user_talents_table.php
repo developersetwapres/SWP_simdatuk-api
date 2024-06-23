@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_assessments', function (Blueprint $table) {
+        Schema::create('user_talents', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
-            $table->date('assessment_date')->nullable();
-            $table->integer('point');
+            $table->date('event_date')->nullable();
+            $table->tinyInteger('point')->comment('1=Kotak 1, 2=Kotak 2, 3=Kotak 3, 4=Kotak 4, 5=Kotak 5, 6=Kotak 6, 7=Kotak 7, 8=Kotak 8, 9=Kotak 9');
             $table->string('organizer', 160)->nullable();
-            $table->string('assessment_document')->nullable();
-            $table->tinyInteger('type')->comment('1=assessment, 2=competency_test, 3=talent_pool');
+            $table->string('talent_document')->nullable();
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
 
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_assessments');
+        Schema::dropIfExists('user_talents');
     }
 };

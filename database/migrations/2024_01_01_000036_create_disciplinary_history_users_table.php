@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('disciplinary_history_users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('disciplinary_history_id');
+            $table->unsignedBigInteger('user_id');
             $table->string('grade')->nullable();
             $table->string('position')->nullable();
             $table->unsignedBigInteger('disciplinary_id')->nullable();

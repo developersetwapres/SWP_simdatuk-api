@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_credit_score', function (Blueprint $table) {
+        Schema::create('user_assessments', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
-            $table->string('position', 160)->nullable();
-            $table->tinyInteger('period')->comment('1 = Triwulan 1, 2 = Triwulan 2, 3 = Triwulan 3,
-            4 = Triwulan 4, 5 = Tahunan');
-            $table->year('year');
-            $table->float('last_credit_score', 5, 2)->nullable();
+            $table->date('event_date')->nullable();
+            $table->tinyInteger('point')->comment('1=Kurang Memenuhi Syarat, 2=Masih Memenuhi Syarat, 3=Memenuhi Syarat');
+            $table->string('organizer', 160)->nullable();
+            $table->string('assessment_document')->nullable();
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
 
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_credit_score');
+        Schema::dropIfExists('user_assessments');
     }
 };

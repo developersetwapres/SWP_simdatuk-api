@@ -13,15 +13,22 @@ class OldRecognitionSeeder extends Seeder
     public function run(): void
     {
         if (config('app.env') == 'production') {
-            DB::table('recognitions')->delete();
-            DB::table('user_recognitions')->delete();
+            DB::table('recognition_histories')->delete();
+            DB::table('recognition_history_users')->delete();
 
             $recognitions = "
                 SELECT
                     db_lama_bintang.id_sk_bintang AS id,
                     YEAR(db_lama_bintang.tgl_sk) AS year,
                     MONTH(db_lama_bintang.tgl_sk) AS month,
-                    db_lama_mstbintang.nm_bintang as name,
+                    CASE
+                        WHEN db_lama_mstbintang.nm_bintang = 'Satyalancana Karya Satya 10th' THEN 1
+                        WHEN db_lama_mstbintang.nm_bintang = 'Satyalancana Karya Satya 20th' THEN 2
+                        WHEN db_lama_mstbintang.nm_bintang = 'Satyalancana Karya Satya 30th' THEN 3
+                        WHEN db_lama_mstbintang.nm_bintang = 'Satyalancana Wira Karya' THEN 4
+                        WHEN db_lama_mstbintang.nm_bintang = 'Bintang Jasa Utama' THEN 5
+                        ELSE NULL
+                    END AS recognition_id,
                     db_lama_mstbintang.ket_bintang as description,
                     db_baru_decrees.id as type_of_decree,
                     db_lama_bintang.tgl_sk as decree_date,
@@ -51,11 +58,11 @@ class OldRecognitionSeeder extends Seeder
             $recognitions = DB::select($recognitions);
 
             foreach ($recognitions as $item) {
-                $recognitionId = DB::table('recognitions')->insertGetIdTs([
+                $recognitionId = DB::table('recognition_histories')->insertGetIdTs([
                     'id' => $item->id,
                     'period_month' => $item->month,
                     'period_year' => $item->year,
-                    'name' => 'Penghargaan ' . $item->name . ' ' . $this->getIndonesianMonthName($item->month) . ' ' . $item->year,
+                    'recognition_id' => $item->recognition_id,
                     'description' => $item->description,
                     'type_of_decree' => $item->type_of_decree,
                     'decree_date' => $item->decree_date,
@@ -66,7 +73,7 @@ class OldRecognitionSeeder extends Seeder
                 $userRecognition = "
                   SELECT
                       db_baru_users.id as user_id,
-                      '$recognitionId' as recognition_id,
+                      '$recognitionId' as recognition_history_id,
                       CURRENT_TIMESTAMP AS created_at
                   FROM
                       simdatuk_dump.tbl_r_bintang as db_lama_bintang
@@ -79,7 +86,7 @@ class OldRecognitionSeeder extends Seeder
                 ";
 
                 $userRecognition = DB::select($userRecognition);
-                DB::table('user_recognitions')->insertTs(json_decode(json_encode($userRecognition), true));
+                DB::table('recognition_history_users')->insertTs(json_decode(json_encode($userRecognition), true));
             }
         }
     }

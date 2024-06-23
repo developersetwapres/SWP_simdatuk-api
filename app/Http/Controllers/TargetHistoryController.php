@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 /**
  * @group History
- * @subgroupDescription These endpoints allow you to perform CRUD operations on Target data, enabling the retrieval, creation, and updating of Target records as needed.
+ * @subgroupDescription These endpoints allow you to perform CRUD operations on target history data, enabling the retrieval, creation, and updating of position history records as needed.
  */
 class TargetHistoryController extends Controller
 {
@@ -21,9 +21,9 @@ class TargetHistoryController extends Controller
     }
 
     /**
-     * Get List of Target
+     * Get List of Target Histories
      *
-     * Retrieve the history of employee Targets.
+     * Retrieve the target histories.
      * @subgroup Target
      * @authenticated
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
@@ -46,24 +46,24 @@ class TargetHistoryController extends Controller
         ], $messages);
         $this->request->limit = ($this->request->limit) ? $this->request->limit : 10;
 
-        $targets = DB::table('targets as t');
-        $targets->leftjoin('user_targets as ut', 't.id', '=', 'ut.target_id');
-        $targets->select('t.id', 't.created_at', 't.name', 't.period_month', 't.period_year', 't.appraisal_period', DB::raw("COUNT(ut.id) AS total"));
-        $targets->where('t.name', 'like', '%' . $this->request->search . '%');
-        $targets->orderBy('t.updated_at', 'desc');
-        $targets->orderBy('t.created_at', 'desc');
-        $targets->groupby('t.id');
-        $targets = $targets->paginate($this->request->limit);
-        if ($targets->isEmpty()) {
-            return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $targets);
+        $targetHistories = DB::table('target_histories as th');
+        $targetHistories->leftjoin('target_history_users as thu', 'th.id', '=', 'thu.target_history_id');
+        $targetHistories->select('th.id', 'th.created_at', 'th.name', 'th.period_month', 'th.period_year', 'th.appraisal_period', DB::raw("COUNT(thu.id) AS total"));
+        $targetHistories->where('th.name', 'like', '%' . $this->request->search . '%');
+        $targetHistories->orderBy('th.updated_at', 'desc');
+        $targetHistories->orderBy('th.created_at', 'desc');
+        $targetHistories->groupby('th.id');
+        $targetHistories = $targetHistories->paginate($this->request->limit);
+        if ($targetHistories->isEmpty()) {
+            return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $targetHistories);
         }
-        return $this->paginateResponse(200, 'success', $targets);
+        return $this->paginateResponse(200, 'success', $targetHistories);
     }
 
     /**
-     * Create a New Target
+     * Create a New Target History
      *
-     * Add a new Target entry for employees.
+     * Add a new target history entry.
      * @subgroup Target
      * @authenticated
      * @response 200 {"code": 200,"message": "SKP berhasil ditambah.","data": null}
@@ -72,17 +72,16 @@ class TargetHistoryController extends Controller
     {
         try {
             DB::beginTransaction();
-            $targetId = DB::table('targets')->insertGetIdTs($this->request->except('users'));
+            $targetHistoryId = DB::table('target_histories')->insertGetIdTs($this->request->except('users'));
             //insert Users
             if (isset($this->request->users)) {
                 $users = array();
                 foreach ($this->request->users as $user) {
-                    $user['target_id'] = $targetId;
+                    $user['target_history_id'] = $targetHistoryId;
                     array_push($users, $user);
                 }
-                DB::table('user_targets')->insertTs($users);
+                DB::table('target_history_users')->insertTs($users);
             }
-
             DB::commit();
             return $this->response(200, 'SKP berhasil ditambah.');
         } catch (\Throwable $th) {
@@ -93,90 +92,90 @@ class TargetHistoryController extends Controller
     }
 
     /**
-     * Get Detail Target by ID
+     * Get Detail Target History by ID
      *
-     * Retrieve target history for a specific employee.
+     * Retrieve target history for specific ID.
      * @subgroup Target
      * @authenticated
-     * @urlParam id Refers to the ID of Target. Example: 1
+     * @urlParam id Refers to the ID of Target History. Example: 1
      * @response 404 {"code": 404,"message": "SKP tidak ditemukan.","data": null}
-     * @response 200 {"code":200,"message":"success","data":{"id":24,"period_month":1,"period_year":"2024","name":"\"test 2\"","appraisal_period":"Q1","year":"2024","users":[{"id":47,"created_at":"2024-05-07 07:03:38","employee_performance_predicate":1,"organizational_performance_achievement":1,"work_behavior_rating":1}]}}
+     * @response 200 {"code": 200,"message": "success","data": {"id": 4,"period_month": 3,"period_year": "2020","name": "PPK December 2020","appraisal_period": "Q1","year": "2020","users": [{"id": 4,"employee_performance_predicate": 1,"organizational_performance_achievement": 1,"work_behavior_rating": 1,"name": "Stanislaus Widjanarto","employee_id_number": "020002268","created_at": "2024-06-21 10:08:34"}]}}
      */
     public function show()
     {
-        $target = DB::table('targets');
-        $target->where('id', $this->request->id);
-        $target->select('id', 'period_month', 'period_year', 'name', 'appraisal_period', 'year');
-        $target = $target->first();
+        $targetHistory = DB::table('target_histories');
+        $targetHistory->where('id', $this->request->id);
+        $targetHistory->select('id', 'period_month', 'period_year', 'name', 'appraisal_period', 'year');
+        $targetHistory = $targetHistory->first();
 
-        if (!$target) {
+        if (!$targetHistory) {
             return $this->response(404, 'SKP tidak ditemukan.');
         }
 
-        $users = DB::table('user_targets as ut');
-        $users->join('users as u', 'u.id', '=', 'ut.user_id');
-        $users->where('target_id', $target->id);
-        $users->select('ut.id', 'ut.employee_performance_predicate', 'ut.organizational_performance_achievement', 'ut.work_behavior_rating', 'u.name', 'u.employee_id_number', 'ut.created_at');
+        $users = DB::table('target_history_users as thu');
+        $users->join('users as u', 'u.id', '=', 'thu.user_id');
+        $users->where('target_history_id', $targetHistory->id);
+        $users->select('thu.id', 'thu.employee_performance_predicate', 'thu.organizational_performance_achievement', 'thu.work_behavior_rating', 'u.name', 'u.employee_id_number', 'thu.created_at');
         $users = $users->get();
 
-        $target->users = $users;
+        $targetHistory->users = $users;
 
-        return $this->response(200, 'success', $target);
+        return $this->response(200, 'success', $targetHistory);
     }
 
     /**
-     * Update Target by ID
+     * Update Target History by ID
      *
-     * Update an existing Target entry.
+     * Update an existing target history entry.
      * @subgroup Target
      * @authenticated
-     * @urlParam id Refers to the ID of Target. Example: 1
+     * @urlParam id Refers to the ID of Target History. Example: 1
      * @response 404 {"code": 404,"message": "SKP tidak ditemukan.","data": null}
      * @response 200 {"code": 200,"message": "SKP berhasil diupdate.","data": null}
      */
     public function update(UpdateTargetHistoryRequest $request)
     {
-        $target = DB::table('targets');
-        $target->where('id', $this->request->id);
-        $target->select('id');
-        $target = $target->first();
+        $targetHistory = DB::table('target_histories');
+        $targetHistory->where('id', $this->request->id);
+        $targetHistory->select('id');
+        $targetHistory = $targetHistory->first();
 
-        if (!$target) {
+        if (!$targetHistory) {
             return $this->response(404, 'SKP tidak ditemukan.');
         }
 
-        $target = DB::table('targets');
-        $target->where('id', $this->request->id);
-        $target = $target->updateTs($this->request->except('users'));
+        $targetHistory = DB::table('target_histories');
+        $targetHistory->where('id', $this->request->id);
+        $targetHistory = $targetHistory->updateTs($this->request->except('users'));
 
         $users = array();
 
         if (isset($this->request->users)) {
 
             // Get existing data
-            $userTargets = DB::table('user_targets');
-            $userTargets->where('target_id', $this->request->id);
-            $userTargets->select('id');
-            $userTargets = $userTargets->get();
+            $targetHistoryUsers = DB::table('target_history_users');
+            $targetHistoryUsers->where('target_history_id', $this->request->id);
+            $targetHistoryUsers->select('id');
+            $targetHistoryUsers = $targetHistoryUsers->get();
 
             // Delete data
-            $array1 = Arr::pluck($userTargets, 'id');
+            $array1 = Arr::pluck($targetHistoryUsers, 'id');
             $array2 = Arr::pluck($this->request->users, 'id');
             $result = array_diff($array1, $array2);
-            DB::table('user_trainings')->whereIn('id', $result)->delete();
+            DB::table('target_history_users')->whereIn('id', $result)->delete();
 
             foreach ($this->request->users as $user) {
                 if (!is_null($user['id'])) {
                     // Update existing data
-                    DB::table('user_targets')->where('id', $user['id'])->updateTs($user);
+                    DB::table('target_history_users')->where('id', $user['id'])->updateTs($user);
                 } else {
                     // Insert new item
-                    $user['target_id'] = $this->request->id;
+                    $user['target_history_id'] = $this->request->id;
                     array_push($users, $user);
                 }
             }
             if (count($users) > 0) {
-                DB::table('user_targets')->insertTs($users);
+                DB::table('target_history_users')->insertTs($users);
             }
         }
         return $this->response(200, 'SKP berhasil diupdate.');

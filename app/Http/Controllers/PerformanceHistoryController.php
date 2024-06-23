@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 /**
  * @group History
- * @subgroupDescription These endpoints allow you to perform CRUD operations on Performance data, enabling the retrieval, creation, and updating of Performance records as needed.
+ * @subgroupDescription These endpoints allow you to perform CRUD operations on performance history data, enabling the retrieval, creation, and updating of performance history records as needed.
  */
 class PerformanceHistoryController extends Controller
 {
@@ -22,15 +22,15 @@ class PerformanceHistoryController extends Controller
     }
 
     /**
-     * Get List of Performance
+     * Get List of Performance Histories
      *
-     * Retrieve the history of employee Performances.
+     * Retrieve the performance histories.
      * @subgroup Performance
      * @authenticated
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
      * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
      * @queryParam search string The keyword search field for the name. Example: PPK Mei 2024
-     * @response 200 {"code":200,"message":"success","data":[{"id":1,"created_at":"2024-05-10 04:36:41","name":"PPK Mei 2024","period_month":5,"period_year":"2024","performance_period":"PPK Mei 2024","total":1}],"pagination":{"total":1,"count":1,"per_page":10,"current_page":1,"total_pages":1,"links":{"first_page":"http://localhost:8000/api/performances?page=1","last_page":"http://localhost:8000/api/performances?page=1","next_page":null,"prev_page":null}}}
+     * @response 200 {"code": 200,"message": "success","data": [{"id": 56,"created_at": "2024-06-20 09:26:03","name": "01 Jan 2017 s.d 31 Des 2017","period_month": 5,"period_year": "2023","performance_period": "01 Jan 2017 s.d 31 Des 2017","total": 221}],"pagination": {"total": 55,"count": 10,"per_page": 10,"current_page": 1,"total_pages": 6,"links": {"first_page": "http://localhost/api/performance-histories?page=1","last_page": "http://localhost/api/performance-histories?page=6","next_page": "http://localhost/api/performance-histories?page=2","prev_page": null}}}
      */
 
     public function index()
@@ -47,24 +47,24 @@ class PerformanceHistoryController extends Controller
         ], $messages);
         $this->request->limit = ($this->request->limit) ? $this->request->limit : 10;
 
-        $performances = DB::table('performances as p');
-        $performances->leftjoin('user_performances as up', 'p.id', '=', 'up.performance_id');
-        $performances->select('p.id', 'p.created_at', 'p.name', 'p.period_month', 'p.period_year', 'p.performance_period', DB::raw("COUNT(up.id) AS total"));
-        $performances->where('p.name', 'like', '%' . $this->request->search . '%');
-        $performances->orderBy('p.updated_at', 'desc');
-        $performances->orderBy('p.created_at', 'desc');
-        $performances->groupby('p.id');
-        $performances = $performances->paginate($this->request->limit);
-        if ($performances->isEmpty()) {
-            return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $performances);
+        $performanceHistories = DB::table('performance_histories as ph');
+        $performanceHistories->leftjoin('performance_history_users as phu', 'ph.id', '=', 'phu.performance_history_id');
+        $performanceHistories->select('ph.id', 'ph.created_at', 'ph.name', 'ph.period_month', 'ph.period_year', 'ph.performance_period', DB::raw("COUNT(phu.id) AS total"));
+        $performanceHistories->where('ph.name', 'like', '%' . $this->request->search . '%');
+        $performanceHistories->orderBy('ph.updated_at', 'desc');
+        $performanceHistories->orderBy('ph.created_at', 'desc');
+        $performanceHistories->groupby('ph.id');
+        $performanceHistories = $performanceHistories->paginate($this->request->limit);
+        if ($performanceHistories->isEmpty()) {
+            return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $performanceHistories);
         }
-        return $this->paginateResponse(200, 'success', $performances);
+        return $this->paginateResponse(200, 'success', $performanceHistories);
     }
 
     /**
-     * Create a New Performance
+     * Create a New Performance History
      *
-     * Add a new Performance entry for employees.
+     * Add a new performance history entry.
      * @subgroup Performance
      * @authenticated
      * @response 200 {"code": 200,"message": "PPK berhasil ditambah.","data": null}
@@ -73,17 +73,15 @@ class PerformanceHistoryController extends Controller
     {
         try {
             DB::beginTransaction();
-            $performanceId = DB::table('performances')->insertGetIdTs($this->request->except('users'));
-
+            $performanceHistoryId = DB::table('performance_histories')->insertGetIdTs($this->request->except('users'));
             if (isset($this->request->users)) {
                 $users = array();
                 foreach ($this->request->users as $user) {
-                    $user['performance_id'] = $performanceId;
+                    $user['performance_history_id'] = $performanceHistoryId;
                     array_push($users, $user);
                 }
-                DB::table('user_performances')->insertTs($users);
+                DB::table('performance_history_users')->insertTs($users);
             }
-
             DB::commit();
             return $this->response(200, 'PPK berhasil ditambahkan.');
         } catch (\Throwable $th) {
@@ -94,98 +92,95 @@ class PerformanceHistoryController extends Controller
     }
 
     /**
-     * Get Detail Performance by ID
+     * Get Detail Performance History by ID
      *
-     * Retrieve performance history for a specific employee.
+     * Retrieve performance history for specific ID.
      * @subgroup Performance
      * @authenticated
-     * @urlParam id Refers to the ID of Performance. Example: 1
+     * @urlParam id Refers to the ID of Performance History. Example: 1
      * @response 404 {"code": 404,"message": "PPK tidak ditemukan.","data": null}
-     * @response 200 {"code":200,"message":"success","data":{"id":2,"name":"PPK November 2025","performance_period":"PPK November 2025","period_year":"2025","period_month":10,"description":"Penilaian Bulanan","users":[{"id":2,"created_at":"2024-05-10 04:42:35","user_id":1,"work_performance_score":80}]}}
+     * @response 200 {"code": 200,"message": "success","data": {"id": 80,"name": "01 Jan 2017 s.d 28 Feb 2017","performance_period": "01 Jan 2017 s.d 28 Feb 2017","period_year": "2023","period_month": 5,"users": [{"id": 390,"user_id": 9470,"name": "Aldi Yarman","employee_id_number": "197804172005011002","work_performance_score": 86.8,"description": 4,"created_at": "2024-06-20 09:26:03"}]}}
      */
     public function show()
     {
-        $performance = DB::table('performances');
-        $performance->where('id', $this->request->id);
-        $performance->select('id', 'name', 'performance_period', 'period_year', 'period_month');
-        $performance = $performance->first();
-
-        if (!$performance) {
+        $performanceHistory = DB::table('performance_histories');
+        $performanceHistory->where('id', $this->request->id);
+        $performanceHistory->select('id', 'name', 'performance_period', 'period_year', 'period_month');
+        $performanceHistory = $performanceHistory->first();
+        if (!$performanceHistory) {
             return $this->response(404, 'PPK tidak ditemukan.');
         }
 
-        $users = DB::table('user_performances as up');
-        $users->join('users as u', 'u.id', '=', 'up.user_id');
-        $users->where('performance_id', $performance->id);
+        $users = DB::table('performance_history_users as phu');
+        $users->join('users as u', 'u.id', '=', 'phu.user_id');
+        $users->where('performance_history_id', $performanceHistory->id);
         $users->select(
-            'up.id',
-            'up.user_id',
+            'phu.id',
+            'phu.user_id',
             'u.name',
             'u.employee_id_number',
-            'up.work_performance_score',
-            'up.description',
-            'up.created_at'
+            'phu.work_performance_score',
+            'phu.description',
+            'phu.created_at'
         );
         $users = $users->get();
-
-        $performance->users = $users;
-
-        return $this->response(200, 'success', $performance);
+        $performanceHistory->users = $users;
+        return $this->response(200, 'success', $performanceHistory);
     }
 
     /**
-     * Update Performance by ID
+     * Update Performance History by ID
      *
-     * Update an existing Performance entry.
+     * Update an existing performance history entry.
      * @subgroup Performance
      * @authenticated
-     * @urlParam id Refers to the ID of Performance. Example: 1
+     * @urlParam id Refers to the ID of Performance History. Example: 1
      * @response 404 {"code": 404,"message": "PPK tidak ditemukan.","data": null}
      * @response 200 {"code": 200,"message": "PPK berhasil diupdate.","data": null}
      */
     public function update(UpdatePerformanceHistoryRequest $request)
     {
-        $performance = DB::table('performances');
-        $performance->where('id', $this->request->id);
-        $performance->select('id');
-        $performance = $performance->first();
+        $performanceHistory = DB::table('performance_histories');
+        $performanceHistory->where('id', $this->request->id);
+        $performanceHistory->select('id');
+        $performanceHistory = $performanceHistory->first();
 
-        if (!$performance) {
+        if (!$performanceHistory) {
             return $this->response(404, 'PPK tidak ditemukan.');
         }
 
-        $performance = DB::table('performances');
-        $performance->where('id', $this->request->id);
-        $performance = $performance->updateTs($this->request->except('users'));
+        $performanceHistory = DB::table('performance_histories');
+        $performanceHistory->where('id', $this->request->id);
+        $performanceHistory = $performanceHistory->updateTs($this->request->except('users'));
 
         $users = array();
 
         if (isset($this->request->users)) {
 
             // Get existing data
-            $userPerformances = DB::table('user_performances');
-            $userPerformances->where('performance_id', $this->request->id);
-            $userPerformances->select('id');
-            $userPerformances = $userPerformances->get();
+            $performanceHistoryUsers = DB::table('performance_history_users');
+            $performanceHistoryUsers->where('performance_history_id', $this->request->id);
+            $performanceHistoryUsers->select('id');
+            $performanceHistoryUsers = $performanceHistoryUsers->get();
 
             // Delete data
-            $array1 = Arr::pluck($userPerformances, 'id');
+            $array1 = Arr::pluck($performanceHistoryUsers, 'id');
             $array2 = Arr::pluck($this->request->users, 'id');
             $result = array_diff($array1, $array2);
-            DB::table('user_performances')->whereIn('id', $result)->delete();
+            DB::table('performance_history_users')->whereIn('id', $result)->delete();
 
             foreach ($this->request->users as $user) {
                 if (!is_null($user['id'])) {
                     // Update existing data
-                    DB::table('user_performances')->where('id', $user['id'])->updateTs($user);
+                    DB::table('performance_history_users')->where('id', $user['id'])->updateTs($user);
                 } else {
                     // Insert new item
-                    $user['performance_id'] = $this->request->id;
+                    $user['performance_history_id'] = $this->request->id;
                     array_push($users, $user);
                 }
             }
             if (count($users) > 0) {
-                DB::table('user_performances')->insertTs($users);
+                DB::table('performance_history_users')->insertTs($users);
             }
         }
         return $this->response(200, 'PPK berhasil diupdate.');

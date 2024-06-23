@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call(DecreeSeeder::class);
         $this->call(DisciplinarySeeder::class);
         $this->call(GroupSeeder::class);
+        $this->call(RecognitionSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(PositionEchelonSeeder::class);
 

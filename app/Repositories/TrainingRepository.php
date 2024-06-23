@@ -11,32 +11,29 @@ class TrainingRepository
 
     public function getDetail($userId, $type)
     {
-        $trainings = DB::table('user_trainings as ut');
-        $trainings->join('trainings as t', 't.id', '=', 'ut.training_id');
-        $trainings->where('ut.user_id', $userId);
-        $trainings->where('t.type', $type);
+        $trainings = DB::table('training_histories as th');
+        $trainings->join('training_history_users as thu', 'th.id', '=', 'thu.training_history_id');
+        $trainings->where('thu.user_id', $userId);
+        $trainings->where('th.type', $type);
         $trainings->select(
-            'ut.id',
-            't.period_month',
-            't.period_year',
-            't.name',
-            't.level',
-            't.start_date',
-            't.duration',
-            't.organizer',
-            't.reference_number',
-            't.link',
-            'ut.certificate',
-            't.type',
+            'thu.id',
+            'th.period_month',
+            'th.period_year',
+            'th.name',
+            'th.level',
+            'th.start_date',
+            'th.duration',
+            'th.organizer',
+            'th.reference_number',
+            'th.link',
+            'thu.certificate',
+            'th.type',
         );
-        $trainings->orderBy('t.period_year', 'desc');
-        $trainings->orderBy('t.period_month', 'desc');
+        $trainings->orderBy('th.start_date', 'desc');
         $trainings = $trainings->get();
-
         foreach ($trainings as $training) {
             $training->certificate = $this->getDocument($training->certificate);
         }
-
         return $trainings;
     }
 }

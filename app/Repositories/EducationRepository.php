@@ -11,6 +11,7 @@ class EducationRepository
         $educations = DB::table('user_educations');
         $educations->where('user_id', $userId);
         $educations->select(
+            'id',
             'level',
             'name',
             'faculty',
@@ -19,6 +20,8 @@ class EducationRepository
             'year_of_graduation',
             'description'
         );
+        $educations->orderBy('level', 'desc');
+        $educations->orderBy('year_of_graduation', 'desc');
         return $educations = $educations->get();
     }
 }

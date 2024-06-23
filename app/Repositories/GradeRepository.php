@@ -33,8 +33,7 @@ class GradeRepository
             'ghu.description',
             'ghu.status',
         );
-        $grades->orderBy('gh.period_year', 'desc');
-        $grades->orderBy('gh.period_month', 'desc');
+        $grades->orderBy('ghu.effective_date', 'desc');
         $grades = $grades->get();
 
         foreach ($grades as $grade) {

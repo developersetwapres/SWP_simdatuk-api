@@ -24,6 +24,7 @@ use App\Http\Controllers\RecapitulationAsnController;
 use App\Http\Controllers\RecapitulationController;
 use App\Http\Controllers\RecapitulationNonAsnController;
 use App\Http\Controllers\RecapitulationOutsourceController;
+use App\Http\Controllers\RecognitionController;
 use App\Http\Controllers\RecognitionHistoryController;
 use App\Http\Controllers\ResidenceController;
 use App\Http\Controllers\RoleController;
@@ -190,6 +191,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('residences')->group(function () {
         Route::get('/', [ResidenceController::class, 'index']);
+    });
+
+    Route::prefix('recognitions')->group(function () {
+        Route::get('/', [RecognitionController::class, 'index']);
     });
 
     Route::prefix('permissions')->group(function () {

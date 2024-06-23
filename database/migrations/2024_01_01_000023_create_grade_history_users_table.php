@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('grade_history_users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('grade_history_id');
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('grade_id')->nullable();
             $table->date('effective_date')->nullable();
             $table->string('decree_name', 160)->nullable();

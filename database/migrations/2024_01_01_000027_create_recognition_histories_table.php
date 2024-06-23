@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('recognitions', function (Blueprint $table) {
+        Schema::create('recognition_histories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->tinyInteger('period_month');
             $table->year('period_year');
-            $table->string('name', 160)->nullable();
+            $table->unsignedBigInteger('recognition_id')->nullable();
             $table->string('description')->nullable();
             $table->unsignedBigInteger('type_of_decree')->nullable();
             $table->date('decree_date')->nullable();
@@ -26,6 +26,7 @@ return new class extends Migration
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
 
+            $table->foreign('recognition_id')->references('id')->on('recognitions')->onDelete('cascade');
             $table->foreign('type_of_decree')->references('id')->on('decrees')->onDelete('cascade');
         });
     }
@@ -35,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('recognitions');
+        Schema::dropIfExists('recognition_histories');
     }
 };

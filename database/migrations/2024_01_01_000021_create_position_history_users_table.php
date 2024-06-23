@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('position_history_users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('position_history_id');
+            $table->unsignedBigInteger('user_id');
             $table->string('position', 1024)->nullable();
             $table->unsignedBigInteger('group_id')->nullable();
             $table->tinyInteger('echelon')->nullable()->comment('1=Eselon I, 2=Eselon II, 3=Eselon III, 4=Fungsional, 5=Pelaksana, 6=Staf');

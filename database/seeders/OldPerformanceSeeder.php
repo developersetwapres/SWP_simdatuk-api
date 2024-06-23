@@ -13,8 +13,8 @@ class OldPerformanceSeeder extends Seeder
     public function run(): void
     {
         if (config('app.env') == 'production') {
-            DB::table('performances')->delete();
-            DB::table('user_performances')->delete();
+            DB::table('performance_histories')->delete();
+            DB::table('performance_history_users')->delete();
 
             $performances = "
               SELECT
@@ -29,12 +29,12 @@ class OldPerformanceSeeder extends Seeder
             ";
 
             $performances = DB::select($performances);
-            DB::table('performances')->insertTs(json_decode(json_encode($performances), true));
+            DB::table('performance_histories')->insertTs(json_decode(json_encode($performances), true));
 
             $performances = "
               SELECT
                 db_baru_users.id as user_id,
-                db_baru_performances.id as performance_id,
+                db_baru_performances.id as performance_history_id,
                 db_lama_skp.nilai_prestasi as work_performance_score
               FROM
                 simdatuk_dump.tbl_r_skp as db_lama_skp
@@ -43,7 +43,7 @@ class OldPerformanceSeeder extends Seeder
               ON
                 db_lama_skp.id_pegawai = db_baru_users.employee_id_number
               JOIN
-                simdatuk.performances as db_baru_performances
+                simdatuk.performance_histories as db_baru_performances
               ON
                 db_lama_skp.periode = db_baru_performances.name
             ";
@@ -70,7 +70,7 @@ class OldPerformanceSeeder extends Seeder
                     $performance->description = 1;
                 }
             }
-            DB::table('user_performances')->insertTs(json_decode(json_encode($performances), true));
+            DB::table('performance_history_users')->insertTs(json_decode(json_encode($performances), true));
         }
     }
 }

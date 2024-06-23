@@ -13,8 +13,8 @@ class OldTrainingSeeder extends Seeder
     public function run(): void
     {
         if (config('app.env') == 'production') {
-            DB::table('trainings')->delete();
-            DB::table('user_trainings')->delete();
+            DB::table('training_histories')->delete();
+            DB::table('training_history_users')->delete();
             $this->getStrukturalAndFungsional(1);
             $this->getStrukturalAndFungsional(2);
             $this->getTeknis();
@@ -55,7 +55,6 @@ class OldTrainingSeeder extends Seeder
                 period_year desc
         ";
         $userTraining = DB::select($userTraining);
-
         $userTraining = json_decode(json_encode($userTraining), true);
 
         $groupedData = [];
@@ -71,7 +70,7 @@ class OldTrainingSeeder extends Seeder
         // Output the grouped data
         foreach ($groupedData as $key => $group) {
             $item = explode("|", $key);
-            $trainingId = DB::table('trainings');
+            $trainingId = DB::table('training_histories');
             $trainingId = $trainingId->insertGetIdTs([
                 'name' => ($item[0] == 'null') ? null : $item[0],
                 'level' => ($item[1] == 'null') ? null : $item[1],
@@ -80,10 +79,10 @@ class OldTrainingSeeder extends Seeder
                 'type' => $type,
             ]);
             foreach ($group as $item) {
-                $user = DB::table('user_trainings');
+                $user = DB::table('training_history_users');
                 $user = $user->insertTs([
                     'user_id' => $item['user_id'],
-                    'training_id' => $trainingId,
+                    'training_history_id' => $trainingId,
                 ]);
             }
         }
@@ -113,7 +112,7 @@ class OldTrainingSeeder extends Seeder
         $trainings = DB::select($trainings);
         foreach ($trainings as $item) {
             // Insert to training
-            $trainingId = DB::table('trainings');
+            $trainingId = DB::table('training_histories');
             $trainingId = $trainingId->insertGetIdTs([
                 'name' => $item->name,
                 'period_year' => $item->period_year,
@@ -127,7 +126,7 @@ class OldTrainingSeeder extends Seeder
             $userTraining = "
                 SELECT
                     db_baru_users.id as user_id,
-                    $trainingId as training_id,
+                    $trainingId as training_history_id,
                     CURRENT_TIMESTAMP AS created_at
                 FROM
                     simdatuk_dump.tbl_r_dik_teknis as db_lama_teknis
@@ -140,7 +139,7 @@ class OldTrainingSeeder extends Seeder
             ";
             $userTraining = DB::select($userTraining);
             if (count($userTraining) > 0) {
-                DB::table('user_trainings')->insertTs(json_decode(json_encode($userTraining), true));
+                DB::table('training_history_users')->insertTs(json_decode(json_encode($userTraining), true));
             }
         }
     }

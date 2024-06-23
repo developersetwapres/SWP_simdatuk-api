@@ -43,7 +43,7 @@ class CreateEducationRequest
             'educations.*.status.numeric' => 'Status harus berupa angka.',
             'educations.*.status.in' => 'Status harus diantara 1,2,3,4 atau 5.',
             'educations.*.year_of_graduation.required' => 'Tahun kelulusan tidak boleh kosong.',
-            'educations.*.year_of_graduation.date' => 'Tahun kelulusan harus dengan format YYYY.',
+            'educations.*.year_of_graduation.date_format' => 'Tahun kelulusan harus dengan format YYYY.',
             'educations.*.description.max' => 'Keterangan tidak boleh lebih dari 160 karakter.',
             'educations.*.degree_document.file' => 'Ijazah harus berupa file.',
             'educations.*.degree_document.extensions' => 'Ijazah harus berupa jpg, jpeg atau png.',
