@@ -79,6 +79,9 @@ class PositionController extends Controller
 
             $positions = $positions->get();
 
+            $dupePositions = [];
+            $originalPositions = unserialize(serialize($positions));
+
             foreach ($positions as $position) {
                 $position->type = [
                     "id" => $position->type,
@@ -106,6 +109,26 @@ class PositionController extends Controller
                 }
 
                 $position->hierarchies = $shownHierarcy;
+
+                //rename with name
+                $countDupe = collect($originalPositions)->filter(function ($item) use ($position) {
+                    return $item->name == $position->name;
+                })->values()->all();
+
+                if (sizeof($countDupe) > 1) {
+                    $user = DB::table('users')
+                        ->select('name')
+                        ->where('position_id', $position->id)
+                        ->first();
+                    if ($user) {
+                        $position->name = $position->name . " (" . $user->name . ")";
+                    } else {
+                        $dupePositions[] = $position->name;
+                        $position->name = $position->name . " " . sizeof($dupePositions);
+                    }
+                }
+
+                $uniquePositions[] = $position->name;
 
                 //remove unecessary select
                 unset($position->parent_id);
