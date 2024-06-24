@@ -695,6 +695,7 @@
             <td class="table-section-3-title">Keterangan Pekerjaan</td>
             <td class="table-section-3-title">Status Perkawinan</td>
             <td class="table-section-3-title">No HP</td>
+            <td class="table-section-3-title">Urut Keluarga</td>
         </thead>
 
         <tbody>
@@ -705,17 +706,130 @@
                 <td class="table-section-3-body">{{ $value['card_number'] }}</td>
                 <td class="table-section-3-body">{{ $value['name'] }}</td>
                 <td class="table-section-3-body">{{ $value['id_number'] }}</td>
-                <td class="table-section-3-body">{{ $value['gender'] }}</td>
-                <td class="table-section-3-body">{{ $value['religion'] }}</td>
+                <td class="table-section-3-body">
+                    @switch($value['gender'])
+                        @case(0)
+                            Laki-Laki
+                            @break
+                        @case(1)
+                            Perempuan
+                            @break
+                        @default
+                            -
+                    @endswitch</td>
+                <td class="table-section-3-body">
+                    @switch($value['religion'])
+                        @case(1)
+                            Islam
+                            @break
+                        @case(2)
+                            Kristen
+                            @break
+                        @case(3)
+                            Katolik
+                            @break
+                        @case(4)
+                            Hindu
+                            @break
+                        @case(5)
+                            Buddha
+                            @break
+                        @case(6)
+                            Konguchu
+                            @break
+                        @default
+                            -
+                    @endswitch</td>
                 <td class="table-section-3-body">{{ $value['place_of_birth'] }}</td>
                 <td class="table-section-3-body">{{ $value['date_of_birth'] }}</td>
                 <td class="table-section-3-body">{{ $value['name_of_father'] }}</td>
                 <td class="table-section-3-body">{{ $value['name_of_mother'] }}</td>
-                <td class="table-section-3-body">{{ $value['relationship_status'] }}</td>
-                <td class="table-section-3-body">{{ $value['education'] }}</td>
+                <td class="table-section-3-body">
+                    @switch($value['relationship_status'])
+                        @case(1)
+                            Kepala Keluarga
+                            @break
+                        @case(2)
+                            Suami
+                            @break
+                        @case(3)
+                            Istri
+                            @break
+                        @case(4)
+                            Anak
+                            @break
+                        @case(5)
+                            Menantu
+                            @break
+                        @case(6)
+                            Cucu
+                            @break
+                        @case(7)
+                            Orang Tua
+                            @break
+                        @case(8)
+                            Mertua
+                            @break
+                        @case(9)
+                            Family Lainnya
+                            @break
+                        @default
+                            -
+                    @endswitch</td>
+                <td class="table-section-3-body">
+                    @switch($value['education'])
+                        @case(1)
+                            Tidak/Belum Sekolah
+                            @break
+                        @case(2)
+                            Belum Tamat SD/Sederajat
+                            @break
+                        @case(3)
+                            Tamat SD/Sederajat
+                            @break
+                        @case(4)
+                            SLTP/Sederajat
+                            @break
+                        @case(5)
+                            SLTA/Sederajat
+                            @break
+                        @case(6)
+                            Diploma I/II
+                            @break
+                        @case(7)
+                            Akademi/Diploma III/Sarjana Muda
+                            @break
+                        @case(8)
+                            Diploma IV/Strata I
+                            @break
+                        @case(9)
+                            Strata II
+                            @break
+                        @case(10)
+                            Strata III
+                            @break
+                        @default
+                            -
+                    @endswitch</td>
                 <td class="table-section-3-body">{{ $value['occupation'] }}</td>
                 <td class="table-section-3-body">{{ $value['occupation_description'] }}</td>
-                <td class="table-section-3-body">{{ $value['marital_status'] }}</td>
+                <td class="table-section-3-body">
+                    @switch($value['marital_status'])
+                        @case(1)
+                            Belum Menikah
+                            @break
+                        @case(2)
+                            Menikah
+                            @break
+                        @case(3)
+                            Cerai Hidup
+                            @break
+                        @case(4)
+                            Cerai Mati
+                            @break
+                        @default
+                            -
+                    @endswitch</td>
                 <td class="table-section-3-body">{{ $value['mobile_phone'] }}</td>
                 <td class="table-section-3-body">{{ $value['sequence_number'] }}</td>
             </tr>
@@ -738,14 +852,36 @@
         </thead>
 
         <tbody>
-            @php $indexPaidLeave=1 @endphp
-            @foreach($userPaidLeave as $value)
+            @php $indexLeave=1 @endphp
+            @foreach($userLeave as $value)
             <tr style="border-bottom: 1px solid #F0F0F0;">
-                <td class="table-section-3-body">{{ $indexPaidLeave++ }}</td>
+                <td class="table-section-3-body">{{ $indexLeave++ }}</td>
                 <td class="table-section-3-body">{{ $value['grade'] }}</td>
-                <td class="table-section-3-body">Lorem</td>
+                <td class="table-section-3-body">{{ $value['position'] }}</td>
                 <td class="table-section-3-body">{{ $value['start_date'] }} - {{ $value['end_date'] }}</td>
-                <td class="table-section-3-body">{{ $value['reason'] }}</td>
+                <td class="table-section-3-body">
+                    @switch($value['type'])
+                        @case(1)
+                            Cuti diluar Tanggungan Negara
+                            @break
+                        @case(2)
+                            Cuti Sakit
+                            @break
+                        @case(3)
+                            Cuti Besar
+                            @break
+                        @case(4)
+                            Cuti Bersalin
+                            @break
+                        @case(5)
+                            Cuti Belajar Luar Negeri
+                            @break
+                        @case(6)
+                            Cuti Tahunan Luar Negeri
+                            @break
+                        @default
+                            -
+                    @endswitch</td>
                 <td class="table-section-3-body">{{ $value['number'] }}</td>
                 <td class="table-section-3-body">{{ $value['purpose'] }}</td>
                 <td class="table-section-3-body"><a href="{{ $value['letter'] }}">Lihat File</a></td>

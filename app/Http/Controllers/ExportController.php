@@ -94,11 +94,12 @@ class ExportController extends Controller
         }
 
         //Recognition
-        $userRecognition = DB::table('user_recognitions as ur');
-        $userRecognition->join('recognitions as r', 'r.id', '=', 'ur.recognition_id');
+        $userRecognition = DB::table('recognition_history_users as ur');
+        $userRecognition->join('recognition_histories as r', 'r.id', '=', 'ur.recognition_history_id');
+        $userRecognition->join('recognitions', 'r.recognition_id', '=', 'recognitions.id');
         $userRecognition->join('users', 'users.id', '=', 'ur.user_id');
         $userRecognition->where('ur.user_id', $user->id);
-        $userRecognition->select('r.name as recognition_name', 'r.description as recognition_description', 'r.type_of_decree as recognition_type',
+        $userRecognition->select('recognitions.name as recognition_name', 'r.description as recognition_description', 'r.type_of_decree as recognition_type',
             'r.decree_date', 'r.decree_number', 'r.decree_year', 'r.awarding_institution', 'r.date_of_receipt');
         $userRecognition = $userRecognition->get();
         $userRecognitionData = array();
@@ -117,27 +118,29 @@ class ExportController extends Controller
 
         //Leaves
         $userLeave = DB::table('user_leaves as ul');
-        $userLeave->join('grades as g', 'g.id', '=', 'ul.grade');
         $userLeave->join('users as u', 'u.id', '=', 'ul.user_id');
+        $userLeave->join('grades as g', 'g.id', '=', 'u.grade_id');
+        $userLeave->join('positions as p', 'p.id', '=', 'u.position_id');
         $userLeave->where('ul.user_id', $user->id);
-        $userLeave->select('g.name', 'ul.start_date', 'ul.end_date', 'ul.reason', 'ul.number', 'ul.purpose', 'ul.leave_letter');
+        $userLeave->select('g.name', 'ul.start_date', 'ul.end_date', 'ul.type', 'ul.number', 'ul.description', 'ul.letter', 'p.name as position_name');
         $userLeave = $userLeave->get();
         $userLeaveData = array();
         foreach ($userLeave as $leave) {
             $userLeaveData[] = [
                 'grade' => $leave->name,
+                'position' => $leave->position_name,
                 'start_date' => $leave->start_date,
                 'end_date' => $leave->end_date,
-                'reason' => $leave->reason,
+                'type' => $leave->type,
                 'number' => $leave->number,
-                'purpose' => $leave->purpose,
-                'letter' => $leave->leave_letter,
+                'purpose' => $leave->description,
+                'letter' => $leave->letter,
             ];
         }
 
         //Target
-        $userTarget = DB::table('user_targets as ut');
-        $userTarget->join('targets as t', 't.id', '=', 'ut.target_id');
+        $userTarget = DB::table('target_history_users as ut');
+        $userTarget->join('target_histories as t', 't.id', '=', 'ut.target_history_id');
         $userTarget->join('users', 'users.id', '=', 'ut.user_id');
         $userTarget->where('ut.user_id', $user->id);
         $userTarget->select('t.appraisal_period as period', 't.year as target_year', 'ut.work_behavior_rating', 'ut.employee_performance_predicate', 'ut.organizational_performance_achievement');
@@ -154,9 +157,9 @@ class ExportController extends Controller
         }
 
         //Credit Score
-        $userCredit = DB::table('user_credit_score as ucs');
+        $userCredit = DB::table('user_credits as ucs');
         $userCredit->where('ucs.user_id', $user->id);
-        $userCredit->select('ucs.position', 'ucs.period', 'ucs.year', 'ucs.last_credit_score');
+        $userCredit->select('ucs.position', 'ucs.period', 'ucs.year', 'ucs.score');
         $userCredit = $userCredit->get();
         $userCreditData = array();
         foreach ($userCredit as $credit) {
@@ -164,13 +167,13 @@ class ExportController extends Controller
                 'position' => $credit->position,
                 'period' => $credit->period,
                 'year' => $credit->year,
-                'credit_score' => $credit->last_credit_score,
+                'credit_score' => $credit->score,
             ];
         }
 
         //Performance
-        $userPerformance = DB::table('user_performances as up');
-        $userPerformance->join('performances as p', 'p.id', '=', 'up.performance_id');
+        $userPerformance = DB::table('performance_history_users as up');
+        $userPerformance->join('performance_histories as p', 'p.id', '=', 'up.performance_history_id');
         $userPerformance->join('users as u', 'u.id', '=', 'up.user_id');
         $userPerformance->where('up.user_id', $user->id);
         $userPerformance->select('up.description', 'p.performance_period', 'up.work_performance_score');
@@ -325,54 +328,59 @@ class ExportController extends Controller
             $noteGiver = DB::table('user_notes as un');
             $noteGiver->join('users', 'users.id', '=', 'un.giver_id');
             $noteGiver->where('un.giver_id', $note->giver_id);
-            $noteGiver->select('users.username');
+            $noteGiver->select('users.name');
             $noteGiver = $noteGiver->first();
             $userNoteData[] = [
                 'description' => $note->description,
                 'created_at' => $note->created_at,
-                'giver' => $noteGiver->username,
+                'giver' => $noteGiver->name,
             ];
         }
 
         $userAssessment = DB::table('user_assessments as ua');
         $userAssessment->join('users', 'users.id', '=', 'ua.user_id');
-        $userAssessment->select('ua.assessment_date', 'ua.point', 'ua.organizer', 'ua.assessment_document', 'ua.type');
+        $userAssessment->select('ua.event_date', 'ua.point', 'ua.organizer', 'ua.assessment_document');
         $userAssessment = $userAssessment->get();
-        $assessmentResult = array();
-        $assessmentCompetency = array();
-        $assessmentTalent = array();
-        foreach ($userAssessment as $assessment) {
-            switch ($assessment->type) {
-                case '1':
-                    $assessmentResult[] = [
-                        'assessment_date' => $assessment->assessment_date,
-                        'point' => $assessment->point,
-                        'organizer' => $assessment->organizer,
-                        'document' => $assessment->assessment_document,
-                    ];
-                    break;
-                case '2':
-                    $assessmentCompetency[] = [
-                        'assessment_date' => $assessment->assessment_date,
-                        'point' => $assessment->point,
-                        'organizer' => $assessment->organizer,
-                        'document' => $assessment->assessment_document,
-                    ];
-                    break;
-                case '3':
-                    $assessmentTalent[] = [
-                        'assessment_date' => $assessment->assessment_date,
-                        'point' => $assessment->point,
-                        'organizer' => $assessment->organizer,
-                        'document' => $assessment->assessment_document,
-                    ];
-                    break;
-            }
+        $userAssessmentData = array();
+        foreach ($userAssessment as $assessment){
+            $userAssessmentData[] = [
+                'assessment_date' => $assessment->event_date,
+                'point' => $assessment->point,
+                'organizer' => $assessment->organizer,
+                'document' => $assessment->assessment_document,
+            ];
+        }
+
+        $userCompetency = DB::table('user_competencies as uc');
+        $userCompetency->join('users', 'users.id', '=', 'uc.user_id');
+        $userCompetency->select('uc.event_date', 'uc.point', 'uc.organizer', 'uc.competency_document');
+        $userCompetency = $userCompetency->get();
+        $userCompetencyData = array();
+        foreach ($userCompetency as $competency){
+            $userCompetencyData[] = [
+                'assessment_date' => $competency->event_date,
+                'point' => $competency->point,
+                'organizer' => $competency->organizer,
+                'document' => $competency->competency_document,
+            ];
+        }
+        $userTalent = DB::table('user_talents as ut');
+        $userTalent->join('users', 'users.id', '=', 'ut.user_id');
+        $userTalent->select('ut.event_date', 'ut.point', 'ut.organizer', 'ut.talent_document');
+        $userTalent = $userTalent->get();
+        $userTalentData = array();
+        foreach ($userTalent as $talent){
+            $userTalentData[] = [
+                'assessment_date' => $talent->event_date,
+                'point' => $talent->point,
+                'organizer' => $talent->organizer,
+                'document' => $talent->talent_document,
+            ];
         }
 
         //Training
-        $userTraining = DB::table('user_trainings as ut');
-        $userTraining->join('trainings as t', 't.id', '=', 'ut.training_id');
+        $userTraining = DB::table('training_history_users as ut');
+        $userTraining->join('training_histories as t', 't.id', '=', 'ut.training_history_id');
         $userTraining->join('users', 'users.id', '=', 'ut.user_id');
         $userTraining->where('ut.user_id', $user->id);
         $userTraining->select('t.organizer', 't.type', 't.reference_number', 't.start_date', 't.link', 't.name', 't.level', 't.duration');
@@ -464,7 +472,7 @@ class ExportController extends Controller
                 'Tingkat' => $user->education_level,
                 'Nama Sekolah/Universitas' => $user->education_name,
                 'Tahun Lulus' => $user->education_year,
-                'No. Karpeg/No. Karis/No. Karsu' => $user->wife_id_card_number . '/' . $user->husband_id_card_number,
+                'No. Karpeg/No. Karis/No. Karsu' => $user->karisu_number,
                 'Masa Kerja Keseluruhan' => 'Lorem ipsum',
                 'Masa Kerja Golongan' => $gradeDate->y . ' Tahun ' . $gradeDate->m . ' Bulan' . $gradeDate->d . ' Hari',
                 'NPWP' => $user->id_tax,
@@ -481,7 +489,7 @@ class ExportController extends Controller
                 'Kontak Darurat' => $user->emergency_contact,
                 'Batas Usia Pensiun' => $user->expire_at,
             ],
-            'currentPosition' => $userCurrentPosition->name,
+            'currentPosition' => ($userCurrentPosition->name ?? '-'),
             'photoProfile' => $user->photo_profile,
             'userNIP' => $user->employee_id_number,
             'userName' => $user->name,
@@ -499,11 +507,11 @@ class ExportController extends Controller
             'userPerformance' => $userPerformanceData,
             'userPunishment' => $userPunishmentData,
             'userFamily' => $userFamilyData,
-            'userPaidLeave' => $userLeaveData,
+            'userLeave' => $userLeaveData,
             'userNotes' => $userNoteData,
-            'userAssessment' => $assessmentResult,
-            'userAssessmentCompetency' => $assessmentCompetency,
-            'userAssessmentTalent' => $assessmentTalent,
+            'userAssessment' => $userAssessmentData,
+            'userAssessmentCompetency' => $userCompetencyData,
+            'userAssessmentTalent' => $userTalentData,
         ]);
         $pdf->set_option('isHtml5ParserEnabled', true);
         $pdf->set_paper("A4", "portrait");
