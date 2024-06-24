@@ -17,7 +17,7 @@ class PositionSeeder extends Seeder
             [
                 'id' => 1,
                 'parent_id' => null,
-                'name' => 'Staff Khusus Wakil Presiden',
+                'name' => 'Staf Khusus Wakil Presiden',
                 'available' => 0,
                 'type' => 1,
                 'entity' => 2,
@@ -27,7 +27,7 @@ class PositionSeeder extends Seeder
                     [
                         'id' => 5,
                         'parent_id' => 1,
-                        'name' => 'Staff Khusus Wakil Presiden (Bidang Umum)',
+                        'name' => 'Staf Khusus Wakil Presiden (Bidang Umum)',
                         'available' => 1,
                         'type' => 1,
                         'entity' => 1,
@@ -37,7 +37,7 @@ class PositionSeeder extends Seeder
                             [
                                 'id' => 15,
                                 'parent_id' => 5,
-                                'name' => 'Asisten Staff Khusus Wakil Presiden (Bidang Umum)',
+                                'name' => 'Asisten Staf Khusus Wakil Presiden (Bidang Umum)',
                                 'available' => 2,
                                 'type' => 1,
                                 'entity' => 1,
@@ -47,7 +47,7 @@ class PositionSeeder extends Seeder
                                     [
                                         'id' => 25,
                                         'parent_id' => 15,
-                                        'name' => 'Asisten Staff Khusus Wakil Presiden',
+                                        'name' => 'Asisten Staf Khusus Wakil Presiden',
                                         'available' => 1,
                                         'type' => 1,
                                         'entity' => 1,
@@ -61,7 +61,7 @@ class PositionSeeder extends Seeder
                     [
                         'id' => 6,
                         'parent_id' => 1,
-                        'name' => 'Staff Khusus Wakil Presiden (Bidang Komunikasi dan Informasi)',
+                        'name' => 'Staf Khusus Wakil Presiden (Bidang Komunikasi dan Informasi)',
                         'available' => 1,
                         'type' => 1,
                         'entity' => 1,
@@ -71,7 +71,7 @@ class PositionSeeder extends Seeder
                             [
                                 'id' => 16,
                                 'parent_id' => 6,
-                                'name' => 'Asisten Staff Khusus Wakil Presiden (Bidang Komunikasi dan Informasi)',
+                                'name' => 'Asisten Staf Khusus Wakil Presiden (Bidang Komunikasi dan Informasi)',
                                 'available' => 2,
                                 'type' => 1,
                                 'entity' => 1,
@@ -83,7 +83,7 @@ class PositionSeeder extends Seeder
                     [
                         'id' => 7,
                         'parent_id' => 1,
-                        'name' => 'Staff Khusus Wakil Presiden (Bidang Hukum)',
+                        'name' => 'Staf Khusus Wakil Presiden (Bidang Hukum)',
                         'available' => 1,
                         'type' => 1,
                         'entity' => 1,
@@ -93,7 +93,7 @@ class PositionSeeder extends Seeder
                             [
                                 'id' => 17,
                                 'parent_id' => 7,
-                                'name' => 'Asisten Staff Khusus Wakil Presiden (Bidang Hukum)',
+                                'name' => 'Asisten Staf Khusus Wakil Presiden (Bidang Hukum)',
                                 'available' => 2,
                                 'type' => 1,
                                 'entity' => 1,
@@ -105,7 +105,7 @@ class PositionSeeder extends Seeder
                     [
                         'id' => 8,
                         'parent_id' => 1,
-                        'name' => 'Staff Khusus Wakil Presiden (Bidang Politik dan Hubungan Antar Lembaga)',
+                        'name' => 'Staf Khusus Wakil Presiden (Bidang Politik dan Hubungan Antar Lembaga)',
                         'available' => 1,
                         'type' => 1,
                         'entity' => 1,
@@ -115,7 +115,7 @@ class PositionSeeder extends Seeder
                             [
                                 'id' => 18,
                                 'parent_id' => 8,
-                                'name' => 'Asisten Staff Khusus Wakil Presiden (Bidang Politik dan Hubungan Antar Lembaga)',
+                                'name' => 'Asisten Staf Khusus Wakil Presiden (Bidang Politik dan Hubungan Antar Lembaga)',
                                 'available' => 2,
                                 'type' => 1,
                                 'entity' => 1,
@@ -127,7 +127,7 @@ class PositionSeeder extends Seeder
                     [
                         'id' => 9,
                         'parent_id' => 1,
-                        'name' => 'Staff Khusus Wakil Presiden (Bidang Ekonomi dan Keuangan)',
+                        'name' => 'Staf Khusus Wakil Presiden (Bidang Ekonomi dan Keuangan)',
                         'available' => 1,
                         'type' => 1,
                         'entity' => 1,
@@ -137,7 +137,7 @@ class PositionSeeder extends Seeder
                             [
                                 'id' => 19,
                                 'parent_id' => 9,
-                                'name' => 'Asisten Staff Khusus Wakil Presiden (Bidang Ekonomi dan Keuangan)',
+                                'name' => 'Asisten Staf Khusus Wakil Presiden (Bidang Ekonomi dan Keuangan)',
                                 'available' => 2,
                                 'type' => 1,
                                 'entity' => 1,
@@ -149,7 +149,7 @@ class PositionSeeder extends Seeder
                     [
                         'id' => 10,
                         'parent_id' => 1,
-                        'name' => 'Staff Khusus Wakil Presiden (Bidang Infrastruktur dan Investasi)',
+                        'name' => 'Staf Khusus Wakil Presiden (Bidang Infrastruktur dan Investasi)',
                         'available' => 1,
                         'type' => 1,
                         'entity' => 1,
@@ -159,7 +159,7 @@ class PositionSeeder extends Seeder
                             [
                                 'id' => 20,
                                 'parent_id' => 10,
-                                'name' => 'Asisten Staff Khusus Wakil Presiden (Bidang Infrastruktur dan Investasi)',
+                                'name' => 'Asisten Staf Khusus Wakil Presiden (Bidang Infrastruktur dan Investasi)',
                                 'available' => 2,
                                 'type' => 1,
                                 'entity' => 1,
@@ -171,7 +171,7 @@ class PositionSeeder extends Seeder
                     [
                         'id' => 11,
                         'parent_id' => 1,
-                        'name' => 'Staff Khusus Wakil Presiden (Bidang Reformasi Birokrasi)',
+                        'name' => 'Staf Khusus Wakil Presiden (Bidang Reformasi Birokrasi)',
                         'available' => 1,
                         'type' => 1,
                         'entity' => 1,
@@ -181,7 +181,7 @@ class PositionSeeder extends Seeder
                             [
                                 'id' => 21,
                                 'parent_id' => 11,
-                                'name' => 'Asisten Staff Khusus Wakil Presiden (Bidang Reformasi Birokrasi)',
+                                'name' => 'Asisten Staf Khusus Wakil Presiden (Bidang Reformasi Birokrasi)',
                                 'available' => 2,
                                 'type' => 1,
                                 'entity' => 1,
@@ -193,7 +193,7 @@ class PositionSeeder extends Seeder
                     [
                         'id' => 12,
                         'parent_id' => 1,
-                        'name' => 'Staff Khusus Wakil Presiden (Bidang Penanggulangan Kemiskinan dan Otonomi Daerah)',
+                        'name' => 'Staf Khusus Wakil Presiden (Bidang Penanggulangan Kemiskinan dan Otonomi Daerah)',
                         'available' => 1,
                         'type' => 1,
                         'entity' => 1,
@@ -203,7 +203,7 @@ class PositionSeeder extends Seeder
                             [
                                 'id' => 22,
                                 'parent_id' => 12,
-                                'name' => 'Asisten Staff Khusus Wakil Presiden (Bidang Penanggulangan Kemiskinan dan Otonomi Daerah)',
+                                'name' => 'Asisten Staf Khusus Wakil Presiden (Bidang Penanggulangan Kemiskinan dan Otonomi Daerah)',
                                 'available' => 2,
                                 'type' => 1,
                                 'entity' => 1,
@@ -215,7 +215,7 @@ class PositionSeeder extends Seeder
                     [
                         'id' => 13,
                         'parent_id' => 1,
-                        'name' => 'Staff Khusus Wakil Presiden',
+                        'name' => 'Staf Khusus Wakil Presiden',
                         'available' => 1,
                         'type' => 1,
                         'entity' => 1,
@@ -225,7 +225,7 @@ class PositionSeeder extends Seeder
                             [
                                 'id' => 23,
                                 'parent_id' => 13,
-                                'name' => 'Asisten Staff Khusus Wakil Presiden',
+                                'name' => 'Asisten Staf Khusus Wakil Presiden',
                                 'available' => 2,
                                 'type' => 1,
                                 'entity' => 1,
@@ -237,7 +237,7 @@ class PositionSeeder extends Seeder
                     [
                         'id' => 14,
                         'parent_id' => 1,
-                        'name' => 'Staff Khusus Wakil Presiden',
+                        'name' => 'Staf Khusus Wakil Presiden',
                         'available' => 1,
                         'type' => 1,
                         'entity' => 1,
@@ -247,7 +247,7 @@ class PositionSeeder extends Seeder
                             [
                                 'id' => 24,
                                 'parent_id' => 14,
-                                'name' => 'Asisten Staff Khusus Wakil Presiden',
+                                'name' => 'Asisten Staf Khusus Wakil Presiden',
                                 'available' => 1,
                                 'type' => 1,
                                 'entity' => 1,
@@ -257,7 +257,7 @@ class PositionSeeder extends Seeder
                                     [
                                         'id' => 26,
                                         'parent_id' => 24,
-                                        'name' => 'Pembantu Asisten Staff Khusus Wakil Presiden (BANAS I)',
+                                        'name' => 'Pembantu Asisten Staf Khusus Wakil Presiden (BANAS I)',
                                         'available' => 1,
                                         'type' => 1,
                                         'entity' => 1,
@@ -267,7 +267,7 @@ class PositionSeeder extends Seeder
                                     [
                                         'id' => 27,
                                         'parent_id' => 24,
-                                        'name' => 'Pembantu Asisten Staff Khusus Wakil Presiden (BANAS II)',
+                                        'name' => 'Pembantu Asisten Staf Khusus Wakil Presiden (BANAS II)',
                                         'available' => 1,
                                         'type' => 1,
                                         'entity' => 1,
@@ -277,7 +277,7 @@ class PositionSeeder extends Seeder
                                     [
                                         'id' => 28,
                                         'parent_id' => 24,
-                                        'name' => 'Pembantu Asisten Staff Khusus Wakil Presiden (BANAS III)',
+                                        'name' => 'Pembantu Asisten Staf Khusus Wakil Presiden (BANAS III)',
                                         'available' => 1,
                                         'type' => 1,
                                         'entity' => 1,
@@ -287,7 +287,7 @@ class PositionSeeder extends Seeder
                                     [
                                         'id' => 29,
                                         'parent_id' => 24,
-                                        'name' => 'Pembantu Asisten Staff Khusus Wakil Presiden (BANAS IV)',
+                                        'name' => 'Pembantu Asisten Staf Khusus Wakil Presiden (BANAS IV)',
                                         'available' => 1,
                                         'type' => 1,
                                         'entity' => 1,
@@ -297,7 +297,7 @@ class PositionSeeder extends Seeder
                                     [
                                         'id' => 30,
                                         'parent_id' => 24,
-                                        'name' => 'Pembantu Asisten Staff Khusus Wakil Presiden (BANAS V)',
+                                        'name' => 'Pembantu Asisten Staf Khusus Wakil Presiden (BANAS V)',
                                         'available' => 1,
                                         'type' => 1,
                                         'entity' => 1,
@@ -307,7 +307,7 @@ class PositionSeeder extends Seeder
                                     [
                                         'id' => 31,
                                         'parent_id' => 24,
-                                        'name' => 'Pembantu Asisten Staff Khusus Wakil Presiden (BANAS VI)',
+                                        'name' => 'Pembantu Asisten Staf Khusus Wakil Presiden (BANAS VI)',
                                         'available' => 1,
                                         'type' => 1,
                                         'entity' => 1,
@@ -2223,7 +2223,7 @@ class PositionSeeder extends Seeder
                     [
                         'id' => 36,
                         'parent_id' => 3,
-                        'name' => 'Staff Pendukung Wakil Presiden',
+                        'name' => 'Staf Pendukung Wakil Presiden',
                         'available' => 2,
                         'type' => 1,
                         'entity' => 1,
