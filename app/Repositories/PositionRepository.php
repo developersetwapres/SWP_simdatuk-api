@@ -82,8 +82,6 @@ class PositionRepository
                 positions p
             INNER JOIN
                 hierarchy h ON p.id = h.parent_id
-            WHERE
-                p.entity = 1
         )
         SELECT
             *
