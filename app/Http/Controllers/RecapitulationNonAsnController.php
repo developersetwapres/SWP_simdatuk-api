@@ -31,59 +31,21 @@ class RecapitulationNonAsnController extends Controller
      */
     public function index()
     {
+        $jabatanNonAsn = $this->recapitulationRepository->getJabatanNonAsn();
         $educationAndGender = $this->recapitulationRepository->getEducationAndGender(2);
         $tim = $this->recapitulationRepository->getTim(15);
         $data = [
             "name" => "Rekapitulasi Pegawai Non ASN",
-            "total" => 10,
+            "total" => '-',
             "cards" => [
                 [
+                    "id" => 1,
                     "name" => "Berdasarkan Jabatan",
-                    "total" => 74,
-                    "cards" => [
-                        [
-                            "name" => "Staf Khusus Wakil Presiden",
-                            "total" => 10,
-                        ],
-                        [
-                            "name" => "Asisten Staf Khusus Wakil Presiden",
-                            "total" => 20,
-                        ],
-                        [
-                            "name" => "Pembantu Asisten Staf Khusus Wakil Presiden",
-                            "total" => 5,
-                        ],
-                        [
-                            "name" => "Anggota Tim Ahli Wakil Presiden",
-                            "total" => 12,
-                        ],
-                        [
-                            "name" => "Staf Pada Sekretaris Pribadi Istri Wakil Presiden",
-                            "total" => 1,
-                        ],
-                        [
-                            "name" => "Staf Kerumahtanggaan Pada Kediaman Wakil Presiden",
-                            "total" => 1,
-                        ],
-                        [
-                            "name" => "Sekretariat Pada Staf Khusus Wakil Presiden (PTT dari SETKAB)",
-                            "total" => 3,
-                        ],
-                        [
-                            "name" => "Ajudan Wakil Presiden dan Istri Wakil Presiden (Perbantuan TNI dan POLRI)",
-                            "total" => 8,
-                        ],
-                        [
-                            "name" => "Dokter Pribadi Wakil Presiden",
-                            "total" => 4,
-                        ],
-                        [
-                            "name" => "Pengemudi VVIP (Perbantuan TNI dan POLRI)",
-                            "total" => 10,
-                        ],
-                    ],
+                    "total" => $jabatanNonAsn->sum('total'),
+                    "cards" => $jabatanNonAsn,
                 ],
                 [
+                    "id" => 2,
                     "name" => "Tim",
                     "total" => $tim,
                     "cards" => [
@@ -95,6 +57,7 @@ class RecapitulationNonAsnController extends Controller
                     ],
                 ],
                 [
+                    "id" => 3,
                     "name" => "Pendidikan",
                     "total" => $educationAndGender->total_education,
                     "cards" => [
@@ -141,6 +104,7 @@ class RecapitulationNonAsnController extends Controller
                     ],
                 ],
                 [
+                    "id" => 4,
                     "name" => "Jenis Kelamin",
                     "total" => $educationAndGender->total_gender,
                     "cards" => [

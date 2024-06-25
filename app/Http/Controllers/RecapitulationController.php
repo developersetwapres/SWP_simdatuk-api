@@ -94,12 +94,14 @@ class RecapitulationController extends Controller
     {
         $pejabat = $this->recapitulationRepository->getPejabatPimpinanAndFungsional();
         $pelaksana = $this->recapitulationRepository->getPejabatPelaksana();
-
+        $pejabatDiperbantukan = $this->recapitulationRepository->getPejabatDiperbantukan(4);
         $data = [
+            "id" => 1,
             "name" => 'Apartur Sipil Negara (ASN) Aktif + Perbantuan TNI/POLRI Pelaksana',
-            "total" => 283,
+            "total" => $pejabat->total_pejabat_pimpinan + $pelaksana->total + $pejabat->total_pejabat_fungsional_keahlian + $pejabat->total_pejabat_fungsional_keterampilan + $pejabatDiperbantukan->total,
             "cards" => [
                 [
+                    "id" => 1,
                     "name" => 'Pejabat Pimpinan',
                     "total" => $pejabat->total_pejabat_pimpinan,
                     "cards" => [
@@ -122,6 +124,7 @@ class RecapitulationController extends Controller
                     ],
                 ],
                 [
+                    "id" => 2,
                     "name" => 'Pejabat Pelaksana',
                     "total" => $pelaksana->total,
                     "cards" => [
@@ -144,6 +147,7 @@ class RecapitulationController extends Controller
                     ],
                 ],
                 [
+                    "id" => 3,
                     "name" => 'Pejabat Fungsional Keahlian',
                     "total" => $pejabat->total_pejabat_fungsional_keahlian,
                     "cards" => [
@@ -166,6 +170,7 @@ class RecapitulationController extends Controller
                     ],
                 ],
                 [
+                    "id" => 4,
                     "name" => 'Pejabat Fungsional Keterampilan',
                     "total" => $pejabat->total_pejabat_fungsional_keterampilan,
                     "cards" => [
@@ -188,20 +193,21 @@ class RecapitulationController extends Controller
                     ],
                 ],
                 [
+                    "id" => 5,
                     "name" => 'Pejabat Kemensetneg Yang Diperbantukan di Setwapres',
-                    "total" => 15,
+                    "total" => $pejabatDiperbantukan->total,
                     "cards" => [
                         [
                             "name" => "Pejabat Struktural",
-                            "total" => 1,
+                            "total" => $pejabatDiperbantukan->struktural,
                         ],
                         [
                             "name" => "Pejabat Pelaksana",
-                            "total" => 1,
+                            "total" => $pejabatDiperbantukan->pelaksana,
                         ],
                         [
                             "name" => "Pejabat Fungsional",
-                            "total" => 13,
+                            "total" => $pejabatDiperbantukan->fungsional,
                         ],
                     ],
                 ],
@@ -214,22 +220,27 @@ class RecapitulationController extends Controller
     {
         $nonActive = $this->recapitulationRepository->getNonActiveAsn();
         $data = [
+            "id" => 2,
             "name" => 'Aparatur Sipil Negara (ASN) Non Aktif',
             "total" => $nonActive->total,
             "cards" => [
                 [
+                    "id" => 1,
                     "name" => "Aparatur Sipil Negara (ASN) Non Aktif",
                     "total" => $nonActive->total,
                     "cards" => [
                         [
+                            "id" => 8,
                             "name" => "Tugas Belajar Luar Negeri (TBLN)",
                             "total" => $nonActive->tbln,
                         ],
                         [
+                            "id" => 7,
                             "name" => "Cuti Diluar Tanggungan Negara (CLTN)",
                             "total" => $nonActive->cltn,
                         ],
                         [
+                            "id" => 9,
                             "name" => "Tidak Aktif (Non Jabatan)",
                             "total" => $nonActive->nonactive,
                         ],
@@ -243,57 +254,20 @@ class RecapitulationController extends Controller
     private function getCategory3()
     {
         $tim = $this->recapitulationRepository->getTim(15);
+        $jabatanNonAsn = $this->recapitulationRepository->getJabatanNonAsn();
         $data = [
+            "id" => 3,
             "name" => 'Non Aparatur Sipil Negara (Non ASN) + Tim',
-            "total" => 162,
+            "total" => $jabatanNonAsn->sum('total') + $tim,
             "cards" => [
                 [
+                    "id" => 1,
                     "name" => "Non Aparatur Sipil Negara (Non ASN)",
-                    "total" => 74,
-                    "cards" => [
-                        [
-                            "name" => "Staf Khusus Wakil Presiden",
-                            "total" => 10,
-                        ],
-                        [
-                            "name" => "Asisten Staf Khusus Wakil Presiden",
-                            "total" => 20,
-                        ],
-                        [
-                            "name" => "Pembantu Asisten Staf Khusus Wakil Presiden",
-                            "total" => 5,
-                        ],
-                        [
-                            "name" => "Anggota Tim Ahli Wakil Presiden",
-                            "total" => 12,
-                        ],
-                        [
-                            "name" => "Staf Pada Sekretaris Pribadi Istri Wakil Presiden",
-                            "total" => 1,
-                        ],
-                        [
-                            "name" => "Staf Kerumahtanggaan Pada Kediaman Wakil Presiden",
-                            "total" => 1,
-                        ],
-                        [
-                            "name" => "Sekretariat Pada Staf Khusus Wakil Presiden (PTT dari SETKAB)",
-                            "total" => 3,
-                        ],
-                        [
-                            "name" => "Ajudan Wakil Presiden dan Istri Wakil Presiden (Perbantuan TNI dan POLRI)",
-                            "total" => 8,
-                        ],
-                        [
-                            "name" => "Dokter Pribadi Wakil Presiden",
-                            "total" => 4,
-                        ],
-                        [
-                            "name" => "Pengemudi VVIP (Perbantuan TNI dan POLRI)",
-                            "total" => 4,
-                        ],
-                    ],
+                    "total" => $jabatanNonAsn->sum('total'),
+                    "cards" => $jabatanNonAsn,
                 ],
                 [
+                    "id" => 2,
                     "name" => "Tim",
                     "total" => $tim,
                     "cards" => [
@@ -314,15 +288,18 @@ class RecapitulationController extends Controller
         $outsource = $this->recapitulationRepository->getOutsource(19);
         $nonOutsource = $this->recapitulationRepository->getOutsource(20);
         $data = [
+            "id" => 4,
             "name" => "Tenaga Outsourcing dan Non Outsourcing",
             "total" => $outsource[0] + $nonOutsource[0],
             "cards" => [
                 [
+                    "id" => 1,
                     "name" => 'Tenaga Outsourcing',
                     "total" => $outsource[0],
                     "cards" => $outsource[1],
                 ],
                 [
+                    "id" => 2,
                     "name" => 'Tenaga Non Outsourcing',
                     "total" => $nonOutsource[0],
                     "cards" => $nonOutsource[1],
@@ -336,9 +313,18 @@ class RecapitulationController extends Controller
     {
         $users = DB::table('users');
         $users->select(
-            DB::raw('COUNT(CASE WHEN employment_status IN (1, 6, 7, 8, 9) THEN 1 END) as total'),
-            DB::raw('COUNT(CASE WHEN type = 1 AND (employment_status = 1 OR employment_status = 6) THEN 1 END) as asn_active'),
-            DB::raw('COUNT(CASE WHEN type = 1 AND (employment_status = 7 OR employment_status = 8 OR employment_status = 9) THEN 1 END) as asn_nonactive'),
+            DB::raw('
+                COUNT(
+                    CASE
+                        WHEN type = 1 AND employment_status IN (1, 6) THEN 1
+                        WHEN type = 1 AND employment_status IN (7, 8, 9) THEN 1
+                        WHEN type = 2 AND employment_status = 1 THEN 1
+                        WHEN type = 3 AND employment_status = 1 THEN 1
+                    END
+                ) as total
+            '),
+            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6) THEN 1 END) as asn_active'),
+            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (7, 8, 9) THEN 1 END) as asn_nonactive'),
             DB::raw('COUNT(CASE WHEN type = 2 AND employment_status = 1 THEN 1 END) as nonasn'),
             DB::raw('COUNT(CASE WHEN type = 3 AND employment_status = 1 THEN 1 END) as outsource'),
         );

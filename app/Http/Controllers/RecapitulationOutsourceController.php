@@ -36,19 +36,22 @@ class RecapitulationOutsourceController extends Controller
         $educationAndGender = $this->recapitulationRepository->getEducationAndGender(3);
         $data = [
             "name" => "Rekapitulasi Pegawai Outsourcing",
-            "total" => $outsource[0] + $nonOutsource[0],
+            "total" => '-',
             "cards" => [
                 [
+                    "id" => 1,
                     "name" => "Tenaga Outsourcing",
                     "total" => $outsource[0],
                     "cards" => $outsource[1],
                 ],
                 [
+                    "id" => 2,
                     "name" => "Tenaga Non Outsourcing",
                     "total" => $nonOutsource[0],
                     "cards" => $nonOutsource[1],
                 ],
                 [
+                    "id" => 3,
                     "name" => "Pendidikan",
                     "total" => $educationAndGender->total_education,
                     "cards" => [
@@ -95,6 +98,7 @@ class RecapitulationOutsourceController extends Controller
                     ],
                 ],
                 [
+                    "id" => 4,
                     "name" => "Jenis Kelamin",
                     "total" => $educationAndGender->total_gender,
                     "cards" => [

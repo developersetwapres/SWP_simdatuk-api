@@ -31,6 +31,7 @@ class RecapitulationAsnController extends Controller
      */
     public function index()
     {
+        $unitKerja = $this->recapitulationRepository->getTotalUnitKerja();
         $pejabat = $this->recapitulationRepository->getKeteranganJabatan();
         $nonActive = $this->recapitulationRepository->getNonActiveAsn();
         $grade = $this->recapitulationRepository->getGrade(1);
@@ -39,127 +40,124 @@ class RecapitulationAsnController extends Controller
 
         $data = [
             "name" => "Rekapitulasi Pegawai ASN",
-            "total" => 10,
+            "total" => '-',
             "cards" => [
                 [
+                    "id" => 1,
                     "name" => "Unit Kerja",
-                    "total" => 283,
-                    "cards" => [
-                        [
-                            "name" => "Kepala Sekretariat Wakil Presiden",
-                            "total" => 1,
-                        ],
-                        [
-                            "name" => "Deputi Bidang Dukungan Kebijakan Pembangunan Ekonomi dan Peningkatan Daya Saing",
-                            "total" => 24,
-                        ],
-                        [
-                            "name" => "Deputi Bidang Dukungan Kebijakan Pembangunan Manusia dan Pemerataan Pembangunan",
-                            "total" => 26,
-                        ],
-                        [
-                            "name" => "Deputi Bidang Dukungan Kebijakan Pemerintahan dan Wawasan Kebangsaan",
-                            "total" => 31,
-                        ],
-                        [
-                            "name" => "Deputi Bidang Administrasi",
-                            "total" => 186,
-                        ],
-                        [
-                            "name" => "Kementerian Sekretariat Negara",
-                            "total" => 15,
-                        ],
-                    ],
+                    "total" => $unitKerja['total'],
+                    "cards" => $unitKerja['data'],
                 ],
                 [
+                    "id" => 2,
                     "name" => "Keterangan Jabatan",
                     "total" => $pejabat->total_pejabat_pimpinan,
                     "cards" => [
                         [
+                            "id" => 1,
                             "name" => "Jabatan Pimpinan Tinggi",
                             "total" => $pejabat->jabatan_pimpinan_tinggi,
                         ],
                         [
+                            "id" => 2,
                             "name" => "Jabatan Administrasi",
                             "total" => $pejabat->jabatan_administrasi,
                         ],
                         [
+                            "id" => 3,
                             "name" => "Jabatan Fungsional",
                             "total" => $pejabat->jabatan_fungsional,
                         ],
                     ],
                 ],
                 [
+                    "id" => 3,
                     "name" => "Pangkat/Golongan ASN",
                     "total" => $grade[0],
                     "cards" => $grade[1],
                 ],
                 [
+                    "id" => 4,
                     "name" => "Golongan PPPK",
                     "total" => $gradePPPK[0],
                     "cards" => $gradePPPK[1],
                 ],
                 [
+                    "id" => 5,
                     "name" => "Pegawai Non Aktif",
-                    "total" => $nonActive->total,
+                    "total" => $nonActive->tbln + $nonActive->cltn,
                     "cards" => [
                         [
+                            "id" => 8,
                             "name" => "TBLN",
                             "total" => $nonActive->tbln,
                         ],
                         [
+                            "id" => 7,
                             "name" => "CLTN",
                             "total" => $nonActive->cltn,
                         ],
                     ],
                 ],
                 [
+                    "id" => 6,
                     "name" => "Pendidikan",
                     "total" => $educationAndGender->total_education,
                     "cards" => [
                         [
+                            "id" => 8,
                             "name" => "Strata III",
                             "total" => $educationAndGender->s3,
                         ],
                         [
+                            "id" => 7,
                             "name" => "Strata II",
                             "total" => $educationAndGender->s2,
                         ],
                         [
+                            "id" => 6,
                             "name" => "Diploma IV/Strata I",
                             "total" => $educationAndGender->s1,
                         ],
                         [
+                            "id" => 5,
                             "name" => "Akademik/D3/S.Muda",
                             "total" => $educationAndGender->d3,
                         ],
                         [
+                            "id" => 4,
                             "name" => "Diploma I/II",
                             "total" => $educationAndGender->d1,
                         ],
                         [
+                            "id" => 3,
                             "name" => "SLTA/Sederajat",
                             "total" => $educationAndGender->sma,
                         ],
                         [
+                            "id" => 2,
                             "name" => "SLTP/Sederajat",
                             "total" => $educationAndGender->smp,
                         ],
                         [
+                            "id" => 1,
                             "name" => "SD/Sederajat",
                             "total" => $educationAndGender->sd,
                         ],
                     ],
                 ],
                 [
+                    "id" => 7,
                     "name" => "Jenis Kelamin",
                     "total" => $educationAndGender->total_gender,
                     "cards" => [
                         [
+                            "id" => 1,
                             "name" => "Laki-laki",
                             "total" => $educationAndGender->male,
                         ],
                         [
+                            "id" => 0,
                             "name" => "Perempuan",
                             "total" => $educationAndGender->female,
                         ],
@@ -192,21 +190,26 @@ class RecapitulationAsnController extends Controller
 
     private function getCategory1()
     {
+        $pejabat = $this->recapitulationRepository->getPimpinanTinggi();
         $data = [
+            "id" => 1,
             "name" => "Jabatan Pimpinan Tinggi",
-            "total" => 18,
+            "total" => $pejabat->total_jabatan_pimpinan_tinggi,
             "cards" => [
                 [
+                    "id" => 1,
                     "name" => "Jabatan Pimpinan Tinggi",
-                    "total" => "18",
+                    "total" => $pejabat->total_jabatan_pimpinan_tinggi,
                     "cards" => [
                         [
+                            "id" => 1,
                             "name" => "Jabatan Pimpinan Tinggi Madya",
-                            "total" => 4,
+                            "total" => $pejabat->jabatan_tinggi_madya,
                         ],
                         [
+                            "id" => 2,
                             "name" => "Jabatan Pimpinan Tinggi Pratama",
-                            "total" => 4,
+                            "total" => $pejabat->jabatan_tinggi_pratama,
                         ],
                     ],
                 ],
@@ -217,25 +220,31 @@ class RecapitulationAsnController extends Controller
 
     private function getCategory2()
     {
+        $pejabat = $this->recapitulationRepository->getAdministrasi();
         $data = [
+            "id" => 2,
             "name" => "Jabatan Administrasi",
-            "total" => 128,
+            "total" => $pejabat->total_jabatan_administrasi,
             "cards" => [
                 [
+                    "id" => 1,
                     "name" => "Jabatan Administrasi",
-                    "total" => "128",
+                    "total" => $pejabat->total_jabatan_administrasi,
                     "cards" => [
                         [
+                            "id" => 3,
                             "name" => "Jabatan Jabatan Administrasi",
-                            "total" => 10,
+                            "total" => $pejabat->jabatan_administrasi,
                         ],
                         [
+                            "id" => 4,
                             "name" => "Jabatan Pengawas",
-                            "total" => 23,
+                            "total" => $pejabat->jabatan_pengawas,
                         ],
                         [
+                            "id" => 9,
                             "name" => "Jabatan Pelaksana",
-                            "total" => 23,
+                            "total" => $pejabat->jabatan_pelaksana,
                         ],
                     ],
                 ],
@@ -246,307 +255,12 @@ class RecapitulationAsnController extends Controller
 
     private function getCategory3()
     {
+        $jabatanFungsional = $this->recapitulationRepository->getJabatanFungsional();
         $data = [
+            "id" => 3,
             "name" => "Jabatan Fungsional",
-            "total" => 128,
-            "cards" => [
-                [
-                    "name" => "Jabatan Fungsional Analis Kebijakan",
-                    "total" => 8,
-                    "cards" => [
-                        [
-                            "name" => "Ahli Utama",
-                            "total" => 1,
-                        ],
-                        [
-                            "name" => "Ahli Madya",
-                            "total" => 3,
-                        ],
-                        [
-                            "name" => "Ahli Muda",
-                            "total" => 2,
-                        ],
-                        [
-                            "name" => "Ahli Pertama",
-                            "total" => 3,
-                        ],
-                    ],
-                ],
-                [
-                    "name" => "Jabatan Fungsional Arsiparis",
-                    "total" => 8,
-                    "cards" => [
-                        [
-                            "name" => "Ahli Madya",
-                            "total" => 1,
-                        ],
-                        [
-                            "name" => "Ahli Muda",
-                            "total" => 3,
-                        ],
-                        [
-                            "name" => "Ahli Pertama",
-                            "total" => 2,
-                        ],
-                        [
-                            "name" => "Penyelia",
-                            "total" => 3,
-                        ],
-                        [
-                            "name" => "Mahir",
-                            "total" => 3,
-                        ],
-                        [
-                            "name" => "Terampil",
-                            "total" => 3,
-                        ],
-                    ],
-                ],
-                [
-                    "name" => "Jabatan Fungsional Pranata Humas",
-                    "total" => 8,
-                    "cards" => [
-                        [
-                            "name" => "Ahli Madya",
-                            "total" => 3,
-                        ],
-                        [
-                            "name" => "Ahli Muda",
-                            "total" => 2,
-                        ],
-                        [
-                            "name" => "Ahli Pertama",
-                            "total" => 3,
-                        ],
-                        [
-                            "name" => "Penyelia",
-                            "total" => 3,
-                        ],
-                        [
-                            "name" => "Mahir",
-                            "total" => 3,
-                        ],
-                        [
-                            "name" => "Terampil",
-                            "total" => 3,
-                        ],
-                    ],
-                ],
-                [
-                    "name" => "Jabatan Fungsional Penerjemah",
-                    "total" => 8,
-                    "cards" => [
-                        [
-                            "name" => "Ahli Madya",
-                            "total" => 3,
-                        ],
-                        [
-                            "name" => "Ahli Muda",
-                            "total" => 2,
-                        ],
-                        [
-                            "name" => "Ahli Pertama",
-                            "total" => 3,
-                        ],
-                    ],
-                ],
-                [
-                    "name" => "Jabatan Fungsional Analis Pengelolaan Keuangan APBN",
-                    "total" => 8,
-                    "cards" => [
-                        [
-                            "name" => "Ahli Madya",
-                            "total" => 3,
-                        ],
-                        [
-                            "name" => "Ahli Muda",
-                            "total" => 2,
-                        ],
-                        [
-                            "name" => "Ahli Pertama",
-                            "total" => 3,
-                        ],
-                    ],
-                ],
-                [
-                    "name" => "Jabatan Fungsional Pranata Keuangan APBN",
-                    "total" => 8,
-                    "cards" => [
-                        [
-                            "name" => "Ahli Madya",
-                            "total" => 3,
-                        ],
-                        [
-                            "name" => "Ahli Muda",
-                            "total" => 2,
-                        ],
-                        [
-                            "name" => "Ahli Pertama",
-                            "total" => 3,
-                        ],
-                    ],
-                ],
-                [
-                    "name" => "Jabatan Fungsional Analis Anggaran",
-                    "total" => 8,
-                    "cards" => [
-                        [
-                            "name" => "Ahli Madya",
-                            "total" => 3,
-                        ],
-                        [
-                            "name" => "Ahli Muda",
-                            "total" => 2,
-                        ],
-                        [
-                            "name" => "Ahli Pertama",
-                            "total" => 3,
-                        ],
-                    ],
-                ],
-                [
-                    "name" => "Jabatan Fungsional Analis SDM Aparatur",
-                    "total" => 8,
-                    "cards" => [
-                        [
-                            "name" => "Ahli Madya",
-                            "total" => 3,
-                        ],
-                        [
-                            "name" => "Ahli Muda",
-                            "total" => 2,
-                        ],
-                        [
-                            "name" => "Ahli Pertama",
-                            "total" => 3,
-                        ],
-                    ],
-                ],
-                [
-                    "name" => "Jabatan Fungsional Pranata SDM Aparatur",
-                    "total" => 8,
-                    "cards" => [
-                        [
-                            "name" => "Ahli Madya",
-                            "total" => 3,
-                        ],
-                        [
-                            "name" => "Ahli Muda",
-                            "total" => 2,
-                        ],
-                        [
-                            "name" => "Ahli Pertama",
-                            "total" => 3,
-                        ],
-                    ],
-                ],
-                [
-                    "name" => "Jabatan Fungsional Pranata Komputer",
-                    "total" => 8,
-                    "cards" => [
-                        [
-                            "name" => "Ahli Madya",
-                            "total" => 3,
-                        ],
-                        [
-                            "name" => "Ahli Muda",
-                            "total" => 2,
-                        ],
-                        [
-                            "name" => "Ahli Pertama",
-                            "total" => 3,
-                        ],
-                    ],
-                ],
-                [
-                    "name" => "Jabatan Fungsional Pengelolaan Pengadaan Barang / Jasa",
-                    "total" => 8,
-                    "cards" => [
-                        [
-                            "name" => "Ahli Madya",
-                            "total" => 3,
-                        ],
-                        [
-                            "name" => "Ahli Muda",
-                            "total" => 2,
-                        ],
-                        [
-                            "name" => "Ahli Pertama",
-                            "total" => 3,
-                        ],
-                    ],
-                ],
-                [
-                    "name" => "Dokter",
-                    "total" => 8,
-                    "cards" => [
-                        [
-                            "name" => "Ahli Muda",
-                            "total" => 2,
-                        ],
-                    ],
-                ],
-                [
-                    "name" => "Dokter Gigi",
-                    "total" => 8,
-                    "cards" => [
-                        [
-                            "name" => "Ahli Muda",
-                            "total" => 2,
-                        ],
-                    ],
-                ],
-                [
-                    "name" => "Perawat",
-                    "total" => 8,
-                    "cards" => [
-                        [
-                            "name" => "Ahli Muda",
-                            "total" => 2,
-                        ],
-                    ],
-                ],
-                [
-                    "name" => "Perawat Gigi",
-                    "total" => 8,
-                    "cards" => [
-                        [
-                            "name" => "Ahli Muda",
-                            "total" => 2,
-                        ],
-                    ],
-                ],
-                [
-                    "name" => "Asisten Apoteker",
-                    "total" => 8,
-                    "cards" => [
-                        [
-                            "name" => "Ahli Muda",
-                            "total" => 2,
-                        ],
-                    ],
-                ],
-                [
-                    "name" => "Pustakawan",
-                    "total" => 8,
-                    "cards" => [
-                        [
-                            "name" => "Ahli Muda",
-                            "total" => 2,
-                        ],
-                    ],
-                ],
-                [
-                    "name" => "Manggala Informatika",
-                    "total" => 8,
-                    "cards" => [
-                        [
-                            "name" => "Ahli Muda",
-                            "total" => 2,
-                        ],
-                    ],
-                ],
-            ],
+            "total" => $jabatanFungsional[0],
+            "cards" => $jabatanFungsional[1],
         ];
         return $this->response(200, 'success', $data);
     }

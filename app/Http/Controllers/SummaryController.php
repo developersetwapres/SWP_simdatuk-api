@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\RecapitulationRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -12,11 +13,15 @@ use Illuminate\Support\Facades\Storage;
  */
 class SummaryController extends Controller
 {
+    protected $recapitulationRepository;
 
-    public function __construct(Request $request)
-    {
+    public function __construct(
+        Request $request,
+        RecapitulationRepository $recapitulationRepository
+    ) {
         $this->request = $request;
         $this->posted = $request->except('_token', '_method');
+        $this->recapitulationRepository = $recapitulationRepository;
     }
 
     /**
@@ -52,6 +57,8 @@ class SummaryController extends Controller
             $item->photo_profile = $this->getDocument($item->photo_profile, true);
         }
 
+        $unitKerja = $this->recapitulationRepository->getTotalUnitKerja();
+
         $countable = DB::table('users')
             ->select(
                 DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6) THEN 1 END) as active'),
@@ -86,32 +93,7 @@ class SummaryController extends Controller
                 "assistance" => $countable->assistance,
                 "outsource" => $countable->outsource,
             ],
-            "work_unit" => [
-                [
-                    "name" => 'Kepala Sekretariat Wakil Presiden',
-                    "quantity" => 1,
-                ],
-                [
-                    "name" => 'Deputi Bidang Dukungan Kebijakan Pembangunan Ekonomi dan Peningkatan Daya Saing',
-                    "quantity" => $this->getTotalUnitKerja(37),
-                ],
-                [
-                    "name" => 'Deputi Bidang Dukungan Kebijakan Pembangunan Manusia dan Pemerataan Pembangunan',
-                    "quantity" => $this->getTotalUnitKerja(38),
-                ],
-                [
-                    "name" => 'Deputi Bidang Dukungan Kebijakan Pemerintah dan Wawasan Kebangsaan',
-                    "quantity" => $this->getTotalUnitKerja(39),
-                ],
-                [
-                    "name" => 'Deputi Bidang Administrasi',
-                    "quantity" => $this->getTotalUnitKerja(40),
-                ],
-                [
-                    "name" => 'Kementerian Sekretariat Negara',
-                    "quantity" => $this->getTotalUnitKerja(4),
-                ],
-            ],
+            "work_unit" => $unitKerja['data'],
             "education_employees" => [
                 [
                     "name" => 'Strata III',
@@ -148,53 +130,5 @@ class SummaryController extends Controller
             ],
         ];
         return $this->response(200, 'success', $data);
-    }
-
-    /**
-     * Get total unit kerja
-     *
-     * @param int $parentId
-     * @return void
-     */
-    private static function getTotalUnitKerja($parentId)
-    {
-        $sql = "
-            WITH RECURSIVE hierarchy AS (
-                -- Anchor member: Select the initial parent row
-                SELECT
-                    po.id,
-                    po.name,
-                    po.parent_id
-                FROM
-                    positions po
-                WHERE
-                    po.id = '$parentId' -- Replace ? with the specific parent id
-
-                UNION ALL
-
-                -- Recursive member: Select the child row
-                SELECT
-                    p.id,
-                    p.name,
-                    p.parent_id
-                FROM
-                    positions p
-                INNER JOIN
-                    hierarchy h ON p.parent_id = h.id
-                WHERE
-                    p.entity = 1
-            )
-            SELECT
-                COUNT(*) as total
-            FROM
-                hierarchy
-            JOIN users ON hierarchy.id=users.position_id
-            WHERE
-                users.employment_status
-            IN
-                (1,6);
-        ";
-        $users = DB::select($sql);
-        return $users[0]->total;
     }
 }
