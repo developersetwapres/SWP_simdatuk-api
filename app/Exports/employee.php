@@ -222,8 +222,8 @@ class employee implements FromView, WithDrawings, WithEvents
             $users->addSelect('position_history.position_history');
         }
         if (isset($this->toggleField['isTrainingStructural'])){
-            $trainingStructuralSubquery = DB::table('trainings as t');
-            $trainingStructuralSubquery->join('user_trainings as ut', 't.id', '=', 'ut.training_id');
+            $trainingStructuralSubquery = DB::table('training_histories as t');
+            $trainingStructuralSubquery->join('training_history_users as ut', 't.id', '=', 'ut.training_history_id');
             $trainingStructuralSubquery->select('ut.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li>', t.name, '
             (Periode: ', t.period_month, ' ', t.period_year, ', Start Date: ', t.start_date, ') Level: ', t.level, ',
             Organizer: ', t.organizer ,'</li>') SEPARATOR ' ') as structural_training_history"));
@@ -239,8 +239,8 @@ class employee implements FromView, WithDrawings, WithEvents
         }
 
         if (isset($this->toggleField['isTrainingFunctional'])){
-            $trainingFunctionalSubquery = DB::table('trainings as t');
-            $trainingFunctionalSubquery->join('user_trainings as ut', 't.id', '=', 'ut.training_id');
+            $trainingFunctionalSubquery = DB::table('training_histories as t');
+            $trainingFunctionalSubquery->join('training_history_users as ut', 't.id', '=', 'ut.training_history_id');
             $trainingFunctionalSubquery->select('ut.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li>', t.name, '
             (Periode: ', t.period_month, ' ', t.period_year, ', Start Date: ', t.start_date, ') Level: ', t.level, ',
             Organizer: ', t.organizer ,'</li>') SEPARATOR ' ' ) as functional_training_history "));
@@ -256,8 +256,8 @@ class employee implements FromView, WithDrawings, WithEvents
         }
 
         if (isset($this->toggleField['isTrainingTechnique'])){
-            $trainingTechnicSubquery = DB::table('trainings as t');
-            $trainingTechnicSubquery->join('user_trainings as ut', 't.id', '=', 'ut.training_id');
+            $trainingTechnicSubquery = DB::table('training_histories as t');
+            $trainingTechnicSubquery->join('training_history_users as ut', 't.id', '=', 'ut.training_history_id');
             $trainingTechnicSubquery->select('ut.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li>', t.name, '
             (Periode: ', t.period_month, ' ', t.period_year, ', Start Date: ', t.start_date, ') Level: ', t.level, ',
             Organizer: ', t.organizer, '</li>') SEPARATOR ' ') as technique_training_history"));
@@ -272,9 +272,10 @@ class employee implements FromView, WithDrawings, WithEvents
             $users->addSelect('technique_training_history.technique_training_history');
         }
         if (isset($this->toggleField['isRecognition'])){
-            $recognitionSubquery = DB::table('recognitions as r');
-            $recognitionSubquery->join('user_recognitions as ur', 'r.id', '=', 'ur.recognition_id');
-            $recognitionSubquery->select('ur.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li>',r.name, '
+            $recognitionSubquery = DB::table('recognition_histories as r');
+            $recognitionSubquery->join('recognition_history_users as ur', 'r.id', '=', 'ur.recognition_history_id');
+            $recognitionSubquery->join('recognitions', 'r.recognition_id', '=', 'recognitions.id');
+            $recognitionSubquery->select('ur.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li>',recognitions.name, '
             (Periode: ', r.period_month, ' ', r.period_year, ', Tanggal Terima: ', r.date_of_receipt, ') Decree: ',
             r.decree_number, ', Institusi: ', r.awarding_institution,'</li>') SEPARATOR ' ') as recognition_history"));
             $recognitionSubquery->whereIn('ur.user_id', $this->userIds);
@@ -287,8 +288,8 @@ class employee implements FromView, WithDrawings, WithEvents
             $users->addSelect('recognition_history.recognition_history');
         }
         if (isset($this->toggleField['isSKP'])){
-            $skpSubquery = DB::table('targets as t');
-            $skpSubquery->join('user_targets as ut', 't.id', '=', 'ut.target_id');
+            $skpSubquery = DB::table('target_histories as t');
+            $skpSubquery->join('target_history_users as ut', 't.id', '=', 'ut.target_history_id');
             $skpSubquery->select('ut.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li>',t.name, ' (Tanggal: ', t.period_month, ' ',
                 t.period_year, ', Periode Penilaian: ', t.appraisal_period, ') Penilaian Perilaku : ',
                  CASE ut.work_behavior_rating
@@ -430,9 +431,20 @@ class employee implements FromView, WithDrawings, WithEvents
         }
         if (isset($this->toggleField['isLeave'])){
             $leaveSubquery = DB::table('user_leaves as ul');
-            $leaveSubquery->select('ul.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li> Golongan : ',ul.grade, '
-            Jabatan: ', ul.position, ' Tanggal Mulai: ', ul.start_date, ', Tanggal Selesai: ', ul.end_date, ' Alasan: ',
-            ul.reason , ', Tujuan: ', ul.purpose,', Nomor: ', ul.number , '</li>') SEPARATOR ' ') as leave_history"));
+            $leaveSubquery->join('users', 'users.id', '=', 'ul.user_id');
+            $leaveSubquery->join('grades', 'grades.id', '=', 'users.grade_id');
+            $leaveSubquery->join('positions', 'positions.id', '=', 'users.position_id');
+            $leaveSubquery->select('ul.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li> Golongan : ',grades.name, '
+            Jabatan: ', positions.name, ' Tanggal Mulai: ', ul.start_date, ', Tanggal Selesai: ', ul.end_date, ' Alasan: ',
+            CASE ul.type
+                WHEN 1 THEN 'Cuti diluar Tanggungan Negara'
+                WHEN 2 THEN 'Cuti Sakit'
+                WHEN 3 THEN 'Cuti Besar'
+                WHEN 4 THEN 'Cuti Bersalin'
+                WHEN 5 THEN 'Cuti Belajar Luar Negeri'
+                WHEN 6 THEN 'Cuti Tahunan Luar Negeri'
+            END
+             , ', Tujuan: ', ul.description,', Nomor: ', ul.number , '</li>') SEPARATOR ' ') as leave_history"));
             $leaveSubquery->whereIn('ul.user_id', $this->userIds);
             $leaveSubquery->groupBy('ul.user_id');
 
@@ -444,10 +456,9 @@ class employee implements FromView, WithDrawings, WithEvents
         }
         if (isset($this->toggleField['isAssessment'])){
             $assessmentSubquery = DB::table('user_assessments as ua');
-            $assessmentSubquery->select('ua.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li> Tanggal Assessment : ', ua.assessment_date, '
+            $assessmentSubquery->select('ua.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li> Tanggal Assessment : ', ua.event_date, '
              Point: ', ua.point, ' Organizer : ', ua.organizer,'</li>') SEPARATOR ' ') as assessment_history"));
             $assessmentSubquery->whereIn('ua.user_id', $this->userIds);
-            $assessmentSubquery->where('ua.type', 1);
             $assessmentSubquery->groupBy('ua.user_id');
 
             $users->leftJoinSub($assessmentSubquery, 'assessment_history', function ($join) {
@@ -457,11 +468,10 @@ class employee implements FromView, WithDrawings, WithEvents
             $users->addSelect('assessment_history.assessment_history');
         }
         if (isset($this->toggleField['isCompetency'])){
-            $assessmentSubquery = DB::table('user_assessments as ua');
-            $assessmentSubquery->select('ua.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li> Tanggal Assessment : ', ua.assessment_date, '
+            $assessmentSubquery = DB::table('user_competencies as ua');
+            $assessmentSubquery->select('ua.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li> Tanggal Assessment : ', ua.event_date, '
              Point: ', ua.point, ' Organizer : ', ua.organizer,'</li>') SEPARATOR ' ') as competency_history"));
             $assessmentSubquery->whereIn('ua.user_id', $this->userIds);
-            $assessmentSubquery->where('ua.type', 2);
             $assessmentSubquery->groupBy('ua.user_id');
 
             $users->leftJoinSub($assessmentSubquery, 'competency_history', function ($join) {
@@ -471,11 +481,10 @@ class employee implements FromView, WithDrawings, WithEvents
             $users->addSelect('competency_history.competency_history');
         }
         if (isset($this->toggleField['isTalentPool'])){
-            $assessmentSubquery = DB::table('user_assessments as ua');
-            $assessmentSubquery->select('ua.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li> Tanggal Assessment : ', ua.assessment_date, '
+            $assessmentSubquery = DB::table('user_talents as ua');
+            $assessmentSubquery->select('ua.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li> Tanggal Assessment : ', ua.event_date, '
              Point: ', ua.point, ' Organizer : ', ua.organizer,'</li>') SEPARATOR ' ') as talent_pool_history"));
             $assessmentSubquery->whereIn('ua.user_id', $this->userIds);
-            $assessmentSubquery->where('ua.type', 3);
             $assessmentSubquery->groupBy('ua.user_id');
 
             $users->leftJoinSub($assessmentSubquery, 'talent_pool_history', function ($join) {

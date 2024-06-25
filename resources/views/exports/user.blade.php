@@ -222,11 +222,58 @@
             @foreach($userCollege as $value)
             <tr style="border-bottom: 1px solid #F0F0F0;">
                 <td class="table-section-3-body">{{ $indexCollege++ }}</td>
-                <td class="table-section-3-body">{{ $value['grade'] }}</td>
+                <td class="table-section-3-body">
+                    @switch($value['grade'])
+                        @case(1)
+                            SD/Sederajat
+                            @break
+                        @case(2)
+                            SLTP/Sederajat
+                            @break
+                        @case(3)
+                            SLTA/Sederajat
+                            @break
+                        @case(4)
+                            Diploma I/II
+                            @break
+                        @case(5)
+                            Akademik/D3/S.Muda
+                            @break
+                        @case(6)
+                            Diploma IV/Strata I
+                            @break
+                        @case(7)
+                            Strata II
+                            @break
+                        @case(8)
+                            Strata III
+                            @break
+                        @default
+                            -
+                    @endswitch</td>
                 <td class="table-section-3-body">{{ $value['school_name'] }}</td>
                 <td class="table-section-3-body">{{ $value['faculty'] }}</td>
                 <td class="table-section-3-body">{{ $value['major'] }}</td>
-                <td class="table-section-3-body">{{ $value['status'] }}</td>
+                <td class="table-section-3-body">
+                    @switch($value['status'])
+                        @case(1)
+                            Lulus
+                            @break
+                        @case(2)
+                            DO
+                            @break
+                        @case(3)
+                            Aktif
+                            @break
+                        @case(4)
+                            Non-Aktif
+                            @break
+                        @case(5)
+                            Mengundurkan diri
+                            @break
+                        @default
+                            -
+                    @endswitch</td>
                 <td class="table-section-3-body">{{ $value['year_graduate'] }}</td>
                 <td class="table-section-3-body">{{ $value['desc'] }}</td>
             </tr>
