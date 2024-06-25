@@ -32,6 +32,7 @@ class EmployeeRepository
             'u.employment_type_id',
             'u.grade_id',
             'g.name as grade_name',
+            'g.code as grade_code',
             'u.grade_effective_date',
             'u.position_id',
             'p.name as position_name',

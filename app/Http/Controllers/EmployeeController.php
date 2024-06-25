@@ -10,6 +10,7 @@ use App\Repositories\CreditRepository;
 use App\Repositories\DisciplinaryRepository;
 use App\Repositories\EducationRepository;
 use App\Repositories\EmployeeRepository;
+use App\Repositories\FamilyRepository;
 use App\Repositories\GradeRepository;
 use App\Repositories\LeaveRepository;
 use App\Repositories\NoteRepository;
@@ -31,6 +32,7 @@ class EmployeeController extends Controller
 {
     protected $employeeRepository;
     protected $educationRepository;
+    protected $familyRepository;
     protected $positionRepository;
     protected $gradeRepository;
     protected $trainingRepository;
@@ -49,6 +51,7 @@ class EmployeeController extends Controller
         Request $request,
         EmployeeRepository $employeeRepository,
         EducationRepository $educationRepository,
+        FamilyRepository $familyRepository,
         PositionRepository $positionRepository,
         GradeRepository $gradeRepository,
         TrainingRepository $trainingRepository,
@@ -80,6 +83,7 @@ class EmployeeController extends Controller
         );
         $this->employeeRepository = $employeeRepository;
         $this->educationRepository = $educationRepository;
+        $this->familyRepository = $familyRepository;
         $this->positionRepository = $positionRepository;
         $this->gradeRepository = $gradeRepository;
         $this->trainingRepository = $trainingRepository;
@@ -132,6 +136,7 @@ class EmployeeController extends Controller
         $users->leftJoin('positions as p', 'u.position_id', '=', 'p.id');
         $users->leftJoin('grades as g', 'u.grade_id', '=', 'g.id');
         $users->leftJoin('employment_types as et', 'u.employment_type_id', '=', 'et.id');
+        $users->leftJoin('echelons as e', 'u.echelon_id', '=', 'e.id');
         $users->select(
             'u.id',
             'u.photo_profile',
@@ -146,7 +151,10 @@ class EmployeeController extends Controller
             'u.employee_id_number',
             'u.employee_registration_number',
             'p.name as position_name',
+            'e.name as echelon_name',
+            'u.echelon_effective_date',
             DB::raw("CONCAT(g.name, ' ', g.code) as grade_name"),
+            'u.grade_effective_date',
             'et.name as employment_type',
             'u.description'
         );
@@ -163,6 +171,9 @@ class EmployeeController extends Controller
         if (!is_null($this->request->grade_id)) {
             $users->where('u.grade_id', $this->request->grade_id);
         }
+        if (!is_null($this->request->echelon_id)) {
+            $users->where('u.echelon_id', $this->request->echelon_id);
+        }
         if (!is_null($this->request->employment_type_id)) {
             $users->where('u.employment_type_id', $this->request->employment_type_id);
         }
@@ -175,6 +186,11 @@ class EmployeeController extends Controller
         if (!is_null($this->request->month_of_birth)) {
             $users->whereMonth('u.date_of_birth', $this->request->month_of_birth);
         }
+        if (!is_null($this->request->gender)) {
+            $users->where('u.gender', $this->request->gender);
+        }
+
+        $users->orderBy('u.position_id', 'asc');
 
         if (is_null($this->request->limit)) {
             $users = $users->get();
@@ -366,6 +382,7 @@ class EmployeeController extends Controller
         }
 
         $educations = $this->educationRepository->getDetail($this->request->id);
+        $families = $this->familyRepository->getDetail($this->request->id);
         $positions = $this->positionRepository->getDetail($this->request->id);
         $grades = $this->gradeRepository->getDetail($this->request->id);
         $structurals = $this->trainingRepository->getDetail($this->request->id, 1);
@@ -383,6 +400,7 @@ class EmployeeController extends Controller
         $talents = $this->talentRepository->getDetail($this->request->id);
 
         $employee->educations = $educations;
+        $employee->families = $families;
         $employee->positions = $positions;
         $employee->grades = $grades;
         $employee->structurals = $structurals;
