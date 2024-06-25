@@ -190,6 +190,8 @@ class EmployeeController extends Controller
             $users->where('u.gender', $this->request->gender);
         }
 
+        $users->orderBy('u.employment_status', 'asc');
+        $users->orderBy('u.echelon_id', 'asc');
         $users->orderBy('u.position_id', 'asc');
 
         if (is_null($this->request->limit)) {
