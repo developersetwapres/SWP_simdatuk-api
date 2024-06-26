@@ -20,6 +20,7 @@ class UpdateLeaveEmployeeRequest
             'leaves.*.number' => 'required|max:160',
             'leaves.*.description' => 'required|max:160',
             'leaves.*.letter' => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
+            'leaves.*.delete_letter' => 'required|boolean',
         ];
     }
 
@@ -45,6 +46,7 @@ class UpdateLeaveEmployeeRequest
             'leaves.*.letter.file' => 'Surat cuti harus berupa file.',
             'leaves.*.letter.extensions' => 'Surat cuti harus berupa jpg, jpeg atau png.',
             'leaves.*.letter.max' => 'Ukuran surat cuti tidak boleh lebih dari 2MB.',
+            'leaves.*.delete_letter.required' => 'Status delete surat cuti tidak boleh kosong.',
         ];
     }
 
@@ -83,6 +85,10 @@ class UpdateLeaveEmployeeRequest
             'leaves.*.letter' => [
                 'description' => 'Refers to the Letter of Employee Leave.',
                 'example' => public_path('/img/logo.svg'),
+            ],
+            'leaves.*.delete_letter' => [
+                'description' => 'Refers to the Status of Delete letter.',
+                'example' => false,
             ],
         ];
     }

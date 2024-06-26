@@ -435,63 +435,532 @@ class EmployeeController extends Controller
      */
     public function update(UpdateEmployeeRequest $request)
     {
-        $user = DB::table('users')
-            ->where('id', $this->request->id)
-            ->first();;
+        try {
+            DB::beginTransaction();
 
-        if (!$user) {
-            return $this->response(404, 'Pegawai tidak ditemukan.');
-        }
+            $user = DB::table('users')
+                ->where('id', $this->request->id)
+                ->first();
 
-        $user = DB::table('users');
-        $user->where('id', $this->request->id);
-        $user = $user->updateTs($this->posted);
+            if (!$user) {
+                return $this->response(404, 'Pegawai tidak ditemukan.');
+            }
 
-        // 'educations',
-        // 'positions',
-        // 'grades',
-        // 'families',
-        // 'leaves',
-        // 'notes',
-        // 'credits',
-        // 'assessments',
-        // 'competencies',
-        // 'talents',
-        // 'structurals',
-        // 'functionals',
-        // 'technicals',
-        // 'targets',
-        // 'performances',
-        // 'disciplinaries',
+            if (isset($this->posted['employee_id_card']) && is_file($this->posted['employee_id_card'])) {
+                $this->posted['employee_id_card'] = $this->uploadDocument($this->posted['employee_id_card'], 'employee_id_card');
+            } else if ($this->posted['delete_employee_id_card'] == true) {
+                $this->posted['employee_id_card'] = null;
+            }
 
-        if (isset($this->request->educations)) {
-            // Get existing data
-            $userEducations = DB::table('user_educations')
-                ->where('user_id', $this->request->id)
-                ->select('id');
-            $userEducations = $userEducations->get();
+            unset($this->posted['delete_employee_id_card']);
 
-            // Delete data
-            $array1 = Arr::pluck($userEducations, 'id');
-            $array2 = Arr::pluck($this->request->educations, 'id');
-            $result = array_diff($array1, $array2);
-            DB::table('user_educations')->whereIn('id', $result)->delete();
+            $user = DB::table('users');
+            $user->where('id', $this->request->id);
 
-            foreach ($this->request->users as $user) {
-                if (!is_null($user['id'])) {
-                    // Update existing data
-                    DB::table('user_educations')->where('id', $user['id'])->updateTs($user);
-                } else {
-                    // Insert new item
-                    $user['disciplinary_history_id'] = $this->request->id;
-                    array_push($users, $user);
+            $user = $user->updateTs($this->posted);
+
+            if (isset($this->request->educations)) {
+                $educations = array();
+                // Get existing data
+                $userEducations = DB::table('user_educations')
+                    ->where('user_id', $this->request->id)
+                    ->select('id');
+                $userEducations = $userEducations->get();
+
+                // Delete data
+                $array1 = Arr::pluck($userEducations, 'id');
+                $array2 = Arr::pluck($this->request->educations, 'id');
+                $result = array_diff($array1, $array2);
+                DB::table('user_educations')->whereIn('id', $result)->delete();
+
+                foreach ($this->request->educations as $education) {
+                    if (isset($education['id'])) {
+                        if (isset($education['degree_document']) && is_file($education['degree_document'])) {
+                            $education['degree_document'] = $this->uploadDocument($education['degree_document'], 'degree_document');
+                        } else if ($education['delete_degree_document'] == true) {
+                            $education['degree_document'] = null;
+                        }
+                        unset($education['delete_degree_document']);
+
+                        // Update existing data
+                        DB::table('user_educations')->where('id', $education['id'])->updateTs($education);
+                    } else {
+                        // Insert new item
+                        unset($education['delete_degree_document']);
+                        $education['user_id'] = $this->request->id;
+                        array_push($educations, $education);
+                    }
+                }
+                if (count($educations) > 0) {
+                    DB::table('user_educations')->insertTs($educations);
                 }
             }
-            if (count($users) > 0) {
-                DB::table('user_educations')->insertTs($users);
-            }
-        }
 
-        dd($user, $request);
+            if (isset($this->request->positions)) {
+                // Get existing data
+                $userPositions = DB::table('position_history_users')
+                    ->where('user_id', $this->request->id)
+                    ->select('id');
+                $userPositions = $userPositions->get();
+
+                // Delete data
+                $array1 = Arr::pluck($userPositions, 'id');
+                $array2 = Arr::pluck($this->request->positions, 'id');
+                $result = array_diff($array1, $array2);
+                DB::table('position_history_users')->whereIn('id', $result)->delete();
+
+                foreach ($this->request->positions as $position) {
+                    if (isset($position['id'])) {
+                        if (isset($position['decree_document']) && is_file($position['decree_document'])) {
+                            $position['decree_document'] = $this->uploadDocument($position['decree_document'], 'decree_document');
+                        } else if ($position['delete_decree_document'] == true) {
+                            $position['decree_document'] = null;
+                        }
+                        unset($position['delete_decree_document']);
+
+                        // Update existing data
+                        DB::table('position_history_users')->where('id', $position['id'])->updateTs($position);
+                    }
+                }
+            }
+
+            if (isset($this->request->grades)) {
+                // Get existing data
+                $userGrades = DB::table('grade_history_users')
+                    ->where('user_id', $this->request->id)
+                    ->select('id');
+                $userGrades = $userGrades->get();
+
+                // Delete data
+                $array1 = Arr::pluck($userGrades, 'id');
+                $array2 = Arr::pluck($this->request->grades, 'id');
+                $result = array_diff($array1, $array2);
+                DB::table('grade_history_users')->whereIn('id', $result)->delete();
+
+                foreach ($this->request->grades as $grade) {
+                    if (isset($grade['id'])) {
+                        if (isset($grade['decree_document']) && is_file($grade['decree_document'])) {
+                            $grade['decree_document'] = $this->uploadDocument($grade['decree_document'], 'decree_document');
+                        } else if ($grade['delete_decree_document'] == true) {
+                            $grade['decree_document'] = null;
+                        }
+                        unset($grade['delete_decree_document']);
+
+                        // Update existing data
+                        DB::table('grade_history_users')->where('id', $grade['id'])->updateTs($grade);
+                    }
+                }
+            }
+
+            if (isset($this->request->families)) {
+                $families = array();
+                // Get existing data
+                $userFamilies = DB::table('user_families')
+                    ->where('user_id', $this->request->id)
+                    ->select('id');
+                $userFamilies = $userFamilies->get();
+
+                // Delete data
+                $array1 = Arr::pluck($userFamilies, 'id');
+                $array2 = Arr::pluck($this->request->families, 'id');
+                $result = array_diff($array1, $array2);
+                DB::table('user_families')->whereIn('id', $result)->delete();
+
+                foreach ($this->request->families as $family) {
+                    if (isset($family['id'])) {
+                        // Update existing data
+                        DB::table('user_families')->where('id', $family['id'])->updateTs($family);
+                    } else {
+                        // Insert new item
+                        $family['user_id'] = $this->request->id;
+                        array_push($families, $family);
+                    }
+                }
+                if (count($families) > 0) {
+                    DB::table('user_families')->insertTs($families);
+                }
+            }
+
+            if (isset($this->request->leaves)) {
+                $leaves = array();
+                // Get existing data
+                $userLeaves = DB::table('user_leaves')
+                    ->where('user_id', $this->request->id)
+                    ->select('id');
+                $userLeaves = $userLeaves->get();
+
+                // Delete data
+                $array1 = Arr::pluck($userLeaves, 'id');
+                $array2 = Arr::pluck($this->request->leaves, 'id');
+                $result = array_diff($array1, $array2);
+                DB::table('user_leaves')->whereIn('id', $result)->delete();
+
+                foreach ($this->request->leaves as $leave) {
+                    if (isset($leave['id'])) {
+                        if (isset($leave['letter']) && is_file($leave['letter'])) {
+                            $leave['letter'] = $this->uploadDocument($leave['letter'], 'letter');
+                        } else if ($leave['delete_letter'] == true) {
+                            $leave['letter'] = null;
+                        }
+                        unset($leave['delete_letter']);
+
+                        // Update existing data
+                        DB::table('user_leaves')->where('id', $leave['id'])->updateTs($leave);
+                    } else {
+                        // Insert new item
+                        unset($leave['delete_letter']);
+                        $leave['user_id'] = $this->request->id;
+                        array_push($leaves, $leave);
+                    }
+                }
+                if (count($leaves) > 0) {
+                    DB::table('user_leaves')->insertTs($leaves);
+                }
+            }
+
+            if (isset($this->request->notes)) {
+                $notes = array();
+                // Get existing data
+                $userNotes = DB::table('user_notes')
+                    ->where('user_id', $this->request->id)
+                    ->select('id');
+                $userNotes = $userNotes->get();
+
+                // Delete data
+                $array1 = Arr::pluck($userNotes, 'id');
+                $array2 = Arr::pluck($this->request->notes, 'id');
+                $result = array_diff($array1, $array2);
+                DB::table('user_notes')->whereIn('id', $result)->delete();
+
+                foreach ($this->request->notes as $note) {
+                    if (isset($note['id'])) {
+                        // Update existing data
+                        DB::table('user_notes')->where('id', $note['id'])->updateTs($note);
+                    } else {
+                        // Insert new item
+                        $note['user_id'] = $this->request->id;
+                        $note['giver_id'] = $this->request->user()->id;
+                        array_push($notes, $note);
+                    }
+                }
+                if (count($notes) > 0) {
+                    DB::table('user_notes')->insertTs($notes);
+                }
+            }
+
+            if (isset($this->request->credits)) {
+                $credits = array();
+                // Get existing data
+                $userCredits = DB::table('user_credits')
+                    ->where('user_id', $this->request->id)
+                    ->select('id');
+                $userCredits = $userCredits->get();
+
+                // Delete data
+                $array1 = Arr::pluck($userCredits, 'id');
+                $array2 = Arr::pluck($this->request->credits, 'id');
+                $result = array_diff($array1, $array2);
+                DB::table('user_credits')->whereIn('id', $result)->delete();
+
+                foreach ($this->request->credits as $credit) {
+                    if (isset($credit['id'])) {
+                        // Update existing data
+                        DB::table('user_credits')->where('id', $credit['id'])->updateTs($credit);
+                    } else {
+                        // Insert new item
+                        $credit['user_id'] = $this->request->id;
+                        array_push($credits, $credit);
+                    }
+                }
+                if (count($credits) > 0) {
+                    DB::table('user_credits')->insertTs($credits);
+                }
+            }
+
+            if (isset($this->request->assessments)) {
+                $assessments = array();
+                // Get existing data
+                $userAssessments = DB::table('user_assessments')
+                    ->where('user_id', $this->request->id)
+                    ->select('id');
+                $userAssessments = $userAssessments->get();
+
+                // Delete data
+                $array1 = Arr::pluck($userAssessments, 'id');
+                $array2 = Arr::pluck($this->request->assessments, 'id');
+                $result = array_diff($array1, $array2);
+                DB::table('user_assessments')->whereIn('id', $result)->delete();
+
+                foreach ($this->request->assessments as $assessment) {
+                    if (isset($assessment['id'])) {
+                        if (isset($assessment['assessment_document']) && is_file($assessment['assessment_document'])) {
+                            $assessment['assessment_document'] = $this->uploadDocument($assessment['assessment_document'], 'assessment_document');
+                        } else if ($assessment['delete_assessment_document'] == true) {
+                            $assessment['assessment_document'] = null;
+                        }
+                        unset($assessment['delete_assessment_document']);
+
+                        // Update existing data
+                        DB::table('user_assessments')->where('id', $assessment['id'])->updateTs($assessment);
+                    } else {
+                        // Insert new item
+                        unset($assessment['delete_assessment_document']);
+                        $assessment['user_id'] = $this->request->id;
+                        array_push($assessments, $assessment);
+                    }
+                }
+                if (count($assessments) > 0) {
+                    DB::table('user_assessments')->insertTs($assessments);
+                }
+            }
+
+            if (isset($this->request->competencies)) {
+                $competencies = array();
+                // Get existing data
+                $userCompetencies = DB::table('user_competencies')
+                    ->where('user_id', $this->request->id)
+                    ->select('id');
+                $userCompetencies = $userCompetencies->get();
+
+                // Delete data
+                $array1 = Arr::pluck($userCompetencies, 'id');
+                $array2 = Arr::pluck($this->request->competencies, 'id');
+                $result = array_diff($array1, $array2);
+                DB::table('user_competencies')->whereIn('id', $result)->delete();
+
+                foreach ($this->request->competencies as $competency) {
+                    if (isset($competency['id'])) {
+                        if (isset($competency['competency_document']) && is_file($competency['competency_document'])) {
+                            $competency['competency_document'] = $this->uploadDocument($competency['competency_document'], 'competency_document');
+                        } else if ($competency['delete_competency_document'] == true) {
+                            $competency['competency_document'] = null;
+                        }
+                        unset($competency['delete_competency_document']);
+
+                        // Update existing data
+                        DB::table('user_competencies')->where('id', $competency['id'])->updateTs($competency);
+                    } else {
+                        // Insert new item
+                        unset($competency['delete_competency_document']);
+                        $competency['user_id'] = $this->request->id;
+                        array_push($competencies, $competency);
+                    }
+                }
+                if (count($competencies) > 0) {
+                    DB::table('user_competencies')->insertTs($competencies);
+                }
+            }
+
+            if (isset($this->request->talents)) {
+                $talents = array();
+                // Get existing data
+                $userTalents = DB::table('user_talents')
+                    ->where('user_id', $this->request->id)
+                    ->select('id');
+                $userTalents = $userTalents->get();
+
+                // Delete data
+                $array1 = Arr::pluck($userTalents, 'id');
+                $array2 = Arr::pluck($this->request->talents, 'id');
+                $result = array_diff($array1, $array2);
+                DB::table('user_talents')->whereIn('id', $result)->delete();
+
+                foreach ($this->request->talents as $talent) {
+                    if (isset($talent['id'])) {
+                        if (isset($talent['talent_document']) && is_file($talent['talent_document'])) {
+                            $talent['talent_document'] = $this->uploadDocument($talent['talent_document'], 'talent_document');
+                        } else if ($talent['delete_talent_document'] == true) {
+                            $talent['talent_document'] = null;
+                        }
+                        unset($talent['delete_talent_document']);
+
+                        // Update existing data
+                        DB::table('user_talents')->where('id', $talent['id'])->updateTs($talent);
+                    } else {
+                        // Insert new item
+                        unset($talent['delete_talent_document']);
+                        $talent['user_id'] = $this->request->id;
+                        array_push($talents, $talent);
+                    }
+                }
+                if (count($talents) > 0) {
+                    DB::table('user_talents')->insertTs($talents);
+                }
+            }
+
+            if (isset($this->request->structurals)) {
+                // Get existing data
+                $userTrainings = DB::table('training_history_users')
+                    ->leftJoin('training_histories', 'training_histories.id', '=', 'training_history_users.training_history_id')
+                    ->where('training_history_users.user_id', $this->request->id)
+                    ->where('training_histories.type', 1)
+                    ->select('training_history_users.id');
+                $userTrainings = $userTrainings->get();
+
+                // Delete data
+                $array1 = Arr::pluck($userTrainings, 'id');
+                $array2 = Arr::pluck($this->request->structurals, 'id');
+                $result = array_diff($array1, $array2);
+                DB::table('training_history_users')->whereIn('id', $result)->delete();
+
+                foreach ($this->request->structurals as $training) {
+                    if (isset($training['id'])) {
+                        if (isset($training['certificate']) && is_file($training['certificate'])) {
+                            $training['certificate'] = $this->uploadDocument($training['certificate'], 'certificate');
+                        } else if ($training['delete_certificate'] == true) {
+                            $training['certificate'] = null;
+                        }
+                        unset($training['delete_certificate']);
+
+                        // Update existing data
+                        DB::table('training_history_users')->where('id', $training['id'])->updateTs($training);
+                    }
+                }
+            }
+
+            if (isset($this->request->functionals)) {
+                // Get existing data
+                $userTrainings = DB::table('training_history_users')
+                    ->leftJoin('training_histories', 'training_histories.id', '=', 'training_history_users.training_history_id')
+                    ->where('training_history_users.user_id', $this->request->id)
+                    ->where('training_histories.type', 2)
+                    ->select('training_history_users.id');
+                $userTrainings = $userTrainings->get();
+
+                // Delete data
+                $array1 = Arr::pluck($userTrainings, 'id');
+                $array2 = Arr::pluck($this->request->functionals, 'id');
+                $result = array_diff($array1, $array2);
+                DB::table('training_history_users')->whereIn('id', $result)->delete();
+
+                foreach ($this->request->functionals as $training) {
+                    if (isset($training['id'])) {
+                        if (isset($training['certificate']) && is_file($training['certificate'])) {
+                            $training['certificate'] = $this->uploadDocument($training['certificate'], 'certificate');
+                        } else if ($training['delete_certificate'] == true) {
+                            $training['certificate'] = null;
+                        }
+                        unset($training['delete_certificate']);
+
+                        // Update existing data
+                        DB::table('training_history_users')->where('id', $training['id'])->updateTs($training);
+                    }
+                }
+            }
+
+            if (isset($this->request->technicals)) {
+                // Get existing data
+                $userTrainings = DB::table('training_history_users')
+                    ->leftJoin('training_histories', 'training_histories.id', '=', 'training_history_users.training_history_id')
+                    ->where('training_history_users.user_id', $this->request->id)
+                    ->where('training_histories.type', 3)
+                    ->select('training_history_users.id');
+                $userTrainings = $userTrainings->get();
+
+                // Delete data
+                $array1 = Arr::pluck($userTrainings, 'id');
+                $array2 = Arr::pluck($this->request->technicals, 'id');
+                $result = array_diff($array1, $array2);
+                DB::table('training_history_users')->whereIn('id', $result)->delete();
+
+                foreach ($this->request->technicals as $training) {
+                    if (isset($training['id'])) {
+                        if (isset($training['certificate']) && is_file($training['certificate'])) {
+                            $training['certificate'] = $this->uploadDocument($training['certificate'], 'certificate');
+                        } else if ($training['delete_certificate'] == true) {
+                            $training['certificate'] = null;
+                        }
+                        unset($training['delete_certificate']);
+
+                        // Update existing data
+                        DB::table('training_history_users')->where('id', $training['id'])->updateTs($training);
+                    }
+                }
+            }
+
+            if (isset($this->request->recognitions)) {
+                // Get existing data
+                $userRecognitions = DB::table('recognition_history_users')
+                    ->where('user_id', $this->request->id)
+                    ->select('id');
+                $userRecognitions = $userRecognitions->get();
+
+                // Delete data
+                $array1 = Arr::pluck($userRecognitions, 'id');
+                $array2 = Arr::pluck($this->request->recognitions, 'id');
+                $result = array_diff($array1, $array2);
+                DB::table('recognition_history_users')->whereIn('id', $result)->delete();
+            }
+
+            if (isset($this->request->targets)) {
+                // Get existing data
+                $userTargets = DB::table('target_history_users')
+                    ->where('user_id', $this->request->id)
+                    ->select('id');
+                $userTargets = $userTargets->get();
+
+                // Delete data
+                $array1 = Arr::pluck($userTargets, 'id');
+                $array2 = Arr::pluck($this->request->targets, 'id');
+                $result = array_diff($array1, $array2);
+                DB::table('target_history_users')->whereIn('id', $result)->delete();
+
+                foreach ($this->request->targets as $target) {
+                    if (isset($target['id'])) {
+                        // Update existing data
+                        DB::table('target_history_users')->where('id', $target['id'])->updateTs($target);
+                    }
+                }
+            }
+
+            if (isset($this->request->performances)) {
+                // Get existing data
+                $userPerformances = DB::table('performance_history_users')
+                    ->where('user_id', $this->request->id)
+                    ->select('id');
+                $userPerformances = $userPerformances->get();
+
+                // Delete data
+                $array1 = Arr::pluck($userPerformances, 'id');
+                $array2 = Arr::pluck($this->request->performances, 'id');
+                $result = array_diff($array1, $array2);
+                DB::table('performance_history_users')->whereIn('id', $result)->delete();
+
+                foreach ($this->request->performances as $performance) {
+                    if (isset($performance['id'])) {
+                        // Update existing data
+                        DB::table('performance_history_users')->where('id', $performance['id'])->updateTs($performance);
+                    }
+                }
+            }
+
+            if (isset($this->request->disciplinaries)) {
+                // Get existing data
+                $userDisciplinaries = DB::table('disciplinary_history_users')
+                    ->where('user_id', $this->request->id)
+                    ->select('id');
+                $userDisciplinaries = $userDisciplinaries->get();
+
+                // Delete data
+                $array1 = Arr::pluck($userDisciplinaries, 'id');
+                $array2 = Arr::pluck($this->request->disciplinaries, 'id');
+                $result = array_diff($array1, $array2);
+                DB::table('disciplinary_history_users')->whereIn('id', $result)->delete();
+
+                foreach ($this->request->disciplinaries as $disciplinary) {
+                    if (isset($disciplinary['id'])) {
+                        // Update existing data
+                        DB::table('disciplinary_history_users')->where('id', $disciplinary['id'])->updateTs($disciplinary);
+                    }
+                }
+            }
+
+            DB::commit();
+            return $this->response(200, 'Pegawai berhasil diubah.');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            Log::warning($th);
+            return $this->response(500, 'Pegawai gagal ditambah.');
+        }
     }
 }

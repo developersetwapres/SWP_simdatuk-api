@@ -22,6 +22,7 @@ class UpdateEducationEmployeeRequest
             'educations.*.year_of_graduation' => 'required|date_format:Y',
             'educations.*.description' => 'max:160',
             'educations.*.degree_document' => 'file|extensions:jpg,jpeg,png,pdf|max:2048',
+            'educations.*.delete_degree_document' => 'required|boolean',
         ];
     }
 
@@ -50,6 +51,7 @@ class UpdateEducationEmployeeRequest
             'educations.*.degree_document.file' => 'Ijazah harus berupa file.',
             'educations.*.degree_document.extensions' => 'Ijazah harus berupa jpg, jpeg atau png.',
             'educations.*.degree_document.max' => 'Ukuran ijazah tidak boleh lebih dari 2MB.',
+            'educations.*.delete_degree_document' => 'Status hapus ijazah tidak boleh kosong.',
         ];
     }
 
@@ -96,6 +98,10 @@ class UpdateEducationEmployeeRequest
             'educations.*.degree_document' => [
                 'description' => 'Refers to the Degree Document of Employee Education.',
                 'example' => public_path('/img/logo.svg'),
+            ],
+            'educations.*.delete_degree_document' => [
+                'description' => 'Refers to the Status Delete Degree Document of Employee Education.',
+                'example' => false,
             ],
         ];
     }

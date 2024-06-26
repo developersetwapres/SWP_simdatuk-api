@@ -17,6 +17,7 @@ class UpdateTrainingHistoryFunctionalEmployeeRequest
         return [
             'functionals.*.id' => 'numeric|nullable',
             'functionals.*.certificate' => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
+            'functionals.*.delete_certificate' => 'required|boolean',
         ];
     }
 
@@ -32,6 +33,7 @@ class UpdateTrainingHistoryFunctionalEmployeeRequest
             'functionals.*.certificate.file' => 'Sertifikat harus berupa file.',
             'functionals.*.certificate.extensions' => 'Sertifikat harus berupa jpg, jpeg atau png.',
             'functionals.*.certificate.max' => 'Ukuran sertifikat tidak boleh lebih dari 2MB.',
+            'functionals.*.delete_certificate.required' => 'Status delete sertifikat tidak boleh kosong.',
         ];
     }
 
@@ -50,6 +52,10 @@ class UpdateTrainingHistoryFunctionalEmployeeRequest
             'functionals.*.certificate' => [
                 'description' => 'Refers to the Certificate of functionals Training.',
                 'example' => public_path('/img/logo.svg'),
+            ],
+            'functionals.*.delete_certificate' => [
+                'description' => 'Refers to the Status of Delete certificate.',
+                'example' => false,
             ],
         ];
     }

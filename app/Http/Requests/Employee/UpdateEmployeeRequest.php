@@ -80,6 +80,7 @@ class UpdateEmployeeRequest extends FormRequest
             'office_email' => 'email|unique:users,office_email,' . $this->id,
             'description' => 'max:160',
             'type' => 'required|in:1,2,3',
+            'delete_employee_id_card' => 'required|boolean',
         ];
 
         $nonASNRules = [
@@ -124,6 +125,7 @@ class UpdateEmployeeRequest extends FormRequest
             'office_email' => 'email|unique:users,office_email,' . $this->id,
             'description' => 'max:160',
             'type' => 'required|in:1,2,3',
+            'delete_employee_id_card' => 'required|boolean',
         ];
 
         $outsourceRules = [
@@ -262,6 +264,7 @@ class UpdateEmployeeRequest extends FormRequest
             'description.max' => 'Keterangan tidak boleh lebih dari 160 karakter.',
             'type.required' => 'Tipe pegawai tidak boleh kosong.',
             'type.in' => 'Tipe pegawai diantara 1, 2 atau 3',
+            'delete_employee_id_card' => 'Status hapus kartu pegawai tidak boleh kosong.',
         ];
 
         return array_merge(
@@ -436,6 +439,10 @@ class UpdateEmployeeRequest extends FormRequest
             'type' => [
                 'description' => 'Refers to the Type of Employee. 1=ASN, 2=NON-ASN, 3=OUTSOURCE',
                 'example' => 1,
+            ],
+            'delete_employee_id_card' => [
+                'description' => 'Refers to the Status delete employee id card.',
+                'example' => false,
             ],
         ];
 

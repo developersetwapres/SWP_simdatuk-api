@@ -18,6 +18,7 @@ class UpdateCompetencyEmployeeRequest
             'competencies.*.point' => 'required|numeric|in:1,2',
             'competencies.*.organizer' => 'max:160',
             'competencies.*.competency_document' => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
+            'competencies.*.delete_competency_document' => 'required|boolean',
         ];
     }
 
@@ -38,6 +39,7 @@ class UpdateCompetencyEmployeeRequest
             'competencies.*.competency_document.file' => 'Sertifikat harus berupa file.',
             'competencies.*.competency_document.extensions' => 'Sertifikat harus berupa jpg, jpeg atau png.',
             'competencies.*.competency_document.max' => 'Ukuran sertifikat tidak boleh lebih dari 2MB.',
+            'competencies.*.delete_competency_document.required' => 'Status delete dokumen tidak boleh kosong.',
         ];
     }
 
@@ -68,6 +70,10 @@ class UpdateCompetencyEmployeeRequest
             'competencies.*.competency_document' => [
                 'description' => 'Refers to the Document of Employee Competency.',
                 'example' => public_path('/img/logo.svg'),
+            ],
+            'competencies.*.delete_competency_document' => [
+                'description' => 'Refers to the Status of Delete competency document.',
+                'example' => false,
             ],
         ];
     }

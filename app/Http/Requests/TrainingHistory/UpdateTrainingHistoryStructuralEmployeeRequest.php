@@ -17,6 +17,7 @@ class UpdateTrainingHistoryStructuralEmployeeRequest
         return [
             'structurals.*.id' => 'numeric|nullable',
             'structurals.*.certificate' => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
+            'structurals.*.delete_certificate' => 'required|boolean',
         ];
     }
 
@@ -32,6 +33,7 @@ class UpdateTrainingHistoryStructuralEmployeeRequest
             'structurals.*.certificate.file' => 'Sertifikat harus berupa file.',
             'structurals.*.certificate.extensions' => 'Sertifikat harus berupa jpg, jpeg atau png.',
             'structurals.*.certificate.max' => 'Ukuran sertifikat tidak boleh lebih dari 2MB.',
+            'structurals.*.delete_certificate.required' => 'Status delete sertifikat tidak boleh kosong.',
         ];
     }
 
@@ -50,6 +52,10 @@ class UpdateTrainingHistoryStructuralEmployeeRequest
             'structurals.*.certificate' => [
                 'description' => 'Refers to the Certificate of structurals Training.',
                 'example' => public_path('/img/logo.svg'),
+            ],
+            'structurals.*.delete_certificate' => [
+                'description' => 'Refers to the Status of Delete certificate.',
+                'example' => false,
             ],
         ];
     }

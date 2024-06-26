@@ -18,6 +18,7 @@ class UpdateTalentEmployeeRequest
             'talents.*.point' => 'required|numeric|in:1,2,3,4,5,6,7',
             'talents.*.organizer' => 'max:160',
             'talents.*.talent_document' => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
+            'talents.*.delete_talent_document' => 'required|boolean',
         ];
     }
 
@@ -38,6 +39,7 @@ class UpdateTalentEmployeeRequest
             'talents.*.talent_document.file' => 'Sertifikat harus berupa file.',
             'talents.*.talent_document.extensions' => 'Sertifikat harus berupa jpg, jpeg atau png.',
             'talents.*.talent_document.max' => 'Ukuran sertifikat tidak boleh lebih dari 2MB.',
+            'talents.*.delete_talent_document.required' => 'Status delete dokumen tidak boleh kosong.',
         ];
     }
 
@@ -68,6 +70,10 @@ class UpdateTalentEmployeeRequest
             'talents.*.talent_document' => [
                 'description' => 'Refers to the Document of Employee Talent.',
                 'example' => public_path('/img/logo.svg'),
+            ],
+            'talents.*.delete_talent_document' => [
+                'description' => 'Refers to the Status of Delete talent document.',
+                'example' => false,
             ],
         ];
     }
