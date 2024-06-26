@@ -16,6 +16,7 @@ class EmployeeRepository
         $user->leftJoin('grades as g', 'u.grade_id', '=', 'g.id');
         $user->leftJoin('echelons as e', 'u.echelon_id', '=', 'e.id');
         $user->leftJoin('residences as r', 'u.residence_id', '=', 'r.id');
+        $user->leftJoin('institutions as i', 'u.institution_id', '=', 'i.id');
         $user->where('u.id', $userId);
         $user->select(
             'u.id',
@@ -31,6 +32,8 @@ class EmployeeRepository
             'u.gender',
             'u.marital_status',
             'u.employment_type_id',
+            'u.cpns_effective_date',
+            'u.retirement_effective_date',
             'u.grade_id',
             'g.name as grade_name',
             'g.code as grade_code',
@@ -42,6 +45,7 @@ class EmployeeRepository
             'e.name as echelon_name',
             'u.echelon_effective_date',
             'u.institution_id',
+            'i.name as institution_name',
             'u.education_level',
             'u.education_name',
             'u.education_year',
@@ -66,8 +70,11 @@ class EmployeeRepository
             'u.retirement_effective_date',
         );
         $user = $user->first();
-        $user->photo_profile = $this->getDocument($user->photo_profile, true);
-        if (!is_null($user->position_id)) {
+
+        if (isset($user->photo_profile)) {
+            $user->photo_profile = $this->getDocument($user->photo_profile, true);
+        }
+        if (isset($user->position_id)) {
             $user->position_merged = $this->getRecursivePosition($user->position_id);
         }
         return $user;

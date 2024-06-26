@@ -26,6 +26,7 @@ class FamilyRepository
             'occupation_description',
             'marital_status',
             'mobile_phone',
+            'sequence_number',
         );
         $families->orderBy('sequence_number', 'asc');
         return $families = $families->get();
