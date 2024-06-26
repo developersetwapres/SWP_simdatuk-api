@@ -2,11 +2,22 @@
 
 namespace App\Http\Requests\Employee;
 
-use App\Http\Requests\Assessment\CreateAssessmentRequest;
-use App\Http\Requests\Education\CreateEducationRequest;
-use App\Http\Requests\Family\CreateFamilyRequest;
-use App\Http\Requests\Leave\CreateLeaveRequest;
-use App\Http\Requests\Note\CreateNoteRequest;
+use App\Http\Requests\Assessment\UpdateAssessmentEmployeeRequest;
+use App\Http\Requests\Education\UpdateEducationEmployeeRequest;
+use App\Http\Requests\Family\UpdateFamilyEmployeeRequest;
+use App\Http\Requests\Leave\UpdateLeaveEmployeeRequest;
+use App\Http\Requests\Note\UpdateNoteEmployeeRequest;
+use App\Http\Requests\Credit\UpdateCreditEmployeeRequest;
+use App\Http\Requests\Competency\UpdateCompetencyEmployeeRequest;
+use App\Http\Requests\Talent\UpdateTalentEmployeeRequest;
+use App\Http\Requests\PositionHistory\UpdatePositionHistoryEmployeeRequest;
+use App\Http\Requests\GradeHistory\UpdateGradeHistoryEmployeeRequest;
+use App\Http\Requests\TrainingHistory\UpdateTrainingHistoryStructuralEmployeeRequest;
+use App\Http\Requests\TrainingHistory\UpdateTrainingHistoryFunctionalEmployeeRequest;
+use App\Http\Requests\TrainingHistory\UpdateTrainingHistoryTechnicalEmployeeRequest;
+use App\Http\Requests\TargetHistory\UpdateTargetHistoryEmployeeRequest;
+use App\Http\Requests\PerformanceHistory\UpdatePerformanceHistoryEmployeeRequest;
+use App\Http\Requests\DisciplinaryHistory\UpdateDisciplinaryHistoryEmployeeRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateEmployeeRequest extends FormRequest
@@ -26,51 +37,145 @@ class UpdateEmployeeRequest extends FormRequest
      */
     public function rules(): array
     {
-        $userRules = [
-            'email' => 'email|unique:users,email',
-            'title_prefix' => 'max:160',
-            'name' => 'required|max:160',
-            'title_suffix' => 'max:160',
+
+        $asnRules = [
             'photo_profile' => 'nullable|file|extensions:jpg,jpeg,png|max:2048|dimensions:width=350,height=500',
-            'id_number' => 'numeric|digits:16|unique:users,id_number',
-            'employee_id_number' => 'required|numeric|min:00000|max:9999999999|unique:users,employee_id_number',
-            'employee_registration_number' => 'numeric|min:00000|max:9999999999|unique:users,employee_registration_number',
+            'name' => 'required|max:160',
+            'title_prefix' => 'max:160',
+            'title_suffix' => 'max:160',
+            'employee_id_number' => 'required|numeric|min:00000|max:9999999999|unique:users,employee_id_number,' . $this->id,
+            'employee_registration_number' => 'numeric|min:00000|max:9999999999|unique:users,employee_registration_number,' . $this->id,
             'place_of_birth' => 'required|max:160',
             'date_of_birth' => 'required|date',
             'religion' => 'required|in:1,2,3,4,5,6',
             'gender' => 'required|boolean',
             'marital_status' => 'required|in:1,2,3,4,5',
             'employment_type_id' => 'required',
+            'cpns_effective_date' => 'required|date',
+            'position_id' => 'required|numeric',
+            'position_effective_date' => 'required|date',
             'grade_id' => 'required|numeric',
             'grade_effective_date' => 'required|date',
-            'position_id' => 'required|numeric',
             'echelon_id' => 'numeric',
             'echelon_effective_date' => 'date',
             'institution_id' => 'required|numeric',
-            'organization_id' => 'required|numeric',
-            'work_unit_id' => 'required|numeric',
-            'employee_id_card_number' => 'numeric|min:00000|max:9999999999|unique:users,employee_id_card_number',
+            'education_level' => 'required|numeric|in:1,2,3,4,5,6,7,8',
+            'education_name' => 'required|max:160',
+            'education_year' => 'required|date_format:Y',
+            'employee_id_card_number' => 'nullable|min:00000|max:9999999999|unique:users,employee_id_card_number,' . $this->id,
             'employee_id_card' => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
-            'karisu_number' => 'numeric|min:00000|max:9999999999|unique:users,karisu_number',
-            'id_tax' => 'max:16|unique:users,id_tax',
-            'employment_status' => 'required|boolean',
+            'karisu_number' => 'numeric|min:00000|max:9999999999|unique:users,karisu_number,' . $this->id,
+            'id_tax' => 'max:16|unique:users,id_tax,' . $this->id,
+            'employment_status' => 'required|numeric',
+            'family_registration_number' => 'numeric|digits:16|unique:users,family_registration_number,' . $this->id,
+            'id_number' => 'numeric|digits:16|unique:users,id_number,' . $this->id,
             'residence_id' => 'required|numeric',
             'current_address' => 'max:160',
             'home_phone_number' => 'numeric|max:99999999999999',
             'mobile_phone' => 'numeric|max:99999999999999',
             'office_address' => 'max:160',
             'office_phone_number' => 'numeric|max:99999999999999',
+            'email' => 'email|unique:users,email,' . $this->id,
+            'emergency_contact' => 'required',
+            'office_email' => 'email|unique:users,office_email,' . $this->id,
+            'description' => 'max:160',
+            'type' => 'required|in:1,2,3',
+        ];
+
+        $nonASNRules = [
+            'photo_profile' => 'nullable|file|extensions:jpg,jpeg,png|max:2048|dimensions:width=350,height=500',
+            'name' => 'required|max:160',
+            'title_prefix' => 'max:160',
+            'title_suffix' => 'max:160',
+            'employee_id_number' => 'required|numeric|min:00000|max:9999999999|unique:users,employee_id_number,' . $this->id,
+            'employee_registration_number' => 'numeric|min:00000|max:9999999999|unique:users,employee_registration_number,' . $this->id,
+            'place_of_birth' => 'required|max:160',
+            'date_of_birth' => 'required|date',
+            'religion' => 'required|in:1,2,3,4,5,6',
+            'gender' => 'required|boolean',
+            'marital_status' => 'required|in:1,2,3,4,5',
+            'employment_type_id' => 'required',
+            'cpns_effective_date' => 'date',
+            'position_id' => 'required|numeric',
+            'position_effective_date' => 'required|date',
+            'grade_id' => 'numeric',
+            'grade_effective_date' => 'date',
+            'echelon_id' => 'numeric',
+            'echelon_effective_date' => 'date',
+            'institution_id' => 'required|numeric',
+            'education_level' => 'required|numeric|in:1,2,3,4,5,6,7,8',
+            'education_name' => 'required|max:160',
+            'education_year' => 'required|date_format:Y',
+            'employee_id_card_number' => 'nullable|min:00000|max:9999999999|unique:users,employee_id_card_number,' . $this->id,
+            'employee_id_card' => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
+            'karisu_number' => 'numeric|min:00000|max:9999999999|unique:users,karisu_number,' . $this->id,
+            'id_tax' => 'max:16|unique:users,id_tax,' . $this->id,
+            'employment_status' => 'required|numeric',
+            'family_registration_number' => 'numeric|digits:16|unique:users,family_registration_number,' . $this->id,
+            'id_number' => 'numeric|digits:16|unique:users,id_number,' . $this->id,
+            'residence_id' => 'required|numeric',
+            'current_address' => 'max:160',
+            'home_phone_number' => 'numeric|max:99999999999999',
+            'mobile_phone' => 'numeric|max:99999999999999',
+            'office_address' => 'max:160',
+            'office_phone_number' => 'numeric|max:99999999999999',
+            'email' => 'email|unique:users,email,' . $this->id,
+            'emergency_contact' => 'required',
+            'office_email' => 'email|unique:users,office_email,' . $this->id,
+            'description' => 'max:160',
+            'type' => 'required|in:1,2,3',
+        ];
+
+        $outsourceRules = [
+            'photo_profile' => 'nullable|file|extensions:jpg,jpeg,png|max:2048|dimensions:width=350,height=500',
+            'name' => 'required|max:160',
+            'employee_id_number' => 'required|numeric|min:00000|max:9999999999|unique:users,employee_id_number,' . $this->id,
+            'place_of_birth' => 'required|max:160',
+            'date_of_birth' => 'required|date',
+            'religion' => 'required|in:1,2,3,4,5,6',
+            'gender' => 'required|boolean',
+            'marital_status' => 'required|in:1,2,3,4,5',
+            'employment_type_id' => 'required',
+            'cpns_effective_date' => 'date',
+            'position_id' => 'required|numeric',
+            'position_effective_date' => 'date',
+            'education_level' => 'required|numeric|in:1,2,3,4,5,6,7,8',
+            'education_name' => 'required|max:160',
+            'education_year' => 'required|date_format:Y',
+            'id_tax' => 'max:16|unique:users,id_tax,' . $this->id,
+            'employment_status' => 'required|numeric',
+            'family_registration_number' => 'numeric|digits:16|unique:users,family_registration_number,' . $this->id,
+            'id_number' => 'numeric|digits:16|unique:users,id_number,' . $this->id,
+            'residence_id' => 'required|numeric',
+            'current_address' => 'max:160',
+            'home_phone_number' => 'numeric|max:99999999999999',
+            'mobile_phone' => 'numeric|max:99999999999999',
+            'office_address' => 'max:160',
+            'office_phone_number' => 'numeric|max:99999999999999',
+            'email' => 'email|unique:users,email,' . $this->id,
             'emergency_contact' => 'required',
             'description' => 'max:160',
             'type' => 'required|in:1,2,3',
         ];
+
         return array_merge(
-            $userRules,
-            CreateEducationRequest::rules(),
-            CreateFamilyRequest::rules(),
-            CreateLeaveRequest::rules(),
-            CreateNoteRequest::rules(),
-            CreateAssessmentRequest::rules(),
+            $this->type == 3 ? $outsourceRules : ($this->type == 2 ? $nonASNRules : $asnRules),
+            UpdateEducationEmployeeRequest::rules(),
+            UpdatePositionHistoryEmployeeRequest::rules(),
+            UpdateGradeHistoryEmployeeRequest::rules(),
+            UpdateTrainingHistoryStructuralEmployeeRequest::rules(),
+            UpdateTrainingHistoryFunctionalEmployeeRequest::rules(),
+            UpdateTrainingHistoryTechnicalEmployeeRequest::rules(),
+            UpdateTargetHistoryEmployeeRequest::rules(),
+            UpdatePerformanceHistoryEmployeeRequest::rules(),
+            UpdateDisciplinaryHistoryEmployeeRequest::rules(),
+            UpdateFamilyEmployeeRequest::rules(),
+            UpdateLeaveEmployeeRequest::rules(),
+            UpdateNoteEmployeeRequest::rules(),
+            UpdateCreditEmployeeRequest::rules(),
+            UpdateAssessmentEmployeeRequest::rules(),
+            UpdateCompetencyEmployeeRequest::rules(),
+            UpdateTalentEmployeeRequest::rules(),
         );
     }
 
@@ -141,6 +246,8 @@ class UpdateEmployeeRequest extends FormRequest
             'karisu_number.unique' => 'Nomor kartu suami/istri sudah terdaftar.',
             'id_tax.unique' => 'NPWP sudah terdaftar.',
             'employment_status.boolean' => 'Status pegawai harus boolean.',
+            'family_registration_number.unique' => 'No KK sudah pernah digunakan',
+            'family_registration_number.digits' => 'No KK harus 16 digits',
             'residence_id.required' => 'Komplek tidak boleh kosong.',
             'residence_id.numeric' => 'Komplek harus berupa angka.',
             'current_address.max' => 'Alamat saat ini tidak boleh lebih dari 160 karakter.',
@@ -159,11 +266,22 @@ class UpdateEmployeeRequest extends FormRequest
 
         return array_merge(
             $userMessages,
-            CreateEducationRequest::messages(),
-            CreateFamilyRequest::messages(),
-            CreateLeaveRequest::messages(),
-            CreateNoteRequest::messages(),
-            CreateAssessmentRequest::messages(),
+            UpdateEducationEmployeeRequest::messages(),
+            UpdatePositionHistoryEmployeeRequest::messages(),
+            UpdateGradeHistoryEmployeeRequest::messages(),
+            UpdateTrainingHistoryStructuralEmployeeRequest::messages(),
+            UpdateTrainingHistoryFunctionalEmployeeRequest::messages(),
+            UpdateTrainingHistoryTechnicalEmployeeRequest::messages(),
+            UpdateTargetHistoryEmployeeRequest::messages(),
+            UpdatePerformanceHistoryEmployeeRequest::messages(),
+            UpdateDisciplinaryHistoryEmployeeRequest::messages(),
+            UpdateFamilyEmployeeRequest::messages(),
+            UpdateLeaveEmployeeRequest::messages(),
+            UpdateNoteEmployeeRequest::messages(),
+            UpdateCreditEmployeeRequest::messages(),
+            UpdateAssessmentEmployeeRequest::messages(),
+            UpdateCompetencyEmployeeRequest::messages(),
+            UpdateTalentEmployeeRequest::messages(),
         );
     }
 
@@ -323,11 +441,22 @@ class UpdateEmployeeRequest extends FormRequest
 
         return array_merge(
             $userBodyParameters,
-            CreateEducationRequest::bodyParameters(),
-            CreateFamilyRequest::bodyParameters(),
-            CreateLeaveRequest::bodyParameters(),
-            CreateNoteRequest::bodyParameters(),
-            CreateAssessmentRequest::bodyParameters(),
+            UpdateEducationEmployeeRequest::bodyParameters(),
+            UpdatePositionHistoryEmployeeRequest::bodyParameters(),
+            UpdateGradeHistoryEmployeeRequest::bodyParameters(),
+            UpdateTrainingHistoryStructuralEmployeeRequest::bodyParameters(),
+            UpdateTrainingHistoryFunctionalEmployeeRequest::bodyParameters(),
+            UpdateTrainingHistoryTechnicalEmployeeRequest::bodyParameters(),
+            UpdateTargetHistoryEmployeeRequest::bodyParameters(),
+            UpdatePerformanceHistoryEmployeeRequest::bodyParameters(),
+            UpdateDisciplinaryHistoryEmployeeRequest::bodyParameters(),
+            UpdateFamilyEmployeeRequest::bodyParameters(),
+            UpdateLeaveEmployeeRequest::bodyParameters(),
+            UpdateNoteEmployeeRequest::bodyParameters(),
+            UpdateCreditEmployeeRequest::bodyParameters(),
+            UpdateAssessmentEmployeeRequest::bodyParameters(),
+            UpdateCompetencyEmployeeRequest::bodyParameters(),
+            UpdateTalentEmployeeRequest::bodyParameters(),
         );
     }
 }

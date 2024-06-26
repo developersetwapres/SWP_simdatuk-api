@@ -22,8 +22,8 @@ use App\Repositories\TargetRepository;
 use App\Repositories\TrainingRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Arr;
 
 /**
  * @group Employee
@@ -46,6 +46,9 @@ class EmployeeController extends Controller
     protected $assessmentRepository;
     protected $competencyRepository;
     protected $talentRepository;
+
+    protected $request;
+    protected $posted;
 
     public function __construct(
         Request $request,
@@ -79,7 +82,13 @@ class EmployeeController extends Controller
             'credits',
             'assessments',
             'competencies',
-            'talents'
+            'talents',
+            'structurals',
+            'functionals',
+            'technicals',
+            'targets',
+            'performances',
+            'disciplinaries',
         );
         $this->employeeRepository = $employeeRepository;
         $this->educationRepository = $educationRepository;
@@ -264,16 +273,6 @@ class EmployeeController extends Controller
                 DB::table('user_educations')->insertTs($educations);
             }
 
-            // Insert Disciplinaries
-            if (isset($this->request->disciplinaries)) {
-                $disciplinaries = array();
-                foreach ($this->request->disciplinaries as $discipline) {
-                    $discipline['user_id'] = $userId;
-                    array_push($disciplinaries, $discipline);
-                }
-                DB::table('user_disciplinaries')->insertTs($disciplinaries);
-            }
-
             // Insert Families
             if (isset($this->request->families)) {
                 $families = array();
@@ -361,7 +360,7 @@ class EmployeeController extends Controller
             return $this->response(200, 'Pegawai berhasil ditambah.');
         } catch (\Throwable $th) {
             DB::rollback();
-            \Log::warning($th);
+            Log::warning($th);
             return $this->response(500, 'Pegawai gagal ditambah.');
         }
     }
@@ -390,17 +389,19 @@ class EmployeeController extends Controller
         $structurals = $this->trainingRepository->getDetail($this->request->id, 1);
         $functionals = $this->trainingRepository->getDetail($this->request->id, 2);
         $technicals = $this->trainingRepository->getDetail($this->request->id, 3);
-        $recognitions = $this->recognitionRepository->getDetail($this->request->id);
-        $targets = $this->targetRepository->getDetail($this->request->id);
-        $performances = $this->performanceRepository->getDetail($this->request->id);
-        $disciplinaries = $this->disciplinaryRepository->getDetail($this->request->id);
+        $recognitions = $this->recognitionRepository->getDetail($this->request->id); //penghargaan
+        $targets = $this->targetRepository->getDetail($this->request->id); //SKP
+        $performances = $this->performanceRepository->getDetail($this->request->id); //prestasi kerja
+        $disciplinaries = $this->disciplinaryRepository->getDetail($this->request->id); //hukdis
         $leaves = $this->leaveRepository->getDetail($this->request->id);
         $notes = $this->noteRepository->getDetail($this->request->id);
         $credits = $this->creditRepository->getDetail($this->request->id);
         $assessments = $this->assessmentRepository->getDetail($this->request->id);
         $competencies = $this->competencyRepository->getDetail($this->request->id);
         $talents = $this->talentRepository->getDetail($this->request->id);
+        $position = array_reverse($this->positionRepository->getRecursivePosition($employee->position_id));
 
+        $employee->position = $position;
         $employee->educations = $educations;
         $employee->families = $families;
         $employee->positions = $positions;
@@ -434,5 +435,63 @@ class EmployeeController extends Controller
      */
     public function update(UpdateEmployeeRequest $request)
     {
+        $user = DB::table('users')
+            ->where('id', $this->request->id)
+            ->first();;
+
+        if (!$user) {
+            return $this->response(404, 'Pegawai tidak ditemukan.');
+        }
+
+        $user = DB::table('users');
+        $user->where('id', $this->request->id);
+        $user = $user->updateTs($this->posted);
+
+        // 'educations',
+        // 'positions',
+        // 'grades',
+        // 'families',
+        // 'leaves',
+        // 'notes',
+        // 'credits',
+        // 'assessments',
+        // 'competencies',
+        // 'talents',
+        // 'structurals',
+        // 'functionals',
+        // 'technicals',
+        // 'targets',
+        // 'performances',
+        // 'disciplinaries',
+
+        if (isset($this->request->educations)) {
+            // Get existing data
+            $userEducations = DB::table('user_educations')
+                ->where('user_id', $this->request->id)
+                ->select('id');
+            $userEducations = $userEducations->get();
+
+            // Delete data
+            $array1 = Arr::pluck($userEducations, 'id');
+            $array2 = Arr::pluck($this->request->educations, 'id');
+            $result = array_diff($array1, $array2);
+            DB::table('user_educations')->whereIn('id', $result)->delete();
+
+            foreach ($this->request->users as $user) {
+                if (!is_null($user['id'])) {
+                    // Update existing data
+                    DB::table('user_educations')->where('id', $user['id'])->updateTs($user);
+                } else {
+                    // Insert new item
+                    $user['disciplinary_history_id'] = $this->request->id;
+                    array_push($users, $user);
+                }
+            }
+            if (count($users) > 0) {
+                DB::table('user_educations')->insertTs($users);
+            }
+        }
+
+        dd($user, $request);
     }
 }

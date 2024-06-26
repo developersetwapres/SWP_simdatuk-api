@@ -20,6 +20,7 @@ class EmployeeRepository
         $user->select(
             'u.id',
             'u.email',
+            'u.office_email',
             'u.name',
             'u.photo_profile',
             'u.employee_id_number',
@@ -36,12 +37,11 @@ class EmployeeRepository
             'u.grade_effective_date',
             'u.position_id',
             'p.name as position_name',
+            'u.position_effective_date',
             'u.echelon_id',
             'e.name as echelon_name',
             'u.echelon_effective_date',
             'u.institution_id',
-            'u.organization_id',
-            'u.work_unit_id',
             'u.education_level',
             'u.education_name',
             'u.education_year',
@@ -62,7 +62,8 @@ class EmployeeRepository
             'u.emergency_contact',
             'u.description',
             'u.type',
-            'u.created_at'
+            'u.created_at',
+            'u.retirement_effective_date',
         );
         $user = $user->first();
         $user->photo_profile = $this->getDocument($user->photo_profile, true);

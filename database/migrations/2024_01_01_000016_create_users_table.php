@@ -36,8 +36,6 @@ return new class extends Migration
             $table->unsignedBigInteger('echelon_id')->nullable();
             $table->date('echelon_effective_date')->nullable();
             $table->unsignedBigInteger('institution_id')->nullable();
-            $table->unsignedBigInteger('organization_id')->nullable();
-            $table->unsignedBigInteger('work_unit_id')->nullable();
             $table->tinyInteger('education_level')->nullable()->comment('1=SD/Sederajat, 2=SLTP/Sederajat, 3=SLTA/Sederajat, 4=Diploma I/II, 5=Akademik/D3/S.Muda, 6=Diploma IV/Strata I, 7=Strata II, 8=Strata III');
             $table->string('education_name', 160)->nullable();
             $table->year('education_year')->nullable();
@@ -60,6 +58,10 @@ return new class extends Migration
             $table->boolean('status')->default(false)->comment('true=active, false=deactivate');
             $table->string('verification_code', 160)->nullable()->unique();
             $table->date('expire_at')->nullable();
+            $table->timestamp('cpns_effective_date')->nullable();
+            $table->timestamp('pns_effective_date')->nullable();
+            $table->timestamp('retirement_effective_date')->nullable();
+            $table->string('office_email')->nullable()->comment('email dinas');
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
 

@@ -78,30 +78,6 @@ class OldUserSeeder extends Seeder
                         ELSE NULL
                     END AS employment_type_id,
                     CASE
-                        WHEN id_golongan = '02' THEN 16
-                        WHEN id_golongan = '03' THEN 15
-                        WHEN id_golongan = '04' THEN 14
-                        WHEN id_golongan = '05' THEN 13
-                        WHEN id_golongan = '06' THEN 12
-                        WHEN id_golongan = '07' THEN 11
-                        WHEN id_golongan = '08' THEN 10
-                        WHEN id_golongan = '09' THEN 9
-                        WHEN id_golongan = '10' THEN 8
-                        WHEN id_golongan = '11' THEN 7
-                        WHEN id_golongan = '12' THEN 6
-                        WHEN id_golongan = '13' THEN 5
-                        WHEN id_golongan = '14' THEN 4
-                        WHEN id_golongan = '15' THEN 3
-                        WHEN id_golongan = '16' THEN 2
-                        WHEN id_golongan = '17' THEN 1
-                        WHEN id_golongan = '24' THEN 28
-                        WHEN id_golongan = '26' THEN 26
-                        ELSE NULL
-                    END AS grade_id,
-                    tmt_golongan as grade_effective_date,
-                    tmt_jabatan as position_effective_date,
-                    '1' as organization_id,
-                    CASE
                         WHEN pddk_akhir = 'Diploma IV/Strata I' THEN '6'
                         WHEN pddk_akhir = 'SLTA/Sederajat' THEN '3'
                         WHEN pddk_akhir = 'Strata II' THEN '7'
@@ -200,26 +176,6 @@ class OldUserSeeder extends Seeder
                         ELSE NULL
                     END AS gender,
                     CASE
-                        WHEN jns_perbantuan = 'Staf Khusus' THEN '5'
-                        WHEN jns_perbantuan = 'Asisten/Staf' THEN '6'
-                        WHEN jns_perbantuan = 'Asisten Staf Khusus' THEN '7'
-                        WHEN jns_perbantuan = 'Sekretariat pada StfKss' THEN '8'
-                        WHEN jns_perbantuan = 'Anggota Tim Ahli' THEN '9'
-                        WHEN jns_perbantuan = 'TNI/POLRI (tmAjudan)' THEN '10'
-                        WHEN jns_perbantuan = 'TNI/POLRI (tmDokpri)' THEN '11'
-                        WHEN jns_perbantuan = 'TNI/POLRI (psPengemudi)' THEN '12'
-                        WHEN jns_perbantuan = 'Pembantu Asisten StfKss' THEN '13'
-                        WHEN jns_perbantuan = 'Staf pada Sespri' THEN '14'
-                        WHEN jns_perbantuan = 'TPPS' THEN '15'
-                        WHEN jns_perbantuan = 'TNP2K' THEN '16'
-                        WHEN jns_perbantuan = 'TNI/POLRI (psProtokol)' THEN '17'
-                        WHEN jns_perbantuan = 'Sespri' THEN '18'
-                        ELSE NULL
-                    END AS employment_type_id,
-                    tmt_golpangkat AS grade_effective_date,
-                    tmt_jabatan AS position_effective_date,
-                    '1' AS organization_id,
-                    CASE
                         WHEN status_kepeg = 'Aktif' THEN 1
                         WHEN status_kepeg = 'Pensiun' THEN 2
                         WHEN status_kepeg = 'Berhenti' THEN 3
@@ -279,13 +235,6 @@ class OldUserSeeder extends Seeder
                         WHEN db_lama_outsource.kelamin = 'Perempuan' THEN '0'
                         ELSE NULL
                     END AS gender,
-                    CASE
-                        WHEN db_lama_outsource.jns_outsorce = 'outsorce' THEN '19'
-                        WHEN db_lama_outsource.jns_outsorce = 'rekanan' THEN '20'
-                        ELSE NULL
-                    END AS employment_type_id,
-                    db_baru_position.id as position_id,
-                    '1' AS organization_id,
                     CASE
                         WHEN db_lama_outsource.status = 'Aktif' THEN 1
                         WHEN db_lama_outsource.status = 'Pensiun' THEN 2
