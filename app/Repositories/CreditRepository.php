@@ -16,7 +16,9 @@ class CreditRepository
             'uc.position',
             'uc.period',
             'uc.year',
-            'uc.score'
+            'uc.score',
+            'uc.start_month',
+            'uc.end_month',
         );
         $credits->orderBy('year', 'desc');
         $credits->orderBy('period', 'desc');
