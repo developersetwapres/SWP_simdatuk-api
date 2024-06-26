@@ -47,6 +47,7 @@ return new class extends Migration
             $table->string('id_number')->nullable();
             $table->string('family_registration_number')->nullable();
             $table->unsignedBigInteger('residence_id')->nullable();
+            $table->string('residence_description')->nullable();
             $table->text('current_address')->nullable();
             $table->string('home_phone_number', 20)->nullable();
             $table->string('mobile_phone', 20)->nullable();

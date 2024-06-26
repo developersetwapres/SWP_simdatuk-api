@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('position', 160)->nullable();
             $table->tinyInteger('period')->comment('1=Triwulan 1, 2=Triwulan 2, 3=Triwulan 3, 4=Triwulan 4, 5=Tahunan');
             $table->year('year');
+            $table->tinyInteger('start_month')->nullable();
+            $table->tinyInteger('end_month')->nullable();
             $table->float('score', 5, 2)->nullable();
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();

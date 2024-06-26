@@ -70,6 +70,7 @@ class UpdateEmployeeRequest extends FormRequest
             'family_registration_number' => 'numeric|digits:16|unique:users,family_registration_number,' . $this->id,
             'id_number' => 'numeric|digits:16|unique:users,id_number,' . $this->id,
             'residence_id' => 'required|numeric',
+            'residence_description' => 'nullable',
             'current_address' => 'max:160',
             'home_phone_number' => 'numeric|max:99999999999999',
             'mobile_phone' => 'numeric|max:99999999999999',
@@ -115,6 +116,7 @@ class UpdateEmployeeRequest extends FormRequest
             'family_registration_number' => 'numeric|digits:16|unique:users,family_registration_number,' . $this->id,
             'id_number' => 'numeric|digits:16|unique:users,id_number,' . $this->id,
             'residence_id' => 'required|numeric',
+            'residence_description' => 'nullable',
             'current_address' => 'max:160',
             'home_phone_number' => 'numeric|max:99999999999999',
             'mobile_phone' => 'numeric|max:99999999999999',
@@ -149,6 +151,7 @@ class UpdateEmployeeRequest extends FormRequest
             'family_registration_number' => 'numeric|digits:16|unique:users,family_registration_number,' . $this->id,
             'id_number' => 'numeric|digits:16|unique:users,id_number,' . $this->id,
             'residence_id' => 'required|numeric',
+            'residence_description' => 'nullable',
             'current_address' => 'max:160',
             'home_phone_number' => 'numeric|max:99999999999999',
             'mobile_phone' => 'numeric|max:99999999999999',
@@ -407,6 +410,10 @@ class UpdateEmployeeRequest extends FormRequest
             'residence_id' => [
                 'description' => 'Refers to the Residence ID of Employee.',
                 'example' => 1,
+            ],
+            'residence_description' => [
+                'description' => 'Refers to the Residence Description of Employee.',
+                'example' => 'Lorem Ipsum',
             ],
             'current_address' => [
                 'description' => 'Refers to the Current Address of Employee.',

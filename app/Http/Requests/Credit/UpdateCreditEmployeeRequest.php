@@ -18,6 +18,8 @@ class UpdateCreditEmployeeRequest
             'credits.*.period' => 'nullable|in:1,2,3,4,5',
             'credits.*.year' => 'nullable|date_format:Y',
             'credits.*.score' => 'nullable|between:1.00,100.00',
+            'credits.*.start_month' => 'nullable|integer|between:1,12',
+            'credits.*.end_month' => 'nullable|integer|between:1,12',
         ];
     }
 
@@ -34,6 +36,8 @@ class UpdateCreditEmployeeRequest
             'credits.*.period.in' => 'Periode harus diantara 1, 2, 4, atau 5.',
             'credits.*.year.date_format' => 'Tahun harus dengan format YYYY.',
             'credits.*.score.between' => 'Angka kredit harus diantara 1 hingga 100.',
+            'credits.*.start_month.between' => 'Bulan awal harus diantara 1 hingga 12.',
+            'credits.*.end_month.between' => 'Bulan awal harus diantara 1 hingga 12.',
         ];
     }
 
@@ -64,6 +68,14 @@ class UpdateCreditEmployeeRequest
             'credits.*.score' => [
                 'description' => 'Refers to the Score of Employee Credit Score.',
                 'example' => '10',
+            ],
+            'credits.*.start_month' => [
+                'description' => 'Refers to the Start month of Employee Credit Score.',
+                'example' => '1',
+            ],
+            'credits.*.end_month' => [
+                'description' => 'Refers to the End month of Employee Credit Score.',
+                'example' => '3',
             ],
         ];
     }

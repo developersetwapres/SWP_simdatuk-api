@@ -58,6 +58,7 @@ class EmployeeRepository
             'u.family_registration_number',
             'u.residence_id',
             'r.name as residence_name',
+            'u.residence_description',
             'u.current_address',
             'u.home_phone_number',
             'u.mobile_phone',
