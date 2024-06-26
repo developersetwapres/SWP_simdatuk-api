@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\RecapitulationRepository;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -11,10 +12,13 @@ use Illuminate\Http\Request;
  */
 class ExportRecapitulationController extends Controller
 {
-    public function __construct(Request $request)
-    {
+    public function __construct(
+        Request $request,
+        RecapitulationRepository $recapitulationRepository
+    ) {
         $this->request = $request;
         $this->posted = $request->except('_token', '_method');
+        $this->recapitulationRepository = $recapitulationRepository;
     }
 
     /**
@@ -43,6 +47,9 @@ class ExportRecapitulationController extends Controller
 
     private function allRecapitulation()
     {
+        $pejabat = $this->recapitulationRepository->getPejabatPimpinanAndFungsional();
+        $pelaksana = $this->recapitulationRepository->getPejabatPelaksana();
+        $nonActive = $this->recapitulationRepository->getNonActiveAsn();
         $title = 'Rekapitulasi Pegawai';
         $date = Carbon::now()->timezone('Asia/Jakarta')->locale('id')->isoFormat('D MMMM Y');
         $tmp = sys_get_temp_dir();
@@ -52,102 +59,102 @@ class ExportRecapitulationController extends Controller
             'data' => [
                 [
                     'title' => 'Pejabat Pimpinan',
-                    'body' => 'Total : 52',
+                    'body' => 'Total : ' . $pejabat->total_pejabat_pimpinan,
                     'type' => 1,
                 ],
                 [
                     'title' => 'Pejabat Pimpinan Tinggi Madya (Eselon I)',
-                    'body' => '4',
+                    'body' => $pejabat->echelon1,
                     'type' => 2,
                 ],
                 [
                     'title' => 'Pejabat Pimpinan Tinggi Pratama (Eselon II)',
-                    'body' => '15',
+                    'body' => $pejabat->echelon2,
                     'type' => 2,
                 ],
                 [
                     'title' => 'Pejabat Administrasi (Eselon III)',
-                    'body' => '10',
+                    'body' => $pejabat->echelon3,
                     'type' => 2,
                 ],
                 [
                     'title' => 'Pejabat Pengawas (Eselon IV)',
-                    'body' => '23',
+                    'body' => $pejabat->echelon4,
                     'type' => 2,
                 ],
                 [
                     'title' => 'Pejabat Pelaksana',
-                    'body' => 'Total : 95',
+                    'body' => 'Total : ' . $pelaksana->total,
                     'type' => 1,
                 ],
                 [
                     'title' => 'Pejabat Pelaksana Golongan IV',
-                    'body' => '0',
+                    'body' => $pelaksana->golongan4,
                     'type' => 2,
                 ],
                 [
                     'title' => 'Pejabat Pelaksana Golongan III',
-                    'body' => '47',
+                    'body' => $pelaksana->golongan3,
                     'type' => 2,
                 ],
                 [
                     'title' => 'Pejabat Pelaksana Golongan II',
-                    'body' => '17',
+                    'body' => $pelaksana->golongan2,
                     'type' => 2,
                 ],
                 [
                     'title' => 'Pejabat Pelaksana Perbantuan TNI dan POLRI',
-                    'body' => '31',
+                    'body' => $pelaksana->tnipolri,
                     'type' => 2,
                 ],
                 [
                     'title' => 'Pejabat Fungsional Keahlian',
-                    'body' => 'Total : 113',
+                    'body' => 'Total : ' . $pejabat->total_pejabat_fungsional_keahlian,
                     'type' => 1,
                 ],
                 [
                     'title' => 'Pejabat Fungsional Ahli Utama',
-                    'body' => '0',
+                    'body' => $pejabat->ahli_utama,
                     'type' => 2,
                 ],
                 [
                     'title' => 'Pejabat Fungsional Ahli Madya',
-                    'body' => '33',
+                    'body' => $pejabat->ahli_madya,
                     'type' => 2,
                 ],
                 [
                     'title' => 'Pejabat Fungsional Ahli Muda',
-                    'body' => '68',
+                    'body' => $pejabat->ahli_muda,
                     'type' => 2,
                 ],
                 [
                     'title' => 'Pejabat Fungsional Ahli Pertama',
-                    'body' => '12',
+                    'body' => $pejabat->ahli_pertama,
                     'type' => 2,
                 ],
                 [
                     'title' => 'Pejabat Fungsional Keterampilan',
-                    'body' => 'Total : 8',
+                    'body' => 'Total : ' . $pejabat->total_pejabat_fungsional_keterampilan,
                     'type' => 1,
                 ],
                 [
                     'title' => 'Pejabat Fungsional Penyelia',
-                    'body' => '4',
+                    'body' => $pejabat->penyelia,
                     'type' => 2,
                 ],
                 [
                     'title' => 'Pejabat Fungsional Mahir',
-                    'body' => '0',
+                    'body' => $pejabat->mahir,
                     'type' => 2,
                 ],
                 [
                     'title' => 'Pejabat Fungsional Terampil',
-                    'body' => '4',
+                    'body' => $pejabat->terampil,
                     'type' => 2,
                 ],
                 [
                     'title' => 'Pejabat Fungsional Pemula',
-                    'body' => '120',
+                    'body' => $pejabat->pemula,
                     'type' => 2,
                 ],
                 [
@@ -177,22 +184,22 @@ class ExportRecapitulationController extends Controller
                 ],
                 [
                     'title' => 'Tugas Belajar Luar Negeri (TBLN)',
-                    'body' => '3',
+                    'body' => $nonActive->tbln,
                     'type' => 1,
                 ],
                 [
                     'title' => 'Cuti Diluar Tanggungan Negara (CLTN)',
-                    'body' => '3',
+                    'body' => $nonActive->cltn,
                     'type' => 1,
                 ],
                 [
                     'title' => 'Tidak Aktif (Non Jabatan)',
-                    'body' => '0',
+                    'body' => $nonActive->nonactive,
                     'type' => 1,
                 ],
                 [
                     'title' => 'Aparatur Sipil Negara (ASN) Non Aktif',
-                    'body' => 'Total : 6',
+                    'body' => 'Total : ' . $nonActive->total,
                     'type' => 3,
                 ],
                 [

@@ -22,6 +22,7 @@ use App\Http\Controllers\PositionHistoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RecapitulationAsnController;
 use App\Http\Controllers\RecapitulationController;
+use App\Http\Controllers\RecapitulationEmployeeController;
 use App\Http\Controllers\RecapitulationNonAsnController;
 use App\Http\Controllers\RecapitulationOutsourceController;
 use App\Http\Controllers\RecognitionController;
@@ -78,6 +79,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('recapitulations-outsource')->group(function () {
         Route::get('/', [RecapitulationOutsourceController::class, 'index']);
     });
+
+    Route::get('/recapitulations-employee', [RecapitulationEmployeeController::class, 'index']);
 
     Route::prefix('notes')->group(function () {
         Route::get('/{userid}', [NoteController::class, 'show']);

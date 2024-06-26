@@ -106,18 +106,22 @@ class RecapitulationController extends Controller
                     "total" => $pejabat->total_pejabat_pimpinan,
                     "cards" => [
                         [
+                            "id" => 1,
                             "name" => "Pejabat Pimpinan Tinggi Madya (Eselon I)",
                             "total" => $pejabat->echelon1,
                         ],
                         [
+                            "id" => 2,
                             "name" => "Pejabat Pimpinan Tinggi Pratama (Eselon II)",
                             "total" => $pejabat->echelon2,
                         ],
                         [
+                            "id" => 3,
                             "name" => "Pejabat Administrator (Eselon III)",
                             "total" => $pejabat->echelon3,
                         ],
                         [
+                            "id" => 4,
                             "name" => "Pejabat Pengawas (Eselon IV)",
                             "total" => $pejabat->echelon4,
                         ],
@@ -129,18 +133,22 @@ class RecapitulationController extends Controller
                     "total" => $pelaksana->total,
                     "cards" => [
                         [
+                            "id" => "1,2,3,4,5",
                             "name" => "Pejabat Pelaksana Golongan IV",
                             "total" => $pelaksana->golongan4,
                         ],
                         [
+                            "id" => "6,7,8,9",
                             "name" => "Pejabat Pelaksana Golongan III",
                             "total" => $pelaksana->golongan3,
                         ],
                         [
+                            "id" => "10,11,12,13",
                             "name" => "Pejabat Pelaksana Golongan II",
                             "total" => $pelaksana->golongan2,
                         ],
                         [
+                            "id" => 0,
                             "name" => "Pejabat Pelaksana Perbantuan TNI dan POLRI",
                             "total" => $pelaksana->tnipolri,
                         ],
@@ -152,18 +160,22 @@ class RecapitulationController extends Controller
                     "total" => $pejabat->total_pejabat_fungsional_keahlian,
                     "cards" => [
                         [
+                            "id" => 5,
                             "name" => "Pejabat Fungsional Ahli Utama",
                             "total" => $pejabat->ahli_utama,
                         ],
                         [
+                            "id" => 6,
                             "name" => "Pejabat Fungsional Ahli Madya",
                             "total" => $pejabat->ahli_madya,
                         ],
                         [
+                            "id" => 7,
                             "name" => "Pejabat Fungsional Ahli Muda",
                             "total" => $pejabat->ahli_muda,
                         ],
                         [
+                            "id" => 8,
                             "name" => "Pejabat Fungsional Ahli Pertama",
                             "total" => $pejabat->ahli_pertama,
                         ],
@@ -175,18 +187,22 @@ class RecapitulationController extends Controller
                     "total" => $pejabat->total_pejabat_fungsional_keterampilan,
                     "cards" => [
                         [
+                            "id" => 10,
                             "name" => "Pejabat Fungsional Penyelia",
                             "total" => $pejabat->penyelia,
                         ],
                         [
+                            "id" => 11,
                             "name" => "Pejabat Fungsional Mahir",
                             "total" => $pejabat->mahir,
                         ],
                         [
+                            "id" => 12,
                             "name" => "Pejabat Fungsional Terampil",
                             "total" => $pejabat->terampil,
                         ],
                         [
+                            "id" => 13,
                             "name" => "Pejabat Fungsional Pemula",
                             "total" => $pejabat->pemula,
                         ],
@@ -198,14 +214,17 @@ class RecapitulationController extends Controller
                     "total" => $pejabatDiperbantukan->total,
                     "cards" => [
                         [
+                            "id" => "1,2,3,4",
                             "name" => "Pejabat Struktural",
                             "total" => $pejabatDiperbantukan->struktural,
                         ],
                         [
+                            "id" => "9",
                             "name" => "Pejabat Pelaksana",
                             "total" => $pejabatDiperbantukan->pelaksana,
                         ],
                         [
+                            "id" => "0",
                             "name" => "Pejabat Fungsional",
                             "total" => $pejabatDiperbantukan->fungsional,
                         ],

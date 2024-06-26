@@ -360,7 +360,7 @@ class RecapitulationRepository
             SELECT
                 COUNT(*) AS total,
                 COUNT(CASE WHEN echelons.id IN (1,2,3,4) THEN 1 END) AS struktural,
-                COUNT(CASE WHEN echelons.id IN (1,2,3,4) THEN 1 END) AS pelaksana,
+                COUNT(CASE WHEN echelons.id IN (9) THEN 1 END) AS pelaksana,
                 COUNT(CASE WHEN echelons.id NOT IN (1,2,3,4,9) THEN 1 END) AS fungsional
             FROM
                 hierarchy
