@@ -20,6 +20,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\PositionHistoryController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\RecapitulationAsnController;
 use App\Http\Controllers\RecapitulationController;
 use App\Http\Controllers\RecapitulationEmployeeController;
@@ -231,5 +232,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/employees/{id}', [ExportController::class, 'detailEmployee']);
         Route::post('/employees-zip', [ExportController::class, 'zipDetailEmployee']);
         Route::post('/preview', [ExportController::class, 'exportExcelsPreview']);
+    });
+
+    Route::prefix('promotions')->group(function () {
+        Route::get('/', [PromotionController::class, 'index']);
+        Route::get('/detail', [PromotionController::class, 'show']);
     });
 });

@@ -1574,7 +1574,7 @@ class PositionSeeder extends Seeder
                                     [ //TBD
                                         'id' => 142,
                                         'parent_id' => 99,
-                                        'name' => 'Analis Pengelola Keuangan APBN',
+                                        'name' => 'Analis Pengelolaan Keuangan APBN',
                                         'available' => 0,
                                         'type' => 2,
                                         'entity' => 2,
@@ -1584,7 +1584,7 @@ class PositionSeeder extends Seeder
                                             [
                                                 'id' => 205,
                                                 'parent_id' => 142,
-                                                'name' => 'Pranata Keuangan',
+                                                'name' => 'Pranata Keuangan APBN',
                                                 'available' => 0,
                                                 'type' => 2,
                                                 'entity' => 2,
