@@ -649,4 +649,19 @@ class ExportRecapitulationController extends Controller
         $pdf->set_option('tempDir', $tmp);
         return $pdf->download($title . ' - ' . $date . '.pdf');
     }
+
+    public function comparison()
+    {
+        $title = 'Bandingkan Pegawai';
+        $date = Carbon::now()->timezone('Asia/Jakarta')->locale('id')->isoFormat('D MMMM Y');
+        $tmp = sys_get_temp_dir();
+        $pdf = Pdf::loadview('exports/comparison', []);
+        $pdf->set_option('isHtml5ParserEnabled', true);
+        $pdf->set_paper("A2", "landscape");
+        $pdf->set_option('isRemoteEnabled', true);
+        $pdf->set_option('fontDir', $tmp);
+        $pdf->set_option('fontCache', $tmp);
+        $pdf->set_option('tempDir', $tmp);
+        return $pdf->download('comparisons.pdf');
+    }
 }
