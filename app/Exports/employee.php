@@ -135,7 +135,7 @@ class employee implements FromView, WithDrawings, WithEvents
             $users->addSelect('g.name as grade_name');
         }
         if (isset($this->toggleField['isNip'])){
-            $users->addSelect(DB::raw("users.employee_id_number"));
+            $users->addSelect('users.employee_id_card_number', 'users.employee_registration_number');
         }
         if (isset($this->toggleField['isBirthPlaceDate'])){
             $users->addSelect('users.place_of_birth', 'users.date_of_birth');
@@ -144,7 +144,7 @@ class employee implements FromView, WithDrawings, WithEvents
             $users->addSelect(DB::raw("TIMESTAMPDIFF(YEAR, users.date_of_birth, CURDATE()) AS age"));
         }
         if (isset($this->toggleField['isWorkUnit'])){
-            $users->addSelect('users.work_unit_id as work_unit');
+            $users->addSelect('users.employment_type_id  as work_unit');
         }
         if (isset($this->toggleField['isEmployeeStatus'])){
             $users->addSelect('users.employment_status');
@@ -162,12 +162,12 @@ class employee implements FromView, WithDrawings, WithEvents
             $users->leftJoin('institutions as i', 'users.institution_id', '=', 'i.id');
             $users->addSelect('i.name as institution_name');
         }
-        if (isset($this->toggleField['isOrganization'])) {
-            $users->leftJoin('groups as o', 'users.organization_id', '=', 'o.id');
-            $users->addSelect('o.name as organization_name');
-        }
+//        if (isset($this->toggleField['isOrganization'])) {
+//            $users->leftJoin('groups as o', 'users.organization_id', '=', 'o.id');
+//            $users->addSelect('o.name as organization_name');
+//        }
         if (isset($this->toggleField['isNoWorker'])){
-            $users->addSelect('users.employee_id_number', 'users.employee_registration_number');
+            $users->addSelect('users.employee_registration_number');
         }
         //add full work duration later
         if (isset($this->toggleField['isGradeDuration'])){
@@ -506,6 +506,80 @@ class employee implements FromView, WithDrawings, WithEvents
             });
 
             $users->addSelect('notes.notes');
+        }
+        if (isset($this->toggleField['isEmployeeType'])){
+            $employmeeType = DB::table('employment_types as et');
+            $employmeeType->join('users', 'et.id', '=', 'users.employment_type_id');
+            $employmeeType->select('users.id as user_id', DB::raw("GROUP_CONCAT( CONCAT('<li>',et.name,'</li>') SEPARATOR '') as employee_type"));
+            $employmeeType->whereIn('users.id', $this->userIds);
+            $employmeeType->groupBy('users.id');
+
+            $users->leftJoinSub($employmeeType, 'employee_type', function ($join) {
+                $join->on('users.id', '=', 'employee_type.user_id');
+            });
+
+            $users->addSelect('employee_type.employee_type');
+        }
+        if (isset($this->toggleField['isEchelonDate'])){
+            $users->addSelect('users.echelon_effective_date');
+        }
+        if (isset($this->toggleField['isGradeDate'])){
+            $users->addSelect('users.grade_effective_date');
+        }
+        if (isset($this->toggleField['isKarisu'])){
+            $users->addSelect('users.karisu_number');
+        }
+        if (isset($this->toggleField['isNoFamily'])){
+            $users->addSelect('users.family_registration_number');
+        }
+        if (isset($this->toggleField['isNIK'])){
+            $users->addSelect('users.id_number');
+        }
+        if (isset($this->toggleField['isStartDate'])){
+            $users->addSelect('users.pns_effective_date');
+        }
+        if (isset($this->toggleField['isDateCPNS'])){
+            $users->addSelect('users.cpns_effective_date');
+        }
+        if (isset($this->toggleField['isEndDate'])){
+            $users->addSelect('users.retirement_effective_date');
+        }
+        if (isset($this->toggleField['isDatePosition'])){
+            $users->addSelect('users.position_effective_date');
+        }
+        if (isset($this->toggleField['isOutsourcingType'])){
+            $outsourcingSubquery = DB::table('employment_types as et');
+            $outsourcingSubquery->join('users', 'et.id', '=', 'users.employment_type_id');
+            $outsourcingSubquery->select('users.id as user_id', DB::raw("GROUP_CONCAT( CONCAT('<li>',et.name,'</li>') SEPARATOR '') as outsource_type"));
+            $outsourcingSubquery->where('et.type', 3);
+            $outsourcingSubquery->whereIn('users.id', $this->userIds);
+            $outsourcingSubquery->groupBy('users.id');
+
+            $users->leftJoinSub($outsourcingSubquery, 'outsource_type', function ($join) {
+                $join->on('users.id', '=', 'outsource_type.user_id');
+            });
+
+            $users->addSelect('outsource_type.outsource_type');
+        }
+        if (isset($this->toggleField['isAssistanceType'])){
+            $assistanceSubquery = DB::table('employment_types as et');
+            $assistanceSubquery->join('users', 'et.id', '=', 'users.employment_type_id');
+            $assistanceSubquery->select('users.id as user_id', DB::raw("GROUP_CONCAT( CONCAT('<li>',et.name,'</li>') SEPARATOR '') as assistance_type"));
+            $assistanceSubquery->where('et.type', 3);
+            $assistanceSubquery->whereIn('users.id', $this->userIds);
+            $assistanceSubquery->groupBy('users.id');
+
+            $users->leftJoinSub($assistanceSubquery, 'assistance_type', function ($join) {
+                $join->on('users.id', '=', 'assistance_type.user_id');
+            });
+
+            $users->addSelect('assistance_type.assistance_type');
+        }
+        if (isset($this->toggleField['isOfficeEmail'])){
+            $users->addSelect('users.office_email');
+        }
+        if (isset($this->toggleField['isEmergencyContact'])){
+            $users->addSelect('users.emergency_contact');
         }
         $users->whereIn('users.id', $this->userIds);
         $users->groupBy('users.id');

@@ -27,7 +27,7 @@
         }
 
         p:last-child {
-            page-break-after: never;
+            page-break-after: auto;
         }
 
         .logo {
@@ -137,42 +137,56 @@
 <div class="title-profile">Export Data Pegawai</div>
 
 @php
-$columns = [
+    $columns = [
         "No" => true,
         "Nama" => $toggleField['isName'],
-        "Jabatan" => $toggleField['isPosition'],
-        "Deskripsi Jabatan" => $toggleField['isPositionDescription'],
-        "Eselon" => $toggleField['isEchelons'],
-        "Grade" => $toggleField['isGrade'],
         "NIP" => $toggleField['isNip'],
         "Tempat, Tanggal Lahir" => $toggleField['isBirthPlaceDate'],
         "Usia" => $toggleField['isAge'],
         "Agama" => $toggleField['isReligion'],
         "Jenis Kelamin" => $toggleField['isGender'],
         "Status Perkawinan" => $toggleField['isMaritalStatus'],
-        "Instansi" => $toggleField['isAgency'],
-        "Organisasi" => $toggleField['isOrganization'],
-        "Unit Kerja" => $toggleField['isWorkUnit'],
-        "No. Pegawai" => $toggleField['isNoWorker'],
+        "Jenis Pegawai" => $toggleField['isEmployeeType'],
+        "Jenis Perbantuan" => $toggleField['isAssistanceType'],
+        "Jenis Outsourcing" => $toggleField['isOutsourcingType'],
+        "TMT CPNS" => $toggleField['isDateCPNS'],
+        "Tanggal Mulai Bekerja" => $toggleField['isStartDate'],
+        "Tanggal Terakhir Bekerja" => $toggleField['isEndDate'],
         "Lama Bekerja" => $toggleField['workDuration'],
-        "Lama Grade" => $toggleField['isGradeDuration'],
+        "Masa Kerja Golongan" => $toggleField['isGradeDuration'],
+        "Jabatan" => $toggleField['isPosition'],
+        "Tanggal Mulai Menjabat" => $toggleField['isDatePosition'],
+        "Eselon" => $toggleField['isEchelons'],
+        "TMT Eselon" => $toggleField['isEchelonDate'],
+        "Golongan" => $toggleField['isGrade'],
+        "TMT Grade" => $toggleField['isGradeDate'],
+        "Instansi" => $toggleField['isAgency'],
+        "No. Pegawai" => $toggleField['isNoWorker'],
+        "No Karisu" => $toggleField['isKarisu'],
         "NPWP" => $toggleField['isNPWP'],
-        "Status Kepegawaian" => $toggleField['isEmployeeStatus'],
+        "Status Pegawai" => $toggleField['isEmployeeStatus'],
+        "No KK" => $toggleField['isNoFamily'],
+        "No NIK" => $toggleField['isNIK'],
         "Alamat Sekarang" => $toggleField['isCurrentAddress'],
         "Perumahan / Kompleks" => $toggleField['isComplex'],
-        "No. Rumah" => $toggleField['isHomeNumber'],
-        "No. Telepon" => $toggleField['isPhoneNumber'],
+        "No. Telp Rumah" => $toggleField['isHomeNumber'],
+        "No. HP" => $toggleField['isPhoneNumber'],
         "Alamat Kantor" => $toggleField['isOfficeAddress'],
-        "No. Kantor" => $toggleField['isOfficeNumber'],
+        "No. Telp Kantor" => $toggleField['isOfficeNumber'],
         "Email" => $toggleField['isEmail'],
-        "Maksimal Pensiun" => $toggleField['isPensionCap'],
+        "Email Dinas" => $toggleField['isOfficeEmail'],
+        "Organisasi" => $toggleField['isOrganization'],
+        "Unit Kerja" => $toggleField['isWorkUnit'],
+        "Kontak Darurat" => $toggleField['isEmergencyContact'],
+        "Batas Usia Pensiun" => $toggleField['isPensionCap'],
         "Riwayat Jabatan" => $toggleField['isPositionHistory'],
         "Riwayat Golongan" => $toggleField['isGradeHistory'],
         "Riwayat Pelatihan Struktural" => $toggleField['isTrainingStructural'],
         "Riwayat Pelatihan Fungsional" => $toggleField['isTrainingFunctional'],
         "Riwayat Pelatihan Teknik" => $toggleField['isTrainingTechnique'],
-        "Riwayat Penghargaan" => $toggleField['isRecognition'],
         "Riwayat SKP" => $toggleField['isSKP'],
+        "Riwayat Penghargaan" => $toggleField['isRecognition'],
+        "Catatan" => $toggleField['isNotes'],
         "Riwayat Edukasi" => $toggleField['isEducationHistory'],
         "Riwayat Hukuman" => $toggleField['isDisciplinary'],
         "Riwayat Keluarga" => $toggleField['isFamilyHistory'],
@@ -180,7 +194,6 @@ $columns = [
         "Hasil Assessment" => $toggleField['isAssessment'],
         "Hasil Uji Kompetensi" => $toggleField['isCompetency'],
         "Hasil Talent Pool" => $toggleField['isTalentPool'],
-        "Catatan" => $toggleField['isNotes'],
         "Deskripsi Jabatan" => $toggleField['isPositionDescription'],
     ];
 
@@ -224,11 +237,8 @@ $columns = [
                             @case("Eselon")
                                 {{ $value['echelons_name'] }}
                                 @break
-                            @case("Grade")
-                                {{ $value['grade_name'] }}
-                                @break
-                            @case("NIP")
-                                '{{ $value['employee_id_number'] }}
+                            @case("Tanggal Mulai Menjabat")
+                                {{ $value['position_effective_date'] }}
                                 @break
                             @case("Tempat, Tanggal Lahir")
                                 {{ $value['place_of_birth'] }}, {{ $value['date_of_birth'] }}
@@ -237,103 +247,70 @@ $columns = [
                                 {{ $value['age'] }}
                                 @break
                             @case("Agama")
-                                @switch($value['religion'])
-                                    @case(1)
-                                        Islam
-                                        @break
-                                    @case(2)
-                                        Kristen
-                                        @break
-                                    @case(3)
-                                        Katolik
-                                        @break
-                                    @case(4)
-                                        Hindu
-                                        @break
-                                    @case(5)
-                                        Buddha
-                                        @break
-                                    @case(6)
-                                        Konghucu
-                                        @break
-                                    @default
-                                        -
-                                @endswitch
+                                {{ $value['religion'] }}
                                 @break
                             @case("Jenis Kelamin")
-                                {{ $value['gender'] === 1 ? 'Pria' : 'Wanita' }}
+                                {{ $value['gender'] }}
                                 @break
                             @case("Status Perkawinan")
-                                @switch($value['marital_status'])
-                                    @case(1)
-                                        Belum Menikah
-                                        @break
-                                    @case(2)
-                                        Menikah
-                                        @break
-                                    @case(3)
-                                        Cerai Hidup
-                                        @break
-                                    @case(4)
-                                        Cerai Mati
-                                        @break
-                                    @default
-                                        -
-                                @endswitch
+                                {{ $value['marital_status'] }}
                                 @break
-                            @case("Instansi")
-                                {{ $value['institution_name'] }}
+                            @case("Jenis Pegawai")
+                                {{ $value['employee_type'] }}
                                 @break
-                            @case("Organisasi")
-                                {{ $value['organization_name'] }}
+                            @case("Jenis Perbantuan")
+                                {{ $value['assistance_type'] }}
                                 @break
-                            @case("Unit Kerja")
-                                {{ $value['work_unit'] }}
+                            @case("Jenis Outsourcing")
+                                {{ $value['outsource_type'] }}
                                 @break
-                            @case("No. Pegawai")
-                                {{ $value['employee_id_number'] }} / {{ $value['employee_registration_number'] }}
+                            @case("TMT CPNS")
+                                {{ $value['cpns_effective_date'] }}
+                                @break
+                            @case("Tanggal Mulai Bekerja")
+                                {{ $value['pns_effective_date'] }}
+                                @break
+                            @case("Tanggal Terakhir Bekerja")
+                                {{ $value['retirement_effective_date'] }}
                                 @break
                             @case("Lama Bekerja")
                                 {{ $value['work_duration'] }}
                                 @break
-                            @case("Lama Grade")
+                            @case("Masa Kerja Golongan")
                                 {{ $value['grade_effective_date'] }}
+                                @break
+                            @case("Tanggal Mulai Menjabat")
+                                {{ $value['position_effective_date'] }}
+                                @break
+                            @case("TMT Eselon")
+                                {{ $value['echelon_effective_date'] }}
+                                @break
+                            @case("Golongan")
+                                {{ $value['grade_name'] }}
+                                @break
+                            @case("TMT Grade")
+                                {{ $value['grade_effective_date'] }}
+                                @break
+                            @case("Instansi")
+                                {{ $value['institution_name'] }}
+                                @break
+                            @case("No. Pegawai")
+                                {{ $value['employee_registration_number'] }}
+                                @break
+                            @case("No Karisu")
+                                {{ $value['karisu_number'] }}
                                 @break
                             @case("NPWP")
                                 {{ $value['id_tax'] }}
                                 @break
-                            @case("Status Kepegawaian")
-                                @switch($value['employment_status'])
-                                    @case(1)
-                                        Aktif
-                                        @break
-                                    @case(2)
-                                        Pensiun
-                                        @break
-                                    @case(3)
-                                        Berhenti
-                                        @break
-                                    @case(4)
-                                        Meninggal
-                                        @break
-                                    @case(5)
-                                        Alih Status
-                                        @break
-                                    @case(6)
-                                        Aktif PS
-                                        @break
-                                    @case(7)
-                                        CLTN
-                                        @break
-                                    @case(8)
-                                        TBL
-                                        @break
-                                    @case(9)
-                                        Non Aktif
-                                        @break
-                                    @default
-                                        -
-                                @endswitch
+                            @case("Status Pegawai")
+                                {{ $value['employment_status'] }}
+                                @break
+                            @case("No KK")
+                                {{ $value['family_registration_number'] }}
+                                @break
+                            @case("No NIK")
+                                {{ $value['id_number'] }}
                                 @break
                             @case("Alamat Sekarang")
                                 {{ $value['current_address'] }}
@@ -341,71 +318,83 @@ $columns = [
                             @case("Perumahan / Kompleks")
                                 {{ $value['residence_name'] }}
                                 @break
-                            @case("No. Rumah")
+                            @case("No. Telp Rumah")
                                 {{ $value['home_phone_number'] }}
                                 @break
-                            @case("No. Telepon")
+                            @case("No. HP")
                                 {{ $value['mobile_phone'] }}
                                 @break
                             @case("Alamat Kantor")
                                 {{ $value['office_address'] }}
                                 @break
-                            @case("No. Kantor")
+                            @case("No. Telp Kantor")
                                 {{ $value['office_phone_number'] }}
                                 @break
                             @case("Email")
                                 {{ $value['email'] }}
                                 @break
-                            @case("Maksimal Pensiun")
+                            @case("Email Dinas")
+                                {{ $value['office_email'] }}
+                                @break
+                            @case("Organisasi")
+                                {{ $value['organization'] }}
+                                @break
+                            @case("Unit Kerja")
+                                {{ $value['work_unit'] }}
+                                @break
+                            @case("Kontak Darurat")
+                                {{ $value['emergency_contact'] }}
+                                @break
+                            @case("Batas Usia Pensiun")
                                 {{ $value['pension_cap'] }}
                                 @break
                             @case("Riwayat Jabatan")
-                                <ul>{!! $value['position_history'] !!}</ul>
+                                {{ $value['position_history'] }}
                                 @break
                             @case("Riwayat Golongan")
-                                <ul>{!! $value['grade_history'] !!}</ul>
+                                {{ $value['grade_history'] }}
                                 @break
                             @case("Riwayat Pelatihan Struktural")
-                                <ul>{!! $value['structural_training_history'] !!}</ul>
+                                {{ $value['structural_training_history'] }}
                                 @break
                             @case("Riwayat Pelatihan Fungsional")
-                                <ul>{!! $value['functional_training_history'] !!}</ul>
+                                {{ $value['functional_training_history'] }}
                                 @break
                             @case("Riwayat Pelatihan Teknik")
-                                <ul>{!! $value['technique_training_history'] !!}</ul>
-                                @break
-                            @case("Riwayat Penghargaan")
-                                <ul>{!! $value['recognition_history'] !!}</ul>
+                                {{ $value['technique_training_history'] }}
                                 @break
                             @case("Riwayat SKP")
-                                <ul>{!! $value['skp_history'] !!}</ul>
+                                {{ $value['skp_history'] }}
                                 @break
-                            @case("Riwayat Edukasi")
-                                <ul>{!! $value['education_history'] !!}</ul>
-                                @break
-                            @case("Riwayat Hukuman")
-                                <ul>{!! $value['disciplinary_history'] !!}</ul>
-                                @break
-                            @case("Riwayat Keluarga")
-                                <ul>{!! $value['family_history'] !!}</ul>
-                                @break
-                            @case("Riwayat Cuti")
-                                <ul>{!! $value['leave_history'] !!}</ul>
-                                @break
-                            @case("Hasil Assessment")
-                                <ul>{!! $value['assessment_history'] !!}</ul>
-                                @break
-                            @case("Hasil Uji Kompetensi")
-                                <ul>{!! $value['competency_history'] !!}</ul>
-                                @break
-                            @case("Hasil Talent Pool")
-                                <ul>{!! $value['talent_pool_history'] !!}</ul>
+                            @case("Riwayat Penghargaan")
+                                {{ $value['recognition_history'] }}
                                 @break
                             @case("Catatan")
-                                <ul>{!! $value['notes'] !!}</ul>
+                                {{ $value['notes'] }}
+                                @break
+                            @case("Riwayat Edukasi")
+                                {{ $value['education_history'] }}
+                                @break
+                            @case("Riwayat Hukuman")
+                                {{ $value['disciplinary_history'] }}
+                                @break
+                            @case("Riwayat Keluarga")
+                                {{ $value['family_history'] }}
+                                @break
+                            @case("Riwayat Cuti")
+                                {{ $value['leave_history'] }}
+                                @break
+                            @case("Hasil Assessment")
+                                {{ $value['assessment_history'] }}
+                                @break
+                            @case("Hasil Uji Kompetensi")
+                                {{ $value['competency_history'] }}
+                                @break
+                            @case("Hasil Talent Pool")
+                                {{ $value['talent_pool_history'] }}
                                 @break
                             @default
-                                -
+                                N/A
                         @endswitch
                     </td>
                 @endforeach

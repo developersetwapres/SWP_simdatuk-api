@@ -184,6 +184,9 @@
                 @if($toggleField['isEmail'])
                     <th class="section-header-color">Email</th>
                 @endif
+                @if($toggleField['isOfficeEmail'])
+                    <th class="section-header-color">Email Dinas</th>
+                @endif
                 @if($toggleField['isPensionCap'])
                     <th class="section-header-color">Maksimal Pensiun</th>
                 @endif
@@ -235,6 +238,45 @@
                 @if($toggleField['isPositionDescription'])
                     <th class="section-header-color">Deskripsi Jabatan</th>
                 @endif
+                @if($toggleField['isEmployeeType'])
+                    <th class="section-header-color">Jenis Pegawai</th>
+                @endif
+                @if($toggleField['isEchelonDate'])
+                    <th class="section-header-color">TMT Eselon</th>
+                @endif
+                @if($toggleField['isGradeDate'])
+                    <th class="section-header-color">TMT Golongan</th>
+                @endif
+                @if($toggleField['isKarisu'])
+                    <th class="section-header-color">No. Karisu</th>
+                @endif
+                @if($toggleField['isNoFamily'])
+                    <th class="section-header-color">No. KK</th>
+                @endif
+                @if($toggleField['isNIK'])
+                    <th class="section-header-color">No. NIK</th>
+                @endif
+                @if($toggleField['isStartDate'])
+                    <th class="section-header-color">Tanggal Mulai Bekerja</th>
+                @endif
+                @if($toggleField['isDateCPNS'])
+                    <th class="section-header-color">TMT CPNS</th>
+                @endif
+                @if($toggleField['isEndDate'])
+                    <th class="section-header-color">Tanggal Terakhir Bekerja</th>
+                @endif
+                @if($toggleField['isDatePosition'])
+                    <th class="section-header-color">Tanggal Mulai Menjabat</th>
+                @endif
+                @if($toggleField['isOutsourcingType'])
+                    <th class="section-header-color">Jenis Outsourcing</th>
+                @endif
+                @if($toggleField['isAssistanceType'])
+                    <th class="section-header-color">Jenis Perbantuan</th>
+                @endif
+                @if($toggleField['isEmergencyContact'])
+                    <th class="section-header-color">Kontak Darurat</th>
+                @endif
             </tr>
         </thead>
         <tbody>
@@ -258,7 +300,7 @@
                     <td>{{ $value['grade_name'] }}</td>
                 @endif
                 @if($toggleField['isNip'])
-                    <td>'{{ $value['employee_id_number'] }}</td>
+                    <td>{!! $value['employee_id_card_number'] !!}/{!! $value['employee_registration_number'] !!}}</td>
                 @endif
                 @if($toggleField['isBirthPlaceDate'])
                     <td>{{ $value['place_of_birth'] }}, {{ $value['date_of_birth'] }}</td>
@@ -323,7 +365,7 @@
                     <td>{{ $value['work_unit'] }}</td>
                 @endif
                 @if($toggleField['isNoWorker'])
-                    <td>{{ $value['employee_id_number'] }} / {{ $value['employee_registration_number'] }}</td>
+                    <td>{{ $value['employee_id_card_number'] }} / {{ $value['employee_registration_number'] }}</td>
                 @endif
                 @if($toggleField['workDuration'])
                     <td>{{ $value['work_duration'] }}</td>
@@ -388,6 +430,9 @@
                 @endif
                 @if($toggleField['isEmail'])
                     <td>{{ $value['email'] }}</td>
+                @endif
+                @if($toggleField['isOfficeEmail'])
+                    <td>{{ $value['office_email'] }}</td>
                 @endif
                 @if($toggleField['isPensionCap'])
                     <td>{{ $value['pension_cap'] }}</td>
@@ -472,7 +517,71 @@
                         <ul>{!! $value['position_description'] !!}</ul>
                     </td>
                 @endif
-
+                @if($toggleField['isEmployeeType'])
+                    <td>
+                        <ul>{!! $value['employee_type'] !!}</ul>
+                    </td>
+                @endif
+                @if($toggleField['isEchelonDate'])
+                    <td>
+                        <ul>{!! $value['echelon_effective_date'] !!}</ul>
+                    </td>
+                @endif
+                @if($toggleField['isGradeDate'])
+                    <td>
+                        <ul>{!! $value['grade_effective_date'] !!}</ul>
+                    </td>
+                @endif
+                @if($toggleField['isKarisu'])
+                    <td>
+                        <ul>{!! $value['karisu_number'] !!}</ul>
+                    </td>
+                @endif
+                @if($toggleField['isNoFamily'])
+                    <td>
+                        <ul>{!! $value['family_registration_number'] !!}</ul>
+                    </td>
+                @endif
+                @if($toggleField['isNIK'])
+                    <td>
+                        <ul>{!! $value['id_number'] !!}</ul>
+                    </td>
+                @endif
+                @if($toggleField['isStartDate'])
+                    <td>
+                        <ul>{!! $value['pns_effective_date'] !!}</ul>
+                    </td>
+                @endif
+                @if($toggleField['isDateCPNS'])
+                    <td>
+                        <ul>{!! $value['cpns_effective_date'] !!}</ul>
+                    </td>
+                @endif
+                @if($toggleField['isEndDate'])
+                    <td>
+                        <ul>{!! $value['retirement_effective_date'] !!}</ul>
+                    </td>
+                @endif
+                @if($toggleField['isDatePosition'])
+                    <td>
+                        <ul>{!! $value['position_effective_date'] !!}</ul>
+                    </td>
+                @endif
+                @if($toggleField['isOutsourcingType'])
+                    <td>
+                        <ul>{!! $value['outsource_type'] !!}</ul>
+                    </td>
+                @endif
+                @if($toggleField['isAssistanceType'])
+                    <td>
+                        <ul>{!! $value['assistance_type'] !!}</ul>
+                    </td>
+                @endif
+                @if($toggleField['isEmergencyContact'])
+                    <td>
+                        <ul>{!! $value['emergency_contact'] !!}</ul>
+                    </td>
+                @endif
             </tr>
         @endforeach
 

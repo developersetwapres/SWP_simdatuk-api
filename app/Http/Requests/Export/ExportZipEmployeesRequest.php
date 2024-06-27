@@ -22,16 +22,19 @@ class ExportZipEmployeesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'organization' => 'array|min:1',
+            'organization' =>    'array|min:1',
             'employee_type' => 'array|min:1',
-            'echelons' => 'array|min:1|numeric',
-            'grades' => 'array|min:1|numeric',
-            'position_status' => 'array|min:1|numeric',
-            'education' => 'array|min:1|numeric',
-            'gender' => 'array|min:1|max:2|numeric',
+            'echelons' => 'array|min:1',
+            'grades' => 'array|min:1',
+            'job_description' => 'array|min:1',
+            'education' => 'array|min:1',
+            'gender' => 'array|min:1|max:2',
             'min_age' => 'numeric|min:1',
             'max_age' => 'numeric',
             'marital_status' => 'array|min:1',
+            'grade_range' => 'array|min:1',
+            'total_working_duration' => 'array|min:1',
+            'deputy' => 'array|min:1'
         ];
     }
 
@@ -55,9 +58,8 @@ class ExportZipEmployeesRequest extends FormRequest
             'grades.array' => 'harus dalam rupa array',
             'grades.min' => 'minimal 1 angka didalam array',
             'grades.numeric' => 'isi array harus berupa angka',
-            'position_status.array' => 'harus dalam rupa array',
-            'position_status.min' => 'minimal 1 angka didalam array',
-            'position_status.numeric' => 'isi array harus berupa angka',
+            'job_description.array' => 'harus dalam rupa array',
+            'job_description.min' => 'minimal 1 angka didalam array',
             'education.array' => 'harus dalam rupa array',
             'education.min' => 'minimal 1 angka didalam array',
             'education.numeric' => 'isi array harus berupa angka',
@@ -71,6 +73,12 @@ class ExportZipEmployeesRequest extends FormRequest
             'min_age.min' => 'array minimal harus ada 1 value',
             'min_age.numeric' => 'harus dalam rupa angka',
             'max_age.numeric' => 'harus dalam rupa angka',
+            'grade_range.array' => 'Age range harus berupa array',
+            'grade_range.min' => 'Age range harus memiliki minimal 1 item',
+            'total_working_duration.array' => 'Age range harus berupa array',
+            'total_working_duration.min' => 'Age range harus memiliki minimal 1 item',
+            'deputy.array' => 'Age range harus berupa array',
+            'deputy.min' => 'Age range harus memiliki minimal 1 item',
         ];
     }
 
@@ -98,7 +106,7 @@ class ExportZipEmployeesRequest extends FormRequest
                 'description' => 'Refers to IDs of employee grades',
                 'example' => [1]
             ],
-            'position_status' => [
+            'job_description' => [
                 'description' => 'Refers to IDs of employee position status',
                 'example' => [1]
             ],
@@ -122,6 +130,18 @@ class ExportZipEmployeesRequest extends FormRequest
                 'description' => 'Refers to maximum age of employee',
                 'example' => 55
             ],
+            'grade_range' => [
+                'description' => 'Refers to duration of grade in years',
+                'example' => ["5-10"],
+            ],
+            'total_working_duration' => [
+                'description' => 'Refers to total duration of employee employment',
+                'example' => ["5-10"],
+            ],
+            'deputy' => [
+                'description' => 'Refers to Deputy ids list of employees',
+                'example' => [5],
+            ]
         ];
     }
 }

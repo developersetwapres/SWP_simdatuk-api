@@ -101,138 +101,183 @@
 
     <table class="section-table" style="border: none">
         <thead>
-            <tr>
-                <th colspan="{{ count(array_filter($toggleField)) }}"></th>
-            </tr>
-            <tr bgcolor="#394346" style="color: #394346">
-                <th class="section-header-color">No</th>
-                @if($toggleField['isName'])
-                    <th class="section-header-color">Nama</th>
-                @endif
-                @if($toggleField['isPosition'])
-                    <th class="section-header-color">Jabatan</th>
-                @endif
-                @if($toggleField['isPositionDescription'])
-                    <th class="section-header-color">Deskripsi Jabatan</th>
-                @endif
-                @if($toggleField['isEchelons'])
-                    <th class="section-header-color">Eselon</th>
-                @endif
-                @if($toggleField['isGrade'])
-                    <th class="section-header-color">Grade</th>
-                @endif
-                @if($toggleField['isNip'])
-                    <th class="section-header-color">NIP</th>
-                @endif
-                @if($toggleField['isBirthPlaceDate'])
-                    <th class="section-header-color">Tempat, Tanggal Lahir</th>
-                @endif
-                @if($toggleField['isAge'])
-                    <th class="section-header-color">Usia</th>
-                @endif
-                @if($toggleField['isReligion'])
-                    <th class="section-header-color">Agama</th>
-                @endif
-                @if($toggleField['isGender'])
-                    <th class="section-header-color">Jenis Kelamin</th>
-                @endif
-                @if($toggleField['isMaritalStatus'])
-                    <th class="section-header-color">Status Perkawinan</th>
-                @endif
-                @if($toggleField['isAgency'])
-                    <th class="section-header-color">Instansi</th>
-                @endif
-                @if($toggleField['isOrganization'])
-                    <th class="section-header-color">Organisasi</th>
-                @endif
-                @if($toggleField['isWorkUnit'])
-                    <th class="section-header-color">Unit Kerja</th>
-                @endif
-                @if($toggleField['isNoWorker'])
-                    <th class="section-header-color">No. Pegawai</th>
-                @endif
-                @if($toggleField['workDuration'])
-                    <th class="section-header-color">Lama Bekerja</th>
-                @endif
-                @if($toggleField['isGradeDuration'])
-                    <th class="section-header-color">Lama Grade</th>
-                @endif
-                @if($toggleField['isNPWP'])
-                    <th class="section-header-color">NPWP</th>
-                @endif
-                @if($toggleField['isEmployeeStatus'])
-                    <th class="section-header-color">Status Kepegawaian</th>
-                @endif
-                @if($toggleField['isCurrentAddress'])
-                    <th class="section-header-color">Alamat Sekarang</th>
-                @endif
-                @if($toggleField['isComplex'])
-                    <th class="section-header-color">Perumahan / Kompleks</th>
-                @endif
-                @if($toggleField['isHomeNumber'])
-                    <th class="section-header-color">No. Rumah</th>
-                @endif
-                @if($toggleField['isPhoneNumber'])
-                    <th class="section-header-color">No. Telepon</th>
-                @endif
-                @if($toggleField['isOfficeAddress'])
-                    <th class="section-header-color">Alamat Kantor</th>
-                @endif
-                @if($toggleField['isOfficeNumber'])
-                    <th class="section-header-color">No. Kantor</th>
-                @endif
-                @if($toggleField['isEmail'])
-                    <th class="section-header-color">Email</th>
-                @endif
-                @if($toggleField['isPensionCap'])
-                    <th class="section-header-color">Maksimal Pensiun</th>
-                @endif
-                @if($toggleField['isPositionHistory'])
-                    <th class="section-header-color">Riwayat Jabatan</th>
-                @endif
-                @if($toggleField['isGradeHistory'])
-                    <th class="section-header-color">Riwayat Golongan</th>
-                @endif
-                @if($toggleField['isTrainingStructural'])
-                    <th class="section-header-color">Riwayat Pelatihan Struktural</th>
-                @endif
-                @if($toggleField['isTrainingFunctional'])
-                    <th class="section-header-color">Riwayat Pelatihan Fungsional</th>
-                @endif
-                @if($toggleField['isTrainingTechnique'])
-                    <th class="section-header-color">Riwayat Pelatihan Teknik</th>
-                @endif
-                @if($toggleField['isRecognition'])
-                    <th class="section-header-color">Riwayat Penghargaan</th>
-                @endif
-                @if($toggleField['isSKP'])
-                    <th class="section-header-color">Riwayat SKP</th>
-                @endif
-                @if($toggleField['isEducationHistory'])
-                    <th class="section-header-color">Riwayat Edukasi</th>
-                @endif
-                @if($toggleField['isDisciplinary'])
-                    <th class="section-header-color">Riwayat Hukuman</th>
-                @endif
-                @if($toggleField['isFamilyHistory'])
-                    <th class="section-header-color">Riwayat Keluarga</th>
-                @endif
-                @if($toggleField['isLeave'])
-                    <th class="section-header-color">Riwayat Cuti</th>
-                @endif
-                @if($toggleField['isAssessment'])
-                    <th class="section-header-color">Hasil Assessment</th>
-                @endif
-                @if($toggleField['isCompetency'])
-                    <th class="section-header-color">Hasil Uji Kompetensi</th>
-                @endif
-                @if($toggleField['isTalentPool'])
-                    <th class="section-header-color">Hasil Talent Pool</th>
-                @endif
-                @if($toggleField['isNotes'])
-                    <th class="section-header-color">Catatan</th>
-                @endif
-            </tr>
+        <tr>
+            <th colspan="11"></th>
+        </tr>
+        <tr bgcolor="#394346" style="color: #394346">
+            <th class="section-header-color">No</th>
+            @if($toggleField['isName'])
+                <th class="section-header-color">Nama</th>
+            @endif
+            @if($toggleField['isPosition'])
+                <th class="section-header-color">Jabatan</th>
+            @endif
+            @if($toggleField['isPositionDescription'])
+                <th class="section-header-color">Deskripsi Jabatan</th>
+            @endif
+            @if($toggleField['isEchelons'])
+                <th class="section-header-color">Eselon</th>
+            @endif
+            @if($toggleField['isGrade'])
+                <th class="section-header-color">Grade</th>
+            @endif
+            @if($toggleField['isNip'])
+                <th class="section-header-color">NIP</th>
+            @endif
+            @if($toggleField['isBirthPlaceDate'])
+                <th class="section-header-color">Tempat, Tanggal Lahir</th>
+            @endif
+            @if($toggleField['isAge'])
+                <th class="section-header-color">Usia</th>
+            @endif
+            @if($toggleField['isReligion'])
+                <th class="section-header-color">Agama</th>
+            @endif
+            @if($toggleField['isGender'])
+                <th class="section-header-color">Jenis Kelamin</th>
+            @endif
+            @if($toggleField['isMaritalStatus'])
+                <th class="section-header-color">Status Perkawinan</th>
+            @endif
+            @if($toggleField['isAgency'])
+                <th class="section-header-color">Instansi</th>
+            @endif
+            @if($toggleField['isOrganization'])
+                <th class="section-header-color">Organisasi</th>
+            @endif
+            @if($toggleField['isWorkUnit'])
+                <th class="section-header-color">Unit Kerja</th>
+            @endif
+            @if($toggleField['isNoWorker'])
+                <th class="section-header-color">No. Pegawai</th>
+            @endif
+            @if($toggleField['workDuration'])
+                <th class="section-header-color">Lama Bekerja</th>
+            @endif
+            @if($toggleField['isGradeDuration'])
+                <th class="section-header-color">Lama Grade</th>
+            @endif
+            @if($toggleField['isNPWP'])
+                <th class="section-header-color">NPWP</th>
+            @endif
+            @if($toggleField['isEmployeeStatus'])
+                <th class="section-header-color">Status Kepegawaian</th>
+            @endif
+            @if($toggleField['isCurrentAddress'])
+                <th class="section-header-color">Alamat Sekarang</th>
+            @endif
+            @if($toggleField['isComplex'])
+                <th class="section-header-color">Perumahan / Kompleks</th>
+            @endif
+            @if($toggleField['isHomeNumber'])
+                <th class="section-header-color">No. Rumah</th>
+            @endif
+            @if($toggleField['isPhoneNumber'])
+                <th class="section-header-color">No. Telepon</th>
+            @endif
+            @if($toggleField['isOfficeAddress'])
+                <th class="section-header-color">Alamat Kantor</th>
+            @endif
+            @if($toggleField['isOfficeNumber'])
+                <th class="section-header-color">No. Kantor</th>
+            @endif
+            @if($toggleField['isEmail'])
+                <th class="section-header-color">Email</th>
+            @endif
+            @if($toggleField['isOfficeEmail'])
+                <th class="section-header-color">Email Dinas</th>
+            @endif
+            @if($toggleField['isPensionCap'])
+                <th class="section-header-color">Maksimal Pensiun</th>
+            @endif
+            @if($toggleField['isPositionHistory'])
+                <th class="section-header-color">Riwayat Jabatan</th>
+            @endif
+            @if($toggleField['isGradeHistory'])
+                <th class="section-header-color">Riwayat Golongan</th>
+            @endif
+            @if($toggleField['isTrainingStructural'])
+                <th class="section-header-color">Riwayat Pelatihan Struktural</th>
+            @endif
+            @if($toggleField['isTrainingFunctional'])
+                <th class="section-header-color">Riwayat Pelatihan Fungsional</th>
+            @endif
+            @if($toggleField['isTrainingTechnique'])
+                <th class="section-header-color">Riwayat Pelatihan Teknik</th>
+            @endif
+            @if($toggleField['isRecognition'])
+                <th class="section-header-color">Riwayat Penghargaan</th>
+            @endif
+            @if($toggleField['isSKP'])
+                <th class="section-header-color">Riwayat SKP</th>
+            @endif
+            @if($toggleField['isEducationHistory'])
+                <th class="section-header-color">Riwayat Edukasi</th>
+            @endif
+            @if($toggleField['isDisciplinary'])
+                <th class="section-header-color">Riwayat Hukuman</th>
+            @endif
+            @if($toggleField['isFamilyHistory'])
+                <th class="section-header-color">Riwayat Keluarga</th>
+            @endif
+            @if($toggleField['isLeave'])
+                <th class="section-header-color">Riwayat Cuti</th>
+            @endif
+            @if($toggleField['isAssessment'])
+                <th class="section-header-color">Hasil Assessment</th>
+            @endif
+            @if($toggleField['isCompetency'])
+                <th class="section-header-color">Hasil Uji Kompetensi</th>
+            @endif
+            @if($toggleField['isTalentPool'])
+                <th class="section-header-color">Hasil Talent Pool</th>
+            @endif
+            @if($toggleField['isNotes'])
+                <th class="section-header-color">Catatan</th>
+            @endif
+            @if($toggleField['isPositionDescription'])
+                <th class="section-header-color">Deskripsi Jabatan</th>
+            @endif
+            @if($toggleField['isEmployeeType'])
+                <th class="section-header-color">Jenis Pegawai</th>
+            @endif
+            @if($toggleField['isEchelonDate'])
+                <th class="section-header-color">TMT Eselon</th>
+            @endif
+            @if($toggleField['isGradeDate'])
+                <th class="section-header-color">TMT Golongan</th>
+            @endif
+            @if($toggleField['isKarisu'])
+                <th class="section-header-color">No. Karisu</th>
+            @endif
+            @if($toggleField['isNoFamily'])
+                <th class="section-header-color">No. KK</th>
+            @endif
+            @if($toggleField['isNIK'])
+                <th class="section-header-color">No. NIK</th>
+            @endif
+            @if($toggleField['isStartDate'])
+                <th class="section-header-color">Tanggal Mulai Bekerja</th>
+            @endif
+            @if($toggleField['isDateCPNS'])
+                <th class="section-header-color">TMT CPNS</th>
+            @endif
+            @if($toggleField['isEndDate'])
+                <th class="section-header-color">Tanggal Terakhir Bekerja</th>
+            @endif
+            @if($toggleField['isDatePosition'])
+                <th class="section-header-color">Tanggal Mulai Menjabat</th>
+            @endif
+            @if($toggleField['isOutsourcingType'])
+                <th class="section-header-color">Jenis Outsourcing</th>
+            @endif
+            @if($toggleField['isAssistanceType'])
+                <th class="section-header-color">Jenis Perbantuan</th>
+            @endif
+            @if($toggleField['isEmergencyContact'])
+                <th class="section-header-color">Kontak Darurat</th>
+            @endif
+        </tr>
         </thead>
         <tbody>
         @php $indexData = 1 @endphp
@@ -255,7 +300,7 @@
                     <td>{{ $value['grade_name'] }}</td>
                 @endif
                 @if($toggleField['isNip'])
-                    <td>'{{ $value['employee_id_number'] }}</td>
+                    <td>{!! $value['employee_id_card_number'] !!}/{!! $value['employee_registration_number'] !!}}</td>
                 @endif
                 @if($toggleField['isBirthPlaceDate'])
                     <td>{{ $value['place_of_birth'] }}, {{ $value['date_of_birth'] }}</td>
@@ -320,7 +365,7 @@
                     <td>{{ $value['work_unit'] }}</td>
                 @endif
                 @if($toggleField['isNoWorker'])
-                    <td>{{ $value['employee_id_number'] }} / {{ $value['employee_registration_number'] }}</td>
+                    <td>{{ $value['employee_id_card_number'] }} / {{ $value['employee_registration_number'] }}</td>
                 @endif
                 @if($toggleField['workDuration'])
                     <td>{{ $value['work_duration'] }}</td>
@@ -385,6 +430,9 @@
                 @endif
                 @if($toggleField['isEmail'])
                     <td>{{ $value['email'] }}</td>
+                @endif
+                @if($toggleField['isOfficeEmail'])
+                    <td>{{ $value['office_email'] }}</td>
                 @endif
                 @if($toggleField['isPensionCap'])
                     <td>{{ $value['pension_cap'] }}</td>
@@ -462,6 +510,76 @@
                 @if($toggleField['isNotes'])
                     <td>
                         <ul>{!! $value['notes'] !!}</ul>
+                    </td>
+                @endif
+                @if($toggleField['isPositionDescription'])
+                    <td>
+                        <ul>{!! $value['position_description'] !!}</ul>
+                    </td>
+                @endif
+                @if($toggleField['isEmployeeType'])
+                    <td>
+                        <ul>{!! $value['employee_type'] !!}</ul>
+                    </td>
+                @endif
+                @if($toggleField['isEchelonDate'])
+                    <td>
+                        <ul>{!! $value['echelon_effective_date'] !!}</ul>
+                    </td>
+                @endif
+                @if($toggleField['isGradeDate'])
+                    <td>
+                        <ul>{!! $value['grade_effective_date'] !!}</ul>
+                    </td>
+                @endif
+                @if($toggleField['isKarisu'])
+                    <td>
+                        <ul>{!! $value['karisu_number'] !!}</ul>
+                    </td>
+                @endif
+                @if($toggleField['isNoFamily'])
+                    <td>
+                        <ul>{!! $value['family_registration_number'] !!}</ul>
+                    </td>
+                @endif
+                @if($toggleField['isNIK'])
+                    <td>
+                        <ul>{!! $value['id_number'] !!}</ul>
+                    </td>
+                @endif
+                @if($toggleField['isStartDate'])
+                    <td>
+                        <ul>{!! $value['pns_effective_date'] !!}</ul>
+                    </td>
+                @endif
+                @if($toggleField['isDateCPNS'])
+                    <td>
+                        <ul>{!! $value['cpns_effective_date'] !!}</ul>
+                    </td>
+                @endif
+                @if($toggleField['isEndDate'])
+                    <td>
+                        <ul>{!! $value['retirement_effective_date'] !!}</ul>
+                    </td>
+                @endif
+                @if($toggleField['isDatePosition'])
+                    <td>
+                        <ul>{!! $value['position_effective_date'] !!}</ul>
+                    </td>
+                @endif
+                @if($toggleField['isOutsourcingType'])
+                    <td>
+                        <ul>{!! $value['outsource_type'] !!}</ul>
+                    </td>
+                @endif
+                @if($toggleField['isAssistanceType'])
+                    <td>
+                        <ul>{!! $value['assistance_type'] !!}</ul>
+                    </td>
+                @endif
+                @if($toggleField['isEmergencyContact'])
+                    <td>
+                        <ul>{!! $value['emergency_contact'] !!}</ul>
                     </td>
                 @endif
             </tr>
