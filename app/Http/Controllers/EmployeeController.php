@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Employee\CreateEmployeeRequest;
 use App\Http\Requests\Employee\UpdateEmployeeRequest;
+use App\Http\Requests\Employee\UpdateStatusRequest;
 use App\Repositories\AssessmentRepository;
 use App\Repositories\CompetencyRepository;
 use App\Repositories\CreditRepository;
@@ -966,5 +967,29 @@ class EmployeeController extends Controller
             Log::warning($th);
             return $this->response(500, 'Pegawai gagal ditambah.');
         }
+    }
+
+    /**
+     * Update Status Employee by ID
+     *
+     * Update a specific employee status.
+     * @group Employee
+     * @authenticated
+     * @response 404 {"code": 404,"message": "Mohon maaf, pegawai tidak ditemukan.","data": null}
+     * @response 200 {"code": 200,"message": "Pegawai berhasil diupdate.","data": null}
+     */
+    public function status(UpdateStatusRequest $request)
+    {
+        $user = DB::table('users');
+        $user->where('id', $this->request->id);
+        $user = $user->first();
+        if (!$user) {
+            return $this->response(404, 'Mohon maaf, pegawai tidak ditemukan.');
+        }
+
+        $query = DB::table('users');
+        $query->where('id', $this->request->id);
+        $query->updateTs($this->posted);
+        return $this->response(200, 'Pegawai berhasil diupdate.');
     }
 }

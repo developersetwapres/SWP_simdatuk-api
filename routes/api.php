@@ -97,6 +97,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/', [EmployeeController::class, 'create']);
         Route::get('/{id}', [EmployeeController::class, 'show']);
         Route::post('/{id}', [EmployeeController::class, 'update']);
+        Route::put('/status', [EmployeeController::class, 'status']);
     });
 
     Route::prefix('position-histories')->group(function () {
