@@ -46,7 +46,7 @@ class SummaryController extends Controller
                 END AS name
             "),
             'photo_profile',
-            'date_of_birth'
+            DB::raw("DATE_FORMAT(date_of_birth, '%d-%m-%Y') as date_of_birth")
         );
         $users->whereMonth('date_of_birth', $this->request->month);
         $users->where('type', 1);

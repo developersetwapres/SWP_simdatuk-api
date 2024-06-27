@@ -21,9 +21,9 @@ use App\Repositories\TalentRepository;
 use App\Repositories\TargetRepository;
 use App\Repositories\TrainingRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Arr;
 
 /**
  * @group Employee
@@ -161,9 +161,9 @@ class EmployeeController extends Controller
             'u.employee_registration_number',
             'p.name as position_name',
             'e.name as echelon_name',
-            'u.echelon_effective_date',
+            DB::raw("DATE_FORMAT(u.echelon_effective_date, '%d-%m-%Y') as echelon_effective_date"),
             DB::raw("CONCAT(g.name, ' ', g.code) as grade_name"),
-            'u.grade_effective_date',
+            DB::raw("DATE_FORMAT(u.grade_effective_date, '%d-%m-%Y') as grade_effective_date"),
             'et.name as employment_type',
             'u.description'
         );
