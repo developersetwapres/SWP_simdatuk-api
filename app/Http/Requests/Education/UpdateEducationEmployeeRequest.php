@@ -21,7 +21,7 @@ class UpdateEducationEmployeeRequest
             'educations.*.status' => 'required|numeric|in:1,2,3,4,5',
             'educations.*.year_of_graduation' => 'required|date_format:Y',
             'educations.*.description' => 'max:160',
-            'educations.*.degree_document' => 'file|extensions:jpg,jpeg,png,pdf|max:2048',
+            'educations.*.degree_document' => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
             'educations.*.delete_degree_document' => 'required|boolean',
         ];
     }

@@ -29,7 +29,7 @@ class UpdateFamilyEmployeeRequest
             'families.*.occupation_description' => 'max:160',
             'families.*.marital_status' => 'required|numeric|in:1,2,3,4,5',
             'families.*.mobile_phone' => 'max:16',
-            'families.*.sequence_number' => 'numeric',
+            'families.*.sequence_number' => 'nullable|numeric',
         ];
     }
 
