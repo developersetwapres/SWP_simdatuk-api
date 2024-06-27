@@ -267,7 +267,7 @@ class UpdateEmployeeRequest extends FormRequest
             'description.max' => 'Keterangan tidak boleh lebih dari 160 karakter.',
             'type.required' => 'Tipe pegawai tidak boleh kosong.',
             'type.in' => 'Tipe pegawai diantara 1, 2 atau 3',
-            'delete_employee_id_card' => 'Status hapus kartu pegawai tidak boleh kosong.',
+            'delete_employee_id_card.required' => 'Status hapus kartu pegawai tidak boleh kosong.',
         ];
 
         return array_merge(
