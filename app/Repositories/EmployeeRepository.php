@@ -40,7 +40,7 @@ class EmployeeRepository
             DB::raw("DATE_FORMAT(u.grade_effective_date, '%d-%m-%Y') as grade_effective_date"),
             'u.position_id',
             'p.name as position_name',
-            'u.position_effective_date',
+            DB::raw("DATE_FORMAT(u.position_effective_date, '%d-%m-%Y') as position_effective_date"),
             'u.echelon_id',
             'e.name as echelon_name',
             DB::raw("DATE_FORMAT(u.echelon_effective_date, '%d-%m-%Y') as echelon_effective_date"),
