@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Repositories\RecapitulationRepository;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
+use DB;
 use Illuminate\Http\Request;
 
 /**
@@ -659,10 +660,40 @@ class ExportRecapitulationController extends Controller
      */
     public function comparison()
     {
+        $users = DB::table('users as u');
+        $users->leftJoin('positions as p', 'u.position_id', '=', 'p.id');
+        $users->leftJoin('echelons as e', 'u.echelon_id', '=', 'e.id');
+        $users->leftJoin('grades as g', 'u.grade_id', '=', 'g.id');
+        $users->select(
+            'u.id',
+            DB::raw("
+                CASE
+                    WHEN u.title_prefix IS NULL && u.title_suffix IS NULL THEN u.name
+                    WHEN u.title_prefix IS NOT NULL && u.title_suffix IS NULL THEN CONCAT(u.title_prefix, ' ', u.name)
+                    WHEN u.title_prefix IS NULL && u.title_suffix IS NOT NULL THEN CONCAT(u.name, ' ', u.title_suffix)
+                    ELSE CONCAT(u.title_prefix, ' ',u.name, ' ',u.title_suffix)
+                END AS name
+            "),
+            'u.photo_profile',
+            'p.name as position_name',
+            'e.name as echelon_name',
+            'u.echelon_effective_date',
+            DB::raw("CONCAT(g.name, ' ', g.code) as grade_name"),
+            'u.grade_effective_date'
+        );
+        $users->whereIn('u.id', [5017, 4909]);
+        $users->orderBy('u.echelon_id', 'asc');
+        $users->orderBy('u.grade_id', 'asc');
+        $users = $users->get();
+        dd($users);
         $title = 'Bandingkan Pegawai';
         $date = Carbon::now()->timezone('Asia/Jakarta')->locale('id')->isoFormat('D MMMM Y');
         $tmp = sys_get_temp_dir();
-        $pdf = Pdf::loadview('exports/comparison', []);
+        $pdf = Pdf::loadview('exports/comparison', [
+            'title' => $title,
+            'date' => $date,
+            'data' => [],
+        ]);
         $pdf->set_option('isHtml5ParserEnabled', true);
         $pdf->set_paper("A2", "landscape");
         $pdf->set_option('isRemoteEnabled', true);

@@ -58,7 +58,7 @@ class RecapitulationController extends Controller
                         ],
                         [
                             "id" => 4,
-                            "name" => 'Tenaga Outsourcing dan Non Outsourcing',
+                            "name" => 'Tenaga Outsourcing',
                             "total" => $users->outsource,
                         ],
                     ],
@@ -305,23 +305,16 @@ class RecapitulationController extends Controller
     private function getCategory4()
     {
         $outsource = $this->recapitulationRepository->getOutsource(19);
-        $nonOutsource = $this->recapitulationRepository->getOutsource(20);
         $data = [
             "id" => 4,
-            "name" => "Tenaga Outsourcing dan Non Outsourcing",
-            "total" => $outsource[0] + $nonOutsource[0],
+            "name" => "Tenaga Outsourcing",
+            "total" => $outsource[0],
             "cards" => [
                 [
                     "id" => 1,
                     "name" => 'Tenaga Outsourcing',
                     "total" => $outsource[0],
                     "cards" => $outsource[1],
-                ],
-                [
-                    "id" => 2,
-                    "name" => 'Tenaga Non Outsourcing',
-                    "total" => $nonOutsource[0],
-                    "cards" => $nonOutsource[1],
                 ],
             ],
         ];
@@ -345,7 +338,7 @@ class RecapitulationController extends Controller
             DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6) THEN 1 END) as asn_active'),
             DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (7, 8, 9) THEN 1 END) as asn_nonactive'),
             DB::raw('COUNT(CASE WHEN type = 2 AND employment_status = 1 THEN 1 END) as nonasn'),
-            DB::raw('COUNT(CASE WHEN type = 3 AND employment_status = 1 THEN 1 END) as outsource'),
+            DB::raw('COUNT(CASE WHEN type = 3 AND employment_status = 1 AND employment_type_id = 19 THEN 1 END) as outsource'),
         );
         return $users = $users->first();
     }
