@@ -447,12 +447,16 @@ class EmployeeController extends Controller
             }
 
             if (isset($this->posted['employee_id_card']) && is_file($this->posted['employee_id_card'])) {
-                $this->posted['employee_id_card'] = $this->uploadDocument($this->posted['employee_id_card'], 'employee_id_card');
+                $this->posted['employee_id_card'] = $this->uploadDocument($this->posted['employee_id_card'], 'employee_id_card', $this->request->employee_id_number);
             } else if ($this->posted['delete_employee_id_card'] == true) {
                 $this->posted['employee_id_card'] = null;
             }
 
             unset($this->posted['delete_employee_id_card']);
+
+            if (isset($this->posted['photo_profile']) && is_file($this->posted['photo_profile'])) {
+                $this->posted['photo_profile'] = $this->uploadDocument($this->posted['photo_profile'], 'photo_profile', $this->request->employee_id_number);
+            }
 
             $user = DB::table('users');
             $user->where('id', $this->request->id);
