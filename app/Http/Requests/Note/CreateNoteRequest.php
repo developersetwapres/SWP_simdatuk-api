@@ -13,7 +13,7 @@ class CreateNoteRequest
     public static function rules(): array
     {
         return [
-            'notes.*.description' => 'required|max:160',
+            'notes.*.description' => 'nullable|max:160',
         ];
     }
 
@@ -25,7 +25,6 @@ class CreateNoteRequest
     public static function messages(): array
     {
         return [
-            'notes.*.description.required' => 'Catatan tidak boleh kosong',
             'notes.*.description.max' => 'Catatan tidak boleh lebih dari 160 karakter.',
         ];
     }

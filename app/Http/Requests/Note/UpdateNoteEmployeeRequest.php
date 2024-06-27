@@ -13,8 +13,8 @@ class UpdateNoteEmployeeRequest
     public static function rules(): array
     {
         return [
-            'notes.*.id' => 'numeric|nullable',
-            'notes.*.description' => 'required|max:160',
+            'notes.*.id' => 'nullable|numeric',
+            'notes.*.description' => 'nullable|max:160',
         ];
     }
 
@@ -27,7 +27,6 @@ class UpdateNoteEmployeeRequest
     {
         return [
             'notes.*.id.numeric' => 'Note ID harus berupa angka.',
-            'notes.*.description.required' => 'Catatan tidak boleh kosong',
             'notes.*.description.max' => 'Catatan tidak boleh lebih dari 160 karakter.',
         ];
     }

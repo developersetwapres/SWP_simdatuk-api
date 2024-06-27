@@ -23,8 +23,8 @@ class UpdateNoteByUserIdRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'notes.*.id' => 'numeric|nullable',
-            'notes.*.description' => 'required',
+            'notes.*.id' => 'nullable|numeric',
+            'notes.*.description' => 'nullable',
         ];
     }
 
@@ -37,7 +37,6 @@ class UpdateNoteByUserIdRequest extends FormRequest
     {
         return [
             'notes.*.id.numeric' => 'Id harus berupa angka.',
-            'notes.*.description' => 'Catatan tidak boleh kosong.',
         ];
     }
 
