@@ -650,6 +650,13 @@ class ExportRecapitulationController extends Controller
         return $pdf->download($title . ' - ' . $date . '.pdf');
     }
 
+    /**
+     * Export Comparison
+     *
+     * Export comparison data between employee
+     * @group Export
+     * @authenticated
+     */
     public function comparison()
     {
         $title = 'Bandingkan Pegawai';
