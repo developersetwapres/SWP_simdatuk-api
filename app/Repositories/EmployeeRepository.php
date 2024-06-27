@@ -74,6 +74,9 @@ class EmployeeRepository
         if (isset($user->photo_profile)) {
             $user->photo_profile = $this->getDocument($user->photo_profile, true);
         }
+        if (isset($user->employee_id_card)) {
+            $user->employee_id_card = $this->getDocument($user->employee_id_card, true);
+        }
         if (isset($user->position_id)) {
             $user->position_merged = $this->getRecursivePosition($user->position_id);
         }
