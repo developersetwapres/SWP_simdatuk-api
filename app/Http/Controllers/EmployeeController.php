@@ -489,7 +489,7 @@ class EmployeeController extends Controller
 
                         // Update existing data
                         DB::table('user_educations')->where('id', $education['id'])->updateTs($education);
-                    } else {
+                    } else if (isset($education)) {
                         // Insert new item
                         unset($education['delete_degree_document']);
                         $education['user_id'] = $this->request->id;
@@ -575,7 +575,7 @@ class EmployeeController extends Controller
                     if (isset($family['id'])) {
                         // Update existing data
                         DB::table('user_families')->where('id', $family['id'])->updateTs($family);
-                    } else {
+                    } else if (isset($family)) {
                         // Insert new item
                         $family['user_id'] = $this->request->id;
                         array_push($families, $family);
@@ -611,7 +611,7 @@ class EmployeeController extends Controller
 
                         // Update existing data
                         DB::table('user_leaves')->where('id', $leave['id'])->updateTs($leave);
-                    } else {
+                    } else if (isset($leave)) {
                         // Insert new item
                         unset($leave['delete_letter']);
                         $leave['user_id'] = $this->request->id;
@@ -641,7 +641,7 @@ class EmployeeController extends Controller
                     if (isset($note['id'])) {
                         // Update existing data
                         DB::table('user_notes')->where('id', $note['id'])->updateTs($note);
-                    } else {
+                    } else if (isset($note)) {
                         // Insert new item
                         $note['user_id'] = $this->request->id;
                         $note['giver_id'] = $this->request->user()->id;
@@ -671,7 +671,7 @@ class EmployeeController extends Controller
                     if (isset($credit['id'])) {
                         // Update existing data
                         DB::table('user_credits')->where('id', $credit['id'])->updateTs($credit);
-                    } else {
+                    } else if (isset($credit)) {
                         // Insert new item
                         $credit['user_id'] = $this->request->id;
                         array_push($credits, $credit);
@@ -707,7 +707,7 @@ class EmployeeController extends Controller
 
                         // Update existing data
                         DB::table('user_assessments')->where('id', $assessment['id'])->updateTs($assessment);
-                    } else {
+                    } else if (isset($assessment)) {
                         // Insert new item
                         unset($assessment['delete_assessment_document']);
                         $assessment['user_id'] = $this->request->id;
@@ -744,7 +744,7 @@ class EmployeeController extends Controller
 
                         // Update existing data
                         DB::table('user_competencies')->where('id', $competency['id'])->updateTs($competency);
-                    } else {
+                    } else if (isset($competency)) {
                         // Insert new item
                         unset($competency['delete_competency_document']);
                         $competency['user_id'] = $this->request->id;
@@ -781,7 +781,7 @@ class EmployeeController extends Controller
 
                         // Update existing data
                         DB::table('user_talents')->where('id', $talent['id'])->updateTs($talent);
-                    } else {
+                    } else if (isset($talent)) {
                         // Insert new item
                         unset($talent['delete_talent_document']);
                         $talent['user_id'] = $this->request->id;
