@@ -36,8 +36,7 @@ class PromotionController extends Controller
      *
      * Below is the list of all data Promotions.
      * @authenticated
-     * @queryParam id integer Refers to the id of parent data. Example: 1
-     * @response 200 {"code": 200,"message": "success","data": [{"id": 1,"name": "Staff Khusus Wakil Presiden","type": 1,"available": 0,"filled": 0,"children": 10,"entity": 2,"users": []},{"id": 2,"name": "Kepala Sekretariat Wakil Presiden","type": 1,"available": 1,"filled": 1,"children": 4,"entity": 1,"users": [{"id": 10578,"name": "Ahmad Erani Yustika","echelon_id": null,"echelon_effective_date": null,"grade_id": null,"grade_effective_date": "2022-10-01","employee_id_number": "197303221997021001","employee_registration_number": "197303221997021001"}]},{"id": 3,"name": "Pejabat Kemensetneg yang Diperbantukan di Sekretariat Wakil Presiden","type": 1,"available": 0,"filled": 0,"children": 4,"entity": 2,"users": []}]}
+     * @response 200 {"code":200,"message":"success","data":[{"id":null,"name":"Jabatan Pimpinan Tinggi","cards":[{"id":1,"name":"Jabatan Pimpinan Tinggi Madya (Eselon I)","unoccupied":0},{"id":2,"name":"Jabatan Pimpinan Tinggi Pratama (Eselon II)","unoccupied":0}],"total":0},{"id":null,"name":"Jabatan Administrasi","cards":[{"id":3,"name":"Administrator (Eselon III)","unoccupied":0},{"id":4,"name":"Pengawas (Eselon IV)","unoccupied":0},{"id":9,"name":"Pelaksana","unoccupied":13}],"total":13},{"id":"41,45,49,53,58,62,66,69,74,79,84,89,93","name":"Jabatan Fungsional Analis Kebijakan","cards":[{"id":5,"name":"Ahli Utama","unoccupied":3},{"id":6,"name":"Ahli Madya","unoccupied":9},{"id":7,"name":"Ahli Muda","unoccupied":10},{"id":8,"name":"Ahli Pertama","unoccupied":16}],"total":38},{"id":"47,51,55,64,71,82,87,91,95,102,150,158,193,194,195,196,197,198,199,201,204,207","name":"Jabatan Fungsional Arsiparis","cards":[{"id":6,"name":"Ahli Madya","unoccupied":2},{"id":7,"name":"Ahli Muda","unoccupied":13},{"id":8,"name":"Ahli Pertama","unoccupied":12},{"id":10,"name":"Penyelia","unoccupied":11},{"id":11,"name":"Mahir","unoccupied":14},{"id":12,"name":"Terampil","unoccupied":13}],"total":65},{"id":"103,136","name":"Jabatan Fungsional Pranata Humas","cards":[{"id":6,"name":"Ahli Madya","unoccupied":2},{"id":7,"name":"Ahli Muda","unoccupied":0},{"id":8,"name":"Ahli Pertama","unoccupied":5},{"id":10,"name":"Penyelia","unoccupied":3},{"id":11,"name":"Mahir","unoccupied":4},{"id":12,"name":"Terampil","unoccupied":2}],"total":16},{"id":"202","name":"Jabatan Fungsional Penerjemah","cards":[{"id":6,"name":"Ahli Madya","unoccupied":2},{"id":7,"name":"Ahli Muda","unoccupied":4},{"id":8,"name":"Ahli Pertama","unoccupied":4}],"total":10},{"id":"142","name":"Jabatan Fungsional Analis Pengelolaan Keuangan APBN","cards":[{"id":6,"name":"Ahli Madya","unoccupied":0},{"id":7,"name":"Ahli Muda","unoccupied":0},{"id":8,"name":"Ahli Pertama","unoccupied":4}],"total":4},{"id":"205","name":"Jabatan Fungsional Pranata Keuangan APBN","cards":[{"id":10,"name":"Penyelia","unoccupied":2},{"id":11,"name":"Mahir","unoccupied":7},{"id":12,"name":"Terampil","unoccupied":4}],"total":13},{"id":"203","name":"Jabatan Fungsional Analis Anggaran","cards":[{"id":6,"name":"Ahli Madya","unoccupied":0},{"id":7,"name":"Ahli Muda","unoccupied":2},{"id":8,"name":"Ahli Pertama","unoccupied":2}],"total":4},{"id":"147","name":"Jabatan Fungsional Analis SDM Aparatur","cards":[{"id":6,"name":"Ahli Madya","unoccupied":0},{"id":7,"name":"Ahli Muda","unoccupied":0},{"id":8,"name":"Ahli Pertama","unoccupied":3}],"total":3},{"id":"208","name":"Jabatan Fungsional Pranata SDM Aparatur","cards":[{"id":10,"name":"Penyelia","unoccupied":3},{"id":11,"name":"Mahir","unoccupied":3},{"id":12,"name":"Terampil","unoccupied":1}],"total":7},{"id":"200,206","name":"Jabatan Fungsional Pranata Komputer","cards":[{"id":6,"name":"Ahli Madya","unoccupied":0},{"id":7,"name":"Ahli Muda","unoccupied":2},{"id":8,"name":"Ahli Pertama","unoccupied":6}],"total":8},{"id":"162","name":"Jabatan Fungsional Pengelola Pengadaan Barang / Jasa","cards":[{"id":6,"name":"Ahli Madya","unoccupied":1},{"id":7,"name":"Ahli Muda","unoccupied":0},{"id":8,"name":"Ahli Pertama","unoccupied":1}],"total":2}]}
      */
     public function index()
     {
@@ -186,24 +185,68 @@ class PromotionController extends Controller
         return $this->response(200, 'success', $response);
     }
 
+    /**
+     * Get Detail of Promotions
+     *
+     * Below is the detail of all data Promotions.
+     * @authenticated
+     * @queryParam position_id string Refers to the position_id of promotions. Example: 41,45,49,53,58,62,66,69,74,79,84,89,93
+     * @queryParam echelon_id string Refers to the echelon_id of promotions. Example: 8
+     * @response 200 {"code":200,"message":"success","data":[{"id":4,"position_id":45,"name":"Ahli Pertama","unoccupied":2,"work_unit":"Asisten Deputi Ekonomi dan Keuangan"},{"id":13,"position_id":49,"name":"Ahli Pertama","unoccupied":2,"work_unit":"Asisten Deputi Industri, Perdagangan, Pariwisata, dan Ekonomi Kreatif"},{"id":21,"position_id":53,"name":"Ahli Pertama","unoccupied":2,"work_unit":"Asisten Deputi Infrastruktur, Ketahanan Energi, dan Sumber Daya Alam"},{"id":30,"position_id":62,"name":"Ahli Pertama","unoccupied":1,"work_unit":"Asisten Deputi Penanggulangan Kemiskinan"},{"id":38,"position_id":66,"name":"Ahli Pertama","unoccupied":1,"work_unit":"Asisten Deputi Pembangunan Sumber Daya Manusia"},{"id":42,"position_id":69,"name":"Ahli Pertama","unoccupied":2,"work_unit":"Asisten Deputi Pemberdayaan Masyarakat dan Penanggulangan Bencana"},{"id":51,"position_id":79,"name":"Ahli Pertama","unoccupied":1,"work_unit":"Asisten Deputi Hubungan Luar Negeri"},{"id":59,"position_id":84,"name":"Ahli Pertama","unoccupied":2,"work_unit":"Asisten Deputi Politik, Hukum, dan Otonomi Daerah"},{"id":67,"position_id":89,"name":"Ahli Pertama","unoccupied":2,"work_unit":"Asisten Deputi Wawasan Kebangsaan, Pertahanan, dan Keamanan"},{"id":75,"position_id":93,"name":"Ahli Pertama","unoccupied":1,"work_unit":"Asisten Deputi Tata Kelola Pemerintahan"}]}
+     */
     public function show()
     {
-        $response = $this->promotionRepository->getPromotionByEchelonId($this->request->echelon_id, explode(",", $this->request->position_id));
-        foreach ($response as $data) {
-            $workUnit = collect($this->positionRepository->getRecursivePosition($data->position_id, 2))
-                ->filter(function ($item) use ($data) {
-                    return $item->id != $data->position_id;
-                })->values()->all();
+        $messages = [
+            'position_id.regex' => 'Format ID jabatan yang dikirim tidak sesuai.',
+            'echelon_id.required' => 'ID eselon harus dikirim',
+            'echelon_id.numeric' => 'ID eselon harus berupa angka.',
+        ];
 
-            if (sizeof($workUnit)) {
-                $workUnit = $workUnit[0]->name;
+        $this->request->validate([
+            'position_id' => 'nullable|regex:/^\d+(,\d+)*$/',
+            'echelon_id' => 'required|numeric',
+        ], $messages);
+
+        $response = $this->promotionRepository->getPromotionByEchelonId($this->request->echelon_id, isset($this->request->position_id) ? explode(",", $this->request->position_id) : []);
+        foreach ($response as $data) {
+            $shownHierarcy = '';
+            //get last 3 parent
+            $last3Parent = $this->positionRepository->getRecursivePosition($data->position_id, 4);
+            $last3Parent = collect($last3Parent)->filter(function ($item) use ($data) {
+                return $item->id != $data->position_id;
+            })->reverse()->values()->all();
+
+            if (sizeof($last3Parent)) {
+                foreach ($last3Parent as $key => $value) {
+                    if ($key > 0) {
+                        $shownHierarcy .= " > ";
+                    }
+                    $shownHierarcy .= $value->name;
+                }
             } else {
-                $workUnit = '-';
+                $shownHierarcy = 'Sekretariat Wakil Presiden';
             }
-            $data->work_unit = $workUnit;
+            $data->hierarchy = $shownHierarcy;
         }
 
         return $this->response(200, 'success', $response);
+    }
+
+    public function filter()
+    {
+        return ($this->promotionRepository->getUserByFilter(
+            $this->request->group_id,
+            $this->request->echelon_id,
+            $this->request->grade_id,
+            $this->request->education_level,
+            $this->request->max_age,
+            $this->request->disciplinary_id,
+            $this->request->targetPredicate_id,
+            $this->request->tmt_cpns,
+            $this->request->grade_year,
+            $this->request->credit_score,
+            $this->request->competency_point,
+        ));
     }
 
     private function addSection($type, $data, $cards, $name)
@@ -216,7 +259,7 @@ class PromotionController extends Controller
         );
 
         return [
-            "id" => $type == 1 ? null : $this->promotionRepository->getPositionIdByName($name),
+            "id" => $type == 1 ? "" : $this->promotionRepository->getPositionIdByName($name),
             "name" => $type == 1 ? $name : "Jabatan Fungsional " . $name,
             "cards" => $resultCards,
             "total" => $total,

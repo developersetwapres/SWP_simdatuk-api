@@ -1906,6 +1906,14 @@ class PositionEchelonSeeder extends Seeder
                 'vertical_order' => 1,
                 'horizontal_order' => 7,
             ],
+            [
+                'id' => 238,
+                'position_id' => 37,
+                'echelon_id' => 1,
+                'available' => 1,
+                'vertical_order' => 1,
+                'horizontal_order' => 1,
+            ],
         ];
 
         DB::table('position_echelons')->insertTs($positionEchelons);

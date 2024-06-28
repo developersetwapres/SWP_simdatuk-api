@@ -88,7 +88,6 @@ class PositionController extends Controller
                     "name" => $position->type == 1 ? 'Struktural' : ($position->type == 2 ? 'Fungsional' : 'Outsource')
                 ];
 
-                $parentId = $position->parent_id;
                 $shownHierarcy = '';
 
                 //get last 3 parent

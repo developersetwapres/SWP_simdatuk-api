@@ -100,6 +100,7 @@ class PromotionRepository
     public function getPromotionByEchelonId($echelonId, $positionIds = [])
     {
         $params[] = $echelonId;
+        $wherePosition = '';
         if (sizeof($positionIds)) {
             $wherePosition = " AND pe.position_id IN (" . implode(",", array_fill(0, count($positionIds), '?')) . ")";
             $params = array_merge($params, $positionIds);
@@ -133,5 +134,88 @@ class PromotionRepository
                 pe.echelon_id = ?" . $wherePosition;
 
         return DB::select($sql, $params);
+    }
+
+    public function getUserByFilter(
+        $groupId = null,
+        $echelonId = null,
+        $gradeId = null,
+        $educationLevel = null,
+        $maxAge = null,
+        $disciplinaryId = null,
+        $targetPredicateId = null,
+        $tmtCPNS = null,
+        $gradeYear = null,
+        $creditScore = null,
+        $competencyPoint = null,
+    ) {
+        $users = DB::table('users as u')
+            ->leftJoin('echelons as e', 'u.echelon_id', '=', 'e.id')
+            ->leftJoin('grades as g', 'u.grade_id', '=', 'g.id')
+            ->select(
+                "u.id",
+                "e.name as echelon_name",
+                "u.name",
+                "g.name as grade_name",
+                "u.employee_id_number",
+                "u.employee_registration_number",
+            );
+
+        if (isset($groupId)) {
+            $users->join('position_history_users as phu', 'phu.user_id', '=', 'u.id');
+            $users->where('phu.group_id', '=', $groupId);
+        }
+
+        if (isset($echelonId)) {
+            $users->where('u.echelon_id', '=', $echelonId);
+        }
+
+        if (isset($gradeId)) {
+            $users->where('u.grade_id', '=', $gradeId);
+        }
+
+        if (isset($educationLevel)) {
+            $users->where('u.education_level', '=', $educationLevel);
+        }
+
+        if (isset($maxAge)) {
+            $date = strtotime(date('Y-m-d') . ' -' . $maxAge . ' year');
+            $users->where('u.date_of_birth', '>=', date('Y-m-d', $date));
+        }
+
+        if (isset($disciplinaryId)) {
+            $users->join('disciplinary_history_users as dhu', 'dhu.user_id', '=', 'u.id');
+            $users->where('dhu.disciplinary_history_id', '=', $disciplinaryId);
+        }
+
+        if (isset($targetPredicateId)) {
+            $users->join('target_history_users as thu', 'thu.user_id', '=', 'u.id');
+            $users->where('thu.employee_performance_predicate', '=', $targetPredicateId);
+        }
+
+        if (isset($tmtCPNS)) {
+            $date = strtotime(date('Y-m-d') . ' -' . $tmtCPNS . ' year');
+            $year = date('Y', $date);
+            $users->where('YEAR(u.tmtcpns)', '=', $year);
+        }
+
+        if (isset($gradeYear)) {
+            $date = strtotime(date('Y-m-d') . ' -' . $gradeYear . ' year');
+            $year = date('Y', $date);
+            $users->where('YEAR(u.grade_effective_date)', '=', $year);
+        }
+
+        if (isset($creditScore)) {
+            $users->join('user_credits as uc', 'uc.user_id', '=', 'u.id');
+            $users->where('uc.score', '=', $creditScore);
+        }
+
+        if (isset($competencyPoint)) {
+            $users->join('user_competencies as uco', 'uco.user_id', '=', 'u.id');
+            $users->where('uco.point', '=', $competencyPoint);
+        }
+
+        $users->groupBy('u.id');
+        return $users->get();
     }
 }

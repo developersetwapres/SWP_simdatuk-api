@@ -335,7 +335,7 @@ class PositionSeeder extends Seeder
                         'id' => 37,
                         'parent_id' => 2,
                         'name' => 'Deputi Bidang Dukungan Kebijakan Pembangunan Ekonomi dan Peningkatan Daya Saing',
-                        'available' => 1,
+                        'available' => 0,
                         'type' => 1,
                         'entity' => 1,
                         'vertical_order' => 1,

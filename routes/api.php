@@ -238,5 +238,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('promotions')->group(function () {
         Route::get('/', [PromotionController::class, 'index']);
         Route::get('/detail', [PromotionController::class, 'show']);
+        Route::get('/filter', [PromotionController::class, 'filter']);
     });
 });
