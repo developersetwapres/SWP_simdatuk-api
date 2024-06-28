@@ -75,6 +75,7 @@ class EmployeeRepository
             'u.description',
             'u.type',
             'u.created_at',
+            'u.quit_date',
         );
         $user = $user->first();
 
