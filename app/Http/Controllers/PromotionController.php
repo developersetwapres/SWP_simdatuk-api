@@ -191,7 +191,7 @@ class PromotionController extends Controller
      * Below is the detail of all data Promotions.
      * @authenticated
      * @queryParam position_id string Refers to the position_id of promotions. Example: 41,45,49,53,58,62,66,69,74,79,84,89,93
-     * @queryParam echelon_id string Refers to the echelon_id of promotions. Example: 8
+     * @queryParam echelon_id integer Refers to the echelon_id of promotions. Example: 8
      * @response 200 {"code":200,"message":"success","data":[{"id":4,"position_id":45,"name":"Ahli Pertama","unoccupied":2,"work_unit":"Asisten Deputi Ekonomi dan Keuangan"},{"id":13,"position_id":49,"name":"Ahli Pertama","unoccupied":2,"work_unit":"Asisten Deputi Industri, Perdagangan, Pariwisata, dan Ekonomi Kreatif"},{"id":21,"position_id":53,"name":"Ahli Pertama","unoccupied":2,"work_unit":"Asisten Deputi Infrastruktur, Ketahanan Energi, dan Sumber Daya Alam"},{"id":30,"position_id":62,"name":"Ahli Pertama","unoccupied":1,"work_unit":"Asisten Deputi Penanggulangan Kemiskinan"},{"id":38,"position_id":66,"name":"Ahli Pertama","unoccupied":1,"work_unit":"Asisten Deputi Pembangunan Sumber Daya Manusia"},{"id":42,"position_id":69,"name":"Ahli Pertama","unoccupied":2,"work_unit":"Asisten Deputi Pemberdayaan Masyarakat dan Penanggulangan Bencana"},{"id":51,"position_id":79,"name":"Ahli Pertama","unoccupied":1,"work_unit":"Asisten Deputi Hubungan Luar Negeri"},{"id":59,"position_id":84,"name":"Ahli Pertama","unoccupied":2,"work_unit":"Asisten Deputi Politik, Hukum, dan Otonomi Daerah"},{"id":67,"position_id":89,"name":"Ahli Pertama","unoccupied":2,"work_unit":"Asisten Deputi Wawasan Kebangsaan, Pertahanan, dan Keamanan"},{"id":75,"position_id":93,"name":"Ahli Pertama","unoccupied":1,"work_unit":"Asisten Deputi Tata Kelola Pemerintahan"}]}
      */
     public function show()
@@ -232,9 +232,27 @@ class PromotionController extends Controller
         return $this->response(200, 'success', $response);
     }
 
+    /**
+     * Get Filter of Promotions
+     *
+     * Below is the filter of all data Promotions.
+     * @authenticated
+     * @queryParam group_id integer Refers to the id of groups. Example: 1
+     * @queryParam echelon_id integer Refers to the id of echelons. Example: 1
+     * @queryParam grade_id integer Refers to the id of grades. Example: 1
+     * @queryParam education_level integer Refers to the level of education level employee. Example: 1
+     * @queryParam max_age integer Refers to the max age of employee. Example: 1
+     * @queryParam disciplinary_id integer Refers to the id of disciplinary_history. Example: 1
+     * @queryParam targetPredicate_id integer Refers to the employee_performance_predicate of target_history_users. Example: 1
+     * @queryParam tmt_cpns integer Refers to the tmt_cpns of employee. Example: 1
+     * @queryParam grade_year integer Refers to the date grade_effective_date of users. Example: 1
+     * @queryParam credit_score integer Refers to the score of user_credits. Example: 1
+     * @queryParam competency_point integer Refers to the point of user_competencies. Example: 1
+     * @response 200 {"code":200,"message":"success","data":[{"id":1952,"echelon_name":null,"name":"Raden Nashrul Fathurrohman","grade_name":null,"employee_id_number":"11000036051078","employee_registration_number":"11000036051078"}]}
+     */
     public function filter()
     {
-        return ($this->promotionRepository->getUserByFilter(
+        $users = $this->promotionRepository->getUserByFilter(
             $this->request->group_id,
             $this->request->echelon_id,
             $this->request->grade_id,
@@ -246,7 +264,9 @@ class PromotionController extends Controller
             $this->request->grade_year,
             $this->request->credit_score,
             $this->request->competency_point,
-        ));
+        );
+
+        return $this->response(200, 'success', $users);
     }
 
     private function addSection($type, $data, $cards, $name)
