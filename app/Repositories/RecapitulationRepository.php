@@ -279,14 +279,30 @@ class RecapitulationRepository
     public function getJabatanFungsional()
     {
         $positions = DB::table('positions as p');
-        $positions->select(DB::raw('GROUP_CONCAT(id) AS ids'), 'name');
+        $positions->select('id', 'name');
         $positions->where('type', 2);
-        $positions->groupBy('name');
+        $positions->orderBy('id', 'asc');
         $positions = $positions->get();
 
+        $grouped = [];
+        foreach (json_decode(json_encode($positions), true) as $item) {
+            if (!isset($grouped[$item['name']])) {
+                $grouped[$item['name']] = [];
+            }
+            $grouped[$item['name']][] = $item['id'];
+        }
+
+        $result = [];
+        foreach ($grouped as $name => $ids) {
+            $result[] = [
+                'name' => $name,
+                'ids' => implode(', ', $ids),
+            ];
+        }
+
         $data = array();
-        foreach ($positions as $position) {
-            $numbers_array = explode(',', $position->ids);
+        foreach ($result as $position) {
+            $numbers_array = explode(',', $position['ids']);
             $numbers_array = array_map('intval', $numbers_array);
             $positionEchelons = DB::table('users');
             $positionEchelons->join('positions', 'users.position_id', '=', 'positions.id');
@@ -294,10 +310,11 @@ class RecapitulationRepository
             $positionEchelons->whereIn('positions.id', $numbers_array);
             $positionEchelons->select('echelons.id', 'echelons.name', DB::raw('COUNT(*) as total'));
             $positionEchelons->groupBy('echelons.name');
+            $positionEchelons->orderBy('echelons.id', 'asc');
             $positionEchelons = $positionEchelons->get();
             array_push($data, [
-                "id" => $position->ids,
-                "name" => $position->name,
+                "id" => $position['ids'],
+                "name" => $position['name'],
                 'total' => $positionEchelons->sum('total'),
                 "cards" => $positionEchelons,
             ]);
@@ -317,12 +334,29 @@ class RecapitulationRepository
      */
     public function getJabatanNonAsn()
     {
+        $sql = "SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));";
+        DB::select($sql);
+
         $positions = DB::table('users as u');
         $positions->join('positions as p', 'u.position_id', '=', 'p.id');
         $positions->select(DB::raw('GROUP_CONCAT(p.id) AS id'), 'p.name', DB::raw('COUNT(u.id) as total'));
         $positions->where('u.type', 2);
         $positions->groupBy('p.name');
-        return $positions = $positions->get();
+        $positions->orderBy('p.id', 'asc');
+        $positions = $positions->get();
+
+        foreach ($positions as $position) {
+            // Step 1: Convert the comma-separated string into an array
+            $array = explode(',', $position->id);
+
+            // Step 2: Remove duplicates from the array
+            $uniqueArray = array_unique($array);
+
+            // Step 3: Convert the array back to a comma-separated string
+            $uniqueCommaSeparatedString = implode(',', $uniqueArray);
+            $position->id = $uniqueCommaSeparatedString;
+        }
+        return $positions;
     }
 
     /**
