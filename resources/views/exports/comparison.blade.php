@@ -66,144 +66,96 @@
 
     <center>
         <div class="title">
-            Bandingkan Pegawai
+            {{$title}}
         </div>
         <div class="sub-title">
-            Per Tanggal : 10-10-2020
+            Per Tanggal : {{$date}}
         </div>
     </center>
 
     <table style="width: 100%; border-collapse: collapse;">
         <tr>
           <td style="width: 230px;"></td>
-          <td class="image">
-            <img src='https://content.ekuator.id/simdatuk/photo_profile/197405171998032001.jpg' class="avatar" /><br>
-            <p class="title-name">
-              Tuti Trihastuti Sukardi S.H., M.Si., M.H.
-            </p>
-          </td>
-          <td class="image">
-            <img src='https://content.ekuator.id/simdatuk/photo_profile/197405171998032001.jpg' class="avatar" /><br>
-            <p class="title-name">
-              Tuti Trihastuti Sukardi S.H., M.Si., M.H.
-            </p>
-          </td>
-          <!-- <td class="image">
-            <img src='https://content.ekuator.id/simdatuk/photo_profile/197405171998032001.jpg' class="avatar" /><br>
-            <p class="title-name">
-              Tuti Trihastuti Sukardi S.H., M.Si., M.H.
-            </p>
-          </td>
-          <td class="image">
-            <img src='https://content.ekuator.id/simdatuk/photo_profile/197405171998032001.jpg' class="avatar" /><br>
-            <p class="title-name">
-              Tuti Trihastuti Sukardi S.H., M.Si., M.H.
-            </p>
-          </td>
-          <td class="image">
-            <img src='https://content.ekuator.id/simdatuk/photo_profile/197405171998032001.jpg' class="avatar" /><br>
-            <p class="title-name">
-              Tuti Trihastuti Sukardi S.H., M.Si., M.H.
-            </p>
-          </td> -->
+            @foreach($data['users'] as $user)
+            <td class="image">
+              <img src="{{$user->photo_profile}}" class="avatar" /><br>
+              <p class="title-name">
+                {{$user->name}}
+              </p>
+            </td>
+            @endforeach
         </tr>
         <tr>
           <td class="title-sidebar">Jabatan</td>
-          <td class="content">Kepala Subbagian Dukungan Administrasi, Asisten Deputi Industri, Perdagangan, Pariwisata, dan Ekonomi Kreatif, Deputi Bidang Dukungan Kebijakan Pembangunan Ekonomi dan Peningkatan Daya Saing</td>
-          <td class="content">Kepala Subbagian Dukungan Administrasi, Asisten Deputi Industri, Perdagangan, Pariwisata, dan Ekonomi Kreatif, Deputi Bidang Dukungan Kebijakan Pembangunan Ekonomi dan Peningkatan Daya Saing</td>
+          @foreach($data['users'] as $user)
+          <td class="content">{{$user->position_name}}</td>
+          @endforeach
         </tr>
         <tr>
           <td class="title-sidebar">Eselon</td>
-          <td class="content">Es. IV, 02-05-2018</td>
-          <td class="content">Es. IV, 02-05-2018</td>
+          @foreach($data['users'] as $user)
+          <td class="content">{{$user->echelon_name}},{{$user->echelon_effective_date}}</td>
+          @endforeach
         </tr>
         <tr>
           <td class="title-sidebar">Golongan</td>
-          <td class="content">Penata Tingkat I (III/d), 01-04-2023</td>
-          <td class="content">Penata Tingkat I (III/d), 01-04-2023</td>
+          @foreach($data['users'] as $user)
+          <td class="content">{{$user->grade_name}},{{$user->grade_effective_date}}</td>
+          @endforeach
         </tr>
         <tr>
-          <td class="title-sidebar">Riwayat Pendidikan</td>
-          <td class="content">
-            <ol>
-              <li>Diploma IV / Strata I, S1 Ekonomi Manajemen</li>
-              <li>Diploma IV / Strata I, S1 Ekonomi Manajemen</li>
-              <li>Diploma IV / Strata I, S1 Ekonomi Manajemen</li>
-            </ol>
-          </td>
-          <td class="content">
-            <ol>
-              <li>Diploma IV / Strata I, S1 Ekonomi Manajemen</li>
-              <li>Diploma IV / Strata I, S1 Ekonomi Manajemen</li>
-              <li>Diploma IV / Strata I, S1 Ekonomi Manajemen</li>
-            </ol>
-          </td>
+          <td class="title-sidebar">Pendidikan Terakhir</td>
+          @foreach($data['users'] as $user)
+          <td class="content">{{$user->position_name}}</td>
+          @endforeach
         </tr>
         <tr>
           <td class="title-sidebar">Riwayat Jabatan</td>
+          @foreach($data['positions'] as $position)
           <td class="content">
             <ol>
-              <li>Kepala Subbagian Acara, Bagian Protokol, Biro Protokol, dan Kerumahtanggaan, Deputi Bidang Administrasi</li>
-              <li>Kepala Subbagian Pelayanan Protokol, Bagian Protokol, Biro Protokol, dan Kerumahtanggaan, Deputi Bidang Administrasi, Sekretariat Wakil Preside</li>
-              <li>Kepala Subbagian Pelayanan Protokol, Bagian Acara dan Persidangan, Biro Protokol, Deputi Bidang Administrasi, Sekretariat Wakil Presiden</li>
-              <li>Kepala Subbagian Istana Wakil Presiden, Bagian Kerumahtanggaan, Biro Protokol, Deputi Bidang Administrasi, Sekretariat Wakil Presiden</li>
-              <li>Kepala Subbagian Istana Wakil Presiden, Bagian Kerumahtanggaan, Biro Protokol dan Kerumahtanggaan, Deputi Seswapres Bidang Administrasi</li>
-              <li>Penata Acara Kepresidenan pada Subbagian Acara, Bagian Acara dan Persidangan, Biro Protokol dan Kerumahtanggaan, Deputi Seswapres Bidang Administrasi</li>
-              <li>Petugas Penyiapan Jamuan, Subbagian Jamuan, Bagian Persidangan, Biro Protokol dan Persidangan, Deputi Seswapres Bidang Administrasi</li>
+              @foreach($position as $item)
+              <li>{{$item['position']}}</li>
+              @endforeach
             </ol>
           </td>
-          <td class="content">
-            <ol>
-              <li>Kepala Subbagian Acara, Bagian Protokol, Biro Protokol, dan Kerumahtanggaan, Deputi Bidang Administrasi</li>
-              <li>Kepala Subbagian Pelayanan Protokol, Bagian Protokol, Biro Protokol, dan Kerumahtanggaan, Deputi Bidang Administrasi, Sekretariat Wakil Preside</li>
-              <li>Kepala Subbagian Pelayanan Protokol, Bagian Acara dan Persidangan, Biro Protokol, Deputi Bidang Administrasi, Sekretariat Wakil Presiden</li>
-              <li>Kepala Subbagian Istana Wakil Presiden, Bagian Kerumahtanggaan, Biro Protokol, Deputi Bidang Administrasi, Sekretariat Wakil Presiden</li>
-              <li>Kepala Subbagian Istana Wakil Presiden, Bagian Kerumahtanggaan, Biro Protokol dan Kerumahtanggaan, Deputi Seswapres Bidang Administrasi</li>
-              <li>Penata Acara Kepresidenan pada Subbagian Acara, Bagian Acara dan Persidangan, Biro Protokol dan Kerumahtanggaan, Deputi Seswapres Bidang Administrasi</li>
-              <li>Petugas Penyiapan Jamuan, Subbagian Jamuan, Bagian Persidangan, Biro Protokol dan Persidangan, Deputi Seswapres Bidang Administrasi</li>
-            </ol>
-          </td>
+          @endforeach
         </tr>
         <tr>
           <td class="title-sidebar">Riwayat Pelatihan Struktural</td>
+          @foreach($data['strukturals'] as $struktural)
           <td class="content">
             <ol>
-              <li>Diklat PIM Tk.IV</li>
-              <li>Diklat PIM Tk.IV</li>
+              @foreach($struktural as $item)
+              <li>{{$item['name']}}</li>
+              @endforeach
             </ol>
           </td>
-          <td class="content">
-            <ol>
-              <li>Diklat PIM Tk.IV</li>
-              <li>Diklat PIM Tk.IV</li>
-            </ol>
-          </td>
+          @endforeach
         </tr>
         <tr>
           <td class="title-sidebar">Riwayat Pelatihan Fungsional</td>
+          @foreach($data['fungsionals'] as $fungsional)
           <td class="content">
             <ol>
-              <li>Diklat PIM Tk.IV</li>
-              <li>Diklat PIM Tk.IV</li>
+              @foreach($fungsional as $item)
+              <li>{{$item['name']}}</li>
+              @endforeach
             </ol>
           </td>
+          @endforeach
         </tr>
         <tr>
           <td class="title-sidebar">Riwayat Pelatihan Teknis</td>
+          @foreach($data['tekniss'] as $teknis)
           <td class="content">
             <ol>
-              <li>Webinar Setneg Serial Lecture 01 dengan tema Impacful Sociopreneursip</li>
-              <li>Webinar Innovation Talks (InnoTalks) & Music “Building innovation Playground from A to Z”</li>
-              <li>Kegiatan Seminar Virtual (Zoom Meeting) Program Pengembangan Kompentensi Biro Protokol dan Kerumahtanggaan oleh Ade Ulfah Rahayu Ningsih, S.E. dengan tema “Kendala dalam pelayanan Keprotokolan di Masa Kini”</li>
+              @foreach($teknis as $item)
+              <li>{{$item['name']}}</li>
+              @endforeach
             </ol>
           </td>
-          <td class="content">
-            <ol>
-              <li>Webinar Setneg Serial Lecture 01 dengan tema Impacful Sociopreneursip</li>
-              <li>Webinar Innovation Talks (InnoTalks) & Music “Building innovation Playground from A to Z”</li>
-              <li>Kegiatan Seminar Virtual (Zoom Meeting) Program Pengembangan Kompentensi Biro Protokol dan Kerumahtanggaan oleh Ade Ulfah Rahayu Ningsih, S.E. dengan tema “Kendala dalam pelayanan Keprotokolan di Masa Kini”</li>
-            </ol>
-          </td>
+          @endforeach
         </tr>
         <tr>
           <td class="title-sidebar">Penilaian SKP (2 Tahun Terakhir)</td>
