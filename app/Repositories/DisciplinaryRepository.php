@@ -36,8 +36,6 @@ class DisciplinaryRepository
             ->orderBy('dhu.date_of_decree', 'desc')
             ->get();
 
-        foreach ($disciplinaries as $disciplinary) {
-        }
         return $disciplinaries;
     }
 }
