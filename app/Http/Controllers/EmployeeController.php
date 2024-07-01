@@ -449,8 +449,10 @@ class EmployeeController extends Controller
 
             if (isset($this->posted['employee_id_card']) && is_file($this->posted['employee_id_card'])) {
                 $this->posted['employee_id_card'] = $this->uploadDocument($this->posted['employee_id_card'], 'employee_id_card', $this->request->employee_id_number);
+                unset($this->posted['delete_employee_id_card']);
             } else if ($this->posted['delete_employee_id_card'] == true) {
                 $this->posted['employee_id_card'] = null;
+                unset($this->posted['delete_employee_id_card']);
             } else {
                 unset($this->posted['delete_employee_id_card']);
                 unset($this->posted['employee_id_card']);
