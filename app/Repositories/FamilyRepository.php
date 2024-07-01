@@ -17,6 +17,7 @@ class FamilyRepository
             'id_number',
             'gender',
             'religion',
+            'date_of_birth',
             'place_of_birth',
             'name_of_father',
             'name_of_mother',

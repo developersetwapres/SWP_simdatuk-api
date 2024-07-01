@@ -51,7 +51,7 @@ class UpdateEducationEmployeeRequest
             'educations.*.degree_document.file' => 'Ijazah harus berupa file.',
             'educations.*.degree_document.extensions' => 'Ijazah harus berupa jpg, jpeg atau png.',
             'educations.*.degree_document.max' => 'Ukuran ijazah tidak boleh lebih dari 2MB.',
-            'educations.*.delete_degree_document' => 'Status hapus ijazah tidak boleh kosong.',
+            'educations.*.delete_degree_document.required' => 'Status hapus ijazah tidak boleh kosong.',
         ];
     }
 

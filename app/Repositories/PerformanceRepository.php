@@ -18,6 +18,7 @@ class PerformanceRepository
             'ph.name',
             'ph.performance_period',
             'phu.work_performance_score',
+            'phu.description',
         );
         $performances->orderBy('ph.period_year', 'desc');
         $performances->orderBy('ph.period_month', 'desc');

@@ -13,7 +13,7 @@ class UpdateFamilyEmployeeRequest
     public static function rules(): array
     {
         return [
-            'families.*.id' => 'numeric|nullable',
+            'families.*.id' => 'nullable|numeric',
             'families.*.card_number' => 'required|max:21',
             'families.*.name' => 'required|max:160',
             'families.*.id_number' => 'required|max:16',
