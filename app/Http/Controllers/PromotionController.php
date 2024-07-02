@@ -235,7 +235,7 @@ class PromotionController extends Controller
     /**
      * Get Filter of Promotions
      *
-     * Below is the filter of all data Promotions.
+     * Below is for get user based on filter.
      * @authenticated
      * @queryParam group_id integer Refers to the id of groups. Example: 1
      * @queryParam echelon_id integer Refers to the id of echelons. Example: 1
@@ -250,7 +250,7 @@ class PromotionController extends Controller
      * @queryParam competency_point integer Refers to the point of user_competencies. Example: 1
      * @response 200 {"code":200,"message":"success","data":[{"id":1952,"echelon_name":null,"name":"Raden Nashrul Fathurrohman","grade_name":null,"employee_id_number":"11000036051078","employee_registration_number":"11000036051078"}]}
      */
-    public function filter()
+    public function users()
     {
         $users = $this->promotionRepository->getUserByFilter(
             $this->request->group_id,
@@ -266,6 +266,25 @@ class PromotionController extends Controller
             $this->request->competency_point,
         );
 
+        return $this->response(200, 'success', $users);
+    }
+
+    public function compare()
+    {
+        $messages = [
+            'user_id.required' => 'User ID tidak boleh kosong.',
+            'user_id.array' => 'User ID harus berupa array.',
+            'user_id.min' => 'User ID minimal 2 buah.',
+            'user_id.*.required' => 'User ID tidak boleh kosong.',
+            'user_id.*.numeric' => 'User ID harus berupa angka.',
+        ];
+
+        $this->request->validate([
+            'user_id' => 'required|array|min:2',
+            'user_id.*' => 'required|numeric',
+        ], $messages);
+
+        $users = $this->promotionRepository->getUserByIds($this->request->user_id);
         return $this->response(200, 'success', $users);
     }
 
