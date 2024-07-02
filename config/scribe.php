@@ -174,6 +174,7 @@ INTRO
             'Summary',
             'Diagram',
             'Compare',
+            'Promotion',
             'Employee',
             'History',
             'Master Data',
