@@ -123,7 +123,10 @@ class EmployeeController extends Controller
      * @queryParam position_id integer Refers to the position of employee. Example: 1
      * @queryParam grade_id integer Refers to the grade of employee. Example: 1
      * @queryParam employment_type_id integer Refers to the employment type of employee. Example: 1
+     * @queryParam education_level integer Refers to the Level of Employee Education. 1=SD/Sederajat, 2=SLTP/Sederajat, 3=SLTA/Sederajat, 4=Diploma I/II, 5=Akademik/D3/S.Muda, 6=Diploma IV/Strata I, 7=Strata II, 8=Strata III
      * @queryParam religion integer Refers to the religion of employee 1=Islam 2=Kristen 3=Katolik 4=Hindu 5=Buddha 6=Konghucu. Example: 1
+     * @queryParam min_age integer Refers to the minimum age of employee. Example: 20
+     * @queryParam max_age integer Refers to the maximum age of employee. Example: 50
      * @queryParam month_of_birth integer Refers to the month of birth of employee 1-12. Example: 1
      * @queryParam employment_status integer Refers to the employment status 1=Aktif, 2=Pensiun, 3=Berhenti, 4=Meninggal, 5=Alih Status, 6=Aktif PS, 7=CLTN, 8=TBL, 9=Non Aktif. Example: 1
      * @response 200 {"code": 200, "message": "success", "data": [{"id": 32, "username": "admin", "employee_id_number": "0000000000000", "employee_registration_number": "0000000000000", "role_name": "administrator", "status": "Aktif"}], "pagination": {"total": 1, "count": 1, "per_page": 1, "current_page": 1, "total_pages": 1, "links": {"first_page": "http://localhost/api/users?page=1", "last_page": "http://localhost/api/users?page=1", "next_page": null, "prev_page": null}}}
@@ -168,10 +171,12 @@ class EmployeeController extends Controller
             'et.name as employment_type',
             'u.description'
         );
+
         $users->where(function ($query) {
             $query->where('u.name', 'like', '%' . $this->request->search . '%')
                 ->orWhere('u.employee_id_number', 'like', '%' . $this->request->search . '%');
         });
+
         if (!is_null($this->request->type)) {
             $users->where('u.type', $this->request->type);
         }
@@ -198,6 +203,17 @@ class EmployeeController extends Controller
         }
         if (!is_null($this->request->gender)) {
             $users->where('u.gender', $this->request->gender);
+        }
+        if (isset($this->request->min_age)) {
+            $maxDate = now()->subYears($this->request->min_age)->format('Y-m-d');
+            $users->whereDate('u.date_of_birth', '<=', $maxDate);
+        }
+        if (isset($this->request->max_age)) {
+            $minDate = now()->subYears($this->request->max_age)->format('Y-m-d');
+            $users->whereDate('u.date_of_birth', '>=', $minDate);
+        }
+        if (!is_null($this->request->education_level)) {
+            $users->where('u.education_level', $this->request->education_level);
         }
 
         $users->orderBy('u.employment_status', 'asc');

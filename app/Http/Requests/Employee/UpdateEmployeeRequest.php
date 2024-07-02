@@ -230,6 +230,8 @@ class UpdateEmployeeRequest extends FormRequest
             'grade_effective_date.date' => 'Tanggal efektif golongan harus berupa tanggal.',
             'position_id.requird' => 'Jabatan tidak boleh kosong.',
             'position_id.numeric' => 'Jabatan harus berupa angka.',
+            'educations_level.required' => 'Tingkat pendidikan tidak boleh kosong.',
+            'educations_level.in' => 'Tingkat pendidikan harus diantara 1,2,3,4,5,6,7, atau 8',
             'echelon_id.numeric' => 'Eselon harus berupa angka.',
             'echelon_effective_date.date' => 'Tanggal efektif eselon harus berupa tanggal.',
             'institution_id.required' => 'Institusi tidak boleh kosong.',

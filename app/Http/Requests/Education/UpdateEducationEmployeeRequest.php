@@ -37,7 +37,7 @@ class UpdateEducationEmployeeRequest
             'educations.*.id.numeric' => 'Education ID harus berupa angka.',
             'educations.*.level.required' => 'Tingkat pendidikan tidak boleh kosong.',
             'educations.*.level.numeric' => 'Tingkat pendidikan harus berupa angka.',
-            'educations.*.level.in' => 'Tingkat pendidikan harus diantara 1,2,3,4,5,6,7,8 atau 9',
+            'educations.*.level.in' => 'Tingkat pendidikan harus diantara 1,2,3,4,5,6,7, atau 8',
             'educations.*.name.requird' => 'Nama tidak boleh kosong.',
             'educations.*.name.max' => 'Nama tidak boleh lebih dari 160 karakter.',
             'educations.*.faculty.max' => 'Nama fakultas tidak boleh lebih dari 160 karakter.',
