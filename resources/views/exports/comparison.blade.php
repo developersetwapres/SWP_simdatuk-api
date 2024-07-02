@@ -94,30 +94,34 @@
         <tr>
           <td class="title-sidebar">Eselon</td>
           @foreach($data['users'] as $user)
-          <td class="content">{{$user->echelon_name}},{{$user->echelon_effective_date}}</td>
+          <td class="content">{{$user->echelon_name}}, {{$user->echelon_effective_date}}</td>
           @endforeach
         </tr>
         <tr>
           <td class="title-sidebar">Golongan</td>
           @foreach($data['users'] as $user)
-          <td class="content">{{$user->grade_name}},{{$user->grade_effective_date}}</td>
+          <td class="content">{{$user->grade_name}}, {{$user->grade_effective_date}}</td>
           @endforeach
         </tr>
         <tr>
           <td class="title-sidebar">Pendidikan Terakhir</td>
           @foreach($data['users'] as $user)
-          <td class="content">{{$user->position_name}}</td>
+          <td class="content">{{$user->education_level}}, {{$user->education_name}}</td>
           @endforeach
         </tr>
         <tr>
           <td class="title-sidebar">Riwayat Jabatan</td>
           @foreach($data['positions'] as $position)
           <td class="content">
+            @if (count($position) > 0)
             <ol>
               @foreach($position as $item)
               <li>{{$item['position']}}</li>
               @endforeach
             </ol>
+            @else
+            -
+            @endif
           </td>
           @endforeach
         </tr>
@@ -125,11 +129,15 @@
           <td class="title-sidebar">Riwayat Pelatihan Struktural</td>
           @foreach($data['strukturals'] as $struktural)
           <td class="content">
+            @if (count($struktural) > 0)
             <ol>
               @foreach($struktural as $item)
               <li>{{$item['name']}}</li>
               @endforeach
             </ol>
+            @else
+            -
+            @endif
           </td>
           @endforeach
         </tr>
@@ -137,11 +145,15 @@
           <td class="title-sidebar">Riwayat Pelatihan Fungsional</td>
           @foreach($data['fungsionals'] as $fungsional)
           <td class="content">
+            @if (count($fungsional) > 0)
             <ol>
               @foreach($fungsional as $item)
-              <li>{{$item['name']}}</li>
+                <li>{{$item['name']}}</li>
               @endforeach
             </ol>
+            @else
+            -
+            @endif
           </td>
           @endforeach
         </tr>
@@ -149,103 +161,113 @@
           <td class="title-sidebar">Riwayat Pelatihan Teknis</td>
           @foreach($data['tekniss'] as $teknis)
           <td class="content">
+            @if (count($teknis) > 0)
             <ol>
               @foreach($teknis as $item)
               <li>{{$item['name']}}</li>
               @endforeach
             </ol>
+            @else
+            -
+            @endif
           </td>
           @endforeach
         </tr>
         <tr>
           <td class="title-sidebar">Penilaian SKP (2 Tahun Terakhir)</td>
+          @foreach($data['targets'] as $target)
           <td class="content">
+            @if (count($target) > 0)
             <ol>
-              <li>Rating Perilaku Kerja : Di bawah ekspektasi, Predikat Kinerja Pegawai : Baik</li>
-              <li>Rating Perilaku Kerja : Di bawah ekspektasi, Predikat Kinerja Pegawai : Baik</li>
+              @foreach($target as $item)
+              <li>Rating Perilaku Kerja: {{$item['work_behavior_rating']}}, Predikat Kinerja Pegawai: {{$item['employee_performance_predicate']}}</li>
+              @endforeach
             </ol>
+            @else
+            -
+            @endif
           </td>
-          <td class="content">
-            <ol>
-              <li>Rating Perilaku Kerja : Di bawah ekspektasi, Predikat Kinerja Pegawai : Baik</li>
-              <li>Rating Perilaku Kerja : Di bawah ekspektasi, Predikat Kinerja Pegawai : Baik</li>
-            </ol>
-          </td>
+          @endforeach
         </tr>
         <tr>
           <td class="title-sidebar">Riwayat Hukuman Displin</td>
+          @foreach($data['disciplinaries'] as $disciplinary)
           <td class="content">
+            @if (count($disciplinary) > 0)
             <ol>
-              <li>Ringan, 12-12-2023</li>
-              <li>Ringan, 12-12-20123</li>
+              @foreach($disciplinary as $item)
+              <li>{{$item['start_date']}}, {{$item['description']}}</li>
+              @endforeach
             </ol>
+            @else
+            -
+            @endif
           </td>
-          <td class="content">
-            <ol>
-              <li>Ringan, 12-12-2023</li>
-              <li>Ringan, 12-12-20123</li>
-            </ol>
-          </td>
+          @endforeach
         </tr>
         <tr>
           <td class="title-sidebar">Catatan</td>
+          @foreach($data['notes'] as $note)
           <td class="content">
+            @if (count($note) > 0)
             <ol>
-              <li>Sangat rajin dan selalu bis3a diandalkan</li>
-              <li>Sangat rajin dan selalu bisa diandalkan</li>
+              @foreach($note as $item)
+              <li>{{$item['description']}}</li>
+              @endforeach
             </ol>
+            @else
+            -
+            @endif
           </td>
-          <td class="content">
-            <ol>
-              <li>Sangat rajin dan selalu bis3a diandalkan</li>
-              <li>Sangat rajin dan selalu bisa diandalkan</li>
-            </ol>
-          </td>
+          @endforeach
         </tr>
         <tr>
           <td class="title-sidebar">Hasil Assessment</td>
+          @foreach($data['assessments'] as $assessment)
           <td class="content">
+            @if (count($assessment) > 0)
             <ol>
-              <li>26-04-2024, Baik</li>
-              <li>26-04-2024, Baik1</li>
+              @foreach($assessment as $item)
+              <li>{{$item['event_date']}}, {{$item['point']}}</li>
+              @endforeach
             </ol>
+            @else
+            -
+            @endif
           </td>
-          <td class="content">
-            <ol>
-              <li>26-04-2024, Baik</li>
-              <li>26-04-2024, Baik1</li>
-            </ol>
-          </td>
+          @endforeach
         </tr>
         <tr>
           <td class="title-sidebar">Hasil Uji Kompetensi</td>
+          @foreach($data['competencies'] as $competency)
           <td class="content">
+            @if (count($competency) > 0)
             <ol>
-              <li>6-04-2024, 80</li>
-              <li>6-04-2024, 80</li>
+              @foreach($competency as $item)
+              <li>{{$item['event_date']}}, {{$item['point']}}</li>
+              @endforeach
             </ol>
+            @else
+            -
+            @endif
           </td>
-          <td class="content">
-            <ol>
-              <li>6-04-2024, 80</li>
-              <li>6-04-2024, 80</li>
-            </ol>
-          </td>
+          @endforeach
         </tr>
         <tr>
           <td class="title-sidebar">Hasil Talent Pool</td>
+          @foreach($data['talents'] as $talent)
           <td class="content">
+            @if (count($talent) > 0)
             <ol>
-              <li>26-04-2024, 80</li>
-              <li>26-04-2024, 81</li>
+              @foreach($talent as $item)
+              <li>{{$item['event_date']}}, {{$item['point']}}</li>
+              @endforeach
             </ol>
+            @else
+            -
+            @endif
           </td>
-          <td class="content">
-            <ol>
-              <li>26-04-2024, 80</li>
-              <li>26-04-2024, 81</li>
-            </ol>
-          </td>
+          @endforeach
         </tr>
     </table>
 </body>

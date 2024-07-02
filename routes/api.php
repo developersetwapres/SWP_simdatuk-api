@@ -8,6 +8,7 @@ use App\Http\Controllers\DisciplinaryHistoryController;
 use App\Http\Controllers\EchelonController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmploymentTypeController;
+use App\Http\Controllers\ExportComparisonController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\ExportRecapitulationController;
 use App\Http\Controllers\GradeController;
@@ -227,7 +228,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::prefix('export')->group(function () {
-        Route::get('/comparisons', [ExportRecapitulationController::class, 'comparison']);
+        Route::get('/comparisons', [ExportComparisonController::class, 'index']);
         Route::get('/recapitulations/{type}', [ExportRecapitulationController::class, 'recapitulation']);
         Route::post('/employees/{type}', [ExportController::class, 'employees']);
         Route::post('/employees-drh/{id}', [ExportController::class, 'detailEmployee']);
