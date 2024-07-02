@@ -32,6 +32,7 @@ use App\Http\Controllers\RecognitionHistoryController;
 use App\Http\Controllers\ResidenceController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SummaryController;
+use App\Http\Controllers\SynchronizationController;
 use App\Http\Controllers\TargetHistoryController;
 use App\Http\Controllers\TrainingHistoryController;
 use App\Http\Controllers\UserController;
@@ -99,6 +100,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/{id}', [EmployeeController::class, 'show']);
         Route::post('/{id}', [EmployeeController::class, 'update']);
         Route::put('/status', [EmployeeController::class, 'status']);
+        Route::patch('/synchronization', [SynchronizationController::class, 'index']);
     });
 
     Route::prefix('position-histories')->group(function () {
