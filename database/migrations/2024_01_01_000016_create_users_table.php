@@ -60,9 +60,9 @@ return new class extends Migration
             $table->boolean('status')->default(false)->comment('true=active, false=deactivate');
             $table->string('verification_code', 160)->nullable()->unique();
             $table->date('expire_at')->nullable();
-            $table->timestamp('cpns_effective_date')->nullable();
-            $table->timestamp('pns_effective_date')->nullable();
-            $table->timestamp('retirement_effective_date')->nullable();
+            $table->date('cpns_effective_date')->nullable();
+            $table->date('pns_effective_date')->nullable();
+            $table->date('retirement_effective_date')->nullable();
             $table->string('office_email')->nullable()->comment('email dinas');
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
