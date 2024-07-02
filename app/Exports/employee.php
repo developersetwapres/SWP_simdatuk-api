@@ -169,7 +169,9 @@ class employee implements FromView, WithDrawings, WithEvents
         if (isset($this->toggleField['isNoWorker'])){
             $users->addSelect('users.employee_registration_number');
         }
-        //add full work duration later
+        if(isset($this->toggleField['isWorkDuration'])){
+            $users->addSelect('users.position_effective_date');
+        }
         if (isset($this->toggleField['isGradeDuration'])){
             $users->addSelect(['users.grade_effective_date']);
         }

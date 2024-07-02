@@ -30,9 +30,9 @@ class ExportController extends Controller
     }
 
     /**
-     * Export Detail Employee
+     * Export Detail DRH Employee
      *
-     * Export detail employee data to .CSV, .XLSX and .PDF.
+     * Export detail employee data to .PDF.
      * @urlParam id Refers to the ID of Employee. Example:: 1
      * @group Export
      * @authenticated
@@ -540,9 +540,9 @@ class ExportController extends Controller
         return $pdf->download('user-pdf.pdf');
     }
     /**
-     * Export Detail Employee
+     * Export Detail DRH Employee
      *
-     * Export detail of multiple employees data to .PDF inside a zip file.
+     * Export detail of multiple employees DRH data to .PDF inside a zip file.
      * @group Export
      * @bodyParam organization int[] list of organization's ids. Example: [1,2]
      * @bodyParam employee_type int[] list of employee's type. Example: [1,2]
@@ -552,8 +552,8 @@ class ExportController extends Controller
      * @bodyParam education int[] list of employee's education level. Example: [1, 6]
      * @bodyParam gender int[] list of employee's gender.
      * @bodyParam marital_status int[] list of employee's marital status. Example: [1,4]
-     * @bodyParam max_range int maximum age of employees. Example: 50
-     * @bodyParam min_range int minimum age of employees. Example: 50
+     * @bodyParam max_age int maximum age of employees. Example: 50
+     * @bodyParam min_age int minimum age of employees. Example: 50
      * @bodyParam deputy int[] list of deputy ids. Example: [1,2]
      * @authenticated
      */
@@ -568,7 +568,6 @@ class ExportController extends Controller
         if (isset($request->employee_type)) {
             $user->whereIn('users.type', $request->employee_type);
         }
-        // Deputi WIP
         if (isset($request->echelons)) {
             $user->whereIn('echelons.name', $request->echelons);
         }
@@ -686,11 +685,10 @@ class ExportController extends Controller
     /**
      * Export List of Employees
      *
-     * Export list of employees data to .CSV, .XLSX
+     * Export list of employees data to .CSV, .XLSX or .PDF
      * @group Export
      * @authenticated
-     *
-     * @bodyParam extension string required Indicates exported file extension. Example: xlsx
+     * @urlParam type string required file type of the document. Example: csv
      * @bodyParam deputy int[] List of employee's deputy. Example: [1,2]
      * @bodyParam employee int[] List of employee's type. Example: [1,2]
      * @bodyParam echelons int[] List of echelons' id. Example: [1,2]
@@ -699,7 +697,8 @@ class ExportController extends Controller
      * @bodyParam education int[] List of employee's education level. Example: [1, 6]
      * @bodyParam gender int[] List of employee's gender. Example: [1,0]
      * @bodyParam marital_status int[] List of employee's marital status. Example: [1,4]
-     * @bodyParam age_range string[] List of employee's age range. Example: ["30-40", "40-50"]
+     * @bodyParam min_age int filter minimum age of employees. Example: 50
+     * @bodyParam max_age int filter minimum age of employees. Example: 60
      * @bodyParam grade_range string[] List of employee's grade duration in year. Example: ["30-40", "40-50"]
      * @bodyParam total_working_duration string[] List range of total employee's working duration in year. Example: ["30-40", "40-50"]
      * @bodyParam target_period string Filter which period employees target_histories. Example: Q1
@@ -724,7 +723,7 @@ class ExportController extends Controller
      * @bodyParam isOrganization int Indicates whether the organization field is included in the output document. Example: 1
      * @bodyParam isWorkUnit int Indicates whether the work unit field is included in the output document. Example: 1
      * @bodyParam isNoWorker int Indicates whether the worker number field is included in the output document. Example: 1
-     * @bodyParam workDuration int Indicates the duration of work. Example: 1
+     * @bodyParam isWorkDuration int Indicates the duration of work. Example: 1
      * @bodyParam isGradeDuration int Indicates whether the grade duration field is included in the output document. Example: 1
      * @bodyParam isNPWP int Indicates whether the NPWP field is included in the output document. Example: 1
      * @bodyParam isEmployeeStatus int Indicates whether the employee status field is included in the output document. Example: 1
@@ -766,20 +765,21 @@ class ExportController extends Controller
             ->leftJoin('target_history_users', 'users.id', '=', 'target_history_users.user_id')
             ->leftJoin('target_histories', 'target_history_users.target_history_id', '=', 'target_histories.id')
             ->select('users.id');
-        if (isset($request->age_range)) {
-            $ageRanges = $request->input('age_range', []);
+        if (isset($request->min_age)) {
+            $minAge = $request->input('min_age');
             $now = Carbon::now();
 
-            $users->where(function ($query) use ($ageRanges, $now, &$dateRanges) {
-                foreach ($ageRanges as $range) {
-                    [$minAge, $maxAge] = explode('-', $range);
+            $minDate = $now->copy()->subYears($minAge + 1)->addDay()->toDateString();
 
-                    $maxDate = $now->copy()->subYears($minAge)->toDateString();
-                    $minDate = $now->copy()->subYears($maxAge + 1)->addDay()->toDateString();
+            $users->where('users.date_of_birth', '<=', $minDate);
+        }
+        if (isset($request->max_age)) {
+            $maxAge = $request->input('max_age');
+            $now = Carbon::now();
 
-                    $query->orWhereBetween('users.date_of_birth', [$minDate, $maxDate]);
-                }
-            });
+            $maxDate = $now->copy()->subYears($maxAge)->toDateString();
+
+            $users->where('users.date_of_birth', '>=', $maxDate);
         }
         if (isset($request->grade_range)) {
             $gradeRanges = $request->input('grade_range', []);
@@ -879,7 +879,7 @@ class ExportController extends Controller
         $toggleFieldBio['isDateCPNS'] = $request->isDateCPNS == 1;
         $toggleFieldBio['isStartDate'] = $request->isStartDate == 1;
         $toggleFieldBio['isEndDate'] = $request->isEndDate == 1;
-        $toggleFieldBio['workDuration'] = $request->workDuration == 1; //note
+        $toggleFieldBio['isWorkDuration'] = $request->isWorkDuration == 1; //note
         $toggleFieldBio['isGradeDuration'] = $request->isGradeDuration == 1;
         $toggleFieldBio['isPosition'] = $request->isPosition == 1;
         $toggleFieldBio['isDatePosition'] = $request->isDatePosition == 1;
@@ -922,11 +922,11 @@ class ExportController extends Controller
         $toggleFieldBio['isAssessment'] = $request->isAssessment == 1;
         $toggleFieldBio['isCompetency'] = $request->isCompetency == 1;
         $toggleFieldBio['isTalentPool'] = $request->isTalentPool == 1;
-        if ($request->extension == "csv") {
+        if ($request->type == "csv") {
             return Excel::download(new employee($toggleFieldBio, $userIds), 'Employees-' . Carbon::now() . '.csv', \Maatwebsite\Excel\Excel::CSV);
-        } else if ($request->extension == "xlsx") {
+        } else if ($request->type == "xlsx") {
             return Excel::download(new employee($toggleFieldBio, $userIds), 'Employees-' . Carbon::now() . '.xlsx', \Maatwebsite\Excel\Excel::XLSX);
-        } else if ($request->extension == "pdf") {
+        } else if ($request->type == "pdf") {
             $tmp = sys_get_temp_dir();
             $usersData = DB::table('users');
             if ($toggleFieldBio['isName']) {
@@ -982,7 +982,6 @@ class ExportController extends Controller
             if ($toggleFieldBio['isNoWorker']) {
                 $usersData->addSelect('users.employee_id_number', 'users.employee_registration_number');
             }
-//add full work duration later
             if ($toggleFieldBio['isGradeDuration']) {
                 $usersData->addSelect(['users.grade_effective_date']);
             }
@@ -1391,8 +1390,11 @@ class ExportController extends Controller
             if ($toggleFieldBio['isKarisu'] == 1){
                 $usersData->addSelect('users.karisu_number');
             }
-            if ($toggleFieldBio['isEmergencyContact']){
+            if ($toggleFieldBio['isEmergencyContact'] == 1){
                 $usersData->addSelect('users.emergency_contact');
+            }
+            if ($toggleFieldBio['isWorkDuration'] == 1){
+                $users->addSelect('users.position_effective_date');
             }
             $usersData->whereIn('users.id', $userIds);
             $usersData->groupBy('users.id');
@@ -1413,13 +1415,13 @@ class ExportController extends Controller
             return $pdf->download('Employees-' . Carbon::now() . '.pdf');
 //            return Excel::download(new employee($toggleFieldBio, $userIds), 'Employees-' . Carbon::now(). '.pdf', \Maatwebsite\Excel\Excel::DOMPDF);
         }
-        return $this->response('400', 'test');
+        return $this->response('400', 'File type provided is incorrect');
     }
 
     /**
-     * Export List of Employees
+     * Preview Export of Employees
      *
-     * Export list of employees data preview
+     * Preview Export of employees data preview
      * @group Export
      * @authenticated
      *
@@ -1431,7 +1433,8 @@ class ExportController extends Controller
      * @bodyParam education int[] List of employee's education level. Example: [1, 6]
      * @bodyParam gender int[] List of employee's gender. Example: [1,0]
      * @bodyParam marital_status int[] List of employee's marital status. Example: [1,4]
-     * @bodyParam age_range string[] List of employee's age range. Example: ["30-40", "40-50"]
+     * @bodyParam min_age int Filter minimum age of employee. Example: 30
+     * @bodyParam max_age int Filter maximum age of employee. Example: 50
      * @bodyParam grade_range string[] List of employee's grade duration in year. Example: ["30-40", "40-50"]
      * @bodyParam total_working_duration string[] List range of total employee's working duration in year. Example: ["30-40", "40-50"]
      * @bodyParam target_period string Filter which period employees target_histories. Example: Q1
@@ -1456,7 +1459,7 @@ class ExportController extends Controller
      * @bodyParam isOrganization int Indicates whether the organization field is included in the output document. Example: 1
      * @bodyParam isWorkUnit int Indicates whether the work unit field is included in the output document. Example: 1
      * @bodyParam isNoWorker int Indicates whether the worker number field is included in the output document. Example: 1
-     * @bodyParam workDuration int Indicates the duration of work. Example: 1
+     * @bodyParam isWorkDuration int Indicates the duration of work. Example: 1
      * @bodyParam isGradeDuration int Indicates whether the grade duration field is included in the output document. Example: 1
      * @bodyParam isNPWP int Indicates whether the NPWP (Tax Identification Number) field is included in the output document. Example: 1
      * @bodyParam isEmployeeStatus int Indicates whether the employee status field is included in the output document. Example: 1
@@ -1496,28 +1499,8 @@ class ExportController extends Controller
             ->leftJoin('target_history_users', 'users.id', '=', 'target_history_users.user_id')
             ->leftJoin('target_histories', 'target_history_users.target_history_id', '=', 'target_histories.id')
             ->select('users.id');
-        if (isset($request->organization)) {
-            $users->whereIn('users.organization_id', $request->organization);
-        }
-        if (isset($request->age_range)) {
-            $ageRanges = $request->input('age_range', []);
-            $now = Carbon::now();
-
-            $users->where(function ($query) use ($ageRanges, $now, &$dateRanges) {
-                foreach ($ageRanges as $range) {
-                    [$minAge, $maxAge] = explode('-', $range);
-
-                    // Calculate date range for the current age range
-                    $maxDate = $now->copy()->subYears($minAge)->toDateString();
-                    $minDate = $now->copy()->subYears($maxAge + 1)->addDay()->toDateString();
-
-                    // Store the date range for debugging
-                    $dateRanges[] = ['minAge' => $minAge, 'maxAge' => $maxAge, 'minDate' => $minDate, 'maxDate' => $maxDate];
-
-                    // Add orWhereBetween clause within the nested query
-                    $query->orWhereBetween('users.date_of_birth', [$minDate, $maxDate]);
-                }
-            });
+        if (isset($request->employee_type)) {
+            $users->whereIn('users.type', $request->employee_type);
         }
         if (isset($request->deputy)){
             $parentIds = DB::table('positions')->whereIn('id', $request->deputy)->pluck('parent_id')->toArray();
@@ -1533,17 +1516,57 @@ class ExportController extends Controller
         if (isset($request->education)) {
             $users->whereIn('user_educations.level', $request->education);
         }
-        if (isset($request->position_status)) {
-            $users->whereIn('position_history_users.position_status', $request->position_status);
-        }
         if (isset($request->gender)) {
             $users->whereIn('users.gender', $request->gender);
+        }
+//        if (isset($request->position_status)) {
+//            $users->whereIn('position_history_users.position_status', $request->position_status);
+//        }
+        if (isset($request->min_age)) {
+            $minAge = $request->input('min_age');
+            $now = Carbon::now();
+            $minDate = $now->copy()->subYears($minAge + 1)->addDay()->toDateString();
+            $users->where('users.date_of_birth', '<=', $minDate);
+        }
+
+        if (isset($request->max_age)) {
+            $maxAge = $request->input('max_age');
+            $now = Carbon::now();
+            $maxDate = $now->copy()->subYears($maxAge)->toDateString();
+            $users->where('users.date_of_birth', '>=', $maxDate);
         }
         if (isset($request->marital_status)) {
             $users->whereIn('users.marital_status', $request->marital_status);
         }
-        if (isset($request->employee_type)) {
-            $users->whereIn('users.type', $request->employee_type);
+        if (isset($request->grade_range)) {
+            $gradeRanges = $request->input('grade_range', []);
+            $now = Carbon::now();
+
+            $users->where(function ($query) use ($gradeRanges, $now) {
+                foreach ($gradeRanges as $range) {
+                    [$minYears, $maxYears] = explode('-', $range);
+
+                    $maxDate = $now->copy()->subYears($minYears)->toDateString();
+                    $minDate = $now->copy()->subYears($maxYears + 1)->addDay()->toDateString();
+
+                    $query->orWhereBetween('users.grade_effective_date', [$minDate, $maxDate]);
+                }
+            });
+        }
+        if (isset($request->total_working_duration)) {
+            $gradeRanges = $request->input('total_working_duration', []);
+            $now = Carbon::now();
+
+            $users->where(function ($query) use ($gradeRanges, $now) {
+                foreach ($gradeRanges as $range) {
+                    [$minYears, $maxYears] = explode('-', $range);
+
+                    $maxDate = $now->copy()->subYears($minYears)->toDateString();
+                    $minDate = $now->copy()->subYears($maxYears + 1)->addDay()->toDateString();
+
+                    $query->orWhereBetween('users.position_effective_date', [$minDate, $maxDate]);
+                }
+            });
         }
         if (isset($request->credit_period)) {
             $users->where('user_credits.period', $request->credit_period);
@@ -1577,6 +1600,24 @@ class ExportController extends Controller
         if ($this->request->isName == 1) {
             $usersPreview->addSelect('users.name');
         }
+        if ($this->request->isNip == 1) {
+            $usersPreview->addSelect('users.employee_id_card_number', 'users.employee_registration_number');
+        }
+        if ($this->request->isBirthPlaceDate == 1) {
+            $usersPreview->addSelect('users.place_of_birth', 'users.date_of_birth');
+        }
+        if ($this->request->isAge == 1) {
+            $usersPreview->addSelect(DB::raw("TIMESTAMPDIFF(YEAR, users.date_of_birth, CURDATE()) AS age"));
+        }
+        if ($this->request->isReligion == 1) {
+            $usersPreview->addSelect('users.religion');
+        }
+        if ($this->request->isGender == 1) {
+            $usersPreview->addSelect('users.gender');
+        }
+        if ($this->request->isMaritalStatus == 1) {
+            $usersPreview->addSelect('users.marital_status');
+        }
         if ($this->request->isPosition == 1) {
             $usersPreview->leftJoin('positions', 'users.position_id', '=', 'positions.id');
             $usersPreview->addSelect('positions.name as position_name');
@@ -1592,29 +1633,11 @@ class ExportController extends Controller
             $usersPreview->leftJoin('grades as g', 'users.grade_id', '=', 'g.id');
             $usersPreview->addSelect('g.name as grade_name');
         }
-        if ($this->request->isNip == 1) {
-            $usersPreview->addSelect('users.employee_id_card_number', 'users.employee_registration_number');
-        }
-        if ($this->request->isBirthPlaceDate == 1) {
-            $usersPreview->addSelect('users.place_of_birth', 'users.date_of_birth');
-        }
-        if ($this->request->isAge == 1) {
-            $usersPreview->addSelect(DB::raw("TIMESTAMPDIFF(YEAR, users.date_of_birth, CURDATE()) AS age"));
-        }
         if ($this->request->isWorkUnit == 1) {
             $users->addSelect('users.employment_type_id  as work_unit');
         }
         if ($this->request->isEmployeeStatus == 1) {
             $usersPreview->addSelect('users.employment_status');
-        }
-        if ($this->request->isReligion == 1) {
-            $usersPreview->addSelect('users.religion');
-        }
-        if ($this->request->isGender == 1) {
-            $usersPreview->addSelect('users.gender');
-        }
-        if ($this->request->isMaritalStatus == 1) {
-            $usersPreview->addSelect('users.marital_status');
         }
         if ($this->request->isAgency == 1) {
             $usersPreview->leftJoin('institutions as i', 'users.institution_id', '=', 'i.id');
@@ -2039,6 +2062,9 @@ class ExportController extends Controller
         if ($this->request->isEmergencyContact == 1){
             $usersPreview->addSelect('users.emergency_contact');
         }
+        if ($this->request->isWorkDuration == 1 ){
+            $usersPreview->addSelect(DB::raw("TIMESTAMPDIFF(YEAR, users.position_effective_date, CURDATE()) AS work_duration"));
+        }
         $usersPreview->whereIn('users.id', $userIds);
         $usersPreview->groupBy('users.id');
         $usersPreview = $usersPreview->get();
@@ -2058,7 +2084,7 @@ class ExportController extends Controller
         $toggleFieldBio['isDateCPNS'] = $request->isDateCPNS == 1;
         $toggleFieldBio['isStartDate'] = $request->isStartDate == 1;
         $toggleFieldBio['isEndDate'] = $request->isEndDate == 1;
-        $toggleFieldBio['workDuration'] = $request->workDuration == 1; //note
+        $toggleFieldBio['isWorkDuration'] = $request->isWorkDuration == 1; //note
         $toggleFieldBio['isGradeDuration'] = $request->isGradeDuration == 1;
         $toggleFieldBio['isPosition'] = $request->isPosition == 1;
         $toggleFieldBio['isDatePosition'] = $request->isDatePosition == 1;

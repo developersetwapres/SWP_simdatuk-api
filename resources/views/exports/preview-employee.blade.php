@@ -277,6 +277,9 @@
             @if($toggleField['isEmergencyContact'])
                 <th class="section-header-color">Kontak Darurat</th>
             @endif
+            @if($toggleField['isWorkDuration'])
+                <th class="section-header-color">Masa Kerja Keseluruhan</th>
+            @endif
         </tr>
         </thead>
         <tbody>
@@ -367,7 +370,7 @@
                 @if($toggleField['isNoWorker'])
                     <td>{{ $value['employee_id_card_number'] }} / {{ $value['employee_registration_number'] }}</td>
                 @endif
-                @if($toggleField['workDuration'])
+                @if($toggleField['isWorkDuration'])
                     <td>{{ $value['work_duration'] }}</td>
                 @endif
                 @if($toggleField['isGradeDuration'])

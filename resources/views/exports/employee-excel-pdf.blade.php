@@ -152,7 +152,7 @@
         "TMT CPNS" => $toggleField['isDateCPNS'],
         "Tanggal Mulai Bekerja" => $toggleField['isStartDate'],
         "Tanggal Terakhir Bekerja" => $toggleField['isEndDate'],
-        "Lama Bekerja" => $toggleField['workDuration'],
+        "Masa Kerja Keseluruhan" => $toggleField['isworkDuration'],
         "Masa Kerja Golongan" => $toggleField['isGradeDuration'],
         "Jabatan" => $toggleField['isPosition'],
         "Tanggal Mulai Menjabat" => $toggleField['isDatePosition'],
@@ -273,7 +273,7 @@
                             @case("Tanggal Terakhir Bekerja")
                                 {{ $value['retirement_effective_date'] }}
                                 @break
-                            @case("Lama Bekerja")
+                            @case("Masa Kerja Keseluruhan")
                                 {{ $value['work_duration'] }}
                                 @break
                             @case("Masa Kerja Golongan")
