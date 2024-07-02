@@ -47,19 +47,23 @@ class PositionController extends Controller
      */
     public function index()
     {
+        $messages = [
+            'page.numeric' => 'Page harus berupa angka.',
+            'page.min' => 'Page minimal harus 1 atau lebih.',
+            'limit.numeric' => 'Limit harus berupa angka.',
+            'limit.min' => 'Limit minimal harus 1 atau lebih.',
+            'type.array' => 'Tipe harus berupa array.',
+            'type.*.numeric' => 'Tipe harus berupa angka.',
+        ];
+
+        $this->request->validate([
+            'page' => 'nullable|numeric|min:1',
+            'limit' => 'nullable|numeric|min:1',
+            'type' => 'nullable|array',
+            'type.*' => 'nullable|numeric',
+        ], $messages);
+
         try {
-            $messages = [
-                'page.numeric' => 'Page harus berupa angka.',
-                'page.min' => 'Page minimal harus 1 atau lebih.',
-                'limit.numeric' => 'Limit harus berupa angka.',
-                'limit.min' => 'Limit minimal harus 1 atau lebih.',
-            ];
-
-            $this->request->validate([
-                'page' => 'nullable|numeric|min:1',
-                'limit' => 'nullable|numeric|min:1',
-            ], $messages);
-
             $positions = DB::table('positions')
                 ->select(
                     'positions.id',
@@ -68,6 +72,12 @@ class PositionController extends Controller
                     'positions.parent_id',
                 )
                 ->orderBy('positions.id', 'ASC');
+
+            if (isset($this->request->type) && sizeof(array_filter($this->request->type, function ($item) {
+                return isset($item);
+            }))) {
+                $positions->whereIn('positions.type', $this->request->type);
+            }
 
             if (!is_null($this->request->search)) {
                 $positions->where('positions.name', 'LIKE', '%' . $this->request->search . '%');
