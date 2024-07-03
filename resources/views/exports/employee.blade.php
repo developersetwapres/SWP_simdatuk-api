@@ -142,9 +142,6 @@
                 @if($toggleField['isAgency'])
                     <th class="section-header-color">Instansi</th>
                 @endif
-                @if($toggleField['isOrganization'])
-                    <th class="section-header-color">Organisasi</th>
-                @endif
                 @if($toggleField['isWorkUnit'])
                     <th class="section-header-color">Unit Kerja</th>
                 @endif
@@ -357,9 +354,6 @@
                 @endif
                 @if($toggleField['isAgency'])
                     <td>{{ $value['institution_name'] }}</td>
-                @endif
-                @if($toggleField['isOrganization'])
-                    <td>{{ $value['organization_name'] }}</td>
                 @endif
                 @if($toggleField['isWorkUnit'])
                     <td>{{ $value['work_unit'] }}</td>

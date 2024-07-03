@@ -142,17 +142,11 @@
             @if($toggleField['isAgency'])
                 <th class="section-header-color">Instansi</th>
             @endif
-            @if($toggleField['isOrganization'])
-                <th class="section-header-color">Organisasi</th>
-            @endif
             @if($toggleField['isWorkUnit'])
                 <th class="section-header-color">Unit Kerja</th>
             @endif
             @if($toggleField['isNoWorker'])
                 <th class="section-header-color">No. Pegawai</th>
-            @endif
-            @if($toggleField['workDuration'])
-                <th class="section-header-color">Lama Bekerja</th>
             @endif
             @if($toggleField['isGradeDuration'])
                 <th class="section-header-color">Lama Grade</th>
@@ -235,9 +229,6 @@
             @if($toggleField['isNotes'])
                 <th class="section-header-color">Catatan</th>
             @endif
-            @if($toggleField['isPositionDescription'])
-                <th class="section-header-color">Deskripsi Jabatan</th>
-            @endif
             @if($toggleField['isEmployeeType'])
                 <th class="section-header-color">Jenis Pegawai</th>
             @endif
@@ -294,7 +285,7 @@
                     <td>{{ $value['position_name'] }}</td>
                 @endif
                 @if($toggleField['isPositionDescription'])
-                    <td>{{ $value['position_description'] }}</td>
+                    <td>{{ $value['description'] }}</td>
                 @endif
                 @if($toggleField['isEchelons'])
                     <td>{{ $value['echelons_name'] }}</td>
@@ -361,17 +352,14 @@
                 @if($toggleField['isAgency'])
                     <td>{{ $value['institution_name'] }}</td>
                 @endif
-                @if($toggleField['isOrganization'])
-                    <td>{{ $value['organization_name'] }}</td>
-                @endif
                 @if($toggleField['isWorkUnit'])
-                    <td>{{ $value['work_unit'] }}</td>
+                    <td>{{ $value['employee_registration_number'] }}</td>
                 @endif
                 @if($toggleField['isNoWorker'])
                     <td>{{ $value['employee_id_card_number'] }} / {{ $value['employee_registration_number'] }}</td>
                 @endif
                 @if($toggleField['isWorkDuration'])
-                    <td>{{ $value['work_duration'] }}</td>
+                    <td>{{ $value['position_effective_date'] }}</td>
                 @endif
                 @if($toggleField['isGradeDuration'])
                     <td>{{ $value['grade_effective_date'] }}</td>
@@ -513,11 +501,6 @@
                 @if($toggleField['isNotes'])
                     <td>
                         <ul>{!! $value['notes'] !!}</ul>
-                    </td>
-                @endif
-                @if($toggleField['isPositionDescription'])
-                    <td>
-                        <ul>{!! $value['position_description'] !!}</ul>
                     </td>
                 @endif
                 @if($toggleField['isEmployeeType'])

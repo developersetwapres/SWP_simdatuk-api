@@ -343,7 +343,7 @@ class ExportController extends Controller
         $userAssessment->select('ua.event_date', 'ua.point', 'ua.organizer', 'ua.assessment_document');
         $userAssessment = $userAssessment->get();
         $userAssessmentData = array();
-        foreach ($userAssessment as $assessment){
+        foreach ($userAssessment as $assessment) {
             $userAssessmentData[] = [
                 'assessment_date' => $assessment->event_date,
                 'point' => $assessment->point,
@@ -357,7 +357,7 @@ class ExportController extends Controller
         $userCompetency->select('uc.event_date', 'uc.point', 'uc.organizer', 'uc.competency_document');
         $userCompetency = $userCompetency->get();
         $userCompetencyData = array();
-        foreach ($userCompetency as $competency){
+        foreach ($userCompetency as $competency) {
             $userCompetencyData[] = [
                 'assessment_date' => $competency->event_date,
                 'point' => $competency->point,
@@ -370,7 +370,7 @@ class ExportController extends Controller
         $userTalent->select('ut.event_date', 'ut.point', 'ut.organizer', 'ut.talent_document');
         $userTalent = $userTalent->get();
         $userTalentData = array();
-        foreach ($userTalent as $talent){
+        foreach ($userTalent as $talent) {
             $userTalentData[] = [
                 'assessment_date' => $talent->event_date,
                 'point' => $talent->point,
@@ -441,13 +441,13 @@ class ExportController extends Controller
             5 => 'Duda',
             default => '-',
         };
-        $employeeType = match ($user->type){
+        $employeeType = match ($user->type) {
             1 => 'ASN',
             2 => 'NON ASN',
             3 => 'OUTSOURCING',
             default => '-',
         };
-        $educationLevel = match ($user->education_level){
+        $educationLevel = match ($user->education_level) {
             1 => 'SD/Sederajat',
             2 => 'SLTP/Sederajat',
             3 => 'SLTA/Sederajat',
@@ -465,7 +465,7 @@ class ExportController extends Controller
         $housingComplex = $housingComplex->first();
         $complex = 'Luar';
         $complexName = '-';
-        if (isset($housingComplex->name) && $housingComplex->name != 'Luar Komplek' ){
+        if (isset($housingComplex->name) && $housingComplex->name != 'Luar Komplek') {
             $complex = 'dalam';
             $complexName = $housingComplex->name;
         }
@@ -475,7 +475,6 @@ class ExportController extends Controller
         $gradeDate = new \DateTime($gradeStartDate);
         $currentDate = new \DateTime();
         $gradeDate = $currentDate->diff($gradeDate);
-
 
         $pdf = Pdf::loadview('exports/user', [
             'userProfile' => [
@@ -544,7 +543,6 @@ class ExportController extends Controller
      *
      * Export detail of multiple employees DRH data to .PDF inside a zip file.
      * @group Export
-     * @bodyParam organization int[] list of organization's ids. Example: [1,2]
      * @bodyParam employee_type int[] list of employee's type. Example: [1,2]
      * @bodyParam echelons int[] list of echelons' id. Example: [1,2]
      * @bodyParam grades int[] list of employee's grade. Example: [1,2]
@@ -574,9 +572,9 @@ class ExportController extends Controller
         if (isset($request->grades)) {
             $user->whereIn('users.grade_id', $request->grades);
         }
-        if (isset($request->organization)) {
-            $user->whereIn('users.organization_id', $request->organization);
-        }
+//        if (isset($request->organization)) {
+//            $user->whereIn('users.organization_id', $request->organization);
+//        }
         if (isset($request->job_description)) {
             $user->whereIn('users.description', $request->job_description);
         }
@@ -637,7 +635,7 @@ class ExportController extends Controller
                 }
             });
         }
-        if (isset($request->deputy)){
+        if (isset($request->deputy)) {
             $parentIds = DB::table('positions')->whereIn('id', $request->deputy)->pluck('parent_id')->toArray();
             $positionIds = array_merge($parentIds, $request->deputy);
             $user->whereIn('users.position_id', $positionIds);
@@ -720,7 +718,6 @@ class ExportController extends Controller
      * @bodyParam isGender int Indicates whether the gender field is included in the output document. Example: 1
      * @bodyParam isMaritalStatus int Indicates whether the marital status field is included in the output document. Example: 1
      * @bodyParam isAgency int Indicates whether the agency field is included in the output document. Example: 1
-     * @bodyParam isOrganization int Indicates whether the organization field is included in the output document. Example: 1
      * @bodyParam isWorkUnit int Indicates whether the work unit field is included in the output document. Example: 1
      * @bodyParam isNoWorker int Indicates whether the worker number field is included in the output document. Example: 1
      * @bodyParam isWorkDuration int Indicates the duration of work. Example: 1
@@ -853,7 +850,7 @@ class ExportController extends Controller
         if (isset($request->employee)) {
             $users->whereIn('users.type', $request->employee);
         }
-        if (isset($request->deputy)){
+        if (isset($request->deputy)) {
             $parentIds = DB::table('positions')->whereIn('id', $request->deputy)->pluck('parent_id')->toArray();
             $positionIds = array_merge($parentIds, $request->deputy);
             $users->whereIn('users.position_id', $positionIds);
@@ -875,7 +872,7 @@ class ExportController extends Controller
         $toggleFieldBio['isMaritalStatus'] = $request->isMaritalStatus == 1;
         $toggleFieldBio['isEmployeeType'] = $request->isEmployeeType == 1;
         $toggleFieldBio['isAssistanceType'] = $request->isAssistanceType == 1;
-        $toggleFieldBio['isOutsourcingType'] = $request->isOutsourcingType ==1;
+        $toggleFieldBio['isOutsourcingType'] = $request->isOutsourcingType == 1;
         $toggleFieldBio['isDateCPNS'] = $request->isDateCPNS == 1;
         $toggleFieldBio['isStartDate'] = $request->isStartDate == 1;
         $toggleFieldBio['isEndDate'] = $request->isEndDate == 1;
@@ -903,9 +900,9 @@ class ExportController extends Controller
         $toggleFieldBio['isOfficeNumber'] = $request->isOfficeNumber == 1;
         $toggleFieldBio['isEmail'] = $request->isEmail == 1;
         $toggleFieldBio['isOfficeEmail'] = $request->isOfficeEmail == 1;
-        $toggleFieldBio['isOrganization'] = $request->isOrganization == 1;
+//        $toggleFieldBio['isOrganization'] = $request->isOrganization == 1;
         $toggleFieldBio['isWorkUnit'] = $request->isWorkUnit == 1;
-        $toggleFieldBio['isEmergencyContact'] = $request->isEmergencyContact ==1;
+        $toggleFieldBio['isEmergencyContact'] = $request->isEmergencyContact == 1;
         $toggleFieldBio['isPensionCap'] = $request->isPensionCap == 1; //not ready
         $toggleFieldBio['isPositionHistory'] = $request->isPositionHistory == 1;
         $toggleFieldBio['isGradeHistory'] = $request->isGradeHistory == 1;
@@ -928,480 +925,487 @@ class ExportController extends Controller
             return Excel::download(new employee($toggleFieldBio, $userIds), 'Employees-' . Carbon::now() . '.xlsx', \Maatwebsite\Excel\Excel::XLSX);
         } else if ($request->type == "pdf") {
             $tmp = sys_get_temp_dir();
+            $userIdArray = collect($userIds);
+            $userIdsChunk = $userIdArray->chunk(100);
+            $results = collect();
             $usersData = DB::table('users');
-            if ($toggleFieldBio['isName']) {
-                $usersData->addSelect('users.name');
-            }
-            if ($toggleFieldBio['isPosition']) {
-                $usersData->leftJoin('positions', 'users.position_id', '=', 'positions.id');
-                $usersData->addSelect('positions.name as position_name');
-            }
-            if ($toggleFieldBio['isPositionDescription']){
-                $usersData->addSelect('users.description');
-            }
-            if ($toggleFieldBio['isEchelons']) {
-                $usersData->leftJoin('echelons', 'users.echelon_id', '=', 'echelons.id');
-                $usersData->addSelect('echelons.name as echelons_name');
-            }
-            if ($toggleFieldBio['isGrade']) {
-                $usersData->leftJoin('grades as g', 'users.grade_id', '=', 'g.id');
-                $usersData->addSelect('g.name as grade_name');
-            }
-            if ($toggleFieldBio['isNip']) {
-                $usersData->addSelect('users.employee_id_card_number', 'users.employee_registration_number');
-            }
-            if ($toggleFieldBio['isBirthPlaceDate']) {
-                $usersData->addSelect('users.place_of_birth', 'users.date_of_birth');
-            }
-            if ($toggleFieldBio['isAge']) {
-                $usersData->addSelect(DB::raw("TIMESTAMPDIFF(YEAR, users.date_of_birth, CURDATE()) AS age"));
-            }
-            if ($toggleFieldBio['isWorkUnit']) {
-                $usersData->addSelect('users.employment_type_id  as work_unit');
-            }
-            if ($toggleFieldBio['isEmployeeStatus']) {
-                $usersData->addSelect('users.employment_status');
-            }
-            if ($toggleFieldBio['isReligion']) {
-                $usersData->addSelect('users.religion');
-            }
-            if ($toggleFieldBio['isGender']) {
-                $usersData->addSelect('users.gender');
-            }
-            if ($toggleFieldBio['isMaritalStatus']) {
-                $usersData->addSelect('users.marital_status');
-            }
-            if ($toggleFieldBio['isAgency']) {
-                $usersData->leftJoin('institutions as i', 'users.institution_id', '=', 'i.id');
-                $usersData->addSelect('i.name as institution_name');
-            }
+            foreach ($userIdsChunk as $userId) {
+                if ($toggleFieldBio['isName']) {
+                    $usersData->addSelect('users.name');
+                }
+                if ($toggleFieldBio['isPosition']) {
+                    $usersData->leftJoin('positions', 'users.position_id', '=', 'positions.id');
+                    $usersData->addSelect('positions.name as position_name');
+                }
+                if ($toggleFieldBio['isPositionDescription']) {
+                    $usersData->addSelect('users.description');
+                }
+                if ($toggleFieldBio['isEchelons']) {
+                    $usersData->leftJoin('echelons', 'users.echelon_id', '=', 'echelons.id');
+                    $usersData->addSelect('echelons.name as echelons_name');
+                }
+                if ($toggleFieldBio['isGrade']) {
+                    $usersData->leftJoin('grades as g', 'users.grade_id', '=', 'g.id');
+                    $usersData->addSelect('g.name as grade_name');
+                }
+                if ($toggleFieldBio['isNip']) {
+                    $usersData->addSelect('users.employee_id_card_number', 'users.employee_registration_number');
+                }
+                if ($toggleFieldBio['isBirthPlaceDate']) {
+                    $usersData->addSelect('users.place_of_birth', 'users.date_of_birth');
+                }
+                if ($toggleFieldBio['isAge']) {
+                    $usersData->addSelect(DB::raw("TIMESTAMPDIFF(YEAR, users.date_of_birth, CURDATE()) AS age"));
+                }
+                if ($toggleFieldBio['isWorkUnit']) {
+                    $usersData->addSelect('users.employment_type_id  as work_unit');
+                }
+                if ($toggleFieldBio['isEmployeeStatus']) {
+                    $usersData->addSelect('users.employment_status');
+                }
+                if ($toggleFieldBio['isReligion']) {
+                    $usersData->addSelect('users.religion');
+                }
+                if ($toggleFieldBio['isGender']) {
+                    $usersData->addSelect('users.gender');
+                }
+                if ($toggleFieldBio['isMaritalStatus']) {
+                    $usersData->addSelect('users.marital_status');
+                }
+                if ($toggleFieldBio['isAgency']) {
+                    $usersData->leftJoin('institutions as i', 'users.institution_id', '=', 'i.id');
+                    $usersData->addSelect('i.name as institution_name');
+                }
 //            if ($toggleFieldBio['isOrganization']) {
 //                $usersData->leftJoin('groups as o', 'users.organization_id', '=', 'o.id');
 //                $usersData->addSelect('o.name as organization_name');
 //            }
-            if ($toggleFieldBio['isNoWorker']) {
-                $usersData->addSelect('users.employee_id_number', 'users.employee_registration_number');
-            }
-            if ($toggleFieldBio['isGradeDuration']) {
-                $usersData->addSelect(['users.grade_effective_date']);
-            }
-            if ($toggleFieldBio['isNPWP']) {
-                $usersData->addSelect('users.id_tax');
-            }
-            if ($toggleFieldBio['isCurrentAddress']) {
-                $usersData->addSelect('users.current_address');
-            }
-            if ($toggleFieldBio['isComplex']) {
-                $usersData->leftJoin('residences as r', 'users.residence_id', '=', 'r.id');
-                $usersData->addSelect('r.name as residence_name');
-            }
-            if ($toggleFieldBio['isHomeNumber']) {
-                $usersData->addSelect('users.home_phone_number');
-            }
-            if ($toggleFieldBio['isPhoneNumber']) {
-                $usersData->addSelect('users.mobile_phone');
-            }
-            if ($toggleFieldBio['isOfficeAddress']) {
-                $usersData->addSelect('users.office_address');
-            }
-            if ($toggleFieldBio['isOfficeNumber']) {
-                $usersData->addSelect('users.office_phone_number');
-            }
-            if ($toggleFieldBio['isEmail']) {
-                $usersData->addSelect('users.email');
-            }
-            if ($toggleFieldBio['isPositionHistory']) {
-                $gradeHistorySubquery = DB::table('grade_history_users as ghu');
-                $gradeHistorySubquery->join('grades', 'grades.id', '=', 'ghu.grade_id');
-                $gradeHistorySubquery->select('ghu.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li>', grades.name, grades.code,
-            ' (', ghu.decree_date, ',', ghu.decree_number, ')', '</li>') SEPARATOR ' ') as grade_history"));
-                $gradeHistorySubquery->whereIn('ghu.user_id', $userIds);
-                $gradeHistorySubquery->groupBy('ghu.user_id');
-                $usersData->leftJoinSub($gradeHistorySubquery, 'grade_history', function ($join) {
-                    $join->on('users.id', '=', 'grade_history.user_id');
-                });
-                $usersData->addSelect('grade_history.grade_history');
-            }
-            if ($toggleFieldBio['isGradeHistory']) {
-                $positionHistorySubquery = DB::table('position_history_users as phu');
-                $positionHistorySubquery->select('phu.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li>', phu.position, '
-            (', phu.decree_date, ',', phu.decree_number, ')' , '</li>') SEPARATOR ' ') as position_history"));
-                $positionHistorySubquery->whereIn('phu.user_id', $userIds);
-                $positionHistorySubquery->groupBy('phu.user_id');
-                $usersData->leftJoinSub($positionHistorySubquery, 'position_history', function ($join) {
-                    $join->on('users.id', '=', 'position_history.user_id');
-                });
-                $usersData->addSelect('position_history.position_history');
-            }
-            if ($toggleFieldBio['isTrainingStructural']) {
-                $trainingStructuralSubquery = DB::table('training_histories as t');
-                $trainingStructuralSubquery->join('training_history_users as ut', 't.id', '=', 'ut.training_history_id');
-                $trainingStructuralSubquery->select('ut.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li>', t.name, '
-            (Periode: ', t.period_month, ' ', t.period_year, ', Start Date: ', t.start_date, ') Level: ', t.level, ',
-            Organizer: ', t.organizer ,'</li>') SEPARATOR ' ') as structural_training_history"));
-                $trainingStructuralSubquery->whereIn('ut.user_id', $userIds);
-                $trainingStructuralSubquery->where('t.type', 1);
-                $trainingStructuralSubquery->groupBy('ut.user_id');
+                if ($toggleFieldBio['isNoWorker']) {
+                    $usersData->addSelect('users.employee_id_number', 'users.employee_registration_number');
+                }
+                if ($toggleFieldBio['isGradeDuration']) {
+                    $usersData->addSelect(['users.grade_effective_date']);
+                }
+                if ($toggleFieldBio['isNPWP']) {
+                    $usersData->addSelect('users.id_tax');
+                }
+                if ($toggleFieldBio['isCurrentAddress']) {
+                    $usersData->addSelect('users.current_address');
+                }
+                if ($toggleFieldBio['isComplex']) {
+                    $usersData->leftJoin('residences as r', 'users.residence_id', '=', 'r.id');
+                    $usersData->addSelect('r.name as residence_name');
+                }
+                if ($toggleFieldBio['isHomeNumber']) {
+                    $usersData->addSelect('users.home_phone_number');
+                }
+                if ($toggleFieldBio['isPhoneNumber']) {
+                    $usersData->addSelect('users.mobile_phone');
+                }
+                if ($toggleFieldBio['isOfficeAddress']) {
+                    $usersData->addSelect('users.office_address');
+                }
+                if ($toggleFieldBio['isOfficeNumber']) {
+                    $usersData->addSelect('users.office_phone_number');
+                }
+                if ($toggleFieldBio['isEmail']) {
+                    $usersData->addSelect('users.email');
+                }
+                if ($toggleFieldBio['isPositionHistory']) {
+                    $gradeHistorySubquery = DB::table('grade_history_users as ghu');
+                    $gradeHistorySubquery->join('grades', 'grades.id', '=', 'ghu.grade_id');
+                    $gradeHistorySubquery->select('ghu.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li>', grades.name, grades.code,
+                    ' (', ghu.decree_date, ',', ghu.decree_number, ')', '</li>') SEPARATOR ' ') as grade_history"));
+                    $gradeHistorySubquery->whereIn('ghu.user_id', $userId);
+                    $gradeHistorySubquery->groupBy('ghu.user_id');
+                    $usersData->leftJoinSub($gradeHistorySubquery, 'grade_history', function ($join) {
+                        $join->on('users.id', '=', 'grade_history.user_id');
+                    });
+                    $usersData->addSelect('grade_history.grade_history');
+                }
+                if ($toggleFieldBio['isGradeHistory']) {
+                    $positionHistorySubquery = DB::table('position_history_users as phu');
+                    $positionHistorySubquery->select('phu.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li>', phu.position, '
+                    (', phu.decree_date, ',', phu.decree_number, ')' , '</li>') SEPARATOR ' ') as position_history"));
+                    $positionHistorySubquery->whereIn('phu.user_id', $userId);
+                    $positionHistorySubquery->groupBy('phu.user_id');
+                    $usersData->leftJoinSub($positionHistorySubquery, 'position_history', function ($join) {
+                        $join->on('users.id', '=', 'position_history.user_id');
+                    });
+                    $usersData->addSelect('position_history.position_history');
+                }
+                if ($toggleFieldBio['isTrainingStructural']) {
+                    $trainingStructuralSubquery = DB::table('training_histories as t');
+                    $trainingStructuralSubquery->join('training_history_users as ut', 't.id', '=', 'ut.training_history_id');
+                    $trainingStructuralSubquery->select('ut.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li>', t.name, '
+                    (Periode: ', t.period_month, ' ', t.period_year, ', Start Date: ', t.start_date, ') Level: ', t.level, ',
+                    Organizer: ', t.organizer ,'</li>') SEPARATOR ' ') as structural_training_history"));
+                    $trainingStructuralSubquery->whereIn('ut.user_id', $userId);
+                    $trainingStructuralSubquery->where('t.type', 1);
+                    $trainingStructuralSubquery->groupBy('ut.user_id');
 
-                $usersData->leftJoinSub($trainingStructuralSubquery, 'structural_training_history', function ($join) {
-                    $join->on('users.id', '=', 'structural_training_history.user_id');
-                });
+                    $usersData->leftJoinSub($trainingStructuralSubquery, 'structural_training_history', function ($join) {
+                        $join->on('users.id', '=', 'structural_training_history.user_id');
+                    });
 
-                $usersData->addSelect('structural_training_history.structural_training_history');
+                    $usersData->addSelect('structural_training_history.structural_training_history');
+                }
+
+                if ($toggleFieldBio['isTrainingFunctional']) {
+                    $trainingFunctionalSubquery = DB::table('training_histories as t');
+                    $trainingFunctionalSubquery->join('training_history_users as ut', 't.id', '=', 'ut.training_history_id');
+                    $trainingFunctionalSubquery->select('ut.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li>', t.name, '
+                    (Periode: ', t.period_month, ' ', t.period_year, ', Start Date: ', t.start_date, ') Level: ', t.level, ',
+                    Organizer: ', t.organizer ,'</li>') SEPARATOR ' ' ) as functional_training_history "));
+                    $trainingFunctionalSubquery->whereIn('ut.user_id', $userId);
+                    $trainingFunctionalSubquery->where('t.type', 2);
+                    $trainingFunctionalSubquery->groupBy('ut.user_id');
+
+                    $usersData->leftJoinSub($trainingFunctionalSubquery, 'functional_training_history', function ($join) {
+                        $join->on('users.id', '=', 'functional_training_history.user_id');
+                    });
+
+                    $usersData->addSelect('functional_training_history.functional_training_history');
+                }
+
+                if ($toggleFieldBio['isTrainingTechnique']) {
+                    $trainingTechnicSubquery = DB::table('training_histories as t');
+                    $trainingTechnicSubquery->join('training_history_users as ut', 't.id', '=', 'ut.training_history_id');
+                    $trainingTechnicSubquery->select('ut.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li>', t.name, '
+                    (Periode: ', t.period_month, ' ', t.period_year, ', Start Date: ', t.start_date, ') Level: ', t.level, ',
+                    Organizer: ', t.organizer, '</li>') SEPARATOR ' ') as technique_training_history"));
+                    $trainingTechnicSubquery->whereIn('ut.user_id', $userId);
+                    $trainingTechnicSubquery->where('t.type', 3);
+                    $trainingTechnicSubquery->groupBy('ut.user_id');
+
+                    $usersData->leftJoinSub($trainingTechnicSubquery, 'technique_training_history', function ($join) {
+                        $join->on('users.id', '=', 'technique_training_history.user_id');
+                    });
+
+                    $usersData->addSelect('technique_training_history.technique_training_history');
+                }
+                if ($toggleFieldBio['isRecognition']) {
+                    $recognitionSubquery = DB::table('recognition_histories as r');
+                    $recognitionSubquery->join('recognition_history_users as ur', 'r.id', '=', 'ur.recognition_history_id');
+                    $recognitionSubquery->join('recognitions', 'r.recognition_id', '=', 'recognitions.id');
+                    $recognitionSubquery->select('ur.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li>',recognitions.name, '
+                    (Periode: ', r.period_month, ' ', r.period_year, ', Tanggal Terima: ', r.date_of_receipt, ') Decree: ',
+                    r.decree_number, ', Institusi: ', r.awarding_institution,'</li>') SEPARATOR ' ') as recognition_history"));
+                    $recognitionSubquery->whereIn('ur.user_id', $userId);
+                    $recognitionSubquery->groupBy('ur.user_id');
+
+                    $usersData->leftJoinSub($recognitionSubquery, 'recognition_history', function ($join) {
+                        $join->on('users.id', '=', 'recognition_history.user_id');
+                    });
+
+                    $usersData->addSelect('recognition_history.recognition_history');
+                }
+                if ($toggleFieldBio['isSKP']) {
+                    $skpSubquery = DB::table('target_histories as t');
+                    $skpSubquery->join('target_history_users as ut', 't.id', '=', 'ut.target_history_id');
+                    $skpSubquery->select('ut.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li>',t.name, ' (Tanggal: ', t.period_month, ' ',
+                    t.period_year, ', Periode Penilaian: ', t.appraisal_period, ') Penilaian Perilaku : ',
+                     CASE ut.work_behavior_rating
+                            WHEN 1 THEN 'Diatas Ekspektasi'
+                            WHEN 2 THEN 'Sesuai Ekspektasi'
+                            WHEN 3 THEN 'Dibawah Ekspektasi'
+                     END
+                    , ', Penilaian Predikat Performa : ',
+                    CASE ut.employee_performance_predicate
+                            WHEN 1 THEN 'Sangat Baik'
+                            WHEN 2 THEN 'Baik'
+                            WHEN 3 THEN 'Butuh Perbaikan'
+                            WHEN 4 THEN 'Kurang'
+                            WHEN 5 THEN 'Sangat Kurang'
+                     END
+                     ,', Penilaian Performa Organisasi : ',
+                     CASE ut.employee_performance_predicate
+                            WHEN 1 THEN 'Sangat Baik'
+                            WHEN 2 THEN 'Baik'
+                            WHEN 3 THEN 'Cukup'
+                     END, '</li>') SEPARATOR ' ') as skp_history"));
+                    $skpSubquery->whereIn('ut.user_id', $userId);
+                    $skpSubquery->groupBy('ut.user_id');
+
+                    $usersData->leftJoinSub($skpSubquery, 'skp_history', function ($join) {
+                        $join->on('users.id', '=', 'skp_history.user_id');
+                    });
+
+                    $usersData->addSelect('skp_history.skp_history');
+                }
+                if ($toggleFieldBio['isEducationHistory']) {
+                    $educationSubquery = DB::table('user_educations as ut');
+                    $educationSubquery->select('ut.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li> Nama Sekolah : ',ut.name, '
+                    (Fakultas: ', ut.faculty, ' Jurusan: ', ut.major, ', Tahun Lulus: ', ut.year_of_graduation, ') Level: ',
+                         CASE ut.level
+                                WHEN 1 THEN 'SD/Sederajat'
+                                WHEN 2 THEN 'SLTP/Sederajat'
+                                WHEN 3 THEN 'SLTA/Sederajat'
+                                WHEN 4 THEN 'Diploma I/II'
+                                WHEN 5 THEN 'Akademik/D3/S.Muda'
+                                WHEN 6 THEN 'Diploma IV/Strata I'
+                                WHEN 7 THEN 'Strata II'
+                                WHEN 8 THEN 'Strata III'
+                         END
+                        , ', Status: ',
+                        CASE ut.status
+                                WHEN 1 THEN 'Lulus'
+                                WHEN 2 THEN 'DO'
+                                WHEN 3 THEN 'Aktif'
+                                WHEN 4 THEN 'Non-Aktif'
+                                WHEN 5 THEN 'Mengundurkan diri'
+                         END
+                         ,', Description: ', ut.description , '</li>') SEPARATOR ' ') as education_history"));
+                    $educationSubquery->whereIn('ut.user_id', $userId);
+                    $educationSubquery->groupBy('ut.user_id');
+
+                    $usersData->leftJoinSub($educationSubquery, 'education_history', function ($join) {
+                        $join->on('users.id', '=', 'education_history.user_id');
+                    });
+
+                    $usersData->addSelect('education_history.education_history');
+                }
+                if ($toggleFieldBio['isDisciplinary']) {
+                    $disciplinarySubquery = DB::table('disciplinary_history_users as dhu')
+                        ->join('disciplinary_histories as dh', 'dhu.disciplinary_history_id', '=', 'dh.id')
+                        ->join('disciplinaries as d', 'dhu.disciplinary_id', '=', 'd.id')
+                        ->select('dhu.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li> Golongan: ', dhu.grade, ' Posisi: ', dhu.position, ' (Periode: ', dh.period_month, ' ', dh.period_year, ', Tanggal Awal: ', dhu.start_date, ' Tanggal Akhir: ', dhu.end_date, ') Decree: ', dhu.decree_number, ', Kantor Otorisasi: ', dhu.authorizing_officer, ' Petugas: ', dhu.name_of_authorizing_officer, '</li>') SEPARATOR ' ') as disciplinary_history"))
+                        ->whereIn('dhu.user_id', $userId)
+                        ->groupBy('dhu.user_id');
+
+                    $usersData->leftJoinSub($disciplinarySubquery, 'disciplinary_history', function ($join) {
+                        $join->on('users.id', '=', 'disciplinary_history.user_id');
+                    });
+
+                    $usersData->addSelect('disciplinary_history.disciplinary_history');
+                }
+                if ($toggleFieldBio['isFamilyHistory']) {
+                    $familyHistory = DB::table('user_families as uf');
+                    $familyHistory->select('uf.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li> Nama : ',uf.name, '
+                    Nomor KTP: ', uf.id_number, ' Nomor KK: ', uf.card_number, ', Tempat Tanggal Lahir: ', uf.place_of_birth, ', ', uf.date_of_birth ,' Agama: ',
+                    CASE uf.religion
+                        WHEN 1 THEN 'Islam'
+                        WHEN 2 THEN 'Kristen'
+                        WHEN 3 THEN 'Katolik'
+                        WHEN 4 THEN 'Hindu'
+                        WHEN 5 THEN 'Buddha'
+                        WHEN 6 THEN 'Konghucu'
+                    END
+                    , ', Jenis Kelamin: ',
+                    CASE uf.gender
+                        WHEN 1 THEN 'Pria'
+                        WHEN 2 THEN 'Wanita'
+                    END
+                    ,', Nama Ayah: ', uf.name_of_father , ' Nama Ibu:', uf.name_of_mother,
+                    ' Relasi Keluarga : ',
+                    CASE uf.relationship_status
+                        WHEN 1 THEN 'Kepala Keluarga'
+                        WHEN 2 THEN 'Suami'
+                        WHEN 3 THEN 'Istri'
+                        WHEN 4 THEN 'Anak'
+                        WHEN 5 THEN 'Menantu'
+                        WHEN 6 THEN 'Cucu'
+                        WHEN 7 THEN 'Orang Tua'
+                        WHEN 8 THEN 'Mertua'
+                        WHEN 9 THEN 'Famili Lainnya'
+                        WHEN 10 THEN 'Pembantu'
+                        WHEN 11 THEN 'Lainnya'
+                    END
+                    ,' Edukasi: ',
+                    CASE uf.education
+                        WHEN 1 THEN 'Kepala Keluarga'
+                        WHEN 2 THEN 'Suami'
+                        WHEN 3 THEN 'Istri'
+                        WHEN 4 THEN 'Anak'
+                        WHEN 5 THEN 'Menantu'
+                        WHEN 6 THEN 'Cucu'
+                        WHEN 7 THEN 'Orang Tua'
+                        WHEN 8 THEN 'Mertua'
+                        WHEN 9 THEN 'Famili Lainnya'
+                        WHEN 10 THEN 'Pembantu'
+                        WHEN 11 THEN 'Lainnya'
+                    END
+                    ,' Okupasi: ', uf.occupation,' Status Perkawinan',
+                    CASE uf.marital_status
+                        WHEN 1 THEN 'Belum Menikah'
+                        WHEN 2 THEN 'Menikah'
+                        WHEN 3 THEN 'Cerai Hidup'
+                        WHEN 4 THEN 'Cerai Mati'
+                    END
+                    ,' Nomor Handphone', uf.mobile_phone,'</li>') SEPARATOR ' ') as family_history"));
+                    $familyHistory->whereIn('uf.user_id', $userId);
+                    $familyHistory->groupBy('uf.user_id');
+
+                    $usersData->leftJoinSub($familyHistory, 'family_history', function ($join) {
+                        $join->on('users.id', '=', 'family_history.user_id');
+                    });
+
+                    $usersData->addSelect('family_history.family_history');
+                }
+                if ($toggleFieldBio['isLeave']) {
+                    $leaveSubquery = DB::table('user_leaves as ul');
+                    $leaveSubquery->join('users', 'users.id', '=', 'ul.user_id');
+                    $leaveSubquery->join('grades', 'grades.id', '=', 'users.grade_id');
+                    $leaveSubquery->join('positions', 'positions.id', '=', 'users.position_id');
+                    $leaveSubquery->select('ul.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li> Golongan : ',grades.name, '
+                    Jabatan: ', positions.name, ' Tanggal Mulai: ', ul.start_date, ', Tanggal Selesai: ', ul.end_date, ' Alasan: ',
+                    CASE ul.type
+                        WHEN 1 THEN 'Cuti diluar Tanggungan Negara'
+                        WHEN 2 THEN 'Cuti Sakit'
+                        WHEN 3 THEN 'Cuti Besar'
+                        WHEN 4 THEN 'Cuti Bersalin'
+                        WHEN 5 THEN 'Cuti Belajar Luar Negeri'
+                        WHEN 6 THEN 'Cuti Tahunan Luar Negeri'
+                    END
+                    , ', Tujuan: ', ul.description,', Nomor: ', ul.number , '</li>') SEPARATOR ' ') as leave_history"));
+                    $leaveSubquery->whereIn('ul.user_id', $userId);
+                    $leaveSubquery->groupBy('ul.user_id');
+
+                    $usersData->leftJoinSub($leaveSubquery, 'leave_history', function ($join) {
+                        $join->on('users.id', '=', 'leave_history.user_id');
+                    });
+
+                    $usersData->addSelect('leave_history.leave_history');
+                }
+                if ($toggleFieldBio['isAssessment']) {
+                    $assessmentSubquery = DB::table('user_assessments as ua');
+                    $assessmentSubquery->select('ua.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li> Tanggal Assessment : ', ua.event_date, '
+                    Point: ', ua.point, ' Organizer : ', ua.organizer,'</li>') SEPARATOR ' ') as assessment_history"));
+                    $assessmentSubquery->whereIn('ua.user_id', $userId);
+                    $assessmentSubquery->groupBy('ua.user_id');
+
+                    $usersData->leftJoinSub($assessmentSubquery, 'assessment_history', function ($join) {
+                        $join->on('users.id', '=', 'assessment_history.user_id');
+                    });
+
+                    $usersData->addSelect('assessment_history.assessment_history');
+                }
+                if ($toggleFieldBio['isCompetency']) {
+                    $assessmentSubquery = DB::table('user_competencies as ua');
+                    $assessmentSubquery->select('ua.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li> Tanggal Assessment : ', ua.event_date, '
+                    Point: ', ua.point, ' Organizer : ', ua.organizer,'</li>') SEPARATOR ' ') as competency_history"));
+                    $assessmentSubquery->whereIn('ua.user_id', $userId);
+                    $assessmentSubquery->groupBy('ua.user_id');
+
+                    $usersData->leftJoinSub($assessmentSubquery, 'competency_history', function ($join) {
+                        $join->on('users.id', '=', 'competency_history.user_id');
+                    });
+
+                    $usersData->addSelect('competency_history.competency_history');
+                }
+                if ($toggleFieldBio['isTalentPool']) {
+                    $assessmentSubquery = DB::table('user_talents as ua');
+                    $assessmentSubquery->select('ua.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li> Tanggal Assessment : ', ua.event_date, '
+                    Point: ', ua.point, ' Organizer : ', ua.organizer,'</li>') SEPARATOR ' ') as talent_pool_history"));
+                    $assessmentSubquery->whereIn('ua.user_id', $userId);
+                    $assessmentSubquery->groupBy('ua.user_id');
+
+                    $usersData->leftJoinSub($assessmentSubquery, 'talent_pool_history', function ($join) {
+                        $join->on('users.id', '=', 'talent_pool_history.user_id');
+                    });
+
+                    $usersData->addSelect('talent_pool_history.talent_pool_history');
+                }
+                if ($toggleFieldBio['isNotes']) {
+                    $assessmentSubquery = DB::table('user_notes as un');
+                    $assessmentSubquery->join('users', 'un.giver_id', '=', 'users.id');
+                    $assessmentSubquery->select('un.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li> Catatan : ', un.description, '
+                    Pemberi catatan: ', users.name, ' Tanggal : ', un.created_at,'</li>') SEPARATOR ' ') as notes"));
+                    $assessmentSubquery->whereIn('un.user_id', $userId);
+                    $assessmentSubquery->groupBy('un.user_id');
+
+                    $usersData->leftJoinSub($assessmentSubquery, 'notes', function ($join) {
+                        $join->on('users.id', '=', 'notes.user_id');
+                    });
+
+                    $usersData->addSelect('notes.notes');
+                }
+                if ($toggleFieldBio['isEmployeeType'] == 1) {
+                    $employmeeType = DB::table('employment_types as et');
+                    $employmeeType->join('users', 'et.id', '=', 'users.employment_type_id');
+                    $employmeeType->select('users.id as user_id', DB::raw("GROUP_CONCAT( CONCAT('<li>',et.name,'</li>') SEPARATOR '') as employee_type"));
+                    $employmeeType->whereIn('users.id', $userId);
+                    $employmeeType->groupBy('users.id');
+
+                    $usersData->leftJoinSub($employmeeType, 'employee_type', function ($join) {
+                        $join->on('users.id', '=', 'employee_type.user_id');
+                    });
+
+                    $usersData->addSelect('employee_type.employee_type');
+                }
+                if ($toggleFieldBio['isEchelonDate'] == 1) {
+                    $usersData->addSelect('users.echelon_effective_date');
+                }
+                if ($toggleFieldBio['isGradeDate'] == 1) {
+                    $usersData->addSelect('users.grade_effective_date');
+                }
+                if ($toggleFieldBio['isNoFamily'] == 1) {
+                    $usersData->addSelect('users.family_registration_number');
+                }
+                if ($toggleFieldBio['isNIK'] == 1) {
+                    $usersData->addSelect('users.id_number');
+                }
+                if ($toggleFieldBio['isStartDate'] == 1) {
+                    $usersData->addSelect('users.pns_effective_date');
+                }
+                if ($toggleFieldBio['isEndDate'] == 1) {
+                    $usersData->addSelect('users.retirement_effective_date');
+                }
+                if ($toggleFieldBio['isDateCPNS'] == 1) {
+                    $usersData->addSelect('users.cpns_effective_date');
+                }
+                if ($toggleFieldBio['isDatePosition'] == 1) {
+                    $usersData->addSelect('users.position_effective_date');
+                }
+                if ($toggleFieldBio['isOutsourcingType'] == 1) {
+                    $outsourcingSubquery = DB::table('employment_types as et');
+                    $outsourcingSubquery->join('users', 'et.id', '=', 'users.employment_type_id');
+                    $outsourcingSubquery->select('users.id as user_id', DB::raw("GROUP_CONCAT( CONCAT('<li>',et.name,'</li>') SEPARATOR '') as outsource_type"));
+                    $outsourcingSubquery->where('et.type', 3);
+                    $outsourcingSubquery->whereIn('users.id', $userId);
+                    $outsourcingSubquery->groupBy('users.id');
+
+                    $usersData->leftJoinSub($outsourcingSubquery, 'outsource_type', function ($join) {
+                        $join->on('users.id', '=', 'outsource_type.user_id');
+                    });
+
+                    $usersData->addSelect('outsource_type.outsource_type');
+                }
+                if ($toggleFieldBio['isAssistanceType'] == 1) {
+                    $assistanceSubquery = DB::table('employment_types as et');
+                    $assistanceSubquery->join('users', 'et.id', '=', 'users.employment_type_id');
+                    $assistanceSubquery->select('users.id as user_id', DB::raw("GROUP_CONCAT( CONCAT('<li>',et.name,'</li>') SEPARATOR '') as assistance_type"));
+                    $assistanceSubquery->where('et.type', 3);
+                    $assistanceSubquery->whereIn('users.id', $userId);
+                    $assistanceSubquery->groupBy('users.id');
+
+                    $usersData->leftJoinSub($assistanceSubquery, 'assistance_type', function ($join) {
+                        $join->on('users.id', '=', 'assistance_type.user_id');
+                    });
+
+                    $usersData->addSelect('assistance_type.assistance_type');
+                }
+                if ($toggleFieldBio['isOfficeEmail'] == 1) {
+                    $usersData->addSelect('users.office_email');
+                }
+                if ($toggleFieldBio['isKarisu'] == 1) {
+                    $usersData->addSelect('users.karisu_number');
+                }
+                if ($toggleFieldBio['isEmergencyContact'] == 1) {
+                    $usersData->addSelect('users.emergency_contact');
+                }
+                if ($toggleFieldBio['isWorkDuration'] == 1) {
+                    $users->addSelect('users.position_effective_date');
+                }
+                $usersData->whereIn('users.id', $userIds);
+                $usersData->groupBy('users.id');
+                $usersData = $usersData->get();
+                $chunkResult = $usersData->map(function ($item) {
+                    return (array) $item;
+                })->toArray();
+                $usersDatas = $results->concat($chunkResult);
             }
 
-            if ($toggleFieldBio['isTrainingFunctional']) {
-                $trainingFunctionalSubquery = DB::table('training_histories as t');
-                $trainingFunctionalSubquery->join('training_history_users as ut', 't.id', '=', 'ut.training_history_id');
-                $trainingFunctionalSubquery->select('ut.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li>', t.name, '
-            (Periode: ', t.period_month, ' ', t.period_year, ', Start Date: ', t.start_date, ') Level: ', t.level, ',
-            Organizer: ', t.organizer ,'</li>') SEPARATOR ' ' ) as functional_training_history "));
-                $trainingFunctionalSubquery->whereIn('ut.user_id', $userIds);
-                $trainingFunctionalSubquery->where('t.type', 2);
-                $trainingFunctionalSubquery->groupBy('ut.user_id');
-
-                $usersData->leftJoinSub($trainingFunctionalSubquery, 'functional_training_history', function ($join) {
-                    $join->on('users.id', '=', 'functional_training_history.user_id');
-                });
-
-                $usersData->addSelect('functional_training_history.functional_training_history');
-            }
-
-            if ($toggleFieldBio['isTrainingTechnique']) {
-                $trainingTechnicSubquery = DB::table('training_histories as t');
-                $trainingTechnicSubquery->join('training_history_users as ut', 't.id', '=', 'ut.training_history_id');
-                $trainingTechnicSubquery->select('ut.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li>', t.name, '
-            (Periode: ', t.period_month, ' ', t.period_year, ', Start Date: ', t.start_date, ') Level: ', t.level, ',
-            Organizer: ', t.organizer, '</li>') SEPARATOR ' ') as technique_training_history"));
-                $trainingTechnicSubquery->whereIn('ut.user_id', $userIds);
-                $trainingTechnicSubquery->where('t.type', 3);
-                $trainingTechnicSubquery->groupBy('ut.user_id');
-
-                $usersData->leftJoinSub($trainingTechnicSubquery, 'technique_training_history', function ($join) {
-                    $join->on('users.id', '=', 'technique_training_history.user_id');
-                });
-
-                $usersData->addSelect('technique_training_history.technique_training_history');
-            }
-            if ($toggleFieldBio['isRecognition']) {
-                $recognitionSubquery = DB::table('recognition_histories as r');
-                $recognitionSubquery->join('recognition_history_users as ur', 'r.id', '=', 'ur.recognition_history_id');
-                $recognitionSubquery->join('recognitions', 'r.recognition_id', '=', 'recognitions.id');
-                $recognitionSubquery->select('ur.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li>',recognitions.name, '
-            (Periode: ', r.period_month, ' ', r.period_year, ', Tanggal Terima: ', r.date_of_receipt, ') Decree: ',
-            r.decree_number, ', Institusi: ', r.awarding_institution,'</li>') SEPARATOR ' ') as recognition_history"));
-                $recognitionSubquery->whereIn('ur.user_id', $userIds);
-                $recognitionSubquery->groupBy('ur.user_id');
-
-                $usersData->leftJoinSub($recognitionSubquery, 'recognition_history', function ($join) {
-                    $join->on('users.id', '=', 'recognition_history.user_id');
-                });
-
-                $usersData->addSelect('recognition_history.recognition_history');
-            }
-            if ($toggleFieldBio['isSKP']) {
-                $skpSubquery = DB::table('target_histories as t');
-                $skpSubquery->join('target_history_users as ut', 't.id', '=', 'ut.target_history_id');
-                $skpSubquery->select('ut.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li>',t.name, ' (Tanggal: ', t.period_month, ' ',
-                t.period_year, ', Periode Penilaian: ', t.appraisal_period, ') Penilaian Perilaku : ',
-                 CASE ut.work_behavior_rating
-                        WHEN 1 THEN 'Diatas Ekspektasi'
-                        WHEN 2 THEN 'Sesuai Ekspektasi'
-                        WHEN 3 THEN 'Dibawah Ekspektasi'
-                 END
-                , ', Penilaian Predikat Performa : ',
-                CASE ut.employee_performance_predicate
-                        WHEN 1 THEN 'Sangat Baik'
-                        WHEN 2 THEN 'Baik'
-                        WHEN 3 THEN 'Butuh Perbaikan'
-                        WHEN 4 THEN 'Kurang'
-                        WHEN 5 THEN 'Sangat Kurang'
-                 END
-                 ,', Penilaian Performa Organisasi : ',
-                 CASE ut.employee_performance_predicate
-                        WHEN 1 THEN 'Sangat Baik'
-                        WHEN 2 THEN 'Baik'
-                        WHEN 3 THEN 'Cukup'
-                 END, '</li>') SEPARATOR ' ') as skp_history"));
-                $skpSubquery->whereIn('ut.user_id', $userIds);
-                $skpSubquery->groupBy('ut.user_id');
-
-                $usersData->leftJoinSub($skpSubquery, 'skp_history', function ($join) {
-                    $join->on('users.id', '=', 'skp_history.user_id');
-                });
-
-                $usersData->addSelect('skp_history.skp_history');
-            }
-            if ($toggleFieldBio['isEducationHistory']) {
-                $educationSubquery = DB::table('user_educations as ut');
-                $educationSubquery->select('ut.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li> Nama Sekolah : ',ut.name, '
-            (Fakultas: ', ut.faculty, ' Jurusan: ', ut.major, ', Tahun Lulus: ', ut.year_of_graduation, ') Level: ',
-                 CASE ut.level
-                        WHEN 1 THEN 'SD/Sederajat'
-                        WHEN 2 THEN 'SLTP/Sederajat'
-                        WHEN 3 THEN 'SLTA/Sederajat'
-                        WHEN 4 THEN 'Diploma I/II'
-                        WHEN 5 THEN 'Akademik/D3/S.Muda'
-                        WHEN 6 THEN 'Diploma IV/Strata I'
-                        WHEN 7 THEN 'Strata II'
-                        WHEN 8 THEN 'Strata III'
-                 END
-                , ', Status: ',
-                CASE ut.status
-                        WHEN 1 THEN 'Lulus'
-                        WHEN 2 THEN 'DO'
-                        WHEN 3 THEN 'Aktif'
-                        WHEN 4 THEN 'Non-Aktif'
-                        WHEN 5 THEN 'Mengundurkan diri'
-                 END
-                 ,', Description: ', ut.description , '</li>') SEPARATOR ' ') as education_history"));
-                $educationSubquery->whereIn('ut.user_id', $userIds);
-                $educationSubquery->groupBy('ut.user_id');
-
-                $usersData->leftJoinSub($educationSubquery, 'education_history', function ($join) {
-                    $join->on('users.id', '=', 'education_history.user_id');
-                });
-
-                $usersData->addSelect('education_history.education_history');
-            }
-            if ($toggleFieldBio['isDisciplinary']) {
-                $disciplinarySubquery = DB::table('disciplinary_history_users as dhu')
-                    ->join('disciplinary_histories as dh', 'dhu.disciplinary_history_id', '=', 'dh.id')
-                    ->join('disciplinaries as d', 'dhu.disciplinary_id', '=', 'd.id')
-                    ->select('dhu.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li> Golongan: ', dhu.grade, ' Posisi: ', dhu.position, ' (Periode: ', dh.period_month, ' ', dh.period_year, ', Tanggal Awal: ', dhu.start_date, ' Tanggal Akhir: ', dhu.end_date, ') Decree: ', dhu.decree_number, ', Kantor Otorisasi: ', dhu.authorizing_officer, ' Petugas: ', dhu.name_of_authorizing_officer, '</li>') SEPARATOR ' ') as disciplinary_history"))
-                    ->whereIn('dhu.user_id', $userIds)
-                    ->groupBy('dhu.user_id');
-
-                $usersData->leftJoinSub($disciplinarySubquery, 'disciplinary_history', function ($join) {
-                    $join->on('users.id', '=', 'disciplinary_history.user_id');
-                });
-
-                $usersData->addSelect('disciplinary_history.disciplinary_history');
-            }
-            if ($toggleFieldBio['isFamilyHistory']) {
-                $familyHistory = DB::table('user_families as uf');
-                $familyHistory->select('uf.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li> Nama : ',uf.name, '
-            Nomor KTP: ', uf.id_number, ' Nomor KK: ', uf.card_number, ', Tempat Tanggal Lahir: ', uf.place_of_birth, ', ', uf.date_of_birth ,' Agama: ',
-            CASE uf.religion
-                WHEN 1 THEN 'Islam'
-                WHEN 2 THEN 'Kristen'
-                WHEN 3 THEN 'Katolik'
-                WHEN 4 THEN 'Hindu'
-                WHEN 5 THEN 'Buddha'
-                WHEN 6 THEN 'Konghucu'
-            END
-            , ', Jenis Kelamin: ',
-            CASE uf.gender
-                WHEN 1 THEN 'Pria'
-                WHEN 2 THEN 'Wanita'
-            END
-            ,', Nama Ayah: ', uf.name_of_father , ' Nama Ibu:', uf.name_of_mother,
-            ' Relasi Keluarga : ',
-            CASE uf.relationship_status
-                WHEN 1 THEN 'Kepala Keluarga'
-                WHEN 2 THEN 'Suami'
-                WHEN 3 THEN 'Istri'
-                WHEN 4 THEN 'Anak'
-                WHEN 5 THEN 'Menantu'
-                WHEN 6 THEN 'Cucu'
-                WHEN 7 THEN 'Orang Tua'
-                WHEN 8 THEN 'Mertua'
-                WHEN 9 THEN 'Famili Lainnya'
-                WHEN 10 THEN 'Pembantu'
-                WHEN 11 THEN 'Lainnya'
-            END
-            ,' Edukasi: ',
-            CASE uf.education
-                WHEN 1 THEN 'Kepala Keluarga'
-                WHEN 2 THEN 'Suami'
-                WHEN 3 THEN 'Istri'
-                WHEN 4 THEN 'Anak'
-                WHEN 5 THEN 'Menantu'
-                WHEN 6 THEN 'Cucu'
-                WHEN 7 THEN 'Orang Tua'
-                WHEN 8 THEN 'Mertua'
-                WHEN 9 THEN 'Famili Lainnya'
-                WHEN 10 THEN 'Pembantu'
-                WHEN 11 THEN 'Lainnya'
-            END
-            ,' Okupasi: ', uf.occupation,' Status Perkawinan',
-            CASE uf.marital_status
-                WHEN 1 THEN 'Belum Menikah'
-                WHEN 2 THEN 'Menikah'
-                WHEN 3 THEN 'Cerai Hidup'
-                WHEN 4 THEN 'Cerai Mati'
-            END
-            ,' Nomor Handphone', uf.mobile_phone,'</li>') SEPARATOR ' ') as family_history"));
-                $familyHistory->whereIn('uf.user_id', $userIds);
-                $familyHistory->groupBy('uf.user_id');
-
-                $usersData->leftJoinSub($familyHistory, 'family_history', function ($join) {
-                    $join->on('users.id', '=', 'family_history.user_id');
-                });
-
-                $usersData->addSelect('family_history.family_history');
-            }
-            if ($toggleFieldBio['isLeave']) {
-                $leaveSubquery = DB::table('user_leaves as ul');
-                $leaveSubquery->join('users', 'users.id', '=', 'ul.user_id');
-                $leaveSubquery->join('grades', 'grades.id', '=', 'users.grade_id');
-                $leaveSubquery->join('positions', 'positions.id', '=', 'users.position_id');
-                $leaveSubquery->select('ul.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li> Golongan : ',grades.name, '
-                Jabatan: ', positions.name, ' Tanggal Mulai: ', ul.start_date, ', Tanggal Selesai: ', ul.end_date, ' Alasan: ',
-                CASE ul.type
-                    WHEN 1 THEN 'Cuti diluar Tanggungan Negara'
-                    WHEN 2 THEN 'Cuti Sakit'
-                    WHEN 3 THEN 'Cuti Besar'
-                    WHEN 4 THEN 'Cuti Bersalin'
-                    WHEN 5 THEN 'Cuti Belajar Luar Negeri'
-                    WHEN 6 THEN 'Cuti Tahunan Luar Negeri'
-                END
-                 , ', Tujuan: ', ul.description,', Nomor: ', ul.number , '</li>') SEPARATOR ' ') as leave_history"));
-                $leaveSubquery->whereIn('ul.user_id', $userIds);
-                $leaveSubquery->groupBy('ul.user_id');
-
-                $usersData->leftJoinSub($leaveSubquery, 'leave_history', function ($join) {
-                    $join->on('users.id', '=', 'leave_history.user_id');
-                });
-
-                $usersData->addSelect('leave_history.leave_history');
-            }
-            if ($toggleFieldBio['isAssessment']) {
-                $assessmentSubquery = DB::table('user_assessments as ua');
-                $assessmentSubquery->select('ua.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li> Tanggal Assessment : ', ua.event_date, '
-             Point: ', ua.point, ' Organizer : ', ua.organizer,'</li>') SEPARATOR ' ') as assessment_history"));
-                $assessmentSubquery->whereIn('ua.user_id', $userIds);
-                $assessmentSubquery->groupBy('ua.user_id');
-
-                $usersData->leftJoinSub($assessmentSubquery, 'assessment_history', function ($join) {
-                    $join->on('users.id', '=', 'assessment_history.user_id');
-                });
-
-                $usersData->addSelect('assessment_history.assessment_history');
-            }
-            if ($toggleFieldBio['isCompetency']) {
-                $assessmentSubquery = DB::table('user_competencies as ua');
-                $assessmentSubquery->select('ua.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li> Tanggal Assessment : ', ua.event_date, '
-             Point: ', ua.point, ' Organizer : ', ua.organizer,'</li>') SEPARATOR ' ') as competency_history"));
-                $assessmentSubquery->whereIn('ua.user_id', $userIds);
-                $assessmentSubquery->groupBy('ua.user_id');
-
-                $usersData->leftJoinSub($assessmentSubquery, 'competency_history', function ($join) {
-                    $join->on('users.id', '=', 'competency_history.user_id');
-                });
-
-                $usersData->addSelect('competency_history.competency_history');
-            }
-            if ($toggleFieldBio['isTalentPool']) {
-                $assessmentSubquery = DB::table('user_talents as ua');
-                $assessmentSubquery->select('ua.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li> Tanggal Assessment : ', ua.event_date, '
-             Point: ', ua.point, ' Organizer : ', ua.organizer,'</li>') SEPARATOR ' ') as talent_pool_history"));
-                $assessmentSubquery->whereIn('ua.user_id', $userIds);
-                $assessmentSubquery->groupBy('ua.user_id');
-
-                $usersData->leftJoinSub($assessmentSubquery, 'talent_pool_history', function ($join) {
-                    $join->on('users.id', '=', 'talent_pool_history.user_id');
-                });
-
-                $usersData->addSelect('talent_pool_history.talent_pool_history');
-            }
-            if ($toggleFieldBio['isNotes']) {
-                $assessmentSubquery = DB::table('user_notes as un');
-                $assessmentSubquery->join('users', 'un.giver_id', '=', 'users.id');
-                $assessmentSubquery->select('un.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li> Catatan : ', un.description, '
-             Pemberi catatan: ', users.name, ' Tanggal : ', un.created_at,'</li>') SEPARATOR ' ') as notes"));
-                $assessmentSubquery->whereIn('un.user_id', $userIds);
-                $assessmentSubquery->groupBy('un.user_id');
-
-                $usersData->leftJoinSub($assessmentSubquery, 'notes', function ($join) {
-                    $join->on('users.id', '=', 'notes.user_id');
-                });
-
-                $usersData->addSelect('notes.notes');
-            }
-            if ($toggleFieldBio['isEmployeeType'] == 1){
-                $employmeeType = DB::table('employment_types as et');
-                $employmeeType->join('users', 'et.id', '=', 'users.employment_type_id');
-                $employmeeType->select('users.id as user_id', DB::raw("GROUP_CONCAT( CONCAT('<li>',et.name,'</li>') SEPARATOR '') as employee_type"));
-                $employmeeType->whereIn('users.id', $userIds);
-                $employmeeType->groupBy('users.id');
-
-                $usersData->leftJoinSub($employmeeType, 'employee_type', function ($join) {
-                    $join->on('users.id', '=', 'employee_type.user_id');
-                });
-
-                $usersData->addSelect('employee_type.employee_type');
-            }
-            if ($toggleFieldBio['isEchelonDate'] == 1){
-                $usersData->addSelect('users.echelon_effective_date');
-            }
-            if ($toggleFieldBio['isGradeDate'] == 1){
-                $usersData->addSelect('users.grade_effective_date');
-            }
-            if ($toggleFieldBio['isNoFamily'] == 1){
-                $usersData->addSelect('users.family_registration_number');
-            }
-            if ($toggleFieldBio['isNIK'] == 1){
-                $usersData->addSelect('users.id_number');
-            }
-            if ($toggleFieldBio['isStartDate'] == 1){
-                $usersData->addSelect('users.pns_effective_date');
-            }
-            if ($toggleFieldBio['isEndDate'] == 1){
-                $usersData->addSelect('users.retirement_effective_date');
-            }
-            if ($toggleFieldBio['isDateCPNS'] == 1){
-                $usersData->addSelect('users.cpns_effective_date');
-            }
-            if ($toggleFieldBio['isDatePosition'] == 1){
-                $usersData->addSelect('users.position_effective_date');
-            }
-            if ($toggleFieldBio['isOutsourcingType'] == 1){
-                $outsourcingSubquery = DB::table('employment_types as et');
-                $outsourcingSubquery->join('users', 'et.id', '=', 'users.employment_type_id');
-                $outsourcingSubquery->select('users.id as user_id', DB::raw("GROUP_CONCAT( CONCAT('<li>',et.name,'</li>') SEPARATOR '') as outsource_type"));
-                $outsourcingSubquery->where('et.type', 3);
-                $outsourcingSubquery->whereIn('users.id', $userIds);
-                $outsourcingSubquery->groupBy('users.id');
-
-                $usersData->leftJoinSub($outsourcingSubquery, 'outsource_type', function ($join) {
-                    $join->on('users.id', '=', 'outsource_type.user_id');
-                });
-
-                $usersData->addSelect('outsource_type.outsource_type');
-            }
-            if ($toggleFieldBio['isAssistanceType'] == 1){
-                $assistanceSubquery = DB::table('employment_types as et');
-                $assistanceSubquery->join('users', 'et.id', '=', 'users.employment_type_id');
-                $assistanceSubquery->select('users.id as user_id', DB::raw("GROUP_CONCAT( CONCAT('<li>',et.name,'</li>') SEPARATOR '') as assistance_type"));
-                $assistanceSubquery->where('et.type', 3);
-                $assistanceSubquery->whereIn('users.id', $userIds);
-                $assistanceSubquery->groupBy('users.id');
-
-                $usersData->leftJoinSub($assistanceSubquery, 'assistance_type', function ($join) {
-                    $join->on('users.id', '=', 'assistance_type.user_id');
-                });
-
-                $usersData->addSelect('assistance_type.assistance_type');
-            }
-            if ($toggleFieldBio['isOfficeEmail'] == 1){
-                $usersData->addSelect('users.office_email');
-            }
-            if ($toggleFieldBio['isKarisu'] == 1){
-                $usersData->addSelect('users.karisu_number');
-            }
-            if ($toggleFieldBio['isEmergencyContact'] == 1){
-                $usersData->addSelect('users.emergency_contact');
-            }
-            if ($toggleFieldBio['isWorkDuration'] == 1){
-                $users->addSelect('users.position_effective_date');
-            }
-            $usersData->whereIn('users.id', $userIds);
-            $usersData->groupBy('users.id');
-            $usersData = $usersData->get();
-            $usersDatas = $usersData->map(function ($item) {
-                return (array) $item;
-            })->toArray();
             $pdf = pdf::loadView('exports/employee-excel-pdf', [
                 'userData' => $usersDatas,
                 'toggleField' => $toggleFieldBio,
@@ -1456,7 +1460,6 @@ class ExportController extends Controller
      * @bodyParam isGender int Indicates whether the gender field is included in the output document. Example: 1
      * @bodyParam isMaritalStatus int Indicates whether the marital status field is included in the output document. Example: 1
      * @bodyParam isAgency int Indicates whether the agency field is included in the output document. Example: 1
-     * @bodyParam isOrganization int Indicates whether the organization field is included in the output document. Example: 1
      * @bodyParam isWorkUnit int Indicates whether the work unit field is included in the output document. Example: 1
      * @bodyParam isNoWorker int Indicates whether the worker number field is included in the output document. Example: 1
      * @bodyParam isWorkDuration int Indicates the duration of work. Example: 1
@@ -1502,7 +1505,7 @@ class ExportController extends Controller
         if (isset($request->employee_type)) {
             $users->whereIn('users.type', $request->employee_type);
         }
-        if (isset($request->deputy)){
+        if (isset($request->deputy)) {
             $parentIds = DB::table('positions')->whereIn('id', $request->deputy)->pluck('parent_id')->toArray();
             $positionIds = array_merge($parentIds, $request->deputy);
             $users->whereIn('users.position_id', $positionIds);
@@ -1596,182 +1599,185 @@ class ExportController extends Controller
 
         $usersPreview = DB::table('users');
         $toggleFieldBio = array();
-
-        if ($this->request->isName == 1) {
-            $usersPreview->addSelect('users.name');
-        }
-        if ($this->request->isNip == 1) {
-            $usersPreview->addSelect('users.employee_id_card_number', 'users.employee_registration_number');
-        }
-        if ($this->request->isBirthPlaceDate == 1) {
-            $usersPreview->addSelect('users.place_of_birth', 'users.date_of_birth');
-        }
-        if ($this->request->isAge == 1) {
-            $usersPreview->addSelect(DB::raw("TIMESTAMPDIFF(YEAR, users.date_of_birth, CURDATE()) AS age"));
-        }
-        if ($this->request->isReligion == 1) {
-            $usersPreview->addSelect('users.religion');
-        }
-        if ($this->request->isGender == 1) {
-            $usersPreview->addSelect('users.gender');
-        }
-        if ($this->request->isMaritalStatus == 1) {
-            $usersPreview->addSelect('users.marital_status');
-        }
-        if ($this->request->isPosition == 1) {
-            $usersPreview->leftJoin('positions', 'users.position_id', '=', 'positions.id');
-            $usersPreview->addSelect('positions.name as position_name');
-        }
-        if ($this->request->isPositionDescription == 1){
-            $usersPreview->addSelect('users.description');
-        }
-        if ($this->request->isEchelons == 1) {
-            $usersPreview->leftJoin('echelons', 'users.echelon_id', '=', 'echelons.id');
-            $usersPreview->addSelect('echelons.name as echelons_name');
-        }
-        if ($this->request->isGrade == 1) {
-            $usersPreview->leftJoin('grades as g', 'users.grade_id', '=', 'g.id');
-            $usersPreview->addSelect('g.name as grade_name');
-        }
-        if ($this->request->isWorkUnit == 1) {
-            $users->addSelect('users.employment_type_id  as work_unit');
-        }
-        if ($this->request->isEmployeeStatus == 1) {
-            $usersPreview->addSelect('users.employment_status');
-        }
-        if ($this->request->isAgency == 1) {
-            $usersPreview->leftJoin('institutions as i', 'users.institution_id', '=', 'i.id');
-            $usersPreview->addSelect('i.name as institution_name');
-        }
+        $userId = collect($userIds);
+        $userIdsChunk = $userId->chunk(100);
+        $results = collect();
+        foreach ($userIdsChunk as $userId) {
+            if ($this->request->isName == 1) {
+                $usersPreview->addSelect('users.name');
+            }
+            if ($this->request->isNip == 1) {
+                $usersPreview->addSelect('users.employee_id_card_number', 'users.employee_registration_number');
+            }
+            if ($this->request->isBirthPlaceDate == 1) {
+                $usersPreview->addSelect('users.place_of_birth', 'users.date_of_birth');
+            }
+            if ($this->request->isAge == 1) {
+                $usersPreview->addSelect(DB::raw("TIMESTAMPDIFF(YEAR, users.date_of_birth, CURDATE()) AS age"));
+            }
+            if ($this->request->isReligion == 1) {
+                $usersPreview->addSelect('users.religion');
+            }
+            if ($this->request->isGender == 1) {
+                $usersPreview->addSelect('users.gender');
+            }
+            if ($this->request->isMaritalStatus == 1) {
+                $usersPreview->addSelect('users.marital_status');
+            }
+            if ($this->request->isPosition == 1) {
+                $usersPreview->leftJoin('positions', 'users.position_id', '=', 'positions.id');
+                $usersPreview->addSelect('positions.name as position_name');
+            }
+            if ($this->request->isPositionDescription == 1) {
+                $usersPreview->addSelect('users.description');
+            }
+            if ($this->request->isEchelons == 1) {
+                $usersPreview->leftJoin('echelons', 'users.echelon_id', '=', 'echelons.id');
+                $usersPreview->addSelect('echelons.name as echelons_name');
+            }
+            if ($this->request->isGrade == 1) {
+                $usersPreview->leftJoin('grades as g', 'users.grade_id', '=', 'g.id');
+                $usersPreview->addSelect('g.name as grade_name');
+            }
+            if ($this->request->isWorkUnit == 1) {
+                $users->addSelect('users.employment_type_id  as work_unit');
+            }
+            if ($this->request->isEmployeeStatus == 1) {
+                $usersPreview->addSelect('users.employment_status');
+            }
+            if ($this->request->isAgency == 1) {
+                $usersPreview->leftJoin('institutions as i', 'users.institution_id', '=', 'i.id');
+                $usersPreview->addSelect('i.name as institution_name');
+            }
 //        if ($this->request->isOrganization == 1) {
 //            $usersPreview->leftJoin('groups as o', 'users.organization_id', '=', 'o.id');
 //            $usersPreview->addSelect('o.name as organization_name');
 //        }
-        if ($this->request->isNoWorker == 1) {
-            $users->addSelect('users.employee_registration_number');
-        }
-        //add full work duration later
-        if ($this->request->isGradeDuration == 1) {
-            $usersPreview->addSelect(['users.grade_effective_date']);
-        }
-        if ($this->request->isNPWP == 1) {
-            $usersPreview->addSelect('users.id_tax');
-        }
-        if ($this->request->isCurrentAddress == 1) {
-            $usersPreview->addSelect('users.current_address');
-        }
-        if ($this->request->isComplex == 1) {
-            $usersPreview->leftJoin('residences as r', 'users.residence_id', '=', 'r.id');
-            $usersPreview->addSelect('r.name as residence_name');
-        }
-        if ($this->request->isHomeNumber == 1) {
-            $usersPreview->addSelect('users.home_phone_number');
-        }
-        if ($this->request->isPhoneNumber == 1) {
-            $usersPreview->addSelect('users.mobile_phone');
-        }
-        if ($this->request->isOfficeAddress == 1) {
-            $usersPreview->addSelect('users.office_address');
-        }
-        if ($this->request->isOfficeNumber == 1) {
-            $usersPreview->addSelect('users.office_phone_number');
-        }
-        if ($this->request->isEmail == 1) {
-            $usersPreview->addSelect('users.email');
-        }
-        if ($this->request->isPositionHistory == 1) {
-            $gradeHistorySubquery = DB::table('grade_history_users as ghu');
-            $gradeHistorySubquery->join('grades', 'grades.id', '=', 'ghu.grade_id');
-            $gradeHistorySubquery->select('ghu.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li>', grades.name, grades.code,
-            ' (', ghu.decree_date, ',', ghu.decree_number, ')', '</li>') SEPARATOR ' ') as grade_history"));
-            $gradeHistorySubquery->whereIn('ghu.user_id', $userIds);
-            $gradeHistorySubquery->groupBy('ghu.user_id');
-            $usersPreview->leftJoinSub($gradeHistorySubquery, 'grade_history', function ($join) {
-                $join->on('users.id', '=', 'grade_history.user_id');
-            });
-            $usersPreview->addSelect('grade_history.grade_history');
-        }
-        if ($this->request->isGradeHistory == 1) {
-            $positionHistorySubquery = DB::table('position_history_users as phu');
-            $positionHistorySubquery->select('phu.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li>', phu.position, '
-            (', phu.decree_date, ',', phu.decree_number, ')' , '</li>') SEPARATOR ' ') as position_history"));
-            $positionHistorySubquery->whereIn('phu.user_id', $userIds);
-            $positionHistorySubquery->groupBy('phu.user_id');
-            $usersPreview->leftJoinSub($positionHistorySubquery, 'position_history', function ($join) {
-                $join->on('users.id', '=', 'position_history.user_id');
-            });
-            $usersPreview->addSelect('position_history.position_history');
-        }
-        if ($this->request->isTrainingStructural == 1) {
-            $trainingStructuralSubquery = DB::table('training_histories as t');
-            $trainingStructuralSubquery->join('training_history_users as ut', 't.id', '=', 'ut.training_history_id');
-            $trainingStructuralSubquery->select('ut.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li>', t.name, '
-            (Periode: ', t.period_month, ' ', t.period_year, ', Start Date: ', t.start_date, ') Level: ', t.level, ',
-            Organizer: ', t.organizer ,'</li>') SEPARATOR ' ') as structural_training_history"));
-            $trainingStructuralSubquery->whereIn('ut.user_id', $userIds);
-            $trainingStructuralSubquery->where('t.type', 1);
-            $trainingStructuralSubquery->groupBy('ut.user_id');
+            if ($this->request->isNoWorker == 1) {
+                $users->addSelect('users.employee_registration_number');
+            }
+            //add full work duration later
+            if ($this->request->isGradeDuration == 1) {
+                $usersPreview->addSelect(['users.grade_effective_date']);
+            }
+            if ($this->request->isNPWP == 1) {
+                $usersPreview->addSelect('users.id_tax');
+            }
+            if ($this->request->isCurrentAddress == 1) {
+                $usersPreview->addSelect('users.current_address');
+            }
+            if ($this->request->isComplex == 1) {
+                $usersPreview->leftJoin('residences as r', 'users.residence_id', '=', 'r.id');
+                $usersPreview->addSelect('r.name as residence_name');
+            }
+            if ($this->request->isHomeNumber == 1) {
+                $usersPreview->addSelect('users.home_phone_number');
+            }
+            if ($this->request->isPhoneNumber == 1) {
+                $usersPreview->addSelect('users.mobile_phone');
+            }
+            if ($this->request->isOfficeAddress == 1) {
+                $usersPreview->addSelect('users.office_address');
+            }
+            if ($this->request->isOfficeNumber == 1) {
+                $usersPreview->addSelect('users.office_phone_number');
+            }
+            if ($this->request->isEmail == 1) {
+                $usersPreview->addSelect('users.email');
+            }
+            if ($this->request->isPositionHistory == 1) {
+                $gradeHistorySubquery = DB::table('grade_history_users as ghu');
+                $gradeHistorySubquery->join('grades', 'grades.id', '=', 'ghu.grade_id');
+                $gradeHistorySubquery->select('ghu.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li>', grades.name, grades.code,
+                ' (', ghu.decree_date, ',', ghu.decree_number, ')', '</li>') SEPARATOR ' ') as grade_history"));
+                $gradeHistorySubquery->whereIn('ghu.user_id', $userId);
+                $gradeHistorySubquery->groupBy('ghu.user_id');
+                $usersPreview->leftJoinSub($gradeHistorySubquery, 'grade_history', function ($join) {
+                    $join->on('users.id', '=', 'grade_history.user_id');
+                });
+                $usersPreview->addSelect('grade_history.grade_history');
+            }
+            if ($this->request->isGradeHistory == 1) {
+                $positionHistorySubquery = DB::table('position_history_users as phu');
+                $positionHistorySubquery->select('phu.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li>', phu.position, '
+                (', phu.decree_date, ',', phu.decree_number, ')' , '</li>') SEPARATOR ' ') as position_history"));
+                $positionHistorySubquery->whereIn('phu.user_id', $userId);
+                $positionHistorySubquery->groupBy('phu.user_id');
+                $usersPreview->leftJoinSub($positionHistorySubquery, 'position_history', function ($join) {
+                    $join->on('users.id', '=', 'position_history.user_id');
+                });
+                $usersPreview->addSelect('position_history.position_history');
+            }
+            if ($this->request->isTrainingStructural == 1) {
+                $trainingStructuralSubquery = DB::table('training_histories as t');
+                $trainingStructuralSubquery->join('training_history_users as ut', 't.id', '=', 'ut.training_history_id');
+                $trainingStructuralSubquery->select('ut.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li>', t.name, '
+                (Periode: ', t.period_month, ' ', t.period_year, ', Start Date: ', t.start_date, ') Level: ', t.level, ',
+                Organizer: ', t.organizer ,'</li>') SEPARATOR ' ') as structural_training_history"));
+                $trainingStructuralSubquery->whereIn('ut.user_id', $userId);
+                $trainingStructuralSubquery->where('t.type', 1);
+                $trainingStructuralSubquery->groupBy('ut.user_id');
 
-            $usersPreview->leftJoinSub($trainingStructuralSubquery, 'structural_training_history', function ($join) {
-                $join->on('users.id', '=', 'structural_training_history.user_id');
-            });
+                $usersPreview->leftJoinSub($trainingStructuralSubquery, 'structural_training_history', function ($join) {
+                    $join->on('users.id', '=', 'structural_training_history.user_id');
+                });
 
-            $usersPreview->addSelect('structural_training_history.structural_training_history');
-        }
+                $usersPreview->addSelect('structural_training_history.structural_training_history');
+            }
 
-        if ($this->request->isTrainingFunctional == 1)  {
-            $trainingFunctionalSubquery = DB::table('training_histories as t');
-            $trainingFunctionalSubquery->join('training_history_users as ut', 't.id', '=', 'ut.training_history_id');
-            $trainingFunctionalSubquery->select('ut.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li>', t.name, '
-            (Periode: ', t.period_month, ' ', t.period_year, ', Start Date: ', t.start_date, ') Level: ', t.level, ',
-            Organizer: ', t.organizer ,'</li>') SEPARATOR ' ' ) as functional_training_history "));
-            $trainingFunctionalSubquery->whereIn('ut.user_id', $userIds);
-            $trainingFunctionalSubquery->where('t.type', 2);
-            $trainingFunctionalSubquery->groupBy('ut.user_id');
+            if ($this->request->isTrainingFunctional == 1) {
+                $trainingFunctionalSubquery = DB::table('training_histories as t');
+                $trainingFunctionalSubquery->join('training_history_users as ut', 't.id', '=', 'ut.training_history_id');
+                $trainingFunctionalSubquery->select('ut.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li>', t.name, '
+                (Periode: ', t.period_month, ' ', t.period_year, ', Start Date: ', t.start_date, ') Level: ', t.level, ',
+                Organizer: ', t.organizer ,'</li>') SEPARATOR ' ' ) as functional_training_history "));
+                $trainingFunctionalSubquery->whereIn('ut.user_id', $userId);
+                $trainingFunctionalSubquery->where('t.type', 2);
+                $trainingFunctionalSubquery->groupBy('ut.user_id');
 
-            $usersPreview->leftJoinSub($trainingFunctionalSubquery, 'functional_training_history', function ($join) {
-                $join->on('users.id', '=', 'functional_training_history.user_id');
-            });
+                $usersPreview->leftJoinSub($trainingFunctionalSubquery, 'functional_training_history', function ($join) {
+                    $join->on('users.id', '=', 'functional_training_history.user_id');
+                });
 
-            $usersPreview->addSelect('functional_training_history.functional_training_history');
-        }
+                $usersPreview->addSelect('functional_training_history.functional_training_history');
+            }
 
-        if ($this->request->isTrainingTechnique == 1) {
-            $trainingTechnicSubquery = DB::table('training_histories as t');
-            $trainingTechnicSubquery->join('training_history_users as ut', 't.id', '=', 'ut.training_history_id');
-            $trainingTechnicSubquery->select('ut.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li>', t.name, '
-            (Periode: ', t.period_month, ' ', t.period_year, ', Start Date: ', t.start_date, ') Level: ', t.level, ',
-            Organizer: ', t.organizer, '</li>') SEPARATOR ' ') as technique_training_history"));
-            $trainingTechnicSubquery->whereIn('ut.user_id', $userIds);
-            $trainingTechnicSubquery->where('t.type', 3);
-            $trainingTechnicSubquery->groupBy('ut.user_id');
+            if ($this->request->isTrainingTechnique == 1) {
+                $trainingTechnicSubquery = DB::table('training_histories as t');
+                $trainingTechnicSubquery->join('training_history_users as ut', 't.id', '=', 'ut.training_history_id');
+                $trainingTechnicSubquery->select('ut.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li>', t.name, '
+                (Periode: ', t.period_month, ' ', t.period_year, ', Start Date: ', t.start_date, ') Level: ', t.level, ',
+                Organizer: ', t.organizer, '</li>') SEPARATOR ' ') as technique_training_history"));
+                $trainingTechnicSubquery->whereIn('ut.user_id', $userId);
+                $trainingTechnicSubquery->where('t.type', 3);
+                $trainingTechnicSubquery->groupBy('ut.user_id');
 
-            $usersPreview->leftJoinSub($trainingTechnicSubquery, 'technique_training_history', function ($join) {
-                $join->on('users.id', '=', 'technique_training_history.user_id');
-            });
+                $usersPreview->leftJoinSub($trainingTechnicSubquery, 'technique_training_history', function ($join) {
+                    $join->on('users.id', '=', 'technique_training_history.user_id');
+                });
 
-            $usersPreview->addSelect('technique_training_history.technique_training_history');
-        }
-        if ($this->request->isRecognition == 1) {
-            $recognitionSubquery = DB::table('recognition_histories as r');
-            $recognitionSubquery->join('recognition_history_users as ur', 'r.id', '=', 'ur.recognition_history_id');
-            $recognitionSubquery->join('recognitions', 'r.recognition_id', '=', 'recognitions.id');
-            $recognitionSubquery->select('ur.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li>',recognitions.name, '
-            (Periode: ', r.period_month, ' ', r.period_year, ', Tanggal Terima: ', r.date_of_receipt, ') Decree: ',
-            r.decree_number, ', Institusi: ', r.awarding_institution,'</li>') SEPARATOR ' ') as recognition_history"));
-            $recognitionSubquery->whereIn('ur.user_id', $userIds);
-            $recognitionSubquery->groupBy('ur.user_id');
+                $usersPreview->addSelect('technique_training_history.technique_training_history');
+            }
+            if ($this->request->isRecognition == 1) {
+                $recognitionSubquery = DB::table('recognition_histories as r');
+                $recognitionSubquery->join('recognition_history_users as ur', 'r.id', '=', 'ur.recognition_history_id');
+                $recognitionSubquery->join('recognitions', 'r.recognition_id', '=', 'recognitions.id');
+                $recognitionSubquery->select('ur.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li>',recognitions.name, '
+                (Periode: ', r.period_month, ' ', r.period_year, ', Tanggal Terima: ', r.date_of_receipt, ') Decree: ',
+                r.decree_number, ', Institusi: ', r.awarding_institution,'</li>') SEPARATOR ' ') as recognition_history"));
+                $recognitionSubquery->whereIn('ur.user_id', $userId);
+                $recognitionSubquery->groupBy('ur.user_id');
 
-            $usersPreview->leftJoinSub($recognitionSubquery, 'recognition_history', function ($join) {
-                $join->on('users.id', '=', 'recognition_history.user_id');
-            });
+                $usersPreview->leftJoinSub($recognitionSubquery, 'recognition_history', function ($join) {
+                    $join->on('users.id', '=', 'recognition_history.user_id');
+                });
 
-            $usersPreview->addSelect('recognition_history.recognition_history');
-        }
-        if ($this->request->isSKP == 1) {
-            $skpSubquery = DB::table('target_histories as t');
-            $skpSubquery->join('target_history_users as ut', 't.id', '=', 'ut.target_history_id');
-            $skpSubquery->select('ut.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li>',t.name, ' (Tanggal: ', t.period_month, ' ',
+                $usersPreview->addSelect('recognition_history.recognition_history');
+            }
+            if ($this->request->isSKP == 1) {
+                $skpSubquery = DB::table('target_histories as t');
+                $skpSubquery->join('target_history_users as ut', 't.id', '=', 'ut.target_history_id');
+                $skpSubquery->select('ut.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li>',t.name, ' (Tanggal: ', t.period_month, ' ',
                 t.period_year, ', Periode Penilaian: ', t.appraisal_period, ') Penilaian Perilaku : ',
                  CASE ut.work_behavior_rating
                         WHEN 1 THEN 'Diatas Ekspektasi'
@@ -1792,19 +1798,19 @@ class ExportController extends Controller
                         WHEN 2 THEN 'Baik'
                         WHEN 3 THEN 'Cukup'
                  END, '</li>') SEPARATOR ' ') as skp_history"));
-            $skpSubquery->whereIn('ut.user_id', $userIds);
-            $skpSubquery->groupBy('ut.user_id');
+                $skpSubquery->whereIn('ut.user_id', $userId);
+                $skpSubquery->groupBy('ut.user_id');
 
-            $usersPreview->leftJoinSub($skpSubquery, 'skp_history', function ($join) {
-                $join->on('users.id', '=', 'skp_history.user_id');
-            });
+                $usersPreview->leftJoinSub($skpSubquery, 'skp_history', function ($join) {
+                    $join->on('users.id', '=', 'skp_history.user_id');
+                });
 
-            $usersPreview->addSelect('skp_history.skp_history');
-        }
-        if ($this->request->isEducationHistory == 1) {
-            $educationSubquery = DB::table('user_educations as ut');
-            $educationSubquery->select('ut.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li> Nama Sekolah : ',ut.name, '
-            (Fakultas: ', ut.faculty, ' Jurusan: ', ut.major, ', Tahun Lulus: ', ut.year_of_graduation, ') Level: ',
+                $usersPreview->addSelect('skp_history.skp_history');
+            }
+            if ($this->request->isEducationHistory == 1) {
+                $educationSubquery = DB::table('user_educations as ut');
+                $educationSubquery->select('ut.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li> Nama Sekolah : ',ut.name, '
+                (Fakultas: ', ut.faculty, ' Jurusan: ', ut.major, ', Tahun Lulus: ', ut.year_of_graduation, ') Level: ',
                  CASE ut.level
                         WHEN 1 THEN 'SD/Sederajat'
                         WHEN 2 THEN 'SLTP/Sederajat'
@@ -1824,253 +1830,256 @@ class ExportController extends Controller
                         WHEN 5 THEN 'Mengundurkan diri'
                  END
                  ,', Description: ', ut.description , '</li>') SEPARATOR ' ') as education_history"));
-            $educationSubquery->whereIn('ut.user_id', $userIds);
-            $educationSubquery->groupBy('ut.user_id');
+                $educationSubquery->whereIn('ut.user_id', $userId);
+                $educationSubquery->groupBy('ut.user_id');
 
-            $usersPreview->leftJoinSub($educationSubquery, 'education_history', function ($join) {
-                $join->on('users.id', '=', 'education_history.user_id');
-            });
+                $usersPreview->leftJoinSub($educationSubquery, 'education_history', function ($join) {
+                    $join->on('users.id', '=', 'education_history.user_id');
+                });
 
-            $usersPreview->addSelect('education_history.education_history');
-        }
-        if ($this->request->isDisciplinary == 1) {
-            $disciplinarySubquery = DB::table('disciplinary_history_users as dhu')
-                ->join('disciplinary_histories as dh', 'dhu.disciplinary_history_id', '=', 'dh.id')
-                ->join('disciplinaries as d', 'dhu.disciplinary_id', '=', 'd.id')
-                ->select('dhu.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li> Golongan: ', dhu.grade, ' Posisi: ', dhu.position, ' (Periode: ', dh.period_month, ' ', dh.period_year, ', Tanggal Awal: ', dhu.start_date, ' Tanggal Akhir: ', dhu.end_date, ') Decree: ', dhu.decree_number, ', Kantor Otorisasi: ', dhu.authorizing_officer, ' Petugas: ', dhu.name_of_authorizing_officer, '</li>') SEPARATOR ' ') as disciplinary_history"))
-                ->whereIn('dhu.user_id', $userIds)
-                ->groupBy('dhu.user_id');
+                $usersPreview->addSelect('education_history.education_history');
+            }
+            if ($this->request->isDisciplinary == 1) {
+                $disciplinarySubquery = DB::table('disciplinary_history_users as dhu')
+                    ->join('disciplinary_histories as dh', 'dhu.disciplinary_history_id', '=', 'dh.id')
+                    ->join('disciplinaries as d', 'dhu.disciplinary_id', '=', 'd.id')
+                    ->select('dhu.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li> Golongan: ', dhu.grade, ' Posisi: ', dhu.position, ' (Periode: ', dh.period_month, ' ', dh.period_year, ', Tanggal Awal: ', dhu.start_date, ' Tanggal Akhir: ', dhu.end_date, ') Decree: ', dhu.decree_number, ', Kantor Otorisasi: ', dhu.authorizing_officer, ' Petugas: ', dhu.name_of_authorizing_officer, '</li>') SEPARATOR ' ') as disciplinary_history"))
+                    ->whereIn('dhu.user_id', $userId)
+                    ->groupBy('dhu.user_id');
 
-            $usersPreview->leftJoinSub($disciplinarySubquery, 'disciplinary_history', function ($join) {
-                $join->on('users.id', '=', 'disciplinary_history.user_id');
-            });
+                $usersPreview->leftJoinSub($disciplinarySubquery, 'disciplinary_history', function ($join) {
+                    $join->on('users.id', '=', 'disciplinary_history.user_id');
+                });
 
-            $usersPreview->addSelect('disciplinary_history.disciplinary_history');
-        }
-        if ($this->request->isFamilyHistory == 1) {
-            $familyHistory = DB::table('user_families as uf');
-            $familyHistory->select('uf.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li> Nama : ',uf.name, '
-            Nomor KTP: ', uf.id_number, ' Nomor KK: ', uf.card_number, ', Tempat Tanggal Lahir: ', uf.place_of_birth, ', ', uf.date_of_birth ,' Agama: ',
-            CASE uf.religion
-                WHEN 1 THEN 'Islam'
-                WHEN 2 THEN 'Kristen'
-                WHEN 3 THEN 'Katolik'
-                WHEN 4 THEN 'Hindu'
-                WHEN 5 THEN 'Buddha'
-                WHEN 6 THEN 'Konghucu'
-            END
-            , ', Jenis Kelamin: ',
-            CASE uf.gender
-                WHEN 1 THEN 'Pria'
-                WHEN 2 THEN 'Wanita'
-            END
-            ,', Nama Ayah: ', uf.name_of_father , ' Nama Ibu:', uf.name_of_mother,
-            ' Relasi Keluarga : ',
-            CASE uf.relationship_status
-                WHEN 1 THEN 'Kepala Keluarga'
-                WHEN 2 THEN 'Suami'
-                WHEN 3 THEN 'Istri'
-                WHEN 4 THEN 'Anak'
-                WHEN 5 THEN 'Menantu'
-                WHEN 6 THEN 'Cucu'
-                WHEN 7 THEN 'Orang Tua'
-                WHEN 8 THEN 'Mertua'
-                WHEN 9 THEN 'Famili Lainnya'
-                WHEN 10 THEN 'Pembantu'
-                WHEN 11 THEN 'Lainnya'
-            END
-            ,' Edukasi: ',
-            CASE uf.education
-                WHEN 1 THEN 'Kepala Keluarga'
-                WHEN 2 THEN 'Suami'
-                WHEN 3 THEN 'Istri'
-                WHEN 4 THEN 'Anak'
-                WHEN 5 THEN 'Menantu'
-                WHEN 6 THEN 'Cucu'
-                WHEN 7 THEN 'Orang Tua'
-                WHEN 8 THEN 'Mertua'
-                WHEN 9 THEN 'Famili Lainnya'
-                WHEN 10 THEN 'Pembantu'
-                WHEN 11 THEN 'Lainnya'
-            END
-            ,' Okupasi: ', uf.occupation,' Status Perkawinan',
-            CASE uf.marital_status
-                WHEN 1 THEN 'Belum Menikah'
-                WHEN 2 THEN 'Menikah'
-                WHEN 3 THEN 'Cerai Hidup'
-                WHEN 4 THEN 'Cerai Mati'
-            END
-            ,' Nomor Handphone', uf.mobile_phone,'</li>') SEPARATOR ' ') as family_history"));
-            $familyHistory->whereIn('uf.user_id', $userIds);
-            $familyHistory->groupBy('uf.user_id');
+                $usersPreview->addSelect('disciplinary_history.disciplinary_history');
+            }
+            if ($this->request->isFamilyHistory == 1) {
+                $familyHistory = DB::table('user_families as uf');
+                $familyHistory->select('uf.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li> Nama : ',uf.name, '
+                Nomor KTP: ', uf.id_number, ' Nomor KK: ', uf.card_number, ', Tempat Tanggal Lahir: ', uf.place_of_birth, ', ', uf.date_of_birth ,' Agama: ',
+                CASE uf.religion
+                    WHEN 1 THEN 'Islam'
+                    WHEN 2 THEN 'Kristen'
+                    WHEN 3 THEN 'Katolik'
+                    WHEN 4 THEN 'Hindu'
+                    WHEN 5 THEN 'Buddha'
+                    WHEN 6 THEN 'Konghucu'
+                END
+                , ', Jenis Kelamin: ',
+                CASE uf.gender
+                    WHEN 1 THEN 'Pria'
+                    WHEN 2 THEN 'Wanita'
+                END
+                ,', Nama Ayah: ', uf.name_of_father , ' Nama Ibu:', uf.name_of_mother,
+                ' Relasi Keluarga : ',
+                CASE uf.relationship_status
+                    WHEN 1 THEN 'Kepala Keluarga'
+                    WHEN 2 THEN 'Suami'
+                    WHEN 3 THEN 'Istri'
+                    WHEN 4 THEN 'Anak'
+                    WHEN 5 THEN 'Menantu'
+                    WHEN 6 THEN 'Cucu'
+                    WHEN 7 THEN 'Orang Tua'
+                    WHEN 8 THEN 'Mertua'
+                    WHEN 9 THEN 'Famili Lainnya'
+                    WHEN 10 THEN 'Pembantu'
+                    WHEN 11 THEN 'Lainnya'
+                END
+                ,' Edukasi: ',
+                CASE uf.education
+                    WHEN 1 THEN 'Kepala Keluarga'
+                    WHEN 2 THEN 'Suami'
+                    WHEN 3 THEN 'Istri'
+                    WHEN 4 THEN 'Anak'
+                    WHEN 5 THEN 'Menantu'
+                    WHEN 6 THEN 'Cucu'
+                    WHEN 7 THEN 'Orang Tua'
+                    WHEN 8 THEN 'Mertua'
+                    WHEN 9 THEN 'Famili Lainnya'
+                    WHEN 10 THEN 'Pembantu'
+                    WHEN 11 THEN 'Lainnya'
+                END
+                ,' Okupasi: ', uf.occupation,' Status Perkawinan',
+                CASE uf.marital_status
+                    WHEN 1 THEN 'Belum Menikah'
+                    WHEN 2 THEN 'Menikah'
+                    WHEN 3 THEN 'Cerai Hidup'
+                    WHEN 4 THEN 'Cerai Mati'
+                END
+                ,' Nomor Handphone', uf.mobile_phone,'</li>') SEPARATOR ' ') as family_history"));
+                $familyHistory->whereIn('uf.user_id', $userId);
+                $familyHistory->groupBy('uf.user_id');
 
-            $usersPreview->leftJoinSub($familyHistory, 'family_history', function ($join) {
-                $join->on('users.id', '=', 'family_history.user_id');
-            });
+                $usersPreview->leftJoinSub($familyHistory, 'family_history', function ($join) {
+                    $join->on('users.id', '=', 'family_history.user_id');
+                });
 
-            $usersPreview->addSelect('family_history.family_history');
-        }
-        if ($this->request->isLeave == 1) {
-            $leaveSubquery = DB::table('user_leaves as ul');
-            $leaveSubquery->join('users', 'users.id', '=', 'ul.user_id');
-            $leaveSubquery->join('grades', 'grades.id', '=', 'users.grade_id');
-            $leaveSubquery->join('positions', 'positions.id', '=', 'users.position_id');
-            $leaveSubquery->select('ul.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li> Golongan : ',grades.name, '
-            Jabatan: ', positions.name, ' Tanggal Mulai: ', ul.start_date, ', Tanggal Selesai: ', ul.end_date, ' Alasan: ',
-            CASE ul.type
-                WHEN 1 THEN 'Cuti diluar Tanggungan Negara'
-                WHEN 2 THEN 'Cuti Sakit'
-                WHEN 3 THEN 'Cuti Besar'
-                WHEN 4 THEN 'Cuti Bersalin'
-                WHEN 5 THEN 'Cuti Belajar Luar Negeri'
-                WHEN 6 THEN 'Cuti Tahunan Luar Negeri'
-            END
-             , ', Tujuan: ', ul.description,', Nomor: ', ul.number , '</li>') SEPARATOR ' ') as leave_history"));
-            $leaveSubquery->whereIn('ul.user_id', $userIds);
-            $leaveSubquery->groupBy('ul.user_id');
+                $usersPreview->addSelect('family_history.family_history');
+            }
+            if ($this->request->isLeave == 1) {
+                $leaveSubquery = DB::table('user_leaves as ul');
+                $leaveSubquery->join('users', 'users.id', '=', 'ul.user_id');
+                $leaveSubquery->join('grades', 'grades.id', '=', 'users.grade_id');
+                $leaveSubquery->join('positions', 'positions.id', '=', 'users.position_id');
+                $leaveSubquery->select('ul.user_id', DB::raw("GROUP_CONCAT(CONCAT('<li> Golongan : ',grades.name, '
+                Jabatan: ', positions.name, ' Tanggal Mulai: ', ul.start_date, ', Tanggal Selesai: ', ul.end_date, ' Alasan: ',
+                CASE ul.type
+                    WHEN 1 THEN 'Cuti diluar Tanggungan Negara'
+                    WHEN 2 THEN 'Cuti Sakit'
+                    WHEN 3 THEN 'Cuti Besar'
+                    WHEN 4 THEN 'Cuti Bersalin'
+                    WHEN 5 THEN 'Cuti Belajar Luar Negeri'
+                    WHEN 6 THEN 'Cuti Tahunan Luar Negeri'
+                END
+                 , ', Tujuan: ', ul.description,', Nomor: ', ul.number , '</li>') SEPARATOR ' ') as leave_history"));
+                $leaveSubquery->whereIn('ul.user_id', $userId);
+                $leaveSubquery->groupBy('ul.user_id');
 
-            $usersPreview->leftJoinSub($leaveSubquery, 'leave_history', function ($join) {
-                $join->on('users.id', '=', 'leave_history.user_id');
-            });
+                $usersPreview->leftJoinSub($leaveSubquery, 'leave_history', function ($join) {
+                    $join->on('users.id', '=', 'leave_history.user_id');
+                });
 
-            $usersPreview->addSelect('leave_history.leave_history');
-        }
-        if ($this->request->isAssessment == 1) {
-            $assessmentSubquery = DB::table('user_assessments as ua');
-            $assessmentSubquery->select('ua.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li> Tanggal Assessment : ', ua.event_date, '
-             Point: ', ua.point, ' Organizer : ', ua.organizer,'</li>') SEPARATOR ' ') as assessment_history"));
-            $assessmentSubquery->whereIn('ua.user_id', $userIds);
-            $assessmentSubquery->groupBy('ua.user_id');
+                $usersPreview->addSelect('leave_history.leave_history');
+            }
+            if ($this->request->isAssessment == 1) {
+                $assessmentSubquery = DB::table('user_assessments as ua');
+                $assessmentSubquery->select('ua.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li> Tanggal Assessment : ', ua.event_date, '
+                Point: ', ua.point, ' Organizer : ', ua.organizer,'</li>') SEPARATOR ' ') as assessment_history"));
+                $assessmentSubquery->whereIn('ua.user_id', $userId);
+                $assessmentSubquery->groupBy('ua.user_id');
 
-            $usersPreview->leftJoinSub($assessmentSubquery, 'assessment_history', function ($join) {
-                $join->on('users.id', '=', 'assessment_history.user_id');
-            });
+                $usersPreview->leftJoinSub($assessmentSubquery, 'assessment_history', function ($join) {
+                    $join->on('users.id', '=', 'assessment_history.user_id');
+                });
 
-            $usersPreview->addSelect('assessment_history.assessment_history');
-        }
-        if ($this->request->isCompetency == 1) {
-            $assessmentSubquery = DB::table('user_competencies as ua');
-            $assessmentSubquery->select('ua.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li> Tanggal Assessment : ', ua.event_date, '
-             Point: ', ua.point, ' Organizer : ', ua.organizer,'</li>') SEPARATOR ' ') as competency_history"));
-            $assessmentSubquery->whereIn('ua.user_id', $userIds);
-            $assessmentSubquery->groupBy('ua.user_id');
+                $usersPreview->addSelect('assessment_history.assessment_history');
+            }
+            if ($this->request->isCompetency == 1) {
+                $assessmentSubquery = DB::table('user_competencies as ua');
+                $assessmentSubquery->select('ua.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li> Tanggal Assessment : ', ua.event_date, '
+                Point: ', ua.point, ' Organizer : ', ua.organizer,'</li>') SEPARATOR ' ') as competency_history"));
+                $assessmentSubquery->whereIn('ua.user_id', $userId);
+                $assessmentSubquery->groupBy('ua.user_id');
 
-            $usersPreview->leftJoinSub($assessmentSubquery, 'competency_history', function ($join) {
-                $join->on('users.id', '=', 'competency_history.user_id');
-            });
+                $usersPreview->leftJoinSub($assessmentSubquery, 'competency_history', function ($join) {
+                    $join->on('users.id', '=', 'competency_history.user_id');
+                });
 
-            $usersPreview->addSelect('competency_history.competency_history');
-        }
-        if ($this->request->isTalentPool == 1) {
-            $assessmentSubquery = DB::table('user_talents as ua');
-            $assessmentSubquery->select('ua.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li> Tanggal Assessment : ', ua.event_date, '
-             Point: ', ua.point, ' Organizer : ', ua.organizer,'</li>') SEPARATOR ' ') as talent_pool_history"));
-            $assessmentSubquery->whereIn('ua.user_id', $userIds);
-            $assessmentSubquery->groupBy('ua.user_id');
+                $usersPreview->addSelect('competency_history.competency_history');
+            }
+            if ($this->request->isTalentPool == 1) {
+                $assessmentSubquery = DB::table('user_talents as ua');
+                $assessmentSubquery->select('ua.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li> Tanggal Assessment : ', ua.event_date, '
+                Point: ', ua.point, ' Organizer : ', ua.organizer,'</li>') SEPARATOR ' ') as talent_pool_history"));
+                $assessmentSubquery->whereIn('ua.user_id', $userId);
+                $assessmentSubquery->groupBy('ua.user_id');
 
-            $usersPreview->leftJoinSub($assessmentSubquery, 'talent_pool_history', function ($join) {
-                $join->on('users.id', '=', 'talent_pool_history.user_id');
-            });
+                $usersPreview->leftJoinSub($assessmentSubquery, 'talent_pool_history', function ($join) {
+                    $join->on('users.id', '=', 'talent_pool_history.user_id');
+                });
 
-            $usersPreview->addSelect('talent_pool_history.talent_pool_history');
-        }
-        if ($this->request->isNotes == 1) {
-            $assessmentSubquery = DB::table('user_notes as un');
-            $assessmentSubquery->join('users', 'un.giver_id', '=', 'users.id');
-            $assessmentSubquery->select('un.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li> Catatan : ', un.description, '
-             Pemberi catatan: ', users.name, ' Tanggal : ', un.created_at,'</li>') SEPARATOR ' ') as notes"));
-            $assessmentSubquery->whereIn('un.user_id', $userIds);
-            $assessmentSubquery->groupBy('un.user_id');
+                $usersPreview->addSelect('talent_pool_history.talent_pool_history');
+            }
+            if ($this->request->isNotes == 1) {
+                $assessmentSubquery = DB::table('user_notes as un');
+                $assessmentSubquery->join('users', 'un.giver_id', '=', 'users.id');
+                $assessmentSubquery->select('un.user_id', DB::raw("GROUP_CONCAT( CONCAT('<li> Catatan : ', un.description, '
+                Pemberi catatan: ', users.name, ' Tanggal : ', un.created_at,'</li>') SEPARATOR ' ') as notes"));
+                $assessmentSubquery->whereIn('un.user_id', $userId);
+                $assessmentSubquery->groupBy('un.user_id');
 
-            $usersPreview->leftJoinSub($assessmentSubquery, 'notes', function ($join) {
-                $join->on('users.id', '=', 'notes.user_id');
-            });
+                $usersPreview->leftJoinSub($assessmentSubquery, 'notes', function ($join) {
+                    $join->on('users.id', '=', 'notes.user_id');
+                });
 
-            $usersPreview->addSelect('notes.notes');
-        }
-        if ($this->request->isEmployeeType == 1){
-            $employmeeType = DB::table('employment_types as et');
-            $employmeeType->join('users', 'et.id', '=', 'users.employment_type_id');
-            $employmeeType->select('users.id as user_id', DB::raw("GROUP_CONCAT( CONCAT('<li>',et.name,'</li>') SEPARATOR '') as employee_type"));
-            $employmeeType->whereIn('users.id', $userIds);
-            $employmeeType->groupBy('users.id');
+                $usersPreview->addSelect('notes.notes');
+            }
+            if ($this->request->isEmployeeType == 1) {
+                $employmeeType = DB::table('employment_types as et');
+                $employmeeType->join('users', 'et.id', '=', 'users.employment_type_id');
+                $employmeeType->select('users.id as user_id', DB::raw("GROUP_CONCAT( CONCAT('<li>',et.name,'</li>') SEPARATOR '') as employee_type"));
+                $employmeeType->whereIn('users.id', $userId);
+                $employmeeType->groupBy('users.id');
 
-            $usersPreview->leftJoinSub($employmeeType, 'employee_type', function ($join) {
-                $join->on('users.id', '=', 'employee_type.user_id');
-            });
+                $usersPreview->leftJoinSub($employmeeType, 'employee_type', function ($join) {
+                    $join->on('users.id', '=', 'employee_type.user_id');
+                });
 
-            $usersPreview->addSelect('employee_type.employee_type');
-        }
-        if ($this->request->isEchelonDate == 1){
-            $usersPreview->addSelect('users.echelon_effective_date');
-        }
-        if ($this->request->isGradeDate == 1){
-            $usersPreview->addSelect('users.grade_effective_date');
-        }
-        if ($this->request->isNoFamily == 1){
-            $usersPreview->addSelect('users.family_registration_number');
-        }
-        if ($this->request->isNIK == 1){
-            $usersPreview->addSelect('users.id_number');
-        }
-        if ($this->request->isStartDate == 1){
-            $usersPreview->addSelect('users.pns_effective_date');
-        }
-        if ($this->request->isEndDate == 1){
-            $usersPreview->addSelect('users.retirement_effective_date');
-        }
-        if ($this->request->isDateCPNS == 1){
-            $usersPreview->addSelect('users.cpns_effective_date');
-        }
-        if ($this->request->isDatePosition == 1){
-            $usersPreview->addSelect('users.position_effective_date');
-        }
-        if ($this->request->isOutsourcingType == 1){
-            $outsourcingSubquery = DB::table('employment_types as et');
-            $outsourcingSubquery->join('users', 'et.id', '=', 'users.employment_type_id');
-            $outsourcingSubquery->select('users.id as user_id', DB::raw("GROUP_CONCAT( CONCAT('<li>',et.name,'</li>') SEPARATOR '') as outsource_type"));
-            $outsourcingSubquery->where('et.type', 3);
-            $outsourcingSubquery->whereIn('users.id', $userIds);
-            $outsourcingSubquery->groupBy('users.id');
+                $usersPreview->addSelect('employee_type.employee_type');
+            }
+            if ($this->request->isEchelonDate == 1) {
+                $usersPreview->addSelect('users.echelon_effective_date');
+            }
+            if ($this->request->isGradeDate == 1) {
+                $usersPreview->addSelect('users.grade_effective_date');
+            }
+            if ($this->request->isNoFamily == 1) {
+                $usersPreview->addSelect('users.family_registration_number');
+            }
+            if ($this->request->isNIK == 1) {
+                $usersPreview->addSelect('users.id_number');
+            }
+            if ($this->request->isStartDate == 1) {
+                $usersPreview->addSelect('users.pns_effective_date');
+            }
+            if ($this->request->isEndDate == 1) {
+                $usersPreview->addSelect('users.retirement_effective_date');
+            }
+            if ($this->request->isDateCPNS == 1) {
+                $usersPreview->addSelect('users.cpns_effective_date');
+            }
+            if ($this->request->isDatePosition == 1) {
+                $usersPreview->addSelect('users.position_effective_date');
+            }
+            if ($this->request->isOutsourcingType == 1) {
+                $outsourcingSubquery = DB::table('employment_types as et');
+                $outsourcingSubquery->join('users', 'et.id', '=', 'users.employment_type_id');
+                $outsourcingSubquery->select('users.id as user_id', DB::raw("GROUP_CONCAT( CONCAT('<li>',et.name,'</li>') SEPARATOR '') as outsource_type"));
+                $outsourcingSubquery->where('et.type', 3);
+                $outsourcingSubquery->whereIn('users.id', $userId);
+                $outsourcingSubquery->groupBy('users.id');
 
-            $usersPreview->leftJoinSub($outsourcingSubquery, 'outsource_type', function ($join) {
-                $join->on('users.id', '=', 'outsource_type.user_id');
-            });
+                $usersPreview->leftJoinSub($outsourcingSubquery, 'outsource_type', function ($join) {
+                    $join->on('users.id', '=', 'outsource_type.user_id');
+                });
 
-            $usersPreview->addSelect('outsource_type.outsource_type');
-        }
-        if ($this->request->isAssistanceType == 1){
-            $assistanceSubquery = DB::table('employment_types as et');
-            $assistanceSubquery->join('users', 'et.id', '=', 'users.employment_type_id');
-            $assistanceSubquery->select('users.id as user_id', DB::raw("GROUP_CONCAT( CONCAT('<li>',et.name,'</li>') SEPARATOR '') as assistance_type"));
-            $assistanceSubquery->where('et.type', 3);
-            $assistanceSubquery->whereIn('users.id', $userIds);
-            $assistanceSubquery->groupBy('users.id');
+                $usersPreview->addSelect('outsource_type.outsource_type');
+            }
+            if ($this->request->isAssistanceType == 1) {
+                $assistanceSubquery = DB::table('employment_types as et');
+                $assistanceSubquery->join('users', 'et.id', '=', 'users.employment_type_id');
+                $assistanceSubquery->select('users.id as user_id', DB::raw("GROUP_CONCAT( CONCAT('<li>',et.name,'</li>') SEPARATOR '') as assistance_type"));
+                $assistanceSubquery->where('et.type', 3);
+                $assistanceSubquery->whereIn('users.id', $userId);
+                $assistanceSubquery->groupBy('users.id');
 
-            $usersPreview->leftJoinSub($assistanceSubquery, 'assistance_type', function ($join) {
-                $join->on('users.id', '=', 'assistance_type.user_id');
-            });
+                $usersPreview->leftJoinSub($assistanceSubquery, 'assistance_type', function ($join) {
+                    $join->on('users.id', '=', 'assistance_type.user_id');
+                });
 
-            $usersPreview->addSelect('assistance_type.assistance_type');
+                $usersPreview->addSelect('assistance_type.assistance_type');
+            }
+            if ($this->request->isOfficeEmail == 1) {
+                $usersPreview->addSelect('users.office_email');
+            }
+            if ($this->request->isKarisu == 1) {
+                $usersPreview->addSelect('users.karisu_number');
+            }
+            if ($this->request->isEmergencyContact == 1) {
+                $usersPreview->addSelect('users.emergency_contact');
+            }
+            if ($this->request->isWorkDuration == 1) {
+                $usersPreview->addSelect(DB::raw("TIMESTAMPDIFF(YEAR, users.position_effective_date, CURDATE()) AS work_duration"));
+            }
+            $usersPreview->whereIn('users.id', $userId);
+            $usersPreview->groupBy('users.id');
+            $usersPreview = $usersPreview->get();
+            $chunkResults = $usersPreview->map(function ($item) {
+                return (array) $item;
+            })->toArray();
+            $usersPreviewData = $results->concat($chunkResults);
         }
-        if ($this->request->isOfficeEmail == 1){
-            $usersPreview->addSelect('users.office_email');
-        }
-        if ($this->request->isKarisu == 1){
-            $usersPreview->addSelect('users.karisu_number');
-        }
-        if ($this->request->isEmergencyContact == 1){
-            $usersPreview->addSelect('users.emergency_contact');
-        }
-        if ($this->request->isWorkDuration == 1 ){
-            $usersPreview->addSelect(DB::raw("TIMESTAMPDIFF(YEAR, users.position_effective_date, CURDATE()) AS work_duration"));
-        }
-        $usersPreview->whereIn('users.id', $userIds);
-        $usersPreview->groupBy('users.id');
-        $usersPreview = $usersPreview->get();
-        $usersPreviewData = $usersPreview->map(function ($item) {
-            return (array) $item;
-        })->toArray();
+
         $toggleFieldBio['isName'] = $request->isName == 1;
         $toggleFieldBio['isNip'] = $request->isNip == 1;
         $toggleFieldBio['isBirthPlaceDate'] = $request->isBirthPlaceDate == 1;
@@ -2080,7 +2089,7 @@ class ExportController extends Controller
         $toggleFieldBio['isMaritalStatus'] = $request->isMaritalStatus == 1;
         $toggleFieldBio['isEmployeeType'] = $request->isEmployeeType == 1;
         $toggleFieldBio['isAssistanceType'] = $request->isAssistanceType == 1;
-        $toggleFieldBio['isOutsourcingType'] = $request->isOutsourcingType ==1;
+        $toggleFieldBio['isOutsourcingType'] = $request->isOutsourcingType == 1;
         $toggleFieldBio['isDateCPNS'] = $request->isDateCPNS == 1;
         $toggleFieldBio['isStartDate'] = $request->isStartDate == 1;
         $toggleFieldBio['isEndDate'] = $request->isEndDate == 1;
@@ -2108,9 +2117,9 @@ class ExportController extends Controller
         $toggleFieldBio['isOfficeNumber'] = $request->isOfficeNumber == 1;
         $toggleFieldBio['isEmail'] = $request->isEmail == 1;
         $toggleFieldBio['isOfficeEmail'] = $request->isOfficeEmail == 1;
-        $toggleFieldBio['isOrganization'] = $request->isOrganization == 1;
+//        $toggleFieldBio['isOrganization'] = $request->isOrganization == 1;
         $toggleFieldBio['isWorkUnit'] = $request->isWorkUnit == 1;
-        $toggleFieldBio['isEmergencyContact'] = $request->isEmergencyContact ==1;
+        $toggleFieldBio['isEmergencyContact'] = $request->isEmergencyContact == 1;
         $toggleFieldBio['isPensionCap'] = $request->isPensionCap == 1; //not ready
 
         $toggleFieldBio['isPositionHistory'] = $request->isPositionHistory == 1;

@@ -175,7 +175,6 @@
         "No. Telp Kantor" => $toggleField['isOfficeNumber'],
         "Email" => $toggleField['isEmail'],
         "Email Dinas" => $toggleField['isOfficeEmail'],
-        "Organisasi" => $toggleField['isOrganization'],
         "Unit Kerja" => $toggleField['isWorkUnit'],
         "Kontak Darurat" => $toggleField['isEmergencyContact'],
         "Batas Usia Pensiun" => $toggleField['isPensionCap'],
@@ -274,7 +273,7 @@
                                 {{ $value['retirement_effective_date'] }}
                                 @break
                             @case("Masa Kerja Keseluruhan")
-                                {{ $value['work_duration'] }}
+                                {{ $value['position_effective_date'] }}
                                 @break
                             @case("Masa Kerja Golongan")
                                 {{ $value['grade_effective_date'] }}
@@ -335,9 +334,6 @@
                                 @break
                             @case("Email Dinas")
                                 {{ $value['office_email'] }}
-                                @break
-                            @case("Organisasi")
-                                {{ $value['organization'] }}
                                 @break
                             @case("Unit Kerja")
                                 {{ $value['work_unit'] }}
