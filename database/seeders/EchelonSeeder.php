@@ -20,7 +20,7 @@ class EchelonSeeder extends Seeder
             ['id' => 4, 'name' => 'Eselon IV', "retirement_age" => 58],
             ['id' => 5, 'name' => 'Ahli Utama', "retirement_age" => 65],
             ['id' => 6, 'name' => 'Ahli Madya', "retirement_age" => 60],
-            ['id' => 7, 'name' => 'Ahli Muda', "retirement_age" => 60],
+            ['id' => 7, 'name' => 'Ahli Muda', "retirement_age" => 58],
             ['id' => 8, 'name' => 'Ahli Pertama', "retirement_age" => 58],
             ['id' => 9, 'name' => 'Pelaksana', "retirement_age" => 58],
             ['id' => 10, 'name' => 'Penyelia', "retirement_age" => 58],
