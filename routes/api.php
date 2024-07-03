@@ -103,8 +103,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/{id}', [EmployeeController::class, 'update']);
         Route::put('/status', [EmployeeController::class, 'status']);
         Route::patch('/synchronization', [SynchronizationController::class, 'index']);
-        Route::get('/download-template/{type}', [ImportEmployeeController::class, 'downloadTemplate']);
-        Route::get('/import-histories', [ImportEmployeeController::class, 'getRiwayatImport']);
+        Route::get('import/download-template/{type}', [ImportEmployeeController::class, 'downloadTemplate']);
+        Route::get('/import/histories', [ImportEmployeeController::class, 'getRiwayatImport']);
     });
 
     Route::prefix('position-histories')->group(function () {

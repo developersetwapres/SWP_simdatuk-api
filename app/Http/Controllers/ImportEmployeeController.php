@@ -456,7 +456,7 @@ class ImportEmployeeController extends Controller
             $logType = 'add-bulk-outsource';
             $logDescription = 'Tambah Massal Data Pegawai OUTSOURCE';
         }
-        DB::table('activity_log')->insert([
+        DB::table('activity_logs')->insert([
             'user_id' => $logUserID,
             'type' => $logType,
             'description' => $logDescription,
@@ -876,7 +876,7 @@ class ImportEmployeeController extends Controller
             $type = "add-bulk-outsource";
         }
 
-        $riwayat = DB::table('activity_log as a')
+        $riwayat = DB::table('activity_logs as a')
             ->select('a.user_id', 'u.name', 'a.type', 'a.description', 'a.created_at')
             ->join('users as u', 'u.id', '=', 'a.user_id')
             ->where('a.type', $type)
