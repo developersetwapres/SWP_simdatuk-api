@@ -23,7 +23,6 @@ class ExportEmployeesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'extension' => ['required', Rule::in(['xlsx', 'csv', 'pdf'])],
             'deputy' => 'array|min:1',
             'employee_type' => 'array|min:1|nullable',
             'echelons' => 'array|min:1|numeric|nullable',
@@ -106,8 +105,6 @@ class ExportEmployeesRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'extension.required' => 'harus di isi',
-            'extension.in' => 'harus diantara xlsx, csv atau pdf',
             'deputy.array' => 'Deputy harus berupa array',
             'deputy.min' => 'Deputy harus memiliki minimal 1 item',
             'employee_type.array' => 'Employee Type harus berupa array',
@@ -316,10 +313,6 @@ class ExportEmployeesRequest extends FormRequest
     public function bodyParameters(): array
     {
         return [
-            'extension' => [
-                'description' => 'Refers to file type to export',
-                'example' => 'csv',
-            ],
             'organization' => [
                 'description' => 'Refers to IDs of Organization',
                 'example' => 1,

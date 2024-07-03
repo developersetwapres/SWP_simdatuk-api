@@ -151,7 +151,7 @@
                 @if($toggleField['isNoWorker'])
                     <th class="section-header-color">No. Pegawai</th>
                 @endif
-                @if($toggleField['workDuration'])
+                @if($toggleField['isWorkDuration'])
                     <th class="section-header-color">Lama Bekerja</th>
                 @endif
                 @if($toggleField['isGradeDuration'])
@@ -367,8 +367,8 @@
                 @if($toggleField['isNoWorker'])
                     <td>{{ $value['employee_id_card_number'] }} / {{ $value['employee_registration_number'] }}</td>
                 @endif
-                @if($toggleField['workDuration'])
-                    <td>{{ $value['work_duration'] }}</td>
+                @if($toggleField['isWorkDuration'])
+                    <td>{{ $value['position_effective_date'] }}</td>
                 @endif
                 @if($toggleField['isGradeDuration'])
                     <td>{{ $value['grade_effective_date'] }}</td>
