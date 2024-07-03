@@ -188,7 +188,7 @@ class PromotionRepository
 
         if (isset($disciplinaryId)) {
             $users->join('disciplinary_history_users as dhu', 'dhu.user_id', '=', 'u.id');
-            $users->where('dhu.disciplinary_history_id', '=', $disciplinaryId);
+            $users->where('dhu.disciplinary_id', '=', $disciplinaryId);
         }
 
         if (isset($targetPredicateId)) {
