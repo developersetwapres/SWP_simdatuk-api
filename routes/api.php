@@ -14,6 +14,7 @@ use App\Http\Controllers\ExportRecapitulationController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\GradeHistoryController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\ImportEmployeeController;
 use App\Http\Controllers\InstitutionController;
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\PerformanceHistoryController;
@@ -95,12 +96,15 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::prefix('employees')->group(function () {
+        Route::post('/import', [ImportEmployeeController::class, 'import']);
         Route::get('/', [EmployeeController::class, 'index']);
         Route::post('/', [EmployeeController::class, 'create']);
         Route::get('/{id}', [EmployeeController::class, 'show']);
         Route::post('/{id}', [EmployeeController::class, 'update']);
         Route::put('/status', [EmployeeController::class, 'status']);
         Route::patch('/synchronization', [SynchronizationController::class, 'index']);
+        Route::get('/download-template/{type}', [ImportEmployeeController::class, 'downloadTemplate']);
+        Route::get('/import-histories', [ImportEmployeeController::class, 'getRiwayatImport']);
     });
 
     Route::prefix('position-histories')->group(function () {
