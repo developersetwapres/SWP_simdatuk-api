@@ -186,18 +186,23 @@ class DiagramController extends Controller
             } else {
                 $positions = $positions->get();
             }
+        } else {
+            $positions = $positions->first();
+        }
 
-            if ($hasChildrenStatus === true) {
+        if ($hasChildrenStatus === true) {
+            if ($allData === true) {
                 foreach ($positions as $position) {
                     $hasChild = DB::select('SELECT COUNT(1) as co FROM positions WHERE parent_id = ?', [$position->id]);
                     $position->has_child = $hasChild[0]->co > 0;
                 }
+            } else {
+                $hasChild = DB::select('SELECT COUNT(1) as co FROM positions WHERE parent_id = ?', [$positions->id]);
+                $positions->has_child = $hasChild[0]->co > 0;
             }
-
-            return $positions;
-        } else {
-            return $positions->first();
         }
+
+        return $positions;
     }
 
     private function getUsers($positionId, $echelonId = null)
