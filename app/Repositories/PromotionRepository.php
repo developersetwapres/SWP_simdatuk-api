@@ -154,13 +154,18 @@ class PromotionRepository
         $users = DB::table('users as u')
             ->leftJoin('echelons as e', 'u.echelon_id', '=', 'e.id')
             ->leftJoin('grades as g', 'u.grade_id', '=', 'g.id')
+            ->leftJoin('positions as p', 'u.position_id', '=', 'p.id')
             ->select(
                 "u.id",
-                "e.name as echelon_name",
                 "u.name",
+                "u.photo_profile",
                 "u.title_prefix",
                 "u.title_suffix",
+                "e.name as echelon_name",
+                "u.echelon_effective_date",
                 "g.name as grade_name",
+                "u.grade_effective_date",
+                "p.name as position_name",
                 "u.employee_id_number",
                 "u.employee_registration_number",
             );
@@ -221,10 +226,16 @@ class PromotionRepository
         $users->groupBy('u.id');
 
         if (isset($limit)) {
-            return $users->paginate($limit);
+            $users = $users->paginate($limit);
         } else {
-            return $users->get();
+            $users = $users->get();
         }
+
+        foreach ($users as $user) {
+            $user->photo_profile = $this->getDocument($user->photo_profile, true);
+        }
+
+        return $users;
     }
 
     public function getUserByIds($userIds = [])

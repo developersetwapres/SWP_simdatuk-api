@@ -23,7 +23,7 @@ class UpdateStatusRequest extends FormRequest
     {
         return [
             'id' => 'required|numeric',
-            'employment_status' => 'required|in:1,2,3,4,5,6,7,8,9',
+            'employment_status' => 'required|in:1,2,3,4,5,6,7,8,9,10',
             'quit_date' => 'required_if:employment_status,2,3,4,5,9|date',
         ];
     }
@@ -39,7 +39,7 @@ class UpdateStatusRequest extends FormRequest
             'id.required' => 'ID Pegawai tidak boleh kosong.',
             'id.numeric' => 'ID Pegawai harus berupa angka.',
             'employment_status.required' => 'Status pegawai tidak boleh kosong.',
-            'employment_status.in' => 'Status pegawai harus diantara 1,2,3,4,5,6,7,8,9.',
+            'employment_status.in' => 'Status pegawai harus diantara 1,2,3,4,5,6,7,8,9,10.',
             'quit_date.required_if' => 'Tanggal berhenti bekerja tidak boleh kosong.',
             'quit_date.date' => 'Tanggal berhenti harus berupa tanggal.',
         ];
@@ -58,7 +58,7 @@ class UpdateStatusRequest extends FormRequest
                 'example' => 1,
             ],
             'employment_status' => [
-                'description' => 'Refers to the Status of User. 1=Aktif, 2=Pensiun, 3=Berhenti, 4=Meninggal, 5=Alih Status, 6=Aktif Perbantuan Setneg, 7=CLTN, 8=TBLN, 9=Non Aktif',
+                'description' => 'Refers to the Status of User. 1=Aktif, 2=Pensiun, 3=Berhenti, 4=Meninggal, 5=Alih Status, 6=Aktif Perbantuan Setneg, 7=CLTN, 8=TBLN, 9=Non Aktif, 10=Hukdis',
                 'example' => 1,
             ],
             'quit_date' => [
