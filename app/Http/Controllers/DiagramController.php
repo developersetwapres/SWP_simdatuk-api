@@ -41,7 +41,7 @@ class DiagramController extends Controller
 
     private function getTopLevelPositions()
     {
-        $positions = $this->getPositions(null, 2, true, false);
+        $positions = $this->getPositions(null, 2, true, false, true);
 
         foreach ($positions as $position) {
             $position->users = [];
@@ -56,7 +56,7 @@ class DiagramController extends Controller
 
     private function getPositionWithChildren($positionId)
     {
-        $positions = $this->getPositions($positionId, 1, false, false);
+        $positions = $this->getPositions($positionId, 1, false, false, true);
 
         if ($positions) {
             $positions->users = [];
@@ -66,7 +66,7 @@ class DiagramController extends Controller
             }
 
             if ($positions->type == 1) {
-                $positions->childs = $this->getPositions($positionId, 2, true, false);
+                $positions->childs = $this->getPositions($positionId, 2, true, false, true);
             } else {
                 $positions->childs = $this->getNestedJafung([], $positionId);
             }
@@ -96,7 +96,7 @@ class DiagramController extends Controller
 
                 //special case Pejabat Kemensetneg yang Diperbantukan di Sekretariat Wakil Presiden
                 if (isset($positions->id) && $positions->id == 4) {
-                    $grandchildPositions = $this->getPositions($childPosition->id, 2, true, false);
+                    $grandchildPositions = $this->getPositions($childPosition->id, 2, true, false, true);
 
                     foreach ($grandchildPositions as $grandchildPosition) {
                         $grandchildUsers = $this->getUsers($grandchildPosition->id);
@@ -119,7 +119,7 @@ class DiagramController extends Controller
             $list[] = $value;
         }
 
-        foreach ($this->getPositions($id, 2, true, false) as $value) {
+        foreach ($this->getPositions($id, 2, true, false, true) as $value) {
             if ($value->type == 2) {
                 $value->childs = $this->getNestedJafung([], $value->id);
                 $value->children = sizeof($value->childs);
@@ -133,7 +133,7 @@ class DiagramController extends Controller
     }
 
     //idType : 1=id, 2=parent_id
-    private function getPositions($id, $idType, $allData, $withUser)
+    private function getPositions($id, $idType, $allData, $withUser, $hasChildrenStatus)
     {
         $positions = DB::table('positions')
             ->select(
@@ -164,7 +164,6 @@ class DiagramController extends Controller
 
             $positions->leftJoin('users as u', function ($join) {
                 $join->on('positions.id', '=', 'u.position_id');
-                // $join->on('position_echelons.echelon_id', '=', 'u.echelon_id');
                 $join->on(DB::raw('CASE WHEN position_echelons.echelon_id IS NOT NULL THEN position_echelons.echelon_id ELSE true END'), '=', DB::raw('CASE WHEN position_echelons.echelon_id IS NOT NULL THEN u.echelon_id ELSE true END'));
             });
 
@@ -183,9 +182,19 @@ class DiagramController extends Controller
 
         if ($allData === true) {
             if ($withUser != true) {
-                return collect($positions->get()->unique('id')->values());
+                $positions = collect($positions->get()->unique('id')->values());
+            } else {
+                $positions = $positions->get();
             }
-            return $positions->get();
+
+            if ($hasChildrenStatus === true) {
+                foreach ($positions as $position) {
+                    $hasChild = DB::select('SELECT COUNT(1) as co FROM positions WHERE parent_id = ?', [$position->id]);
+                    $position->has_child = $hasChild[0]->co > 0;
+                }
+            }
+
+            return $positions;
         } else {
             return $positions->first();
         }
@@ -286,7 +295,7 @@ class DiagramController extends Controller
     {
         $positions = [];
         if ($positionType == 1) {
-            $positions = $this->getPositions($parentId, 2, true, true);
+            $positions = $this->getPositions($parentId, 2, true, true, false);
         }
 
 
