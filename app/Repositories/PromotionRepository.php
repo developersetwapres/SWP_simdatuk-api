@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Helpers\Document;
-use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
@@ -32,8 +31,8 @@ class PromotionRepository
                     e.name as echelon_name,
                     CASE " . $availableSQL . " END as unoccupied,
                     1 as type
-                FROM 
-                echelons e 
+                FROM
+                echelons e
                 LEFT JOIN position_echelons pe ON e.id = pe.echelon_id
                 LEFT JOIN positions p ON p.id = pe.position_id
                 JOIN (
@@ -120,17 +119,17 @@ class PromotionRepository
                 SELECT
                     pe.position_id,
                     pe.echelon_id,
-                    COUNT( 1 ) AS unoccupied 
+                    COUNT( 1 ) AS unoccupied
                 FROM
                     position_echelons pe
-                    JOIN users u ON pe.echelon_id = u.echelon_id 
+                    JOIN users u ON pe.echelon_id = u.echelon_id
                     AND pe.position_id = u.position_id
-                    JOIN positions p ON pe.position_id = p.id 
+                    JOIN positions p ON pe.position_id = p.id
                 GROUP BY
                     pe.echelon_id,
-                    pe.position_id 
+                    pe.position_id
                 ) su ON su.position_id = pe.position_id
-                AND su.echelon_id = pe.echelon_id 
+                AND su.echelon_id = pe.echelon_id
             WHERE
                 pe.echelon_id = ?" . $wherePosition;
 
@@ -218,6 +217,7 @@ class PromotionRepository
             $users->where('uco.point', '=', $competencyPoint);
         }
 
+        $users->whereIn('status', [1, 6, 7, 8]);
         $users->groupBy('u.id');
         return $users->get();
     }
@@ -294,7 +294,6 @@ class PromotionRepository
             return $item->grade_type == 2;
         })->values();
         $type2Grades = $type2Grades->sortBy('grade_id')->pluck('grade_id')->unique()->values()->toArray();
-
 
         foreach ($users as $user) {
             if ($user->grade_id) {
