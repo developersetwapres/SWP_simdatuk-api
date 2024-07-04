@@ -297,7 +297,7 @@
                     <td>{{ $value['grade_name'] }}</td>
                 @endif
                 @if($toggleField['isNip'])
-                    <td>{!! $value['employee_id_card_number'] !!}/{!! $value['employee_registration_number'] !!}}</td>
+                    <td>{!! $value['employee_id_card_number'] !!}/{!! $value['employee_registration_number'] !!}</td>
                 @endif
                 @if($toggleField['isBirthPlaceDate'])
                     <td>{{ $value['place_of_birth'] }}, {{ $value['date_of_birth'] }}</td>

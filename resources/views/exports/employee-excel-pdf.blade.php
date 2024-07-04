@@ -161,14 +161,14 @@
         "Golongan" => $toggleField['isGrade'],
         "TMT Grade" => $toggleField['isGradeDate'],
         "Instansi" => $toggleField['isAgency'],
-        "No. Pegawai" => $toggleField['isNoWorker'],
+        "No. Karpeg" => $toggleField['isNoWorker'],
         "No Karisu" => $toggleField['isKarisu'],
         "NPWP" => $toggleField['isNPWP'],
         "Status Pegawai" => $toggleField['isEmployeeStatus'],
         "No KK" => $toggleField['isNoFamily'],
         "No NIK" => $toggleField['isNIK'],
-        "Alamat Sekarang" => $toggleField['isCurrentAddress'],
-        "Perumahan / Kompleks" => $toggleField['isComplex'],
+        "Alamat Tempat Tinggal Saat Ini" => $toggleField['isCurrentAddress'],
+        "Nama Kompleks" => $toggleField['isComplex'],
         "No. Telp Rumah" => $toggleField['isHomeNumber'],
         "No. HP" => $toggleField['isPhoneNumber'],
         "Alamat Kantor" => $toggleField['isOfficeAddress'],
@@ -186,14 +186,14 @@
         "Riwayat SKP" => $toggleField['isSKP'],
         "Riwayat Penghargaan" => $toggleField['isRecognition'],
         "Catatan" => $toggleField['isNotes'],
-        "Riwayat Edukasi" => $toggleField['isEducationHistory'],
+        "Riwayat Pendidikan" => $toggleField['isEducationHistory'],
         "Riwayat Hukuman" => $toggleField['isDisciplinary'],
         "Riwayat Keluarga" => $toggleField['isFamilyHistory'],
         "Riwayat Cuti" => $toggleField['isLeave'],
         "Hasil Assessment" => $toggleField['isAssessment'],
         "Hasil Uji Kompetensi" => $toggleField['isCompetency'],
         "Hasil Talent Pool" => $toggleField['isTalentPool'],
-        "Deskripsi Jabatan" => $toggleField['isPositionDescription'],
+        "Keterangan" => $toggleField['isPositionDescription'],
     ];
 
     $filteredColumns = array_filter($columns);
@@ -227,17 +227,8 @@
                             @case("Nama")
                                 {{ $value['name'] }}
                                 @break
-                            @case("Jabatan")
-                                {{ $value['position_name'] }}
-                                @break
-                            @case("Deskripsi Jabatan")
-                                {{ $value['description'] }}
-                                @break
-                            @case("Eselon")
-                                {{ $value['echelons_name'] }}
-                                @break
-                            @case("Tanggal Mulai Menjabat")
-                                {{ $value['position_effective_date'] }}
+                            @case("NIP/NRP")
+                                {{ $value['employee_id_card_number'] }}/{{ $value['employee_registration_number'] }}
                                 @break
                             @case("Tempat, Tanggal Lahir")
                                 {{ $value['place_of_birth'] }}, {{ $value['date_of_birth'] }}
@@ -278,8 +269,14 @@
                             @case("Masa Kerja Golongan")
                                 {{ $value['grade_effective_date'] }}
                                 @break
+                            @case("Jabatan")
+                                {{ $value['position_name'] }}
+                                @break
                             @case("Tanggal Mulai Menjabat")
                                 {{ $value['position_effective_date'] }}
+                                @break
+                            @case("Eselon")
+                                {{ $value['echelons_name'] }}
                                 @break
                             @case("TMT Eselon")
                                 {{ $value['echelon_effective_date'] }}
@@ -293,7 +290,7 @@
                             @case("Instansi")
                                 {{ $value['institution_name'] }}
                                 @break
-                            @case("No. Pegawai")
+                            @case("No. Karpeg")
                                 {{ $value['employee_registration_number'] }}
                                 @break
                             @case("No Karisu")
@@ -311,11 +308,11 @@
                             @case("No NIK")
                                 {{ $value['id_number'] }}
                                 @break
-                            @case("Alamat Sekarang")
-                                {{ $value['current_address'] }}
-                                @break
-                            @case("Perumahan / Kompleks")
+                            @case("Nama Kompleks")
                                 {{ $value['residence_name'] }}
+                                @break
+                            @case("Alamat Tempat Tinggal Saat Ini")
+                                {{ $value['current_address'] }}
                                 @break
                             @case("No. Telp Rumah")
                                 {{ $value['home_phone_number'] }}
@@ -335,14 +332,17 @@
                             @case("Email Dinas")
                                 {{ $value['office_email'] }}
                                 @break
-                            @case("Unit Kerja")
-                                {{ $value['work_unit'] }}
+                            @case("Keterangan")
+                                {{ $value['description'] }}
                                 @break
                             @case("Kontak Darurat")
                                 {{ $value['emergency_contact'] }}
                                 @break
                             @case("Batas Usia Pensiun")
                                 {{ $value['pension_cap'] }}
+                                @break
+                            @case("Riwayat Pendidikan")
+                                {{ $value['education_history'] }}
                                 @break
                             @case("Riwayat Jabatan")
                                 {{ $value['position_history'] }}
@@ -367,9 +367,6 @@
                                 @break
                             @case("Catatan")
                                 {{ $value['notes'] }}
-                                @break
-                            @case("Riwayat Edukasi")
-                                {{ $value['education_history'] }}
                                 @break
                             @case("Riwayat Hukuman")
                                 {{ $value['disciplinary_history'] }}

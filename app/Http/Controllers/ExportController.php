@@ -755,11 +755,8 @@ class ExportController extends Controller
     {
         // filter user to get ids
         $users = DB::table('users')
-            ->leftJoin('echelons', 'users.echelon_id', '=', 'echelons.id')
-            ->leftJoin('user_educations', 'users.id', '=', 'user_educations.user_id')
-            ->leftJoin('position_history_users', 'users.id', '=', 'position_history_users.user_id')
-            ->leftJoin('user_credits', 'users.id', '=', 'user_credits.user_id')
-            ->leftJoin('target_history_users', 'users.id', '=', 'target_history_users.user_id')
+            ->leftjoin('user_credits', 'users.id', '=', 'user_credits.user_id')
+            ->leftjoin('target_history_users', 'users.id', '=', 'target_history_users.user_id')
             ->leftJoin('target_histories', 'target_history_users.target_history_id', '=', 'target_histories.id')
             ->select('users.id');
         if (isset($request->min_age)) {
@@ -809,6 +806,7 @@ class ExportController extends Controller
             });
         }
         if (isset($request->echelons)) {
+            $users->leftJoin('echelons', 'users.echelon_id', '=', 'echelons.id');
             $users->whereIn('echelons.id', $request->echelons);
         }
         if (isset($request->grades)) {
@@ -818,6 +816,7 @@ class ExportController extends Controller
             $users->whereIn('user_educations.level', $request->education);
         }
         if (isset($request->position_status)) {
+            $users->leftJoin('position_history_users', 'users.id', '=', 'position_history_users.user_id');
             $users->whereIn('position_history_users.position_status', $request->position_status);
         }
         if (isset($request->gender)) {
@@ -928,8 +927,8 @@ class ExportController extends Controller
             $userIdArray = collect($userIds);
             $userIdsChunk = $userIdArray->chunk(100);
             $results = collect();
-            $usersData = DB::table('users');
             foreach ($userIdsChunk as $userId) {
+                $usersData = DB::table('users');
                 if ($toggleFieldBio['isName']) {
                     $usersData->addSelect('users.name');
                 }
@@ -1495,9 +1494,6 @@ class ExportController extends Controller
     {
         // filter user to get ids
         $users = DB::table('users')
-            ->leftJoin('echelons', 'users.echelon_id', '=', 'echelons.id')
-            ->leftJoin('user_educations', 'users.id', '=', 'user_educations.user_id')
-            ->leftJoin('position_history_users', 'users.id', '=', 'position_history_users.user_id')
             ->leftJoin('user_credits', 'users.id', '=', 'user_credits.user_id')
             ->leftJoin('target_history_users', 'users.id', '=', 'target_history_users.user_id')
             ->leftJoin('target_histories', 'target_history_users.target_history_id', '=', 'target_histories.id')
@@ -1511,6 +1507,7 @@ class ExportController extends Controller
             $users->whereIn('users.position_id', $positionIds);
         }
         if (isset($request->echelons)) {
+            $users->leftJoin('echelons', 'users.echelon_id', '=', 'echelons.id');
             $users->whereIn('echelons.name', $request->echelons);
         }
         if (isset($request->grades)) {
@@ -1522,9 +1519,10 @@ class ExportController extends Controller
         if (isset($request->gender)) {
             $users->whereIn('users.gender', $request->gender);
         }
-//        if (isset($request->position_status)) {
-//            $users->whereIn('position_history_users.position_status', $request->position_status);
-//        }
+        if (isset($request->position_status)) {
+            $users->leftJoin('position_history_users', 'users.id', '=', 'position_history_users.user_id');
+            $users->whereIn('position_history_users.position_status', $request->position_status);
+        }
         if (isset($request->min_age)) {
             $minAge = $request->input('min_age');
             $now = Carbon::now();
