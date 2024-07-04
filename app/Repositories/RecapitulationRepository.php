@@ -356,7 +356,55 @@ class RecapitulationRepository
             $uniqueCommaSeparatedString = implode(',', $uniqueArray);
             $position->id = $uniqueCommaSeparatedString;
         }
-        return $positions;
+        $data = array();
+        foreach ($positions as $item) {
+            if (strpos($item->name, 'Staf Khusus Wakil Presiden') === 0) {
+                $result = $this->getFirstIndex($data, 'Staf Khusus Wakil Presiden');
+                if (is_null($result)) {
+                    array_push($data, ['id' => $item->id, 'name' => 'Staf Khusus Wakil Presiden', 'total' => $item->total]);
+                } else {
+                    $data[$result]['id'] = $data[$result]['id'] . ',' . $item->id;
+                    $data[$result]['total'] += $item->total;
+                }
+            } elseif (strpos($item->name, 'Asisten Staf Khusus Wakil Presiden') === 0) {
+                $result = $this->getFirstIndex($data, 'Asisten Staf Khusus Wakil Presiden');
+                if (is_null($result)) {
+                    array_push($data, ['id' => $item->id, 'name' => 'Asisten Staf Khusus Wakil Presiden', 'total' => $item->total]);
+                } else {
+                    $data[$result]['id'] = $data[$result]['id'] . ',' . $item->id;
+                    $data[$result]['total'] += $item->total;
+                }
+            } elseif (strpos($item->name, 'Pembantu Asisten Staf Khusus Wakil Presiden') === 0) {
+                $result = $this->getFirstIndex($data, 'Pembantu Asisten Staf Khusus Wakil Presiden');
+                if (is_null($result)) {
+                    array_push($data, ['id' => $item->id, 'name' => 'Pembantu Asisten Staf Khusus Wakil Presiden', 'total' => $item->total]);
+                } else {
+                    $data[$result]['id'] = $data[$result]['id'] . ',' . $item->id;
+                    $data[$result]['total'] += $item->total;
+                }
+            } else {
+                array_push($data, $item);
+            }
+        }
+
+        $data = json_decode(json_encode($data), true);
+
+        $totalSum = 0;
+        foreach ($data as $item) {
+            $totalSum += $item['total'];
+        }
+
+        return array($totalSum, $data);
+    }
+
+    public function getFirstIndex($data, $substring)
+    {
+        foreach ($data as $index => $item) {
+            if (strpos($item['name'], $substring) !== false) {
+                return $index;
+            }
+        }
+        return null; // Return null if no match is found
     }
 
     /**

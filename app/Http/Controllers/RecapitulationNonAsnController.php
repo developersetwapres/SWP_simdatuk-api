@@ -36,13 +36,13 @@ class RecapitulationNonAsnController extends Controller
         $tim = $this->recapitulationRepository->getTim(15);
         $data = [
             "name" => "Rekapitulasi Pegawai Non ASN",
-            "total" => '-',
+            "total" => $jabatanNonAsn[0] + $tim,
             "cards" => [
                 [
                     "id" => 1,
                     "name" => "Berdasarkan Jabatan",
-                    "total" => $jabatanNonAsn->sum('total'),
-                    "cards" => $jabatanNonAsn,
+                    "total" => $jabatanNonAsn[0],
+                    "cards" => $jabatanNonAsn[1],
                 ],
                 [
                     "id" => 2,

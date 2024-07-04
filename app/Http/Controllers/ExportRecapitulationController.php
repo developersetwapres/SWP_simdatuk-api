@@ -203,10 +203,10 @@ class ExportRecapitulationController extends Controller
         ];
 
         $array = array();
-        foreach ($jabatanNonAsn as $item) {
-            array_push($array, ['title' => $item->name, 'body' => $item->total, 'type' => 2]);
+        foreach ($jabatanNonAsn[1] as $item) {
+            array_push($array, ['title' => $item['name'], 'body' => $item['total'], 'type' => 2]);
         }
-        $jabatanNonAsnArray = array_merge($array, [['title' => 'Non Aparatur Sipil Negara (Non ASN)', 'body' => 'Total: ' . $jabatanNonAsn->sum('total'), 'type' => 3]]);
+        $jabatanNonAsnArray = array_merge($array, [['title' => 'Non Aparatur Sipil Negara (Non ASN)', 'body' => 'Total: ' . $jabatanNonAsn[0], 'type' => 3]]);
 
         $tim = [
             [
@@ -221,7 +221,7 @@ class ExportRecapitulationController extends Controller
             ],
             [
                 'title' => 'Non Aparatur Sipil Negara (Non ASN) + Tim',
-                'body' => 'Total : ' . $jabatanNonAsn->sum('total') + $tim,
+                'body' => 'Total : ' . $jabatanNonAsn[0] + $tim,
                 'type' => 3,
             ],
         ];
@@ -476,10 +476,10 @@ class ExportRecapitulationController extends Controller
         $tim = $this->recapitulationRepository->getTim(15);
 
         $array = array();
-        foreach ($jabatanNonAsn as $item) {
-            array_push($array, ['title' => $item->name, 'body' => $item->total, 'type' => 2]);
+        foreach ($jabatanNonAsn[1] as $item) {
+            array_push($array, ['title' => $item['name'], 'body' => $item['total'], 'type' => 2]);
         }
-        $jabatanNonAsn = array_merge($array, [['title' => 'Jabatan', 'body' => 'Total: ' . $jabatanNonAsn->sum('total'), 'type' => 3]]);
+        $jabatanNonAsn = array_merge($array, [['title' => 'Jabatan', 'body' => 'Total: ' . $jabatanNonAsn[0], 'type' => 3]]);
         $data = [
             [
                 'title' => 'Tim Nasional Percepatan Penurunan Stunting (TPPS)',

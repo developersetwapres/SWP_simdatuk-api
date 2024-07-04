@@ -40,7 +40,7 @@ class RecapitulationAsnController extends Controller
 
         $data = [
             "name" => "Rekapitulasi Pegawai ASN",
-            "total" => '-',
+            "total" => $pejabat->total_pejabat_pimpinan + $grade[0] + $gradePPPK[0],
             "cards" => [
                 [
                     "id" => 1,

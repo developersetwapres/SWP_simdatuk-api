@@ -277,13 +277,13 @@ class RecapitulationController extends Controller
         $data = [
             "id" => 3,
             "name" => 'Non Aparatur Sipil Negara (Non ASN) + Tim',
-            "total" => $jabatanNonAsn->sum('total') + $tim,
+            "total" => $jabatanNonAsn[0] + $tim,
             "cards" => [
                 [
                     "id" => 1,
                     "name" => "Non Aparatur Sipil Negara (Non ASN)",
-                    "total" => $jabatanNonAsn->sum('total'),
-                    "cards" => $jabatanNonAsn,
+                    "total" => $jabatanNonAsn[0],
+                    "cards" => $jabatanNonAsn[1],
                 ],
                 [
                     "id" => 2,
@@ -331,7 +331,7 @@ class RecapitulationController extends Controller
                         WHEN type = 1 AND employment_status IN (1, 6) THEN 1
                         WHEN type = 1 AND employment_status IN (7, 8, 9) THEN 1
                         WHEN type = 2 AND employment_status = 1 THEN 1
-                        WHEN type = 3 AND employment_status = 1 THEN 1
+                        WHEN type = 3 AND employment_status = 1 AND employment_type_id = 19 THEN 1
                     END
                 ) as total
             '),
