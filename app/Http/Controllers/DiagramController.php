@@ -203,6 +203,7 @@ class DiagramController extends Controller
                 'users.employee_id_number',
                 'users.employee_registration_number',
                 'users.type',
+                'users.photo_profile',
                 'positions.name as position_name',
                 'echelons.name as echelon_name',
                 'grades.name as grade_name',
@@ -219,7 +220,13 @@ class DiagramController extends Controller
             $users->where('users.echelon_id', '=', $echelonId);
         }
 
-        return $users->get();
+        $users = $users->get();
+
+        foreach ($users as $user) {
+            $user->photo_profile = $this->getDocument($user->photo_profile, true);
+        }
+
+        return $users;
     }
 
     private function getPositionEchelons($positionId)
