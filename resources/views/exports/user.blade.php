@@ -143,7 +143,7 @@
     <table>
         <tr>
             <td>
-                <img src='{{ $photoProfile }}' class="profile-image" />
+                <img src="{{ $photoProfile}}" class="profile-image" />
             </td>
             <td>
                 <table style="margin-left: 12px;">

@@ -507,7 +507,7 @@ class ExportController extends Controller
                 'Batas Usia Pensiun' => $user->retirement_effective_date,
             ],
             'currentPosition' => ($userCurrentPosition->name ?? '-'),
-            'photoProfile' => $user->photo_profile,
+            'photoProfile' => $this->getDocument($user->photo_profile, true),
             'userNIP' => $user->employee_id_number,
             'userName' => $user->name,
             'userEchelons' => ($userEchelons->name ?? '') . ', ' . ($userEchelons->date ?? ' '),
