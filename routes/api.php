@@ -93,6 +93,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('diagrams')->group(function () {
         Route::get('/', [DiagramController::class, 'index']);
+        Route::get('/export', [DiagramController::class, 'export']);
     });
 
     Route::prefix('employees')->group(function () {

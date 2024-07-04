@@ -2291,7 +2291,7 @@ class PositionSeeder extends Seeder
                         'name' => 'Bagian Pelayanan Kesehatan, Biro Umum, Setmensesneg',
                         'available' => 9,
                         'type' => 1,
-                        'entity' => 1,
+                        'entity' => 2,
                         'vertical_order' => 1,
                         'horizontal_order' => 2,
                         'child' => [
@@ -2383,7 +2383,7 @@ class PositionSeeder extends Seeder
                         'name' => 'Biro Informasi, Data, dan Teknologi Setmensesneg',
                         'available' => 1,
                         'type' => 1,
-                        'entity' => 1,
+                        'entity' => 2,
                         'vertical_order' => 1,
                         'horizontal_order' => 3,
                         'child' => [
@@ -2405,7 +2405,7 @@ class PositionSeeder extends Seeder
                         'name' => 'Pusat Pengembangan Kompentensi ASN, Kemensetneg',
                         'available' => 2,
                         'type' => 1,
-                        'entity' => 1,
+                        'entity' => 2,
                         'vertical_order' => 1,
                         'horizontal_order' => 4,
                         'child' => [
