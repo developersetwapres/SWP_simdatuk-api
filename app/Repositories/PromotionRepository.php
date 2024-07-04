@@ -215,7 +215,7 @@ class PromotionRepository
             $users->where('uco.point', '=', $competencyPoint);
         }
 
-        $users->whereIn('status', [1, 6, 7, 8]);
+        $users->whereIn('u.status', [1, 6, 7, 8]);
         $users->groupBy('u.id');
         return $users->get();
     }
