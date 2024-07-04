@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -40,7 +41,7 @@ class DiagramController extends Controller
 
     private function getTopLevelPositions()
     {
-        $positions = $this->getPositions(null, 2, true);
+        $positions = $this->getPositions(null, 2, true, false);
 
         foreach ($positions as $position) {
             $position->users = [];
@@ -55,7 +56,7 @@ class DiagramController extends Controller
 
     private function getPositionWithChildren($positionId)
     {
-        $positions = $this->getPositions($positionId, 1, false);
+        $positions = $this->getPositions($positionId, 1, false, false);
 
         if ($positions) {
             $positions->users = [];
@@ -65,7 +66,7 @@ class DiagramController extends Controller
             }
 
             if ($positions->type == 1) {
-                $positions->childs = $this->getPositions($positionId, 2, true);
+                $positions->childs = $this->getPositions($positionId, 2, true, false);
             } else {
                 $positions->childs = $this->getNestedJafung([], $positionId);
             }
@@ -95,7 +96,7 @@ class DiagramController extends Controller
 
                 //special case Pejabat Kemensetneg yang Diperbantukan di Sekretariat Wakil Presiden
                 if (isset($positions->id) && $positions->id == 4) {
-                    $grandchildPositions = $this->getPositions($childPosition->id, 2, true);
+                    $grandchildPositions = $this->getPositions($childPosition->id, 2, true, false);
 
                     foreach ($grandchildPositions as $grandchildPosition) {
                         $grandchildUsers = $this->getUsers($grandchildPosition->id);
@@ -118,7 +119,7 @@ class DiagramController extends Controller
             $list[] = $value;
         }
 
-        foreach ($this->getPositions($id, 2, true) as $value) {
+        foreach ($this->getPositions($id, 2, true, false) as $value) {
             if ($value->type == 2) {
                 $value->childs = $this->getNestedJafung([], $value->id);
                 $value->children = sizeof($value->childs);
@@ -132,7 +133,7 @@ class DiagramController extends Controller
     }
 
     //idType : 1=id, 2=parent_id
-    private function getPositions($id, $idType, $all = true)
+    private function getPositions($id, $idType, $allData, $withUser)
     {
         $positions = DB::table('positions')
             ->select(
@@ -149,14 +150,42 @@ class DiagramController extends Controller
             ->orderBy('position_echelons.vertical_order')
             ->orderBy('position_echelons.horizontal_order');
 
+        if ($withUser === true) {
+            $positions->addSelect(
+                'u.name as user_name',
+                'u.title_prefix',
+                'u.title_suffix',
+                'u.photo_profile as user_photo_profile',
+                'e.name as echelon_name',
+                'g.name as grade_name',
+                'u.employee_id_number',
+                'u.employee_registration_number',
+            );
+
+            $positions->leftJoin('users as u', function ($join) {
+                $join->on('positions.id', '=', 'u.position_id');
+                // $join->on('position_echelons.echelon_id', '=', 'u.echelon_id');
+                $join->on(DB::raw('CASE WHEN position_echelons.echelon_id IS NOT NULL THEN position_echelons.echelon_id ELSE true END'), '=', DB::raw('CASE WHEN position_echelons.echelon_id IS NOT NULL THEN u.echelon_id ELSE true END'));
+            });
+
+            $positions->leftJoin('echelons as e', function ($join) {
+                $join->on('u.echelon_id', '=', 'e.id');
+                $join->on('position_echelons.echelon_id', '=', 'e.id');
+            });
+            $positions->leftJoin('grades as g', 'u.grade_id', '=', 'g.id');
+        }
+
         if ($idType == 1) {
             $positions->where('positions.id', $id);
         } else {
             $positions->where('positions.parent_id', $id);
         }
 
-        if ($all === true) {
-            return collect($positions->get()->unique('id')->values());
+        if ($allData === true) {
+            if ($withUser != true) {
+                return collect($positions->get()->unique('id')->values());
+            }
+            return $positions->get();
         } else {
             return $positions->first();
         }
@@ -214,5 +243,174 @@ class DiagramController extends Controller
         }
 
         return $positionEchelons;
+    }
+
+    public function export()
+    {
+        ini_set('memory_limit', '-1');
+        set_time_limit(300);
+        $hierarchies = $this->getHierarchy(null, 1);
+
+        // return $hierarchies;
+
+        $html = '<ul><li class="li-last"><a href="#">PARENT</a>';
+        $html .= $this->generateHtml($hierarchies);
+        $html .= '</li></ul>';
+
+        $tmp = sys_get_temp_dir();
+
+        $pdf = Pdf::loadview('exports/diagram', ['html' => $html]);
+
+        $pdf->set_option('isHtml5ParserEnabled', true);
+        // $pdf->set_paper("4a0", "landscape");
+        $w = 595.28 * 150;
+        $h = 841.89 * 10;
+        // a4 = 595.28, 841.89
+        $customPaper = array(0, 0, $w, $h);
+        $pdf->setPaper($customPaper);
+        $pdf->set_option('isRemoteEnabled', true);
+        $pdf->set_option('fontDir', $tmp);
+        $pdf->set_option('fontCache', $tmp);
+        $pdf->set_option('tempDir', $tmp);
+        return $pdf->download('diagram-pdf.pdf');
+    }
+
+    private function getHierarchy($parentId = null, $positionType = null)
+    {
+        $positions = [];
+        if ($positionType == 1) {
+            $positions = $this->getPositions($parentId, 2, true, true);
+        }
+
+
+        foreach ($positions as $position) {
+            $children = $this->getHierarchy($position->id, $position->type);
+
+            if (collect($children)->values()->contains(function ($child) {
+                return $child->type == 2;
+            })) {
+                // $uniqueChildrens = $children->unique('id')->values();
+
+                // foreach ($uniqueChildrens as $uniqueChildren) {
+                //     $grandChild = $this->getHierarchy($uniqueChildren->id, $uniqueChildren->type);
+
+                //     $uniqueChildren->children = $grandChild;
+                // }
+            }
+
+            $position->children = $children;
+        }
+
+        return $positions;
+    }
+
+    private function generateHtml($hierarchies)
+    {
+        $html = '<ul>';
+        foreach ($hierarchies as $key => $hierarchy) {
+            if (sizeof($hierarchies) == 1) {
+                $html .= '<li class="li-single">';
+            } else if ($key == 0 && sizeof($hierarchies) > 1) {
+                $html .= '<li class="li-last">';
+            } else {
+                $html .= '<li class="li-left li-last">';
+            }
+
+            // <img src="public/img/profile.jpg" class="node-photo"/>
+            // <img src="' . (isset($hierarchy->user_photo_profile) ? $this->getDocument($hierarchy->user_photo_profile, true) : 'public/img/profile.jpg') . '" class="node-photo"/>
+
+            if (($hierarchy->type == 1 && $hierarchy->entity == 1) || $hierarchy->type == 2) {
+                //card person
+
+                $userName = '-';
+
+                if (isset($hierarchy->user_name)) {
+                    $userName = $hierarchy->user_name;
+                }
+                if (isset($hierarchy->title_prefix)) {
+                    $userName = $hierarchy->title_prefix . ' ' . $userName;
+                }
+                if (isset($hierarchy->title_suffix)) {
+                    $userName = $userName . ' ' . $hierarchy->title_suffix;
+                }
+
+                $html .= '
+                        <div class="node-person">
+                            <table style="width: 100%; table-layout: fixed;">
+                                <tr>
+                                    <td class="node-position-name-person">
+                                        ' . ($hierarchy->name ?? '-') . '
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="node-photo-container">
+                                        <img src="' . (isset($hierarchy->user_photo_profile) ? $this->getDocument($hierarchy->user_photo_profile, true) : 'https://simdatuk-api.ekuator.id/img/profile.jpg') . '" class="node-photo"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="node-user-name">
+                                        ' . $userName . '
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="node-item-title">
+                                        Eselon
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="node-item-value">
+                                        ' . ($hierarchy->echelon_name ?? '-') . '
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="node-item-title">
+                                        Golongan
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="node-item-value">
+                                        ' . ($hierarchy->grade_name ?? '-') . '
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        TMT
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="node-item-title">
+                                        NIP/NRP
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="node-item-value">
+                                        ' . ($hierarchy->employee_id_number ?? '-') . '/' . ($hierarchy->employee_registration_number ?? '-') . '
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        ';
+            } else {
+                //card non person
+                $html .= '
+                        <div class="node-non-person">
+                            <table style="width: 100%; table-layout: fixed;">
+                                <tr>
+                                    <td class="node-position-name-non-person">
+                                        ' . ($hierarchy->name ?? '-') . '
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        ';
+            }
+            if (sizeof($hierarchy->children)) {
+                $html .= $this->generateHtml($hierarchy->children);
+            }
+            $html .= '</li>';
+        }
+        $html .= '</ul>';
+
+        return $html;
     }
 }
