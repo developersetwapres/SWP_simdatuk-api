@@ -243,8 +243,8 @@ class PromotionController extends Controller
      * @queryParam education_level integer Refers to the level of education level employee. Example: 1
      * @queryParam max_age integer Refers to the max age of employee. Example: 1
      * @queryParam disciplinary_id integer Refers to the id of disciplinary_history. Example: 1
-     * @queryParam targetPredicate_id integer Refers to the employee_performance_predicate of target_history_users. Example: 1
-     * @queryParam tmt_cpns integer Refers to the tmt_cpns of employee. Example: 1
+     * @queryParam target_predicate_id integer Refers to the employee_performance_predicate of target_history_users. Example: 1
+     * @queryParam cpns_year integer Refers to the cpns_year of employee. Example: 1
      * @queryParam grade_year integer Refers to the date grade_effective_date of users. Example: 1
      * @queryParam credit_score integer Refers to the score of user_credits. Example: 1
      * @queryParam competency_point integer Refers to the point of user_competencies. Example: 1
@@ -252,6 +252,34 @@ class PromotionController extends Controller
      */
     public function users()
     {
+        $messages = [
+            'group_id.numeric' => 'ID grade harus berupa angka.',
+            'echelon_id.numeric' => 'ID eselon harus berupa angka.',
+            'grade_id.numeric' => 'ID eselon harus berupa angka.',
+            'education_level.numeric' => 'ID eselon harus berupa angka.',
+            'max_age.numeric' => 'ID eselon harus berupa angka.',
+            'disciplinary_id.numeric' => 'ID eselon harus berupa angka.',
+            'target_predicate_id.numeric' => 'ID eselon harus berupa angka.',
+            'cpns_year.numeric' => 'ID eselon harus berupa angka.',
+            'grade_year.numeric' => 'ID eselon harus berupa angka.',
+            'credit_score.numeric' => 'ID eselon harus berupa angka.',
+            'competency_point.numeric' => 'ID eselon harus berupa angka.',
+        ];
+
+        $this->request->validate([
+            'group_id' => 'nullable|numeric',
+            'echelon_id' => 'nullable|numeric',
+            'grade_id' => 'nullable|numeric',
+            'education_level' => 'nullable|numeric',
+            'max_age' => 'nullable|numeric',
+            'disciplinary_id' => 'nullable|numeric',
+            'target_predicate_id' => 'nullable|numeric',
+            'cpns_year' => 'nullable|numeric',
+            'grade_year' => 'nullable|numeric',
+            'credit_score' => 'nullable|numeric',
+            'competency_point' => 'nullable|numeric',
+        ], $messages);
+
         $users = $this->promotionRepository->getUserByFilter(
             $this->request->group_id,
             $this->request->echelon_id,
@@ -259,8 +287,8 @@ class PromotionController extends Controller
             $this->request->education_level,
             $this->request->max_age,
             $this->request->disciplinary_id,
-            $this->request->targetPredicate_id,
-            $this->request->tmt_cpns,
+            $this->request->target_predicate_id,
+            $this->request->cpns_year,
             $this->request->grade_year,
             $this->request->credit_score,
             $this->request->competency_point,

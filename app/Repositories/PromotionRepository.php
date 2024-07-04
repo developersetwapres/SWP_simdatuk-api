@@ -144,7 +144,7 @@ class PromotionRepository
         $maxAge = null,
         $disciplinaryId = null,
         $targetPredicateId = null,
-        $tmtCPNS = null,
+        $cpnsYear = null,
         $gradeYear = null,
         $creditScore = null,
         $competencyPoint = null,
@@ -195,16 +195,14 @@ class PromotionRepository
             $users->where('thu.employee_performance_predicate', '=', $targetPredicateId);
         }
 
-        if (isset($tmtCPNS)) {
-            $date = strtotime(date('Y-m-d') . ' -' . $tmtCPNS . ' year');
-            $year = date('Y', $date);
-            $users->where('YEAR(u.tmtcpns)', '=', $year);
+        if (isset($cpnsYear)) {
+            $date = strtotime(date('Y-m-d') . ' -' . $cpnsYear . ' year');
+            $users->where('u.cpns_effective_date', '<=', date('Y-m-d', $date));
         }
 
         if (isset($gradeYear)) {
             $date = strtotime(date('Y-m-d') . ' -' . $gradeYear . ' year');
-            $year = date('Y', $date);
-            $users->where('YEAR(u.grade_effective_date)', '=', $year);
+            $users->where('u.grade_effective_date', '<=', date('Y-m-d', $date));
         }
 
         if (isset($creditScore)) {
