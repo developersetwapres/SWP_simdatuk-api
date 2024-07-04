@@ -256,11 +256,13 @@ class EmployeeController extends Controller
             return $this->response(404, 'Jenis pegawai tidak ditemukan.');
         }
 
-        $institution = DB::table('institutions');
-        $institution->where('id', $this->request->institution_id);
-        $institution = $institution->first();
-        if (!$institution) {
-            return $this->response(404, 'Institusi tidak ditemukan.');
+        if (isset($this->request->institution_id)) {
+            $institution = DB::table('institutions');
+            $institution->where('id', $this->request->institution_id);
+            $institution = $institution->first();
+            if (!$institution) {
+                return $this->response(404, 'Institusi tidak ditemukan.');
+            }
         }
 
         if ($this->request->hasFile('photo_profile')) {

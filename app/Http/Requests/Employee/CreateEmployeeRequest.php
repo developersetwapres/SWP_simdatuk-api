@@ -131,7 +131,7 @@ class CreateEmployeeRequest extends FormRequest
             'employment_type_id' => 'required',
             'cpns_effective_date' => 'date',
             'position_id' => 'required|numeric',
-            'position_effective_date' => 'date',
+            'position_effective_date' => 'nullable|date',
             'education_level' => 'required|numeric|in:1,2,3,4,5,6,7,8',
             'education_name' => 'required|max:160',
             'education_year' => 'required|date_format:Y',
