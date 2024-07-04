@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repositories\PromotionRepository;
 use App\Repositories\PositionRepository;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 
@@ -371,5 +372,19 @@ class PromotionController extends Controller
         }, $filteredData, array_keys($filteredData));
 
         return [$resultCards, $total];
+    }
+
+    public function export()
+    {
+        $tmp = sys_get_temp_dir();
+
+        $pdf = Pdf::loadview('exports/promotion', []);
+        $pdf->set_option('isHtml5ParserEnabled', true);
+        $pdf->set_paper("A4", "portrait");
+        $pdf->set_option('isRemoteEnabled', true);
+        $pdf->set_option('fontDir', $tmp);
+        $pdf->set_option('fontCache', $tmp);
+        $pdf->set_option('tempDir', $tmp);
+        return $pdf->download('user-pdf.pdf');
     }
 }

@@ -248,5 +248,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/detail', [PromotionController::class, 'show']);
         Route::post('/users', [PromotionController::class, 'users']);
         Route::post('/compare', [PromotionController::class, 'compare']);
+        Route::post('/export', [PromotionController::class, 'export']);
     });
 });
