@@ -253,6 +253,10 @@ class PromotionController extends Controller
     public function users()
     {
         $messages = [
+            'page.numeric' => 'Page harus berupa angka.',
+            'page.min' => 'Page minimal harus 1 atau lebih.',
+            'limit.numeric' => 'Limit harus berupa angka.',
+            'limit.min' => 'Limit minimal harus 1 atau lebih.',
             'group_id.numeric' => 'ID grade harus berupa angka.',
             'echelon_id.numeric' => 'ID eselon harus berupa angka.',
             'grade_id.numeric' => 'ID eselon harus berupa angka.',
@@ -267,6 +271,8 @@ class PromotionController extends Controller
         ];
 
         $this->request->validate([
+            'page' => 'nullable|numeric|min:1',
+            'limit' => 'nullable|numeric|min:1',
             'group_id' => 'nullable|numeric',
             'echelon_id' => 'nullable|numeric',
             'grade_id' => 'nullable|numeric',
@@ -281,6 +287,8 @@ class PromotionController extends Controller
         ], $messages);
 
         $users = $this->promotionRepository->getUserByFilter(
+            $this->request->page,
+            $this->request->limit,
             $this->request->group_id,
             $this->request->echelon_id,
             $this->request->grade_id,
@@ -294,7 +302,11 @@ class PromotionController extends Controller
             $this->request->competency_point,
         );
 
-        return $this->response(200, 'success', $users);
+        if (isset($this->request->limit)) {
+            return $this->paginateResponse(200, 'success', $users);
+        } else {
+            return $this->response(200, 'success', $users);
+        }
     }
 
     public function compare()

@@ -137,6 +137,8 @@ class PromotionRepository
     }
 
     public function getUserByFilter(
+        $page = null,
+        $limit = null,
         $groupId = null,
         $echelonId = null,
         $gradeId = null,
@@ -217,7 +219,12 @@ class PromotionRepository
 
         $users->whereIn('u.status', [1, 6, 7, 8]);
         $users->groupBy('u.id');
-        return $users->get();
+
+        if (isset($limit)) {
+            return $users->paginate($limit);
+        } else {
+            return $users->get();
+        }
     }
 
     public function getUserByIds($userIds = [])
