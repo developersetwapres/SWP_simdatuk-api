@@ -310,18 +310,27 @@ class PromotionController extends Controller
         }
     }
 
+    /**
+     * Get Compare user for Promotions
+     *
+     * Below is for compare user based for promotion by user id.
+     * @authenticated
+     * @bodyParam user_id int[] list of user_id' id. Example: [1,2]
+     * @response 200 {"code":200,"message":"success","data":[{"id":527,"name":"Danang Ari Suwito","title_prefix":null,"title_suffix":"S.Sos.","employee_id_number":"198707042015031001","employee_registration_number":"180005738","echelon":{"id":7,"name":"Ahli Muda","percentage":66},"grade":{"id":7,"name":"Penata","percentage":100},"grade_effective_date":{"name":"2023-10-01","percentage":66},"cpns_effective_date":{"name":null,"percentage":0},"education_level":{"id":6,"name":"Diploma IV/Strata I","percentage":100},"notes":[{"id":2,"description":"cihuy","giver_name":"Mellinia Fitrika Irjayanti","created_at":"2024-07-04 17:50:34"}]},{"id":565,"name":"Yuyun Kusumawardani","title_prefix":null,"title_suffix":"A.Md.A.P.S.","employee_id_number":"199606032018012001","employee_registration_number":"199606032018012001","echelon":{"id":9,"name":"Pelaksana","percentage":100},"grade":{"id":10,"name":"Pengatur Tingkat I","percentage":50},"grade_effective_date":{"name":"2022-04-01","percentage":100},"cpns_effective_date":{"name":null,"percentage":0},"education_level":{"id":5,"name":"Akademik/D3/S.Muda","percentage":50},"notes":[{"id":3,"description":"ntap","giver_name":"Mellinia Fitrika Irjayanti","created_at":"2024-07-04 17:51:02"}]},{"id":570,"name":"Cindy Vandanaswari","title_prefix":null,"title_suffix":",A.Md.A.Pkt.","employee_id_number":"199905302024212005","employee_registration_number":"199905302024212005","echelon":{"id":12,"name":"Terampil","percentage":33},"grade":{"id":28,"name":"Golongan VII","percentage":100},"grade_effective_date":{"name":"2024-03-01","percentage":33},"cpns_effective_date":{"name":null,"percentage":0},"education_level":{"id":5,"name":"Akademik/D3/S.Muda","percentage":50},"notes":[]},{"id":571,"name":"Bachtiar","title_prefix":null,"title_suffix":null,"employee_id_number":"200000220","employee_registration_number":"200000220","echelon":{"id":null,"name":null,"percentage":0},"grade":{"id":null,"name":null,"percentage":0},"grade_effective_date":{"name":null,"percentage":0},"cpns_effective_date":{"name":null,"percentage":0},"education_level":{"id":null,"name":"","percentage":0},"notes":[]},{"id":1028,"name":"T. Afrizal Nur","title_prefix":null,"title_suffix":null,"employee_id_number":"TP2KAK059","employee_registration_number":"TP2KAK059","echelon":{"id":null,"name":null,"percentage":0},"grade":{"id":null,"name":null,"percentage":0},"grade_effective_date":{"name":null,"percentage":0},"cpns_effective_date":{"name":null,"percentage":0},"education_level":{"id":null,"name":"","percentage":0},"notes":[{"id":6,"description":"oh","giver_name":"Catatan 1","created_at":"2024-07-04 17:51:49"},{"id":5,"description":"Catatan 2","giver_name":"Mellinia Fitrika Irjayanti","created_at":"2024-07-04 17:51:39"},{"id":4,"description":"Catatan 3","giver_name":"Mellinia Fitrika Irjayanti","created_at":"2024-07-04 17:51:28"}]}]}
+     */
     public function compare()
     {
         $messages = [
             'user_id.required' => 'User ID tidak boleh kosong.',
             'user_id.array' => 'User ID harus berupa array.',
             'user_id.min' => 'User ID minimal 2 buah.',
+            'user_id.max' => 'User ID maksimal 5 buah.',
             'user_id.*.required' => 'User ID tidak boleh kosong.',
             'user_id.*.numeric' => 'User ID harus berupa angka.',
         ];
 
         $this->request->validate([
-            'user_id' => 'required|array|min:2',
+            'user_id' => 'required|array|min:2|max:5',
             'user_id.*' => 'required|numeric',
         ], $messages);
 
@@ -374,17 +383,56 @@ class PromotionController extends Controller
         return [$resultCards, $total];
     }
 
+    /**
+     * Export user for Promotions
+     *
+     * Below is for export user based for promotion by user id.
+     * @authenticated
+     * @bodyParam user_id int[] list of user_id' id. Example: [1,2]
+     */
     public function export()
     {
+        $messages = [
+            'user_id.required' => 'User ID tidak boleh kosong.',
+            'user_id.array' => 'User ID harus berupa array.',
+            'user_id.min' => 'User ID minimal 2 buah.',
+            'user_id.max' => 'User ID maksimal 5 buah.',
+            'user_id.*.required' => 'User ID tidak boleh kosong.',
+            'user_id.*.numeric' => 'User ID harus berupa angka.',
+        ];
+
+        $this->request->validate([
+            'user_id' => 'required|array|min:2|max:5',
+            'user_id.*' => 'required|numeric',
+        ], $messages);
+
+        $colors = [
+            '#F16637',
+            '#74B856',
+            '#2D9DD1',
+            '#F8A232',
+            '#506CB2',
+            '#C22551'
+        ];
+
+        $users = $this->promotionRepository->getUserByIds($this->request->user_id);
+
+        foreach ($users as $key => $user) {
+            $user->color = $colors[$key];
+        }
+
         $tmp = sys_get_temp_dir();
 
-        $pdf = Pdf::loadview('exports/promotion', []);
+        $pdf = Pdf::loadview('exports/promotion', [
+            'users' => $users,
+        ]);
+
         $pdf->set_option('isHtml5ParserEnabled', true);
         $pdf->set_paper("A4", "portrait");
         $pdf->set_option('isRemoteEnabled', true);
         $pdf->set_option('fontDir', $tmp);
         $pdf->set_option('fontCache', $tmp);
         $pdf->set_option('tempDir', $tmp);
-        return $pdf->download('user-pdf.pdf');
+        return $pdf->download('promotion-user.pdf');
     }
 }

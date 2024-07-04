@@ -243,6 +243,7 @@ class PromotionRepository
         $users = DB::table('users as u')
             ->select(
                 'u.id as user_id',
+                "u.photo_profile",
                 'u.name as user_name',
                 "u.title_prefix",
                 "u.title_suffix",
@@ -395,38 +396,252 @@ class PromotionRepository
         }
         //END OF USER NOTES
 
+        //ASSESSMENT
+        $userIds = $users->pluck('user_id')->toArray();
+
+        $assessmentParams = [];
+        $assessmentParams[] = now()->year;
+        $assessmentParams = array_merge($assessmentParams, $userIds);
+
+        $assessments = DB::select('
+            SELECT 
+                user_id,
+                point 
+            FROM 
+                user_assessments 
+            WHERE 
+                id IN (SELECT
+                        MAX(id) 
+                        FROM user_assessments 
+                        WHERE
+                        YEAR(event_date) = ?
+                        AND user_id IN(' . implode(",", array_fill(0, count($userIds), '?')) . ')
+                        GROUP BY user_id)
+            ORDER BY 
+                point DESC', $assessmentParams);
+
+        $assessmentPoints = collect($assessments)
+            ->pluck('point')
+            ->unique()
+            ->filter(function ($value) {
+                return !is_null($value) && $value !== '';
+            })
+            ->values()
+            ->toArray();
+
+        foreach ($users as $user) {
+            $userAssessment = collect($assessments)->filter(function ($data) use ($user) {
+                return $data->user_id == $user->user_id;
+            })->values();
+
+            if (sizeof($userAssessment)) {
+                $user->assessment_point = $userAssessment[0]->point;
+                $rank = array_search($userAssessment[0]->point, $assessmentPoints, true);
+                $user->assessment_point_percentage = (int) (100 - ($rank * (100 / sizeof($assessmentPoints))));
+
+                switch ($user->assessment_point) {
+                    case 1:
+                        $user->assessment_point_name = 'Kurang Memenuhi Syarat';
+                        break;
+                    case 2:
+                        $user->assessment_point_name = 'Masih Memenuhi Syarat';
+                        break;
+                    case 3:
+                        $user->assessment_point_name = 'Memenuhi Syarat';
+                        break;
+                }
+            } else {
+                $user->assessment_point = '-';
+                $user->assessment_point_percentage = 0;
+                $user->assessment_point_name = '-';
+            }
+        }
+        //END OF ASSESSMENT
+
+        //COMPETENCY
+        $competencyParams = [];
+        $competencyParams[] = now()->year;
+        $competencyParams = array_merge($competencyParams, $userIds);
+
+        $competencies = DB::select('
+            SELECT 
+                user_id,
+                point 
+            FROM 
+                user_competencies 
+            WHERE 
+                id IN (SELECT
+                        MAX(id) 
+                        FROM user_competencies 
+                        WHERE
+                        YEAR(event_date) = ?
+                        AND user_id IN(' . implode(",", array_fill(0, count($userIds), '?')) . ')
+                        GROUP BY user_id)
+            ORDER BY 
+                point ASC', $competencyParams);
+
+        $competencyPoints = collect($competencies)
+            ->pluck('point')
+            ->unique()
+            ->filter(function ($value) {
+                return !is_null($value) && $value !== '';
+            })
+            ->values()
+            ->toArray();
+
+        foreach ($users as $user) {
+            $userCompetency = collect($competencies)->filter(function ($data) use ($user) {
+                return $data->user_id == $user->user_id;
+            })->values();
+
+            if (sizeof($userCompetency)) {
+                $user->competency_point = $userCompetency[0]->point;
+                $rank = array_search($userCompetency[0]->point, $competencyPoints, true);
+                $user->competency_point_percentage = (int) (100 - ($rank * (100 / sizeof($competencyPoints))));
+
+                switch ($user->competency_point) {
+                    case 1:
+                        $user->competency_point_name = 'Lulus';
+                        break;
+                    case 2:
+                        $user->competency_point_name = 'Tidak Lulus';
+                        break;
+                }
+            } else {
+                $user->competency_point = '-';
+                $user->competency_point_percentage = 0;
+                $user->competency_point_name = '-';
+            }
+        }
+        //END OF COMPETENCY
+
+        //TALENT POOL
+        $talentParams = [];
+        $talentParams[] = now()->year;
+        $talentParams = array_merge($talentParams, $userIds);
+
+        $talents = DB::select('
+            SELECT 
+                user_id,
+                point 
+            FROM 
+                user_talents 
+            WHERE 
+                id IN (SELECT
+                        MAX(id) 
+                        FROM user_talents 
+                        WHERE
+                        YEAR(event_date) = ?
+                        AND user_id IN(' . implode(",", array_fill(0, count($userIds), '?')) . ')
+                        GROUP BY user_id)
+            ORDER BY 
+                point DESC', $talentParams);
+
+        $talentPoints = collect($talents)
+            ->pluck('point')
+            ->unique()
+            ->filter(function ($value) {
+                return !is_null($value) && $value !== '';
+            })
+            ->values()
+            ->toArray();
+
+        foreach ($users as $user) {
+            $userTalent = collect($talents)->filter(function ($data) use ($user) {
+                return $data->user_id == $user->user_id;
+            })->values();
+
+            if (sizeof($userTalent)) {
+                $user->talent_point = $userTalent[0]->point;
+                $rank = array_search($userTalent[0]->point, $talentPoints, true);
+                $user->talent_point_percentage = (int) (100 - ($rank * (100 / sizeof($talentPoints))));
+                $user->talent_point_name = 'Kotak ' . $userTalent[0]->point;
+            } else {
+                $user->talent_point = '-';
+                $user->talent_point_percentage = 0;
+                $user->talent_point_name = '-';
+            }
+        }
+        //END OF TALENT POOL
+
         $returnedData = [];
         foreach ($users as $user) {
-            $returnedData[] = [
+            $educationName = '';
+
+            switch ($user->education_level) {
+                case 1:
+                    $educationName = 'SD/Sederajat';
+                    break;
+                case 2:
+                    $educationName = 'SLTP/Sederajat';
+                    break;
+                case 3:
+                    $educationName = 'SLTA/Sederajat';
+                    break;
+                case 4:
+                    $educationName = 'Diploma I/II';
+                    break;
+                case 5:
+                    $educationName = 'Akademik/D3/S.Muda';
+                    break;
+                case 6:
+                    $educationName = 'Diploma IV/Strata I';
+                    break;
+                case 7:
+                    $educationName = 'Strata II';
+                    break;
+                case 8:
+                    $educationName = 'Strata III';
+                    break;
+            }
+
+            $returnedData[] = (object)[
                 'id' => $user->user_id,
                 'name' => $user->user_name,
                 'title_prefix' => $user->title_prefix,
                 'title_suffix' => $user->title_suffix,
+                'photo_profile' => $this->getDocument($user->photo_profile, true),
                 'employee_id_number' => $user->employee_id_number,
                 'employee_registration_number' => $user->employee_registration_number,
-                'echelon' => [
+                'echelon' => (object)[
                     'id' => $user->echelon_id,
                     'name' => $user->echelon_name,
                     'percentage' => $user->echelon_percentage,
                 ],
-                'grade' => [
+                'grade' => (object)[
                     'id' => $user->grade_id,
                     'name' => $user->grade_name,
                     'percentage' => $user->grade_percentage,
                 ],
-                'grade_effective_date' => [
+                'grade_effective_date' => (object)[
                     'name' => $user->grade_effective_date,
                     'percentage' => $user->grade_effective_date_percentage,
                 ],
-                'cpns_effective_date' => [
+                'cpns_effective_date' => (object)[
                     'name' => $user->cpns_effective_date,
                     'percentage' => $user->cpns_effective_date_percentage,
                 ],
-                'education_level' => [
+                'education_level' => (object)[
                     'id' => $user->education_level,
+                    'name' => $educationName,
                     'percentage' => $user->education_level_percentage,
                 ],
-                'notes' => $user->notes,
+                'assessment' => (object)[
+                    'point' => $user->assessment_point,
+                    'name' => $user->assessment_point_name,
+                    'percentage' => $user->assessment_point_percentage,
+                ],
+                'competency' => (object)[
+                    'point' => $user->competency_point,
+                    'name' => $user->competency_point_name,
+                    'percentage' => $user->competency_point_percentage,
+                ],
+                'talent' => (object)[
+                    'point' => $user->talent_point,
+                    'name' => $user->talent_point_name,
+                    'percentage' => $user->talent_point_percentage,
+                ],
+                'notes' => (object)$user->notes,
             ];
         }
 

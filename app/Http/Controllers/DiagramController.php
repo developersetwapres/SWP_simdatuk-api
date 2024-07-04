@@ -293,7 +293,7 @@ class DiagramController extends Controller
         $pdf->set_option('fontDir', $tmp);
         $pdf->set_option('fontCache', $tmp);
         $pdf->set_option('tempDir', $tmp);
-        return $pdf->download('diagram-pdf.pdf');
+        return $pdf->download('diagram.pdf');
     }
 
     private function getHierarchy($parentId = null, $positionType = null)
@@ -337,9 +337,6 @@ class DiagramController extends Controller
                 $html .= '<li class="li-left li-last">';
             }
 
-            // <img src="public/img/profile.jpg" class="node-photo"/>
-            // <img src="' . (isset($hierarchy->user_photo_profile) ? $this->getDocument($hierarchy->user_photo_profile, true) : 'public/img/profile.jpg') . '" class="node-photo"/>
-
             if (($hierarchy->type == 1 && $hierarchy->entity == 1) || $hierarchy->type == 2) {
                 //card person
 
@@ -365,7 +362,7 @@ class DiagramController extends Controller
                                 </tr>
                                 <tr>
                                     <td class="node-photo-container">
-                                        <img src="' . (isset($hierarchy->user_photo_profile) ? $this->getDocument($hierarchy->user_photo_profile, true) : 'https://simdatuk-api.ekuator.id/img/profile.jpg') . '" class="node-photo"/>
+                                        <img src="' . (isset($hierarchy->user_photo_profile) ? $this->getDocument($hierarchy->user_photo_profile, true) : 'img/profile.jpg') . '" class="node-photo"/>
                                     </td>
                                 </tr>
                                 <tr>

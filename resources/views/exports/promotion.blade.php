@@ -136,24 +136,25 @@
 
     <table style="margin-top:10px; width: 100%;">
         <tr>
-            @php $loopCount=5 @endphp
-            @for ($i = 0; $i < $loopCount; $i++)
+            @php $loopCount=3 @endphp
+            @foreach ($users as $user)
                 <td>
                     <table style="margin-left: auto; margin-right: auto;">
                         <tr>
                             <td>
-                                <img src='img/profile.jpg' class="profile-image" />
+                                <img src='{{ $user->photo_profile }}' class="profile-image" />
                             </td>
                             <td class="vertical-top">
                                 <table style="margin-left: 8px; " cellspacing="0" cellpadding="0">
                                     <tr>
-                                        <td class="user-name text-black">
-                                            Wibowo aji utomo, S.E.
+                                        <td class="user-name text-black" style="color: {{ $user->color }}">
+                                            {{ $user->name }}
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="user-registration-number text-black">
-                                            123123123123 /<br>123123123
+                                            {{ $user->employee_id_number }}
+                                            /<br>{{ $user->employee_registration_number }}
                                         </td>
                                     </tr>
                                 </table>
@@ -161,7 +162,7 @@
                         </tr>
                     </table>
                 </td>
-            @endfor
+            @endforeach
         </tr>
     </table>
 
@@ -173,31 +174,140 @@
     <div class="card">
         <div class="card-title">Umum</div>
         <table style="width:100%; table-layout:fixed; border-spacing: 10px 5px;">
-            @for ($section = 0; $section < 5; $section++)
+            @for ($section = 0; $section < 3; $section++)
                 @if ($section % 2 == 0)
                     <tr>
                 @endif
 
                 <td class="card-item-title">
-                    Eselon
+                    @if ($section == 0)
+                        Eselon
+                    @elseif ($section == 1)
+                        Golongan
+                    @elseif ($section == 2)
+                        Pendidikan Terakhir
+                    @endif
                 </td>
                 <td style="width: 70%">
                     <table style="width:100%;">
-                        @for ($i = 0; $i < $loopCount; $i++)
+                        @foreach ($users as $user)
                             <tr>
                                 <td colspan="2">
-                                    <div style="width: {{ ($i + 1) * 20 }}%; background-color: red; height:6px;"></div>
+                                    @if ($section == 0)
+                                        <div
+                                            style="width: {{ $user->echelon->percentage }}%; background-color: {{ $user->color }}; height:6px;">
+                                        </div>
+                                    @elseif ($section == 1)
+                                        <div
+                                            style="width: {{ $user->grade->percentage }}%; background-color: {{ $user->color }}; height:6px;">
+                                        </div>
+                                    @elseif ($section == 2)
+                                        <div
+                                            style="width: {{ $user->education_level->percentage }}%; background-color: {{ $user->color }}; height:6px;">
+                                        </div>
+                                    @endif
                                 </td>
                             </tr>
                             <tr>
                                 <td class="card-item-subtitle">
-                                    Eselon 1
+                                    @if ($section == 0)
+                                        {{ $user->echelon->name }}
+                                    @elseif ($section == 1)
+                                        {{ $user->grade->name }}
+                                    @elseif ($section == 2)
+                                        {{ $user->education_level->name }}
+                                    @endif
                                 </td>
                                 <td class="card-item-subtitle" style="width:1%;">
-                                    80
+                                    @if ($section == 0)
+                                        {{ $user->echelon->percentage }}%
+                                    @elseif ($section == 1)
+                                        {{ $user->grade->percentage }}%
+                                    @elseif ($section == 2)
+                                        {{ $user->education_level->percentage }}%
+                                    @endif
                                 </td>
                             </tr>
-                        @endfor
+                        @endforeach
+                    </table>
+                </td>
+
+                <!-- SEPARATOR -->
+                @if ($section % 2 == 1 || $section == 5 - 1)
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="card-item-separator" />
+                        </td>
+                        @if ($section < 5 - 1)
+                            <td colspan="2">
+                                <div class="card-item-separator" />
+                            </td>
+                        @endif
+                    </tr>
+                @endif
+            @endfor
+        </table>
+    </div>
+
+    <div class="card">
+        <div class="card-title">Nilai Manajemen Talenta</div>
+        <table style="width:100%; table-layout:fixed; border-spacing: 10px 5px;">
+            @for ($section = 0; $section < 3; $section++)
+                @if ($section % 2 == 0)
+                    <tr>
+                @endif
+
+                <td class="card-item-title">
+                    @if ($section == 0)
+                        Hasil Assessment
+                    @elseif ($section == 1)
+                        Hasil Uji Kompetensi
+                    @elseif ($section == 2)
+                        Hasil Talent Pool
+                    @endif
+                </td>
+                <td style="width: 70%">
+                    <table style="width:100%;">
+                        @foreach ($users as $user)
+                            <tr>
+                                <td colspan="2">
+                                    @if ($section == 0)
+                                        <div
+                                            style="width: {{ $user->assessment->percentage }}%; background-color: {{ $user->color }}; height:6px;">
+                                        </div>
+                                    @elseif ($section == 1)
+                                        <div
+                                            style="width: {{ $user->competency->percentage }}%; background-color: {{ $user->color }}; height:6px;">
+                                        </div>
+                                    @elseif ($section == 2)
+                                        <div
+                                            style="width: {{ $user->talent->percentage }}%; background-color: {{ $user->color }}; height:6px;">
+                                        </div>
+                                    @endif
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="card-item-subtitle">
+                                    @if ($section == 0)
+                                        {{ $user->assessment->name }}
+                                    @elseif ($section == 1)
+                                        {{ $user->competency->name }}
+                                    @elseif ($section == 2)
+                                        {{ $user->talent->name }}
+                                    @endif
+                                </td>
+                                <td class="card-item-subtitle" style="width:1%;">
+                                    @if ($section == 0)
+                                        {{ $user->assessment->percentage }}%
+                                    @elseif ($section == 1)
+                                        {{ $user->competency->percentage }}%
+                                    @elseif ($section == 2)
+                                        {{ $user->talent->percentage }}%
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
                     </table>
                 </td>
 
@@ -227,23 +337,39 @@
 
     <table style="width:100%; table-layout:fixed; margin-top: 8px; border-spacing: 10px 0;">
         <tr>
-            @for ($i = 0; $i < $loopCount; $i++)
-                <td class="note-owner">
-                    Wibowo Aji Utomo, S.E.
+            @foreach ($users as $user)
+                <td class="note-owner" style="color:{{ $user->color }}">
+                    {{ $user->name }}
                 </td>
-            @endfor
+            @endforeach
+        </tr>
+        <tr>
+            @foreach ($users as $user)
+                <td style="vertical-align: top;">
+                    <table cellspacing="0" cellpadding="0">
+                        @foreach ($user->notes as $note)
+                            <tr>
+                                <td class="note-item">
+                                    {{ $loop->index + 1 . '. ' . $note->description }}
+                                </td>
+                            </tr>
+                        @endforeach
+                    </table>
+                </td>
+            @endforeach
         </tr>
 
-        @for ($i = 0; $i < $loopCount; $i++)
+        {{-- @for ($i = 0; $i < $loopCount; $i++)
             <tr>
                 @for ($a = 0; $a < $loopCount; $a++)
                     <td class="note-item">
-                        {{ $i + 1 }}. Sangat rajin, tepat waktu, rajin menabung, selalu beribadah dan selalu bisa
+                        {{ $i + 1 }}. Sangat rajin, tepat waktu, rajin menabung, selalu beribadah dan selalu
+                        bisa
                         diandalkan!
                     </td>
                 @endfor
             </tr>
-        @endfor
+        @endfor --}}
     </table>
     <!-- end of notes section -->
 </body>
