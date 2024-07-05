@@ -237,13 +237,49 @@
                                 {{ $value['age'] }}
                                 @break
                             @case("Agama")
-                                {{ $value['religion'] }}
+                                @switch($value['religion'])
+                                    @case(1)
+                                        Islam
+                                        @break
+                                    @case(2)
+                                        Kristen
+                                        @break
+                                    @case(3)
+                                        Katolik
+                                        @break
+                                    @case(4)
+                                        Hindu
+                                        @break
+                                    @case(5)
+                                        Buddha
+                                        @break
+                                    @case(6)
+                                        Konghucu
+                                        @break
+                                    @default
+                                        -
+                                @endswitch
                                 @break
                             @case("Jenis Kelamin")
-                                {{ $value['gender'] }}
+                                {{ $value['gender'] === 1 ? 'Pria' : 'Wanita' }}
                                 @break
                             @case("Status Perkawinan")
-                                {{ $value['marital_status'] }}
+                                @switch($value['marital_status'])
+                                    @case(1)
+                                        Belum Menikah
+                                        @break
+                                    @case(2)
+                                        Menikah
+                                        @break
+                                    @case(3)
+                                        Cerai Hidup
+                                        @break
+                                    @case(4)
+                                        Cerai Mati
+                                        @break
+                                    @default
+                                        -
+                                @endswitch
                                 @break
                             @case("Jenis Pegawai")
                                 {{ $value['employee_type'] }}
@@ -300,7 +336,37 @@
                                 {{ $value['id_tax'] }}
                                 @break
                             @case("Status Pegawai")
-                                {{ $value['employment_status'] }}
+                                @switch($value['employment_status'])
+                                    @case(1)
+                                        Aktif
+                                        @break
+                                    @case(2)
+                                        Pensiun
+                                        @break
+                                    @case(3)
+                                        Berhenti
+                                        @break
+                                    @case(4)
+                                        Meninggal
+                                        @break
+                                    @case(5)
+                                        Alih Status
+                                        @break
+                                    @case(6)
+                                        Aktif PS
+                                        @break
+                                    @case(7)
+                                        CLTN
+                                        @break
+                                    @case(8)
+                                        TBL
+                                        @break
+                                    @case(9)
+                                        Non Aktif
+                                        @break
+                                    @default
+                                        -
+                                @endswitch
                                 @break
                             @case("No KK")
                                 {{ $value['family_registration_number'] }}
