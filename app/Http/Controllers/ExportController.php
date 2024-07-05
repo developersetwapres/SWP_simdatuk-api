@@ -1594,13 +1594,12 @@ class ExportController extends Controller
         if (!$userIds) {
             return $this->response(400, 'Data pegawai tidak ditemukan');
         }
-
-        $usersPreview = DB::table('users');
         $toggleFieldBio = array();
         $userId = collect($userIds);
         $userIdsChunk = $userId->chunk(200);
         $results = collect();
         foreach ($userIdsChunk as $userId) {
+            $usersPreview = DB::table('users');
             if ($this->request->isName == 1) {
                 $usersPreview->addSelect('users.name');
             }
