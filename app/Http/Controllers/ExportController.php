@@ -925,7 +925,7 @@ class ExportController extends Controller
         } else if ($request->type == "pdf") {
             $tmp = sys_get_temp_dir();
             $userIdArray = collect($userIds);
-            $userIdsChunk = $userIdArray->chunk(100);
+            $userIdsChunk = $userIdArray->chunk(200);
             $results = collect();
             foreach ($userIdsChunk as $userId) {
                 $usersData = DB::table('users');
@@ -1598,7 +1598,7 @@ class ExportController extends Controller
         $usersPreview = DB::table('users');
         $toggleFieldBio = array();
         $userId = collect($userIds);
-        $userIdsChunk = $userId->chunk(100);
+        $userIdsChunk = $userId->chunk(200);
         $results = collect();
         foreach ($userIdsChunk as $userId) {
             if ($this->request->isName == 1) {

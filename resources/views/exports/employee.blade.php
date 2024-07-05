@@ -288,7 +288,7 @@
                     <td>{{ $value['position_name'] }}</td>
                 @endif
                 @if($toggleField['isPositionDescription'])
-                    <td>{{ $value['position_description'] }}</td>
+                    <td>{!! $value['position_description'] !!}</td>
                 @endif
                 @if($toggleField['isEchelons'])
                     <td>{{ $value['echelons_name'] }}</td>
@@ -504,11 +504,6 @@
                 @if($toggleField['isNotes'])
                     <td>
                         <ul>{!! $value['notes'] !!}</ul>
-                    </td>
-                @endif
-                @if($toggleField['isPositionDescription'])
-                    <td>
-                        <ul>{!! $value['position_description'] !!}</ul>
                     </td>
                 @endif
                 @if($toggleField['isEmployeeType'])

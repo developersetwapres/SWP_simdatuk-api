@@ -109,7 +109,7 @@ class employee implements FromView, WithDrawings, WithEvents
     public function view(): View
     {
         $userId = collect($this->userIds);
-        $userIdsChunk = $userId->chunk(100);
+        $userIdsChunk = $userId->chunk(200);
         $results = collect();
         $usersData = array();
         foreach ($userIdsChunk as $userIds) {
