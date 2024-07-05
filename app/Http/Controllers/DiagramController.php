@@ -196,7 +196,7 @@ class DiagramController extends Controller
                     $hasChild = DB::select('SELECT COUNT(1) as co FROM positions WHERE parent_id = ?', [$position->id]);
                     $position->has_child = $hasChild[0]->co > 0;
                 }
-            } else {
+            } else if ($positions) {
                 $hasChild = DB::select('SELECT COUNT(1) as co FROM positions WHERE parent_id = ?', [$positions->id]);
                 $positions->has_child = $hasChild[0]->co > 0;
             }
