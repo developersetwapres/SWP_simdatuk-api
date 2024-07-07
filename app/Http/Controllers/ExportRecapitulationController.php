@@ -54,7 +54,10 @@ class ExportRecapitulationController extends Controller
         $jabatanNonAsn = $this->recapitulationRepository->getJabatanNonAsn();
         $tim = $this->recapitulationRepository->getTim(15);
 
-        $array1 = [
+        /**
+         * Begin total ASN active + non active
+         */
+        $arrayAsnActiveNonActive = [
             [
                 'title' => 'Pejabat Pimpinan',
                 'body' => 'Total : ' . $pejabat->total_pejabat_pimpinan,
@@ -202,13 +205,19 @@ class ExportRecapitulationController extends Controller
             ],
         ];
 
+        /**
+         * Begin total non asn
+         */
         $array = array();
         foreach ($jabatanNonAsn[1] as $item) {
             array_push($array, ['title' => $item['name'], 'body' => $item['total'], 'type' => 2]);
         }
-        $jabatanNonAsnArray = array_merge($array, [['title' => 'Non Aparatur Sipil Negara (Non ASN)', 'body' => 'Total: ' . $jabatanNonAsn[0], 'type' => 3]]);
+        $arrayNonAsn = array_merge($array, [['title' => 'Non Aparatur Sipil Negara (Non ASN)', 'body' => 'Total: ' . $jabatanNonAsn[0], 'type' => 3]]);
 
-        $tim = [
+        /**
+         * Begin total non asn + tim
+         */
+        $arrayNonAsnTim = [
             [
                 'title' => 'Tim',
                 'body' => 'Total : ' . $tim,
@@ -226,13 +235,24 @@ class ExportRecapitulationController extends Controller
             ],
         ];
 
+        /**
+         * Begin total outsourcing
+         */
         $outsource = $this->recapitulationRepository->getOutsource(19);
-
         $array = array();
         foreach ($outsource[1] as $item) {
             array_push($array, ['title' => $item->name, 'body' => $item->total, 'type' => 2]);
         }
-        $outsource = array_merge($array, [['title' => 'Tenaga Outsourcing', 'body' => 'Total: ' . $outsource[0], 'type' => 3]]);
+        $arrayOutsource = array_merge($array, [['title' => 'Tenaga Outsourcing', 'body' => 'Total: ' . $outsource[0], 'type' => 3]]);
+
+        /**
+         * Grand total
+         */
+        $grandTotal = [[
+            'title' => 'Grand Total',
+            'body' => 'Total : ' . $pejabat->total_pejabat_pimpinan + $pelaksana->total + $pejabat->total_pejabat_fungsional_keahlian + $pejabat->total_pejabat_fungsional_keterampilan + $pejabatDiperbantukan->total + $nonActive->total + $jabatanNonAsn[0] + $outsource[0],
+            'type' => 3,
+        ]];
 
         $title = 'Rekapitulasi Pegawai';
         $date = Carbon::now()->timezone('Asia/Jakarta')->locale('id')->isoFormat('D MMMM Y');
@@ -240,7 +260,7 @@ class ExportRecapitulationController extends Controller
         $pdf = Pdf::loadview('exports/recapitulation', [
             'title' => $title . ' Sekretariat Wakil Presiden RI',
             'date' => $date,
-            'data' => array_merge($array1, $jabatanNonAsnArray, $tim, $outsource),
+            'data' => array_merge($grandTotal, $arrayAsnActiveNonActive, $arrayNonAsn, $arrayNonAsnTim, $arrayOutsource),
         ]);
         $pdf->set_option('isHtml5ParserEnabled', true);
         $pdf->set_paper("A4", "portrait");
@@ -258,6 +278,9 @@ class ExportRecapitulationController extends Controller
         $administrasi = $this->recapitulationRepository->getAdministrasi();
         $fungsional = $this->recapitulationRepository->getPejabatPimpinanAndFungsional();
         $grade = $this->recapitulationRepository->getGrade(1);
+        $gradeTotalByGroup = $this->recapitulationRepository->getGradeTotalByGroup();
+        $pelaksana = $this->recapitulationRepository->getPejabatPelaksana();
+        $gradePPPK = $this->recapitulationRepository->getGrade(2);
         $nonActive = $this->recapitulationRepository->getNonActiveAsn();
         $educationAndGender = $this->recapitulationRepository->getEducationAndGender(1);
 
@@ -375,9 +398,61 @@ class ExportRecapitulationController extends Controller
         foreach ($grade[1] as $item) {
             array_push($array, ['title' => $item->name, 'body' => $item->total, 'type' => 2]);
         }
-        $grade = array_merge($array, [['title' => 'Golongan', 'body' => 'Total: ' . $grade[0], 'type' => 3]]);
+        $grade = array_merge($array, [['title' => 'Golongan/Pangkat', 'body' => 'Total: ' . $grade[0], 'type' => 3]]);
 
-        $nonActive = [
+        $totalGolongan = [
+            [
+                'title' => 'Golongan IV (Pembina)',
+                'body' => $gradeTotalByGroup->pembina,
+                'type' => 2,
+            ],
+            [
+                'title' => 'Golongan III (Penata)',
+                'body' => $gradeTotalByGroup->penata,
+                'type' => 2,
+            ],
+            [
+                'title' => 'Golongan II (Pengatur)',
+                'body' => $gradeTotalByGroup->pengatur,
+                'type' => 2,
+            ],
+            [
+                'title' => 'Total Golongan/Pangkat',
+                'body' => 'Total : ' . $gradeTotalByGroup->total,
+                'type' => 3,
+            ],
+        ];
+
+        $array = array();
+        foreach ($gradePPPK[1] as $item) {
+            array_push($array, ['title' => $item->name, 'body' => $item->total, 'type' => 2]);
+        }
+        $arrayGradePPPK = array_merge($array, [['title' => 'Golongan PPPK', 'body' => 'Total: ' . $gradePPPK[0], 'type' => 3]]);
+
+        $totalPPK = [
+            [
+                'title' => 'Golongan IV (Pembina)',
+                'body' => $pelaksana->golongan4,
+                'type' => 2,
+            ],
+            [
+                'title' => 'Golongan III (Penata)',
+                'body' => $pelaksana->golongan3,
+                'type' => 2,
+            ],
+            [
+                'title' => 'Golongan II (Pengatur)',
+                'body' => $pelaksana->golongan2,
+                'type' => 2,
+            ],
+            [
+                'title' => 'Total Golongan/Pangkat',
+                'body' => 'Total : ' . $pelaksana->golongan4 + $pelaksana->golongan3 + $pelaksana->golongan2,
+                'type' => 3,
+            ],
+        ];
+
+        $arrayNonActive = [
             [
                 'title' => 'Tugas Belajar Luar Negeri (TBLN)',
                 'body' => $nonActive->tbln,
@@ -452,13 +527,20 @@ class ExportRecapitulationController extends Controller
                 'type' => 3,
             ],
         ];
+
+        $grandTotal = [[
+            'title' => 'Grand Total',
+            'body' => 'Total : ' . $pejabat->total_jabatan_pimpinan_tinggi + $administrasi->total_jabatan_administrasi + $fungsional->total_pejabat_fungsional_keahlian + $fungsional->total_pejabat_fungsional_keterampilan + $nonActive->tbln + $nonActive->cltn,
+            'type' => 3,
+        ]];
+
         $title = 'Rekapitulasi Pegawai ASN';
         $date = Carbon::now()->timezone('Asia/Jakarta')->locale('id')->isoFormat('D MMMM Y');
         $tmp = sys_get_temp_dir();
         $pdf = Pdf::loadview('exports/recapitulation', [
             'title' => $title . ' Sekretariat Wakil Presiden RI',
             'date' => $date,
-            'data' => array_merge($unitKerjaArray, $pejabatArray, $administrasiArray, $fungsionalArray, $grade, $nonActive, $educationAndGender),
+            'data' => array_merge($grandTotal, $unitKerjaArray, $pejabatArray, $administrasiArray, $fungsionalArray, $grade, $totalGolongan, $arrayGradePPPK, $educationAndGender, $arrayNonActive),
         ]);
         $pdf->set_option('isHtml5ParserEnabled', true);
         $pdf->set_paper("A4", "portrait");
@@ -479,8 +561,8 @@ class ExportRecapitulationController extends Controller
         foreach ($jabatanNonAsn[1] as $item) {
             array_push($array, ['title' => $item['name'], 'body' => $item['total'], 'type' => 2]);
         }
-        $jabatanNonAsn = array_merge($array, [['title' => 'Jabatan', 'body' => 'Total: ' . $jabatanNonAsn[0], 'type' => 3]]);
-        $data = [
+        $arrayJabatanNonAsn = array_merge($array, [['title' => 'Jabatan', 'body' => 'Total: ' . $jabatanNonAsn[0], 'type' => 3]]);
+        $arrayData = [
             [
                 'title' => 'Tim Nasional Percepatan Penurunan Stunting (TPPS)',
                 'body' => $tim,
@@ -547,13 +629,20 @@ class ExportRecapitulationController extends Controller
                 'type' => 3,
             ],
         ];
+
+        $grandTotal = [[
+            'title' => 'Grand Total',
+            'body' => 'Total : ' . $jabatanNonAsn[0] + $tim,
+            'type' => 3,
+        ]];
+
         $title = 'Rekapitulasi Pegawai Non ASN';
         $date = Carbon::now()->timezone('Asia/Jakarta')->locale('id')->isoFormat('D MMMM Y');
         $tmp = sys_get_temp_dir();
         $pdf = Pdf::loadview('exports/recapitulation', [
             'title' => $title . ' Sekretariat Wakil Presiden RI',
             'date' => $date,
-            'data' => array_merge($jabatanNonAsn, $data),
+            'data' => array_merge($grandTotal, $arrayJabatanNonAsn, $arrayData),
         ]);
         $pdf->set_option('isHtml5ParserEnabled', true);
         $pdf->set_paper("A4", "portrait");

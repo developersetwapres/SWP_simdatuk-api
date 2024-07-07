@@ -92,6 +92,21 @@ class RecapitulationRepository
         return array($total, $grade);
     }
 
+    public function getGradeTotalByGroup()
+    {
+        $grade = DB::table('grades as g');
+        $grade->join('users as u', 'u.grade_id', '=', 'g.id');
+        $grade->select(
+            DB::raw('COUNT(CASE WHEN u.grade_id IN (1,2,3,4,5,6,7,8,9,10,11,12,13) THEN 1 END) as total'),
+            DB::raw('COUNT(CASE WHEN u.grade_id IN (1,2,3,4,5) THEN 1 END) as pembina'),
+            DB::raw('COUNT(CASE WHEN u.grade_id IN (6,7,8,9) THEN 1 END) as penata'),
+            DB::raw('COUNT(CASE WHEN u.grade_id IN (10,11,12,13) THEN 1 END) as pengatur')
+        );
+        $grade->whereIn('u.employment_status', [1, 6]);
+        $grade->where('u.type', 1);
+        return $grade = $grade->first();
+    }
+
     /**
      * Get list of outsource position and total by type of employment
      *
