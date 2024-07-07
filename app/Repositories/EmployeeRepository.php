@@ -34,8 +34,6 @@ class EmployeeRepository
             'u.gender',
             'u.marital_status',
             'u.employment_type_id',
-            DB::raw("DATE_FORMAT(u.cpns_effective_date, '%d-%m-%Y') as cpns_effective_date"),
-            DB::raw("DATE_FORMAT(u.retirement_effective_date, '%d-%m-%Y') as retirement_effective_date"),
             'u.grade_id',
             'g.name as grade_name',
             'g.code as grade_code',
@@ -56,6 +54,7 @@ class EmployeeRepository
             'u.karisu_number',
             'u.id_tax',
             'u.employment_status',
+            'u.quit_date',
             'u.id_number',
             'u.family_registration_number',
             'u.residence_id',
@@ -69,8 +68,71 @@ class EmployeeRepository
             'u.emergency_contact',
             'u.description',
             'u.type',
+            DB::raw("DATE_FORMAT(u.cpns_effective_date, '%d-%m-%Y') as cpns_effective_date"),
+            DB::raw("
+                IF(
+                    u.quit_date IS NULL,
+                    CONCAT(
+                        TIMESTAMPDIFF(YEAR, u.cpns_effective_date, NOW()), ' Tahun, ',
+                        TIMESTAMPDIFF(MONTH, u.cpns_effective_date, NOW()) % 12, ' Bulan, ',
+                        DATEDIFF(
+                            NOW(),
+                            DATE_ADD(
+                                u.cpns_effective_date,
+                                INTERVAL TIMESTAMPDIFF(YEAR, u.cpns_effective_date, NOW()) YEAR
+                            ) + INTERVAL TIMESTAMPDIFF(MONTH, u.cpns_effective_date, NOW()) % 12 MONTH
+                        ), ' Hari'
+                    ),
+                    CONCAT(
+                        TIMESTAMPDIFF(YEAR, u.cpns_effective_date, u.quit_date), ' Tahun, ',
+                        TIMESTAMPDIFF(MONTH, u.cpns_effective_date, u.quit_date) % 12, ' Bulan, ',
+                        DATEDIFF(
+                            u.quit_date,
+                            DATE_ADD(
+                                u.cpns_effective_date,
+                                INTERVAL TIMESTAMPDIFF(YEAR, u.cpns_effective_date, quit_date) YEAR
+                            ) + INTERVAL TIMESTAMPDIFF(MONTH, u.cpns_effective_date, quit_date) % 12 MONTH
+                        ), ' Hari'
+                    )
+                ) as cpns_years_of_service
+            "),
+            DB::raw("DATE_FORMAT(u.pns_effective_date, '%d-%m-%Y') as pns_effective_date"),
+            DB::raw("
+                IF(
+                    u.quit_date IS NULL,
+                    CONCAT(
+                        TIMESTAMPDIFF(YEAR, u.pns_effective_date, NOW()), ' Tahun, ',
+                        TIMESTAMPDIFF(MONTH, u.pns_effective_date, NOW()) % 12, ' Bulan, ',
+                        DATEDIFF(
+                            NOW(),
+                            DATE_ADD(
+                                u.pns_effective_date,
+                                INTERVAL TIMESTAMPDIFF(YEAR, u.pns_effective_date, NOW()) YEAR
+                            ) + INTERVAL TIMESTAMPDIFF(MONTH, u.pns_effective_date, NOW()) % 12 MONTH
+                        ), ' Hari'
+                    ),
+                    CONCAT(
+                        TIMESTAMPDIFF(YEAR, u.pns_effective_date, u.quit_date), ' Tahun, ',
+                        TIMESTAMPDIFF(MONTH, u.pns_effective_date, u.quit_date) % 12, ' Bulan, ',
+                        DATEDIFF(
+                            u.quit_date,
+                            DATE_ADD(
+                                u.pns_effective_date,
+                                INTERVAL TIMESTAMPDIFF(YEAR, u.pns_effective_date, quit_date) YEAR
+                            ) + INTERVAL TIMESTAMPDIFF(MONTH, u.pns_effective_date, quit_date) % 12 MONTH
+                        ), ' Hari'
+                    )
+                ) as pns_years_of_service
+            "),
+            DB::raw("
+                CASE
+                    WHEN u.type = 1 && u.echelon_id IS NOT NULL && u.date_of_birth IS NOT NULL THEN DATE_FORMAT(DATE_ADD(DATE_ADD(u.date_of_birth, INTERVAL e.retirement_age YEAR), INTERVAL 1 MONTH),'%d-%m-%Y')
+                    WHEN u.type = 2 && u.date_of_birth IS NOT NULL THEN DATE_FORMAT(DATE_ADD(DATE_ADD(u.date_of_birth, INTERVAL 58 YEAR), INTERVAL 1 MONTH),'%d-%m-%Y')
+                    WHEN u.type = 3 && u.date_of_birth IS NOT NULL THEN DATE_FORMAT(DATE_ADD(DATE_ADD(u.date_of_birth, INTERVAL 58 YEAR), INTERVAL 1 MONTH),'%d-%m-%Y')
+                    ELSE NULL
+                END AS retirement_age
+            "),
             'u.created_at',
-            'u.quit_date',
         );
         $user = $user->first();
 

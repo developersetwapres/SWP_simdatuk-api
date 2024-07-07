@@ -311,6 +311,8 @@ class OldUserSeeder extends Seeder
                     db_lama_outsource.alamat AS current_address,
                     db_lama_outsource.ket_jabatan AS description,
                     '3' AS type,
+                    db_lama_outsource.tgl_masuk AS cpns_effective_date,
+                    db_lama_outsource.tgl_diangkat AS pns_effective_date,
                     CURRENT_TIMESTAMP AS created_at
                 FROM
                     simdatuk_dump.tbl_3outsorce as db_lama_outsource
