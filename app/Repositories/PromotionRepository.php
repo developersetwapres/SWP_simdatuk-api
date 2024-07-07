@@ -223,6 +223,7 @@ class PromotionRepository
         }
 
         $users->whereIn('u.employment_status', [1, 6, 7, 8]);
+        $users->where('u.type', 1);
         $users->groupBy('u.id');
         $users->orderBy('u.employment_status', 'asc');
         $users->orderBy('u.echelon_id', 'asc');
@@ -406,20 +407,20 @@ class PromotionRepository
         $assessmentParams = array_merge($assessmentParams, $userIds);
 
         $assessments = DB::select('
-            SELECT 
+            SELECT
                 user_id,
-                point 
-            FROM 
-                user_assessments 
-            WHERE 
+                point
+            FROM
+                user_assessments
+            WHERE
                 id IN (SELECT
-                        MAX(id) 
-                        FROM user_assessments 
+                        MAX(id)
+                        FROM user_assessments
                         WHERE
                         YEAR(event_date) = ?
                         AND user_id IN(' . implode(",", array_fill(0, count($userIds), '?')) . ')
                         GROUP BY user_id)
-            ORDER BY 
+            ORDER BY
                 point DESC', $assessmentParams);
 
         $assessmentPoints = collect($assessments)
@@ -466,20 +467,20 @@ class PromotionRepository
         $competencyParams = array_merge($competencyParams, $userIds);
 
         $competencies = DB::select('
-            SELECT 
+            SELECT
                 user_id,
-                point 
-            FROM 
-                user_competencies 
-            WHERE 
+                point
+            FROM
+                user_competencies
+            WHERE
                 id IN (SELECT
-                        MAX(id) 
-                        FROM user_competencies 
+                        MAX(id)
+                        FROM user_competencies
                         WHERE
                         YEAR(event_date) = ?
                         AND user_id IN(' . implode(",", array_fill(0, count($userIds), '?')) . ')
                         GROUP BY user_id)
-            ORDER BY 
+            ORDER BY
                 point ASC', $competencyParams);
 
         $competencyPoints = collect($competencies)
@@ -523,20 +524,20 @@ class PromotionRepository
         $talentParams = array_merge($talentParams, $userIds);
 
         $talents = DB::select('
-            SELECT 
+            SELECT
                 user_id,
-                point 
-            FROM 
-                user_talents 
-            WHERE 
+                point
+            FROM
+                user_talents
+            WHERE
                 id IN (SELECT
-                        MAX(id) 
-                        FROM user_talents 
+                        MAX(id)
+                        FROM user_talents
                         WHERE
                         YEAR(event_date) = ?
                         AND user_id IN(' . implode(",", array_fill(0, count($userIds), '?')) . ')
                         GROUP BY user_id)
-            ORDER BY 
+            ORDER BY
                 point DESC', $talentParams);
 
         $talentPoints = collect($talents)
@@ -597,7 +598,7 @@ class PromotionRepository
                     break;
             }
 
-            $returnedData[] = (object)[
+            $returnedData[] = (object) [
                 'id' => $user->user_id,
                 'name' => $user->user_name,
                 'title_prefix' => $user->title_prefix,
@@ -605,45 +606,45 @@ class PromotionRepository
                 'photo_profile' => $this->getDocument($user->photo_profile, true),
                 'employee_id_number' => $user->employee_id_number,
                 'employee_registration_number' => $user->employee_registration_number,
-                'echelon' => (object)[
+                'echelon' => (object) [
                     'id' => $user->echelon_id,
                     'name' => $user->echelon_name,
                     'percentage' => $user->echelon_percentage,
                 ],
-                'grade' => (object)[
+                'grade' => (object) [
                     'id' => $user->grade_id,
                     'name' => $user->grade_name,
                     'percentage' => $user->grade_percentage,
                 ],
-                'grade_effective_date' => (object)[
+                'grade_effective_date' => (object) [
                     'name' => $user->grade_effective_date,
                     'percentage' => $user->grade_effective_date_percentage,
                 ],
-                'cpns_effective_date' => (object)[
+                'cpns_effective_date' => (object) [
                     'name' => $user->cpns_effective_date,
                     'percentage' => $user->cpns_effective_date_percentage,
                 ],
-                'education_level' => (object)[
+                'education_level' => (object) [
                     'id' => $user->education_level,
                     'name' => $educationName,
                     'percentage' => $user->education_level_percentage,
                 ],
-                'assessment' => (object)[
+                'assessment' => (object) [
                     'point' => $user->assessment_point,
                     'name' => $user->assessment_point_name,
                     'percentage' => $user->assessment_point_percentage,
                 ],
-                'competency' => (object)[
+                'competency' => (object) [
                     'point' => $user->competency_point,
                     'name' => $user->competency_point_name,
                     'percentage' => $user->competency_point_percentage,
                 ],
-                'talent' => (object)[
+                'talent' => (object) [
                     'point' => $user->talent_point,
                     'name' => $user->talent_point_name,
                     'percentage' => $user->talent_point_percentage,
                 ],
-                'notes' => (object)$user->notes,
+                'notes' => (object) $user->notes,
             ];
         }
 
