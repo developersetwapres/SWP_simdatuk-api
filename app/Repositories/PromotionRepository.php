@@ -222,8 +222,10 @@ class PromotionRepository
             $users->where('uco.point', '=', $competencyPoint);
         }
 
-        $users->whereIn('u.status', [1, 6, 7, 8]);
+        $users->whereIn('u.employment_status', [1, 6, 7, 8]);
         $users->groupBy('u.id');
+        $users->orderBy('u.employment_status', 'asc');
+        $users->orderBy('u.echelon_id', 'asc');
 
         if (isset($limit)) {
             $users = $users->paginate($limit);
