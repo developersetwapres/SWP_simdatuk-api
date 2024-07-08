@@ -62,7 +62,6 @@ return new class extends Migration
             $table->date('expire_at')->nullable();
             $table->date('cpns_effective_date')->nullable();
             $table->date('pns_effective_date')->nullable();
-            $table->date('retirement_effective_date')->nullable();
             $table->string('office_email')->nullable()->comment('email dinas');
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
