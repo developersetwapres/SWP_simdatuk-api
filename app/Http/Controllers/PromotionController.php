@@ -290,6 +290,7 @@ class PromotionController extends Controller
         $users = $this->promotionRepository->getUserByFilter(
             $this->request->page,
             $this->request->limit,
+            $this->request->search,
             $this->request->group_id,
             $this->request->echelon_id,
             $this->request->grade_id,

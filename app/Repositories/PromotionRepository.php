@@ -139,6 +139,7 @@ class PromotionRepository
     public function getUserByFilter(
         $page = null,
         $limit = null,
+        $search = null,
         $groupId = null,
         $echelonId = null,
         $gradeId = null,
@@ -169,6 +170,13 @@ class PromotionRepository
                 "u.employee_id_number",
                 "u.employee_registration_number",
             );
+
+        if (isset($search)) {
+            $users->where(function ($query) use ($search) {
+                $query->where('u.name', 'like', '%' . $search . '%')
+                    ->orWhere('u.employee_id_number', 'like', '%' . $search . '%');
+            });
+        }
 
         if (isset($groupId)) {
             $users->join('position_history_users as phu', 'phu.user_id', '=', 'u.id');
