@@ -173,7 +173,7 @@ INTRO
             'Authentication',
             'Summary',
             'Diagram',
-            'Compare',
+            'Comparison',
             'Promotion',
             'Employee',
             'History',
