@@ -552,10 +552,8 @@ class ImportEmployeeController extends Controller
      * Add bulk employee with excel template.
      * @group Employee
      * @authenticated
-     * @queryParam type integer Refers to the type of employee 1=ASN 2=NON ASN 3=OUTSOURCE. Example: 1
-     * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
-     * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
-     * @response 400 {"code": 400,"message": "Import pegawai gagal.","data": null}
+     * @response 400 {"code": 400,"message": "Import pegawai gagal","data": {"message": "Sheet Data Pegawai tidak sesuai atau kosong"}}
+     * @response 400 {"code": 400,"message": "Import pegawai gagal","data": [{"sheet": "Data Pegawai","row": 2,"reason": "Pegawai dengan No NIK  = 3573052203730999, sudah ada"},{"sheet": "Data Pegawai","row": 3,"reason": "Jabatan = \"Staf Khusus Wakil Presiden (Bidang Umu)\" tidak ditemukan"}]}
      * @response 200 {"code": 200,"message": "Import pegawai berhasil.","data": null}
      */
     public function import(Request $request)
