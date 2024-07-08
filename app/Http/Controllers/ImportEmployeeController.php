@@ -18,43 +18,85 @@ class ImportEmployeeController extends Controller
     protected $skippedRow = [];
 
     /**
+     * BEGIN of maps the column names to their respective indexes
+     */
+
+    /**
      * Maps the column names to their respective indexes in the `Data Pegawai` Sheet.
+     * ASN & NON ASN
      */
     protected $personalInfoPos = [
         'name' => 0,
-        'employee_id_number' => 1, // NIP
-        'employee_registration_number' => 2, // NRP
-        'title_prefix' => 3, // Nama Gelar Depan
-        'title_suffix' => 4, // Nama Gelar Belakang
+        'title_prefix' => 1, // Nama Gelar Depan
+        'title_suffix' => 2, // Nama Gelar Belakang
+        'employee_id_number' => 3, // NIP
+        'employee_registration_number' => 4, // NRP
         'place_of_birth' => 5,
         'date_of_birth' => 6,
         'religion' => 7,
         'gender' => 8,
         'marital_status' => 9,
-        'employment_type' => 10, // Jenis Pegawai
-        'outsource_type' => 11, // Jenis Outsource
-        'grade' => 12, // Golongan
-        'grade_effective_date' => 13, // TMT Golongan
-        'echelon' => 14, // Eselon
-        'echelon_effective_date' => 15, // TMT Eselon
-        'institution' => 16, // Instansi Induk
-        'education_level' => 17, // Tingkat
-        'education_name' => 18, // Nama Sekolah/Universitas
-        'education_year' => 19, // Tahun Lulus
-        'employee_id_card_number' => 20, // No Karpeg
-        'karisu_number' => 21,
-        'id_tax' => 22, // NPWP
-        'employment_status' => 23, // Status Pegawai
-        'family_registration_number' => 24, // No KK
-        'id_number' => 25, // NIK
-        'residence' => 26, // Komplek
-        'current_address' => 27, // Alamat Tempat Tinggal Saat Ini
-        'home_phone_number' => 28, // No Telepon Rumah
-        'mobile_phone' => 29, // No HP
-        'office_address' => 30, // Alamat Kantor
-        'office_phone_number' => 31, // No Telepon Kantor
-        'email' => 32,
-        'emergency_contact' => 33 // Kontak Darurat
+        'employment_type' => 10, // ASN = Jenis Pegawai / NON ASN = Jenis Perbantuan
+        'cpns_effective_date' => 11, // ASN = TMT CPNS / NON ASN = Tanggal Mulai Bekerja
+        'position' => 12, // Jabatan
+        'position_effective_date' => 13, // TMT Menjabat
+        'grade' => 14, // Golongan
+        'grade_effective_date' => 15, // TMT Golongan
+        'echelon' => 16, // Eselon
+        'echelon_effective_date' => 17, // TMT Eselon
+        'institution' => 18, // Instansi Induk
+        'education_level' => 19, // Tingkat Pendidikan Terakhir
+        'education_name' => 20, // Nama Sekolah/Universitas
+        'education_year' => 21, // Tahun Lulus
+        'employee_id_card_number' => 22, // No Karpeg
+        'karisu_number' => 23,
+        'id_tax' => 24, // NPWP
+        'employment_status' => 25, // Status Pegawai
+        'family_registration_number' => 26, // No KK
+        'id_number' => 27, // NIK
+        'residence' => 28, // Komplek
+        'current_address' => 29, // Alamat Tempat Tinggal Saat Ini
+        'home_phone_number' => 30, // No Telepon Rumah
+        'mobile_phone' => 31, // No HP
+        'office_address' => 32, // Alamat Kantor
+        'office_phone_number' => 33, // No Telepon Kantor
+        'email' => 34,
+        'office_email' => 35,
+        'emergency_contact' => 36 // Kontak Darurat
+    ];
+
+    /**
+     * Maps the column names to their respective indexes in the `Data Pegawai` Sheet.
+     * OUTSOURCE
+     */
+    protected $outsourcePersonalInfoPos = [
+        'name' => 0,
+        'employee_id_number' => 1, // NIP
+        'place_of_birth' => 2,
+        'date_of_birth' => 3,
+        'religion' => 4,
+        'gender' => 5,
+        'marital_status' => 6,
+        'employment_type' => 7, // Jenis Outsourcing
+        'cpns_effective_date' => 8, // Tanggal Mulai Bekerja
+        'position' => 9, // Jabatan
+        'position_effective_date' => 10, // TMT Menjabat
+        'education_level' => 11, // Tingkat Pendidikan Terakhir
+        'education_name' => 12, // Nama Sekolah/Universitas
+        'education_year' => 13, // Tahun Lulus
+        'id_tax' => 14, // NPWP
+        'employment_status' => 15, // Status Pegawai
+        'family_registration_number' => 16, // No KK
+        'id_number' => 17, // NIK
+        'residence' => 18, // Komplek
+        'current_address' => 19, // Alamat Tempat Tinggal Saat Ini
+        'home_phone_number' => 20, // No Telepon Rumah
+        'mobile_phone' => 21, // No HP
+        'office_address' => 22, // Alamat Kantor
+        'office_phone_number' => 23, // No Telepon Kantor
+        'email' => 24,
+        'description' => 25, // Keterangan
+        'emergency_contact' => 26 // Kontak Darurat
     ];
 
     /**
@@ -69,6 +111,142 @@ class ImportEmployeeController extends Controller
         'status' => 5,
         'year_of_graduation' => 6,
         'description' => 7,
+    ];
+
+
+    /**
+     * 
+     */
+    protected $positionInfoPos = [
+        'name' => 0, // Nama Riwayat Jabatan
+        'period_month' => 1, // Bulan Periode Input Riwayat
+        'period_year' => 2, // Tahun Periode Input Riwayat
+        'nik' => 3,
+        'position' => 4, // Jabatan
+        'group' => 5, // Rumpun
+        'echelon' => 6, // Jenjang Jabatan
+        'position_status' => 7, // Keterangan Jabatan
+        'effective_date' => 8, // TMT Menjabat
+        'decree' => 9, // SK Jabatan
+        'type_of_decree' => 10, //Jenis SK Jabatan
+        'decree_number' => 11, // No SK Jabatan
+        'decree_date' => 12, // Tanggal SK Jabatan
+        'termination_date' => 13, // TMT Selesai
+        'termination_decree' => 14, // SK Selesai
+        'type_of_termination_decree' => 15, // Jenis SK Selesai
+        'termination_decree_number' => 16, // No SK Selesai
+        'termination_decree_date' => 17, // Tanggal SK Selesai
+    ];
+
+    /**
+     * 
+     */
+    protected $gradeInfoPos = [
+        'name' => 0, // Nama Riwayat Golongan
+        'period_month' => 1, // Bulan Periode Input Riwayat
+        'period_year' => 2, // Tahun Periode Input Riwayat
+        'nik' => 3,
+        'grade' => 4, // Golongan
+        'effective_date' => 5, // TMT Golongan
+        'decree_name' => 6, // SK Golongan
+        'type_of_decree' => 7, // Jenis SK Golongan
+        'decree_number' => 8, // No. SK Golongan
+        'decree_date' => 9, // Tanggal SK Golongan
+        'description' => 10, // Keterangan Golongan
+        'status' => 11 // Status Golongan
+    ];
+
+    /**
+     * 
+     */
+    protected $trainingInfoPos = [
+        'name' => 0, // Nama Diklat
+        'period_month' => 1, // Bulan Periode Input Riwayat
+        'period_year' => 2, // Tahun Periode Input Riwayat
+        'reference_number' => 3, // No Surat Perintah
+        'level' => 4, // Jenjang
+        'start_date' => 5, // Tanggal Pelaksanaan
+        'duration' => 6, // Durasi Pelatihan
+        'organizer' => 7, // Penyelenggara
+        'nik' => 8,
+    ];
+
+    /**
+     * 
+     */
+    protected $technicalTrainingInfoPos = [
+        'name' => 0, // Nama Diklat
+        'period_month' => 1, // Bulan Periode Input Riwayat
+        'period_year' => 2, // Tahun Periode Input Riwayat
+        'reference_number' => 3, // No Surat Perintah
+        'start_date' => 4, // Tanggal Pelaksanaan
+        'duration' => 5, // Durasi Pelatihan
+        'nik' => 6,
+    ];
+
+    /**
+     * 
+     */
+    protected $recognitionInfoPos = [
+        'recognition' => 0, // Nama Penghargaan
+        'period_month' => 1, // Bulan Periode Input Riwayat
+        'period_year' => 2, // Tahun Periode Input Riwayat
+        'description' => 3, // Keterangan Penghargaan
+        'type_of_decree' => 4, // Jenis SK
+        'decree_date' => 5, // Tanggal SK
+        'decree_number' => 6, // Nomor SK Penghargaan
+        'decree_year' => 7, // Tahun SK
+        'awarding_institution' => 8, // Instansi Pemberi Penghargaan
+        'date_of_receipt' => 9, // Tanggal Terima
+        'nik' => 10,
+    ];
+
+    /**
+     * 
+     */
+    protected $targetInfoPos = [
+        'name' => 0, // Nama Riwayat SKP
+        'period_month' => 1, // Bulan Periode Input Riwayat
+        'period_year' => 2, // Tahun Periode Input Riwayat
+        'appraisal_period' => 3, // Periode Penilaian
+        'year' => 4, // Tahun
+        'nik' => 5,
+        'work_behavior_rating' => 6, // Rating Perilaku Kerja
+        'employee_performance_predicate' => 7, // Predikat Kinerja Pegawai
+        'organizational_performance_achievement' => 8, // Capaian Kinerja Organisasi
+    ];
+
+    /**
+     * 
+     */
+    protected $performanceInfoPos = [
+        'name' => 0, // Nama Riwayat PPK
+        'period_month' => 1, // Bulan Periode Input Riwayat
+        'period_year' => 2, // Tahun Periode Input Riwayat
+        'performance_period' => 3, // Periode PPK
+        'nik' => 4,
+        'work_performance_score' => 5, // Nilai Prestasi Kerja
+        'description' => 6, // Keterangan
+    ];
+
+    /**
+     * 
+     */
+    protected $disciplinaryInfoPos = [
+        'name' => 0, // Nama Riwayat Hukuman Disiplin
+        'period_month' => 1, // Bulan Periode Input Riwayat
+        'period_year' => 2, // Tahun Periode Input Riwayat
+        'nik' => 3,
+        'grade' => 4, // Golongan
+        'position' => 5, // Jabatan
+        'disciplinary' => 6, // Jenis Hukuman
+        'decree_number' => 7, // No. SK Hukuman Disiplin
+        'date_of_decree' => 8, // Tanggal SK Hukuman Disiplin
+        'start_date' => 9, // Tanggal Hukuman Disiplin
+        'authorizing_officer' => 10, // Pejabat Berwenang
+        'name_of_authorizing_officer' => 11, // Nama Pejabat Berwenang
+        'description' => 12, // Uraian
+
     ];
 
     /**
@@ -143,12 +321,52 @@ class ImportEmployeeController extends Controller
         'point' => 2,
         'organizer' => 3,
     ];
+    /**
+     * END of maps the column names to their respective indexes
+     */
 
+
+    /**
+     * BEGIN MASTER DATA
+     * All MASTER DATA below must be :
+     * lowercase
+     * number
+     * alphabets
+     * allowed symbols ()-/,.
+     * 
+     * Other than that replace with empty
+     */
+    protected $employmentTypes;
+    protected $positions;
+    protected $grades;
+    protected $echelons;
+    protected $institutions;
+    protected $residences;
+    protected $groups;
+    protected $decrees;
+    protected $recognitions;
+    protected $disciplinaries;
+
+    // Array mapping gender to their respective numeric codes
+    protected $month = [
+        'januari' => 1,
+        'februari' => 2,
+        'maret' => 3,
+        'april' => 4,
+        'mei' => 5,
+        'juni' => 6,
+        'juli' => 7,
+        'agustus' => 8,
+        'september' => 9,
+        'oktober' => 10,
+        'november' => 11,
+        'desember' => 12,
+    ];
 
     // Array mapping gender to their respective numeric codes
     protected $gender = [
-        'wanita' => 0,
-        'pria' => 1,
+        'perempuan' => 0,
+        'laki-laki' => 1,
     ];
 
     // Array mapping religions to their respective numeric codes
@@ -163,7 +381,7 @@ class ImportEmployeeController extends Controller
 
     // Array mapping marital status to their respective numeric codes
     protected $maritalStatus = [
-        'belum_menikah' => 1,
+        'belummenikah' => 1,
         'menikah' => 2,
         'cerai' => 3,
         'janda' => 4,
@@ -175,11 +393,11 @@ class ImportEmployeeController extends Controller
         'sd/sederajat' => 1,
         'sltp/sederajat' => 2,
         'slta/sederajat' => 3,
-        'diploma_i/ii' => 4,
+        'diplomai/ii' => 4,
         'akademik/d3/s.muda' => 5,
-        'diploma_iv/strata_i' => 6,
-        'strata_ii' => 7,
-        'strata_iii' => 8
+        'diplomaiv/stratai' => 6,
+        'strataii' => 7,
+        'strataiii' => 8
     ];
 
     // Array mapping education status to their respective numeric codes
@@ -188,7 +406,23 @@ class ImportEmployeeController extends Controller
         'do' => 2,
         'aktif' => 3,
         'non-aktif' => 4,
-        'mengundurkan_diri' => 5
+        'mengundurkandiri' => 5
+    ];
+
+    protected $positionEchelon = [
+        'eseloni' => 1,
+        'eselonii' => 2,
+        'eseloniii' => 3,
+        'fungsional' => 4,
+        'pelaksana' => 5,
+        'staf' => 6,
+    ];
+
+    protected $positionStatus = [
+        'promosi' => 1,
+        'mutasi' => 2,
+        'inpassing' => 3,
+        'konversi' => 4,
     ];
 
     // Array mapping employment status to their respective numeric codes
@@ -197,85 +431,120 @@ class ImportEmployeeController extends Controller
         'pensiun' => 2,
         'berhenti' => 3,
         'meninggal' => 4,
-        'alih_status' => 5,
-        'aktif_perbantuan_setneg' => 6,
+        'alihstatus' => 5,
+        'aktifperbantuansetneg' => 6,
         'cltn' => 7,
         'tbln' => 8,
-        'non_aktif' => 9
+        'nonaktif' => 9
+    ];
+
+    protected $workBehaviourRating = [
+        'diatasekspektasi' => 1,
+        'sesuaiekspektasi' => 2,
+        'dibawahekspektasi' => 3,
+    ];
+
+    protected $employeePerformancePredicate = [
+        'sangatbaik' => 1,
+        'baik' => 2,
+        'butuhperbaikan' => 3,
+        'kurang' => 4,
+        'sangatkurang' => 5,
+    ];
+
+    protected $organizationalPerformanceAchievement = [
+        'sangatbaik' => 1,
+        'baik' => 2,
+        'cukup' => 3,
+    ];
+
+    protected $performanceDescription = [
+        'kurang' => 1,
+        'sedang' => 2,
+        'cukup' => 3,
+        'baik' => 4,
+        'sangatbaik' => 5,
     ];
 
     // Array mapping family relationship to their respective numeric codes
     protected $familyRelationship = [
-        'kepala_keluarga' => 1,
+        'kepalakeluarga' => 1,
         'suami' => 2,
         'istri' => 3,
         'anak' => 4,
         'menantu' => 5,
         'cucu' => 6,
-        'orang_tua' => 7,
+        'orangtua' => 7,
         'mertua' => 8,
-        'famili_lainnya' => 9,
+        'famililainnya' => 9,
         'pembantu' => 10,
         'lainnya' => 11,
     ];
 
     // Array mapping education to their respective numeric codes (for family info)
     protected $familyEducation = [
-        'tidak/belum_sekolah' => 1,
-        'belum_tamat_sd/sederajat' => 2,
-        'tamat_sd/sederajat' => 3,
+        'tidak/belumsekolah' => 1,
+        'belumtamatsd/sederajat' => 2,
+        'tamatsd/sederajat' => 3,
         'sltp/sederajat' => 4,
         'slta/sederajat' => 5,
-        'diploma_i/ii' => 6,
-        'akademi/diploma_iii/sarjana_muda' => 7,
-        'diploma_iv/strata_i' => 8,
-        'strata_ii' => 9,
-        'strata_iii' => 10,
+        'diplomai/ii' => 6,
+        'akademi/diplomaiii/sarjanamuda' => 7,
+        'diplomaiv/stratai' => 8,
+        'strataii' => 9,
+        'strataiii' => 10,
     ];
 
     // Array mapping marital status to their respective numeric codes (for family info)
     protected $familyMaritalStatus = [
-        'belum_menikah' => 1,
+        'belummenikah' => 1,
         'menikah' => 2,
-        'cerai_hidup' => 3,
-        'cerai_mati' => 4,
+        'ceraihidup' => 3,
+        'ceraimati' => 4,
     ];
 
     // Array mapping leave type to their respective numeric codes
     protected $leaveType = [
-        'cuti_diluar_tanggungan_negara' => 1,
-        'cuti_sakit' => 2,
-        'cuti_besar' => 3,
-        'cuti_bersalin' => 4,
-        'cuti_belajar_luar_negeri' => 5,
-        'cuti_tahunan_luar_negeri' => 6,
+        'cutidiluartanggungannegara' => 1,
+        'cutisakit' => 2,
+        'cutibesar' => 3,
+        'cutibersalin' => 4,
+        'cutibelajarluarnegeri' => 5,
+        'cutitahunanluarnegeri' => 6,
     ];
 
     // Array mapping assessment point to their respective numeric codes
     protected $assessmentPoint = [
-        'kurang_memenuhi_syarat' => 1,
-        'masih_memenuhi_syarat' => 2,
-        'memenuhi_syarat' => 3,
+        'kurangmemenuhisyarat' => 1,
+        'masihmemenuhisyarat' => 2,
+        'memenuhisyarat' => 3,
     ];
 
     // Array mapping competency point to their respective numeric codes
     protected $competencyPoint = [
         'lulus' => 1,
-        'tidak_lulus' => 2,
+        'tidaklulus' => 2,
     ];
 
     // Array mapping talent point to their respective numeric codes
     protected $talentPoint = [
-        'kotak_1' => 1,
-        'kotak_2' => 2,
-        'kotak_3' => 3,
-        'kotak_4' => 4,
-        'kotak_5' => 5,
-        'kotak_6' => 6,
-        'kotak_7' => 7,
-        'kotak_8' => 8,
-        'kotak_9' => 9,
+        'kotak1' => 1,
+        'kotak2' => 2,
+        'kotak3' => 3,
+        'kotak4' => 4,
+        'kotak5' => 5,
+        'kotak6' => 6,
+        'kotak7' => 7,
+        'kotak8' => 8,
+        'kotak9' => 9,
     ];
+    /**
+     * END OF MASTER DATA
+     */
+
+
+
+
 
     /**
      * Import excel for add bulk employee
@@ -304,9 +573,7 @@ class ImportEmployeeController extends Controller
         $this->type = $request->type;
 
         $employeesImport = new EmployeesImport();
-
         $extension = $request->file('file')->extension();
-
         // Import sheets
         if ($extension == 'csv') {
             Excel::import($employeesImport, $request->file('file')->path(), null, \Maatwebsite\Excel\Excel::CSV);
@@ -321,54 +588,141 @@ class ImportEmployeeController extends Controller
             $personalInfo = $employeesData[0] ?? []; // Sheet 1 : Data Pegawai
             $educationInfo = $employeesData[1] ?? []; // Sheet 2 : Riwayat Pendidikan
             $noteInfo = $employeesData[2] ?? []; // Sheet 3 : Riwayat Catatan
+
+
         } else { // ASN / NON ASN
             $personalInfo = $employeesData[0] ?? []; // Sheet 1 : Data Pegawai
-            $educationInfo = $employeesData[1] ?? []; // Sheet 2 : Pendidikan
-            $familyInfo = $employeesData[2] ?? []; // Sheet 3 : Keluarga
-            $leaveInfo = $employeesData[3] ?? []; // Sheet 4 : Cuti
-            $noteInfo = $employeesData[4] ?? []; // Sheet 5 : Catatan
-            $assessmentInfo = $employeesData[5] ?? []; // Sheet 6 : Hasil Assessment
-            $competencyInfo = $employeesData[6] ?? []; // Sheet 7 : Hasil Uji Kompetensi
-            $talentInfo = $employeesData[7] ?? []; // Sheet 8 : Hasil Talent Pool
+            $educationInfo = $employeesData[1] ?? []; // Sheet 2 : Riwayat Pendidikan
+            $positionInfo = $employeesData[2] ?? []; // Sheet 3 : Riwayat Jabatan
+            $gradeInfo = $employeesData[3] ?? []; // Sheet 4 : Riwayat Golongan
+            $structuralTrainingInfo = $employeesData[4] ?? []; // Sheet 5 : Riwayat Pelatihan Struktural
+            $functionalTrainingInfo = $employeesData[5] ?? []; // Sheet 6 : Riwayat Pelatihan Fungsional
+            $technicalTrainingInfo = $employeesData[6] ?? []; // Sheet 7 : Riwayat Pelatihan Teknis
+            $recognitionInfo = $employeesData[7] ?? []; // Sheet 8 : Riwayat Penghaargaan
+            $targetInfo = $employeesData[8] ?? []; // Sheet 9 : Riwayat SKP
+            $performanceInfo = $employeesData[9] ?? []; // Sheet 10 : Penilaian Prestasi Kerja
+            $disciplinaryInfo = $employeesData[10] ?? []; // Sheet 11 : Riwayat Hukuman Disiplin
+            $familyInfo = $employeesData[11] ?? []; // Sheet 12 : Riwayat Keluarga
+            $leaveInfo = $employeesData[12] ?? []; // Sheet 13 : Riwayat Cuti
+            $noteInfo = $employeesData[13] ?? []; // Sheet 14 : Riwayat Catatan
+            $assessmentInfo = $employeesData[14] ?? []; // Sheet 15 : Hasil Assessment
+            $competencyInfo = $employeesData[15] ?? []; // Sheet 16 : Hasil Uji Kompetensi
+            $talentInfo = $employeesData[16] ?? []; // Sheet 17 : Hasil Talent Pool
         }
 
-        if (sizeOf($personalInfo) == 0) {
-            return $this->response(400, 'Import pegawai gagal', ['message' => 'Sheet Data Pegawai kosong']);
+        $lastEl = ($this->type == 3) ? end($this->outsourcePersonalInfoPos) : end($this->personalInfoPos);
+        if (count($personalInfo) == 0 || !isset($personalInfo[0][$lastEl])) {
+            return $this->response(400, 'Import pegawai gagal', ['message' => 'Sheet Data Pegawai tidak sesuai atau kosong']);
         }
+
+        // Map Data Master
+        $this->employmentTypes = $this->getNameIdMapping('employment_types', ['status' => 1]);
+        $positions = DB::table('positions')->select("id", "parent_id", DB::raw("LOWER(REPLACE(name, ' ', '')) as name"))->orderBy('parent_id')->get()->toArray();
+        $this->positions = $this->buildHierarchy($positions);
+        $this->grades = $this->getNameIdMapping('grades');
+        $this->echelons = $this->getNameIdMapping('echelons');
+        $this->institutions = $this->getNameIdMapping('institutions');
+        $this->residences = $this->getNameIdMapping('residences');
+        $this->groups = $this->getNameIdMapping('groups');
+        $this->decrees = $this->getNameIdMapping('decrees');
+        $this->recognitions = $this->getNameIdMapping('recognitions');
+        $this->disciplinaries = $this->getNameIdMapping('disciplinaries');
 
         if ($request->type == 3) { // Outsource
             // Process personal info
             $personalInfo = $this->personalInfo($personalInfo);
 
             // Process education info
-            $personalInfo = $this->educationInfo($educationInfo, $personalInfo);
+            if (count($educationInfo) > 0 && isset($educationInfo[0][end($this->educationInfoPos)])) {
+                $personalInfo = $this->educationInfo($educationInfo, $personalInfo);
+            }
 
             // Process note info
-            $personalInfo = $this->noteInfo($noteInfo, $personalInfo, $request->user()->id);
+            if (count($noteInfo) > 0 && isset($noteInfo[0][end($this->noteInfoPos)])) {
+                $personalInfo = $this->noteInfo($noteInfo, $personalInfo, $request->user()->id);
+            }
         } else { // ASN / NON ASN
             // Process personal info
             $personalInfo = $this->personalInfo($personalInfo);
 
             // Process education info
-            $personalInfo = $this->educationInfo($educationInfo, $personalInfo);
+            if (count($educationInfo) > 0 && isset($educationInfo[0][end($this->educationInfoPos)])) {
+                $personalInfo = $this->educationInfo($educationInfo, $personalInfo);
+            }
+
+            // Process position info
+            if (count($positionInfo) > 0 && isset($positionInfo[0][end($this->positionInfoPos)])) {
+                $personalInfo = $this->positionInfo($positionInfo, $personalInfo);
+            }
+
+            // Process grade info
+            if (count($positionInfo) > 0 && isset($positionInfo[0][end($this->positionInfoPos)])) {
+                $personalInfo = $this->gradeInfo($gradeInfo, $personalInfo);
+            }
+
+            // Process structural training info
+            if (count($structuralTrainingInfo) > 0 && isset($structuralTrainingInfo[0][end($this->trainingInfoPos)])) {
+                $personalInfo = $this->trainingInfo($structuralTrainingInfo, $personalInfo, 1);
+            }
+
+            // Process functional training info
+            if (count($functionalTrainingInfo) > 0 && isset($functionalTrainingInfo[0][end($this->trainingInfoPos)])) {
+                $personalInfo = $this->trainingInfo($functionalTrainingInfo, $personalInfo, 2);
+            }
+
+            // Process technical training info
+            if (count($technicalTrainingInfo) > 0 && isset($technicalTrainingInfo[0][end($this->technicalTrainingInfoPos)])) {
+                $personalInfo = $this->trainingInfo($technicalTrainingInfo, $personalInfo, 3);
+            }
+
+            // Process recognition info
+            if (count($recognitionInfo) > 0 && isset($recognitionInfo[0][end($this->recognitionInfoPos)])) {
+                $personalInfo = $this->recognitionInfo($recognitionInfo, $personalInfo);
+            }
+
+            // Process target info
+            if (count($targetInfo) > 0 && isset($targetInfo[0][end($this->targetInfoPos)])) {
+                $personalInfo = $this->targetInfo($targetInfo, $personalInfo);
+            }
+
+            // Process performance info
+            if (count($performanceInfo) > 0 && isset($performanceInfo[0][end($this->performanceInfoPos)])) {
+                $personalInfo = $this->performanceInfo($performanceInfo, $personalInfo);
+            }
+
+            // Process disciplinary info
+            if (count($disciplinaryInfo) > 0 && isset($disciplinaryInfo[0][end($this->disciplinaryInfoPos)])) {
+                $personalInfo = $this->disciplinaryInfo($disciplinaryInfo, $personalInfo);
+            }
 
             // Process family info
-            $personalInfo = $this->familyInfo($familyInfo, $personalInfo);
+            if (count($familyInfo) > 0 && isset($familyInfo[0][end($this->familyInfoPos)])) {
+                $personalInfo = $this->familyInfo($familyInfo, $personalInfo);
+            }
 
             // Process leave info
-            $personalInfo = $this->leaveInfo($leaveInfo, $personalInfo);
+            if (count($leaveInfo) > 0 && isset($leaveInfo[0][end($this->leaveInfoPos)])) {
+                $personalInfo = $this->leaveInfo($leaveInfo, $personalInfo);
+            }
 
             // Process note info
-            $personalInfo = $this->noteInfo($noteInfo, $personalInfo, $request->user()->id);
-
+            if (count($noteInfo) > 0 && isset($noteInfo[0][end($this->noteInfoPos)])) {
+                $personalInfo = $this->noteInfo($noteInfo, $personalInfo, $request->user()->id);
+            }
             // Process assessment info
-            $personalInfo = $this->assessmentInfo($assessmentInfo, $personalInfo);
+            if (count($assessmentInfo) > 0 && isset($assessmentInfo[0][end($this->assessmentInfoPos)])) {
+                $personalInfo = $this->assessmentInfo($assessmentInfo, $personalInfo);
+            }
 
             // Process competency info
-            $personalInfo = $this->competencyInfo($competencyInfo, $personalInfo);
+            if (count($competencyInfo) > 0 && isset($competencyInfo[0][end($this->competencyInfoPos)])) {
+                $personalInfo = $this->competencyInfo($competencyInfo, $personalInfo);
+            }
 
             // Process talent info
-            $personalInfo = $this->talentInfo($talentInfo, $personalInfo);
+            if (count($talentInfo) > 0 && isset($talentInfo[0][end($this->talentInfoPos)])) {
+                $personalInfo = $this->talentInfo($talentInfo, $personalInfo);
+            }
         }
 
         return $this->save($personalInfo, $request->user()->id);
@@ -398,41 +752,108 @@ class ImportEmployeeController extends Controller
 
                 if ($this->type == 3) { // OUTSOURCE
                     // Save Education
-                    $data['education'] = $this->mergeValuesIntoArrayElements($additionalInfo, $data['education']);
-                    DB::table('user_educations')->insert($data['education']);
+                    if (isset($data['education'])) {
+                        $data['education'] = $this->mergeValuesIntoArrayElements($additionalInfo, $data['education']);
+                        DB::table('user_educations')->insert($data['education']);
+                    }
 
                     // Save Notes
-                    $data['note'] = $this->mergeValuesIntoArrayElements($additionalInfo, $data['note']);
-                    DB::table('user_notes')->insert($data['note']);
+                    if (isset($data['note'])) {
+                        $data['note'] = $this->mergeValuesIntoArrayElements($additionalInfo, $data['note']);
+                        DB::table('user_notes')->insert($data['note']);
+                    }
                 } else { // ASN/NON ASN
 
                     // Save Education
-                    $data['education'] = $this->mergeValuesIntoArrayElements($additionalInfo, $data['education']);
-                    DB::table('user_educations')->insert($data['education']);
+                    if (isset($data['education'])) {
+                        $data['education'] = $this->mergeValuesIntoArrayElements($additionalInfo, $data['education']);
+                        DB::table('user_educations')->insert($data['education']);
+                    }
+
+                    // Save Position
+                    if (isset($data['position'])) {
+                        $data['position'] = $this->mergeValuesIntoArrayElements($additionalInfo, $data['position']);
+                        $data['position'] = $this->historySave($data['position'], 'position_histories', 3, 'position_history_id');
+                        DB::table('position_history_users')->insert($data['position']);
+                    }
+
+                    // Save Grade
+                    if (isset($data['grade'])) {
+                        $data['grade'] = $this->mergeValuesIntoArrayElements($additionalInfo, $data['grade']);
+                        $data['grade'] = $this->historySave($data['grade'], 'grade_histories', 3, 'grade_history_id');
+                        DB::table('grade_history_users')->insert($data['grade']);
+                    }
+
+                    // Save Training
+                    if (isset($data['training'])) {
+                        $data['training'] = $this->historySave($data['training'], 'training_histories', 0, 'training_history_id');
+                        $data['training'] = $this->mergeValuesIntoArrayElements($additionalInfo, $data['training']);
+                        DB::table('training_history_users')->insert($data['training']);
+                    }
+
+                    // Save Recognition
+                    if (isset($data['training'])) {
+                        $data['recognition'] = $this->historySave($data['recognition'], 'recognition_histories', 0, 'recognition_history_id');
+                        $data['recognition'] = $this->mergeValuesIntoArrayElements($additionalInfo, $data['recognition']);
+                        DB::table('recognition_history_users')->insert($data['recognition']);
+                    }
+
+                    // Save Target
+                    if (isset($data['target'])) {
+                        $data['target'] = $this->mergeValuesIntoArrayElements($additionalInfo, $data['target']);
+                        $data['target'] = $this->historySave($data['target'], 'target_histories', 5, 'target_history_id');
+                        DB::table('target_history_users')->insert($data['target']);
+                    }
+
+                    // Save Performance
+                    if (isset($data['performance'])) {
+                        $data['performance'] = $this->mergeValuesIntoArrayElements($additionalInfo, $data['performance']);
+                        $data['performance'] = $this->historySave($data['performance'], 'performance_histories', 4, 'performance_history_id');
+                        DB::table('performance_history_users')->insert($data['performance']);
+                    }
+
+                    // Save Discipliary
+                    if (isset($data['disciplinary'])) {
+                        $data['disciplinary'] = $this->mergeValuesIntoArrayElements($additionalInfo, $data['disciplinary']);
+                        $data['disciplinary'] = $this->historySave($data['disciplinary'], 'disciplinary_histories', 3, 'disciplinary_history_id');
+                        DB::table('disciplinary_history_users')->insert($data['disciplinary']);
+                    }
 
                     // Save Family
-                    $data['family'] = $this->mergeValuesIntoArrayElements($additionalInfo, $data['family']);
-                    DB::table('user_families')->insert($data['family']);
+                    if (isset($data['family'])) {
+                        $data['family'] = $this->mergeValuesIntoArrayElements($additionalInfo, $data['family']);
+                        DB::table('user_families')->insert($data['family']);
+                    }
 
                     // Save Leave
-                    $data['leave'] = $this->mergeValuesIntoArrayElements($additionalInfo, $data['leave']);
-                    DB::table('user_leaves')->insert($data['leave']);
+                    if (isset($data['leave'])) {
+                        $data['leave'] = $this->mergeValuesIntoArrayElements($additionalInfo, $data['leave']);
+                        DB::table('user_leaves')->insert($data['leave']);
+                    }
 
                     // Save Notes
-                    $data['note'] = $this->mergeValuesIntoArrayElements($additionalInfo, $data['note']);
-                    DB::table('user_notes')->insert($data['note']);
+                    if (isset($data['note'])) {
+                        $data['note'] = $this->mergeValuesIntoArrayElements($additionalInfo, $data['note']);
+                        DB::table('user_notes')->insert($data['note']);
+                    }
 
                     // Save Assessment
-                    $data['assessment'] = $this->mergeValuesIntoArrayElements($additionalInfo, $data['assessment']);
-                    DB::table('user_assessments')->insert($data['assessment']);
+                    if (isset($data['assessment'])) {
+                        $data['assessment'] = $this->mergeValuesIntoArrayElements($additionalInfo, $data['assessment']);
+                        DB::table('user_assessments')->insert($data['assessment']);
+                    }
 
                     // Save Competencies
-                    $data['competency'] = $this->mergeValuesIntoArrayElements($additionalInfo, $data['competency']);
-                    DB::table('user_competencies')->insert($data['competency']);
+                    if (isset($data['competency'])) {
+                        $data['competency'] = $this->mergeValuesIntoArrayElements($additionalInfo, $data['competency']);
+                        DB::table('user_competencies')->insert($data['competency']);
+                    }
 
                     // Save Talents
-                    $data['talent'] = $this->mergeValuesIntoArrayElements($additionalInfo, $data['talent']);
-                    DB::table('user_talents')->insert($data['talent']);
+                    if (isset($data['talent'])) {
+                        $data['talent'] = $this->mergeValuesIntoArrayElements($additionalInfo, $data['talent']);
+                        DB::table('user_talents')->insert($data['talent']);
+                    }
                 }
 
                 DB::commit();
@@ -465,6 +886,66 @@ class ImportEmployeeController extends Controller
         return $this->response(200, 'Import pegawai berhasil');
     }
 
+    /**
+     * Save history records and update relation field with history ID.
+     *
+     * @param array $records Array of records to process.
+     * @param string $tableName Name of the table to query/insert history.
+     * @param int $cutOffIndex Index to determine how many parts of the primary key to use.
+     * @param string $relationFieldName Field name to update with the history ID.
+     * @return array Updated records with history IDs.
+     */
+    private function historySave(array $records, string $tableName, int $cutOffIndex, string $relationFieldName): array
+    {
+        $history = [];
+
+        foreach ($records as $recordIndex => $record) {
+            // Determine primary key parts based on cut-off index
+            $primaryKeyParts = ($cutOffIndex == 0) ? array_splice($record, 0, count($record)) : array_splice($record, 0, $cutOffIndex);
+
+            $whereClause = '';
+            $conditionCount = 0;
+            $primaryKeyValues = [];
+
+            foreach ($primaryKeyParts as $field => $value) {
+                // Build WHERE clause for SQL query
+                if ($conditionCount > 0) {
+                    $whereClause .= " AND ";
+                }
+
+                $value = str_replace(' ', '', strtolower($value));
+                $primaryKeyValues[] = $value;
+                $whereClause .= "LOWER(REPLACE(" . $field . ",' ','')) = '" . $value . "'";
+                $conditionCount++;
+            }
+
+            // Generate a unique key for history lookup
+            $historyKey = implode('-', $primaryKeyValues);
+            $historyId = array_search($historyKey, $history);
+
+            if ($historyId === false) {
+                // Query the database for existing history record
+                $historyRecord = DB::select("SELECT id FROM `" . $tableName . "` WHERE " . $whereClause);
+                $historyId = (count($historyRecord) > 0) ? $historyRecord[0]->id : null;
+
+                if (is_null($historyId)) {
+                    // Insert a new history record if none found
+                    $primaryKeyParts['created_at'] = date('Y-m-d H:i:s');
+                    $historyId = DB::table($tableName)->insertGetId($primaryKeyParts);
+                }
+
+                // Store the history ID and key for future reference
+                $history[$historyId] = $historyKey;
+            }
+
+            // Update the relation field with the history ID
+            $record[$relationFieldName] = $historyId;
+            $records[$recordIndex] = $record;
+        }
+
+        return $records;
+    }
+
     private function personalInfo($personalInfo)
     {
         $result = [];
@@ -475,70 +956,114 @@ class ImportEmployeeController extends Controller
              * Check Required Field. 
              * Based on rules in App\Http\Requests\Employee\CreateEmployeeRequest
              */
-            $requiredFields = [
-                'id_number',
-                'name',
-                'place_of_birth',
-                'date_of_birth',
-                'religion',
-                'gender',
-                'marital_status',
-                'employment_type',
-                'grade',
-                'grade_effective_date',
-                'institution',
-                'education_level',
-                'education_name',
-                'education_year',
-                'employment_status',
-                'residence',
-                'emergency_contact'
-            ];
+            if ($this->type == 3) { // OUTSOURCE
+                $personalInfoPos = $this->outsourcePersonalInfoPos;
+                $requiredFields = [
+                    'id_number',
+                    'name',
+                    'place_of_birth',
+                    'date_of_birth',
+                    'religion',
+                    'gender',
+                    'marital_status',
+                    'employment_type',
+                    'cpns_effective_date',
+                    'position',
+                    'position_effective_date',
+                    'education_level',
+                    'education_name',
+                    'education_year',
+                    'employment_status',
+                    'family_registration_number',
+                    'residence',
+                    'emergency_contact'
+                ];
+            } else { // ASN & NON ASN
+                $personalInfoPos = $this->personalInfoPos;
+                $requiredFields = [
+                    'id_number',
+                    'name',
+                    'employee_id_number',
+                    'place_of_birth',
+                    'date_of_birth',
+                    'religion',
+                    'gender',
+                    'marital_status',
+                    'employment_type',
+                    'cpns_effective_date',
+                    'position',
+                    'position_effective_date',
+                    'grade',
+                    'grade_effective_date',
+                    'institution',
+                    'education_level',
+                    'education_name',
+                    'education_year',
+                    'employment_status',
+                    'family_registration_number',
+                    'residence',
+                    'emergency_contact',
+                ];
+            }
+
             $requiredFieldFilled = true;
             foreach ($requiredFields as $key => $field) {
-                if (empty($personalInfoRow[$this->personalInfoPos[$field]])) {
+                if (empty($personalInfoRow[$personalInfoPos[$field]])) {
                     $requiredFieldFilled = false;
 
-                    $this->skippedRow('Data Pegawai', $personalInfoKey, 'Kolom ' . $personalInfo[0][$this->personalInfoPos[$field]] . ' kosong');
+                    $this->skippedRow('Data Pegawai', $personalInfoKey, 'Kolom ' . $personalInfo[0][$personalInfoPos[$field]] . ' harus diisi');
                 }
             }
             if (!$requiredFieldFilled) continue; // Skip jika ada required field yang tidak diisi
 
             // Check Unique
-            $user = User::where('email', '=', $personalInfoRow[$this->personalInfoPos['email']])
-                ->orWhere('employee_id_number', '=', $personalInfoRow[$this->personalInfoPos['employee_id_number']])
-                ->orWhere('employee_registration_number', '=', $personalInfoRow[$this->personalInfoPos['employee_registration_number']])
-                ->orWhere('employee_id_card_number', '=', $personalInfoRow[$this->personalInfoPos['employee_id_card_number']])
-                ->orWhere('karisu_number', '=', $personalInfoRow[$this->personalInfoPos['karisu_number']])
-                ->orWhere('id_tax', '=', $personalInfoRow[$this->personalInfoPos['id_tax']])
-                ->orWhere('id_number', '=', $personalInfoRow[$this->personalInfoPos['id_number']])
-                ->orWhere('family_registration_number', '=', $personalInfoRow[$this->personalInfoPos['family_registration_number']])
-                ->first();
+            if ($this->type == 3) { // OUTSOURCE
+                $user = User::where('email', '=', $personalInfoRow[$personalInfoPos['email']])
+                    ->orWhere('employee_id_number', '=', $personalInfoRow[$personalInfoPos['employee_id_number']])
+                    ->orWhere('id_tax', '=', $personalInfoRow[$personalInfoPos['id_tax']])
+                    ->orWhere('id_number', '=', $personalInfoRow[$personalInfoPos['id_number']])
+                    ->orWhere('family_registration_number', '=', $personalInfoRow[$personalInfoPos['family_registration_number']])
+                    ->first();
+            } else { // ASN & NON ASN
+                $user = User::where('email', '=', $personalInfoRow[$personalInfoPos['email']])
+                    ->orWhere('employee_id_number', '=', $personalInfoRow[$personalInfoPos['employee_id_number']])
+                    ->orWhere('employee_registration_number', '=', $personalInfoRow[$personalInfoPos['employee_registration_number']])
+                    ->orWhere('employee_id_card_number', '=', $personalInfoRow[$personalInfoPos['employee_id_card_number']])
+                    ->orWhere('karisu_number', '=', $personalInfoRow[$personalInfoPos['karisu_number']])
+                    ->orWhere('id_tax', '=', $personalInfoRow[$personalInfoPos['id_tax']])
+                    ->orWhere('id_number', '=', $personalInfoRow[$personalInfoPos['id_number']])
+                    ->orWhere('family_registration_number', '=', $personalInfoRow[$personalInfoPos['family_registration_number']])
+                    ->first();
+            }
             if ($user !== null) {
                 $nonUnique = '';
-                if ($user->email == $personalInfoRow[$this->personalInfoPos['email']]) {
-                    $nonUnique .= $personalInfo[0][$this->personalInfoPos['email']] . ' = ' . $personalInfoRow[$this->personalInfoPos['email']] . ',';
+                if ($user->email == $personalInfoRow[$personalInfoPos['email']]) {
+                    $nonUnique .= $personalInfo[0][$personalInfoPos['email']] . ' = ' . $personalInfoRow[$personalInfoPos['email']] . ',';
                 }
-                if ($user->employee_id_number == $personalInfoRow[$this->personalInfoPos['employee_id_number']]) {
-                    $nonUnique .= $personalInfo[0][$this->personalInfoPos['employee_id_number']] . ' = ' . $personalInfoRow[$this->personalInfoPos['employee_id_number']] . ',';
+                if ($user->employee_id_number == $personalInfoRow[$personalInfoPos['employee_id_number']]) {
+                    $nonUnique .= $personalInfo[0][$personalInfoPos['employee_id_number']] . ' = ' . $personalInfoRow[$personalInfoPos['employee_id_number']] . ',';
                 }
-                if ($user->employee_registration_number == $personalInfoRow[$this->personalInfoPos['employee_registration_number']]) {
-                    $nonUnique .= $personalInfo[0][$this->personalInfoPos['employee_registration_number']] . ' = ' . $personalInfoRow[$this->personalInfoPos['employee_registration_number']] . ',';
+
+                if ($user->id_tax == $personalInfoRow[$personalInfoPos['id_tax']]) {
+                    $nonUnique .= $personalInfo[0][$personalInfoPos['id_tax']] . ' = ' . $personalInfoRow[$personalInfoPos['id_tax']] . ',';
                 }
-                if ($user->employee_id_card_number == $personalInfoRow[$this->personalInfoPos['employee_id_card_number']]) {
-                    $nonUnique .= $personalInfo[0][$this->personalInfoPos['employee_id_card_number']] . ' = ' . $personalInfoRow[$this->personalInfoPos['employee_id_card_number']] . ',';
+                if ($user->id_number == $personalInfoRow[$personalInfoPos['id_number']]) {
+                    $nonUnique .= $personalInfo[0][$personalInfoPos['id_number']] . ' = ' . $personalInfoRow[$personalInfoPos['id_number']] . ',';
                 }
-                if ($user->karisu_number == $personalInfoRow[$this->personalInfoPos['karisu_number']]) {
-                    $nonUnique .= $personalInfo[0][$this->personalInfoPos['karisu_number']] . ' = ' . $personalInfoRow[$this->personalInfoPos['karisu_number']] . ',';
+                if ($user->family_registration_number == $personalInfoRow[$personalInfoPos['family_registration_number']]) {
+                    $nonUnique .= $personalInfo[0][$personalInfoPos['family_registration_number']] . ' = ' . $personalInfoRow[$personalInfoPos['family_registration_number']] . ',';
                 }
-                if ($user->id_tax == $personalInfoRow[$this->personalInfoPos['id_tax']]) {
-                    $nonUnique .= $personalInfo[0][$this->personalInfoPos['id_tax']] . ' = ' . $personalInfoRow[$this->personalInfoPos['id_tax']] . ',';
-                }
-                if ($user->id_number == $personalInfoRow[$this->personalInfoPos['id_number']]) {
-                    $nonUnique .= $personalInfo[0][$this->personalInfoPos['id_number']] . ' = ' . $personalInfoRow[$this->personalInfoPos['id_number']] . ',';
-                }
-                if ($user->family_registration_number == $personalInfoRow[$this->personalInfoPos['family_registration_number']]) {
-                    $nonUnique .= $personalInfo[0][$this->personalInfoPos['family_registration_number']] . ' = ' . $personalInfoRow[$this->personalInfoPos['family_registration_number']] . ',';
+
+                if ($this->type == 1 || $this->type == 2) { // ASN & NON ASN
+                    if ($user->employee_registration_number == $personalInfoRow[$personalInfoPos['employee_registration_number']]) {
+                        $nonUnique .= $personalInfo[0][$personalInfoPos['employee_registration_number']] . ' = ' . $personalInfoRow[$personalInfoPos['employee_registration_number']] . ',';
+                    }
+                    if ($user->employee_id_card_number == $personalInfoRow[$personalInfoPos['employee_id_card_number']]) {
+                        $nonUnique .= $personalInfo[0][$personalInfoPos['employee_id_card_number']] . ' = ' . $personalInfoRow[$personalInfoPos['employee_id_card_number']] . ',';
+                    }
+                    if ($user->karisu_number == $personalInfoRow[$personalInfoPos['karisu_number']]) {
+                        $nonUnique .= $personalInfo[0][$personalInfoPos['karisu_number']] . ' = ' . $personalInfoRow[$personalInfoPos['karisu_number']] . ',';
+                    }
                 }
 
                 $this->skippedRow('Data Pegawai', $personalInfoKey, 'Pegawai dengan ' . $nonUnique . ' sudah ada');
@@ -547,64 +1072,104 @@ class ImportEmployeeController extends Controller
             }
 
             // Get ID 
-            $employmentType = DB::select("SELECT id FROM employment_types WHERE LOWER(REPLACE(name,' ','')) = ? AND status = 1", [str_replace(' ', '', strtolower($personalInfoRow[$this->personalInfoPos['employment_type']]))]);
-            $grade = DB::select("SELECT id FROM grades WHERE LOWER(REPLACE(name,' ','')) = ? ", [str_replace(' ', '', strtolower($personalInfoRow[$this->personalInfoPos['grade']]))]);
-            $echelon = DB::select("SELECT id FROM echelons WHERE LOWER(REPLACE(name,' ','')) = ? ", [str_replace(' ', '', strtolower($personalInfoRow[$this->personalInfoPos['echelon']]))]);
-            $institution = DB::select("SELECT id FROM institutions WHERE LOWER(REPLACE(name,' ','')) = ? ", [str_replace(' ', '', strtolower($personalInfoRow[$this->personalInfoPos['institution']]))]);
-            $residence = DB::select("SELECT id FROM residences WHERE LOWER(REPLACE(name,' ','')) = ? ", [str_replace(' ', '', strtolower($personalInfoRow[$this->personalInfoPos['residence']]))]);;
+            $employmentTypeID = $this->findInArray($personalInfoRow[$personalInfoPos['employment_type']], $this->employmentTypes, 'Data Pegawai', $personalInfoKey, $personalInfo[0][$personalInfoPos['employment_type']]);
+            $positionID = $this->getPositionID($personalInfoRow[$personalInfoPos['position']], $personalInfoKey);
+            $residenceID = $this->findInArray($personalInfoRow[$personalInfoPos['residence']], $this->residences, 'Data Pegawai', $personalInfoKey, $personalInfo[0][$personalInfoPos['residence']]);
+            $religionID = $this->findInArray($personalInfoRow[$personalInfoPos['religion']], $this->religions, 'Data Pegawai', $personalInfoKey, $personalInfo[0][$personalInfoPos['religion']]);
+            $maritalStatusID = $this->findInArray($personalInfoRow[$personalInfoPos['marital_status']], $this->maritalStatus, 'Data Pegawai', $personalInfoKey, $personalInfo[0][$personalInfoPos['marital_status']]);
+            $educationLevelID = $this->findInArray($personalInfoRow[$personalInfoPos['education_level']], $this->educationLevel, 'Data Pegawai', $personalInfoKey, $personalInfo[0][$personalInfoPos['education_level']]);
+            $employmentStatusID = $this->findInArray($personalInfoRow[$personalInfoPos['employment_status']], $this->employmentStatus, 'Data Pegawai', $personalInfoKey, $personalInfo[0][$personalInfoPos['employment_status']]);
+            $gender = $this->findInArray($personalInfoRow[$personalInfoPos['gender']], $this->gender, 'Data Pegawai', $personalInfoKey, $personalInfo[0][$personalInfoPos['employment_status']]);
 
-            $employmentTypeID = (sizeof($employmentType) > 0) ? $employmentType[0]->id : null;
-            $gradeID = (sizeof($grade) > 0) ? $grade[0]->id : null;
-            $echelonID = (sizeof($echelon) > 0) ? $echelon[0]->id : null;
-            $institutionID = (sizeof($institution) > 0) ? $institution[0]->id : null;
-            $residenceID = (sizeof($residence) > 0) ? $residence[0]->id : null;
-            $religionID = $this->findInArray($personalInfoRow[$this->personalInfoPos['religion']], $this->religions);
-            $maritalStatusID = $this->findInArray($personalInfoRow[$this->personalInfoPos['marital_status']], $this->maritalStatus);
-            $educationLevelID = $this->findInArray($personalInfoRow[$this->personalInfoPos['education_level']], $this->educationLevel);
-            $employmentStatusID = $this->findInArray($personalInfoRow[$this->personalInfoPos['employment_status']], $this->employmentStatus);
+            if ($this->type == 1 || $this->type == 2) { // ASN & NON ASN
+                $gradeID = $this->findInArray($personalInfoRow[$personalInfoPos['grade']], $this->grades, 'Data Pegawai', $personalInfoKey, $personalInfo[0][$personalInfoPos['grade']]);
+                $echelonID = $this->findInArray($personalInfoRow[$personalInfoPos['echelon']], $this->echelons, 'Data Pegawai', $personalInfoKey, $personalInfo[0][$personalInfoPos['echelon']]);
+                $institutionID = $this->findInArray($personalInfoRow[$personalInfoPos['institution']], $this->institutions, 'Data Pegawai', $personalInfoKey, $personalInfo[0][$personalInfoPos['institution']]);
+            }
 
             // Format Date & Gender
-            $dateOfBirth = Carbon::createFromFormat('d/m/Y', $personalInfoRow[$this->personalInfoPos['date_of_birth']])->format('Y-m-d');
-            $gradeEffectiveDate = Carbon::createFromFormat('d/m/Y', $personalInfoRow[$this->personalInfoPos['grade_effective_date']])->format('Y-m-d');
-            $echelonEffectiveDate = Carbon::createFromFormat('d/m/Y', $personalInfoRow[$this->personalInfoPos['echelon_effective_date']])->format('Y-m-d');
-            $gender = $this->findInArray($personalInfoRow[$this->personalInfoPos['gender']], $this->gender);
+            $dateOfBirth = Carbon::createFromFormat('d/m/Y', $personalInfoRow[$personalInfoPos['date_of_birth']])->format('Y-m-d');
+            $cpnsEffectiveDate = Carbon::createFromFormat('d/m/Y', $personalInfoRow[$personalInfoPos['cpns_effective_date']])->format('Y-m-d');
+            $positionEffectiveDate = Carbon::createFromFormat('d/m/Y', $personalInfoRow[$personalInfoPos['position_effective_date']])->format('Y-m-d');
 
-            $result[$personalInfoRow[$this->personalInfoPos['id_number']]]['personal_info'] = [
-                'email' => $personalInfoRow[$this->personalInfoPos['email']],
-                'title_prefix' => $personalInfoRow[$this->personalInfoPos['title_prefix']],
-                'name' => $personalInfoRow[$this->personalInfoPos['name']],
-                'title_suffix' => $personalInfoRow[$this->personalInfoPos['title_suffix']],
-                'employee_id_number' => $personalInfoRow[$this->personalInfoPos['employee_id_number']],
-                'employee_registration_number' => $personalInfoRow[$this->personalInfoPos['employee_registration_number']],
-                'place_of_birth' => $personalInfoRow[$this->personalInfoPos['place_of_birth']],
-                'date_of_birth' => $dateOfBirth,
-                'religion' => $religionID,
-                'gender' => $gender,
-                'marital_status' => $maritalStatusID,
-                'employment_type_id' => $employmentTypeID,
-                'grade_id' => $gradeID,
-                'grade_effective_date' => $gradeEffectiveDate,
-                'echelon_id' => $echelonID,
-                'echelon_effective_date' => $echelonEffectiveDate,
-                'institution_id' => $institutionID,
-                'education_level' => $educationLevelID,
-                'education_name' => $personalInfoRow[$this->personalInfoPos['education_name']],
-                'education_year' => $personalInfoRow[$this->personalInfoPos['education_year']],
-                'employee_id_card_number' => $personalInfoRow[$this->personalInfoPos['employee_id_card_number']],
-                'karisu_number' =>  $personalInfoRow[$this->personalInfoPos['karisu_number']],
-                'id_tax' => $personalInfoRow[$this->personalInfoPos['id_tax']],
-                'employment_status' => $employmentStatusID,
-                'id_number' => $personalInfoRow[$this->personalInfoPos['id_number']],
-                'family_registration_number' => $personalInfoRow[$this->personalInfoPos['family_registration_number']],
-                'residence_id' => $residenceID,
-                'current_address' => $personalInfoRow[$this->personalInfoPos['current_address']],
-                'home_phone_number' => $personalInfoRow[$this->personalInfoPos['home_phone_number']],
-                'mobile_phone' => $personalInfoRow[$this->personalInfoPos['mobile_phone']],
-                'office_address' => $personalInfoRow[$this->personalInfoPos['office_address']],
-                'office_phone_number' => $personalInfoRow[$this->personalInfoPos['office_phone_number']],
-                'emergency_contact' => $personalInfoRow[$this->personalInfoPos['emergency_contact']],
-                'type' => $this->type
-            ];
+            if ($this->type == 1 || $this->type == 2) { // ASN & NON ASN
+                $gradeEffectiveDate = Carbon::createFromFormat('d/m/Y', $personalInfoRow[$personalInfoPos['grade_effective_date']])->format('Y-m-d');
+                $echelonEffectiveDate = Carbon::createFromFormat('d/m/Y', $personalInfoRow[$personalInfoPos['echelon_effective_date']])->format('Y-m-d');
+            }
+
+            if ($this->type == 3) { // OUTSOURCE
+                $result[$personalInfoRow[$personalInfoPos['id_number']]]['personal_info'] = [
+                    'email' => $personalInfoRow[$personalInfoPos['email']],
+                    'name' => $personalInfoRow[$personalInfoPos['name']],
+                    'employee_id_number' => $personalInfoRow[$personalInfoPos['employee_id_number']],
+                    'place_of_birth' => $personalInfoRow[$personalInfoPos['place_of_birth']],
+                    'date_of_birth' => $dateOfBirth,
+                    'religion' => $religionID,
+                    'gender' => $gender,
+                    'marital_status' => $maritalStatusID,
+                    'employment_type_id' => $employmentTypeID,
+                    'cpns_effective_date' => $cpnsEffectiveDate,
+                    'position_id' => $positionID,
+                    'position_effective_date' => $positionEffectiveDate,
+                    'education_level' => $educationLevelID,
+                    'education_name' => $personalInfoRow[$personalInfoPos['education_name']],
+                    'education_year' => $personalInfoRow[$personalInfoPos['education_year']],
+                    'id_tax' => $personalInfoRow[$personalInfoPos['id_tax']],
+                    'employment_status' => $employmentStatusID,
+                    'id_number' => $personalInfoRow[$personalInfoPos['id_number']],
+                    'family_registration_number' => $personalInfoRow[$personalInfoPos['family_registration_number']],
+                    'residence_id' => $residenceID,
+                    'current_address' => $personalInfoRow[$personalInfoPos['current_address']],
+                    'home_phone_number' => $personalInfoRow[$personalInfoPos['home_phone_number']],
+                    'mobile_phone' => $personalInfoRow[$personalInfoPos['mobile_phone']],
+                    'office_address' => $personalInfoRow[$personalInfoPos['office_address']],
+                    'office_phone_number' => $personalInfoRow[$personalInfoPos['office_phone_number']],
+                    'description' => $personalInfoRow[$personalInfoPos['description']],
+                    'emergency_contact' => $personalInfoRow[$personalInfoPos['emergency_contact']],
+                    'type' => $this->type
+                ];
+            } else { // ASN & NON ASN
+                $result[$personalInfoRow[$personalInfoPos['id_number']]]['personal_info'] = [
+                    'email' => $personalInfoRow[$personalInfoPos['email']],
+                    'title_prefix' => $personalInfoRow[$personalInfoPos['title_prefix']],
+                    'name' => $personalInfoRow[$personalInfoPos['name']],
+                    'title_suffix' => $personalInfoRow[$personalInfoPos['title_suffix']],
+                    'employee_id_number' => $personalInfoRow[$personalInfoPos['employee_id_number']],
+                    'employee_registration_number' => $personalInfoRow[$personalInfoPos['employee_registration_number']],
+                    'place_of_birth' => $personalInfoRow[$personalInfoPos['place_of_birth']],
+                    'date_of_birth' => $dateOfBirth,
+                    'religion' => $religionID,
+                    'gender' => $gender,
+                    'marital_status' => $maritalStatusID,
+                    'employment_type_id' => $employmentTypeID,
+                    'cpns_effective_date' => $cpnsEffectiveDate,
+                    'position_id' => $positionID,
+                    'position_effective_date' => $positionEffectiveDate,
+                    'grade_id' => $gradeID,
+                    'grade_effective_date' => $gradeEffectiveDate,
+                    'echelon_id' => $echelonID,
+                    'echelon_effective_date' => $echelonEffectiveDate,
+                    'institution_id' => $institutionID,
+                    'education_level' => $educationLevelID,
+                    'education_name' => $personalInfoRow[$personalInfoPos['education_name']],
+                    'education_year' => $personalInfoRow[$personalInfoPos['education_year']],
+                    'employee_id_card_number' => $personalInfoRow[$personalInfoPos['employee_id_card_number']],
+                    'karisu_number' =>  $personalInfoRow[$personalInfoPos['karisu_number']],
+                    'id_tax' => $personalInfoRow[$personalInfoPos['id_tax']],
+                    'employment_status' => $employmentStatusID,
+                    'id_number' => $personalInfoRow[$personalInfoPos['id_number']],
+                    'family_registration_number' => $personalInfoRow[$personalInfoPos['family_registration_number']],
+                    'residence_id' => $residenceID,
+                    'current_address' => $personalInfoRow[$personalInfoPos['current_address']],
+                    'home_phone_number' => $personalInfoRow[$personalInfoPos['home_phone_number']],
+                    'mobile_phone' => $personalInfoRow[$personalInfoPos['mobile_phone']],
+                    'office_address' => $personalInfoRow[$personalInfoPos['office_address']],
+                    'office_phone_number' => $personalInfoRow[$personalInfoPos['office_phone_number']],
+                    'office_email' => $personalInfoRow[$personalInfoPos['office_email']],
+                    'emergency_contact' => $personalInfoRow[$personalInfoPos['emergency_contact']],
+                    'type' => $this->type
+                ];
+            }
         }
 
         return $result;
@@ -615,8 +1180,26 @@ class ImportEmployeeController extends Controller
         foreach ($educationInfo as $educationKey => $educationRow) {
             if ($educationKey == 0) continue; // Skip header row
 
-            $levelID = $this->findInArray($educationRow[$this->educationInfoPos['level']], $this->educationLevel);
-            $statusID = $this->findInArray($educationRow[$this->educationInfoPos['status']], $this->educationStatus);
+            $requiredFields = [
+                'nik',
+                'level',
+                'name',
+                'status',
+                'year_of_graduation',
+            ];
+
+            $requiredFieldFilled = true;
+            foreach ($requiredFields as $key => $field) {
+                if (empty($educationRow[$this->educationInfoPos[$field]])) {
+                    $requiredFieldFilled = false;
+
+                    $this->skippedRow('Riwayat Pendidikan', $educationKey, 'Kolom ' . $educationInfo[0][$this->educationInfoPos[$field]] . ' harus diisi');
+                }
+            }
+            if (!$requiredFieldFilled) continue; // Skip jika ada required field yang tidak diisi
+
+            $levelID = $this->findInArray($educationRow[$this->educationInfoPos['level']], $this->educationLevel, 'Riwayat Pendidikan', $educationKey, $educationInfo[0][$this->educationInfoPos['level']]);
+            $statusID = $this->findInArray($educationRow[$this->educationInfoPos['status']], $this->educationStatus, 'Riwayat Pendidikan', $educationKey, $educationInfo[0][$this->educationInfoPos['status']]);
 
             $personalInfo[$educationRow[$this->educationInfoPos['nik']]]['education'][] = [
                 'level' => $levelID,
@@ -632,16 +1215,416 @@ class ImportEmployeeController extends Controller
         return $personalInfo;
     }
 
+    private function positionInfo($positionInfo, $personalInfo)
+    {
+        foreach ($positionInfo as $positionKey => $positionRow) {
+            if ($positionKey == 0) continue; // Skip header row
+
+            $requiredFields = [
+                'name',
+                'period_month',
+                'period_year',
+                'nik',
+                'position',
+                'effective_date',
+            ];
+
+            $requiredFieldFilled = true;
+            foreach ($requiredFields as $key => $field) {
+                if (empty($positionRow[$this->positionInfoPos[$field]])) {
+                    $requiredFieldFilled = false;
+
+                    $this->skippedRow('Riwayat Jabatan', $positionKey, 'Kolom ' . $positionInfo[0][$this->positionInfoPos[$field]] . ' harus diisi');
+                }
+            }
+            if (!$requiredFieldFilled) continue; // Skip jika ada required field yang tidak diisi
+
+            $groupID = $this->findInArray($positionRow[$this->positionInfoPos['group']], $this->groups, 'Riwayat Jabatan', $positionKey, $positionInfo[0][$this->positionInfoPos['group']]);
+            $monthID = $this->findInArray($positionRow[$this->positionInfoPos['period_month']], $this->month, 'Riwayat Jabatan', $positionKey, $positionInfo[0][$this->positionInfoPos['period_month']]);
+            $positionEchelon = $this->findInArray($positionRow[$this->positionInfoPos['echelon']], $this->positionEchelon, 'Riwayat Jabatan', $positionKey, $positionInfo[0][$this->positionInfoPos['echelon']]);
+            $positionStatusID = $this->findInArray($positionRow[$this->positionInfoPos['position_status']], $this->positionStatus, 'Riwayat Jabatan', $positionKey, $positionInfo[0][$this->positionInfoPos['position_status']]);
+
+            $effectiveDate = Carbon::createFromFormat('d/m/Y', $positionRow[$this->positionInfoPos['effective_date']])->format('Y-m-d');
+            $decreeDate = Carbon::createFromFormat('d/m/Y', $positionRow[$this->positionInfoPos['decree_date']])->format('Y-m-d');
+            $terminationDate = Carbon::createFromFormat('d/m/Y', $positionRow[$this->positionInfoPos['termination_date']])->format('Y-m-d');
+            $terminationDecreeDate = Carbon::createFromFormat('d/m/Y', $positionRow[$this->positionInfoPos['termination_decree_date']])->format('Y-m-d');
+
+            $personalInfo[$positionRow[$this->positionInfoPos['nik']]]['position'][] = [
+                'name' => $positionRow[$this->positionInfoPos['name']],
+                'period_month' => $monthID,
+                'period_year' => $positionRow[$this->positionInfoPos['period_year']],
+                'position' => $positionRow[$this->positionInfoPos['position']],
+                'group_id' => $groupID,
+                'echelon' => $positionEchelon,
+                'position_status' => $positionStatusID,
+                'effective_date' => $effectiveDate,
+                'decree' => $positionRow[$this->positionInfoPos['decree']],
+                'type_of_decree' => $positionRow[$this->positionInfoPos['type_of_decree']],
+                'decree_number' => $positionRow[$this->positionInfoPos['decree_number']],
+                'decree_date' => $decreeDate,
+                'termination_date' => $terminationDate,
+                'termination_decree' => $positionRow[$this->positionInfoPos['termination_decree']],
+                'type_of_termination_decree' => $positionRow[$this->positionInfoPos['type_of_termination_decree']],
+                'termination_decree_number' => $positionRow[$this->positionInfoPos['termination_decree_number']],
+                'termination_decree_date' => $terminationDecreeDate,
+            ];
+        }
+
+        return $personalInfo;
+    }
+
+    private function gradeInfo($gradeInfo, $personalInfo)
+    {
+        foreach ($gradeInfo as $gradeKey => $gradeRow) {
+            if ($gradeKey == 0) continue; // Skip header row
+
+            $requiredFields = [
+                'name',
+                'period_month',
+                'period_year',
+                'nik',
+                'grade',
+                'effective_date',
+            ];
+
+            $requiredFieldFilled = true;
+            foreach ($requiredFields as $key => $field) {
+                if (empty($gradeRow[$this->gradeInfoPos[$field]])) {
+                    $requiredFieldFilled = false;
+
+                    $this->skippedRow('Riwayat Golongan', $gradeKey, 'Kolom ' . $gradeInfo[0][$this->gradeInfoPos[$field]] . ' harus diisi');
+                }
+            }
+            if (!$requiredFieldFilled) continue; // Skip jika ada required field yang tidak diisi
+
+            $gradeID = $this->findInArray($gradeRow[$this->gradeInfoPos['grade']], $this->grades, 'Riwayat Golongan', $gradeKey, $gradeInfo[0][$this->gradeInfoPos['grade']]);
+            $decreeID = $this->findInArray($gradeRow[$this->gradeInfoPos['type_of_decree']], $this->decrees, 'Riwayat Golongan', $gradeKey, $gradeInfo[0][$this->gradeInfoPos['type_of_decree']]);
+            $monthID = $this->findInArray($gradeRow[$this->gradeInfoPos['period_month']], $this->month, 'Riwayat Golongan', $gradeKey, $gradeInfo[0][$this->gradeInfoPos['period_month']]);
+
+            $effectiveDate = Carbon::createFromFormat('d/m/Y', $gradeRow[$this->gradeInfoPos['effective_date']])->format('Y-m-d');
+            $decreeDate = Carbon::createFromFormat('d/m/Y', $gradeRow[$this->gradeInfoPos['decree_date']])->format('Y-m-d');
+            $status = null;
+            if ($gradeRow[$this->gradeInfoPos['status']] == 'Aktif') {
+                $status = 1;
+            } else if ($gradeRow[$this->gradeInfoPos['status']] == 'Tidak Aktif') {
+                $status = 0;
+            }
+
+            $personalInfo[$gradeRow[$this->gradeInfoPos['nik']]]['grade'][] = [
+                'name' => $gradeRow[$this->gradeInfoPos['name']],
+                'period_month' => $monthID,
+                'period_year' => $gradeRow[$this->gradeInfoPos['period_year']],
+                'grade_id' => $gradeID,
+                'effective_date' => $effectiveDate,
+                'decree_name' => $gradeRow[$this->gradeInfoPos['decree_name']],
+                'type_of_decree' => $decreeID,
+                'decree_number' => $gradeRow[$this->gradeInfoPos['decree_number']],
+                'decree_date' => $decreeDate,
+                'description' => $gradeRow[$this->gradeInfoPos['description']],
+                'status' =>  $status
+            ];
+        }
+
+        return $personalInfo;
+    }
+
+    private function trainingInfo($trainingInfo, $personalInfo, $trainingType)
+    {
+        foreach ($trainingInfo as $trainingKey => $trainingRow) {
+            if ($trainingKey == 0) continue; // Skip header row
+
+            $requiredFields = [
+                'name',
+                'period_month',
+                'period_year',
+                'reference_number',
+                'start_date',
+                'nik',
+            ];
+
+            if ($trainingType == 3) { // Pelatihan Teknis
+                $startDate = Carbon::createFromFormat('d/m/Y', $trainingRow[$this->technicalTrainingInfoPos['start_date']])->format('Y-m-d');
+
+                $requiredFieldFilled = true;
+                foreach ($requiredFields as $key => $field) {
+                    if (empty($trainingRow[$this->technicalTrainingInfoPos[$field]])) {
+                        $requiredFieldFilled = false;
+
+                        $this->skippedRow('Riwayat Pelatihan Teknis', $trainingKey, 'Kolom ' . $trainingInfo[0][$this->technicalTrainingInfoPos[$field]] . ' harus diisi');
+                    }
+                }
+                if (!$requiredFieldFilled) continue; // Skip jika ada required field yang tidak diisi
+
+                $monthID = $this->findInArray($trainingRow[$this->technicalTrainingInfoPos['period_month']], $this->month, 'Riwayat Pelatihan Teknis', $trainingKey, $trainingInfo[0][$this->technicalTrainingInfoPos['period_month']]);
+
+                $personalInfo[$trainingRow[$this->technicalTrainingInfoPos['nik']]]['training'][] = [
+                    'name' => $trainingRow[$this->technicalTrainingInfoPos['name']],
+                    'period_month' => $monthID,
+                    'period_year' => $trainingRow[$this->technicalTrainingInfoPos['period_year']],
+                    'start_date' => $startDate,
+                    'duration' => $trainingRow[$this->technicalTrainingInfoPos['duration']],
+                    'reference_number' => $trainingRow[$this->technicalTrainingInfoPos['reference_number']],
+                    'type' => $trainingType
+                ];
+            } else { // Pelatihan Struktural and Pelatihan Fungsional
+                $startDate = Carbon::createFromFormat('d/m/Y', $trainingRow[$this->trainingInfoPos['start_date']])->format('Y-m-d');
+
+                if ($trainingType == 1) { // Struktural
+                    $sheet = 'Riwayat Pelatihan Struktural';
+                } else {
+                    $sheet = 'Riwayat Pelatihan Fungsional';
+                }
+
+                $requiredFieldFilled = true;
+                foreach ($requiredFields as $key => $field) {
+                    if (empty($trainingRow[$this->trainingInfoPos[$field]])) {
+                        $requiredFieldFilled = false;
+
+                        $this->skippedRow($sheet, $trainingKey, 'Kolom ' . $trainingInfo[0][$this->trainingInfoPos[$field]] . ' harus diisi');
+                    }
+                }
+                if (!$requiredFieldFilled) continue; // Skip jika ada required field yang tidak diisi
+
+                $monthID = $this->findInArray($trainingRow[$this->trainingInfoPos['period_month']], $this->month, $sheet, $trainingKey, $trainingInfo[0][$this->trainingInfoPos['period_month']]);
+
+                $personalInfo[$trainingRow[$this->trainingInfoPos['nik']]]['training'][] = [
+                    'name' => $trainingRow[$this->trainingInfoPos['name']],
+                    'period_month' => $monthID,
+                    'period_year' => $trainingRow[$this->trainingInfoPos['period_year']],
+                    'level' => $trainingRow[$this->trainingInfoPos['level']],
+                    'start_date' => $startDate,
+                    'duration' => $trainingRow[$this->trainingInfoPos['duration']],
+                    'organizer' => $trainingRow[$this->trainingInfoPos['organizer']],
+                    'reference_number' => $trainingRow[$this->trainingInfoPos['reference_number']],
+                    'type' => $trainingType
+                ];
+            }
+        }
+
+        return $personalInfo;
+    }
+
+    private function recognitionInfo($recognitionInfo, $personalInfo)
+    {
+        foreach ($recognitionInfo as $recognitionKey => $recognitionRow) {
+            if ($recognitionKey == 0) continue; // Skip header row
+
+            $requiredFields = [
+                'recognition',
+                'period_month',
+                'period_year',
+                'type_of_decree',
+                'decree_date',
+                'decree_number',
+                'nik',
+            ];
+
+            $requiredFieldFilled = true;
+            foreach ($requiredFields as $key => $field) {
+                if (empty($recognitionRow[$this->recognitionInfoPos[$field]])) {
+                    $requiredFieldFilled = false;
+
+                    $this->skippedRow('Riwayat Penghargaan', $recognitionKey, 'Kolom ' . $recognitionInfo[0][$this->recognitionInfoPos[$field]] . ' harus diisi');
+                }
+            }
+            if (!$requiredFieldFilled) continue; // Skip jika ada required field yang tidak diisi
+
+            $recognitionID =  $this->findInArray($recognitionRow[$this->recognitionInfoPos['recognition']], $this->recognitions, 'Riwayat Penghargaan', $recognitionKey, $recognitionInfo[0][$this->recognitionInfoPos['recognition']]);
+            $decreeID = $this->findInArray($recognitionRow[$this->recognitionInfoPos['type_of_decree']], $this->decrees, 'Riwayat Penghargaan', $recognitionKey, $recognitionInfo[0][$this->recognitionInfoPos['type_of_decree']]);
+            $monthID = $this->findInArray($recognitionRow[$this->recognitionInfoPos['period_month']], $this->month, 'Riwayat Penghargaan', $recognitionKey, $recognitionInfo[0][$this->recognitionInfoPos['period_month']]);
+
+            $decreeDate = Carbon::createFromFormat('d/m/Y', $recognitionRow[$this->recognitionInfoPos['decree_date']])->format('Y-m-d');
+            $dateOfReceipt = Carbon::createFromFormat('d/m/Y', $recognitionRow[$this->recognitionInfoPos['date_of_receipt']])->format('Y-m-d');
+
+            $personalInfo[$recognitionRow[$this->recognitionInfoPos['nik']]]['recognition'][] = [
+                'recognition_id' => $recognitionID,
+                'period_month' => $monthID,
+                'period_year' => $recognitionRow[$this->recognitionInfoPos['period_year']],
+                'description' => $recognitionRow[$this->recognitionInfoPos['description']],
+                'type_of_decree' => $decreeID,
+                'decree_date' => $decreeDate,
+                'decree_number' => $recognitionRow[$this->recognitionInfoPos['decree_number']],
+                'decree_year' => $recognitionRow[$this->recognitionInfoPos['decree_year']],
+                'awarding_institution' => $recognitionRow[$this->recognitionInfoPos['awarding_institution']],
+                'date_of_receipt' => $dateOfReceipt
+            ];
+        }
+
+        return $personalInfo;
+    }
+
+    private function targetInfo($targetInfo, $personalInfo)
+    {
+        foreach ($targetInfo as $targetKey => $targetRow) {
+            if ($targetKey == 0) continue; // Skip header row
+
+            $requiredFields = [
+                'name',
+                'period_month',
+                'period_year',
+                'appraisal_period',
+                'nik',
+                'work_behavior_rating',
+                'employee_performance_predicate',
+                'organizational_performance_achievement',
+            ];
+
+            $requiredFieldFilled = true;
+            foreach ($requiredFields as $key => $field) {
+                if (empty($targetRow[$this->targetInfoPos[$field]])) {
+                    $requiredFieldFilled = false;
+
+                    $this->skippedRow('Riwayat SKP', $targetKey, 'Kolom ' . $targetInfo[0][$this->targetInfoPos[$field]] . ' harus diisi');
+                }
+            }
+            if (!$requiredFieldFilled) continue; // Skip jika ada required field yang tidak diisi
+
+            $monthID = $this->findInArray($targetRow[$this->targetInfoPos['period_month']], $this->month, 'Riwayat SKP', $targetKey, $targetInfo[0][$this->targetInfoPos['period_month']]);
+            $workBehaviourRatingID = $this->findInArray($targetRow[$this->targetInfoPos['work_behavior_rating']], $this->workBehaviourRating, 'Riwayat SKP', $targetKey, $targetInfo[0][$this->targetInfoPos['work_behavior_rating']]);
+            $employeePerformancePredicateID = $this->findInArray($targetRow[$this->targetInfoPos['employee_performance_predicate']], $this->employeePerformancePredicate, 'Riwayat SKP', $targetKey, $targetInfo[0][$this->targetInfoPos['employee_performance_predicate']]);
+            $organizationalPerformanceAchievementID = $this->findInArray($targetRow[$this->targetInfoPos['organizational_performance_achievement']], $this->organizationalPerformanceAchievement, 'Riwayat SKP', $targetKey, $targetInfo[0][$this->targetInfoPos['organizational_performance_achievement']]);
+
+            $personalInfo[$targetRow[$this->targetInfoPos['nik']]]['target'][] = [
+                'name' => $targetRow[$this->targetInfoPos['name']],
+                'period_month' => $monthID,
+                'period_year' => $targetRow[$this->targetInfoPos['period_year']],
+                'appraisal_period' => $targetRow[$this->targetInfoPos['appraisal_period']],
+                'year' => $targetRow[$this->targetInfoPos['year']],
+                'work_behavior_rating' => $workBehaviourRatingID,
+                'employee_performance_predicate' => $employeePerformancePredicateID,
+                'organizational_performance_achievement' => $organizationalPerformanceAchievementID,
+            ];
+        }
+
+        return $personalInfo;
+    }
+
+    private function performanceInfo($performanceInfo, $personalInfo)
+    {
+        foreach ($performanceInfo as $performanceKey => $performanceRow) {
+            if ($performanceKey == 0) continue; // Skip header row
+
+            $requiredFields = [
+                'name',
+                'period_month',
+                'period_year',
+                'performance_period',
+                'nik',
+                'work_performance_score',
+                'description',
+            ];
+
+            $requiredFieldFilled = true;
+            foreach ($requiredFields as $key => $field) {
+                if (empty($performanceRow[$this->performanceInfoPos[$field]])) {
+                    $requiredFieldFilled = false;
+
+                    $this->skippedRow('Penilaian Prestasi Kerja', $performanceKey, 'Kolom ' . $performanceInfo[0][$this->performanceInfoPos[$field]] . ' harus diisi');
+                }
+            }
+            if (!$requiredFieldFilled) continue; // Skip jika ada required field yang tidak diisi
+
+            $monthID = $this->findInArray($performanceRow[$this->performanceInfoPos['period_month']], $this->month, 'Penilaian Prestasi Kerja', $performanceKey, $performanceInfo[0][$this->performanceInfoPos['period_month']]);
+            $performanceDescriptionID = $this->findInArray($performanceRow[$this->performanceInfoPos['description']], $this->performanceDescription, 'Penilaian Prestasi Kerja', $performanceKey, $performanceInfo[0][$this->performanceInfoPos['description']]);
+
+            $personalInfo[$performanceRow[$this->performanceInfoPos['nik']]]['performance'][] = [
+                'name' => $performanceRow[$this->performanceInfoPos['name']],
+                'period_month' => $monthID,
+                'period_year' => $performanceRow[$this->performanceInfoPos['period_year']],
+                'performance_period' => $performanceRow[$this->performanceInfoPos['performance_period']],
+                'work_performance_score' => $performanceRow[$this->performanceInfoPos['work_performance_score']],
+                'description' => $performanceDescriptionID
+            ];
+        }
+
+        return $personalInfo;
+    }
+
+    private function disciplinaryInfo($disciplinaryInfo, $personalInfo)
+    {
+        foreach ($disciplinaryInfo as $disciplinaryKey => $disciplinaryRow) {
+            if ($disciplinaryKey == 0) continue; // Skip header row
+
+            $requiredFields = [
+                'name',
+                'period_month',
+                'period_year',
+                'nik',
+                'disciplinary',
+                'start_date',
+            ];
+
+            $requiredFieldFilled = true;
+            foreach ($requiredFields as $key => $field) {
+                if (empty($disciplinaryRow[$this->disciplinaryInfoPos[$field]])) {
+                    $requiredFieldFilled = false;
+
+                    $this->skippedRow('Riwayat Hukuman Disiplin', $disciplinaryKey, 'Kolom ' . $disciplinaryInfo[0][$this->disciplinaryInfoPos[$field]] . ' harus diisi');
+                }
+            }
+            if (!$requiredFieldFilled) continue; // Skip jika ada required field yang tidak diisi
+
+            $disciplinaryID = $this->findInArray($disciplinaryRow[$this->disciplinaryInfoPos['disciplinary']], $this->disciplinaries, 'Riwayat Hukuman Disiplin', $disciplinaryKey, $disciplinaryInfo[0][$this->disciplinaryInfoPos['disciplinary']]);
+            $monthID = $this->findInArray($disciplinaryRow[$this->disciplinaryInfoPos['period_month']], $this->month, 'Riwayat Hukuman Disiplin', $disciplinaryKey, $disciplinaryInfo[0][$this->disciplinaryInfoPos['period_month']]);
+
+            $decreeDate = Carbon::createFromFormat('d/m/Y', $disciplinaryRow[$this->disciplinaryInfoPos['date_of_decree']])->format('Y-m-d');
+            $startDate = Carbon::createFromFormat('d/m/Y', $disciplinaryRow[$this->disciplinaryInfoPos['start_date']])->format('Y-m-d');
+
+            $personalInfo[$disciplinaryRow[$this->disciplinaryInfoPos['nik']]]['disciplinary'][] = [
+                'name' => $disciplinaryRow[$this->disciplinaryInfoPos['name']],
+                'period_month' => $monthID,
+                'period_year' => $disciplinaryRow[$this->disciplinaryInfoPos['period_year']],
+                'disciplinary_id' => $disciplinaryID,
+                'grade' => $disciplinaryRow[$this->disciplinaryInfoPos['grade']],
+                'position' => $disciplinaryRow[$this->disciplinaryInfoPos['position']],
+                'decree_number' => $disciplinaryRow[$this->disciplinaryInfoPos['decree_number']],
+                'date_of_decree' => $decreeDate,
+                'start_date' => $startDate,
+                // 'end_date' => $disciplinaryRow[$this->disciplinaryInfoPos['']],
+                'authorizing_officer' => $disciplinaryRow[$this->disciplinaryInfoPos['authorizing_officer']],
+                'name_of_authorizing_officer' => $disciplinaryRow[$this->disciplinaryInfoPos['name_of_authorizing_officer']],
+                'description' => $disciplinaryRow[$this->disciplinaryInfoPos['description']],
+
+            ];
+        }
+
+        return $personalInfo;
+    }
+
     private function familyInfo($familyInfo, $personalInfo)
     {
         foreach ($familyInfo as $familyKey => $familyRow) {
             if ($familyKey == 0) continue; // Skip header row
 
-            $genderID = $this->findInArray($familyRow[$this->familyInfoPos['gender']], $this->gender);
-            $religionID = $this->findInArray($familyRow[$this->familyInfoPos['religion']], $this->religions);
-            $familyRelationshipID = $this->findInArray($familyRow[$this->familyInfoPos['relationship_status']], $this->familyRelationship);
-            $familyEducationID = $this->findInArray($familyRow[$this->familyInfoPos['education']], $this->familyEducation);
-            $familyMaritalStatusID = $this->findInArray($familyRow[$this->familyInfoPos['marital_status']], $this->familyMaritalStatus);
+            $requiredFields = [
+                'nik',
+                'card_number',
+                'name',
+                'id_number',
+                'gender',
+                'religion',
+                'place_of_birth',
+                'date_of_birth',
+                'relationship_status',
+                'education',
+                'marital_status',
+            ];
+
+            $requiredFieldFilled = true;
+            foreach ($requiredFields as $key => $field) {
+                if (empty($familyRow[$this->familyInfoPos[$field]])) {
+                    $requiredFieldFilled = false;
+
+                    $this->skippedRow('Riwayat Keluarga', $familyKey, 'Kolom ' . $familyInfo[0][$this->familyInfoPos[$field]] . ' harus diisi');
+                }
+            }
+            if (!$requiredFieldFilled) continue; // Skip jika ada required field yang tidak diisi
+
+            $genderID = $this->findInArray($familyRow[$this->familyInfoPos['gender']], $this->gender, 'Riwayat Keluarga', $familyKey, $familyInfo[0][$this->familyInfoPos['gender']]);
+            $religionID = $this->findInArray($familyRow[$this->familyInfoPos['religion']], $this->religions, 'Riwayat Keluarga', $familyKey, $familyInfo[0][$this->familyInfoPos['religion']]);
+            $familyRelationshipID = $this->findInArray($familyRow[$this->familyInfoPos['relationship_status']], $this->familyRelationship, 'Riwayat Keluarga', $familyKey, $familyInfo[0][$this->familyInfoPos['relationship_status']]);
+            $familyEducationID = $this->findInArray($familyRow[$this->familyInfoPos['education']], $this->familyEducation, 'Riwayat Keluarga', $familyKey, $familyInfo[0][$this->familyInfoPos['education']]);
+            $familyMaritalStatusID = $this->findInArray($familyRow[$this->familyInfoPos['marital_status']], $this->familyMaritalStatus, 'Riwayat Keluarga', $familyKey, $familyInfo[0][$this->familyInfoPos['marital_status']]);
 
             $birthDate = Carbon::createFromFormat('d/m/Y', $familyRow[$this->familyInfoPos['date_of_birth']])->format('Y-m-d');
 
@@ -673,7 +1656,26 @@ class ImportEmployeeController extends Controller
         foreach ($leaveInfo as $leaveKey => $leaveRow) {
             if ($leaveKey == 0) continue; // Skip header row
 
-            $leaveTypeID = $this->findInArray($leaveRow[$this->leaveInfoPos['type']], $this->leaveType);
+            $requiredFields = [
+                'nik',
+                'start_date',
+                'end_date',
+                'type',
+                'number',
+                'description',
+            ];
+
+            $requiredFieldFilled = true;
+            foreach ($requiredFields as $key => $field) {
+                if (empty($leaveRow[$this->leaveInfoPos[$field]])) {
+                    $requiredFieldFilled = false;
+
+                    $this->skippedRow('Riwayat Cuti', $leaveKey, 'Kolom ' . $leaveInfo[0][$this->leaveInfoPos[$field]] . ' harus diisi');
+                }
+            }
+            if (!$requiredFieldFilled) continue; // Skip jika ada required field yang tidak diisi
+
+            $leaveTypeID = $this->findInArray($leaveRow[$this->leaveInfoPos['type']], $this->leaveType, 'Riwayat Cuti', $leaveKey, $leaveInfo[0][$this->leaveInfoPos['type']]);
 
             $startDate = Carbon::createFromFormat('d/m/Y', $leaveRow[$this->leaveInfoPos['start_date']])->format('Y-m-d');
             $endDate = Carbon::createFromFormat('d/m/Y', $leaveRow[$this->leaveInfoPos['end_date']])->format('Y-m-d');
@@ -695,6 +1697,22 @@ class ImportEmployeeController extends Controller
         foreach ($noteInfo as $noteKey => $noteRow) {
             if ($noteKey == 0) continue; // Skip header row
 
+            $requiredFields = [
+                'nik',
+                'description',
+            ];
+
+            $requiredFieldFilled = true;
+            foreach ($requiredFields as $key => $field) {
+                if (empty($noteRow[$this->noteInfoPos[$field]])) {
+                    $requiredFieldFilled = false;
+
+                    $this->skippedRow('Riwayat Catatan', $noteKey, 'Kolom ' . $noteInfo[0][$this->noteInfoPos[$field]] . ' harus diisi');
+                }
+            }
+            if (!$requiredFieldFilled) continue; // Skip jika ada required field yang tidak diisi
+
+
             $personalInfo[$noteRow[$this->noteInfoPos['nik']]]['note'][] = [
                 'giver_id' => $giverID,
                 'description' => $noteRow[$this->noteInfoPos['description']],
@@ -709,7 +1727,23 @@ class ImportEmployeeController extends Controller
         foreach ($assessmentInfo as $assessmentKey => $assessmentRow) {
             if ($assessmentKey == 0) continue; // Skip header row
 
-            $assessmentPointID = $this->findInArray($assessmentRow[$this->assessmentInfoPos['point']], $this->assessmentPoint);
+            $requiredFields = [
+                'nik',
+                'event_date',
+                'point',
+            ];
+
+            $requiredFieldFilled = true;
+            foreach ($requiredFields as $key => $field) {
+                if (empty($assessmentRow[$this->assessmentInfoPos[$field]])) {
+                    $requiredFieldFilled = false;
+
+                    $this->skippedRow('Hasil Assessment', $assessmentKey, 'Kolom ' . $assessmentInfo[0][$this->assessmentInfoPos[$field]] . ' harus diisi');
+                }
+            }
+            if (!$requiredFieldFilled) continue; // Skip jika ada required field yang tidak diisi
+
+            $assessmentPointID = $this->findInArray($assessmentRow[$this->assessmentInfoPos['point']], $this->assessmentPoint, 'Hasil Assessment', $assessmentKey, $assessmentInfo[0][$this->assessmentInfoPos['point']]);
 
             $eventDate = Carbon::createFromFormat('d/m/Y', $assessmentRow[$this->assessmentInfoPos['event_date']])->format('Y-m-d');
 
@@ -728,7 +1762,23 @@ class ImportEmployeeController extends Controller
         foreach ($competencyInfo as $competencyKey => $competencyRow) {
             if ($competencyKey == 0) continue; // Skip header row
 
-            $competencyPointID = $this->findInArray($competencyRow[$this->competencyInfoPos['point']], $this->competencyPoint);
+            $requiredFields = [
+                'nik',
+                'event_date',
+                'point',
+            ];
+
+            $requiredFieldFilled = true;
+            foreach ($requiredFields as $key => $field) {
+                if (empty($competencyRow[$this->competencyInfoPos[$field]])) {
+                    $requiredFieldFilled = false;
+
+                    $this->skippedRow('Hasil Uji Kompetensi', $competencyKey, 'Kolom ' . $competencyInfo[0][$this->competencyInfoPos[$field]] . ' harus diisi');
+                }
+            }
+            if (!$requiredFieldFilled) continue; // Skip jika ada required field yang tidak diisi
+
+            $competencyPointID = $this->findInArray($competencyRow[$this->competencyInfoPos['point']], $this->competencyPoint, 'Hasil Uji Kompetensi', $competencyKey, $competencyInfo[0][$this->competencyInfoPos['point']]);
 
             $eventDate = Carbon::createFromFormat('d/m/Y', $competencyRow[$this->competencyInfoPos['event_date']])->format('Y-m-d');
 
@@ -747,7 +1797,23 @@ class ImportEmployeeController extends Controller
         foreach ($talentInfo as $talentKey => $talentRow) {
             if ($talentKey == 0) continue; // Skip header row
 
-            $talentPointID = $this->findInArray($talentRow[$this->talentInfoPos['point']], $this->talentPoint);
+            $requiredFields = [
+                'nik',
+                'event_date',
+                'point',
+            ];
+
+            $requiredFieldFilled = true;
+            foreach ($requiredFields as $key => $field) {
+                if (empty($talentRow[$this->talentInfoPos[$field]])) {
+                    $requiredFieldFilled = false;
+
+                    $this->skippedRow('Hasil Talent Pool', $talentKey, 'Kolom ' . $talentInfo[0][$this->talentInfoPos[$field]] . ' harus diisi');
+                }
+            }
+            if (!$requiredFieldFilled) continue; // Skip jika ada required field yang tidak diisi
+
+            $talentPointID = $this->findInArray($talentRow[$this->talentInfoPos['point']], $this->talentPoint, 'Hasil Talent Pool', $talentKey, $talentInfo[0][$this->talentInfoPos['point']]);
 
             $eventDate = Carbon::createFromFormat('d/m/Y', $talentRow[$this->talentInfoPos['event_date']])->format('Y-m-d');
 
@@ -767,19 +1833,27 @@ class ImportEmployeeController extends Controller
      * Finds a value in an array based on a given key.
      *
      * This function converts the provided key to lowercase,
-     * replaces spaces with underscores, and then searches for
+     * replaces spaces with empty, and then searches for
      * this key in the given array. If the key is found, it returns
      * the associated value; otherwise, it returns null.
      *
      * @param string $find The key to search for.
      * @param array $array The array to search in.
+     * @param string $sheet Excel sheet where the data located. For skippedRow if not found
+     * @param string $row row where the data located. For skippedRow if not found
+     * @param string $column column where the data located. For skippedRow if not found
      * @return mixed|null The value associated with the key, or null if not found.
      */
-    private function findInArray($find, $array)
+    private function findInArray($find, $array, $sheet, $row, $column)
     {
-        $find = strtolower($find);
-        $find = str_replace(' ', '_', $find);
-        return $array[$find] ?? null;
+        // replace characters in a string that are not numbers, alphabets, or the specified symbols ()-/,. with empty
+        $key = preg_replace('/[^a-zA-Z0-9\(\)\-\,\.\/]/', '', strtolower($find));
+
+        $id = $array[$key] ?? null;
+
+        if (is_null($id)) $this->skippedRow($sheet, $row, $column . ' = "' . $find . '", tidak ditemukan');
+
+        return $id;
     }
 
     /**
@@ -798,13 +1872,91 @@ class ImportEmployeeController extends Controller
         return $array;
     }
 
+    /**
+     * Fetches a mapping of names to IDs from a specified table, with optional conditions.
+     *
+     * @param string $tableName The name of the table to query.
+     * @param array $conditions (Optional) An associative array of conditions for the query.
+     * @return array An associative array where the keys are the processed names and the values are the IDs.
+     */
+    private function getNameIdMapping($tableName, $conditions = [])
+    {
+        // Query the specified table and select the id and the processed name
+        $query = DB::table($tableName);
+        $query->select("id", DB::raw("LOWER(REPLACE(name, ' ', '')) as name"));
+
+        // Apply conditions if provided
+        if (count($conditions) > 0) {
+            $query->where($conditions);
+        }
+
+        // Execute the query and get the results
+        $results = $query->get();
+
+        // Initialize an array to hold the name to id mapping
+        $nameIdMapping = [];
+
+        // Populate the array with processed names as keys and their corresponding ids as values
+        foreach ($results as $row) {
+            $nameIdMapping[$row->name] = $row->id;
+        }
+
+        // Return the mapping array
+        return $nameIdMapping;
+    }
+
+    private function buildHierarchy(array $elements, $parentId = null)
+    {
+        $branch = [];
+
+        foreach ($elements as $element) {
+            $element = (array) $element;
+            if ($element['parent_id'] === $parentId) {
+                $children = $this->buildHierarchy($elements, $element['id']);
+                if ($children) {
+                    $element['child'] = $children;
+                }
+                $branch[$element['name']] = [
+                    'id' => $element['id']
+                ];
+                if (isset($element['child'])) {
+                    $branch[$element['name']]['child'] = $element['child'];
+                }
+            }
+        }
+
+        return $branch;
+    }
+
     private function skippedRow($sheet, $row, $reason = '')
     {
         $this->skippedRow[] = [
             'sheet' => $sheet,
-            'row' => $row,
-            'reason' => $reason
+            'row' =>  $row + 1,
+            'reason' => str_replace('*', '', $reason)
         ];
+    }
+
+    private function getPositionID($stringPosition, $row)
+    {
+        $find = explode('>', $stringPosition);
+
+        $count = count($find) - 1;
+        $positions = $this->positions;
+        foreach ($find as $key => $segment) {
+            $jabatan = strtolower(str_replace(' ', '', $segment));
+            if (isset($positions[$jabatan])) {
+                $positions = $positions[$jabatan];
+                if (isset($positions['child']) && $key < $count) {
+                    $positions = $positions['child'];
+                }
+            } else {
+                $this->skippedRow('Data Pegawai', $row, 'Jabatan = "' . $segment . '" tidak ditemukan');
+                return null;
+            }
+        }
+
+        return isset($positions['id']) ? $positions['id'] : null;
     }
 
     /**
@@ -888,7 +2040,7 @@ class ImportEmployeeController extends Controller
 
             return $this->response(200, $message, $riwayat);
         } else {
-            $riwayat = $riwayat->paginate($request->limit);
+            $riwayat = $riwayat->paginate($request->limit)->withQueryString();
             $message = ($riwayat->isEmpty()) ? 'Mohon maaf, data tidak ditemukan.' : 'success';
 
             return $this->paginateResponse(200, $message, $riwayat);
