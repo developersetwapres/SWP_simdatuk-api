@@ -14,107 +14,96 @@ class ComparisonsExport implements FromArray, WithDrawings, WithCustomStartCell,
 {
     use Exportable;
 
-    protected $users, $positions, $strukturals, $fungsionals, $tekniss, $targets, $disciplinaries, $notes, $assessments, $competencies, $talents;
+    protected $data;
 
-    public function __construct($users, $positions, $strukturals, $fungsionals, $tekniss, $targets, $disciplinaries, $notes, $assessments, $competencies, $talents)
+    public function __construct($data)
     {
-        $this->users = $users;
-        $this->positions = $positions;
-        $this->strukturals = $strukturals;
-        $this->fungsionals = $fungsionals;
-        $this->tekniss = $tekniss;
-        $this->targets = $targets;
-        $this->disciplinaries = $disciplinaries;
-        $this->notes = $notes;
-        $this->assessments = $assessments;
-        $this->competencies = $competencies;
-        $this->talents = $talents;
+        $this->data = $data;
     }
 
     public function array(): array
     {
-        // dd($this->users);
         $name = ['Nama'];
-        foreach ($this->users as $item) {
+        foreach ($this->data['users'] as $item) {
             array_push($name, $item->name);
         }
 
         $position = ['Jabatan'];
-        foreach ($this->users as $item) {
+        foreach ($this->data['users'] as $item) {
             array_push($position, $item->position_name);
         }
 
         $echelon = ['Eselon'];
-        foreach ($this->users as $item) {
+        foreach ($this->data['users'] as $item) {
             array_push($echelon, $item->echelon_name . ', ' . $item->echelon_effective_date);
         }
 
         $grade = ['Golongan'];
-        foreach ($this->users as $item) {
+        foreach ($this->data['users'] as $item) {
             array_push($grade, $item->grade_name . ', ' . $item->grade_effective_date);
         }
 
         $education = ['Pendidikan Terakhir'];
-        foreach ($this->users as $item) {
+        foreach ($this->data['users'] as $item) {
             array_push($education, $item->education_level . ', ' . $item->education_name);
         }
 
         $positionHistory = ['Riwayat Jabatan'];
-        foreach ($this->positions as $item) {
+        foreach ($this->data['positions'] as $item) {
             $result = $this->createListOnColumn($item, 'position');
             array_push($positionHistory, $result);
         }
 
         $strukturalHistory = ['Riwayat Pelatihan Struktural'];
-        foreach ($this->strukturals as $item) {
+        foreach ($this->data['strukturals'] as $item) {
             $result = $this->createListOnColumn($item, 'name');
             array_push($strukturalHistory, $result);
         }
 
         $fungsionalHistory = ['Riwayat Pelatihan Fungsional'];
-        foreach ($this->fungsionals as $item) {
+        foreach ($this->data['fungsionals'] as $item) {
             $result = $this->createListOnColumn($item, 'name');
             array_push($fungsionalHistory, $result);
         }
 
         $teknisHistory = ['Riwayat Pelatihan Teknis'];
-        foreach ($this->tekniss as $item) {
+        foreach ($this->data['tekniss'] as $item) {
             $result = $this->createListOnColumn($item, 'name');
             array_push($teknisHistory, $result);
         }
 
         $targetHistory = ['Penilaian SKP (2 Tahun terakhir)'];
-        foreach ($this->targets as $item) {
+        foreach ($this->data['targets'] as $item) {
             $result = $this->createListOnColumn($item, 'name', 'target');
             array_push($targetHistory, $result);
         }
 
         $disciplinaryHistory = ['Riwayat Hukuman Disiplin'];
-        foreach ($this->disciplinaries as $item) {
+        foreach ($this->data['disciplinaries'] as $item) {
             $result = $this->createListOnColumn($item, 'name', 'disciplinary');
             array_push($disciplinaryHistory, $result);
         }
 
         $noteHistory = ['Catatan'];
-        foreach ($this->notes as $item) {
+        foreach ($this->data['notes'] as $item) {
             $result = $this->createListOnColumn($item, 'description');
             array_push($noteHistory, $result);
         }
 
         $assessmentHistory = ['Hasil Assessment'];
-        foreach ($this->assessments as $item) {
+        foreach ($this->data['assessments'] as $item) {
             $result = $this->createListOnColumn($item, 'description', 'assessment');
             array_push($assessmentHistory, $result);
         }
 
         $competencyHistory = ['Hasil Uji Kompetensi'];
-        foreach ($this->competencies as $item) {
+        foreach ($this->data['competencies'] as $item) {
             $result = $this->createListOnColumn($item, 'description', 'assessment');
             array_push($competencyHistory, $result);
         }
 
         $talentHistory = ['Hasil Talent Pool'];
-        foreach ($this->talents as $item) {
+        foreach ($this->data['talents'] as $item) {
             $result = $this->createListOnColumn($item, 'description', 'assessment');
             array_push($talentHistory, $result);
         }

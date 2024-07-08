@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ComparisonController;
 use App\Http\Controllers\DecreeController;
 use App\Http\Controllers\DiagramController;
 use App\Http\Controllers\DisciplinaryController;
@@ -86,14 +87,25 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/recapitulations-employee', [RecapitulationEmployeeController::class, 'index']);
 
+    Route::prefix('diagrams')->group(function () {
+        Route::get('/', [DiagramController::class, 'index']);
+        Route::get('/export', [DiagramController::class, 'export']);
+    });
+
+    Route::prefix('comparisons')->group(function () {
+        Route::get('/', [ComparisonController::class, 'index']);
+        Route::post('/detail', [ComparisonController::class, 'comparison']);
+        Route::post('/detail-promotions', [ComparisonController::class, 'comparisonPromotion']);
+    });
+
     Route::prefix('notes')->group(function () {
         Route::get('/{userid}', [NoteController::class, 'show']);
         Route::post('/{userid}', [NoteController::class, 'update']);
     });
 
-    Route::prefix('diagrams')->group(function () {
-        Route::get('/', [DiagramController::class, 'index']);
-        Route::get('/export', [DiagramController::class, 'export']);
+    Route::prefix('promotions')->group(function () {
+        Route::get('/', [PromotionController::class, 'index']);
+        Route::get('/detail', [PromotionController::class, 'show']);
     });
 
     Route::prefix('employees')->group(function () {
@@ -235,19 +247,12 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::prefix('export')->group(function () {
-        Route::get('/comparisons', [ExportComparisonController::class, 'index']);
         Route::get('/recapitulations/{type}', [ExportRecapitulationController::class, 'recapitulation']);
+        Route::post('/comparisons', [ExportComparisonController::class, 'comparison']);
+        Route::post('/comparison-promotions', [ExportComparisonController::class, 'comparisonPromotion']);
         Route::post('/employees/{type}', [ExportController::class, 'employees']);
         Route::post('/employees-drh/{id}', [ExportController::class, 'detailEmployee']);
         Route::post('/employees-drh', [ExportController::class, 'zipDetailEmployee']);
         Route::post('/preview', [ExportController::class, 'exportExcelsPreview']);
-    });
-
-    Route::prefix('promotions')->group(function () {
-        Route::get('/', [PromotionController::class, 'index']);
-        Route::get('/detail', [PromotionController::class, 'show']);
-        Route::post('/users', [PromotionController::class, 'users']);
-        Route::post('/compare', [PromotionController::class, 'compare']);
-        Route::post('/export', [PromotionController::class, 'export']);
     });
 });

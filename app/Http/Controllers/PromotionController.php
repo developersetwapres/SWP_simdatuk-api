@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\PromotionRepository;
 use App\Repositories\PositionRepository;
-use Barryvdh\DomPDF\Facade\Pdf;
+use App\Repositories\PromotionRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 
 /**
  * @group Promotion
- * Below is the endpoint to get Promotion data
+ * Below is the endpoint to get promotion data
  */
 class PromotionController extends Controller
 {
@@ -233,112 +232,6 @@ class PromotionController extends Controller
         return $this->response(200, 'success', $response);
     }
 
-    /**
-     * Get Filter of Promotions
-     *
-     * Below is for get user based on filter.
-     * @authenticated
-     * @queryParam group_id integer Refers to the id of groups. Example: 1
-     * @queryParam echelon_id integer Refers to the id of echelons. Example: 1
-     * @queryParam grade_id integer Refers to the id of grades. Example: 1
-     * @queryParam education_level integer Refers to the level of education level employee. Example: 1
-     * @queryParam max_age integer Refers to the max age of employee. Example: 1
-     * @queryParam disciplinary_id integer Refers to the id of disciplinary_history. Example: 1
-     * @queryParam target_predicate_id integer Refers to the employee_performance_predicate of target_history_users. Example: 1
-     * @queryParam cpns_year integer Refers to the cpns_year of employee. Example: 1
-     * @queryParam grade_year integer Refers to the date grade_effective_date of users. Example: 1
-     * @queryParam credit_score integer Refers to the score of user_credits. Example: 1
-     * @queryParam competency_point integer Refers to the point of user_competencies. Example: 1
-     * @response 200 {"code":200,"message":"success","data":[{"id":1952,"echelon_name":null,"name":"Raden Nashrul Fathurrohman","grade_name":null,"employee_id_number":"11000036051078","employee_registration_number":"11000036051078"}]}
-     */
-    public function users()
-    {
-        $messages = [
-            'page.numeric' => 'Page harus berupa angka.',
-            'page.min' => 'Page minimal harus 1 atau lebih.',
-            'limit.numeric' => 'Limit harus berupa angka.',
-            'limit.min' => 'Limit minimal harus 1 atau lebih.',
-            'group_id.numeric' => 'ID grade harus berupa angka.',
-            'echelon_id.numeric' => 'ID eselon harus berupa angka.',
-            'grade_id.numeric' => 'ID eselon harus berupa angka.',
-            'education_level.numeric' => 'ID eselon harus berupa angka.',
-            'max_age.numeric' => 'ID eselon harus berupa angka.',
-            'disciplinary_id.numeric' => 'ID eselon harus berupa angka.',
-            'target_predicate_id.numeric' => 'ID eselon harus berupa angka.',
-            'cpns_year.numeric' => 'ID eselon harus berupa angka.',
-            'grade_year.numeric' => 'ID eselon harus berupa angka.',
-            'credit_score.numeric' => 'ID eselon harus berupa angka.',
-            'competency_point.numeric' => 'ID eselon harus berupa angka.',
-        ];
-
-        $this->request->validate([
-            'page' => 'nullable|numeric|min:1',
-            'limit' => 'nullable|numeric|min:1',
-            'group_id' => 'nullable|numeric',
-            'echelon_id' => 'nullable|numeric',
-            'grade_id' => 'nullable|numeric',
-            'education_level' => 'nullable|numeric',
-            'max_age' => 'nullable|numeric',
-            'disciplinary_id' => 'nullable|numeric',
-            'target_predicate_id' => 'nullable|numeric',
-            'cpns_year' => 'nullable|numeric',
-            'grade_year' => 'nullable|numeric',
-            'credit_score' => 'nullable|numeric',
-            'competency_point' => 'nullable|numeric',
-        ], $messages);
-
-        $users = $this->promotionRepository->getUserByFilter(
-            $this->request->page,
-            $this->request->limit,
-            $this->request->search,
-            $this->request->group_id,
-            $this->request->echelon_id,
-            $this->request->grade_id,
-            $this->request->education_level,
-            $this->request->max_age,
-            $this->request->disciplinary_id,
-            $this->request->target_predicate_id,
-            $this->request->cpns_year,
-            $this->request->grade_year,
-            $this->request->credit_score,
-            $this->request->competency_point,
-        );
-
-        if (isset($this->request->limit)) {
-            return $this->paginateResponse(200, 'success', $users);
-        } else {
-            return $this->response(200, 'success', $users);
-        }
-    }
-
-    /**
-     * Get Compare user for Promotions
-     *
-     * Below is for compare user based for promotion by user id.
-     * @authenticated
-     * @bodyParam user_id int[] list of user_id' id. Example: [1,2]
-     * @response 200 {"code":200,"message":"success","data":[{"id":527,"name":"Danang Ari Suwito","title_prefix":null,"title_suffix":"S.Sos.","employee_id_number":"198707042015031001","employee_registration_number":"180005738","echelon":{"id":7,"name":"Ahli Muda","percentage":66},"grade":{"id":7,"name":"Penata","percentage":100},"grade_effective_date":{"name":"2023-10-01","percentage":66},"cpns_effective_date":{"name":null,"percentage":0},"education_level":{"id":6,"name":"Diploma IV/Strata I","percentage":100},"notes":[{"id":2,"description":"cihuy","giver_name":"Mellinia Fitrika Irjayanti","created_at":"2024-07-04 17:50:34"}]},{"id":565,"name":"Yuyun Kusumawardani","title_prefix":null,"title_suffix":"A.Md.A.P.S.","employee_id_number":"199606032018012001","employee_registration_number":"199606032018012001","echelon":{"id":9,"name":"Pelaksana","percentage":100},"grade":{"id":10,"name":"Pengatur Tingkat I","percentage":50},"grade_effective_date":{"name":"2022-04-01","percentage":100},"cpns_effective_date":{"name":null,"percentage":0},"education_level":{"id":5,"name":"Akademik/D3/S.Muda","percentage":50},"notes":[{"id":3,"description":"ntap","giver_name":"Mellinia Fitrika Irjayanti","created_at":"2024-07-04 17:51:02"}]},{"id":570,"name":"Cindy Vandanaswari","title_prefix":null,"title_suffix":",A.Md.A.Pkt.","employee_id_number":"199905302024212005","employee_registration_number":"199905302024212005","echelon":{"id":12,"name":"Terampil","percentage":33},"grade":{"id":28,"name":"Golongan VII","percentage":100},"grade_effective_date":{"name":"2024-03-01","percentage":33},"cpns_effective_date":{"name":null,"percentage":0},"education_level":{"id":5,"name":"Akademik/D3/S.Muda","percentage":50},"notes":[]},{"id":571,"name":"Bachtiar","title_prefix":null,"title_suffix":null,"employee_id_number":"200000220","employee_registration_number":"200000220","echelon":{"id":null,"name":null,"percentage":0},"grade":{"id":null,"name":null,"percentage":0},"grade_effective_date":{"name":null,"percentage":0},"cpns_effective_date":{"name":null,"percentage":0},"education_level":{"id":null,"name":"","percentage":0},"notes":[]},{"id":1028,"name":"T. Afrizal Nur","title_prefix":null,"title_suffix":null,"employee_id_number":"TP2KAK059","employee_registration_number":"TP2KAK059","echelon":{"id":null,"name":null,"percentage":0},"grade":{"id":null,"name":null,"percentage":0},"grade_effective_date":{"name":null,"percentage":0},"cpns_effective_date":{"name":null,"percentage":0},"education_level":{"id":null,"name":"","percentage":0},"notes":[{"id":6,"description":"oh","giver_name":"Catatan 1","created_at":"2024-07-04 17:51:49"},{"id":5,"description":"Catatan 2","giver_name":"Mellinia Fitrika Irjayanti","created_at":"2024-07-04 17:51:39"},{"id":4,"description":"Catatan 3","giver_name":"Mellinia Fitrika Irjayanti","created_at":"2024-07-04 17:51:28"}]}]}
-     */
-    public function compare()
-    {
-        $messages = [
-            'user_id.required' => 'User ID tidak boleh kosong.',
-            'user_id.array' => 'User ID harus berupa array.',
-            'user_id.min' => 'User ID minimal 2 buah.',
-            'user_id.max' => 'User ID maksimal 5 buah.',
-            'user_id.*.required' => 'User ID tidak boleh kosong.',
-            'user_id.*.numeric' => 'User ID harus berupa angka.',
-        ];
-
-        $this->request->validate([
-            'user_id' => 'required|array|min:2|max:5',
-            'user_id.*' => 'required|numeric',
-        ], $messages);
-
-        $users = $this->promotionRepository->getUserByIds($this->request->user_id);
-        return $this->response(200, 'success', $users);
-    }
-
     private function addSection($type, $data, $cards, $name)
     {
         // Jabatan Pimpinan Tinggi
@@ -373,8 +266,8 @@ class PromotionController extends Controller
             $result = [
                 "id" => (int) $item->echelon_id,
                 "name" => isset($positionName)
-                    ? $item->echelon_name
-                    : $cards[$index]["name"],
+                ? $item->echelon_name
+                : $cards[$index]["name"],
                 "unoccupied" => (int) $item->unoccupied,
             ];
             $total += $item->unoccupied;
@@ -382,58 +275,5 @@ class PromotionController extends Controller
         }, $filteredData, array_keys($filteredData));
 
         return [$resultCards, $total];
-    }
-
-    /**
-     * Export user for Promotions
-     *
-     * Below is for export user based for promotion by user id.
-     * @authenticated
-     * @bodyParam user_id int[] list of user_id' id. Example: [1,2]
-     */
-    public function export()
-    {
-        $messages = [
-            'user_id.required' => 'User ID tidak boleh kosong.',
-            'user_id.array' => 'User ID harus berupa array.',
-            'user_id.min' => 'User ID minimal 2 buah.',
-            'user_id.max' => 'User ID maksimal 5 buah.',
-            'user_id.*.required' => 'User ID tidak boleh kosong.',
-            'user_id.*.numeric' => 'User ID harus berupa angka.',
-        ];
-
-        $this->request->validate([
-            'user_id' => 'required|array|min:2|max:5',
-            'user_id.*' => 'required|numeric',
-        ], $messages);
-
-        $colors = [
-            '#F16637',
-            '#74B856',
-            '#2D9DD1',
-            '#F8A232',
-            '#506CB2',
-            '#C22551'
-        ];
-
-        $users = $this->promotionRepository->getUserByIds($this->request->user_id);
-
-        foreach ($users as $key => $user) {
-            $user->color = $colors[$key];
-        }
-
-        $tmp = sys_get_temp_dir();
-
-        $pdf = Pdf::loadview('exports/promotion', [
-            'users' => $users,
-        ]);
-
-        $pdf->set_option('isHtml5ParserEnabled', true);
-        $pdf->set_paper("A4", "portrait");
-        $pdf->set_option('isRemoteEnabled', true);
-        $pdf->set_option('fontDir', $tmp);
-        $pdf->set_option('fontCache', $tmp);
-        $pdf->set_option('tempDir', $tmp);
-        return $pdf->download('promotion-user.pdf');
     }
 }

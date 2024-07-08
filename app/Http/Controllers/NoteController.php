@@ -8,8 +8,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 /**
- * @group Compare
- * @subgroupDescription These endpoints allow you to manage notes for specific user.
+ * @group Comparison
  */
 class NoteController extends Controller
 {
