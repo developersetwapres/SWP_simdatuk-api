@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use App\Imports\EmployeesImport;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
-
 
 class ImportEmployeeController extends Controller
 {
@@ -62,7 +60,7 @@ class ImportEmployeeController extends Controller
         'office_phone_number' => 33, // No Telepon Kantor
         'email' => 34,
         'office_email' => 35,
-        'emergency_contact' => 36 // Kontak Darurat
+        'emergency_contact' => 36, // Kontak Darurat
     ];
 
     /**
@@ -96,7 +94,7 @@ class ImportEmployeeController extends Controller
         'office_phone_number' => 23, // No Telepon Kantor
         'email' => 24,
         'description' => 25, // Keterangan
-        'emergency_contact' => 26 // Kontak Darurat
+        'emergency_contact' => 26, // Kontak Darurat
     ];
 
     /**
@@ -113,9 +111,8 @@ class ImportEmployeeController extends Controller
         'description' => 7,
     ];
 
-
     /**
-     * 
+     *
      */
     protected $positionInfoPos = [
         'name' => 0, // Nama Riwayat Jabatan
@@ -139,7 +136,7 @@ class ImportEmployeeController extends Controller
     ];
 
     /**
-     * 
+     *
      */
     protected $gradeInfoPos = [
         'name' => 0, // Nama Riwayat Golongan
@@ -153,11 +150,11 @@ class ImportEmployeeController extends Controller
         'decree_number' => 8, // No. SK Golongan
         'decree_date' => 9, // Tanggal SK Golongan
         'description' => 10, // Keterangan Golongan
-        'status' => 11 // Status Golongan
+        'status' => 11, // Status Golongan
     ];
 
     /**
-     * 
+     *
      */
     protected $trainingInfoPos = [
         'name' => 0, // Nama Diklat
@@ -172,7 +169,7 @@ class ImportEmployeeController extends Controller
     ];
 
     /**
-     * 
+     *
      */
     protected $technicalTrainingInfoPos = [
         'name' => 0, // Nama Diklat
@@ -185,7 +182,7 @@ class ImportEmployeeController extends Controller
     ];
 
     /**
-     * 
+     *
      */
     protected $recognitionInfoPos = [
         'recognition' => 0, // Nama Penghargaan
@@ -202,7 +199,7 @@ class ImportEmployeeController extends Controller
     ];
 
     /**
-     * 
+     *
      */
     protected $targetInfoPos = [
         'name' => 0, // Nama Riwayat SKP
@@ -217,7 +214,7 @@ class ImportEmployeeController extends Controller
     ];
 
     /**
-     * 
+     *
      */
     protected $performanceInfoPos = [
         'name' => 0, // Nama Riwayat PPK
@@ -230,7 +227,7 @@ class ImportEmployeeController extends Controller
     ];
 
     /**
-     * 
+     *
      */
     protected $disciplinaryInfoPos = [
         'name' => 0, // Nama Riwayat Hukuman Disiplin
@@ -289,7 +286,7 @@ class ImportEmployeeController extends Controller
      */
     protected $noteInfoPos = [
         'nik' => 0,
-        'description' => 1
+        'description' => 1,
     ];
 
     /**
@@ -325,7 +322,6 @@ class ImportEmployeeController extends Controller
      * END of maps the column names to their respective indexes
      */
 
-
     /**
      * BEGIN MASTER DATA
      * All MASTER DATA below must be :
@@ -333,7 +329,7 @@ class ImportEmployeeController extends Controller
      * number
      * alphabets
      * allowed symbols ()-/,.
-     * 
+     *
      * Other than that replace with empty
      */
     protected $employmentTypes;
@@ -376,7 +372,7 @@ class ImportEmployeeController extends Controller
         'katolik' => 3,
         'hindu' => 4,
         'budha' => 5,
-        'konghucu' => 6
+        'konghucu' => 6,
     ];
 
     // Array mapping marital status to their respective numeric codes
@@ -385,7 +381,7 @@ class ImportEmployeeController extends Controller
         'menikah' => 2,
         'cerai' => 3,
         'janda' => 4,
-        'duda' => 5
+        'duda' => 5,
     ];
 
     // Array mapping education level to their respective numeric codes
@@ -397,7 +393,7 @@ class ImportEmployeeController extends Controller
         'akademik/d3/s.muda' => 5,
         'diplomaiv/stratai' => 6,
         'strataii' => 7,
-        'strataiii' => 8
+        'strataiii' => 8,
     ];
 
     // Array mapping education status to their respective numeric codes
@@ -406,7 +402,7 @@ class ImportEmployeeController extends Controller
         'do' => 2,
         'aktif' => 3,
         'non-aktif' => 4,
-        'mengundurkandiri' => 5
+        'mengundurkandiri' => 5,
     ];
 
     protected $positionEchelon = [
@@ -435,7 +431,7 @@ class ImportEmployeeController extends Controller
         'aktifperbantuansetneg' => 6,
         'cltn' => 7,
         'tbln' => 8,
-        'nonaktif' => 9
+        'nonaktif' => 9,
     ];
 
     protected $workBehaviourRating = [
@@ -542,14 +538,10 @@ class ImportEmployeeController extends Controller
      * END OF MASTER DATA
      */
 
-
-
-
-
     /**
-     * Import excel for add bulk employee
+     * Import Employee with .XLSX
      *
-     * Add bulk employee with excel template.
+     * Import bulk employee with .XLSX file. This endpoint have type with 1=ASN, 2=Non ASN, 3=Outsource
      * @group Employee
      * @authenticated
      * @response 400 {"code": 400,"message": "Import pegawai gagal","data": {"message": "Sheet Data Pegawai tidak sesuai atau kosong"}}
@@ -561,11 +553,11 @@ class ImportEmployeeController extends Controller
         // Validate the uploaded file
         $request->validate([
             'file' => 'required|file|mimes:xlsx,csv',
-            'type' => 'required|in:1,2,3'
+            'type' => 'required|in:1,2,3',
         ], [
             'type' => [
-                'in' => 'Tipe Pegawai tidak dikenali.'
-            ]
+                'in' => 'Tipe Pegawai tidak dikenali.',
+            ],
         ]);
 
         $this->type = $request->type;
@@ -586,7 +578,6 @@ class ImportEmployeeController extends Controller
             $personalInfo = $employeesData[0] ?? []; // Sheet 1 : Data Pegawai
             $educationInfo = $employeesData[1] ?? []; // Sheet 2 : Riwayat Pendidikan
             $noteInfo = $employeesData[2] ?? []; // Sheet 3 : Riwayat Catatan
-
 
         } else { // ASN / NON ASN
             $personalInfo = $employeesData[0] ?? []; // Sheet 1 : Data Pegawai
@@ -734,7 +725,9 @@ class ImportEmployeeController extends Controller
 
         foreach ($personalInfo as $nik => $data) {
             // Skip. If personal info is empty
-            if (!isset($personalInfo[$nik]['personal_info'])) continue;
+            if (!isset($personalInfo[$nik]['personal_info'])) {
+                continue;
+            }
 
             try {
                 DB::beginTransaction();
@@ -745,7 +738,7 @@ class ImportEmployeeController extends Controller
 
                 $additionalInfo = [
                     'user_id' => $userID,
-                    'created_at' => date('Y-m-d H:i:s')
+                    'created_at' => date('Y-m-d H:i:s'),
                 ];
 
                 if ($this->type == 3) { // OUTSOURCE
@@ -879,7 +872,7 @@ class ImportEmployeeController extends Controller
             'user_id' => $logUserID,
             'type' => $logType,
             'description' => $logDescription,
-            'created_at' => date('Y-m-d H:i:s')
+            'created_at' => date('Y-m-d H:i:s'),
         ]);
         return $this->response(200, 'Import pegawai berhasil');
     }
@@ -948,10 +941,13 @@ class ImportEmployeeController extends Controller
     {
         $result = [];
         foreach ($personalInfo as $personalInfoKey => $personalInfoRow) {
-            if ($personalInfoKey == 0) continue; // Skip header row
+            if ($personalInfoKey == 0) {
+                continue;
+            }
+            // Skip header row
 
             /**
-             * Check Required Field. 
+             * Check Required Field.
              * Based on rules in App\Http\Requests\Employee\CreateEmployeeRequest
              */
             if ($this->type == 3) { // OUTSOURCE
@@ -974,7 +970,7 @@ class ImportEmployeeController extends Controller
                     'employment_status',
                     'family_registration_number',
                     'residence',
-                    'emergency_contact'
+                    'emergency_contact',
                 ];
             } else { // ASN & NON ASN
                 $personalInfoPos = $this->personalInfoPos;
@@ -1012,7 +1008,10 @@ class ImportEmployeeController extends Controller
                     $this->skippedRow('Data Pegawai', $personalInfoKey, 'Kolom ' . $personalInfo[0][$personalInfoPos[$field]] . ' harus diisi');
                 }
             }
-            if (!$requiredFieldFilled) continue; // Skip jika ada required field yang tidak diisi
+            if (!$requiredFieldFilled) {
+                continue;
+            }
+            // Skip jika ada required field yang tidak diisi
 
             // Check Unique
             if ($this->type == 3) { // OUTSOURCE
@@ -1069,7 +1068,7 @@ class ImportEmployeeController extends Controller
                 continue; // Skip jika tidak unique
             }
 
-            // Get ID 
+            // Get ID
             $employmentTypeID = $this->findInArray($personalInfoRow[$personalInfoPos['employment_type']], $this->employmentTypes, 'Data Pegawai', $personalInfoKey, $personalInfo[0][$personalInfoPos['employment_type']]);
             $positionID = $this->getPositionID($personalInfoRow[$personalInfoPos['position']], $personalInfoKey);
             $residenceID = $this->findInArray($personalInfoRow[$personalInfoPos['residence']], $this->residences, 'Data Pegawai', $personalInfoKey, $personalInfo[0][$personalInfoPos['residence']]);
@@ -1124,7 +1123,7 @@ class ImportEmployeeController extends Controller
                     'office_phone_number' => $personalInfoRow[$personalInfoPos['office_phone_number']],
                     'description' => $personalInfoRow[$personalInfoPos['description']],
                     'emergency_contact' => $personalInfoRow[$personalInfoPos['emergency_contact']],
-                    'type' => $this->type
+                    'type' => $this->type,
                 ];
             } else { // ASN & NON ASN
                 $result[$personalInfoRow[$personalInfoPos['id_number']]]['personal_info'] = [
@@ -1152,7 +1151,7 @@ class ImportEmployeeController extends Controller
                     'education_name' => $personalInfoRow[$personalInfoPos['education_name']],
                     'education_year' => $personalInfoRow[$personalInfoPos['education_year']],
                     'employee_id_card_number' => $personalInfoRow[$personalInfoPos['employee_id_card_number']],
-                    'karisu_number' =>  $personalInfoRow[$personalInfoPos['karisu_number']],
+                    'karisu_number' => $personalInfoRow[$personalInfoPos['karisu_number']],
                     'id_tax' => $personalInfoRow[$personalInfoPos['id_tax']],
                     'employment_status' => $employmentStatusID,
                     'id_number' => $personalInfoRow[$personalInfoPos['id_number']],
@@ -1165,7 +1164,7 @@ class ImportEmployeeController extends Controller
                     'office_phone_number' => $personalInfoRow[$personalInfoPos['office_phone_number']],
                     'office_email' => $personalInfoRow[$personalInfoPos['office_email']],
                     'emergency_contact' => $personalInfoRow[$personalInfoPos['emergency_contact']],
-                    'type' => $this->type
+                    'type' => $this->type,
                 ];
             }
         }
@@ -1176,7 +1175,10 @@ class ImportEmployeeController extends Controller
     private function educationInfo($educationInfo, $personalInfo)
     {
         foreach ($educationInfo as $educationKey => $educationRow) {
-            if ($educationKey == 0) continue; // Skip header row
+            if ($educationKey == 0) {
+                continue;
+            }
+            // Skip header row
 
             $requiredFields = [
                 'nik',
@@ -1194,7 +1196,10 @@ class ImportEmployeeController extends Controller
                     $this->skippedRow('Riwayat Pendidikan', $educationKey, 'Kolom ' . $educationInfo[0][$this->educationInfoPos[$field]] . ' harus diisi');
                 }
             }
-            if (!$requiredFieldFilled) continue; // Skip jika ada required field yang tidak diisi
+            if (!$requiredFieldFilled) {
+                continue;
+            }
+            // Skip jika ada required field yang tidak diisi
 
             $levelID = $this->findInArray($educationRow[$this->educationInfoPos['level']], $this->educationLevel, 'Riwayat Pendidikan', $educationKey, $educationInfo[0][$this->educationInfoPos['level']]);
             $statusID = $this->findInArray($educationRow[$this->educationInfoPos['status']], $this->educationStatus, 'Riwayat Pendidikan', $educationKey, $educationInfo[0][$this->educationInfoPos['status']]);
@@ -1216,7 +1221,10 @@ class ImportEmployeeController extends Controller
     private function positionInfo($positionInfo, $personalInfo)
     {
         foreach ($positionInfo as $positionKey => $positionRow) {
-            if ($positionKey == 0) continue; // Skip header row
+            if ($positionKey == 0) {
+                continue;
+            }
+            // Skip header row
 
             $requiredFields = [
                 'name',
@@ -1235,7 +1243,10 @@ class ImportEmployeeController extends Controller
                     $this->skippedRow('Riwayat Jabatan', $positionKey, 'Kolom ' . $positionInfo[0][$this->positionInfoPos[$field]] . ' harus diisi');
                 }
             }
-            if (!$requiredFieldFilled) continue; // Skip jika ada required field yang tidak diisi
+            if (!$requiredFieldFilled) {
+                continue;
+            }
+            // Skip jika ada required field yang tidak diisi
 
             $groupID = $this->findInArray($positionRow[$this->positionInfoPos['group']], $this->groups, 'Riwayat Jabatan', $positionKey, $positionInfo[0][$this->positionInfoPos['group']]);
             $monthID = $this->findInArray($positionRow[$this->positionInfoPos['period_month']], $this->month, 'Riwayat Jabatan', $positionKey, $positionInfo[0][$this->positionInfoPos['period_month']]);
@@ -1274,7 +1285,10 @@ class ImportEmployeeController extends Controller
     private function gradeInfo($gradeInfo, $personalInfo)
     {
         foreach ($gradeInfo as $gradeKey => $gradeRow) {
-            if ($gradeKey == 0) continue; // Skip header row
+            if ($gradeKey == 0) {
+                continue;
+            }
+            // Skip header row
 
             $requiredFields = [
                 'name',
@@ -1293,7 +1307,10 @@ class ImportEmployeeController extends Controller
                     $this->skippedRow('Riwayat Golongan', $gradeKey, 'Kolom ' . $gradeInfo[0][$this->gradeInfoPos[$field]] . ' harus diisi');
                 }
             }
-            if (!$requiredFieldFilled) continue; // Skip jika ada required field yang tidak diisi
+            if (!$requiredFieldFilled) {
+                continue;
+            }
+            // Skip jika ada required field yang tidak diisi
 
             $gradeID = $this->findInArray($gradeRow[$this->gradeInfoPos['grade']], $this->grades, 'Riwayat Golongan', $gradeKey, $gradeInfo[0][$this->gradeInfoPos['grade']]);
             $decreeID = $this->findInArray($gradeRow[$this->gradeInfoPos['type_of_decree']], $this->decrees, 'Riwayat Golongan', $gradeKey, $gradeInfo[0][$this->gradeInfoPos['type_of_decree']]);
@@ -1319,7 +1336,7 @@ class ImportEmployeeController extends Controller
                 'decree_number' => $gradeRow[$this->gradeInfoPos['decree_number']],
                 'decree_date' => $decreeDate,
                 'description' => $gradeRow[$this->gradeInfoPos['description']],
-                'status' =>  $status
+                'status' => $status,
             ];
         }
 
@@ -1329,7 +1346,10 @@ class ImportEmployeeController extends Controller
     private function trainingInfo($trainingInfo, $personalInfo, $trainingType)
     {
         foreach ($trainingInfo as $trainingKey => $trainingRow) {
-            if ($trainingKey == 0) continue; // Skip header row
+            if ($trainingKey == 0) {
+                continue;
+            }
+            // Skip header row
 
             $requiredFields = [
                 'name',
@@ -1351,7 +1371,10 @@ class ImportEmployeeController extends Controller
                         $this->skippedRow('Riwayat Pelatihan Teknis', $trainingKey, 'Kolom ' . $trainingInfo[0][$this->technicalTrainingInfoPos[$field]] . ' harus diisi');
                     }
                 }
-                if (!$requiredFieldFilled) continue; // Skip jika ada required field yang tidak diisi
+                if (!$requiredFieldFilled) {
+                    continue;
+                }
+                // Skip jika ada required field yang tidak diisi
 
                 $monthID = $this->findInArray($trainingRow[$this->technicalTrainingInfoPos['period_month']], $this->month, 'Riwayat Pelatihan Teknis', $trainingKey, $trainingInfo[0][$this->technicalTrainingInfoPos['period_month']]);
 
@@ -1362,7 +1385,7 @@ class ImportEmployeeController extends Controller
                     'start_date' => $startDate,
                     'duration' => $trainingRow[$this->technicalTrainingInfoPos['duration']],
                     'reference_number' => $trainingRow[$this->technicalTrainingInfoPos['reference_number']],
-                    'type' => $trainingType
+                    'type' => $trainingType,
                 ];
             } else { // Pelatihan Struktural and Pelatihan Fungsional
                 $startDate = Carbon::createFromFormat('d/m/Y', $trainingRow[$this->trainingInfoPos['start_date']])->format('Y-m-d');
@@ -1381,7 +1404,10 @@ class ImportEmployeeController extends Controller
                         $this->skippedRow($sheet, $trainingKey, 'Kolom ' . $trainingInfo[0][$this->trainingInfoPos[$field]] . ' harus diisi');
                     }
                 }
-                if (!$requiredFieldFilled) continue; // Skip jika ada required field yang tidak diisi
+                if (!$requiredFieldFilled) {
+                    continue;
+                }
+                // Skip jika ada required field yang tidak diisi
 
                 $monthID = $this->findInArray($trainingRow[$this->trainingInfoPos['period_month']], $this->month, $sheet, $trainingKey, $trainingInfo[0][$this->trainingInfoPos['period_month']]);
 
@@ -1394,7 +1420,7 @@ class ImportEmployeeController extends Controller
                     'duration' => $trainingRow[$this->trainingInfoPos['duration']],
                     'organizer' => $trainingRow[$this->trainingInfoPos['organizer']],
                     'reference_number' => $trainingRow[$this->trainingInfoPos['reference_number']],
-                    'type' => $trainingType
+                    'type' => $trainingType,
                 ];
             }
         }
@@ -1405,7 +1431,10 @@ class ImportEmployeeController extends Controller
     private function recognitionInfo($recognitionInfo, $personalInfo)
     {
         foreach ($recognitionInfo as $recognitionKey => $recognitionRow) {
-            if ($recognitionKey == 0) continue; // Skip header row
+            if ($recognitionKey == 0) {
+                continue;
+            }
+            // Skip header row
 
             $requiredFields = [
                 'recognition',
@@ -1425,9 +1454,12 @@ class ImportEmployeeController extends Controller
                     $this->skippedRow('Riwayat Penghargaan', $recognitionKey, 'Kolom ' . $recognitionInfo[0][$this->recognitionInfoPos[$field]] . ' harus diisi');
                 }
             }
-            if (!$requiredFieldFilled) continue; // Skip jika ada required field yang tidak diisi
+            if (!$requiredFieldFilled) {
+                continue;
+            }
+            // Skip jika ada required field yang tidak diisi
 
-            $recognitionID =  $this->findInArray($recognitionRow[$this->recognitionInfoPos['recognition']], $this->recognitions, 'Riwayat Penghargaan', $recognitionKey, $recognitionInfo[0][$this->recognitionInfoPos['recognition']]);
+            $recognitionID = $this->findInArray($recognitionRow[$this->recognitionInfoPos['recognition']], $this->recognitions, 'Riwayat Penghargaan', $recognitionKey, $recognitionInfo[0][$this->recognitionInfoPos['recognition']]);
             $decreeID = $this->findInArray($recognitionRow[$this->recognitionInfoPos['type_of_decree']], $this->decrees, 'Riwayat Penghargaan', $recognitionKey, $recognitionInfo[0][$this->recognitionInfoPos['type_of_decree']]);
             $monthID = $this->findInArray($recognitionRow[$this->recognitionInfoPos['period_month']], $this->month, 'Riwayat Penghargaan', $recognitionKey, $recognitionInfo[0][$this->recognitionInfoPos['period_month']]);
 
@@ -1444,7 +1476,7 @@ class ImportEmployeeController extends Controller
                 'decree_number' => $recognitionRow[$this->recognitionInfoPos['decree_number']],
                 'decree_year' => $recognitionRow[$this->recognitionInfoPos['decree_year']],
                 'awarding_institution' => $recognitionRow[$this->recognitionInfoPos['awarding_institution']],
-                'date_of_receipt' => $dateOfReceipt
+                'date_of_receipt' => $dateOfReceipt,
             ];
         }
 
@@ -1454,7 +1486,10 @@ class ImportEmployeeController extends Controller
     private function targetInfo($targetInfo, $personalInfo)
     {
         foreach ($targetInfo as $targetKey => $targetRow) {
-            if ($targetKey == 0) continue; // Skip header row
+            if ($targetKey == 0) {
+                continue;
+            }
+            // Skip header row
 
             $requiredFields = [
                 'name',
@@ -1475,7 +1510,10 @@ class ImportEmployeeController extends Controller
                     $this->skippedRow('Riwayat SKP', $targetKey, 'Kolom ' . $targetInfo[0][$this->targetInfoPos[$field]] . ' harus diisi');
                 }
             }
-            if (!$requiredFieldFilled) continue; // Skip jika ada required field yang tidak diisi
+            if (!$requiredFieldFilled) {
+                continue;
+            }
+            // Skip jika ada required field yang tidak diisi
 
             $monthID = $this->findInArray($targetRow[$this->targetInfoPos['period_month']], $this->month, 'Riwayat SKP', $targetKey, $targetInfo[0][$this->targetInfoPos['period_month']]);
             $workBehaviourRatingID = $this->findInArray($targetRow[$this->targetInfoPos['work_behavior_rating']], $this->workBehaviourRating, 'Riwayat SKP', $targetKey, $targetInfo[0][$this->targetInfoPos['work_behavior_rating']]);
@@ -1500,7 +1538,10 @@ class ImportEmployeeController extends Controller
     private function performanceInfo($performanceInfo, $personalInfo)
     {
         foreach ($performanceInfo as $performanceKey => $performanceRow) {
-            if ($performanceKey == 0) continue; // Skip header row
+            if ($performanceKey == 0) {
+                continue;
+            }
+            // Skip header row
 
             $requiredFields = [
                 'name',
@@ -1520,7 +1561,10 @@ class ImportEmployeeController extends Controller
                     $this->skippedRow('Penilaian Prestasi Kerja', $performanceKey, 'Kolom ' . $performanceInfo[0][$this->performanceInfoPos[$field]] . ' harus diisi');
                 }
             }
-            if (!$requiredFieldFilled) continue; // Skip jika ada required field yang tidak diisi
+            if (!$requiredFieldFilled) {
+                continue;
+            }
+            // Skip jika ada required field yang tidak diisi
 
             $monthID = $this->findInArray($performanceRow[$this->performanceInfoPos['period_month']], $this->month, 'Penilaian Prestasi Kerja', $performanceKey, $performanceInfo[0][$this->performanceInfoPos['period_month']]);
             $performanceDescriptionID = $this->findInArray($performanceRow[$this->performanceInfoPos['description']], $this->performanceDescription, 'Penilaian Prestasi Kerja', $performanceKey, $performanceInfo[0][$this->performanceInfoPos['description']]);
@@ -1531,7 +1575,7 @@ class ImportEmployeeController extends Controller
                 'period_year' => $performanceRow[$this->performanceInfoPos['period_year']],
                 'performance_period' => $performanceRow[$this->performanceInfoPos['performance_period']],
                 'work_performance_score' => $performanceRow[$this->performanceInfoPos['work_performance_score']],
-                'description' => $performanceDescriptionID
+                'description' => $performanceDescriptionID,
             ];
         }
 
@@ -1541,7 +1585,10 @@ class ImportEmployeeController extends Controller
     private function disciplinaryInfo($disciplinaryInfo, $personalInfo)
     {
         foreach ($disciplinaryInfo as $disciplinaryKey => $disciplinaryRow) {
-            if ($disciplinaryKey == 0) continue; // Skip header row
+            if ($disciplinaryKey == 0) {
+                continue;
+            }
+            // Skip header row
 
             $requiredFields = [
                 'name',
@@ -1560,7 +1607,10 @@ class ImportEmployeeController extends Controller
                     $this->skippedRow('Riwayat Hukuman Disiplin', $disciplinaryKey, 'Kolom ' . $disciplinaryInfo[0][$this->disciplinaryInfoPos[$field]] . ' harus diisi');
                 }
             }
-            if (!$requiredFieldFilled) continue; // Skip jika ada required field yang tidak diisi
+            if (!$requiredFieldFilled) {
+                continue;
+            }
+            // Skip jika ada required field yang tidak diisi
 
             $disciplinaryID = $this->findInArray($disciplinaryRow[$this->disciplinaryInfoPos['disciplinary']], $this->disciplinaries, 'Riwayat Hukuman Disiplin', $disciplinaryKey, $disciplinaryInfo[0][$this->disciplinaryInfoPos['disciplinary']]);
             $monthID = $this->findInArray($disciplinaryRow[$this->disciplinaryInfoPos['period_month']], $this->month, 'Riwayat Hukuman Disiplin', $disciplinaryKey, $disciplinaryInfo[0][$this->disciplinaryInfoPos['period_month']]);
@@ -1592,7 +1642,10 @@ class ImportEmployeeController extends Controller
     private function familyInfo($familyInfo, $personalInfo)
     {
         foreach ($familyInfo as $familyKey => $familyRow) {
-            if ($familyKey == 0) continue; // Skip header row
+            if ($familyKey == 0) {
+                continue;
+            }
+            // Skip header row
 
             $requiredFields = [
                 'nik',
@@ -1616,7 +1669,10 @@ class ImportEmployeeController extends Controller
                     $this->skippedRow('Riwayat Keluarga', $familyKey, 'Kolom ' . $familyInfo[0][$this->familyInfoPos[$field]] . ' harus diisi');
                 }
             }
-            if (!$requiredFieldFilled) continue; // Skip jika ada required field yang tidak diisi
+            if (!$requiredFieldFilled) {
+                continue;
+            }
+            // Skip jika ada required field yang tidak diisi
 
             $genderID = $this->findInArray($familyRow[$this->familyInfoPos['gender']], $this->gender, 'Riwayat Keluarga', $familyKey, $familyInfo[0][$this->familyInfoPos['gender']]);
             $religionID = $this->findInArray($familyRow[$this->familyInfoPos['religion']], $this->religions, 'Riwayat Keluarga', $familyKey, $familyInfo[0][$this->familyInfoPos['religion']]);
@@ -1642,7 +1698,7 @@ class ImportEmployeeController extends Controller
                 'occupation_description' => $familyRow[$this->familyInfoPos['occupation_description']],
                 'marital_status' => $familyMaritalStatusID,
                 'mobile_phone' => $familyRow[$this->familyInfoPos['mobile_phone']],
-                'sequence_number' => $familyRow[$this->familyInfoPos['sequence_number']]
+                'sequence_number' => $familyRow[$this->familyInfoPos['sequence_number']],
             ];
         }
 
@@ -1652,7 +1708,10 @@ class ImportEmployeeController extends Controller
     private function leaveInfo($leaveInfo, $personalInfo)
     {
         foreach ($leaveInfo as $leaveKey => $leaveRow) {
-            if ($leaveKey == 0) continue; // Skip header row
+            if ($leaveKey == 0) {
+                continue;
+            }
+            // Skip header row
 
             $requiredFields = [
                 'nik',
@@ -1671,7 +1730,10 @@ class ImportEmployeeController extends Controller
                     $this->skippedRow('Riwayat Cuti', $leaveKey, 'Kolom ' . $leaveInfo[0][$this->leaveInfoPos[$field]] . ' harus diisi');
                 }
             }
-            if (!$requiredFieldFilled) continue; // Skip jika ada required field yang tidak diisi
+            if (!$requiredFieldFilled) {
+                continue;
+            }
+            // Skip jika ada required field yang tidak diisi
 
             $leaveTypeID = $this->findInArray($leaveRow[$this->leaveInfoPos['type']], $this->leaveType, 'Riwayat Cuti', $leaveKey, $leaveInfo[0][$this->leaveInfoPos['type']]);
 
@@ -1693,7 +1755,10 @@ class ImportEmployeeController extends Controller
     private function noteInfo($noteInfo, $personalInfo, $giverID)
     {
         foreach ($noteInfo as $noteKey => $noteRow) {
-            if ($noteKey == 0) continue; // Skip header row
+            if ($noteKey == 0) {
+                continue;
+            }
+            // Skip header row
 
             $requiredFields = [
                 'nik',
@@ -1708,8 +1773,10 @@ class ImportEmployeeController extends Controller
                     $this->skippedRow('Riwayat Catatan', $noteKey, 'Kolom ' . $noteInfo[0][$this->noteInfoPos[$field]] . ' harus diisi');
                 }
             }
-            if (!$requiredFieldFilled) continue; // Skip jika ada required field yang tidak diisi
-
+            if (!$requiredFieldFilled) {
+                continue;
+            }
+            // Skip jika ada required field yang tidak diisi
 
             $personalInfo[$noteRow[$this->noteInfoPos['nik']]]['note'][] = [
                 'giver_id' => $giverID,
@@ -1723,7 +1790,10 @@ class ImportEmployeeController extends Controller
     private function assessmentInfo($assessmentInfo, $personalInfo)
     {
         foreach ($assessmentInfo as $assessmentKey => $assessmentRow) {
-            if ($assessmentKey == 0) continue; // Skip header row
+            if ($assessmentKey == 0) {
+                continue;
+            }
+            // Skip header row
 
             $requiredFields = [
                 'nik',
@@ -1739,7 +1809,10 @@ class ImportEmployeeController extends Controller
                     $this->skippedRow('Hasil Assessment', $assessmentKey, 'Kolom ' . $assessmentInfo[0][$this->assessmentInfoPos[$field]] . ' harus diisi');
                 }
             }
-            if (!$requiredFieldFilled) continue; // Skip jika ada required field yang tidak diisi
+            if (!$requiredFieldFilled) {
+                continue;
+            }
+            // Skip jika ada required field yang tidak diisi
 
             $assessmentPointID = $this->findInArray($assessmentRow[$this->assessmentInfoPos['point']], $this->assessmentPoint, 'Hasil Assessment', $assessmentKey, $assessmentInfo[0][$this->assessmentInfoPos['point']]);
 
@@ -1758,7 +1831,10 @@ class ImportEmployeeController extends Controller
     private function competencyInfo($competencyInfo, $personalInfo)
     {
         foreach ($competencyInfo as $competencyKey => $competencyRow) {
-            if ($competencyKey == 0) continue; // Skip header row
+            if ($competencyKey == 0) {
+                continue;
+            }
+            // Skip header row
 
             $requiredFields = [
                 'nik',
@@ -1774,7 +1850,10 @@ class ImportEmployeeController extends Controller
                     $this->skippedRow('Hasil Uji Kompetensi', $competencyKey, 'Kolom ' . $competencyInfo[0][$this->competencyInfoPos[$field]] . ' harus diisi');
                 }
             }
-            if (!$requiredFieldFilled) continue; // Skip jika ada required field yang tidak diisi
+            if (!$requiredFieldFilled) {
+                continue;
+            }
+            // Skip jika ada required field yang tidak diisi
 
             $competencyPointID = $this->findInArray($competencyRow[$this->competencyInfoPos['point']], $this->competencyPoint, 'Hasil Uji Kompetensi', $competencyKey, $competencyInfo[0][$this->competencyInfoPos['point']]);
 
@@ -1793,7 +1872,10 @@ class ImportEmployeeController extends Controller
     private function talentInfo($talentInfo, $personalInfo)
     {
         foreach ($talentInfo as $talentKey => $talentRow) {
-            if ($talentKey == 0) continue; // Skip header row
+            if ($talentKey == 0) {
+                continue;
+            }
+            // Skip header row
 
             $requiredFields = [
                 'nik',
@@ -1809,7 +1891,10 @@ class ImportEmployeeController extends Controller
                     $this->skippedRow('Hasil Talent Pool', $talentKey, 'Kolom ' . $talentInfo[0][$this->talentInfoPos[$field]] . ' harus diisi');
                 }
             }
-            if (!$requiredFieldFilled) continue; // Skip jika ada required field yang tidak diisi
+            if (!$requiredFieldFilled) {
+                continue;
+            }
+            // Skip jika ada required field yang tidak diisi
 
             $talentPointID = $this->findInArray($talentRow[$this->talentInfoPos['point']], $this->talentPoint, 'Hasil Talent Pool', $talentKey, $talentInfo[0][$this->talentInfoPos['point']]);
 
@@ -1824,8 +1909,6 @@ class ImportEmployeeController extends Controller
 
         return $personalInfo;
     }
-
-
 
     /**
      * Finds a value in an array based on a given key.
@@ -1849,7 +1932,9 @@ class ImportEmployeeController extends Controller
 
         $id = $array[$key] ?? null;
 
-        if (is_null($id)) $this->skippedRow($sheet, $row, $column . ' = "' . $find . '", tidak ditemukan');
+        if (is_null($id)) {
+            $this->skippedRow($sheet, $row, $column . ' = "' . $find . '", tidak ditemukan');
+        }
 
         return $id;
     }
@@ -1915,7 +2000,7 @@ class ImportEmployeeController extends Controller
                     $element['child'] = $children;
                 }
                 $branch[$element['name']] = [
-                    'id' => $element['id']
+                    'id' => $element['id'],
                 ];
                 if (isset($element['child'])) {
                     $branch[$element['name']]['child'] = $element['child'];
@@ -1930,8 +2015,8 @@ class ImportEmployeeController extends Controller
     {
         $this->skippedRow[] = [
             'sheet' => $sheet,
-            'row' =>  $row + 1,
-            'reason' => str_replace('*', '', $reason)
+            'row' => $row + 1,
+            'reason' => str_replace('*', '', $reason),
         ];
     }
 
@@ -1958,9 +2043,9 @@ class ImportEmployeeController extends Controller
     }
 
     /**
-     * Download Excel Template Add Bulk Employee
+     * Download .XLSX Template for Import Employee
      *
-     * Download Excel Template to add bulk ASN/NON-ASN/OUTSOURCE employee.
+     * Download .XLSX Template for import ASN/NON-ASN/OUTSOURCE employee.
      * @group Employee
      * @authenticated
      * @urlParam type integer Refers to the type of employee 1=ASN 2=NON ASN 3=OUTSOURCE. Example: 1
