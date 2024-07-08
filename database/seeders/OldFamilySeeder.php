@@ -69,7 +69,7 @@ class OldFamilySeeder extends Seeder
                   WHEN db_lama_keluarga.status_nkh = 'Cerai Hidup' THEN 3
                   ELSE NULL
                 END AS marital_status,
-                db_lama_keluarga.urut_kel AS sequence_number,
+                CAST(db_lama_keluarga.urut_kel AS UNSIGNED) AS sequence_number,
                 CURRENT_TIMESTAMP AS created_at
               FROM
                 simdatuk_dump.tbl_r_keluarga_pswp AS db_lama_keluarga

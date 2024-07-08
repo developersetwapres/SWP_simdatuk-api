@@ -147,8 +147,10 @@ class OldUserSeeder extends Seeder
                         ELSE NULL
                     END AS residence_id,
                     al_rumah as current_address,
-                    tlp_rumah as home_phone_number,
-                    no_seluler as mobile_phone,
+                    CASE
+                        WHEN CHAR_LENGTH(no_seluler) > 20 THEN NULL
+                        ELSE no_seluler
+                    END AS mobile_phone,
                     tlp_kntr as office_phone_number,
                     '1' as type,
                     IF(id_pegawai = '198503022009021001' OR id_pegawai = '198605282009122001', TRUE, FALSE) AS status,
@@ -182,7 +184,11 @@ class OldUserSeeder extends Seeder
                         ELSE gelar_blk
                     END AS title_suffix,
                     id_perbantuan AS employee_id_number,
-                    IF(id_lama = '', id_perbantuan, id_lama) AS employee_registration_number,
+                    CASE
+                        WHEN id_lama = '070920201' THEN NULL
+                        WHEN id_lama = '' THEN id_perbantuan
+                        ELSE id_perbantuan
+                    END AS employee_registration_number,
                     tmpt_lahir AS place_of_birth,
                     tgl_lahir AS date_of_birth,
                     CASE
@@ -242,8 +248,10 @@ class OldUserSeeder extends Seeder
                     END AS education_year,
                     no_ktp AS id_number,
                     alamat AS current_address,
-                    tlp_rumah AS home_phone_number,
-                    no_tlp AS mobile_phone,
+                    CASE
+                        WHEN CHAR_LENGTH(no_tlp) > 20 THEN NULL
+                        ELSE no_tlp
+                    END AS mobile_phone,
                     '2' AS type,
                     CURRENT_TIMESTAMP AS created_at
                 FROM

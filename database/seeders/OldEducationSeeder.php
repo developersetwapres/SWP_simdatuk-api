@@ -33,7 +33,10 @@ class OldEducationSeeder extends Seeder
                 db_lama_pddk.fakultas as faculty,
                 db_lama_pddk.jurusan as major,
                 '1' as status,
-                db_lama_pddk.thn_lulus as year_of_graduation,
+                CASE
+                  WHEN db_lama_pddk.thn_lulus < '1900' THEN NULL
+                  ELSE db_lama_pddk.thn_lulus
+                END AS year_of_graduation,
                 db_lama_pddk.ket_sekolah as description,
                 CURRENT_TIMESTAMP AS created_at
               FROM
