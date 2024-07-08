@@ -183,6 +183,7 @@ class OldUserSeeder extends Seeder
                         WHEN gelar_blk = '' THEN NULL
                         ELSE gelar_blk
                     END AS title_suffix,
+                    CONCAT('photo_profile/', id_perbantuan, '.jpg') AS photo_profile,
                     id_perbantuan AS employee_id_number,
                     CASE
                         WHEN id_lama = '070920201' THEN NULL
@@ -259,6 +260,9 @@ class OldUserSeeder extends Seeder
             ";
 
             $nonAsn = DB::select($nonAsn);
+            foreach ($nonAsn as $item) {
+                $item->photo_profile = $this->getDocumentExist($item->photo_profile);
+            }
             DB::table('users')->insertTs(json_decode(json_encode($nonAsn), true));
 
             // Get pegawai outsource
@@ -271,6 +275,7 @@ class OldUserSeeder extends Seeder
                         ELSE LOWER(db_lama_outsource.email)
                     END AS email,
                     db_lama_outsource.nm_outsorce AS name,
+                    CONCAT('photo_profile/', db_lama_outsource.id_outsorce, '.jpg') AS photo_profile,
                     db_lama_outsource.id_outsorce AS employee_id_number,
                     db_lama_outsource.tmp_lahir AS place_of_birth,
                     db_lama_outsource.tgl_lahir AS date_of_birth,
@@ -335,6 +340,9 @@ class OldUserSeeder extends Seeder
             ";
 
             $outsource = DB::select($outsource);
+            foreach ($outsource as $item) {
+                $item->photo_profile = $this->getDocumentExist($item->photo_profile);
+            }
             DB::table('users')->insertTs(json_decode(json_encode($outsource), true));
             $this->setPosition();
             $this->setEchelon();
