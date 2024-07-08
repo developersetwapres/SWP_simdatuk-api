@@ -124,7 +124,28 @@ class ComparisonController extends Controller
             'user_id.*' => 'required|numeric',
         ], $messages);
         $data = $this->comparisonRepository->getDetailUsers($this->request->user_id);
-        return $this->response(200, 'success', $data);
+
+        $groupedData = [];
+        $array = array();
+
+        foreach ($data['users'] as $user) {
+            $userId = $user->id;
+            $user = json_decode(json_encode($user), true);
+            $groupedData[] = array_merge($user, [
+                'positions' => $data['positions'][$userId] ?? [],
+                'structurals' => $data['strukturals'][$userId] ?? [],
+                'functionals' => $data['fungsionals'][$userId] ?? [],
+                'technicals' => $data['tekniss'][$userId] ?? [],
+                'targets' => $data['targets'][$userId] ?? [],
+                'disciplinaries' => $data['disciplinaries'][$userId] ?? [],
+                'notes' => $data['notes'][$userId] ?? [],
+                'assessments' => $data['assessments'][$userId] ?? [],
+                'competencies' => $data['competencies'][$userId] ?? [],
+                'talents' => $data['talents'][$userId] ?? [],
+            ]);
+        }
+
+        return $this->response(200, 'success', $groupedData);
     }
 
     /**
