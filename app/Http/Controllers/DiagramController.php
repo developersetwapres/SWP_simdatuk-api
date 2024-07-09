@@ -325,13 +325,15 @@ class DiagramController extends Controller
         return $positionEchelons;
     }
 
+    /**
+     * Export Diagrams
+     *
+     * Below is function to export diagrams.
+     * @authenticated
+     */
     public function export()
     {
-        ini_set('memory_limit', '-1');
-        set_time_limit(300);
         $hierarchies = $this->getHierarchy(null, 1);
-
-        // return $hierarchies;
 
         $html = '<ul><li class="li-last">
         <div class="node-non-person">
@@ -346,24 +348,12 @@ class DiagramController extends Controller
         $html .= $this->generateHtml($hierarchies, null, false, false);
         $html .= '</li></ul>';
 
-        // return $html;
-
-        // return view('exports/diagram', compact('html'))->render();
-
         $tmp = sys_get_temp_dir();
 
         $pdf = Pdf::loadview('exports/diagram', ['html' => $html]);
 
         $pdf->set_option('isHtml5ParserEnabled', true);
         $pdf->set_paper("A0", "landscape");
-        // $pdf->set_paper("4a0", "landscape");
-        // $w = 595.28 * 150;
-        // $h = 841.89 * 10;
-        // $w = 595.28 * 8;
-        // $h = 841.89 * 8;
-        // a4 = 595.28, 841.89
-        // $customPaper = array(0, 0, $w, $h);
-        // $pdf->setPaper($customPaper, 'landscape');
         $pdf->set_option('isRemoteEnabled', true);
         $pdf->set_option('fontDir', $tmp);
         $pdf->set_option('fontCache', $tmp);
@@ -528,9 +518,6 @@ class DiagramController extends Controller
             if (isset($hierarchy->title_suffix)) {
                 $userName = $userName . ' ' . $hierarchy->title_suffix;
             }
-
-            // <img src="' . (isset($hierarchy->user_photo_profile) ? $this->getDocument($hierarchy->user_photo_profile, true) : 'img/profile.jpg') . '" class="node-photo"/>
-            // <img src="' . ('img/profile.jpg') . '" class="node-photo"/>
 
             $card = '
             <div class="' . (($stack === true) ? 'node-person-stack' : 'node-person') . '">
