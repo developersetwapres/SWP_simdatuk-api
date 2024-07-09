@@ -15,6 +15,10 @@
             background-color: #F4F4F4;
         }
 
+        .page_break {
+            page-break-after: always;
+        }
+
         .orgchart ul {
             padding-top: 40px;
             position: relative;
@@ -23,13 +27,13 @@
             text-align: center;
         }
 
-        .orgchart ul ul::before {
+        .ul-child::before {
             content: '';
             display: table;
             position: absolute;
             top: 0;
+            /* left: 49.82%; */
             left: 50%;
-            /* border-left: 1px solid pink; */
             border-left: 1px solid black;
             width: 0;
             height: 40px;
@@ -80,7 +84,7 @@
         }
 
         .li-single:last-child::before {
-            left: 0%;
+            /* left: -1%; */
             border-right: 1px solid black;
         }
 
@@ -113,6 +117,11 @@
             border-radius: 5px 0 0 0;
         }
 
+        .node-person-stack-container {
+            width: 240px;
+            height: 600px;
+        }
+
         .node-person {
             border: 1px solid #ccc;
             padding: 5px 10px;
@@ -122,7 +131,20 @@
             border-radius: 12px;
             background-color: white;
             width: 200px;
-            height: 560px;
+            height: 620px;
+        }
+
+        .node-person-stack {
+            border: 1px solid #ccc;
+            padding: 5px 10px;
+            text-decoration: none;
+            color: #666;
+            display: inline-block;
+            border-radius: 12px;
+            background-color: white;
+            width: 200px;
+            height: 620px;
+            position: absolute;
         }
 
         .node-non-person {
@@ -181,6 +203,20 @@
             font-weight: 700;
             color: #394346;
             word-wrap: break-word;
+        }
+
+        .node-person-stack:nth-child(3) {
+            transform: translateY(10px) translateX(10px);
+            z-index: 3;
+        }
+
+        .node-person-stack:nth-child(2) {
+            transform: translateY(5px) translateX(5px);
+            z-index: 2;
+        }
+
+        .node-person-stack:nth-child(1) {
+            z-index: 1;
         }
     </style>
 </head>
