@@ -77,7 +77,20 @@ class DiagramController extends Controller
             foreach ($positions->childs as $childPosition) {
                 if (isset($childPosition->entity)) {
                     if ($childPosition->entity == 1) {
-                        $childPosition->users = $this->getUsers($childPosition->id);
+                        if (str_starts_with(strtolower($childPosition->name), 'asisten staf khusus wakil presiden')) {
+                            $childPosition->users = $this->getUsers($childPosition->id);
+                            if (sizeof($childPosition->users) > 1) {
+                                $ass = collect([]);
+                                foreach ($childPosition->users as $key => $user) {
+                                    $uniqueChild = $childPosition;
+                                    $uniqueChild->users = [$user];
+                                    $ass->push($uniqueChild);
+                                }
+                                $positions->childs = $ass;
+                            }
+                        } else {
+                            $childPosition->users = $this->getUsers($childPosition->id);
+                        }
                     } else {
                         $childPosition->users = [];
                     }
