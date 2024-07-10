@@ -672,7 +672,7 @@ class PositionSeeder extends Seeder
                                         'id' => 68,
                                         'parent_id' => 60,
                                         'name' => 'Penyusun Bahan Kebijakan',
-                                        'available' => 2,
+                                        'available' => 1,
                                         'type' => 1,
                                         'entity' => 1,
                                         'vertical_order' => 1,

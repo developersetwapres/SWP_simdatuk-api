@@ -1213,7 +1213,7 @@ class PositionEchelonSeeder extends Seeder
             [
                 'id' => 151,
                 'position_id' => 63,
-                'echelon_id' => 4,
+                'echelon_id' => 3, //previously was 4
                 'available' => 1,
                 'vertical_order' => 1,
                 'horizontal_order' => 3,
@@ -1293,7 +1293,7 @@ class PositionEchelonSeeder extends Seeder
             [
                 'id' => 161,
                 'position_id' => 94,
-                'echelon_id' => 4,
+                'echelon_id' => 3, //previously was 4
                 'available' => 1,
                 'vertical_order' => 1,
                 'horizontal_order' => 2,
@@ -1413,7 +1413,7 @@ class PositionEchelonSeeder extends Seeder
             [
                 'id' => 176,
                 'position_id' => 114,
-                'echelon_id' => 9,
+                'echelon_id' => null, //previously was 9
                 'available' => 2,
                 'vertical_order' => 1,
                 'horizontal_order' => 1,
@@ -1549,7 +1549,7 @@ class PositionEchelonSeeder extends Seeder
             [
                 'id' => 193,
                 'position_id' => 138,
-                'echelon_id' => 9,
+                'echelon_id' => 4, //previously was 9
                 'available' => 1,
                 'vertical_order' => 1,
                 'horizontal_order' => 6,

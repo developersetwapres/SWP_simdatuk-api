@@ -192,6 +192,7 @@ class DiagramController extends Controller
             });
             $positions->leftJoin('grades as g', 'u.grade_id', '=', 'g.id');
             $positions->orderBy('u.position_effective_date', 'ASC');
+            $positions->orderBy('u.grade_id', 'ASC');
             $positions->orderBy('u.grade_effective_date', 'ASC');
             $positions->orderBy('u.name', 'ASC');
         }
@@ -245,7 +246,7 @@ class DiagramController extends Controller
                         "title_suffix" => null,
                         "user_photo_profile" => null,
                         "echelon_id" => null,
-                        "echelon_name" => $position->echelon_name,
+                        "echelon_name" => $position->type == 1 ? '-' : $position->echelon_name,
                         "grade_name" => null,
                         "employee_id_number" => null,
                         "employee_registration_number" => null,
@@ -346,6 +347,9 @@ class DiagramController extends Controller
      */
     public function export()
     {
+        ini_set('memory_limit', '-1');
+        set_time_limit(300);
+
         $hierarchies = $this->getHierarchy(null, 1);
 
         $html = '<ul><li class="li-last">
@@ -371,7 +375,7 @@ class DiagramController extends Controller
         $pdf->set_option('fontDir', $tmp);
         $pdf->set_option('fontCache', $tmp);
         $pdf->set_option('tempDir', $tmp);
-        return $pdf->download('diagram.pdf');
+        return $pdf->download('peta-jabatan.pdf');
     }
 
     private function getHierarchy($parentId = null, $positionType = null)
@@ -472,23 +476,20 @@ class DiagramController extends Controller
                     })->values();
 
                     if ($sub->count() > 1) {
-                        if ($sub->count() > 18 && $echelon != $hierarchy->echelon_name) {
-                            $sub = collect($hierarchies)->filter(function ($item) use ($hierarchy, $echelon) {
-                                $positionStatus = $item->name == $hierarchy->name;
-                                $echelonStatus = true;
+                        if ($sub->count() > 18) {
+                            $echelons = $sub->groupBy('echelon_name')->values();
+                            foreach ($echelons as $key => $echelon) {
+                                $wrapped = $echelon->count() > 18; //max child/node in 1 row is 18 items
 
-                                if (isset($hierarchy->echelon_name)) {
-                                    $echelonStatus = $item->echelon_name == $hierarchy->echelon_name;
-                                }
+                                $html .= '</ul>';
+                                $html .= $this->generateHtml($echelon, $parent, $wrapped, true);
+                            }
+                        } else {
+                            $wrapped = $sub->count() > 18; //max child/node in 1 row is 18 items
 
-                                $echelon = $hierarchy->echelon_name;
-                                return $positionStatus === true && $echelonStatus === true;
-                            })->values();
+                            $html .= '</ul>';
+                            $html .= $this->generateHtml($sub, $parent, $wrapped, true);
                         }
-                        $wrapped = $sub->count() > 18; //max child/node in 1 row is 18 items
-
-                        $html .= '</ul>';
-                        $html .= $this->generateHtml($sub, $parent, $wrapped, true);
                     }
 
                     $position = $hierarchy->name;
