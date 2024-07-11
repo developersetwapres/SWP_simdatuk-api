@@ -21,7 +21,7 @@ class TrainingRepository
             'th.period_year',
             'th.name',
             'th.level',
-            'th.start_date',
+            DB::raw("DATE_FORMAT(th.start_date, '%d-%m-%Y') as start_date"),
             'th.duration',
             'th.organizer',
             'th.reference_number',

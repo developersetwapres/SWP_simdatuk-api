@@ -27,7 +27,7 @@ class PositionRepository
             'g.name as group_name',
             'phu.echelon',
             'phu.position_status',
-            'phu.effective_date',
+            DB::raw("DATE_FORMAT(phu.effective_date, '%d-%m-%Y') as effective_date"),
             'phu.decree',
             'phu.decree_document',
             'phu.decree_number',
@@ -35,11 +35,11 @@ class PositionRepository
             'tod.name as type_decree_name',
             'totd.id as type_termination_decree_id',
             'totd.name as type_termination_decree_name',
-            'phu.decree_date',
-            'phu.termination_date',
+            DB::raw("DATE_FORMAT(phu.decree_date, '%d-%m-%Y') as decree_date"),
+            DB::raw("DATE_FORMAT(phu.termination_date, '%d-%m-%Y') as termination_date"),
             'phu.termination_decree',
             'phu.termination_decree_number',
-            'phu.termination_decree_date',
+            DB::raw("DATE_FORMAT(phu.termination_decree_date, '%d-%m-%Y') as termination_decree_date"),
             'phu.status'
         );
         $positions->orderBy('phu.effective_date', 'desc');

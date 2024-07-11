@@ -54,7 +54,7 @@ class EmployeeRepository
             'u.karisu_number',
             'u.id_tax',
             'u.employment_status',
-            'u.quit_date',
+            DB::raw("DATE_FORMAT(u.quit_date, '%d-%m-%Y') as quit_date"),
             'u.id_number',
             'u.family_registration_number',
             'u.residence_id',

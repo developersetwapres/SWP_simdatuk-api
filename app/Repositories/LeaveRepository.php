@@ -15,8 +15,8 @@ class LeaveRepository
         $leaves->where('user_id', $userId);
         $leaves->select(
             'id',
-            'start_date',
-            'end_date',
+            DB::raw("DATE_FORMAT(start_date, '%d-%m-%Y') as start_date"),
+            DB::raw("DATE_FORMAT(end_date, '%d-%m-%Y') as end_date"),
             'type',
             'number',
             'description',

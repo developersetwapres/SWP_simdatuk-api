@@ -17,7 +17,7 @@ class FamilyRepository
             'id_number',
             'gender',
             'religion',
-            'date_of_birth',
+            DB::raw("DATE_FORMAT(date_of_birth, '%d-%m-%Y') as date_of_birth"),
             'place_of_birth',
             'name_of_father',
             'name_of_mother',
