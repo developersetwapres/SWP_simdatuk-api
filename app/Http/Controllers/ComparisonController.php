@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 class ComparisonController extends Controller
 {
     protected $comparisonRepository;
+    protected $request;
+    protected $posted;
 
     public function __construct(
         Request $request,

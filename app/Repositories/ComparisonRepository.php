@@ -32,20 +32,17 @@ class ComparisonRepository
             ->select(
                 "u.id",
                 "u.photo_profile",
-                DB::raw("
-                    CASE
-                        WHEN u.title_prefix IS NULL && u.title_suffix IS NULL THEN u.name
-                        WHEN u.title_prefix IS NOT NULL && u.title_suffix IS NULL THEN CONCAT(u.title_prefix, ' ', u.name)
-                        WHEN u.title_prefix IS NULL && u.title_suffix IS NOT NULL THEN CONCAT(u.name, ' ', u.title_suffix)
-                        ELSE CONCAT(u.title_prefix, ' ',u.name, ' ',u.title_suffix)
-                    END AS name
-                "),
-                'u.employee_id_number',
-                'u.employee_registration_number',
-                'p.name as position_name',
-                'e.name as echelon_name',
+                "u.name",
+                "u.title_prefix",
+                "u.title_suffix",
+                "u.employee_id_number",
+                "u.employee_registration_number",
+                "p.name as position_name",
+                "e.name as echelon_name",
                 DB::raw("DATE_FORMAT(u.echelon_effective_date, '%d-%m-%Y') as echelon_effective_date"),
-                DB::raw("CONCAT(g.name, ' ', g.code) as grade_name"),
+                "g.name as grade_name",
+                "g.code as grade_code",
+                "u.type",
                 DB::raw("DATE_FORMAT(u.grade_effective_date, '%d-%m-%Y') as grade_effective_date"),
             );
 

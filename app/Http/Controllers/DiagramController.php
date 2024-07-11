@@ -293,7 +293,9 @@ class DiagramController extends Controller
                 'users.photo_profile',
                 'positions.name as position_name',
                 'echelons.name as echelon_name',
+                'users.echelon_effective_date',
                 'grades.name as grade_name',
+                'users.grade_effective_date',
                 'grades.code as grade_code',
             )
             ->leftJoin('positions', 'positions.id', '=', 'users.position_id')
