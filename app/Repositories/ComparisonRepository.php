@@ -42,8 +42,8 @@ class ComparisonRepository
                 DB::raw("DATE_FORMAT(u.echelon_effective_date, '%d-%m-%Y') as echelon_effective_date"),
                 "g.name as grade_name",
                 "g.code as grade_code",
-                "u.type",
                 DB::raw("DATE_FORMAT(u.grade_effective_date, '%d-%m-%Y') as grade_effective_date"),
+                "u.type",
             );
 
         if (isset($search)) {
