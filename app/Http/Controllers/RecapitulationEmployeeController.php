@@ -36,7 +36,7 @@ class RecapitulationEmployeeController extends Controller
      */
     public function index()
     {
-        if ($this->request->page == 'recapitulations') {
+        if ($this->request->page == 'recapitulation') {
             if ($this->request->category_id == 1) {
                 if ($this->request->section_id == 1) {
                     $data = $this->getUsers(1, 'echelon', $this->request->card_id);
@@ -118,20 +118,17 @@ class RecapitulationEmployeeController extends Controller
             'u.id',
             'p.name as position_name',
             'u.photo_profile',
-            DB::raw("
-                CASE
-                    WHEN u.title_prefix IS NULL && u.title_suffix IS NULL THEN u.name
-                    WHEN u.title_prefix IS NOT NULL && u.title_suffix IS NULL THEN CONCAT(u.title_prefix, ' ', u.name)
-                    WHEN u.title_prefix IS NULL && u.title_suffix IS NOT NULL THEN CONCAT(u.name, ' ', u.title_suffix)
-                    ELSE CONCAT(u.title_prefix, ' ',u.name, ' ',u.title_suffix)
-                END AS name
-            "),
+            'u.name',
+            'u.title_prefix',
+            'u.title_suffix',
             'e.name as echelon_name',
-            'u.echelon_effective_date',
-            DB::raw("CONCAT(g.name, ' ', g.code) as grade_name"),
-            'u.grade_effective_date',
+            DB::raw("DATE_FORMAT(u.echelon_effective_date, '%d-%m-%Y') as echelon_effective_date"),
+            'g.name as grade_name',
+            'g.code as grade_code',
+            DB::raw("DATE_FORMAT(u.grade_effective_date, '%d-%m-%Y') as grade_effective_date"),
             'u.employee_id_number',
-            'u.employee_registration_number'
+            'u.employee_registration_number',
+            'u.type'
         );
         $users->where('u.type', $type);
         if ($filter == 'position') {
@@ -201,18 +198,17 @@ class RecapitulationEmployeeController extends Controller
                 u.id,
                 p.name as position_name,
                 u.photo_profile,
-                CASE
-                    WHEN u.title_prefix IS NULL && u.title_suffix IS NULL THEN u.name
-                    WHEN u.title_prefix IS NOT NULL && u.title_suffix IS NULL THEN CONCAT(u.title_prefix, ' ', u.name)
-                    WHEN u.title_prefix IS NULL && u.title_suffix IS NOT NULL THEN CONCAT(u.name, ' ', u.title_suffix)
-                    ELSE CONCAT(u.title_prefix, ' ',u.name, ' ',u.title_suffix)
-                END AS name,
+                u.name,
+                u.title_prefix,
+                u.title_suffix,
                 e.name as echelon_name,
-                u.echelon_effective_date,
-                CONCAT(g.name, ' ', g.code) as grade_name,
-                u.grade_effective_date,
+                DATE_FORMAT(u.echelon_effective_date, '%d-%m-%Y') as echelon_effective_date,
+                g.name as grade_name,
+                g.code as grade_code,
+                DATE_FORMAT(u.grade_effective_date, '%d-%m-%Y') as grade_effective_date,
                 u.employee_id_number,
-                u.employee_registration_number
+                u.employee_registration_number,
+                u.type
             FROM
                 hierarchy
             JOIN users u ON hierarchy.id=u.position_id
@@ -241,20 +237,17 @@ class RecapitulationEmployeeController extends Controller
             'u.id',
             'p.name as position_name',
             'u.photo_profile',
-            DB::raw("
-              CASE
-                  WHEN u.title_prefix IS NULL && u.title_suffix IS NULL THEN u.name
-                  WHEN u.title_prefix IS NOT NULL && u.title_suffix IS NULL THEN CONCAT(u.title_prefix, ' ', u.name)
-                  WHEN u.title_prefix IS NULL && u.title_suffix IS NOT NULL THEN CONCAT(u.name, ' ', u.title_suffix)
-                  ELSE CONCAT(u.title_prefix, ' ',u.name, ' ',u.title_suffix)
-              END AS name
-          "),
+            'u.name',
+            'u.title_prefix',
+            'u.title_suffix',
             'e.name as echelon_name',
-            'u.echelon_effective_date',
-            DB::raw("CONCAT(g.name, ' ', g.code) as grade_name"),
-            'u.grade_effective_date',
+            DB::raw("DATE_FORMAT(u.echelon_effective_date, '%d-%m-%Y') as echelon_effective_date"),
+            'g.name as grade_name',
+            'g.code as grade_code',
+            DB::raw("DATE_FORMAT(u.grade_effective_date, '%d-%m-%Y') as grade_effective_date"),
             'u.employee_id_number',
-            'u.employee_registration_number'
+            'u.employee_registration_number',
+            'u.type'
         );
         $users->where('u.type', 1);
         $users->where('u.echelon_id', 9);
@@ -312,18 +305,17 @@ class RecapitulationEmployeeController extends Controller
                 u.id,
                 p.name as position_name,
                 u.photo_profile,
-                CASE
-                    WHEN u.title_prefix IS NULL && u.title_suffix IS NULL THEN u.name
-                    WHEN u.title_prefix IS NOT NULL && u.title_suffix IS NULL THEN CONCAT(u.title_prefix, ' ', u.name)
-                    WHEN u.title_prefix IS NULL && u.title_suffix IS NOT NULL THEN CONCAT(u.name, ' ', u.title_suffix)
-                    ELSE CONCAT(u.title_prefix, ' ',u.name, ' ',u.title_suffix)
-                END AS name,
+                u.name,
+                u.title_prefix,
+                u.title_suffix,
                 e.name as echelon_name,
-                u.echelon_effective_date,
-                CONCAT(g.name, ' ', g.code) as grade_name,
-                u.grade_effective_date,
+                DATE_FORMAT(u.echelon_effective_date, '%d-%m-%Y') as echelon_effective_date,
+                g.name as grade_name,
+                g.code as grade_code,
+                DATE_FORMAT(u.grade_effective_date, '%d-%m-%Y') as grade_effective_date,
                 u.employee_id_number,
-                u.employee_registration_number
+                u.employee_registration_number,
+                u.type
             FROM
               hierarchy
             JOIN users u ON hierarchy.id=u.position_id
@@ -356,20 +348,17 @@ class RecapitulationEmployeeController extends Controller
             'u.id',
             'p.name as position_name',
             'u.photo_profile',
-            DB::raw("
-                CASE
-                    WHEN u.title_prefix IS NULL && u.title_suffix IS NULL THEN u.name
-                    WHEN u.title_prefix IS NOT NULL && u.title_suffix IS NULL THEN CONCAT(u.title_prefix, ' ', u.name)
-                    WHEN u.title_prefix IS NULL && u.title_suffix IS NOT NULL THEN CONCAT(u.name, ' ', u.title_suffix)
-                    ELSE CONCAT(u.title_prefix, ' ',u.name, ' ',u.title_suffix)
-                END AS name
-            "),
+            'u.name',
+            'u.title_prefix',
+            'u.title_suffix',
             'e.name as echelon_name',
-            'u.echelon_effective_date',
-            DB::raw("CONCAT(g.name, ' ', g.code) as grade_name"),
-            'u.grade_effective_date',
+            DB::raw("DATE_FORMAT(u.echelon_effective_date, '%d-%m-%Y') as echelon_effective_date"),
+            'g.name as grade_name',
+            'g.code as grade_code',
+            DB::raw("DATE_FORMAT(u.grade_effective_date, '%d-%m-%Y') as grade_effective_date"),
             'u.employee_id_number',
-            'u.employee_registration_number'
+            'u.employee_registration_number',
+            'u.type'
         );
         $users->where('u.type', 1);
         $users->where('u.employment_status', [1, 6]);
