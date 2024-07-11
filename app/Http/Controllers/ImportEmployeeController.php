@@ -239,10 +239,11 @@ class ImportEmployeeController extends Controller
         'disciplinary' => 6, // Jenis Hukuman
         'decree_number' => 7, // No. SK Hukuman Disiplin
         'date_of_decree' => 8, // Tanggal SK Hukuman Disiplin
-        'start_date' => 9, // Tanggal Hukuman Disiplin
-        'authorizing_officer' => 10, // Pejabat Berwenang
-        'name_of_authorizing_officer' => 11, // Nama Pejabat Berwenang
-        'description' => 12, // Uraian
+        'start_date' => 9, // Tanggal Awal Hukuman Disiplin
+        'start_date' => 10, // Tanggal Akhir Hukuman Disiplin
+        'authorizing_officer' => 11, // Pejabat Berwenang
+        'name_of_authorizing_officer' => 12, // Nama Pejabat Berwenang
+        'description' => 13, // Uraian
 
     ];
 
@@ -1252,6 +1253,8 @@ class ImportEmployeeController extends Controller
             $monthID = $this->findInArray($positionRow[$this->positionInfoPos['period_month']], $this->month, 'Riwayat Jabatan', $positionKey, $positionInfo[0][$this->positionInfoPos['period_month']]);
             $positionEchelon = $this->findInArray($positionRow[$this->positionInfoPos['echelon']], $this->positionEchelon, 'Riwayat Jabatan', $positionKey, $positionInfo[0][$this->positionInfoPos['echelon']]);
             $positionStatusID = $this->findInArray($positionRow[$this->positionInfoPos['position_status']], $this->positionStatus, 'Riwayat Jabatan', $positionKey, $positionInfo[0][$this->positionInfoPos['position_status']]);
+            $decreeID = $this->findInArray($positionRow[$this->positionInfoPos['type_of_decree']], $this->decrees, 'Riwayat Jabatan', $positionKey, $positionInfo[0][$this->positionInfoPos['type_of_decree']]);
+            $terminationDecreeID = $this->findInArray($positionRow[$this->positionInfoPos['type_of_termination_decree']], $this->decrees, 'Riwayat Jabatan', $positionKey, $positionInfo[0][$this->positionInfoPos['type_of_termination_decree']]);
 
             $effectiveDate = Carbon::createFromFormat('d/m/Y', $positionRow[$this->positionInfoPos['effective_date']])->format('Y-m-d');
             $decreeDate = Carbon::createFromFormat('d/m/Y', $positionRow[$this->positionInfoPos['decree_date']])->format('Y-m-d');
@@ -1268,12 +1271,12 @@ class ImportEmployeeController extends Controller
                 'position_status' => $positionStatusID,
                 'effective_date' => $effectiveDate,
                 'decree' => $positionRow[$this->positionInfoPos['decree']],
-                'type_of_decree' => $positionRow[$this->positionInfoPos['type_of_decree']],
+                'type_of_decree' => $decreeID,
                 'decree_number' => $positionRow[$this->positionInfoPos['decree_number']],
                 'decree_date' => $decreeDate,
                 'termination_date' => $terminationDate,
                 'termination_decree' => $positionRow[$this->positionInfoPos['termination_decree']],
-                'type_of_termination_decree' => $positionRow[$this->positionInfoPos['type_of_termination_decree']],
+                'type_of_termination_decree' => $terminationDecreeID,
                 'termination_decree_number' => $positionRow[$this->positionInfoPos['termination_decree_number']],
                 'termination_decree_date' => $terminationDecreeDate,
             ];
@@ -1597,6 +1600,7 @@ class ImportEmployeeController extends Controller
                 'nik',
                 'disciplinary',
                 'start_date',
+                'end_date',
             ];
 
             $requiredFieldFilled = true;
@@ -1617,6 +1621,7 @@ class ImportEmployeeController extends Controller
 
             $decreeDate = Carbon::createFromFormat('d/m/Y', $disciplinaryRow[$this->disciplinaryInfoPos['date_of_decree']])->format('Y-m-d');
             $startDate = Carbon::createFromFormat('d/m/Y', $disciplinaryRow[$this->disciplinaryInfoPos['start_date']])->format('Y-m-d');
+            $endDate = Carbon::createFromFormat('d/m/Y', $disciplinaryRow[$this->disciplinaryInfoPos['end_date']])->format('Y-m-d');
 
             $personalInfo[$disciplinaryRow[$this->disciplinaryInfoPos['nik']]]['disciplinary'][] = [
                 'name' => $disciplinaryRow[$this->disciplinaryInfoPos['name']],
@@ -1628,7 +1633,7 @@ class ImportEmployeeController extends Controller
                 'decree_number' => $disciplinaryRow[$this->disciplinaryInfoPos['decree_number']],
                 'date_of_decree' => $decreeDate,
                 'start_date' => $startDate,
-                // 'end_date' => $disciplinaryRow[$this->disciplinaryInfoPos['']],
+                'end_date' => $endDate,
                 'authorizing_officer' => $disciplinaryRow[$this->disciplinaryInfoPos['authorizing_officer']],
                 'name_of_authorizing_officer' => $disciplinaryRow[$this->disciplinaryInfoPos['name_of_authorizing_officer']],
                 'description' => $disciplinaryRow[$this->disciplinaryInfoPos['description']],
