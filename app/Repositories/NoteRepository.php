@@ -15,7 +15,7 @@ class NoteRepository
                 'un.id',
                 'un.description',
                 'u.name as giver_name',
-                'un.created_at',
+                DB::raw("DATE_FORMAT(un.created_at, '%d-%m-%Y') as created_at"),
             )
             ->orderBy('un.created_at', 'desc');
         return $notes = $notes->get();

@@ -15,7 +15,7 @@ class AssessmentRepository
         $assessements->where('user_id', $userId);
         $assessements->select(
             'id',
-            'event_date',
+            DB::raw("DATE_FORMAT(event_date, '%d-%m-%Y') as event_date"),
             'point',
             'organizer',
             'assessment_document'

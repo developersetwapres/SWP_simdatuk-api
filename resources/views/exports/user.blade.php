@@ -124,6 +124,11 @@
             padding-left: 4px;
             word-wrap: break-word;
         }
+
+        a {
+            color: blue !important;
+            text-decoration: underline;
+        }
     </style>
 </head>
 
@@ -223,79 +228,78 @@
             <tr style="border-bottom: 1px solid #F0F0F0;">
                 <td class="table-section-3-body">{{ $indexCollege++ }}</td>
                 <td class="table-section-3-body">
-                    @switch($value['grade'])
-                        @case(1)
-                            SD/Sederajat
-                            @break
-                        @case(2)
-                            SLTP/Sederajat
-                            @break
-                        @case(3)
-                            SLTA/Sederajat
-                            @break
-                        @case(4)
-                            Diploma I/II
-                            @break
-                        @case(5)
-                            Akademik/D3/S.Muda
-                            @break
-                        @case(6)
-                            Diploma IV/Strata I
-                            @break
-                        @case(7)
-                            Strata II
-                            @break
-                        @case(8)
-                            Strata III
-                            @break
-                        @default
-                            -
+                    @switch($value->level)
+                    @case(1)
+                    SD/Sederajat
+                    @break
+                    @case(2)
+                    SLTP/Sederajat
+                    @break
+                    @case(3)
+                    SLTA/Sederajat
+                    @break
+                    @case(4)
+                    Diploma I/II
+                    @break
+                    @case(5)
+                    Akademik/D3/S.Muda
+                    @break
+                    @case(6)
+                    Diploma IV/Strata I
+                    @break
+                    @case(7)
+                    Strata II
+                    @break
+                    @case(8)
+                    Strata III
+                    @break
+                    @default
+                    -
                     @endswitch</td>
-                <td class="table-section-3-body">{{ $value['school_name'] }}</td>
-                <td class="table-section-3-body">{{ $value['faculty'] }}</td>
-                <td class="table-section-3-body">{{ $value['major'] }}</td>
+                <td class="table-section-3-body">{{ $value->name }}</td>
+                <td class="table-section-3-body">{{ $value->faculty }}</td>
+                <td class="table-section-3-body">{{ $value->major }}</td>
                 <td class="table-section-3-body">
-                    @switch($value['status'])
-                        @case(1)
-                            Lulus
-                            @break
-                        @case(2)
-                            DO
-                            @break
-                        @case(3)
-                            Aktif
-                            @break
-                        @case(4)
-                            Non-Aktif
-                            @break
-                        @case(5)
-                            Mengundurkan diri
-                            @break
-                        @default
-                            -
+                    @switch($value->status)
+                    @case(1)
+                    Lulus
+                    @break
+                    @case(2)
+                    DO
+                    @break
+                    @case(3)
+                    Aktif
+                    @break
+                    @case(4)
+                    Non-Aktif
+                    @break
+                    @case(5)
+                    Mengundurkan diri
+                    @break
+                    @default
+                    -
                     @endswitch</td>
-                <td class="table-section-3-body">{{ $value['year_graduate'] }}</td>
-                <td class="table-section-3-body">{{ $value['desc'] }}</td>
+                <td class="table-section-3-body">{{ $value->year_of_graduation }}</td>
+                <td class="table-section-3-body">{{ $value->description }}</td>
             </tr>
             @endforeach
         </tbody>
     </table>
 
     <div class="title-profile">Riwayat Jabatan</div>
-
     <table class="table-section-3">
         <thead class="table-section-3-title-row">
             <td class="table-section-3-title">No</td>
             <td class="table-section-3-title">Jabatan</td>
             <td class="table-section-3-title">Rumpun</td>
+            <td class="table-section-3-title">Jenjang Jabatan</td>
+            <td class="table-section-3-title">Keterangan Jabatan</td>
             <td class="table-section-3-title">TMT Menjabat</td>
             <td class="table-section-3-title">SK Menjabat</td>
             <td class="table-section-3-title">SK Jabatan</td>
             <td class="table-section-3-title">Jenis SK Jabatan</td>
             <td class="table-section-3-title">No SK Jabatan</td>
             <td class="table-section-3-title">Tanggal SK Jabatan</td>
-            <td class="table-section-3-title">Keterangan Eselon</td>
-            <td class="table-section-3-title">Keterangan Jabatan</td>
             <td class="table-section-3-title">TMT Selesai</td>
             <td class="table-section-3-title">SK Selesai</td>
             <td class="table-section-3-title">Jenis SK Selesai</td>
@@ -309,38 +313,38 @@
             @foreach($userPosition as $value)
             <tr style="border-bottom: 1px solid #F0F0F0;">
                 <td class="table-section-3-body">{{ $indexPosition++ }}</td>
-                <td class="table-section-3-body">{{ $value['position'] }}</td>
-                <td class="table-section-3-body">{{ $value['group'] }}</td>
-                <td class="table-section-3-body">{{ $value['effective_date'] }}</td>
-                <td class="table-section-3-body">{{ $value['decree'] }}</td>
-                <td class="table-section-3-body"><a href="{{ $value['decree_document'] }}"></a></td>
-                <td class="table-section-3-body">{{ $value['decree_name'] }}</td>
-                <td class="table-section-3-body">{{ $value['decree_number'] }}</td>
-                <td class="table-section-3-body">{{ $value['decree_date'] }}</td>
-                <td class="table-section-3-body">{{ $value['echelons_name'] }}</td>
+                <td class="table-section-3-body">{{ $value->position }}</td>
+                <td class="table-section-3-body">{{ $value->group_name }}</td>
+                <td class="table-section-3-body">{{ $value->echelon_name }}</td>
                 <td class="table-section-3-body">
-                    @switch($value['position_status'])
-                        @case(1)
-                            Promosi
-                            @break
-                        @case(2)
-                            Mutasi
-                            @break
-                        @case(3)
-                            Impassing
-                            @break
-                        @case(4)
-                            Konversi
-                            @break
-                        @default
-                            -
+                    @switch($value->position_status)
+                    @case(1)
+                    Promosi
+                    @break
+                    @case(2)
+                    Mutasi
+                    @break
+                    @case(3)
+                    Impassing
+                    @break
+                    @case(4)
+                    Konversi
+                    @break
+                    @default
+                    -
                     @endswitch</td>
-                <td class="table-section-3-body">{{ $value['termination_date'] }}</td>
-                <td class="table-section-3-body">{{ $value['termination_decree'] }}</td>
-                <td class="table-section-3-body">{{ $value['termination_name'] }}</td>
-                <td class="table-section-3-body">{{ $value['termination_decree_number'] }}</td>
-                <td class="table-section-3-body">{{ $value['termination_decree_date'] }}</td>
-                <td class="table-section-3-body">{{ $value['status'] === 1 ? 'Aktif' : 'Tidak Aktif' }}</td>
+                <td class="table-section-3-body">{{ $value->effective_date }}</td>
+                <td class="table-section-3-body">{{ $value->decree }}</td>
+                <td class="table-section-3-body"><a href="{{ $value->decree_document }}">Lihat File</a></td>
+                <td class="table-section-3-body">{{ $value->type_decree_name }}</td>
+                <td class="table-section-3-body">{{ $value->decree_number }}</td>
+                <td class="table-section-3-body">{{ $value->decree_date }}</td>
+                <td class="table-section-3-body">{{ $value->termination_date }}</td>
+                <td class="table-section-3-body">{{ $value->termination_decree }}</td>
+                <td class="table-section-3-body">{{ $value->type_termination_decree_name }}</td>
+                <td class="table-section-3-body">{{ $value->termination_decree_number }}</td>
+                <td class="table-section-3-body">{{ $value->termination_decree_date }}</td>
+                <td class="table-section-3-body">{{ $value->status === 1 ? 'Aktif' : 'Tidak Aktif' }}</td>
             </tr>
             @endforeach
         </tbody>
@@ -367,21 +371,21 @@
             @foreach($userGrade as $value)
             <tr style="border-bottom: 1px solid #F0F0F0;">
                 <td class="table-section-3-body">{{ $indexGrade++ }}</td>
-                <td class="table-section-3-body">{{ $value['name'] }} ({{ $value['code'] }})</td>
-                <td class="table-section-3-body">{{ $value['effective_date'] }}</td>
-                <td class="table-section-3-body">{{ $value['decree_name'] }}</td>
-                <td class="table-section-3-body">{{ $value['decree_document'] }}</td>
-                <td class="table-section-3-body">{{ $value['type'] }}</td>
-                <td class="table-section-3-body">{{ $value['decree_number'] }}</td>
-                <td class="table-section-3-body">{{ $value['decree_date'] }}</td>
-                <td class="table-section-3-body">{{ $value['description'] }}</td>
-                <td class="table-section-3-body">{{ $value['status'] === 1 ? 'Aktif' : 'Tidak Aktif' }}</td>
+                <td class="table-section-3-body">{{ $value->grade_name }} ({{ $value->grade_code }})</td>
+                <td class="table-section-3-body">{{ $value->effective_date }}</td>
+                <td class="table-section-3-body">{{ $value->decree_name }}</td>
+                <td class="table-section-3-body"><a href="{{ $value->decree_document }}">Lihat File</a></td>
+                <td class="table-section-3-body">{{ $value->type_of_decree_name }}</td>
+                <td class="table-section-3-body">{{ $value->decree_number }}</td>
+                <td class="table-section-3-body">{{ $value->decree_date }}</td>
+                <td class="table-section-3-body">{{ $value->description }}</td>
+                <td class="table-section-3-body">{{ $value->status === 1 ? 'Aktif' : 'Tidak Aktif' }}</td>
             </tr>
             @endforeach
         </tbody>
     </table>
 
-    <div class="title-profile">Riwayat Pelatihan Truktural</div>
+    <div class="title-profile">Riwayat Pelatihan Struktural</div>
 
     <table class="table-section-3">
         <thead class="table-section-3-title-row">
@@ -400,13 +404,13 @@
             @foreach($userTrainingStructural as $value)
             <tr style="border-bottom: 1px solid #F0F0F0;">
                 <td class="table-section-3-body">{{ $indexTrainingStructural++ }}</td>
-                <td class="table-section-3-body">{{ $value['name'] }}</td>
-                <td class="table-section-3-body">{{ $value['certificate'] }}</td>
-                <td class="table-section-3-body">{{ $value['level'] }}</td>
-                <td class="table-section-3-body">{{ $value['start_date'] }}</td>
-                <td class="table-section-3-body">{{ $value['duration'] }}</td>
-                <td class="table-section-3-body">{{ $value['organizer'] }}</td>
-                <td class="table-section-3-body"><a href="{{ $value['link'] }}">Lihat File</a></td>
+                <td class="table-section-3-body">{{ $value->name }}</td>
+                <td class="table-section-3-body">{{ $value->reference_number }}</td>
+                <td class="table-section-3-body">{{ $value->level }}</td>
+                <td class="table-section-3-body">{{ $value->start_date }}</td>
+                <td class="table-section-3-body">{{ $value->duration }}</td>
+                <td class="table-section-3-body">{{ $value->organizer }}</td>
+                <td class="table-section-3-body"><a href="{{ $value->link }}">Lihat File</a></td>
             </tr>
             @endforeach
         </tbody>
@@ -431,13 +435,13 @@
             @foreach($userTrainingFunctional as $value)
             <tr style="border-bottom: 1px solid #F0F0F0;">
                 <td class="table-section-3-body">{{ $indexTrainingFunctional++ }}</td>
-                <td class="table-section-3-body">{{ $value['name'] }}</td>
-                <td class="table-section-3-body">{{ $value['certificate'] }}</td>
-                <td class="table-section-3-body">{{ $value['level'] }}</td>
-                <td class="table-section-3-body">{{ $value['start_date'] }}</td>
-                <td class="table-section-3-body">{{ $value['duration'] }}</td>
-                <td class="table-section-3-body">{{ $value['organizer'] }}</td>
-                <td class="table-section-3-body"><a href="{{ $value['link'] }}">Lihat File</a></td>
+                <td class="table-section-3-body">{{ $value->name }}</td>
+                <td class="table-section-3-body">{{ $value->reference_number }}</td>
+                <td class="table-section-3-body">{{ $value->level }}</td>
+                <td class="table-section-3-body">{{ $value->start_date }}</td>
+                <td class="table-section-3-body">{{ $value->duration }}</td>
+                <td class="table-section-3-body">{{ $value->organizer }}</td>
+                <td class="table-section-3-body"><a href="{{ $value->link }}">Lihat File</a></td>
             </tr>
             @endforeach
         </tbody>
@@ -460,11 +464,11 @@
             @foreach($userTrainingTechnical as $value)
             <tr style="border-bottom: 1px solid #F0F0F0;">
                 <td class="table-section-3-body">{{ $indexTrainingTechnical++ }}</td>
-                <td class="table-section-3-body">{{ $value['name'] }}</td>
-                <td class="table-section-3-body">{{ $value['certificate'] }}</td>
-                <td class="table-section-3-body">{{ $value['start_date'] }}</td>
-                <td class="table-section-3-body">{{ $value['duration'] }}</td>
-                <td class="table-section-3-body"><a href="{{ $value['link'] }}">Lihat File</a></td>
+                <td class="table-section-3-body">{{ $value->name }}</td>
+                <td class="table-section-3-body">{{ $value->reference_number }}</td>
+                <td class="table-section-3-body">{{ $value->start_date }}</td>
+                <td class="table-section-3-body">{{ $value->duration }}</td>
+                <td class="table-section-3-body"><a href="{{ $value->link }}">Lihat File</a></td>
             </tr>
             @endforeach
         </tbody>
@@ -490,14 +494,14 @@
             @foreach($userAward as $value)
             <tr style="border-bottom: 1px solid #F0F0F0;">
                 <td class="table-section-3-body">{{ $indexAward++ }}</td>
-                <td class="table-section-3-body">{{ $value['decree_name'] }}</td>
-                <td class="table-section-3-body">{{ $value['desc'] }}</td>
-                <td class="table-section-3-body">{{ $value['decree'] }}</td>
-                <td class="table-section-3-body">{{ $value['decree_date'] }}</td>
-                <td class="table-section-3-body">{{ $value['decree_number'] }}</td>
-                <td class="table-section-3-body">{{ $value['decree_year'] }}</td>
-                <td class="table-section-3-body">{{ $value['awarding_institution'] }}</td>
-                <td class="table-section-3-body">{{ $value['receipt_date'] }}</td>
+                <td class="table-section-3-body">{{ $value->recognition_name }}</td>
+                <td class="table-section-3-body">{{ $value->description }}</td>
+                <td class="table-section-3-body">{{ $value->type_of_decree_name }}</td>
+                <td class="table-section-3-body">{{ $value->decree_date }}</td>
+                <td class="table-section-3-body">{{ $value->decree_number }}</td>
+                <td class="table-section-3-body">{{ $value->decree_year }}</td>
+                <td class="table-section-3-body">{{ $value->awarding_institution }}</td>
+                <td class="table-section-3-body">{{ $value->date_of_receipt }}</td>
             </tr>
             @endforeach
         </tbody>
@@ -508,11 +512,11 @@
     <table class="table-section-3">
         <thead class="table-section-3-title-row">
             <td class="table-section-3-title">No</td>
-            <td class="table-section-3-title">Nilai SKP</td>
-            <td class="table-section-3-title">Nilai Perilaku</td>
-            <td class="table-section-3-title">Nilai Prestasi</td>
-            <td class="table-section-3-title">Periode</td>
+            <td class="table-section-3-title">Periode Penilaian</td>
             <td class="table-section-3-title">Tahun</td>
+            <td class="table-section-3-title">Rating Perilaku Kerja</td>
+            <td class="table-section-3-title">Predikat Kinerja Pegawai</td>
+            <td class="table-section-3-title">Capaian Kinerja Organisasi</td>
         </thead>
 
         <tbody>
@@ -520,56 +524,57 @@
             @foreach($userSKP as $value)
             <tr style="border-bottom: 1px solid #F0F0F0;">
                 <td class="table-section-3-body">{{ $indexSKP++ }}</td>
+                <td class="table-section-3-body">{{ $value->appraisal_period }}</td>
+                <td class="table-section-3-body">{{ $value->year }}</td>
                 <td class="table-section-3-body">
-                    @switch($value['work_behavior_rating'])
-                        @case(1)
-                            Diatas Ekspektasi
-                            @break
-                        @case(2)
-                            Sesuai Ekspektasi
-                            @break
-                        @case(3)
-                            Dibawah Ekspektasi
-                            @break
-                        @default
-                            -
+                    @switch($value->work_behavior_rating)
+                    @case(1)
+                    Diatas Ekspektasi
+                    @break
+                    @case(2)
+                    Sesuai Ekspektasi
+                    @break
+                    @case(3)
+                    Dibawah Ekspektasi
+                    @break
+                    @default
+                    -
                     @endswitch</td>
                 <td class="table-section-3-body">
-                    @switch($value['employee_performance_predicate'])
-                        @case(1)
-                            Sangat Baik
-                            @break
-                        @case(2)
-                            Baik
-                            @break
-                        @case(3)
-                            Butuh Perbaikan
-                            @break
-                        @case(4)
-                            Kurang
-                            @break
-                        @case(5)
-                            Sangat Kurang
-                            @break
-                        @default
-                            -
+                    @switch($value->employee_performance_predicate)
+                    @case(1)
+                    Sangat Baik
+                    @break
+                    @case(2)
+                    Baik
+                    @break
+                    @case(3)
+                    Butuh Perbaikan
+                    @break
+                    @case(4)
+                    Kurang
+                    @break
+                    @case(5)
+                    Sangat Kurang
+                    @break
+                    @default
+                    -
                     @endswitch</td>
                 <td class="table-section-3-body">
-                    @switch($value['organizational_performance_achievement'])
-                        @case(1)
-                            Sangat Baik
-                            @break
-                        @case(2)
-                            Baik
-                            @break
-                        @case(3)
-                            Cukup
-                            @break
-                        @default
-                            -
+                    @switch($value->organizational_performance_achievement)
+                    @case(1)
+                    Sangat Baik
+                    @break
+                    @case(2)
+                    Baik
+                    @break
+                    @case(3)
+                    Cukup
+                    @break
+                    @default
+                    -
                     @endswitch</td>
-                <td class="table-section-3-body">{{ $value['period'] }}</td>
-                <td class="table-section-3-body">{{ $value['target_year'] }}</td>
+
             </tr>
             @endforeach
         </tbody>
@@ -579,61 +584,45 @@
 
     <table class="table-section-3">
         <thead class="table-section-3-title-row">
-        <td class="table-section-3-title">No</td>
-        <td class="table-section-3-title">Jabatan</td>
-        <td class="table-section-3-title">Periode</td>
-        <td class="table-section-3-title">Tahun</td>
-        <td class="table-section-3-title">Bulan</td>
-        <td class="table-section-3-title">Angka Kredit Terakhir</td>
+            <td class="table-section-3-title">No</td>
+            <td class="table-section-3-title">Jabatan</td>
+            <td class="table-section-3-title">Periode</td>
+            <td class="table-section-3-title">Tahun</td>
+            <td class="table-section-3-title">Bulan</td>
+            <td class="table-section-3-title">Angka Kredit Terakhir</td>
         </thead>
 
         <tbody>
-        @php $indexScore=1 @endphp
-        @foreach($userCredit as $value)
+            @php $indexScore=1 @endphp
+            @foreach($userCredit as $value)
             <tr style="border-bottom: 1px solid #F0F0F0;">
                 <td class="table-section-3-body">{{ $indexScore++ }}</td>
-                <td class="table-section-3-body">{{ $value['position'] }}</td>
+                <td class="table-section-3-body">{{ $value->position }}</td>
                 <td class="table-section-3-body">
-                    @switch($value['period'])
-                        @case(1)
-                            Triwulan 1
-                            @break
-                        @case(2)
-                            Triwulan 2
-                            @break
-                        @case(3)
-                            Triwulan 3
-                            @break
-                        @case(4)
-                            Triwulan 4
-                            @break
-                        @case(5)
-                            Tahunan
-                            @break
-                        @default
-                            -
+                    @switch($value->period)
+                    @case(1)
+                    Triwulan 1
+                    @break
+                    @case(2)
+                    Triwulan 2
+                    @break
+                    @case(3)
+                    Triwulan 3
+                    @break
+                    @case(4)
+                    Triwulan 4
+                    @break
+                    @case(5)
+                    Tahunan
+                    @break
+                    @default
+                    -
                     @endswitch</td>
-                <td class="table-section-3-body">{{ $value['year'] }}</td>
-                <td class="table-section-3-body">
-                    @switch($value['period'])
-                        @case(1)
-                            Januari - Maret
-                            @break
-                        @case(2)
-                            April - Juni
-                            @break
-                        @case(3)
-                            Juli - September
-                            @break
-                        @case(4)
-                            Oktober - Desember
-                            @break
-                        @default
-                            -
-                    @endswitch</td>
-                <td class="table-section-3-body">{{ $value['credit_score'] }}</td>
+                <td class="table-section-3-body">{{ $value->year }}</td>
+                <td class="table-section-3-body">{{ $value->start_month_name . ' - '. $value->end_month_name }}</td>
+                <td class="table-section-3-body">{{ $value->score }}</td>
             </tr>
-        @endforeach
+            @endforeach
         </tbody>
     </table>
 
@@ -652,27 +641,27 @@
             @foreach($userPerformance as $value)
             <tr style="border-bottom: 1px solid #F0F0F0;">
                 <td class="table-section-3-body">{{ $indexPerformance++ }}</td>
-                <td class="table-section-3-body">{{ $value['period'] }}</td>
-                <td class="table-section-3-body">{{ $value['score'] }}</td>
+                <td class="table-section-3-body">{{ $value->performance_period }}</td>
+                <td class="table-section-3-body">{{ $value->work_performance_score }}</td>
                 <td class="table-section-3-body">
-                    @switch($value['description'])
-                        @case(1)
-                            Kurang
-                            @break
-                        @case(2)
-                            Sedang
-                            @break
-                        @case(3)
-                            Cukup
-                            @break
-                        @case(4)
-                            Baik
-                            @break
-                        @case(5)
-                            Sangat Baik
-                            @break
-                        @default
-                            -
+                    @switch($value->description)
+                    @case(1)
+                    Kurang
+                    @break
+                    @case(2)
+                    Sedang
+                    @break
+                    @case(3)
+                    Cukup
+                    @break
+                    @case(4)
+                    Baik
+                    @break
+                    @case(5)
+                    Sangat Baik
+                    @break
+                    @default
+                    -
                     @endswitch</td>
             </tr>
             @endforeach
@@ -686,17 +675,18 @@
             <td class="table-section-3-title">No</td>
             <td class="table-section-3-title">Golongan</td>
             <td class="table-section-3-title">Jabatan</td>
-            <td class="table-section-3-title">Hukuman Disiplin</td>
+            <td class="table-section-3-title">Jenis Hukuman</td>
+            <td class="table-section-3-title">Tingkat Hukuman</td>
+            <td class="table-section-3-title">Pemotongan Tunjangan Kinerja (Persentase)</td>
+            <td class="table-section-3-title">Jangka Waktu Pemotongan (Bulan)</td>
             <td class="table-section-3-title">No SK Hukuman Disiplin</td>
             <td class="table-section-3-title">Tanggal SK Hukuman Disiplin</td>
             <td class="table-section-3-title">Tanggal Hukuman Disiplin</td>
             <td class="table-section-3-title">Status</td>
-            <td class="table-section-3-title">Uraian</td>
+            <td class="table-section-3-title">Masa Berlaku</td>
             <td class="table-section-3-title">Pejabat Berwenang</td>
             <td class="table-section-3-title">Nama Pejabat Berwenang</td>
-            <td class="table-section-3-title">Tingkat Hukuman</td>
-            <td class="table-section-3-title">Jenis Hukuman</td>
-            <td class="table-section-3-title">Masa Berlaku</td>
+            <td class="table-section-3-title">Uraian</td>
         </thead>
 
         <tbody>
@@ -704,25 +694,26 @@
             @foreach($userPunishment as $value)
             <tr style="border-bottom: 1px solid #F0F0F0;">
                 <td class="table-section-3-body">{{ $indexPunishment++ }}</td>
-                <td class="table-section-3-body">{{ $value['grade'] }}</td>
-                <td class="table-section-3-body">{{ $value['position'] }}</td>
-                <td class="table-section-3-body">{{ $value['description'] }}</td>
-                <td class="table-section-3-body">{{ $value['decree_number'] }}</td>
-                <td class="table-section-3-body">{{ $value['date_of_decree'] }}</td>
-                <td class="table-section-3-body">{{ $value['start_date'] }} - {{ $value['end_date'] }}</td>
-                <td class="table-section-3-body">-</td>
-                <td class="table-section-3-body">{{ $value['description'] }}</td>
-                <td class="table-section-3-body">{{ $value['authorizing_officer'] }}</td>
-                <td class="table-section-3-body">{{ $value['name_of_authorizing_officer'] }}</td>
-                <td class="table-section-3-body">{{ $value['severity'] }}</td>
-                <td class="table-section-3-body">{{ $value['name'] }}</td>
-                <td class="table-section-3-body">{{ $value['performance_allowance_duration'] }}</td>
+                <td class="table-section-3-body">{{ $value->grade }}</td>
+                <td class="table-section-3-body">{{ $value->position }}</td>
+                <td class="table-section-3-body">{{ $value->disciplinary_name }}</td>
+                <td class="table-section-3-body">{{ $value->disciplinary_description }}</td>
+                <td class="table-section-3-body">{{ $value->performance_allowance_deduction }}</td>
+                <td class="table-section-3-body">{{ $value->performance_allowance_duration }}</td>
+                <td class="table-section-3-body">{{ $value->decree_number }}</td>
+                <td class="table-section-3-body">{{ $value->date_of_decree }}</td>
+                <td class="table-section-3-body">{{ $value->start_date }} - {{ $value->end_date }}</td>
+                <td class="table-section-3-body"> {{ ($value->status) ? 'Aktif': 'Pasif'}}</td>
+                <td class="table-section-3-body">{{ $value->validity_period }} Hari</td>
+                <td class="table-section-3-body">{{ $value->authorizing_officer }}</td>
+                <td class="table-section-3-body">{{ $value->name_of_authorizing_officer }}</td>
+                <td class="table-section-3-body">{{ $value->description }}</td>
             </tr>
             @endforeach
         </tbody>
     </table>
 
-    <div class="title-profile">Riwayat Keluarga</div>
+    <div class="title-profile">Keluarga</div>
 
     <table class="table-section-3">
         <thead class="table-section-3-title-row">
@@ -750,141 +741,141 @@
             @foreach($userFamily as $value)
             <tr style="border-bottom: 1px solid #F0F0F0;">
                 <td class="table-section-3-body">{{ $indexFamily++ }}</td>
-                <td class="table-section-3-body">{{ $value['card_number'] }}</td>
-                <td class="table-section-3-body">{{ $value['name'] }}</td>
-                <td class="table-section-3-body">{{ $value['id_number'] }}</td>
+                <td class="table-section-3-body">{{ $value->card_number }}</td>
+                <td class="table-section-3-body">{{ $value->name }}</td>
+                <td class="table-section-3-body">{{ $value->id_number }}</td>
                 <td class="table-section-3-body">
-                    @switch($value['gender'])
-                        @case(0)
-                            Laki-Laki
-                            @break
-                        @case(1)
-                            Perempuan
-                            @break
-                        @default
-                            -
+                    @switch($value->gender)
+                    @case(0)
+                    Perempuan
+                    @break
+                    @case(1)
+                    Laki-Laki
+                    @break
+                    @default
+                    -
                     @endswitch</td>
                 <td class="table-section-3-body">
-                    @switch($value['religion'])
-                        @case(1)
-                            Islam
-                            @break
-                        @case(2)
-                            Kristen
-                            @break
-                        @case(3)
-                            Katolik
-                            @break
-                        @case(4)
-                            Hindu
-                            @break
-                        @case(5)
-                            Buddha
-                            @break
-                        @case(6)
-                            Konguchu
-                            @break
-                        @default
-                            -
+                    @switch($value->religion)
+                    @case(1)
+                    Islam
+                    @break
+                    @case(2)
+                    Kristen
+                    @break
+                    @case(3)
+                    Katolik
+                    @break
+                    @case(4)
+                    Hindu
+                    @break
+                    @case(5)
+                    Buddha
+                    @break
+                    @case(6)
+                    Konguchu
+                    @break
+                    @default
+                    -
                     @endswitch</td>
-                <td class="table-section-3-body">{{ $value['place_of_birth'] }}</td>
-                <td class="table-section-3-body">{{ $value['date_of_birth'] }}</td>
-                <td class="table-section-3-body">{{ $value['name_of_father'] }}</td>
-                <td class="table-section-3-body">{{ $value['name_of_mother'] }}</td>
+                <td class="table-section-3-body">{{ $value->place_of_birth }}</td>
+                <td class="table-section-3-body">{{ $value->date_of_birth }}</td>
+                <td class="table-section-3-body">{{ $value->name_of_father }}</td>
+                <td class="table-section-3-body">{{ $value->name_of_mother }}</td>
                 <td class="table-section-3-body">
-                    @switch($value['relationship_status'])
-                        @case(1)
-                            Kepala Keluarga
-                            @break
-                        @case(2)
-                            Suami
-                            @break
-                        @case(3)
-                            Istri
-                            @break
-                        @case(4)
-                            Anak
-                            @break
-                        @case(5)
-                            Menantu
-                            @break
-                        @case(6)
-                            Cucu
-                            @break
-                        @case(7)
-                            Orang Tua
-                            @break
-                        @case(8)
-                            Mertua
-                            @break
-                        @case(9)
-                            Family Lainnya
-                            @break
-                        @default
-                            -
+                    @switch($value->relationship_status)
+                    @case(1)
+                    Kepala Keluarga
+                    @break
+                    @case(2)
+                    Suami
+                    @break
+                    @case(3)
+                    Istri
+                    @break
+                    @case(4)
+                    Anak
+                    @break
+                    @case(5)
+                    Menantu
+                    @break
+                    @case(6)
+                    Cucu
+                    @break
+                    @case(7)
+                    Orang Tua
+                    @break
+                    @case(8)
+                    Mertua
+                    @break
+                    @case(9)
+                    Family Lainnya
+                    @break
+                    @default
+                    -
                     @endswitch</td>
                 <td class="table-section-3-body">
-                    @switch($value['education'])
-                        @case(1)
-                            Tidak/Belum Sekolah
-                            @break
-                        @case(2)
-                            Belum Tamat SD/Sederajat
-                            @break
-                        @case(3)
-                            Tamat SD/Sederajat
-                            @break
-                        @case(4)
-                            SLTP/Sederajat
-                            @break
-                        @case(5)
-                            SLTA/Sederajat
-                            @break
-                        @case(6)
-                            Diploma I/II
-                            @break
-                        @case(7)
-                            Akademi/Diploma III/Sarjana Muda
-                            @break
-                        @case(8)
-                            Diploma IV/Strata I
-                            @break
-                        @case(9)
-                            Strata II
-                            @break
-                        @case(10)
-                            Strata III
-                            @break
-                        @default
-                            -
+                    @switch($value->education)
+                    @case(1)
+                    Tidak/Belum Sekolah
+                    @break
+                    @case(2)
+                    Belum Tamat SD/Sederajat
+                    @break
+                    @case(3)
+                    Tamat SD/Sederajat
+                    @break
+                    @case(4)
+                    SLTP/Sederajat
+                    @break
+                    @case(5)
+                    SLTA/Sederajat
+                    @break
+                    @case(6)
+                    Diploma I/II
+                    @break
+                    @case(7)
+                    Akademi/Diploma III/Sarjana Muda
+                    @break
+                    @case(8)
+                    Diploma IV/Strata I
+                    @break
+                    @case(9)
+                    Strata II
+                    @break
+                    @case(10)
+                    Strata III
+                    @break
+                    @default
+                    -
                     @endswitch</td>
-                <td class="table-section-3-body">{{ $value['occupation'] }}</td>
-                <td class="table-section-3-body">{{ $value['occupation_description'] }}</td>
+                <td class="table-section-3-body">{{ $value->occupation }}</td>
+                <td class="table-section-3-body">{{ $value->occupation_description }}</td>
                 <td class="table-section-3-body">
-                    @switch($value['marital_status'])
-                        @case(1)
-                            Belum Menikah
-                            @break
-                        @case(2)
-                            Menikah
-                            @break
-                        @case(3)
-                            Cerai Hidup
-                            @break
-                        @case(4)
-                            Cerai Mati
-                            @break
-                        @default
-                            -
+                    @switch($value->marital_status)
+                    @case(1)
+                    Belum Menikah
+                    @break
+                    @case(2)
+                    Menikah
+                    @break
+                    @case(3)
+                    Cerai Hidup
+                    @break
+                    @case(4)
+                    Cerai Mati
+                    @break
+                    @default
+                    -
                     @endswitch</td>
-                <td class="table-section-3-body">{{ $value['mobile_phone'] }}</td>
-                <td class="table-section-3-body">{{ $value['sequence_number'] }}</td>
+                <td class="table-section-3-body">{{ $value->mobile_phone }}</td>
+                <td class="table-section-3-body">{{ $value->sequence_number }}</td>
             </tr>
             @endforeach
         </tbody>
     </table>
 
-    <div class="title-profile">Riwayat Cuti</div>
+    <div class="title-profile">Cuti</div>
 
     <table class="table-section-3">
         <thead class="table-section-3-title-row">
@@ -903,35 +894,35 @@
             @foreach($userLeave as $value)
             <tr style="border-bottom: 1px solid #F0F0F0;">
                 <td class="table-section-3-body">{{ $indexLeave++ }}</td>
-                <td class="table-section-3-body">{{ $value['grade'] }}</td>
-                <td class="table-section-3-body">{{ $value['position'] }}</td>
-                <td class="table-section-3-body">{{ $value['start_date'] }} - {{ $value['end_date'] }}</td>
+                <td class="table-section-3-body">{{ $value->grade }}</td>
+                <td class="table-section-3-body">{{ $value->position_merged }}</td>
+                <td class="table-section-3-body">{{ $value->start_date }} - {{ $value->end_date }}</td>
                 <td class="table-section-3-body">
-                    @switch($value['type'])
-                        @case(1)
-                            Cuti diluar Tanggungan Negara
-                            @break
-                        @case(2)
-                            Cuti Sakit
-                            @break
-                        @case(3)
-                            Cuti Besar
-                            @break
-                        @case(4)
-                            Cuti Bersalin
-                            @break
-                        @case(5)
-                            Cuti Belajar Luar Negeri
-                            @break
-                        @case(6)
-                            Cuti Tahunan Luar Negeri
-                            @break
-                        @default
-                            -
+                    @switch($value->type)
+                    @case(1)
+                    Cuti diluar Tanggungan Negara
+                    @break
+                    @case(2)
+                    Cuti Sakit
+                    @break
+                    @case(3)
+                    Cuti Besar
+                    @break
+                    @case(4)
+                    Cuti Bersalin
+                    @break
+                    @case(5)
+                    Cuti Belajar Luar Negeri
+                    @break
+                    @case(6)
+                    Cuti Tahunan Luar Negeri
+                    @break
+                    @default
+                    -
                     @endswitch</td>
-                <td class="table-section-3-body">{{ $value['number'] }}</td>
-                <td class="table-section-3-body">{{ $value['purpose'] }}</td>
-                <td class="table-section-3-body"><a href="{{ $value['letter'] }}">Lihat File</a></td>
+                <td class="table-section-3-body">{{ $value->number }}</td>
+                <td class="table-section-3-body">{{ $value->description }}</td>
+                <td class="table-section-3-body"><a href="{{ $value->letter }}">Lihat File</a></td>
             </tr>
             @endforeach
         </tbody>
@@ -943,7 +934,7 @@
         <thead class="table-section-3-title-row">
             <td class="table-section-3-title">No</td>
             <td class="table-section-3-title">Tanggal</td>
-            <td class="table-section-3-title">Pemberi Catatan</td>
+            <td class="table-section-3-title">Inputer</td>
             <td class="table-section-3-title">Catatan</td>
         </thead>
 
@@ -952,9 +943,9 @@
             @foreach($userNotes as $value)
             <tr style="border-bottom: 1px solid #F0F0F0;">
                 <td class="table-section-3-body">{{ $indexNotes++ }}</td>
-                <td class="table-section-3-body">{{ $value['created_at'] }}</td>
-                <td class="table-section-3-body">{{ $value['giver'] }}</td>
-                <td class="table-section-3-body">{{ $value['description'] }}</td>
+                <td class="table-section-3-body">{{ $value->created_at }}</td>
+                <td class="table-section-3-body">{{ $value->giver_name }}</td>
+                <td class="table-section-3-body">{{ $value->description }}</td>
             </tr>
             @endforeach
         </tbody>
@@ -964,43 +955,43 @@
 
     <table class="table-section-3">
         <thead class="table-section-3-title-row">
-        <td class="table-section-3-title">No</td>
-        <td class="table-section-3-title">Tanggal</td>
-        <td class="table-section-3-title">Hasil</td>
-        <td class="table-section-3-title">Penyelenggara</td>
-        <td class="table-section-3-title">File Pendukung</td>
+            <td class="table-section-3-title">No</td>
+            <td class="table-section-3-title">Tanggal</td>
+            <td class="table-section-3-title">Hasil</td>
+            <td class="table-section-3-title">Penyelenggara</td>
+            <td class="table-section-3-title">File Pendukung</td>
         </thead>
 
         <tbody>
-        @php $indexAssessment=1 @endphp
-        @foreach($userAssessment as $value)
+            @php $indexAssessment=1 @endphp
+            @foreach($userAssessment as $value)
             <tr style="border-bottom: 1px solid #F0F0F0;">
                 <td class="table-section-3-body">{{ $indexAssessment++ }}</td>
-                <td class="table-section-3-body">{{ $value['assessment_date'] }}</td>
+                <td class="table-section-3-body">{{ $value->event_date }}</td>
                 <td class="table-section-3-body">
-                    @switch($value['point'])
-                        @case(1)
-                            Kurang
-                            @break
-                        @case(2)
-                            Sedang
-                            @break
-                        @case(3)
-                            Cukup
-                            @break
-                        @case(4)
-                            Baik
-                            @break
-                        @case(5)
-                            Sangat Baik
-                            @break
-                        @default
-                            -
+                    @switch($value->point)
+                    @case(1)
+                    Kurang
+                    @break
+                    @case(2)
+                    Sedang
+                    @break
+                    @case(3)
+                    Cukup
+                    @break
+                    @case(4)
+                    Baik
+                    @break
+                    @case(5)
+                    Sangat Baik
+                    @break
+                    @default
+                    -
                     @endswitch</td>
-                <td class="table-section-3-body">{{ $value['organizer'] }}</td>
-                <td class="table-section-3-body"><a href="{{ $value['document'] }}">Lihat File</a></td>
+                <td class="table-section-3-body">{{ $value->organizer }}</td>
+                <td class="table-section-3-body"><a href="{{ $value->assessment_document }}">Lihat File</a></td>
             </tr>
-        @endforeach
+            @endforeach
         </tbody>
     </table>
 
@@ -1008,43 +999,43 @@
 
     <table class="table-section-3">
         <thead class="table-section-3-title-row">
-        <td class="table-section-3-title">No</td>
-        <td class="table-section-3-title">Tanggal</td>
-        <td class="table-section-3-title">Hasil</td>
-        <td class="table-section-3-title">Penyelenggara</td>
-        <td class="table-section-3-title">File Pendukung</td>
+            <td class="table-section-3-title">No</td>
+            <td class="table-section-3-title">Tanggal</td>
+            <td class="table-section-3-title">Hasil</td>
+            <td class="table-section-3-title">Penyelenggara</td>
+            <td class="table-section-3-title">File Pendukung</td>
         </thead>
 
         <tbody>
-        @php $indexCompetency=1 @endphp
-        @foreach($userAssessmentCompetency as $value)
+            @php $indexCompetency=1 @endphp
+            @foreach($userAssessmentCompetency as $value)
             <tr style="border-bottom: 1px solid #F0F0F0;">
                 <td class="table-section-3-body">{{ $indexCompetency++ }}</td>
-                <td class="table-section-3-body">{{ $value['assessment_date'] }}</td>
+                <td class="table-section-3-body">{{ $value->event_date }}</td>
                 <td class="table-section-3-body">
-                    @switch($value['point'])
-                        @case(1)
-                            Kurang
-                            @break
-                        @case(2)
-                            Sedang
-                            @break
-                        @case(3)
-                            Cukup
-                            @break
-                        @case(4)
-                            Baik
-                            @break
-                        @case(5)
-                            Sangat Baik
-                            @break
-                        @default
-                            -
+                    @switch($value->point)
+                    @case(1)
+                    Kurang
+                    @break
+                    @case(2)
+                    Sedang
+                    @break
+                    @case(3)
+                    Cukup
+                    @break
+                    @case(4)
+                    Baik
+                    @break
+                    @case(5)
+                    Sangat Baik
+                    @break
+                    @default
+                    -
                     @endswitch</td>
-                <td class="table-section-3-body">{{ $value['organizer'] }}</td>
-                <td class="table-section-3-body"><a href="{{ $value['document'] }}">Lihat File</a></td>
+                <td class="table-section-3-body">{{ $value->organizer }}</td>
+                <td class="table-section-3-body"><a href="{{ $value->competency_document }}">Lihat File</a></td>
             </tr>
-        @endforeach
+            @endforeach
         </tbody>
     </table>
 
@@ -1052,43 +1043,43 @@
 
     <table class="table-section-3">
         <thead class="table-section-3-title-row">
-        <td class="table-section-3-title">No</td>
-        <td class="table-section-3-title">Tanggal</td>
-        <td class="table-section-3-title">Hasil</td>
-        <td class="table-section-3-title">Penyelenggara</td>
-        <td class="table-section-3-title">File Pendukung</td>
+            <td class="table-section-3-title">No</td>
+            <td class="table-section-3-title">Tanggal</td>
+            <td class="table-section-3-title">Hasil</td>
+            <td class="table-section-3-title">Penyelenggara</td>
+            <td class="table-section-3-title">File Pendukung</td>
         </thead>
 
         <tbody>
-        @php $indexTalent=1 @endphp
-        @foreach($userAssessmentTalent as $value)
+            @php $indexTalent=1 @endphp
+            @foreach($userAssessmentTalent as $value)
             <tr style="border-bottom: 1px solid #F0F0F0;">
                 <td class="table-section-3-body">{{ $indexTalent++ }}</td>
-                <td class="table-section-3-body">{{ $value['assessment_date'] }}</td>
+                <td class="table-section-3-body">{{ $value->event_date }}</td>
                 <td class="table-section-3-body">
-                    @switch($value['point'])
-                        @case(1)
-                            Kurang
-                            @break
-                        @case(2)
-                            Sedang
-                            @break
-                        @case(3)
-                            Cukup
-                            @break
-                        @case(4)
-                            Baik
-                            @break
-                        @case(5)
-                            Sangat Baik
-                            @break
-                        @default
-                            -
+                    @switch($value->point)
+                    @case(1)
+                    Kurang
+                    @break
+                    @case(2)
+                    Sedang
+                    @break
+                    @case(3)
+                    Cukup
+                    @break
+                    @case(4)
+                    Baik
+                    @break
+                    @case(5)
+                    Sangat Baik
+                    @break
+                    @default
+                    -
                     @endswitch</td>
-                <td class="table-section-3-body">{{ $value['organizer'] }}</td>
-                <td class="table-section-3-body"><a href="{{ $value['document'] }}">Lihat File</a></td>
+                <td class="table-section-3-body">{{ $value->organizer }}</td>
+                <td class="table-section-3-body"><a href="{{ $value->talent_document }}">Lihat File</a></td>
             </tr>
-        @endforeach
+            @endforeach
         </tbody>
     </table>
 </body>

@@ -15,7 +15,7 @@ class TalentRepository
         $talents->where('user_id', $userId);
         $talents->select(
             'id',
-            'event_date',
+            DB::raw("DATE_FORMAT(event_date, '%d-%m-%Y') as event_date"),
             'point',
             'organizer',
             'talent_document'
