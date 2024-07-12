@@ -6,6 +6,22 @@ use App\Exports\employee;
 use App\Http\Requests\Export\ExportEmployeesRequest;
 use App\Http\Requests\Export\ExportZipEmployeesRequest;
 use App\Http\Requests\Export\PreviewExportEmployeesRequest;
+use App\Repositories\AssessmentRepository;
+use App\Repositories\CompetencyRepository;
+use App\Repositories\CreditRepository;
+use App\Repositories\DisciplinaryRepository;
+use App\Repositories\EducationRepository;
+use App\Repositories\EmployeeRepository;
+use App\Repositories\FamilyRepository;
+use App\Repositories\GradeRepository;
+use App\Repositories\LeaveRepository;
+use App\Repositories\NoteRepository;
+use App\Repositories\PerformanceRepository;
+use App\Repositories\PositionRepository;
+use App\Repositories\RecognitionRepository;
+use App\Repositories\TalentRepository;
+use App\Repositories\TargetRepository;
+use App\Repositories\TrainingRepository;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -19,14 +35,65 @@ use PhpOffice\PhpSpreadsheet\Writer\Csv;
  */
 class ExportController extends Controller
 {
+    protected $employeeRepository;
+    protected $educationRepository;
+    protected $familyRepository;
+    protected $positionRepository;
+    protected $gradeRepository;
+    protected $trainingRepository;
+    protected $recognitionRepository;
+    protected $targetRepository;
+    protected $performanceRepository;
+    protected $disciplinaryRepository;
+    protected $leaveRepository;
+    protected $noteRepository;
+    protected $creditRepository;
+    protected $assessmentRepository;
+    protected $competencyRepository;
+    protected $talentRepository;
 
     protected $request;
     protected $posted;
 
-    public function __construct(Request $request)
+    public function __construct(
+        Request $request,
+        EmployeeRepository $employeeRepository,
+        EducationRepository $educationRepository,
+        FamilyRepository $familyRepository,
+        PositionRepository $positionRepository,
+        GradeRepository $gradeRepository,
+        TrainingRepository $trainingRepository,
+        RecognitionRepository $recognitionRepository,
+        TargetRepository $targetRepository,
+        PerformanceRepository $performanceRepository,
+        DisciplinaryRepository $disciplinaryRepository,
+        LeaveRepository $leaveRepository,
+        NoteRepository $noteRepository,
+        CreditRepository $creditRepository,
+        AssessmentRepository $assessmentRepository,
+        CompetencyRepository $competencyRepository,
+        TalentRepository $talentRepository,
+    )
     {
         $this->request = $request;
         $this->posted = $request->except('_token', '_method');
+
+        $this->employeeRepository = $employeeRepository;
+        $this->educationRepository = $educationRepository;
+        $this->familyRepository = $familyRepository;
+        $this->positionRepository = $positionRepository;
+        $this->gradeRepository = $gradeRepository;
+        $this->trainingRepository = $trainingRepository;
+        $this->recognitionRepository = $recognitionRepository;
+        $this->targetRepository = $targetRepository;
+        $this->performanceRepository = $performanceRepository;
+        $this->disciplinaryRepository = $disciplinaryRepository;
+        $this->leaveRepository = $leaveRepository;
+        $this->noteRepository = $noteRepository;
+        $this->creditRepository = $creditRepository;
+        $this->assessmentRepository = $assessmentRepository;
+        $this->competencyRepository = $competencyRepository;
+        $this->talentRepository = $talentRepository;
     }
 
     /**
@@ -44,387 +111,30 @@ class ExportController extends Controller
             return response()->json(['error' => 'No employee ID provided'], 400);
         }
         $tmp = sys_get_temp_dir();
-        $user = DB::table('users as u');
-        $user->where('id', $employeeId);
-        $user->select('*');
-        $user = $user->first();
-
-        // Institution
-        $userInstitution = DB::table('institutions as i');
-        $userInstitution->join('users', 'users.institution_id', '=', 'i.id');
-        $userInstitution->select('i.name');
-        $userInstitution = $userInstitution->first();
-
-        //Organization
-        $userEchelons = DB::table('echelons as e');
-        $userEchelons->join('users', 'users.echelon_id', '=', 'e.id');
-        $userEchelons->select('e.name', 'users.echelon_effective_date');
-        $userEchelons = $userEchelons->first();
-
-        //CurrentGrade
-        $userCurrentGrade = DB::table('grades as g');
-        $userCurrentGrade->join('users', 'users.grade_id', '=', 'g.id');
-        $userCurrentGrade->select('g.name', 'g.code', 'users.grade_effective_date as date');
-        $userCurrentGrade = $userCurrentGrade->first();
-
-        //CurrentPosition
-        $userCurrentPosition = DB::table('positions');
-        $userCurrentPosition->join('users', 'users.position_id', '=', 'positions.id');
-        $userCurrentPosition->select('positions.name');
-        $userCurrentPosition = $userCurrentPosition->first();
-
-        // Education
-        $userEducation = DB::table('user_educations as ue');
-        $userEducation->join('users', 'users.id', '=', 'ue.user_id');
-        $userEducation->where('ue.user_id', $user->id);
-        $userEducation->select('ue.level', 'ue.name as school_name', 'ue.faculty', 'ue.major', 'ue.status as education_status', 'ue.year_of_graduation', 'ue.description as education_description');
-        $userEducation->orderBy('ue.level');
-        $userEducation = $userEducation->get();
-        $userCollegeData = array();
-        foreach ($userEducation as $education) {
-            $userCollegeData[] = [
-                'grade' => $education->level,
-                'school_name' => $education->school_name,
-                'faculty' => $education->faculty,
-                'major' => $education->major,
-                'status' => $education->education_status,
-                'year_graduate' => $education->year_of_graduation,
-                'desc' => $education->education_description,
-            ];
+        $employee = $this->employeeRepository->getDetail($employeeId);
+        if (!$employee) {
+            return $this->response(404, 'Pegawai tidak ditemukan.');
         }
 
-        //Recognition
-        $userRecognition = DB::table('recognition_history_users as ur');
-        $userRecognition->join('recognition_histories as r', 'r.id', '=', 'ur.recognition_history_id');
-        $userRecognition->join('recognitions', 'r.recognition_id', '=', 'recognitions.id');
-        $userRecognition->join('decrees', 'decrees.id', '=', 'r.type_of_decree');
-        $userRecognition->join('users', 'users.id', '=', 'ur.user_id');
-        $userRecognition->where('ur.user_id', $user->id);
-        $userRecognition->select('recognitions.name as recognition_name', 'r.description as recognition_description', 'decrees.name as recognition_type',
-            'r.decree_date', 'r.decree_number', 'r.decree_year', 'r.awarding_institution', 'r.date_of_receipt');
-        $userRecognition = $userRecognition->get();
-        $userRecognitionData = array();
-        foreach ($userRecognition as $recognition) {
-            $userRecognitionData[] = [
-                'decree_name' => $recognition->recognition_name,
-                'desc' => $recognition->recognition_description,
-                'decree' => $recognition->recognition_type,
-                'decree_date' => $recognition->decree_date,
-                'decree_number' => $recognition->decree_number,
-                'decree_year' => $recognition->decree_year,
-                'awarding_institution' => $recognition->awarding_institution,
-                'receipt_date' => $recognition->date_of_receipt,
-            ];
-        }
+        $educations = $this->educationRepository->getDetail($employeeId);
+        $families = $this->familyRepository->getDetail($employeeId);
+        $positions = $this->positionRepository->getDetail($employeeId);
+        $grades = $this->gradeRepository->getDetail($employeeId);
+        $structurals = $this->trainingRepository->getDetail($employeeId, 1);
+        $functionals = $this->trainingRepository->getDetail($employeeId, 2);
+        $technicals = $this->trainingRepository->getDetail($employeeId, 3);
+        $recognitions = $this->recognitionRepository->getDetail($employeeId); //penghargaan
+        $targets = $this->targetRepository->getDetail($employeeId); //SKP
+        $performances = $this->performanceRepository->getDetail($employeeId); //prestasi kerja
+        $disciplinaries = $this->disciplinaryRepository->getDetail($employeeId); //hukdis
+        $leaves = $this->leaveRepository->getDetail($employeeId);
+        $notes = $this->noteRepository->getDetail($employeeId);
+        $credits = $this->creditRepository->getDetail($employeeId);
+        $assessments = $this->assessmentRepository->getDetail($employeeId);
+        $competencies = $this->competencyRepository->getDetail($employeeId);
+        $talents = $this->talentRepository->getDetail($employeeId);
 
-        //Leaves
-        $userLeave = DB::table('user_leaves as ul');
-        $userLeave->join('users as u', 'u.id', '=', 'ul.user_id');
-        $userLeave->join('grades as g', 'g.id', '=', 'u.grade_id');
-        $userLeave->join('positions as p', 'p.id', '=', 'u.position_id');
-        $userLeave->where('ul.user_id', $user->id);
-        $userLeave->select('g.name', 'ul.start_date', 'ul.end_date', 'ul.type', 'ul.number', 'ul.description', 'ul.letter', 'p.name as position_name');
-        $userLeave = $userLeave->get();
-        $userLeaveData = array();
-        foreach ($userLeave as $leave) {
-            $userLeaveData[] = [
-                'grade' => $leave->name,
-                'position' => $leave->position_name,
-                'start_date' => $leave->start_date,
-                'end_date' => $leave->end_date,
-                'type' => $leave->type,
-                'number' => $leave->number,
-                'purpose' => $leave->description,
-                'letter' => $leave->letter,
-            ];
-        }
-
-        //Target
-        $userTarget = DB::table('target_history_users as ut');
-        $userTarget->join('target_histories as t', 't.id', '=', 'ut.target_history_id');
-        $userTarget->join('users', 'users.id', '=', 'ut.user_id');
-        $userTarget->where('ut.user_id', $user->id);
-        $userTarget->select('t.appraisal_period as period', 't.year as target_year', 'ut.work_behavior_rating', 'ut.employee_performance_predicate', 'ut.organizational_performance_achievement');
-        $userTarget = $userTarget->get();
-        $userTargetData = array();
-        foreach ($userTarget as $target) {
-            $userTargetData[] = [
-                'period' => $target->period,
-                'target_year' => $target->target_year,
-                'work_behavior_rating' => $target->work_behavior_rating,
-                'employee_performance_predicate' => $target->employee_performance_predicate,
-                'organizational_performance_achievement' => $target->organizational_performance_achievement,
-            ];
-        }
-
-        //Credit Score
-        $userCredit = DB::table('user_credits as ucs');
-        $userCredit->where('ucs.user_id', $user->id);
-        $userCredit->select('ucs.position', 'ucs.period', 'ucs.year', 'ucs.score');
-        $userCredit = $userCredit->get();
-        $userCreditData = array();
-        foreach ($userCredit as $credit) {
-            $userCreditData[] = [
-                'position' => $credit->position,
-                'period' => $credit->period,
-                'year' => $credit->year,
-                'credit_score' => $credit->score,
-            ];
-        }
-
-        //Performance
-        $userPerformance = DB::table('performance_history_users as up');
-        $userPerformance->join('performance_histories as p', 'p.id', '=', 'up.performance_history_id');
-        $userPerformance->join('users as u', 'u.id', '=', 'up.user_id');
-        $userPerformance->where('up.user_id', $user->id);
-        $userPerformance->select('up.description', 'p.performance_period', 'up.work_performance_score');
-        $userPerformance = $userPerformance->get();
-        $userPerformanceData = array();
-        foreach ($userPerformance as $performance) {
-            $userPerformanceData[] = [
-                'period' => $performance->performance_period,
-                'score' => $performance->work_performance_score,
-                'description' => $performance->description,
-            ];
-        }
-
-        //Grade
-        $userGrade = DB::table('grade_history_users as ug');
-        $userGrade->join('grades as g', 'g.id', '=', 'ug.grade_id');
-        $userGrade->join('users', 'users.id', '=', 'ug.user_id');
-        $userGrade->join('decrees', 'decrees.id', '=', 'ug.type_of_decree');
-        $userGrade->select('g.name', 'g.code', 'ug.effective_date', 'ug.decree_name', 'ug.decree_document', 'decrees.name as type_of_decree',
-            'ug.decree_number', 'ug.decree_date', 'ug.description', 'ug.status');
-        $userGrade->where('ug.user_id', $user->id);
-        $userGrade = $userGrade->get();
-        $userGradeData = array();
-        foreach ($userGrade as $grade) {
-            $userGradeData[] = [
-                'name' => $grade->name,
-                'code' => $grade->code,
-                'effective_date' => $grade->effective_date,
-                'decree_name' => $grade->decree_name,
-                'decree_document' => $grade->decree_document,
-                'type' => $grade->type_of_decree,
-                'decree_number' => $grade->decree_number,
-                'decree_date' => $grade->decree_date,
-                'description' => $grade->description,
-                'status' => $grade->status,
-            ];
-        }
-
-        //Position
-        $userPosition = DB::table('position_history_users as up');
-        $userPosition->join('users', 'users.id', '=', 'up.user_id');
-        $userPosition->join('groups', 'groups.id', '=', 'up.group_id');
-        $userPosition->join('decrees', 'decrees.id', '=', 'up.type_of_decree');
-        $userPosition->join('decrees as termination', 'termination.id', '=', 'up.type_of_termination_decree');
-        $userPosition->join('echelons', 'echelons.id', '=', 'up.echelon');
-        $userPosition->select(
-            'up.position',
-            'groups.name as group_name',
-            'up.effective_date',
-            'up.decree',
-            'up.decree_document',
-            'up.decree_date',
-            'decrees.name as decree_name',
-            'up.decree_number',
-            'echelons.name as echelons_name',
-            'up.position_status',
-            'up.termination_date',
-            'up.termination_decree',
-            'termination.name as termination_name',
-            'up.termination_decree_number',
-            'up.termination_decree_date',
-            'up.status'
-        );
-        $userPosition->where('users.id', $user->id);
-        $userPosition = $userPosition->get();
-        $userPositionData = array();
-        foreach ($userPosition as $position) {
-            $userPositionData[] = [
-                'position' => $position->position,
-                'group' => $position->group_name,
-                'effective_date' => $position->effective_date,
-                'decree' => $position->decree,
-                'decree_document' => $position->decree_document,
-                'decree_name' => $position->decree_name,
-                'decree_number' => $position->decree_number,
-                'decree_date' => $position->decree_date,
-                'echelons_name' => $position->echelons_name,
-                'position_status' => $position->position_status,
-                'termination_date' => $position->termination_date,
-                'termination_decree' => $position->termination_decree,
-                'termination_name' => $position->termination_name,
-                'termination_decree_number' => $position->termination_decree_number,
-                'termination_decree_date' => $position->termination_decree_date,
-                'status' => $position->status,
-            ];
-        }
-        //Discipline
-        $userPunishment = DB::table('disciplinary_history_users as ud');
-        $userPunishment->join('disciplinary_histories as d', 'd.id', '=', 'ud.disciplinary_history_id');
-        $userPunishment->join('disciplinaries as dt', 'dt.id', '=', 'ud.disciplinary_id');
-        $userPunishment->join('users', 'users.id', '=', 'ud.user_id');
-        $userPunishment->where('ud.user_id', $user->id);
-        $userPunishment->select('ud.grade', 'ud.position', 'ud.decree_number', 'ud.date_of_decree', 'ud.start_date',
-            'ud.end_date', 'ud.description', 'ud.authorizing_officer', 'ud.name_of_authorizing_officer', 'dt.description as severity',
-            'dt.name', 'dt.performance_allowance_duration');
-        $userPunishment = $userPunishment->get();
-        $userPunishmentData = array();
-        foreach ($userPunishment as $punishment) {
-            $userPunishmentData[] = [
-                'grade' => $punishment->grade,
-                'position' => $punishment->position,
-                'decree_number' => $punishment->decree_number,
-                'date_of_decree' => $punishment->date_of_decree,
-                'start_date' => $punishment->start_date,
-                'end_date' => $punishment->end_date,
-                'description' => $punishment->description,
-                'authorizing_officer' => $punishment->authorizing_officer,
-                'name_of_authorizing_officer' => $punishment->name_of_authorizing_officer,
-                'severity' => $punishment->severity,
-                'name' => $punishment->name,
-                'performance_allowance_duration' => $punishment->performance_allowance_duration,
-            ];
-        }
-
-        //Family
-        $userFamily = DB::table('user_families as uf');
-        $userFamily->join('users', 'users.id', '=', 'uf.user_id');
-        $userFamily->where('uf.user_id', $user->id);
-        $userFamily->select('uf.*');
-        $userFamily = $userFamily->get();
-        $userFamilyData = array();
-        foreach ($userFamily as $family) {
-            $userFamilyData[] = [
-                'card_number' => $family->card_number,
-                'name' => $family->name,
-                'id_number' => $family->id_number,
-                'gender' => $family->gender,
-                'religion' => $family->religion,
-                'place_of_birth' => $family->place_of_birth,
-                'date_of_birth' => $family->date_of_birth,
-                'name_of_father' => $family->name_of_father,
-                'name_of_mother' => $family->name_of_mother,
-                'relationship_status' => $family->relationship_status,
-                'education' => $family->education,
-                'occupation' => $family->occupation,
-                'occupation_description' => $family->occupation_description,
-                'marital_status' => $family->marital_status,
-                'mobile_phone' => $family->mobile_phone,
-                'sequence_number' => $family->sequence_number,
-            ];
-        }
-
-        //Notes
-        $userNote = DB::table('user_notes as un');
-        $userNote->join('users', 'users.id', '=', 'un.user_id');
-        $userNote->join('users as giver', 'giver.id', '=', 'un.giver_id');
-        $userNote->where('un.user_id', $user->id);
-        $userNote->select('un.description', 'un.created_at', 'un.giver_id');
-        $userNote = $userNote->get();
-        $userNoteData = array();
-        foreach ($userNote as $note) {
-            $noteGiver = DB::table('user_notes as un');
-            $noteGiver->join('users', 'users.id', '=', 'un.giver_id');
-            $noteGiver->where('un.giver_id', $note->giver_id);
-            $noteGiver->select('users.name');
-            $noteGiver = $noteGiver->first();
-            $userNoteData[] = [
-                'description' => $note->description,
-                'created_at' => $note->created_at,
-                'giver' => $noteGiver->name,
-            ];
-        }
-
-        $userAssessment = DB::table('user_assessments as ua');
-        $userAssessment->join('users', 'users.id', '=', 'ua.user_id');
-        $userAssessment->select('ua.event_date', 'ua.point', 'ua.organizer', 'ua.assessment_document');
-        $userAssessment = $userAssessment->get();
-        $userAssessmentData = array();
-        foreach ($userAssessment as $assessment) {
-            $userAssessmentData[] = [
-                'assessment_date' => $assessment->event_date,
-                'point' => $assessment->point,
-                'organizer' => $assessment->organizer,
-                'document' => $assessment->assessment_document,
-            ];
-        }
-
-        $userCompetency = DB::table('user_competencies as uc');
-        $userCompetency->join('users', 'users.id', '=', 'uc.user_id');
-        $userCompetency->select('uc.event_date', 'uc.point', 'uc.organizer', 'uc.competency_document');
-        $userCompetency = $userCompetency->get();
-        $userCompetencyData = array();
-        foreach ($userCompetency as $competency) {
-            $userCompetencyData[] = [
-                'assessment_date' => $competency->event_date,
-                'point' => $competency->point,
-                'organizer' => $competency->organizer,
-                'document' => $competency->competency_document,
-            ];
-        }
-        $userTalent = DB::table('user_talents as ut');
-        $userTalent->join('users', 'users.id', '=', 'ut.user_id');
-        $userTalent->select('ut.event_date', 'ut.point', 'ut.organizer', 'ut.talent_document');
-        $userTalent = $userTalent->get();
-        $userTalentData = array();
-        foreach ($userTalent as $talent) {
-            $userTalentData[] = [
-                'assessment_date' => $talent->event_date,
-                'point' => $talent->point,
-                'organizer' => $talent->organizer,
-                'document' => $talent->talent_document,
-            ];
-        }
-
-        //Training
-        $userTraining = DB::table('training_history_users as ut');
-        $userTraining->join('training_histories as t', 't.id', '=', 'ut.training_history_id');
-        $userTraining->join('users', 'users.id', '=', 'ut.user_id');
-        $userTraining->where('ut.user_id', $user->id);
-        $userTraining->select('t.organizer', 't.type', 't.reference_number', 't.start_date', 't.link', 't.name', 't.level', 't.duration');
-        $userTraining = $userTraining->get();
-        $trainingFunctional = array();
-        $trainingStructural = array();
-        $trainingTechnique = array();
-        foreach ($userTraining as $training) {
-            switch ($training->type) {
-                case '1':
-                    $trainingStructural[] = [
-                        'name' => $training->name,
-                        'certificate' => $training->reference_number,
-                        'level' => $training->level,
-                        'start_date' => $training->start_date,
-                        'duration' => $training->duration,
-                        'organizer' => $training->organizer,
-                        'link' => $training->link,
-                    ];
-                    break;
-                case '2':
-                    $trainingFunctional[] = [
-                        'name' => $training->name,
-                        'certificate' => $training->reference_number,
-                        'level' => $training->level,
-                        'start_date' => $training->start_date,
-                        'duration' => $training->duration,
-                        'organizer' => $training->organizer,
-                        'link' => $training->link,
-                    ];
-                    break;
-                case '3':
-                    $trainingTechnique[] = [
-                        'name' => $training->name,
-                        'certificate' => $training->reference_number,
-                        'start_date' => $training->start_date,
-                        'duration' => $training->duration,
-                        'link' => $training->link,
-                    ];
-                    break;
-            }
-        }
-        $religion = match ($user->religion) {
+        $religion = match ($employee->religion) {
             1 => 'Islam',
             2 => 'Kristen',
             3 => 'Katolik',
@@ -433,7 +143,7 @@ class ExportController extends Controller
             6 => 'Konghucu',
             default => '-',
         };
-        $maritalStatus = match ($user->marital_status) {
+        $maritalStatus = match ($employee->marital_status) {
             1 => 'Belum Menikah',
             2 => 'Menikah',
             3 => 'Cerai',
@@ -441,13 +151,13 @@ class ExportController extends Controller
             5 => 'Duda',
             default => '-',
         };
-        $employeeType = match ($user->type) {
+        $employeeType = match ($employee->type) {
             1 => 'ASN',
             2 => 'NON ASN',
             3 => 'OUTSOURCING',
             default => '-',
         };
-        $educationLevel = match ($user->education_level) {
+        $educationLevel = match ($employee->education_level) {
             1 => 'SD/Sederajat',
             2 => 'SLTP/Sederajat',
             3 => 'SLTA/Sederajat',
@@ -458,6 +168,7 @@ class ExportController extends Controller
             8 => 'Strata III',
             default => '-',
         };
+
         // Housing
         $housingComplex = DB::table('residences');
         $housingComplex->join('users as u', 'u.residence_id', '=', 'residences.id');
@@ -466,69 +177,94 @@ class ExportController extends Controller
         $complex = 'Luar';
         $complexName = '-';
         if (isset($housingComplex->name) && $housingComplex->name != 'Luar Komplek') {
-            $complex = 'dalam';
+            $complex = 'Dalam';
             $complexName = $housingComplex->name;
         }
 
         //Grade Date
-        $gradeStartDate = $user->grade_effective_date;
+        $gradeStartDate = $employee->grade_effective_date;
         $gradeDate = new \DateTime($gradeStartDate);
         $currentDate = new \DateTime();
         $gradeDate = $currentDate->diff($gradeDate);
 
+        // Batas Usia Pensiun
+        $indonesianMonth = [
+            1=> 'Januari',
+            2=> 'Februari',
+            3=> 'Maret',
+            4=> 'April',
+            5=> 'Mei',
+            6=> 'Juni',
+            7=> 'Juli',
+            8=> 'Agustus',
+            9=> 'September',
+            10=> 'Oktober',
+            11=> 'November',
+            12=> 'Desember',
+        ];
+        $retirementDate = '-';
+        if(!is_null($employee->retirement_age)){
+            $date = Carbon::createFromFormat('d-m-Y', $employee->retirement_age);
+            $retirementDate = $indonesianMonth[$date->format('n')].' '.$date->format('Y');
+        }
+        foreach($credits as $key => $value){
+            $credits[$key]->start_month_name = $indonesianMonth[$value->start_month];
+            $credits[$key]->end_month_name = $indonesianMonth[$value->end_month];
+        }
+
         $pdf = Pdf::loadview('exports/user', [
             'userProfile' => [
-                'Tempat, tanggal lahir' => $user->place_of_birth . ', ' . $user->date_of_birth,
+                'Tempat, Tanggal Lahir' => $employee->place_of_birth . ', ' . $employee->date_of_birth,
                 'Agama' => $religion,
-                'Jenis Kelamin' => ($user->gender ? 'Pria' : 'Wanita'),
+                'Jenis Kelamin' => ($employee->gender ? 'Pria' : 'Wanita'),
                 'Status Perkawinan' => $maritalStatus,
                 'Jenis Pegawai' => $employeeType,
-                'TMT Menjabat' => ($user->position_effective_date ?? ''),
-                'Instansi Induk' => ($userInstitution->name ?? ''),
+                'TMT Menjabat' => ($employee->position_effective_date ?? '-'),
+                'Instansi Induk' => ($employee->institution_name ?? '-'),
                 'Tingkat' => $educationLevel,
-                'Nama Sekolah/Universitas' => $user->education_name,
-                'Tahun Lulus' => $user->education_year,
-                'No. Karpeg/No. Karis/No. Karsu' => $user->karisu_number,
-                'Masa Kerja Keseluruhan' => 'Lorem ipsum',
+                'Nama Sekolah/Universitas' => $employee->education_name,
+                'Tahun Lulus' => $employee->education_year,
+                'No. Karpeg/No. Karisu' => $employee->employee_id_card_number .' / '.$employee->karisu_number,
+                'Masa Kerja Keseluruhan' => $employee->cpns_years_of_service,
                 'Masa Kerja Golongan' => $gradeDate->y . ' Tahun ' . $gradeDate->m . ' Bulan' . $gradeDate->d . ' Hari',
-                'NPWP' => $user->id_tax,
-                'Status Pegawai' => ($user->employment_status ? 'Aktif' : 'Tidak Aktif'),
-                'Nomor NIK' => $user->id_number,
+                'NPWP' => $employee->id_tax,
+                'Status Pegawai' => ($employee->employment_status ? 'Aktif' : 'Tidak Aktif'),
+                'No NIK' => $employee->id_number,
                 'Komplek' => $complex,
                 'Nama Komplek' => $complexName,
-                'Alamat Tempat Tinggal Saat Ini' => $user->current_address,
-                'No. Telepon Rumah' => $user->home_phone_number,
-                'No. HP' => $user->mobile_phone,
-                'Alamat Kantor' => $user->office_address,
-                'No. Telepon Kantor' => $user->office_phone_number,
-                'Email' => $user->email,
-                'Email Dinas' => $user->office_email,
-                'Kontak Darurat' => $user->emergency_contact,
-                'Batas Usia Pensiun' => $user->retirement_effective_date,
+                'Alamat Tempat Tinggal Saat Ini' => $employee->current_address,
+                'No. Telepon Rumah' => $employee->home_phone_number,
+                'No. HP' => $employee->mobile_phone,
+                'Alamat Kantor' => $employee->office_address,
+                'No. Telepon Kantor' => $employee->office_phone_number,
+                'Email' => $employee->email,
+                'Email Dinas' => $employee->office_email,
+                'Kontak Darurat' => $employee->emergency_contact,
+                'Batas Usia Pensiun' => $retirementDate,
             ],
-            'currentPosition' => ($userCurrentPosition->name ?? '-'),
-            'photoProfile' => $this->getDocument($user->photo_profile, true),
-            'userNIP' => $user->employee_id_number,
-            'userName' => $user->name,
-            'userEchelons' => ($userEchelons->name ?? '') . ', ' . ($userEchelons->date ?? ' '),
-            'userCurrentGrade' => ($userCurrentGrade->name ?? '') . '(' . ($userCurrentGrade->code ?? '') . '), ' . ($userCurrentGrade->date ?? ''),
-            'userCollege' => $userCollegeData,
-            'userPosition' => $userPositionData,
-            'userGrade' => $userGradeData,
-            'userTrainingStructural' => $trainingStructural,
-            'userTrainingFunctional' => $trainingFunctional,
-            'userTrainingTechnical' => $trainingTechnique,
-            'userAward' => $userRecognitionData,
-            'userSKP' => $userTargetData,
-            'userCredit' => $userCreditData,
-            'userPerformance' => $userPerformanceData,
-            'userPunishment' => $userPunishmentData,
-            'userFamily' => $userFamilyData,
-            'userLeave' => $userLeaveData,
-            'userNotes' => $userNoteData,
-            'userAssessment' => $userAssessmentData,
-            'userAssessmentCompetency' => $userCompetencyData,
-            'userAssessmentTalent' => $userTalentData,
+            'currentPosition' => ($employee->position_merged ?? '-'),
+            'photoProfile' => $this->getDocument($employee->photo_profile, true),
+            'userNIP' => $employee->employee_id_number,
+            'userName' => $employee->name,
+            'userEchelons' => ($employee->echelon_name ?? '') . ', ' . ($employee->echelon_effective_date ?? ' '),
+            'userCurrentGrade' => ($employee->grade_name ?? '') . '(' . ($employee->grade_code ?? '') . '), ' . ($employee->grade_effective_date ?? ''),
+            'userCollege' => $educations,
+            'userPosition' => $positions,
+            'userGrade' => $grades,
+            'userTrainingStructural' => $structurals,
+            'userTrainingFunctional' => $functionals,
+            'userTrainingTechnical' => $technicals,
+            'userAward' => $recognitions,
+            'userSKP' => $targets,
+            'userCredit' => $credits,
+            'userPerformance' => $performances,
+            'userPunishment' => $disciplinaries,
+            'userFamily' => $families,
+            'userLeave' => $leaves,
+            'userNotes' => $notes,
+            'userAssessment' => $assessments,
+            'userAssessmentCompetency' => $competencies,
+            'userAssessmentTalent' => $talents,
         ]);
         $pdf->set_option('isHtml5ParserEnabled', true);
         $pdf->set_paper("A4", "portrait");

@@ -15,7 +15,7 @@ class CompetencyRepository
         $competencies->where('user_id', $userId);
         $competencies->select(
             'id',
-            'event_date',
+            DB::raw("DATE_FORMAT(event_date, '%d-%m-%Y') as event_date"),
             'point',
             'organizer',
             'competency_document'
