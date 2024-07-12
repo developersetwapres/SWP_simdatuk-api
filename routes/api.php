@@ -109,6 +109,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::prefix('employees')->group(function () {
+        Route::post('/import', [ImportEmployeeController::class, 'import']); // Put this on top, to ensure the import route is defined before the "create" route to avoid conflicts
         Route::get('/', [EmployeeController::class, 'index']);
         Route::post('/', [EmployeeController::class, 'create']);
         Route::get('/{id}', [EmployeeController::class, 'show']);
@@ -116,7 +117,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::put('/status', [EmployeeController::class, 'status']);
         Route::patch('/synchronization', [SynchronizationController::class, 'index']);
         Route::get('/import/download-template/{type}', [ImportEmployeeController::class, 'downloadTemplate']);
-        Route::post('/import', [ImportEmployeeController::class, 'import']);
         Route::get('/import/histories', [ImportEmployeeController::class, 'getRiwayatImport']);
     });
 
