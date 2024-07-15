@@ -155,6 +155,12 @@ class RecapitulationRepository
             DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND education_level = 7 THEN 1 END) as s2'),
             DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND education_level = 8 THEN 1 END) as s3'),
         );
+
+        // Perhitungan hanya untuk outsourcing
+        if ($type == 3) {
+            $total->where('employment_type_id', 19);
+        }
+
         $total->where('type', $type);
         return $total = $total->first();
     }
