@@ -81,8 +81,8 @@ class DiagramController extends Controller
                             $childPosition->users = $this->getUsers($childPosition->id);
                             if (sizeof($childPosition->users) > 1) {
                                 $ass = collect([]);
-                                foreach ($childPosition->users as $key => $user) {
-                                    $uniqueChild = $childPosition;
+                                foreach ($childPosition->users as $user) {
+                                    $uniqueChild = unserialize(serialize($childPosition));
                                     $uniqueChild->users = [$user];
                                     $ass->push($uniqueChild);
                                 }
