@@ -240,7 +240,7 @@ class ImportEmployeeController extends Controller
         'decree_number' => 7, // No. SK Hukuman Disiplin
         'date_of_decree' => 8, // Tanggal SK Hukuman Disiplin
         'start_date' => 9, // Tanggal Awal Hukuman Disiplin
-        'start_date' => 10, // Tanggal Akhir Hukuman Disiplin
+        'end_date' => 10, // Tanggal Akhir Hukuman Disiplin
         'authorizing_officer' => 11, // Pejabat Berwenang
         'name_of_authorizing_officer' => 12, // Nama Pejabat Berwenang
         'description' => 13, // Uraian
