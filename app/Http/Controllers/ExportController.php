@@ -73,8 +73,7 @@ class ExportController extends Controller
         AssessmentRepository $assessmentRepository,
         CompetencyRepository $competencyRepository,
         TalentRepository $talentRepository,
-    )
-    {
+    ) {
         $this->request = $request;
         $this->posted = $request->except('_token', '_method');
 
@@ -170,44 +169,29 @@ class ExportController extends Controller
         };
 
         // Housing
-        $housingComplex = DB::table('residences');
-        $housingComplex->join('users as u', 'u.residence_id', '=', 'residences.id');
-        $housingComplex->select('residences.name');
-        $housingComplex = $housingComplex->first();
         $complex = 'Luar';
         $complexName = '-';
-        if (isset($housingComplex->name) && $housingComplex->name != 'Luar Komplek') {
+        if ($employee->residence_name != 'Luar Komplek') {
             $complex = 'Dalam';
-            $complexName = $housingComplex->name;
+            $complexName = $employee->residence_name;
         }
-
-        //Grade Date
-        $gradeStartDate = $employee->grade_effective_date;
-        $gradeDate = new \DateTime($gradeStartDate);
-        $currentDate = new \DateTime();
-        $gradeDate = $currentDate->diff($gradeDate);
 
         // Batas Usia Pensiun
         $indonesianMonth = [
-            1=> 'Januari',
-            2=> 'Februari',
-            3=> 'Maret',
-            4=> 'April',
-            5=> 'Mei',
-            6=> 'Juni',
-            7=> 'Juli',
-            8=> 'Agustus',
-            9=> 'September',
-            10=> 'Oktober',
-            11=> 'November',
-            12=> 'Desember',
+            1 => 'Januari',
+            2 => 'Februari',
+            3 => 'Maret',
+            4 => 'April',
+            5 => 'Mei',
+            6 => 'Juni',
+            7 => 'Juli',
+            8 => 'Agustus',
+            9 => 'September',
+            10 => 'Oktober',
+            11 => 'November',
+            12 => 'Desember',
         ];
-        $retirementDate = '-';
-        if(!is_null($employee->retirement_age)){
-            $date = Carbon::createFromFormat('d-m-Y', $employee->retirement_age);
-            $retirementDate = $indonesianMonth[$date->format('n')].' '.$date->format('Y');
-        }
-        foreach($credits as $key => $value){
+        foreach ($credits as $key => $value) {
             $credits[$key]->start_month_name = $indonesianMonth[$value->start_month];
             $credits[$key]->end_month_name = $indonesianMonth[$value->end_month];
         }
@@ -224,9 +208,9 @@ class ExportController extends Controller
                 'Tingkat' => $educationLevel,
                 'Nama Sekolah/Universitas' => $employee->education_name,
                 'Tahun Lulus' => $employee->education_year,
-                'No. Karpeg/No. Karisu' => $employee->employee_id_card_number .' / '.$employee->karisu_number,
+                'No. Karpeg/No. Karisu' => $employee->employee_id_card_number . ' / ' . $employee->karisu_number,
                 'Masa Kerja Keseluruhan' => $employee->cpns_years_of_service,
-                'Masa Kerja Golongan' => $gradeDate->y . ' Tahun ' . $gradeDate->m . ' Bulan' . $gradeDate->d . ' Hari',
+                'Masa Kerja Golongan' => $employee->pns_years_of_service,
                 'NPWP' => $employee->id_tax,
                 'Status Pegawai' => ($employee->employment_status ? 'Aktif' : 'Tidak Aktif'),
                 'No NIK' => $employee->id_number,
@@ -240,10 +224,10 @@ class ExportController extends Controller
                 'Email' => $employee->email,
                 'Email Dinas' => $employee->office_email,
                 'Kontak Darurat' => $employee->emergency_contact,
-                'Batas Usia Pensiun' => $retirementDate,
+                'Batas Usia Pensiun' => $employee->retirement_age,
             ],
             'currentPosition' => ($employee->position_merged ?? '-'),
-            'photoProfile' => $this->getDocument($employee->photo_profile, true),
+            'photoProfile' => $employee->photo_profile,
             'userNIP' => $employee->employee_id_number,
             'userName' => $employee->name,
             'userEchelons' => ($employee->echelon_name ?? '') . ', ' . ($employee->echelon_effective_date ?? ' '),
@@ -272,7 +256,7 @@ class ExportController extends Controller
         $pdf->set_option('fontDir', $tmp);
         $pdf->set_option('fontCache', $tmp);
         $pdf->set_option('tempDir', $tmp);
-        return $pdf->download('user-pdf.pdf');
+        return $pdf->download($employee->name . ' - ' . $employee->employee_id_number . '.pdf');
     }
     /**
      * Export Detail DRH Employee
