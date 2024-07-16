@@ -220,7 +220,42 @@ class RecapitulationEmployeeController extends Controller
             IN
                 (1,6);
         ";
-        $users = DB::select($sql);
+
+        $sql2 = "
+            SELECT
+                u.id,
+                p.name as position_name,
+                u.photo_profile,
+                u.name,
+                u.title_prefix,
+                u.title_suffix,
+                e.name as echelon_name,
+                DATE_FORMAT(u.echelon_effective_date, '%d-%m-%Y') as echelon_effective_date,
+                g.name as grade_name,
+                g.code as grade_code,
+                DATE_FORMAT(u.grade_effective_date, '%d-%m-%Y') as grade_effective_date,
+                u.employee_id_number,
+                u.employee_registration_number,
+                u.type
+            FROM
+                users as u
+            LEFT JOIN positions p ON u.position_id=p.id
+            LEFT JOIN echelons e ON u.echelon_id=e.id
+            LEFT JOIN grades g ON u.grade_id=g.id
+            WHERE
+                u.employment_status
+            IN
+                (1,6)
+            AND
+                position_id = 2
+            ;
+        ";
+
+        if ($parentId == 2) {
+            $users = DB::select($sql2);
+        } else {
+            $users = DB::select($sql);
+        }
         foreach ($users as $item) {
             $item->photo_profile = $this->getDocument($item->photo_profile, true);
         }
