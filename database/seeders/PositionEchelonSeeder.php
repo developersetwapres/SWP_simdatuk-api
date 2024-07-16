@@ -17,7 +17,6 @@ class PositionEchelonSeeder extends Seeder
         $positionEchelons = [
             //jabatan fungsional
             [
-                'id' => 1,
                 'position_id' => 41,
                 'echelon_id' => 5,
                 'available' => 1,
@@ -25,7 +24,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 2,
                 'position_id' => 45,
                 'echelon_id' => 6,
                 'available' => 3,
@@ -33,15 +31,13 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 3,
                 'position_id' => 45,
                 'echelon_id' => 7,
-                'available' => 5,
+                'available' => 6,
                 'vertical_order' => 2,
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 4,
                 'position_id' => 45,
                 'echelon_id' => 8,
                 'available' => 2,
@@ -49,15 +45,13 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 5,
-                'position_id' => 193,
+                'position_id' => 47,
                 'echelon_id' => 7,
                 'available' => 1,
                 'vertical_order' => 1,
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 7,
                 'position_id' => 47,
                 'echelon_id' => 8,
                 'available' => 1,
@@ -65,7 +59,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 8,
                 'position_id' => 47,
                 'echelon_id' => 10,
                 'available' => 1,
@@ -73,7 +66,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 9,
                 'position_id' => 47,
                 'echelon_id' => 11,
                 'available' => 1,
@@ -81,15 +73,13 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 4,
             ],
             [
-                'id' => 10,
                 'position_id' => 47,
                 'echelon_id' => 12,
-                'available' => 1,
+                'available' => 2,
                 'vertical_order' => 1,
                 'horizontal_order' => 5,
             ],
             [
-                'id' => 11,
                 'position_id' => 49,
                 'echelon_id' => 6,
                 'available' => 3,
@@ -97,7 +87,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 12,
                 'position_id' => 49,
                 'echelon_id' => 7,
                 'available' => 4,
@@ -105,7 +94,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 13,
                 'position_id' => 49,
                 'echelon_id' => 8,
                 'available' => 2,
@@ -113,7 +101,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 14,
                 'position_id' => 194,
                 'echelon_id' => 7,
                 'available' => 1,
@@ -121,39 +108,41 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 15,
                 'position_id' => 51,
-                'echelon_id' => 8,
+                'echelon_id' => 7,
                 'available' => 1,
                 'vertical_order' => 1,
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 16,
                 'position_id' => 51,
-                'echelon_id' => 10,
+                'echelon_id' => 8,
                 'available' => 1,
                 'vertical_order' => 1,
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 17,
                 'position_id' => 51,
-                'echelon_id' => 11,
+                'echelon_id' => 10,
                 'available' => 1,
                 'vertical_order' => 1,
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 18,
                 'position_id' => 51,
-                'echelon_id' => 12,
+                'echelon_id' => 11,
                 'available' => 1,
                 'vertical_order' => 1,
                 'horizontal_order' => 4,
             ],
             [
-                'id' => 19,
+                'position_id' => 51,
+                'echelon_id' => 12,
+                'available' => 1,
+                'vertical_order' => 1,
+                'horizontal_order' => 5,
+            ],
+            [
                 'position_id' => 53,
                 'echelon_id' => 6,
                 'available' => 3,
@@ -161,15 +150,13 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 20,
                 'position_id' => 53,
                 'echelon_id' => 7,
-                'available' => 4,
+                'available' => 6,
                 'vertical_order' => 1,
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 21,
                 'position_id' => 53,
                 'echelon_id' => 8,
                 'available' => 2,
@@ -177,7 +164,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 22,
                 'position_id' => 55,
                 'echelon_id' => 7,
                 'available' => 1,
@@ -185,7 +171,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 23,
                 'position_id' => 55,
                 'echelon_id' => 8,
                 'available' => 1,
@@ -193,7 +178,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 24,
                 'position_id' => 55,
                 'echelon_id' => 10,
                 'available' => 1,
@@ -201,7 +185,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 25,
                 'position_id' => 55,
                 'echelon_id' => 11,
                 'available' => 1,
@@ -209,7 +192,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 4,
             ],
             [
-                'id' => 26,
                 'position_id' => 55,
                 'echelon_id' => 12,
                 'available' => 1,
@@ -217,7 +199,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 5,
             ],
             [
-                'id' => 27,
                 'position_id' => 58,
                 'echelon_id' => 5,
                 'available' => 1,
@@ -225,7 +206,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 28,
                 'position_id' => 62,
                 'echelon_id' => 6,
                 'available' => 3,
@@ -233,15 +213,13 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 29,
                 'position_id' => 62,
                 'echelon_id' => 7,
-                'available' => 4,
+                'available' => 6,
                 'vertical_order' => 1,
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 30,
                 'position_id' => 62,
                 'echelon_id' => 8,
                 'available' => 2,
@@ -249,47 +227,41 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 31,
-                'position_id' => 195,
+                'position_id' => 64,
                 'echelon_id' => 7,
                 'available' => 1,
                 'vertical_order' => 1,
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 32,
                 'position_id' => 64,
                 'echelon_id' => 8,
-                'available' => 1,
-                'vertical_order' => 1,
-                'horizontal_order' => 1,
-            ],
-            [
-                'id' => 33,
-                'position_id' => 64,
-                'echelon_id' => 10,
                 'available' => 1,
                 'vertical_order' => 1,
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 34,
                 'position_id' => 64,
-                'echelon_id' => 11,
+                'echelon_id' => 10,
                 'available' => 1,
                 'vertical_order' => 1,
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 35,
+                'position_id' => 64,
+                'echelon_id' => 11,
+                'available' => 1,
+                'vertical_order' => 1,
+                'horizontal_order' => 4,
+            ],
+            [
                 'position_id' => 64,
                 'echelon_id' => 12,
                 'available' => 1,
                 'vertical_order' => 1,
-                'horizontal_order' => 4,
+                'horizontal_order' => 5,
             ],
             [
-                'id' => 36,
                 'position_id' => 66,
                 'echelon_id' => 6,
                 'available' => 3,
@@ -297,15 +269,13 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 37,
                 'position_id' => 66,
                 'echelon_id' => 7,
-                'available' => 4,
+                'available' => 6,
                 'vertical_order' => 1,
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 38,
                 'position_id' => 66,
                 'echelon_id' => 8,
                 'available' => 2,
@@ -313,15 +283,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 39,
-                'position_id' => 196,
-                'echelon_id' => 7,
-                'available' => 1,
-                'vertical_order' => 1,
-                'horizontal_order' => 1,
-            ],
-            [
-                'id' => 40,
                 'position_id' => 69,
                 'echelon_id' => 6,
                 'available' => 3,
@@ -329,23 +290,20 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 41,
                 'position_id' => 69,
                 'echelon_id' => 7,
-                'available' => 4,
+                'available' => 6,
                 'vertical_order' => 1,
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 42,
                 'position_id' => 69,
                 'echelon_id' => 8,
-                'available' => 2,
+                'available' => 3,
                 'vertical_order' => 1,
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 43,
                 'position_id' => 71,
                 'echelon_id' => 7,
                 'available' => 1,
@@ -353,7 +311,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 44,
                 'position_id' => 71,
                 'echelon_id' => 8,
                 'available' => 1,
@@ -361,7 +318,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 45,
                 'position_id' => 71,
                 'echelon_id' => 10,
                 'available' => 1,
@@ -369,7 +325,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 46,
                 'position_id' => 71,
                 'echelon_id' => 11,
                 'available' => 1,
@@ -377,7 +332,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 4,
             ],
             [
-                'id' => 47,
                 'position_id' => 71,
                 'echelon_id' => 12,
                 'available' => 1,
@@ -385,7 +339,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 5,
             ],
             [
-                'id' => 48,
                 'position_id' => 74,
                 'echelon_id' => 5,
                 'available' => 1,
@@ -393,7 +346,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 49,
                 'position_id' => 79,
                 'echelon_id' => 6,
                 'available' => 3,
@@ -401,15 +353,13 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 50,
                 'position_id' => 79,
                 'echelon_id' => 7,
-                'available' => 4,
+                'available' => 6,
                 'vertical_order' => 1,
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 51,
                 'position_id' => 79,
                 'echelon_id' => 8,
                 'available' => 2,
@@ -417,47 +367,41 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 52,
-                'position_id' => 197,
+                'position_id' => 82,
                 'echelon_id' => 7,
                 'available' => 1,
                 'vertical_order' => 1,
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 53,
                 'position_id' => 82,
                 'echelon_id' => 8,
-                'available' => 1,
-                'vertical_order' => 1,
-                'horizontal_order' => 1,
-            ],
-            [
-                'id' => 54,
-                'position_id' => 82,
-                'echelon_id' => 10,
                 'available' => 1,
                 'vertical_order' => 1,
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 55,
                 'position_id' => 82,
-                'echelon_id' => 11,
+                'echelon_id' => 10,
                 'available' => 1,
                 'vertical_order' => 1,
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 56,
                 'position_id' => 82,
-                'echelon_id' => 12,
+                'echelon_id' => 11,
                 'available' => 1,
                 'vertical_order' => 1,
                 'horizontal_order' => 4,
             ],
             [
-                'id' => 57,
+                'position_id' => 82,
+                'echelon_id' => 12,
+                'available' => 1,
+                'vertical_order' => 1,
+                'horizontal_order' => 5,
+            ],
+            [
                 'position_id' => 84,
                 'echelon_id' => 6,
                 'available' => 3,
@@ -465,15 +409,13 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 58,
                 'position_id' => 84,
                 'echelon_id' => 7,
-                'available' => 4,
+                'available' => 6,
                 'vertical_order' => 1,
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 59,
                 'position_id' => 84,
                 'echelon_id' => 8,
                 'available' => 2,
@@ -481,15 +423,13 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 60,
-                'position_id' => 198,
+                'position_id' => 87,
                 'echelon_id' => 7,
                 'available' => 1,
                 'vertical_order' => 1,
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 61,
                 'position_id' => 87,
                 'echelon_id' => 8,
                 'available' => 1,
@@ -497,7 +437,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 62,
                 'position_id' => 87,
                 'echelon_id' => 10,
                 'available' => 1,
@@ -505,7 +444,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 63,
                 'position_id' => 87,
                 'echelon_id' => 11,
                 'available' => 1,
@@ -513,7 +451,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 64,
                 'position_id' => 87,
                 'echelon_id' => 12,
                 'available' => 1,
@@ -521,7 +458,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 4,
             ],
             [
-                'id' => 65,
                 'position_id' => 89,
                 'echelon_id' => 6,
                 'available' => 3,
@@ -529,15 +465,13 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 66,
                 'position_id' => 89,
                 'echelon_id' => 7,
-                'available' => 4,
+                'available' => 6,
                 'vertical_order' => 1,
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 67,
                 'position_id' => 89,
                 'echelon_id' => 8,
                 'available' => 2,
@@ -545,15 +479,13 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 68,
-                'position_id' => 199,
+                'position_id' => 91,
                 'echelon_id' => 7,
                 'available' => 1,
                 'vertical_order' => 1,
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 69,
                 'position_id' => 91,
                 'echelon_id' => 8,
                 'available' => 1,
@@ -561,7 +493,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 70,
                 'position_id' => 91,
                 'echelon_id' => 10,
                 'available' => 1,
@@ -569,7 +500,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 71,
                 'position_id' => 91,
                 'echelon_id' => 11,
                 'available' => 1,
@@ -577,7 +507,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 72,
                 'position_id' => 91,
                 'echelon_id' => 12,
                 'available' => 1,
@@ -585,7 +514,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 4,
             ],
             [
-                'id' => 73,
                 'position_id' => 93,
                 'echelon_id' => 6,
                 'available' => 3,
@@ -593,15 +521,13 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 74,
                 'position_id' => 93,
                 'echelon_id' => 7,
-                'available' => 4,
+                'available' => 6,
                 'vertical_order' => 1,
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 75,
                 'position_id' => 93,
                 'echelon_id' => 8,
                 'available' => 2,
@@ -609,7 +535,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 76,
                 'position_id' => 95,
                 'echelon_id' => 7,
                 'available' => 1,
@@ -617,7 +542,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 77,
                 'position_id' => 95,
                 'echelon_id' => 8,
                 'available' => 1,
@@ -625,7 +549,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 78,
                 'position_id' => 95,
                 'echelon_id' => 10,
                 'available' => 1,
@@ -633,7 +556,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 79,
                 'position_id' => 95,
                 'echelon_id' => 11,
                 'available' => 1,
@@ -641,7 +563,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 4,
             ],
             [
-                'id' => 80,
                 'position_id' => 95,
                 'echelon_id' => 12,
                 'available' => 1,
@@ -649,7 +570,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 5,
             ],
             [
-                'id' => 81,
                 'position_id' => 102,
                 'echelon_id' => 7,
                 'available' => 1,
@@ -657,7 +577,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 82,
                 'position_id' => 102,
                 'echelon_id' => 8,
                 'available' => 1,
@@ -665,31 +584,27 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 83,
                 'position_id' => 102,
-                'echelon_id' => 11,
+                'echelon_id' => 10,
                 'available' => 1,
                 'vertical_order' => 1,
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 84,
                 'position_id' => 102,
-                'echelon_id' => 12,
+                'echelon_id' => 11,
                 'available' => 1,
                 'vertical_order' => 1,
                 'horizontal_order' => 4,
             ],
             [
-                'id' => 85,
-                'position_id' => 103,
-                'echelon_id' => 6,
+                'position_id' => 102,
+                'echelon_id' => 12,
                 'available' => 1,
                 'vertical_order' => 1,
-                'horizontal_order' => 1,
+                'horizontal_order' => 5,
             ],
             [
-                'id' => 86,
                 'position_id' => 136,
                 'echelon_id' => 6,
                 'available' => 4,
@@ -697,7 +612,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 87,
                 'position_id' => 136,
                 'echelon_id' => 7,
                 'available' => 9,
@@ -705,7 +619,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 88,
                 'position_id' => 136,
                 'echelon_id' => 8,
                 'available' => 6,
@@ -713,7 +626,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 89,
                 'position_id' => 136,
                 'echelon_id' => 10,
                 'available' => 4,
@@ -721,15 +633,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 4,
             ],
             [
-                'id' => 90,
-                'position_id' => 136,
-                'echelon_id' => 11,
-                'available' => 4,
-                'vertical_order' => 1,
-                'horizontal_order' => 5,
-            ],
-            [
-                'id' => 91,
                 'position_id' => 136,
                 'echelon_id' => 12,
                 'available' => 4,
@@ -737,7 +640,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 6,
             ],
             [
-                'id' => 92,
                 'position_id' => 200,
                 'echelon_id' => 7,
                 'available' => 2,
@@ -745,7 +647,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 93,
                 'position_id' => 200,
                 'echelon_id' => 8,
                 'available' => 2,
@@ -753,7 +654,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 94,
                 'position_id' => 201,
                 'echelon_id' => 7,
                 'available' => 1,
@@ -761,7 +661,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 95,
                 'position_id' => 201,
                 'echelon_id' => 8,
                 'available' => 1,
@@ -769,7 +668,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 96,
                 'position_id' => 201,
                 'echelon_id' => 10,
                 'available' => 1,
@@ -777,7 +675,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 97,
                 'position_id' => 201,
                 'echelon_id' => 11,
                 'available' => 1,
@@ -785,7 +682,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 4,
             ],
             [
-                'id' => 98,
                 'position_id' => 201,
                 'echelon_id' => 12,
                 'available' => 1,
@@ -793,7 +689,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 5,
             ],
             [
-                'id' => 99,
                 'position_id' => 202,
                 'echelon_id' => 6,
                 'available' => 2,
@@ -801,7 +696,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 100,
                 'position_id' => 202,
                 'echelon_id' => 7,
                 'available' => 4,
@@ -809,7 +703,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 101,
                 'position_id' => 202,
                 'echelon_id' => 8,
                 'available' => 4,
@@ -817,7 +710,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 102,
                 'position_id' => 142,
                 'echelon_id' => 6,
                 'available' => 5,
@@ -825,15 +717,13 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 103,
                 'position_id' => 142,
                 'echelon_id' => 7,
-                'available' => 9,
+                'available' => 13,
                 'vertical_order' => 1,
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 104,
                 'position_id' => 142,
                 'echelon_id' => 8,
                 'available' => 6,
@@ -841,7 +731,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 105,
                 'position_id' => 203,
                 'echelon_id' => 6,
                 'available' => 2,
@@ -849,7 +738,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 106,
                 'position_id' => 203,
                 'echelon_id' => 7,
                 'available' => 4,
@@ -857,7 +745,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 107,
                 'position_id' => 203,
                 'echelon_id' => 8,
                 'available' => 3,
@@ -865,7 +752,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 108,
                 'position_id' => 204,
                 'echelon_id' => 7,
                 'available' => 1,
@@ -873,7 +759,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 109,
                 'position_id' => 204,
                 'echelon_id' => 8,
                 'available' => 1,
@@ -881,7 +766,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 110,
                 'position_id' => 204,
                 'echelon_id' => 10,
                 'available' => 1,
@@ -889,7 +773,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 111,
                 'position_id' => 204,
                 'echelon_id' => 11,
                 'available' => 1,
@@ -897,7 +780,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 4,
             ],
             [
-                'id' => 112,
                 'position_id' => 204,
                 'echelon_id' => 12,
                 'available' => 1,
@@ -905,15 +787,13 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 5,
             ],
             [
-                'id' => 113,
                 'position_id' => 147,
                 'echelon_id' => 6,
-                'available' => 1,
+                'available' => 3,
                 'vertical_order' => 1,
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 114,
                 'position_id' => 147,
                 'echelon_id' => 7,
                 'available' => 4,
@@ -921,7 +801,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 115,
                 'position_id' => 147,
                 'echelon_id' => 8,
                 'available' => 4,
@@ -929,7 +808,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 116,
                 'position_id' => 206,
                 'echelon_id' => 6,
                 'available' => 1,
@@ -937,15 +815,13 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 117,
                 'position_id' => 206,
                 'echelon_id' => 7,
-                'available' => 4,
+                'available' => 5,
                 'vertical_order' => 1,
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 118,
                 'position_id' => 206,
                 'echelon_id' => 8,
                 'available' => 5,
@@ -953,7 +829,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 119,
                 'position_id' => 207,
                 'echelon_id' => 6,
                 'available' => 2,
@@ -961,7 +836,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 120,
                 'position_id' => 150,
                 'echelon_id' => 7,
                 'available' => 5,
@@ -969,7 +843,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 121,
                 'position_id' => 150,
                 'echelon_id' => 8,
                 'available' => 2,
@@ -977,7 +850,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 122,
                 'position_id' => 150,
                 'echelon_id' => 10,
                 'available' => 2,
@@ -985,15 +857,13 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 123,
                 'position_id' => 150,
                 'echelon_id' => 11,
-                'available' => 3,
+                'available' => 4,
                 'vertical_order' => 1,
                 'horizontal_order' => 4,
             ],
             [
-                'id' => 124,
                 'position_id' => 150,
                 'echelon_id' => 12,
                 'available' => 2,
@@ -1001,7 +871,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 5,
             ],
             [
-                'id' => 125,
                 'position_id' => 158,
                 'echelon_id' => 8,
                 'available' => 1,
@@ -1009,7 +878,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 126,
                 'position_id' => 158,
                 'echelon_id' => 10,
                 'available' => 1,
@@ -1017,7 +885,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 127,
                 'position_id' => 158,
                 'echelon_id' => 11,
                 'available' => 1,
@@ -1025,7 +892,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 128,
                 'position_id' => 158,
                 'echelon_id' => 12,
                 'available' => 1,
@@ -1033,15 +899,13 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 4,
             ],
             [
-                'id' => 129,
                 'position_id' => 162,
                 'echelon_id' => 6,
-                'available' => 1,
+                'available' => 2,
                 'vertical_order' => 1,
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 130,
                 'position_id' => 162,
                 'echelon_id' => 7,
                 'available' => 6,
@@ -1049,15 +913,13 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 131,
                 'position_id' => 162,
                 'echelon_id' => 8,
-                'available' => 1,
+                'available' => 6,
                 'vertical_order' => 1,
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 132,
                 'position_id' => 205,
                 'echelon_id' => 10,
                 'available' => 4,
@@ -1065,7 +927,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 133,
                 'position_id' => 205,
                 'echelon_id' => 11,
                 'available' => 7,
@@ -1073,31 +934,27 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 134,
                 'position_id' => 205,
                 'echelon_id' => 12,
-                'available' => 5,
+                'available' => 6,
                 'vertical_order' => 1,
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 135,
                 'position_id' => 208,
                 'echelon_id' => 10,
-                'available' => 3,
+                'available' => 1,
                 'vertical_order' => 1,
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 136,
                 'position_id' => 208,
                 'echelon_id' => 11,
-                'available' => 3,
+                'available' => 2,
                 'vertical_order' => 1,
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 137,
                 'position_id' => 208,
                 'echelon_id' => 12,
                 'available' => 2,
@@ -1107,7 +964,6 @@ class PositionEchelonSeeder extends Seeder
 
             //jabatan fungsional
             [
-                'id' => 138,
                 'position_id' => 2,
                 'echelon_id' => 1,
                 'available' => 1,
@@ -1115,7 +971,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 139,
                 'position_id' => 38,
                 'echelon_id' => 1,
                 'available' => 1,
@@ -1123,7 +978,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 140,
                 'position_id' => 39,
                 'echelon_id' => 1,
                 'available' => 1,
@@ -1131,7 +985,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 141,
                 'position_id' => 40,
                 'echelon_id' => 1,
                 'available' => 1,
@@ -1139,7 +992,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 4,
             ],
             [
-                'id' => 142,
                 'position_id' => 42,
                 'echelon_id' => 2,
                 'available' => 1,
@@ -1147,7 +999,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 143,
                 'position_id' => 43,
                 'echelon_id' => 2,
                 'available' => 1,
@@ -1155,7 +1006,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 144,
                 'position_id' => 44,
                 'echelon_id' => 2,
                 'available' => 1,
@@ -1163,7 +1013,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 4,
             ],
             [
-                'id' => 145,
                 'position_id' => 46,
                 'echelon_id' => 4,
                 'available' => 1,
@@ -1171,7 +1020,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 146,
                 'position_id' => 50,
                 'echelon_id' => 4,
                 'available' => 1,
@@ -1179,7 +1027,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 147,
                 'position_id' => 54,
                 'echelon_id' => 3,
                 'available' => 1,
@@ -1187,7 +1034,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 148,
                 'position_id' => 59,
                 'echelon_id' => 2,
                 'available' => 1,
@@ -1195,7 +1041,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 149,
                 'position_id' => 60,
                 'echelon_id' => 2,
                 'available' => 1,
@@ -1203,7 +1048,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 150,
                 'position_id' => 61,
                 'echelon_id' => 2,
                 'available' => 1,
@@ -1211,15 +1055,13 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 4,
             ],
             [
-                'id' => 151,
                 'position_id' => 63,
-                'echelon_id' => 3, //previously was 4
+                'echelon_id' => 4,
                 'available' => 1,
                 'vertical_order' => 1,
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 152,
                 'position_id' => 67,
                 'echelon_id' => 4,
                 'available' => 1,
@@ -1227,7 +1069,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 153,
                 'position_id' => 70,
                 'echelon_id' => 3,
                 'available' => 1,
@@ -1235,7 +1076,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 154,
                 'position_id' => 75,
                 'echelon_id' => 2,
                 'available' => 1,
@@ -1243,7 +1083,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 155,
                 'position_id' => 76,
                 'echelon_id' => 2,
                 'available' => 1,
@@ -1251,7 +1090,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 156,
                 'position_id' => 77,
                 'echelon_id' => 2,
                 'available' => 1,
@@ -1259,7 +1097,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 4,
             ],
             [
-                'id' => 157,
                 'position_id' => 78,
                 'echelon_id' => 2,
                 'available' => 1,
@@ -1267,7 +1104,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 5,
             ],
             [
-                'id' => 158,
                 'position_id' => 80,
                 'echelon_id' => 4,
                 'available' => 1,
@@ -1275,7 +1111,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 159,
                 'position_id' => 85,
                 'echelon_id' => 4,
                 'available' => 1,
@@ -1283,7 +1118,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 160,
                 'position_id' => 90,
                 'echelon_id' => 4,
                 'available' => 1,
@@ -1291,7 +1125,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 161,
                 'position_id' => 94,
                 'echelon_id' => 3, //previously was 4
                 'available' => 1,
@@ -1299,7 +1132,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 162,
                 'position_id' => 97,
                 'echelon_id' => 2,
                 'available' => 1,
@@ -1307,7 +1139,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 163,
                 'position_id' => 98,
                 'echelon_id' => 2,
                 'available' => 1,
@@ -1315,7 +1146,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 164,
                 'position_id' => 99,
                 'echelon_id' => 2,
                 'available' => 1,
@@ -1323,7 +1153,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 165,
                 'position_id' => 100,
                 'echelon_id' => 2,
                 'available' => 1,
@@ -1331,7 +1160,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 4,
             ],
             [
-                'id' => 166,
                 'position_id' => 101,
                 'echelon_id' => 2,
                 'available' => 1,
@@ -1339,7 +1167,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 5,
             ],
             [
-                'id' => 167,
                 'position_id' => 105,
                 'echelon_id' => 3,
                 'available' => 1,
@@ -1347,7 +1174,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 4,
             ],
             [
-                'id' => 168,
                 'position_id' => 106,
                 'echelon_id' => 3,
                 'available' => 1,
@@ -1355,7 +1181,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 5,
             ],
             [
-                'id' => 169,
                 'position_id' => 107,
                 'echelon_id' => 4,
                 'available' => 1,
@@ -1363,7 +1188,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 170,
                 'position_id' => 108,
                 'echelon_id' => 4,
                 'available' => 1,
@@ -1371,7 +1195,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 171,
                 'position_id' => 109,
                 'echelon_id' => 4,
                 'available' => 1,
@@ -1379,7 +1202,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 172,
                 'position_id' => 110,
                 'echelon_id' => 9,
                 'available' => 1,
@@ -1387,15 +1209,13 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 173,
                 'position_id' => 111,
                 'echelon_id' => 9,
-                'available' => 11,
+                'available' => 12,
                 'vertical_order' => 1,
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 174,
                 'position_id' => 112,
                 'echelon_id' => 9,
                 'available' => 4,
@@ -1403,7 +1223,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 175,
                 'position_id' => 113,
                 'echelon_id' => 9,
                 'available' => 11,
@@ -1411,15 +1230,13 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 176,
                 'position_id' => 114,
-                'echelon_id' => null, //previously was 9
+                'echelon_id' => 9,
                 'available' => 2,
                 'vertical_order' => 1,
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 177,
                 'position_id' => 116,
                 'echelon_id' => 9,
                 'available' => 1,
@@ -1427,7 +1244,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 178,
                 'position_id' => 117,
                 'echelon_id' => 4,
                 'available' => 1,
@@ -1435,7 +1251,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 179,
                 'position_id' => 118,
                 'echelon_id' => 4,
                 'available' => 1,
@@ -1443,7 +1258,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 180,
                 'position_id' => 119,
                 'echelon_id' => 4,
                 'available' => 1,
@@ -1451,31 +1265,27 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 181,
                 'position_id' => 120,
                 'echelon_id' => 9,
-                'available' => 1,
+                'available' => 2,
                 'vertical_order' => 1,
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 182,
                 'position_id' => 121,
                 'echelon_id' => 9,
-                'available' => 3,
+                'available' => 6,
                 'vertical_order' => 1,
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 183,
                 'position_id' => 124,
                 'echelon_id' => 9,
-                'available' => 3,
+                'available' => 5,
                 'vertical_order' => 1,
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 184,
                 'position_id' => 125,
                 'echelon_id' => 9,
                 'available' => 1,
@@ -1483,7 +1293,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 185,
                 'position_id' => 126,
                 'echelon_id' => 9,
                 'available' => 2,
@@ -1491,7 +1300,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 186,
                 'position_id' => 127,
                 'echelon_id' => 9,
                 'available' => 2,
@@ -1499,7 +1307,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 187,
                 'position_id' => 128,
                 'echelon_id' => 4,
                 'available' => 1,
@@ -1507,15 +1314,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 188,
-                'position_id' => 129,
-                'echelon_id' => 4,
-                'available' => 1,
-                'vertical_order' => 1,
-                'horizontal_order' => 2,
-            ],
-            [
-                'id' => 189,
                 'position_id' => 130,
                 'echelon_id' => 4,
                 'available' => 1,
@@ -1523,23 +1321,20 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 190,
                 'position_id' => 132,
                 'echelon_id' => 9,
-                'available' => 2,
+                'available' => 3,
                 'vertical_order' => 1,
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 191,
                 'position_id' => 134,
                 'echelon_id' => 9,
-                'available' => 2,
+                'available' => 3,
                 'vertical_order' => 1,
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 192,
                 'position_id' => 135,
                 'echelon_id' => 9,
                 'available' => 1,
@@ -1547,15 +1342,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 193,
-                'position_id' => 138,
-                'echelon_id' => 4, //previously was 9
-                'available' => 1,
-                'vertical_order' => 1,
-                'horizontal_order' => 6,
-            ],
-            [
-                'id' => 194,
                 'position_id' => 139,
                 'echelon_id' => 9,
                 'available' => 1,
@@ -1563,23 +1349,20 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 7,
             ],
             [
-                'id' => 195,
                 'position_id' => 140,
                 'echelon_id' => 9,
-                'available' => 3,
+                'available' => 6,
                 'vertical_order' => 1,
                 'horizontal_order' => 8,
             ],
             [
-                'id' => 196,
                 'position_id' => 141,
                 'echelon_id' => 9,
-                'available' => 2,
+                'available' => 4,
                 'vertical_order' => 1,
                 'horizontal_order' => 9,
             ],
             [
-                'id' => 197,
                 'position_id' => 145,
                 'echelon_id' => 9,
                 'available' => 4,
@@ -1587,23 +1370,13 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 6,
             ],
             [
-                'id' => 198,
                 'position_id' => 146,
                 'echelon_id' => 9,
-                'available' => 1,
+                'available' => 3,
                 'vertical_order' => 1,
                 'horizontal_order' => 7,
             ],
             [
-                'id' => 199,
-                'position_id' => 148,
-                'echelon_id' => 9,
-                'available' => 4,
-                'vertical_order' => 1,
-                'horizontal_order' => 4,
-            ],
-            [
-                'id' => 200,
                 'position_id' => 149,
                 'echelon_id' => 3,
                 'available' => 1,
@@ -1611,7 +1384,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 5,
             ],
             [
-                'id' => 201,
                 'position_id' => 151,
                 'echelon_id' => 4,
                 'available' => 1,
@@ -1619,31 +1391,20 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 202,
                 'position_id' => 153,
                 'echelon_id' => 9,
-                'available' => 2,
+                'available' => 7,
                 'vertical_order' => 1,
                 'horizontal_order' => 4,
             ],
             [
-                'id' => 203,
                 'position_id' => 154,
                 'echelon_id' => 9,
-                'available' => 3,
+                'available' => 4,
                 'vertical_order' => 1,
                 'horizontal_order' => 5,
             ],
             [
-                'id' => 204,
-                'position_id' => 155,
-                'echelon_id' => 9,
-                'available' => 1,
-                'vertical_order' => 1,
-                'horizontal_order' => 6,
-            ],
-            [
-                'id' => 205,
                 'position_id' => 157,
                 'echelon_id' => 9,
                 'available' => 1,
@@ -1651,7 +1412,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 206,
                 'position_id' => 159,
                 'echelon_id' => 3,
                 'available' => 1,
@@ -1659,7 +1419,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 207,
                 'position_id' => 160,
                 'echelon_id' => 3,
                 'available' => 1,
@@ -1667,7 +1426,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 208,
                 'position_id' => 161,
                 'echelon_id' => 3,
                 'available' => 1,
@@ -1675,23 +1433,41 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 4,
             ],
             [
-                'id' => 209,
-                'position_id' => 164,
-                'echelon_id' => 9,
-                'available' => 2,
+                'position_id' => 163,
+                'echelon_id' => 10,
+                'available' => 1,
+                'vertical_order' => 1,
+                'horizontal_order' => 1,
+            ],
+            [
+                'position_id' => 163,
+                'echelon_id' => 11,
+                'available' => 1,
+                'vertical_order' => 1,
+                'horizontal_order' => 2,
+            ],
+            [
+                'position_id' => 163,
+                'echelon_id' => 12,
+                'available' => 1,
                 'vertical_order' => 1,
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 210,
+                'position_id' => 164,
+                'echelon_id' => 9,
+                'available' => 1,
+                'vertical_order' => 1,
+                'horizontal_order' => 3,
+            ],
+            [
                 'position_id' => 166,
                 'echelon_id' => 9,
-                'available' => 3,
+                'available' => 6,
                 'vertical_order' => 1,
                 'horizontal_order' => 5,
             ],
             [
-                'id' => 211,
                 'position_id' => 167,
                 'echelon_id' => 4,
                 'available' => 1,
@@ -1699,7 +1475,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 212,
                 'position_id' => 168,
                 'echelon_id' => 4,
                 'available' => 1,
@@ -1707,7 +1482,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 213,
                 'position_id' => 169,
                 'echelon_id' => 4,
                 'available' => 1,
@@ -1715,7 +1489,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 214,
                 'position_id' => 170,
                 'echelon_id' => 9,
                 'available' => 1,
@@ -1723,7 +1496,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 215,
                 'position_id' => 172,
                 'echelon_id' => 9,
                 'available' => 1,
@@ -1731,7 +1503,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 216,
                 'position_id' => 174,
                 'echelon_id' => 9,
                 'available' => 2,
@@ -1739,7 +1510,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 217,
                 'position_id' => 176,
                 'echelon_id' => 9,
                 'available' => 2,
@@ -1747,7 +1517,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 218,
                 'position_id' => 178,
                 'echelon_id' => 4,
                 'available' => 1,
@@ -1755,7 +1524,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 219,
                 'position_id' => 179,
                 'echelon_id' => 4,
                 'available' => 1,
@@ -1763,7 +1531,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 220,
                 'position_id' => 183,
                 'echelon_id' => 9,
                 'available' => 1,
@@ -1771,7 +1538,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 221,
                 'position_id' => 184,
                 'echelon_id' => 9,
                 'available' => 2,
@@ -1779,15 +1545,13 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 222,
                 'position_id' => 185,
                 'echelon_id' => 9,
-                'available' => 8,
+                'available' => 11,
                 'vertical_order' => 1,
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 223,
                 'position_id' => 187,
                 'echelon_id' => 9,
                 'available' => 1,
@@ -1795,7 +1559,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 224,
                 'position_id' => 188,
                 'echelon_id' => 9,
                 'available' => 15,
@@ -1803,23 +1566,13 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 225,
                 'position_id' => 189,
-                'echelon_id' => 6,
+                'echelon_id' => 7,
                 'available' => 1,
                 'vertical_order' => 1,
                 'horizontal_order' => 1,
             ],
             [
-                'id' => 226,
-                'position_id' => 190,
-                'echelon_id' => 6,
-                'available' => 1,
-                'vertical_order' => 1,
-                'horizontal_order' => 2,
-            ],
-            [
-                'id' => 227,
                 'position_id' => 191,
                 'echelon_id' => 8,
                 'available' => 1,
@@ -1827,31 +1580,20 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 228,
                 'position_id' => 192,
                 'echelon_id' => 7,
-                'available' => 2,
+                'available' => 1,
                 'vertical_order' => 1,
                 'horizontal_order' => 4,
             ],
             [
-                'id' => 229,
                 'position_id' => 182,
                 'echelon_id' => 9,
-                'available' => 1,
+                'available' => 2,
                 'vertical_order' => 1,
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 230,
-                'position_id' => 210,
-                'echelon_id' => 7,
-                'available' => 1,
-                'vertical_order' => 1,
-                'horizontal_order' => 2,
-            ],
-            [
-                'id' => 231,
                 'position_id' => 211,
                 'echelon_id' => 12,
                 'available' => 1,
@@ -1859,7 +1601,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 232,
                 'position_id' => 213,
                 'echelon_id' => 4,
                 'available' => 1,
@@ -1867,7 +1608,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
-                'id' => 233,
                 'position_id' => 214,
                 'echelon_id' => 6,
                 'available' => 1,
@@ -1875,7 +1615,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 3,
             ],
             [
-                'id' => 234,
                 'position_id' => 215,
                 'echelon_id' => 6,
                 'available' => 1,
@@ -1883,7 +1622,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 4,
             ],
             [
-                'id' => 235,
                 'position_id' => 216,
                 'echelon_id' => 10,
                 'available' => 1,
@@ -1891,7 +1629,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 5,
             ],
             [
-                'id' => 236,
                 'position_id' => 217,
                 'echelon_id' => 11,
                 'available' => 2,
@@ -1899,7 +1636,6 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 6,
             ],
             [
-                'id' => 237,
                 'position_id' => 218,
                 'echelon_id' => 12,
                 'available' => 1,
@@ -1907,12 +1643,46 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 7,
             ],
             [
-                'id' => 238,
                 'position_id' => 37,
                 'echelon_id' => 1,
                 'available' => 1,
                 'vertical_order' => 1,
                 'horizontal_order' => 1,
+            ],
+            [
+                'position_id' => 232,
+                'echelon_id' => 7,
+                'available' => 1,
+                'vertical_order' => 1,
+                'horizontal_order' => 1,
+            ],
+            [
+                'position_id' => 232,
+                'echelon_id' => 8,
+                'available' => 1,
+                'vertical_order' => 1,
+                'horizontal_order' => 2,
+            ],
+            [
+                'position_id' => 232,
+                'echelon_id' => 10,
+                'available' => 1,
+                'vertical_order' => 1,
+                'horizontal_order' => 3,
+            ],
+            [
+                'position_id' => 232,
+                'echelon_id' => 11,
+                'available' => 1,
+                'vertical_order' => 1,
+                'horizontal_order' => 4,
+            ],
+            [
+                'position_id' => 232,
+                'echelon_id' => 12,
+                'available' => 1,
+                'vertical_order' => 1,
+                'horizontal_order' => 5,
             ],
         ];
 
