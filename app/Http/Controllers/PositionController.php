@@ -265,6 +265,7 @@ class PositionController extends Controller
             $positionEchelons = DB::table('position_echelons')
                 ->select(
                     'position_echelons.id',
+                    'echelons.id as echelon_id',
                     'echelons.name',
                     'position_echelons.available',
                     'position_echelons.position_id'
@@ -324,9 +325,35 @@ class PositionController extends Controller
                 return $this->response(404, 'Jabatan tidak ditemukan.');
             }
 
-            //modify request
+            // check if reduction available
             if (sizeof($this->request->position_echelons)) {
+                foreach ($this->request->position_echelons as $key => $value) {
+                    $countAvailable = DB::table('users as u')
+                        ->where('u.position_id', $this->request->id)
+                        ->where('u.echelon_id', $value['echelon_id'])
+                        ->count();
+
+                    if ($countAvailable > $value['available']) {
+                        $echelon = DB::table('echelons as e')
+                            ->select('e.name')
+                            ->where('e.id', $value['echelon_id'])
+                            ->first();
+                        return $this->response(404, 'Eselon ' . $echelon->name . ' sudah terisi ' . $countAvailable . ' orang.');
+                    }
+                }
+                //modify request
                 $this->request->merge(['available' => 0]);
+            } else {
+                $countAvailable = DB::table('users as u')
+                    ->where('u.position_id', $this->request->id)
+                    ->count();
+
+                if ($countAvailable > $this->request->available) {
+                    $countAvailable = DB::table('users as u')
+                        ->where('u.position_id', $this->request->id)
+                        ->count();
+                    return $this->response(404, 'Posisi sudah terisi ' . $countAvailable . ' orang.');
+                }
             }
 
             if (is_null($this->request->parent_id)) {

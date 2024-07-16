@@ -482,6 +482,54 @@ class EmployeeController extends Controller
                 unset($this->posted['photo_profile']);
             }
 
+            if (isset($this->posted['position_id'])) {
+                $existsPosition = DB::table('positions')
+                    ->where('id', $this->posted['position_id'])
+                    ->first();
+
+                if (!$existsPosition) {
+                    return $this->response(404, 'Jabatan tidak ditemukan.');
+                }
+
+                $availablePosition = $existsPosition->available;
+
+                if (isset($this->posted['echelon_id']) && ($existsPosition->type == 2 || $availablePosition == 0)) {
+                    $existsPositionEchelon = DB::table('position_echelons')
+                        ->where('position_id', $this->posted['position_id']);
+
+                    if ($existsPosition->type == 2) {
+                        $existsPositionEchelon->where('echelon_id', $this->posted['echelon_id']);
+                    }
+
+                    $existsPositionEchelon = $existsPositionEchelon->first();
+
+                    if (!$existsPositionEchelon) {
+                        if ($existsPosition->type == 2) {
+                            return $this->response(404, 'Jabatan untuk eselon ini tidak ditemukan!');
+                        } else {
+                            return $this->response(404, 'Jabatan tidak tersedia.');
+                        }
+                    } else if ($existsPositionEchelon->available == 0) {
+                        if ($existsPosition->type == 2) {
+                            return $this->response(404, 'Jabatan untuk eselon ini tidak tersedia!');
+                        } else {
+                            return $this->response(404, 'Jabatan tidak tersedia.');
+                        }
+                    }
+
+                    $availablePosition = $existsPositionEchelon->available;
+                }
+
+                $countExistsPosition = DB::table('users')
+                    ->where('position_id', $this->posted['position_id'])
+                    ->where('id', '!=', $this->request->id)
+                    ->count();
+
+                if ($availablePosition <= $countExistsPosition) {
+                    return $this->response(404, 'Jabatan sudah terisi seluruhnya.');
+                }
+            }
+
             $user = DB::table('users');
             $user->where('id', $this->request->id);
 
