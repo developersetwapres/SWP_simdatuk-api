@@ -458,9 +458,11 @@ class ExportController extends Controller
                 11 => 'November',
                 12 => 'Desember',
             ];
-            foreach ($credits[$employeeId] as $key => $value) {
-                    $credits[$employeeId][$key]->start_month_name = ($value->start_month) ? $indonesianMonth[$value->start_month] : '';
-                    $credits[$employeeId][$key]->end_month_name = ($value->end_month) ? $indonesianMonth[$value->end_month] : '';
+            if(isset($credits[$employeeId])){
+                foreach ($credits[$employeeId] as $key => $value) {
+                        $credits[$employeeId][$key]->start_month_name = ($value->start_month) ? $indonesianMonth[$value->start_month] : '';
+                        $credits[$employeeId][$key]->end_month_name = ($value->end_month) ? $indonesianMonth[$value->end_month] : '';
+                }
             }
     
             $tmp = sys_get_temp_dir();
