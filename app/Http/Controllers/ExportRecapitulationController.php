@@ -189,7 +189,7 @@ class ExportRecapitulationController extends Controller
                 'type' => 2,
             ],
             [
-                'title' => 'Cuti Diluar Tanggungan Negara (CLTN)',
+                'title' => 'Cuti di Luar Tanggungan Negara (CLTN)',
                 'body' => $nonActive->cltn,
                 'type' => 2,
             ],
@@ -459,7 +459,7 @@ class ExportRecapitulationController extends Controller
                 'type' => 2,
             ],
             [
-                'title' => 'Cuti Diluar Tanggungan Negara (CLTN)',
+                'title' => 'Cuti di Luar Tanggungan Negara (CLTN)',
                 'body' => $nonActive->cltn,
                 'type' => 2,
             ],

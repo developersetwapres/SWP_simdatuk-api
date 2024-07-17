@@ -255,7 +255,7 @@ class RecapitulationController extends Controller
                         ],
                         [
                             "id" => 7,
-                            "name" => "Cuti Diluar Tanggungan Negara (CLTN)",
+                            "name" => "Cuti di Luar Tanggungan Negara (CLTN)",
                             "total" => $nonActive->cltn,
                         ],
                         [
