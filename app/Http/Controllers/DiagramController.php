@@ -159,6 +159,7 @@ class DiagramController extends Controller
             )
             ->leftJoin('position_echelons', 'positions.id', '=', 'position_echelons.position_id')
             ->where('positions.type', '!=', 3)
+            ->where('positions.type', '!=', 4)
             ->orderBy('positions.vertical_order')
             ->orderBy('positions.horizontal_order')
             ->orderBy('position_echelons.vertical_order')
