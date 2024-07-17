@@ -29,6 +29,7 @@ class CreatePositionRequest extends FormRequest
             'type' => 'required|in:1,2,3',
             'entity' => 'required|in:1,2',
             'order' => 'required|numeric',
+            'status' => 'boolean|nullable',
         ];
         return array_merge(
             $userRules,
@@ -54,6 +55,7 @@ class CreatePositionRequest extends FormRequest
             'entity.in' => 'Entity harus diantara 1 atau 2.',
             'order.required' => 'Order tidak boleh kosong.',
             'order.numeric' => 'Order harus berupa angka.',
+            'status.boolean' => 'Status harus berupa boolean.',
         ];
 
         return array_merge(
@@ -92,6 +94,10 @@ class CreatePositionRequest extends FormRequest
             ],
             'order' => [
                 'description' => 'Refers to the Order placing position on graph.',
+                'example' => 1,
+            ],
+            'status' => [
+                'description' => 'Refers to the Status for dislay to graph.',
                 'example' => 1,
             ],
         ];

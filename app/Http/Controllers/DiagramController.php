@@ -159,7 +159,7 @@ class DiagramController extends Controller
             )
             ->leftJoin('position_echelons', 'positions.id', '=', 'position_echelons.position_id')
             ->where('positions.type', '!=', 3)
-            ->where('positions.type', '!=', 4)
+            ->where('positions.status', true)
             ->orderBy('positions.vertical_order')
             ->orderBy('positions.horizontal_order')
             ->orderBy('position_echelons.vertical_order')
@@ -236,7 +236,7 @@ class DiagramController extends Controller
                 $positionWithEmptySlot->push($position);
 
                 if ($position->available > 1) {
-                    $placeholder = (object)[
+                    $placeholder = (object) [
                         "id" => $position->id,
                         "name" => $position->name,
                         "type" => $position->type,
@@ -251,7 +251,7 @@ class DiagramController extends Controller
                         "grade_name" => null,
                         "employee_id_number" => null,
                         "employee_registration_number" => null,
-                        "children" => []
+                        "children" => [],
                     ];
                     if ($position->entity == 1 && $position->type == 1 && $positionId != $position->id) {
                         $count = collect($positions)->where('id', $position->id);

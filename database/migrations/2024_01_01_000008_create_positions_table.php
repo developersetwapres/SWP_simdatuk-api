@@ -20,6 +20,7 @@ return new class extends Migration
             $table->tinyInteger('entity')->comment('1=personil, 2=badan');
             $table->tinyInteger('vertical_order')->default(0);
             $table->tinyInteger('horizontal_order')->default(0);
+            $table->boolean('status')->default(true);
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
         });

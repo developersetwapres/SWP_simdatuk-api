@@ -2843,6 +2843,7 @@ class PositionSeeder extends Seeder
                 'entity' => 1,
                 'vertical_order' => 0,
                 'horizontal_order' => 0,
+                'status' => false,
             ];
             array_push($data, $array);
         }
@@ -2851,6 +2852,17 @@ class PositionSeeder extends Seeder
 
     private function insertPerbantuanTimPosition()
     {
+        $id = DB::table('positions')->insertGetIdTs([
+            'parent_id' => null,
+            'name' => 'Perbantuan Tim',
+            'available' => 0,
+            'type' => 2,
+            'entity' => 2,
+            'vertical_order' => 1,
+            'horizontal_order' => 1,
+            'status' => false,
+        ]);
+
         $positions = [
             "Sekretariat Staf Khusus Wakil Presiden (PTT dari Setkab)/ Pramubakti",
             "Sekretariat Staf Khusus Wakil Presiden (PTT dari Setkab)",
@@ -2933,12 +2945,14 @@ class PositionSeeder extends Seeder
         $data = array();
         foreach ($positions as $item) {
             $array = [
+                'parent_id' => $id,
                 'name' => $item,
                 'available' => 0,
-                'type' => 4,
+                'type' => 2,
                 'entity' => 1,
                 'vertical_order' => 0,
                 'horizontal_order' => 0,
+                'status' => false,
             ];
             array_push($data, $array);
         }

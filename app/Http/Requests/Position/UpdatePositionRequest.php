@@ -29,6 +29,7 @@ class UpdatePositionRequest extends FormRequest
             'type' => 'required|in:1,2,3',
             'entity' => 'required|in:1,2',
             'order' => 'required|numeric',
+            'status' => 'boolean|nullable',
             'deleted_echelon_id' => 'nullable|array',
         ];
         return array_merge(
@@ -55,6 +56,7 @@ class UpdatePositionRequest extends FormRequest
             'entity.in' => 'Entity harus diantara 1 atau 2.',
             'order.required' => 'Order tidak boleh kosong.',
             'order.numeric' => 'Order harus berupa angka.',
+            'status.boolean' => 'Status harus berupa boolean.',
             'deleted_echelon_id.array' => 'Format deleted_echelon_id adalah array, contoh [1,2,3].',
         ];
 
@@ -94,6 +96,10 @@ class UpdatePositionRequest extends FormRequest
             ],
             'order' => [
                 'description' => 'Refers to the Order placing position on graph.',
+                'example' => 1,
+            ],
+            'status' => [
+                'description' => 'Refers to the Status for display to graph.',
                 'example' => 1,
             ],
             'deleted_echelon_id' => [

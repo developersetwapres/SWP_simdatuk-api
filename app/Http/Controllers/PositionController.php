@@ -91,7 +91,7 @@ class PositionController extends Controller
             foreach ($positions as $position) {
                 $position->type = [
                     "id" => $position->type,
-                    "name" => $position->type == 1 ? 'Struktural' : ($position->type == 2 ? 'Fungsional' : 'Outsource')
+                    "name" => $position->type == 1 ? 'Struktural' : ($position->type == 2 ? 'Fungsional' : 'Outsource'),
                 ];
 
                 $shownHierarcy = '';
@@ -234,7 +234,8 @@ class PositionController extends Controller
                     'entity',
                     'vertical_order',
                     'horizontal_order',
-                    'parent_id'
+                    'parent_id',
+                    'status'
                 )
                 ->where('id', $this->request->id)
                 ->first();
@@ -247,12 +248,12 @@ class PositionController extends Controller
 
             $position->type = [
                 "id" => $position->type,
-                "name" => $position->type == 1 ? 'Struktural' : ($position->type == 2 ? 'Fungsional' : 'Outsource')
+                "name" => $position->type == 1 ? 'Struktural' : ($position->type == 2 ? 'Fungsional' : 'Outsource'),
             ];
 
             $position->entity = [
                 "id" => $position->entity,
-                "name" => $position->entity == 1 ? 'Orang' : 'Kelompok'
+                "name" => $position->entity == 1 ? 'Orang' : 'Kelompok',
             ];
 
             if (isset($position->parent_id)) {

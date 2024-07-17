@@ -362,6 +362,7 @@ class RecapitulationRepository
         $positions->join('positions as p', 'u.position_id', '=', 'p.id');
         $positions->select(DB::raw('GROUP_CONCAT(p.id) AS id'), 'p.name', DB::raw('COUNT(u.id) as total'));
         $positions->where('u.type', 2);
+        $positions->where('p.status', true);
         $positions->groupBy('p.name');
         $positions->orderBy('p.id', 'asc');
         $positions = $positions->get();
