@@ -36,7 +36,7 @@ class RecapitulationOutsourceController extends Controller
         $educationAndGender = $this->recapitulationRepository->getEducationAndGender(3);
         $data = [
             "name" => "Rekapitulasi Pegawai Outsourcing",
-            "total" => $outsource[0] + $nonOutsource[0],
+            "total" => $outsource[0],
             "cards" => [
                 [
                     "id" => 1,

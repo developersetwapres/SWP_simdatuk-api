@@ -140,28 +140,32 @@ class RecapitulationRepository
      */
     public function getEducationAndGender($type)
     {
-        $total = DB::table('users');
+        $total = DB::table('users as u');
         $total->select(
-            DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND gender IS NOT NULL THEN 1 END) as total_gender'),
-            DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND gender = 0 THEN 1 END) as female'),
-            DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND gender = 1 THEN 1 END) as male'),
-            DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND education_level IS NOT NULL THEN 1 END) as total_education'),
-            DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND education_level = 1 THEN 1 END) as sd'),
-            DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND education_level = 2 THEN 1 END) as smp'),
-            DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND education_level = 3 THEN 1 END) as sma'),
-            DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND education_level = 4 THEN 1 END) as d1'),
-            DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND education_level = 5 THEN 1 END) as d3'),
-            DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND education_level = 6 THEN 1 END) as s1'),
-            DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND education_level = 7 THEN 1 END) as s2'),
-            DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND education_level = 8 THEN 1 END) as s3'),
+            DB::raw('COUNT(CASE WHEN u.employment_status IN (1, 6) AND u.gender IS NOT NULL THEN 1 END) as total_gender'),
+            DB::raw('COUNT(CASE WHEN u.employment_status IN (1, 6) AND u.gender = 0 THEN 1 END) as female'),
+            DB::raw('COUNT(CASE WHEN u.employment_status IN (1, 6) AND u.gender = 1 THEN 1 END) as male'),
+            DB::raw('COUNT(CASE WHEN u.employment_status IN (1, 6) AND u.education_level IS NOT NULL THEN 1 END) as total_education'),
+            DB::raw('COUNT(CASE WHEN u.employment_status IN (1, 6) AND u.education_level = 1 THEN 1 END) as sd'),
+            DB::raw('COUNT(CASE WHEN u.employment_status IN (1, 6) AND u.education_level = 2 THEN 1 END) as smp'),
+            DB::raw('COUNT(CASE WHEN u.employment_status IN (1, 6) AND u.education_level = 3 THEN 1 END) as sma'),
+            DB::raw('COUNT(CASE WHEN u.employment_status IN (1, 6) AND u.education_level = 4 THEN 1 END) as d1'),
+            DB::raw('COUNT(CASE WHEN u.employment_status IN (1, 6) AND u.education_level = 5 THEN 1 END) as d3'),
+            DB::raw('COUNT(CASE WHEN u.employment_status IN (1, 6) AND u.education_level = 6 THEN 1 END) as s1'),
+            DB::raw('COUNT(CASE WHEN u.employment_status IN (1, 6) AND u.education_level = 7 THEN 1 END) as s2'),
+            DB::raw('COUNT(CASE WHEN u.employment_status IN (1, 6) AND u.education_level = 8 THEN 1 END) as s3'),
         );
+        $total->leftJoin('positions as p', 'u.position_id', '=', 'p.id');
 
-        // Perhitungan hanya untuk outsourcing
-        if ($type == 3) {
-            $total->where('employment_type_id', 19);
+        if ($type == 2) {
+            $total->where(function ($query) {
+                $query->where('p.status', true)->orWhere('u.employment_type_id', '=', 15);
+            });
+        } elseif ($type == 3) {
+            $total->where('u.employment_type_id', 19);
         }
 
-        $total->where('type', $type);
+        $total->where('u.type', $type);
         return $total = $total->first();
     }
 
@@ -302,6 +306,7 @@ class RecapitulationRepository
         $positions = DB::table('positions as p');
         $positions->select('id', 'name');
         $positions->where('type', 2);
+        $positions->where('status', true);
         $positions->orderBy('id', 'asc');
         $positions = $positions->get();
 

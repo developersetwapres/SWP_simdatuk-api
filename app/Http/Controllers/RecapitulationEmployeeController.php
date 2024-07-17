@@ -142,9 +142,23 @@ class RecapitulationEmployeeController extends Controller
         }
         if ($filter == 'education') {
             $users->where('u.education_level', $cardId);
+            if ($type == 2) {
+                $users->where(function ($query) {
+                    $query->where('p.status', true)->orWhere('u.employment_type_id', '=', 15);
+                });
+            } elseif ($type == 3) {
+                $users->where('p.employment_type_id', 19);
+            }
         }
         if ($filter == 'gender') {
             $users->where('u.gender', $cardId);
+            if ($type == 2) {
+                $users->where(function ($query) {
+                    $query->where('p.status', true)->orWhere('u.employment_type_id', '=', 15);
+                });
+            } elseif ($type == 3) {
+                $users->where('u.employment_type_id', 19);
+            }
         }
         if ($filter == 'employment-type') {
             $users->where('u.employment_type_id', $cardId);
