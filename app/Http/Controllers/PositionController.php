@@ -146,12 +146,14 @@ class PositionController extends Controller
                 $page = $this->request->get('page', 1);
 
                 $paginatedUsers = new LengthAwarePaginator(
-                    $positions->forPage($page, $this->request->limit),
+                    $positions->forPage($page, $this->request->limit)->values(),
                     $positions->count(),
                     $this->request->limit,
                     $page,
                     ['path' => $this->request->url(), 'query' => $this->request->query()]
                 );
+
+                // $paginatedUsers = $paginatedUsers->values();
 
                 $message = ($paginatedUsers->isEmpty()) ? 'Mohon maaf, data tidak ditemukan.' : 'success';
                 return $this->paginateResponse(200, $message, $paginatedUsers);
