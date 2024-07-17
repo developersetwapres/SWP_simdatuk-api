@@ -281,7 +281,6 @@ class ExportController extends Controller
     **/
     public function zipDetailEmployee(ExportZipEmployeesRequest $request)
     {
-
         $user = DB::table('users');
         $user->leftJoin('echelons', 'echelons.id', '=', 'users.echelon_id');
         $user->leftJoin('user_educations', 'user_educations.user_id', '=', 'users.id');
@@ -325,7 +324,6 @@ class ExportController extends Controller
         if (isset($request->marital_status)) {
             $user->whereIn('users.marital_status', $request->marital_status);
         }
-
         if (isset($request->grade_range)) {
             $gradeRanges = $request->input('grade_range', []);
             $now = Carbon::now();
@@ -369,6 +367,26 @@ class ExportController extends Controller
         if (!$userIds) {
             return $this->response(400, 'Data pegawai tidak ditemukan');
         }
+
+        $employee = $this->employeeRepository->getDetailBulkUser($userIds);
+        $families = $this->familyRepository->getDetailBulkUser($userIds);
+        $educations = $this->educationRepository->getDetailBulkUser($userIds);
+        $positions = $this->positionRepository->getDetailBulkUser($userIds);
+        $grades = $this->gradeRepository->getDetailBulkUser($userIds);
+        $structurals = $this->trainingRepository->getDetailBulkUser($userIds,1);
+        $functionals = $this->trainingRepository->getDetailBulkUser($userIds,2);
+        $technicals = $this->trainingRepository->getDetailBulkUser($userIds,3);
+        $recognitions = $this->recognitionRepository->getDetailBulkUser($userIds);
+        $targets = $this->targetRepository->getDetailBulkUser($userIds);
+        $performances = $this->performanceRepository->getDetailBulkUser($userIds);
+        $disciplinaries = $this->disciplinaryRepository->getDetailBulkUser($userIds);
+        $leaves= $this->leaveRepository->getDetailBulkUser($userIds);
+        $notes= $this->noteRepository->getDetailBulkUser($userIds);
+        $credits= $this->creditRepository->getDetailBulkUser($userIds);
+        $assessments= $this->assessmentRepository->getDetailBulkUser($userIds);
+        $competencies= $this->competencyRepository->getDetailBulkUser($userIds);
+        $talents= $this->talentRepository->getDetailBulkUser($userIds);
+
         $zip = new \Madnest\Madzipper\Madzipper;
         $zipFileName = "Employee-" . Carbon::now()->format('Y-m-d_H-i-s') . ".zip";
         $zipFileLocation = storage_path('app/public/document/' . $zipFileName);
@@ -380,7 +398,134 @@ class ExportController extends Controller
         set_time_limit(0);
         $pdfFiles = [];
         foreach ($userIds as $employeeId) {
-            $pdfContent = $this->detailEmployee($employeeId);
+            // $pdfContent = $this->detailEmployee($employeeId);
+
+            $religion = match ($employee[$employeeId]->religion) {
+                1 => 'Islam',
+                2 => 'Kristen',
+                3 => 'Katolik',
+                4 => 'Hindu',
+                5 => 'Budha',
+                6 => 'Konghucu',
+                default => '-',
+            };
+            $maritalStatus = match ($employee[$employeeId]->marital_status) {
+                1 => 'Belum Menikah',
+                2 => 'Menikah',
+                3 => 'Cerai',
+                4 => 'Janda',
+                5 => 'Duda',
+                default => '-',
+            };
+            $employeeType = match ($employee[$employeeId]->type) {
+                1 => 'ASN',
+                2 => 'NON ASN',
+                3 => 'OUTSOURCING',
+                default => '-',
+            };
+            $educationLevel = match ($employee[$employeeId]->education_level) {
+                1 => 'SD/Sederajat',
+                2 => 'SLTP/Sederajat',
+                3 => 'SLTA/Sederajat',
+                4 => 'Diploma I/II',
+                5 => 'Akademik/D3/S.Muda',
+                6 => 'Diploma IV/Strata I',
+                7 => 'Strata II',
+                8 => 'Strata III',
+                default => '-',
+            };
+    
+            // Housing
+            $complex = 'Luar';
+            $complexName = '-';
+            if ($employee[$employeeId]->residence_name != 'Luar Komplek') {
+                $complex = 'Dalam';
+                $complexName = $employee[$employeeId]->residence_name;
+            }
+    
+            // Batas Usia Pensiun
+            $indonesianMonth = [
+                1 => 'Januari',
+                2 => 'Februari',
+                3 => 'Maret',
+                4 => 'April',
+                5 => 'Mei',
+                6 => 'Juni',
+                7 => 'Juli',
+                8 => 'Agustus',
+                9 => 'September',
+                10 => 'Oktober',
+                11 => 'November',
+                12 => 'Desember',
+            ];
+            foreach ($credits[$employeeId] as $key => $value) {
+                    $credits[$employeeId][$key]->start_month_name = ($value->start_month) ? $indonesianMonth[$value->start_month] : '';
+                    $credits[$employeeId][$key]->end_month_name = ($value->end_month) ? $indonesianMonth[$value->end_month] : '';
+            }
+    
+            $tmp = sys_get_temp_dir();
+            $pdf = Pdf::loadview('exports/user', [
+                'userProfile' => [
+                    'Tempat, Tanggal Lahir' => $employee[$employeeId]->place_of_birth . ', ' . $employee[$employeeId]->date_of_birth,
+                    'Agama' => $religion,
+                    'Jenis Kelamin' => ($employee[$employeeId]->gender ? 'Pria' : 'Wanita'),
+                    'Status Perkawinan' => $maritalStatus,
+                    'Jenis Pegawai' => $employeeType,
+                    'TMT Menjabat' => ($employee[$employeeId]->position_effective_date ?? '-'),
+                    'Instansi Induk' => ($employee[$employeeId]->institution_name ?? '-'),
+                    'Tingkat' => $educationLevel,
+                    'Nama Sekolah/Universitas' => $employee[$employeeId]->education_name,
+                    'Tahun Lulus' => $employee[$employeeId]->education_year,
+                    'No. Karpeg/No. Karisu' => $employee[$employeeId]->employee_id_card_number . ' / ' . $employee[$employeeId]->karisu_number,
+                    'Masa Kerja Keseluruhan' => $employee[$employeeId]->cpns_years_of_service,
+                    'Masa Kerja Golongan' => $employee[$employeeId]->pns_years_of_service,
+                    'NPWP' => $employee[$employeeId]->id_tax,
+                    'Status Pegawai' => ($employee[$employeeId]->employment_status ? 'Aktif' : 'Tidak Aktif'),
+                    'No NIK' => $employee[$employeeId]->id_number,
+                    'Komplek' => $complex,
+                    'Nama Komplek' => $complexName,
+                    'Alamat Tempat Tinggal Saat Ini' => $employee[$employeeId]->current_address,
+                    'No. Telepon Rumah' => $employee[$employeeId]->home_phone_number,
+                    'No. HP' => $employee[$employeeId]->mobile_phone,
+                    'Alamat Kantor' => $employee[$employeeId]->office_address,
+                    'No. Telepon Kantor' => $employee[$employeeId]->office_phone_number,
+                    'Email' => $employee[$employeeId]->email,
+                    'Email Dinas' => $employee[$employeeId]->office_email,
+                    'Kontak Darurat' => $employee[$employeeId]->emergency_contact,
+                    'Batas Usia Pensiun' => $employee[$employeeId]->retirement_age,
+                ],
+                'currentPosition' => ($employee[$employeeId]->position_merged ?? '-'),
+                'photoProfile' => $employee[$employeeId]->photo_profile,
+                'userNIP' => $employee[$employeeId]->employee_id_number,
+                'userName' => $employee[$employeeId]->name,
+                'userEchelons' => ($employee[$employeeId]->echelon_name ?? '') . ', ' . ($employee[$employeeId]->echelon_effective_date ?? ' '),
+                'userCurrentGrade' => ($employee[$employeeId]->grade_name ?? '') . '(' . ($employee[$employeeId]->grade_code ?? '') . '), ' . ($employee[$employeeId]->grade_effective_date ?? ''),
+                'userCollege' => $educations[$employeeId] ?? [],
+                'userPosition' => $positions[$employeeId] ?? [],
+                'userGrade' => $grades[$employeeId] ?? [],
+                'userTrainingStructural' => $structurals[$employeeId] ?? [],
+                'userTrainingFunctional' => $functionals[$employeeId] ?? [],
+                'userTrainingTechnical' => $technicals[$employeeId] ?? [],
+                'userAward' => $recognitions[$employeeId] ?? [],
+                'userSKP' => $targets[$employeeId] ?? [],
+                'userCredit' => $credits[$employeeId] ?? [],
+                'userPerformance' => $performances[$employeeId] ?? [],
+                'userPunishment' => $disciplinaries[$employeeId] ?? [],
+                'userFamily' => $families[$employeeId] ?? [],
+                'userLeave' => $leaves[$employeeId] ?? [],
+                'userNotes' => $notes[$employeeId] ?? [],
+                'userAssessment' => $assessments[$employeeId] ?? [],
+                'userAssessmentCompetency' => $competencies[$employeeId] ?? [],
+                'userAssessmentTalent' => $talents[$employeeId] ?? [],
+            ]);
+            $pdf->set_option('isHtml5ParserEnabled', true);
+            $pdf->set_paper("A4", "portrait");
+            $pdf->set_option('isRemoteEnabled', true);
+            $pdf->set_option('fontDir', $tmp);
+            $pdf->set_option('fontCache', $tmp);
+            $pdf->set_option('tempDir', $tmp);
+            $pdfContent = $pdf->download($employee[$employeeId]->name . ' - ' . $employee[$employeeId]->employee_id_number . '.pdf');
+
             $pdfFileName = 'employee_' . $employeeId . '.pdf';
             $pdfFilePath = 'public/document/' . $pdfFileName;
             Storage::put($pdfFilePath, $pdfContent);
@@ -675,6 +820,7 @@ class ExportController extends Controller
             $results = collect();
             foreach ($userIdsChunk as $userId) {
                 $usersData = DB::table('users');
+                $usersData->leftJoin('echelons', 'users.echelon_id', '=', 'echelons.id');
                 if ($toggleFieldBio['isName']) {
                     $usersData->addSelect('users.name');
                 }
@@ -704,7 +850,6 @@ class ExportController extends Controller
                     $usersData->addSelect('users.description');
                 }
                 if ($toggleFieldBio['isEchelons']) {
-                    $usersData->leftJoin('echelons', 'users.echelon_id', '=', 'echelons.id');
                     $usersData->addSelect('echelons.name as echelons_name');
                 }
                 if ($toggleFieldBio['isGrade']) {
@@ -1136,9 +1281,6 @@ class ExportController extends Controller
                     $usersData->addSelect(DB::raw("DATE_FORMAT(users.pns_effective_date, '%d-%m-%Y') as pns_effective_date"));
                 }
                 if ($toggleFieldBio['isEndDate']) {
-                    if (!isset($toggleFieldBio['isEchelons'])) {
-                        $usersData->leftJoin('echelons', 'users.echelon_id', '=', 'echelons.id');
-                    }
                     $usersData->addSelect(DB::raw("
                                 CASE
                                     WHEN users.type = 1 && users.echelon_id IS NOT NULL && users.date_of_birth IS NOT NULL THEN DATE_FORMAT(DATE_ADD(DATE_ADD(users.date_of_birth, INTERVAL echelons.retirement_age YEAR), INTERVAL 1 MONTH),'%d-%m-%Y')
@@ -1192,9 +1334,6 @@ class ExportController extends Controller
                     $usersData->addSelect('users.emergency_contact');
                 }
                 if ($toggleFieldBio['isPensionCap']) {
-                    if (!$toggleFieldBio['isEchelons']) {
-                        $usersData->leftJoin('echelons', 'users.echelon_id', '=', 'echelons.id');
-                    }
                     $usersData->addSelect('echelons.retirement_age as pension_cap');
                 }
                 if ($toggleFieldBio['isWorkDuration']) {
@@ -1343,6 +1482,7 @@ class ExportController extends Controller
         // filter user to get ids
         $users = DB::table('users')
             ->leftJoin('user_credits', 'users.id', '=', 'user_credits.user_id')
+            ->leftJoin('echelons', 'users.echelon_id', '=', 'echelons.id')
             ->leftJoin('target_history_users', 'users.id', '=', 'target_history_users.user_id')
             ->leftJoin('target_histories', 'target_history_users.target_history_id', '=', 'target_histories.id')
             ->select('users.id');
@@ -1377,7 +1517,6 @@ class ExportController extends Controller
             $minDate = $now->copy()->subYears($minAge + 1)->addDay()->toDateString();
             $users->where('users.date_of_birth', '<=', $minDate);
         }
-
         if (isset($request->max_age)) {
             $maxAge = $request->input('max_age');
             $now = Carbon::now();
@@ -1443,11 +1582,13 @@ class ExportController extends Controller
         if (!$userIds) {
             return $this->response(400, 'Data pegawai tidak ditemukan');
         }
+
         $toggleFieldBio = array();
         $userId = collect($userIds);
         // $userIdsChunk = $userId->chunk(200);
         $results = collect();
-            $usersPreview = DB::table('users');
+            $usersPreview = DB::table('users')->select('users.id');
+            $usersPreview->leftJoin('echelons', 'echelons.id', '=', 'users.echelon_id');
             if ($this->request->isName == 1) {
                 $usersPreview->addSelect('users.name');
             }
@@ -1477,7 +1618,6 @@ class ExportController extends Controller
                 $usersPreview->addSelect('users.description');
             }
             if ($this->request->isEchelons == 1) {
-                $usersPreview->leftJoin('echelons', 'users.echelon_id', '=', 'echelons.id');
                 $usersPreview->addSelect('echelons.name as echelons_name');
             }
             if ($this->request->isGrade == 1) {
@@ -1492,7 +1632,7 @@ class ExportController extends Controller
                 $usersPreview->addSelect('i.name as institution_name');
             }
             if ($this->request->isNoWorker == 1) {
-                $users->addSelect('users.employee_id_card_number');
+                $usersPreview->addSelect('users.employee_id_card_number');
             }
             if ($this->request->isGradeDuration == 1) {
                 // $usersPreview->addSelect(['users.grade_effective_date']);
@@ -1909,9 +2049,6 @@ class ExportController extends Controller
                 $usersPreview->addSelect(DB::raw("DATE_FORMAT(users.pns_effective_date, '%d-%m-%Y') as pns_effective_date"));
             }
             if ($this->request->isEndDate == 1) {
-                if (!isset($this->request->isEchelons)) {
-                    $usersPreview->leftJoin('echelons', 'users.echelon_id', '=', 'echelons.id');
-                }
                 $usersPreview->addSelect(DB::raw("
                     CASE
                         WHEN users.type = 1 && users.echelon_id IS NOT NULL && users.date_of_birth IS NOT NULL THEN DATE_FORMAT(DATE_ADD(DATE_ADD(users.date_of_birth, INTERVAL echelons.retirement_age YEAR), INTERVAL 1 MONTH),'%d-%m-%Y')
@@ -1964,10 +2101,7 @@ class ExportController extends Controller
             if ($this->request->isEmergencyContact == 1) {
                 $usersPreview->addSelect('users.emergency_contact');
             }
-            if($this->request->isPensionCap == 1){
-                if (!$this->request->isEchelons) {
-                    $usersPreview->leftJoin('echelons', 'users.echelon_id', '=', 'echelons.id');
-                }
+            if ($this->request->isPensionCap == 1){
                 $usersPreview->addSelect('echelons.retirement_age as pension_cap');
             }
             if ($this->request->isWorkDuration == 1) {
