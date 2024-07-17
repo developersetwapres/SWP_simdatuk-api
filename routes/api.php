@@ -238,7 +238,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/', [UserController::class, 'create']);
         Route::get('/{id}', [UserController::class, 'show']);
         Route::post('/{id}', [UserController::class, 'update']);
-        Route::post('/status', [UserController::class, 'status']);
+        Route::put('/status', [UserController::class, 'status']);
     });
 
     Route::prefix('profile')->group(function () {
