@@ -14,7 +14,7 @@ class CreateTalentRequest
     {
         return [
             'talents.*.event_date' => 'date',
-            'talents.*.point' => 'required|numeric|in:1,2,3,4,5,6,7',
+            'talents.*.point' => 'required|numeric|in:1,2,3,4,5,6,7,8,9',
             'talents.*.organizer' => 'max:160',
             'talents.*.talent_document' => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
         ];
