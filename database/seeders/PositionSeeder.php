@@ -788,7 +788,7 @@ class PositionSeeder extends Seeder
                                                 'vertical_order' => 1,
                                                 'horizontal_order' => 4,
                                             ],
-                                        ]
+                                        ],
                                     ],
                                     [
                                         'id' => 68,
@@ -2798,6 +2798,7 @@ class PositionSeeder extends Seeder
         $positions = $this->flattenArray($positions);
         DB::table('positions')->insertTs($positions);
         $this->insertOutsourcePosition();
+        $this->insertPerbantuanTimPosition();
     }
 
     public function flattenArray($array, &$result = [])
@@ -2821,7 +2822,17 @@ class PositionSeeder extends Seeder
     private function insertOutsourcePosition()
     {
         $positions = [
-            'Pengemudi', 'Petugas Kebersihan Gedung', 'Petugas Perawatan Kolam', 'Petugas Taman', 'Pramusaji/Pramubakti', 'Teknisi Jaringan', 'Teknisi Komputer', 'Teknisi Mekanikal dan Elektrikal', 'Teknisi Fotocopy', 'Teknisi Road Blocker', 'Teknisi Lift',
+            'Pengemudi',
+            'Petugas Kebersihan Gedung',
+            'Petugas Perawatan Kolam',
+            'Petugas Taman',
+            'Pramusaji/Pramubakti',
+            'Teknisi Jaringan',
+            'Teknisi Komputer',
+            'Teknisi Mekanikal dan Elektrikal',
+            'Teknisi Fotocopy',
+            'Teknisi Road Blocker',
+            'Teknisi Lift',
         ];
         $data = array();
         foreach ($positions as $item) {
@@ -2829,6 +2840,102 @@ class PositionSeeder extends Seeder
                 'name' => $item,
                 'available' => 0,
                 'type' => 3,
+                'entity' => 1,
+                'vertical_order' => 0,
+                'horizontal_order' => 0,
+            ];
+            array_push($data, $array);
+        }
+        DB::table('positions')->insertTs($data);
+    }
+
+    private function insertPerbantuanTimPosition()
+    {
+        $positions = [
+            "Sekretariat Staf Khusus Wakil Presiden (PTT dari Setkab)/ Pramubakti",
+            "Sekretariat Staf Khusus Wakil Presiden (PTT dari Setkab)",
+            "Pengemudi VVIP",
+            "Bintara Pengemudi 2 VVIP Unit Mudi Tim Pampri Den 2 Grup B Paspampres",
+            "Administrasi Umum",
+            "Pengemudi VVIP Grup B Paspampres, Ba Pamins-1 Unit-1 Tim Pamins Den-3 Grup Paspampres",
+            "Mudi Wapres RI KH. Ma'ruf Amin, Ba Mudi-2 VVIP Unit Mudi Tim Pampri Don 1 Grup B Paspamres",
+            "Jabatan Pengemudi VVIP Grup B Paspampres",
+            "Pengemudi VVIP Grup B Paspampres",
+            "Evaluation Specialist",
+            "Public Health Specialist",
+            "Program Analyst and Development Specialist",
+            "Legal Drafter",
+            "Senior Advisor for Poverty Targetting",
+            "Social Protection Data Analyst",
+            "Senior MSME Policy Specialist",
+            "Data Analyst",
+            "Graphic Designer",
+            "Employment Policy  Specialist",
+            "Economist",
+            "Pengemudi VVIP, Grup B Paspampres",
+            "Project Administration and Government Liaison Officer",
+            "Local Planning and Budgeting Specialist",
+            "Non-Government Program Development Specialist",
+            "Economic Empowerment Specialist",
+            "Leader of Economic Capacity Improvement Policy Team",
+            "Senior Survey Specialist",
+            "Senior Policy Research and Development Specialist",
+            "Chief Policy Advisor",
+            "Qualitative Research Specialist",
+            "Senior Policy Ops Specialist",
+            "Senior Coordinator for Policy Ops Team",
+            "Senior Program Officer",
+            "Social Insurance for Health Specialist",
+            "Senior Social Insurance for Employment Policy Specialist",
+            "Senior Program Development and Targeting Specialist",
+            "Spatial Based Targeting Specialist",
+            "Web and Mobile Application Specialist",
+            "Senior Information Technology Specialist",
+            "Senior Data Management Specialist",
+            "Office and Administration Officer",
+            "Operation Finance Officer",
+            "Program and Data Operation",
+            "Tax Administration",
+            "Data and Program Information",
+            "Program Administration and Finance (for Tim Kebijakan Perlindungan Sosial, Tim Kebijakan Peningkatan Kapasitas Ekonomi )",
+            "Senior Officer - Program Administration and Finance (for Tim Kebijakan, Unit Riset Kebijakan dan Data, Unit Advokasi Kebijakan dan Kemitraan)",
+            "Senior Statistics Specialist",
+            "Chief of Policy Team (Kepala Tim Kebijakan)",
+            "Manager of Policy Advocacy & Partnership Unit",
+            "Data and Analytical Tool Development Specialist",
+            "Local Institutional Strengthening Specialist",
+            "Operation Planning Specialist",
+            "Knowledge Management Specialist",
+            "Knowledge Disamination Specialist",
+            "Satuan Pengamanan (Ketua Regu)",
+            "Satuan Pengamanan",
+            "Pramu bhakti/Tenaga Kebersihan (Koordinator)",
+            "Pramu bhakti/Tenaga Kebersihan",
+            "Pengemudi Perbantuan Tim",
+            "Manager of Monitoring and Evaluation Unit",
+            "IT Operation",
+            "Quantitative Evaluation Specialist",
+            "Manager Research Development Data Management Unit",
+            "Manager of Communication and Knowledge Management Unit",
+            "Program Assistant",
+            "Public Communication Specialist",
+            "Lead Program Manager (PM)",
+            "Monitoring Spesialis for Public Policy Specialist (MS-PP)",
+            "Monitoring & Reporting Specialist (ISM)",
+            "Communication and External Relation",
+            "Monitoring Specialist (Kementerian Desa Percepatan) (MS-MOV)",
+            "IT Specialist (ITS)",
+            "Financial And Administrator Coordinator",
+            "Sekretaris",
+            "Office Boy",
+        ];
+
+        $data = array();
+        foreach ($positions as $item) {
+            $array = [
+                'name' => $item,
+                'available' => 0,
+                'type' => 4,
                 'entity' => 1,
                 'vertical_order' => 0,
                 'horizontal_order' => 0,

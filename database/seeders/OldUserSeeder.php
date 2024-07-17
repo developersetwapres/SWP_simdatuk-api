@@ -161,7 +161,7 @@ class OldUserSeeder extends Seeder
 
             $asn = DB::select($asn);
             foreach ($asn as $item) {
-                // $item->photo_profile = $this->getDocumentExist($item->photo_profile);
+                $item->photo_profile = $this->getDocumentExist($item->photo_profile);
             }
             DB::table('users')->insertTs(json_decode(json_encode($asn), true));
 
@@ -336,7 +336,19 @@ class OldUserSeeder extends Seeder
                 WHERE
                     db_baru_position.name
                 IN
-                    ('Pengemudi', 'Petugas Kebersihan Gedung', 'Petugas Perawatan Kolam', 'Petugas Taman', 'Pramusaji/Pramubakti', 'Teknisi Jaringan', 'Teknisi Komputer', 'Teknisi Mekanikal dan Elektrikal', 'Teknisi Fotocopy', 'Teknisi Road Blocker', 'Teknisi Lift')
+                    (
+                        'Pengemudi',
+                        'Petugas Kebersihan Gedung',
+                        'Petugas Perawatan Kolam',
+                        'Petugas Taman',
+                        'Pramusaji/Pramubakti',
+                        'Teknisi Jaringan',
+                        'Teknisi Komputer',
+                        'Teknisi Mekanikal dan Elektrikal',
+                        'Teknisi Fotocopy',
+                        'Teknisi Road Blocker',
+                        'Teknisi Lift'
+                    )
             ";
 
             $outsource = DB::select($outsource);
@@ -344,10 +356,34 @@ class OldUserSeeder extends Seeder
                 $item->photo_profile = $this->getDocumentExist($item->photo_profile);
             }
             DB::table('users')->insertTs(json_decode(json_encode($outsource), true));
+            $this->setPerbantuanTim();
             $this->setPosition();
             $this->setEchelon();
             $this->setGrade();
         }
+    }
+
+    private static function setPerbantuanTim()
+    {
+        $sql = "
+            UPDATE simdatuk.users u
+                JOIN (
+                    SELECT
+                        u.employee_id_number,
+                        du.jabatan
+                    FROM
+                        simdatuk_dump.tbl_2perbantuan AS du
+                    LEFT JOIN
+                        simdatuk.users u ON du.id_perbantuan = u.employee_id_number
+                    WHERE
+                        u.employee_id_number
+                    IN
+                        ('2015021101',	'2015021102',	'2019102801',	'2019102802',	'2019102803',	'2021111901',	'2022010401',	'2022053101',	'2022053102',	'2022121201',	'2022122801',	'2023022201',	'2023090170',	'2023090171',	'20231016122',	'20231016123',	'20231016124',	'20231016125',	'20231016126',	'20231016127',	'20231101129',	'20231106128',	'20231113130',	'2024030101',	'31080264970487',	'TNP2K001',	'TNP2K004',	'TNP2K011',	'TNP2K017',	'TNP2K020',	'TNP2K021',	'TNP2K027',	'TNP2K028',	'TNP2K030',	'TNP2K035',	'TNP2K036',	'TNP2K038',	'TNP2K040',	'TNP2K043',	'TNP2K044',	'TNP2K045',	'TNP2K046',	'TNP2K047',	'TNP2K049',	'TNP2K050',	'TNP2K051',	'TNP2K053',	'TNP2K054',	'TNP2K055',	'TNP2K056',	'TNP2K057',	'TNP2K059',	'TNP2K060',	'TNP2K061',	'TNP2K062',	'TNP2K063',	'TNP2K064',	'TNP2K065',	'TNP2K066',	'TNP2K071',	'TNP2K072',	'TNP2K073',	'TNP2K076',	'TNP2K077',	'TNP2K078',	'TNP2K079',	'TNP2K080',	'TNP2K081',	'TNP2K083',	'TNP2K084',	'TNP2K085',	'TNP2K086',	'TNP2K091',	'TNP2K092',	'TNP2K104',	'TNP2K107',	'TNP2K118',	'TNP2K119',	'TNP2K120',	'TNP2K121',	'TP2KAK001',	'TP2KAK009',	'TP2KAK011',	'TP2KAK014',	'TP2KAK022',	'TP2KAK034',	'TP2KAK041',	'TP2KAK044',	'TP2KAK045',	'TP2KAK051',	'TP2KAK056',	'TP2KAK059')
+                )  AS subq ON u.employee_id_number = subq.employee_id_number
+            LEFT JOIN simdatuk.positions AS p ON p.name = subq.jabatan
+            SET u.position_id = p.id
+        ";
+        DB::statement($sql);
     }
 
     private static function setGrade()
@@ -855,16 +891,16 @@ class OldUserSeeder extends Seeder
         DB::table('users')->whereIn('employee_id_number', [
             '31940570830974',
             '518595',
+            '3194047850773',
             '31940365900873',
             '21040027590683',
-            '536843',
+            '110190',
+            '86082000',
             '21040039060985',
             '21050097950682',
-            '3194047850773',
-            '110190',
-            '529045',
             '538157',
             '21120081020192',
+            '529045',
             '131224',
         ])->update([
             'position_id' => 188,
