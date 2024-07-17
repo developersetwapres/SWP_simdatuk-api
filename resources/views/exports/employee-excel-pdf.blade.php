@@ -308,10 +308,10 @@
                     {{ $value['retirement_effective_date'] }}
                     @break
                     @case("Masa Kerja Keseluruhan")
-                    {{ $value['position_effective_date'] }}
+                    {{ $value['work_duration'] }}
                     @break
                     @case("Masa Kerja Golongan")
-                    {{ $value['grade_effective_date'] }}
+                    {{ $value['grade_duration'] }}
                     @break
                     @case("Jabatan")
                     {{ $value['position_name'] }}

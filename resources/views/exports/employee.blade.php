@@ -386,10 +386,10 @@
                 <td>{{ $value['retirement_effective_date'] }}</td>
                 @endif
                 @if($toggleField['isWorkDuration'])
-                <td>{{ $value['position_effective_date'] }}</td>
+                <td>{{ $value['work_duration'] }}</td>
                 @endif
                 @if($toggleField['isGradeDuration'])
-                <td>{{ $value['grade_effective_date'] }}</td>
+                <td>{{ $value['grade_duration'] }}</td>
                 @endif
                 @if($toggleField['isPosition'])
                 <td>{{ $value['position_name'] }}</td>

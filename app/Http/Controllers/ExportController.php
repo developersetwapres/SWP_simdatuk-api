@@ -271,13 +271,13 @@ class ExportController extends Controller
      * @bodyParam grades int[] Refers to IDs of employee grades. Example: [1, 3]
      * @bodyParam position_status int[] Refers to IDs of employee position status. Example: [1, 3]
      * @bodyParam education int[] Refers to type of employee education (1=SD/Sederajat, 2=SLTP/Sederajat, 3=SLTA/Sederajat, 4=Akademik/D3/S.Muda, 5=Diploma IV, 6=Strata I, 7=Strata II, 8=Strata III). Example: [1, 3]
-     * @bodyParam gender int[] Refers to gender of employee (1: Laki - Laki, 0: Perempuan). Example: [1, 3]
+     * @bodyParam gender int[] Refers to gender of employee (1: Laki - Laki, 0: Perempuan). Example: [1]
      * @bodyParam min_age int Refers to minimum age of employee. Example: 50
      * @bodyParam max_age int Refers to maximum age of employee. Example: 55
      * @bodyParam marital_status int[] Refers to marital status of employee (1=Belum Menikah, 2=Menikah, 3=Cerai Hidup, 4=Cerai Mati). Example: [1, 3]
      * @bodyParam retirement_age int[] Refers to retirement age of employee. Example: [58]
-     * @bodyParam total_working_duration string Refers to total duration of employee employment. Example: "5-10"
-     * @bodyParam grade_range string Refers to duration of grade in years. Example: "5-10"
+     * @bodyParam total_working_duration int[] Refers to total duration of employee employment. Example: ["5-10"]
+     * @bodyParam grade_range int[] Refers to duration of grade in years. Example: ["5-10"]
     **/
     public function zipDetailEmployee(ExportZipEmployeesRequest $request)
     {
@@ -417,13 +417,13 @@ class ExportController extends Controller
      * @bodyParam grades int[] Refers to IDs of employee grades. Example: [1, 3]
      * @bodyParam position_status int[] Refers to IDs of employee position status. Example: [1, 3]
      * @bodyParam education int[] Refers to type of employee education (1=SD/Sederajat, 2=SLTP/Sederajat, 3=SLTA/Sederajat, 4=Akademik/D3/S.Muda, 5=Diploma IV, 6=Strata I, 7=Strata II, 8=Strata III). Example: [1, 3]
-     * @bodyParam gender int[] Refers to gender of employee (1: Laki - Laki, 0: Perempuan). Example: [1, 3]
+     * @bodyParam gender int[] Refers to gender of employee (1: Laki - Laki, 0: Perempuan). Example: [1]
      * @bodyParam min_age int Refers to minimum age of employee. Example: 50
      * @bodyParam max_age int Refers to maximum age of employee. Example: 55
      * @bodyParam marital_status int[] Refers to marital status of employee (1=Belum Menikah, 2=Menikah, 3=Cerai Hidup, 4=Cerai Mati). Example: [1, 3]
      * @bodyParam retirement_age int[] Refers to retirement age of employee. Example: [58]
-     * @bodyParam total_working_duration string Refers to total duration of employee employment. Example: "5-10"
-     * @bodyParam grade_range string Refers to duration of grade in years. Example: "5-10"
+     * @bodyParam total_working_duration int[] Refers to total duration of employee employment. Example: ["5-10"]
+     * @bodyParam grade_range int[] Refers to duration of grade in years. Example: ["5-10"]
      * @bodyParam target_period string[] Refers to employees Target appraisal period ("Q1","Q2","Q3","Q4","Tahunan"). Example: ["Q1"]
      * @bodyParam target_year string Refers to employees Target year period. Example: "2024"
      * @bodyParam work_behavior_rating int[] Refers to employees work behavior rating (1=Diatas Ekspektasi, 2=Sesuai Ekspektasi, 3=Dibawah Ekspektasi). Example: [1, 3]
@@ -444,7 +444,7 @@ class ExportController extends Controller
      * @bodyParam isDateCPNS int Indicates whether the CPNS Start date field is included in the request. Example: 1
      * @bodyParam isStartDate int Indicates whether the employment start date field is included in the request. Example: 1
      * @bodyParam isEndDate int Indicates whether the employment end date field is included in the request. Example: 1
-     * @bodyParam workDuration int Indicates the duration of work. Example: 1
+     * @bodyParam isWorkDuration int Indicates the duration of work. Example: 1
      * @bodyParam isGradeDuration int Indicates whether the grade duration field is included in the request. Example: 1
      * @bodyParam isPosition int Indicates whether the position field is included in the request. Example: 1
      * @bodyParam isDatePosition int Indicates whether the position start date field is included in the request. Example: 1
@@ -722,7 +722,34 @@ class ExportController extends Controller
                     $usersData->addSelect('users.employee_id_card_number');
                 }
                 if ($toggleFieldBio['isGradeDuration']) {
-                    $usersData->addSelect(['users.grade_effective_date']);
+                    // $usersData->addSelect(['users.grade_effective_date']);
+                    $usersData->addSelect(DB::raw("
+                    IF(
+                        users.quit_date IS NULL,
+                        CONCAT(
+                            TIMESTAMPDIFF(YEAR, users.pns_effective_date, NOW()), ' Tahun, ',
+                            TIMESTAMPDIFF(MONTH, users.pns_effective_date, NOW()) % 12, ' Bulan, ',
+                            DATEDIFF(
+                                NOW(),
+                                DATE_ADD(
+                                    users.pns_effective_date,
+                                    INTERVAL TIMESTAMPDIFF(YEAR, users.pns_effective_date, NOW()) YEAR
+                                ) + INTERVAL TIMESTAMPDIFF(MONTH, users.pns_effective_date, NOW()) % 12 MONTH
+                            ), ' Hari'
+                        ),
+                        CONCAT(
+                            TIMESTAMPDIFF(YEAR, users.pns_effective_date, users.quit_date), ' Tahun, ',
+                            TIMESTAMPDIFF(MONTH, users.pns_effective_date, users.quit_date) % 12, ' Bulan, ',
+                            DATEDIFF(
+                                users.quit_date,
+                                DATE_ADD(
+                                    users.pns_effective_date,
+                                    INTERVAL TIMESTAMPDIFF(YEAR, users.pns_effective_date, quit_date) YEAR
+                                ) + INTERVAL TIMESTAMPDIFF(MONTH, users.pns_effective_date, quit_date) % 12 MONTH
+                            ), ' Hari'
+                        )
+                    ) as grade_duration
+                "));
                 }
                 if ($toggleFieldBio['isNPWP']) {
                     $usersData->addSelect('users.id_tax');
@@ -1171,7 +1198,35 @@ class ExportController extends Controller
                     $usersData->addSelect('echelons.retirement_age as pension_cap');
                 }
                 if ($toggleFieldBio['isWorkDuration']) {
-                    $usersData->addSelect(DB::raw("TIMESTAMPDIFF(YEAR, users.position_effective_date, CURDATE()) AS work_duration"));
+                    // $usersData->addSelect(DB::raw("TIMESTAMPDIFF(YEAR, users.position_effective_date, CURDATE()) AS work_duration"));
+                    $usersData->addSelect(DB::raw("
+                    IF(
+                        users.quit_date IS NULL,
+                        CONCAT(
+                            TIMESTAMPDIFF(YEAR, users.cpns_effective_date, NOW()), ' Tahun, ',
+                            TIMESTAMPDIFF(MONTH, users.cpns_effective_date, NOW()) % 12, ' Bulan, ',
+                            DATEDIFF(
+                                NOW(),
+                                DATE_ADD(
+                                    users.cpns_effective_date,
+                                    INTERVAL TIMESTAMPDIFF(YEAR, users.cpns_effective_date, NOW()) YEAR
+                                ) + INTERVAL TIMESTAMPDIFF(MONTH, users.cpns_effective_date, NOW()) % 12 MONTH
+                            ), ' Hari'
+                        ),
+                        CONCAT(
+                            TIMESTAMPDIFF(YEAR, users.cpns_effective_date, users.quit_date), ' Tahun, ',
+                            TIMESTAMPDIFF(MONTH, users.cpns_effective_date, users.quit_date) % 12, ' Bulan, ',
+                            DATEDIFF(
+                                users.quit_date,
+                                DATE_ADD(
+                                    users.cpns_effective_date,
+                                    INTERVAL TIMESTAMPDIFF(YEAR, users.cpns_effective_date, quit_date) YEAR
+                                ) + INTERVAL TIMESTAMPDIFF(MONTH, users.cpns_effective_date, quit_date) % 12 MONTH
+                            ), ' Hari'
+                        )
+                    ) as work_duration
+                "));
+
                 }
                 $usersData->whereIn('users.id', $userId);
                 $usersData->groupBy('users.id');
@@ -1212,13 +1267,13 @@ class ExportController extends Controller
      * @bodyParam grades int[] Refers to IDs of employee grades. Example: [1, 3]
      * @bodyParam position_status int[] Refers to IDs of employee position status. Example: [1, 3]
      * @bodyParam education int[] Refers to type of employee education (1=SD/Sederajat, 2=SLTP/Sederajat, 3=SLTA/Sederajat, 4=Akademik/D3/S.Muda, 5=Diploma IV, 6=Strata I, 7=Strata II, 8=Strata III). Example: [1, 3]
-     * @bodyParam gender int[] Refers to gender of employee (1: Laki - Laki, 0: Perempuan). Example: [1, 3]
+     * @bodyParam gender int[] Refers to gender of employee (1: Laki - Laki, 0: Perempuan). Example: [1]
      * @bodyParam min_age int Refers to minimum age of employee. Example: 50
      * @bodyParam max_age int Refers to maximum age of employee. Example: 55
      * @bodyParam marital_status int[] Refers to marital status of employee (1=Belum Menikah, 2=Menikah, 3=Cerai Hidup, 4=Cerai Mati). Example: [1, 3]
      * @bodyParam retirement_age int[] Refers to retirement age of employee. Example: [58]
-     * @bodyParam total_working_duration string Refers to total duration of employee employment. Example: "5-10"
-     * @bodyParam grade_range string Refers to duration of grade in years. Example: "5-10"
+     * @bodyParam total_working_duration int[] Refers to total duration of employee employment. Example: ["5-10"]
+     * @bodyParam grade_range int[] Refers to duration of grade in years. Example: ["5-10"]
      * @bodyParam target_period string[] Refers to employees Target appraisal period ("Q1","Q2","Q3","Q4","Tahunan"). Example: ["Q1"]
      * @bodyParam target_year string Refers to employees Target year period. Example: "2024"
      * @bodyParam work_behavior_rating int[] Refers to employees work behavior rating (1=Diatas Ekspektasi, 2=Sesuai Ekspektasi, 3=Dibawah Ekspektasi). Example: [1, 3]
@@ -1239,7 +1294,7 @@ class ExportController extends Controller
      * @bodyParam isDateCPNS int Indicates whether the CPNS Start date field is included in the request. Example: 1
      * @bodyParam isStartDate int Indicates whether the employment start date field is included in the request. Example: 1
      * @bodyParam isEndDate int Indicates whether the employment end date field is included in the request. Example: 1
-     * @bodyParam workDuration int Indicates the duration of work. Example: 1
+     * @bodyParam isWorkDuration int Indicates the duration of work. Example: 1
      * @bodyParam isGradeDuration int Indicates whether the grade duration field is included in the request. Example: 1
      * @bodyParam isPosition int Indicates whether the position field is included in the request. Example: 1
      * @bodyParam isDatePosition int Indicates whether the position start date field is included in the request. Example: 1
@@ -1440,7 +1495,34 @@ class ExportController extends Controller
                 $users->addSelect('users.employee_id_card_number');
             }
             if ($this->request->isGradeDuration == 1) {
-                $usersPreview->addSelect(['users.grade_effective_date']);
+                // $usersPreview->addSelect(['users.grade_effective_date']);
+                $usersPreview->addSelect(DB::raw("
+                IF(
+                    users.quit_date IS NULL,
+                    CONCAT(
+                        TIMESTAMPDIFF(YEAR, users.pns_effective_date, NOW()), ' Tahun, ',
+                        TIMESTAMPDIFF(MONTH, users.pns_effective_date, NOW()) % 12, ' Bulan, ',
+                        DATEDIFF(
+                            NOW(),
+                            DATE_ADD(
+                                users.pns_effective_date,
+                                INTERVAL TIMESTAMPDIFF(YEAR, users.pns_effective_date, NOW()) YEAR
+                            ) + INTERVAL TIMESTAMPDIFF(MONTH, users.pns_effective_date, NOW()) % 12 MONTH
+                        ), ' Hari'
+                    ),
+                    CONCAT(
+                        TIMESTAMPDIFF(YEAR, users.pns_effective_date, users.quit_date), ' Tahun, ',
+                        TIMESTAMPDIFF(MONTH, users.pns_effective_date, users.quit_date) % 12, ' Bulan, ',
+                        DATEDIFF(
+                            users.quit_date,
+                            DATE_ADD(
+                                users.pns_effective_date,
+                                INTERVAL TIMESTAMPDIFF(YEAR, users.pns_effective_date, quit_date) YEAR
+                            ) + INTERVAL TIMESTAMPDIFF(MONTH, users.pns_effective_date, quit_date) % 12 MONTH
+                        ), ' Hari'
+                    )
+                ) as grade_duration
+            "));
             }
             if ($this->request->isNPWP == 1) {
                 $usersPreview->addSelect('users.id_tax');
@@ -1889,7 +1971,35 @@ class ExportController extends Controller
                 $usersPreview->addSelect('echelons.retirement_age as pension_cap');
             }
             if ($this->request->isWorkDuration == 1) {
-                $usersPreview->addSelect(DB::raw("TIMESTAMPDIFF(YEAR, users.position_effective_date, CURDATE()) AS work_duration"));
+                // $usersPreview->addSelect(DB::raw("TIMESTAMPDIFF(YEAR, users.position_effective_date, CURDATE()) AS work_duration"));
+                $usersPreview->addSelect(DB::raw("
+                IF(
+                    users.quit_date IS NULL,
+                    CONCAT(
+                        TIMESTAMPDIFF(YEAR, users.cpns_effective_date, NOW()), ' Tahun, ',
+                        TIMESTAMPDIFF(MONTH, users.cpns_effective_date, NOW()) % 12, ' Bulan, ',
+                        DATEDIFF(
+                            NOW(),
+                            DATE_ADD(
+                                users.cpns_effective_date,
+                                INTERVAL TIMESTAMPDIFF(YEAR, users.cpns_effective_date, NOW()) YEAR
+                            ) + INTERVAL TIMESTAMPDIFF(MONTH, users.cpns_effective_date, NOW()) % 12 MONTH
+                        ), ' Hari'
+                    ),
+                    CONCAT(
+                        TIMESTAMPDIFF(YEAR, users.cpns_effective_date, users.quit_date), ' Tahun, ',
+                        TIMESTAMPDIFF(MONTH, users.cpns_effective_date, users.quit_date) % 12, ' Bulan, ',
+                        DATEDIFF(
+                            users.quit_date,
+                            DATE_ADD(
+                                users.cpns_effective_date,
+                                INTERVAL TIMESTAMPDIFF(YEAR, users.cpns_effective_date, quit_date) YEAR
+                            ) + INTERVAL TIMESTAMPDIFF(MONTH, users.cpns_effective_date, quit_date) % 12 MONTH
+                        ), ' Hari'
+                    )
+                ) as work_duration
+            "));
+
             }
             $usersPreview->whereIn('users.id', $userId);
             $usersPreview->groupBy('users.id');
