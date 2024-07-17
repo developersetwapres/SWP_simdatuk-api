@@ -23,21 +23,29 @@ class PreviewExportEmployeesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'deputy' => 'array|min:1',
             'employee_type' => 'array|min:1|nullable',
-            'echelons' => 'array|min:1|numeric|nullable',
-            'grades' => 'array|min:1|numeric|nullable',
+            'employee_type.*' => 'numeric',
+            'deputy' => 'array|min:1',
+            'echelons' => 'array|min:1|nullable',
+            'echelons.*' => 'numeric',
+            'grades' => 'array|min:1|nullable',
+            'grades.*' => 'numeric',
             'position_status' => 'array|min:1|nullable',
             'education' => 'array|min:1|nullable',
             'gender' => 'array|min:1|max:2|nullable',
-            'age_range' => 'array|min:1|nullable',
+            'min_age' => 'numeric|min:1|nullable',
+            'max_age' => 'numeric|min:1|nullable',
             'marital_status' => 'array|min:1|nullable',
-            'target_period' => 'nullable|in:Q1,Q2,Q3,Q4,Tahunan',
+            'retirement_age' => 'array|min:1|nullable',
+            'retirement_age.*' => 'numeric',
+            'grade_range' => 'array|min:1|nullable',
+            'total_working_duration' => 'array|min:1|nullable',
+            'target_period' => 'array|min:1|nullable',
             'target_year' => 'nullable|date_format:Y',
-            'work_behavior_rating' => 'nullable|numeric|in:1,2,3',
-            'employee_performance_predicate' => 'nullable|numeric|in:1,2,3,4,5',
-            'organizational_performance_achievement' => 'nullable|numeric|in:1,2,3',
-            'credit_period' => 'nullable|numeric|in:1,2,3,4,5',
+            'work_behavior_rating' => 'array|min:1|nullable',
+            'employee_performance_predicate' => 'array|min:1|nullable',
+            'organizational_performance_achievement' => 'array|min:1|nullable',
+            'credit_period' => 'array|min:1|nullable',
             'credit_year' => 'nullable|date_format:Y',
             'isName' => 'nullable|numeric|min:0|max:1',
             'isNip' => 'nullable|numeric|min:0|max:1',
@@ -58,7 +66,6 @@ class PreviewExportEmployeesRequest extends FormRequest
             'isDatePosition' => 'nullable|numeric|min:0|max:1',
             'isEchelons' => 'nullable|numeric|min:0|max:1',
             'isEchelonDate' => 'nullable|numeric|min:0|max:1',
-            'isPositionDescription' => 'nullable|numeric|min:0|max:1',
             'isGrade' => 'nullable|numeric|min:0|max:1',
             'isGradeDate' => 'nullable|numeric|min:0|max:1',
             'isAgency' => 'nullable|numeric|min:0|max:1',
@@ -76,22 +83,23 @@ class PreviewExportEmployeesRequest extends FormRequest
             'isOfficeNumber' => 'nullable|numeric|min:0|max:1',
             'isEmail' => 'nullable|numeric|min:0|max:1',
             'isOfficeEmail' => 'nullable|numeric|min:0|max:1',
-            'isOrganization' => 'nullable|numeric|min:0|max:1',
-            'isWorkUnit' => 'nullable|numeric|min:0|max:1',
+            'isPositionDescription' => 'nullable|numeric|min:0|max:1',
             'isEmergencyContact' => 'nullable|numeric|min:0|max:1',
             'isPensionCap' => 'nullable|numeric|min:0|max:1',
+            'isEducationHistory' => 'nullable|numeric|min:0|max:1',
             'isPositionHistory' => 'nullable|numeric|min:0|max:1',
             'isGradeHistory' => 'nullable|numeric|min:0|max:1',
             'isTrainingStructural' => 'nullable|numeric|min:0|max:1',
             'isTrainingFunctional' => 'nullable|numeric|min:0|max:1',
             'isTrainingTechnique' => 'nullable|numeric|min:0|max:1',
-            'isSKP' => 'nullable|numeric|min:0|max:1',
             'isRecognition' => 'nullable|numeric|min:0|max:1',
-            'isNotes' => 'nullable|numeric|min:0|max:1',
-            'isEducationHistory' => 'nullable|numeric|min:0|max:1',
+            'isSKP' => 'nullable|numeric|min:0|max:1',
+            'isCredit' => 'nullable|numeric|min:0|max:1',
+            'isPerformance' => 'nullable|numeric|min:0|max:1',
             'isDisciplinary' => 'nullable|numeric|min:0|max:1',
             'isFamilyHistory' => 'nullable|numeric|min:0|max:1',
             'isLeave' => 'nullable|numeric|min:0|max:1',
+            'isNotes' => 'nullable|numeric|min:0|max:1',
             'isAssessment' => 'nullable|numeric|min:0|max:1',
             'isCompetency' => 'nullable|numeric|min:0|max:1',
             'isTalentPool' => 'nullable|numeric|min:0|max:1',
@@ -105,14 +113,17 @@ class PreviewExportEmployeesRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'deputy.array' => 'Deputy harus berupa array',
-            'deputy.min' => 'Deputy harus memiliki minimal 1 item',
             'employee_type.array' => 'Employee Type harus berupa array',
             'employee_type.min' => 'Employee Type harus memiliki minimal 1 item',
+            'employee_type.*.numeric' => 'Employee type isi array harus berupa angka',
+            'deputy.array' => 'Deputy harus berupa array',
+            'deputy.min' => 'Deputy harus memiliki minimal 1 item',
             'echelons.array' => 'Echelons harus berupa array',
             'echelons.min' => 'Echelons harus memiliki minimal 1 item',
+            'echelons.*.numeric' => 'Setiap nilai dalam array echelons harus berupa angka',
             'grades.array' => 'Grades harus berupa array',
             'grades.min' => 'Grades harus memiliki minimal 1 item',
+            'grades.*.numeric' => 'Setiap nilai dalam array grades harus berupa angka',
             'position_status.array' => 'Position Status harus berupa array',
             'position_status.min' => 'Position Status harus memiliki minimal 1 item',
             'education.array' => 'Education harus berupa array',
@@ -120,20 +131,28 @@ class PreviewExportEmployeesRequest extends FormRequest
             'gender.array' => 'Gender harus berupa array',
             'gender.min' => 'Gender harus memiliki minimal 1 item',
             'gender.max' => 'Gender tidak boleh lebih dari 2 item',
-            'age_range.array' => 'Age Range harus berupa array',
-            'age_range.min' => 'Age Range harus memiliki minimal 1 item',
+            'min_age.numeric' => 'Min age harus berupa angka',
+            'max_age.numeric' => 'Max age harus berupa angka',
             'marital_status.array' => 'Marital Status harus berupa array',
             'marital_status.min' => 'Marital Status harus memiliki minimal 1 item',
-            'target_period.in' => 'Target Period harus diantara Q1, Q2, Q3, Q4, atau Tahunan',
+            'retirement_age.array' => 'Retirement age harus berupa array',
+            'retirement_age.min' => 'Retirement age minimal 1 angka didalam array',
+            'retirement_age.*.numeric' => 'Retirement age isi array harus berupa angka',
+            'total_working_duration.array' => 'Total working duration harus berupa array',
+            'total_working_duration.min' => 'Total working duration harus memiliki minimal 1 item',
+            'grade_range.array' => 'Grade range harus berupa array',
+            'grade_range.min' => 'Grade range harus memiliki minimal 1 item',
+            'target_period.array' => 'Target period harus berupa array',
+            'target_period.min' => 'Target period harus memiliki minimal 1 item',
             'target_year.date_format' => 'Target Year harus dalam format Y',
-            'work_behavior_rating.numeric' => 'Work Behavior Rating harus berupa angka',
-            'work_behavior_rating.in' => 'Work Behavior Rating harus diantara 1, 2, atau 3',
-            'employee_performance_predicate.numeric' => 'Employee Performance Predicate harus berupa angka',
-            'employee_performance_predicate.in' => 'Employee Performance Predicate harus diantara 1, 2, 3, 4, atau 5',
-            'organizational_performance_achievement.numeric' => 'Organizational Performance Achievement harus berupa angka',
-            'organizational_performance_achievement.in' => 'Organizational Performance Achievement harus diantara 1, 2, atau 3',
-            'credit_period.numeric' => 'Credit Period harus berupa angka',
-            'credit_period.in' => 'Credit Period harus diantara 1, 2, 3, 4, atau 5',
+            'work_behavior_rating.array' => 'Work Behavior Rating harus berupa array',
+            'work_behavior_rating.min' => 'Work Behavior Rating harus memiliki minimal 1 item',
+            'employee_performance_predicate.array' => 'Employee Performance Predicate harus berupa array',
+            'employee_performance_predicate.min' => 'Employee Performance Predicate harus memiliki minimal 1 item',
+            'organizational_performance_achievement.array' => 'Organizational Performance Achievement harus berupa array',
+            'organizational_performance_achievement.min' => 'Organizational Performance Achievement harus memiliki minimal 1 item',
+            'credit_period.array' => 'Credit Period harus berupa array',
+            'credit_period.min' => 'Credit Period harus memiliki minimal 1 item',
             'credit_year.date_format' => 'Credit Year harus dalam format Y',
             'isName.numeric' => 'IsName harus berupa angka',
             'isName.min' => 'IsName tidak boleh kurang dari 0',
@@ -276,6 +295,12 @@ class PreviewExportEmployeesRequest extends FormRequest
             'isSKP.numeric' => 'IsSKP harus berupa angka',
             'isSKP.min' => 'IsSKP tidak boleh kurang dari 0',
             'isSKP.max' => 'IsSKP tidak boleh lebih dari 1',
+            'isCredit.numeric' => 'isCredit harus berupa angka',
+            'isCredit.min' => 'isCredit tidak boleh kurang dari 0',
+            'isCredit.max' => 'isCredit tidak boleh lebih dari 1',
+            'isPerformance.numeric' => 'isPerformance harus berupa angka',
+            'isPerformance.min' => 'isPerformance tidak boleh kurang dari 0',
+            'isPerformance.max' => 'isPerformance tidak boleh lebih dari 1',
             'isRecognition.numeric' => 'IsRecognition harus berupa angka',
             'isRecognition.min' => 'IsRecognition tidak boleh kurang dari 0',
             'isRecognition.max' => 'IsRecognition tidak boleh lebih dari 1',
@@ -315,60 +340,80 @@ class PreviewExportEmployeesRequest extends FormRequest
         return [
             'employee_type' => [
                 'description' => 'Refers to IDs of type of employee (1: ASN, 2: Non ASN, 3: Outsourcing)',
-                'example' => 1,
+                'example' => [1]
+            ],
+            'deputy' => [
+                'description' => 'deputy int[] List of employees deputy. Example: [1,2]',
+                'example' => [1],
             ],
             'echelons' => [
                 'description' => 'Refers to IDs of employee echelons',
-                'example' => 1,
+                'example' => [1],
             ],
             'grades' => [
                 'description' => 'Refers to IDs of employee grades',
-                'example' => 1,
+                'example' => [1],
             ],
             'position_status' => [
                 'description' => 'Refers to IDs of employee position status',
-                'example' => 1,
+                'example' => [1],
             ],
             'education' => [
                 'description' => 'Refers to type of employee education (1=SD/Sederajat, 2=SLTP/Sederajat, 3=SLTA/Sederajat,
                  4=Akademik/D3/S.Muda, 5=Diploma IV, 6=Strata I, 7=Strata II, 8=Strata III )',
-                'example' => 1,
+                'example' => [1],
             ],
             'gender' => [
                 'description' => 'Refers to gender of employee (1 : Laki - Laki, 0 : Perempuan)',
-                'example' => 1,
+                'example' => [1],
+            ],
+            'min_age' => [
+                'description' => 'Refers to minimum age of employee',
+                'example' => 50
+            ],
+            'max_age' => [
+                'description' => 'Refers to maximum age of employee',
+                'example' => 55
             ],
             'marital_status' => [
                 'description' => 'Refers to marital status of employee (1=Belum Menikah, 2=Menikah, 3=Cerai Hidup, 4=Cerai Mati)',
-                'example' => 1,
+                'example' => [1],
             ],
-            'age_range' => [
-                'description' => 'Refers to age range of employee',
-                'example' => 1,
+            'retirement_age' => [
+                'description' => 'Refers to retirement age of employee',
+                'example' => [58]
+            ],
+            'total_working_duration' => [
+                'description' => 'Refers to total duration of employee employment',
+                'example' => ["5-10"],
+            ],
+            'grade_range' => [
+                'description' => 'Refers to duration of grade in years',
+                'example' => ["5-10"],
             ],
             'target_period' => [
-                'description' => 'Refers to employees Target appraisal period',
-                'example' => 'Q1',
+                'description' => 'Refers to employees Target appraisal period ("Q1","Q2","Q3","Q4","Tahunan")',
+                'example' => ["Q1"],
             ],
             'target_year' => [
                 'description' => 'Refers to employees Target year period',
                 'example' => '2024',
             ],
             'work_behavior_rating' => [
-                'description' => 'Refers to employees work behavior rating',
-                'example' => '2',
+                'description' => 'Refers to employees work behavior rating (1=Diatas Ekspektasi, 2=Sesuai Ekspektasi, 3=Dibawah Ekspektasi)',
+                'example' => [1],
             ],
             'employee_performance_predicate' => [
-                'description' => 'Refers to employees performance predicate',
-                'example' => '3',
+                'description' => 'Refers to employees performance predicate (1=Sangat Baik, 2=Baik, 3=Butuh Perbaikan, 4=Kurang, 5=Sangat Kurang)',
+                'example' => [3],
             ],
             'organizational_performance_achievement' => [
-                'description' => 'Refers to employees organizational performance achievement',
-                'example' => '1',
+                'description' => 'Refers to employees organizational performance achievement (1=Sangat Baik, 2=Baik, 3=Cukup)',
+                'example' => [1],
             ],
             'credit_period' => [
-                'description' => 'Refers to employees credit period',
-                'example' => '1',
+                'description' => 'Refers to employees credit period (1=Triwulan 1, 2=Triwulan 2, 3=Triwulan 3, 4=Triwulan 4, 5=Tahunan)',
+                'example' => [1],
             ],
             'credit_year' => [
                 'description' => 'Refers to employees credit year period',
@@ -376,175 +421,31 @@ class PreviewExportEmployeesRequest extends FormRequest
             ],
             'isName' => [
                 'description' => 'Indicates whether the name field is included in the request',
-                'example' => [0, 1]
-            ],
-            'isPosition' => [
-                'description' => 'Indicates whether the position field is included in the request',
-                'example' => [0, 1]
-            ],
-            'isPositionDescription' => [
-                'description' => 'Indicates whether the position description field is included in the request',
-                'example' => [0, 1]
-            ],
-            'isEchelons' => [
-                'description' => 'Indicates whether the echelons field is included in the request',
-                'example' => [0, 1]
-            ],
-            'isGrade' => [
-                'description' => 'Indicates whether the grade field is included in the request',
-                'example' => [0, 1]
+                'example' => 1,
             ],
             'isNip' => [
                 'description' => 'Indicates whether the NIP (National Identification Number) field is included in the request',
-                'example' => [0, 1]
+                'example' => 1,
             ],
             'isBirthPlaceDate' => [
                 'description' => 'Indicates whether the birth place and date field is included in the request',
-                'example' => [0, 1]
+                'example' => 1,
             ],
             'isAge' => [
                 'description' => 'Indicates whether the age field is included in the request',
-                'example' => [0, 1]
+                'example' => 1,
             ],
             'isReligion' => [
                 'description' => 'Indicates whether the religion field is included in the request',
-                'example' => [0, 1]
+                'example' => 1,
             ],
             'isGender' => [
                 'description' => 'Indicates whether the gender field is included in the request',
-                'example' => [0, 1]
+                'example' => 1,
             ],
             'isMaritalStatus' => [
                 'description' => 'Indicates whether the marital status field is included in the request',
-                'example' => [0, 1]
-            ],
-            'isAgency' => [
-                'description' => 'Indicates whether the agency field is included in the request',
-                'example' => [0, 1]
-            ],
-            'isOrganization' => [
-                'description' => 'Indicates whether the organization field is included in the request',
-                'example' => [0, 1]
-            ],
-            'isWorkUnit' => [
-                'description' => 'Indicates whether the work unit field is included in the request',
-                'example' => [0, 1]
-            ],
-            'isNoWorker' => [
-                'description' => 'Indicates whether the worker number field is included in the request',
-                'example' => [0, 1]
-            ],
-            'workDuration' => [
-                'description' => 'Indicates the duration of work',
-                'example' => [0, 1]
-            ],
-            'isGradeDuration' => [
-                'description' => 'Indicates whether the grade duration field is included in the request',
-                'example' => [0, 1]
-            ],
-            'isNPWP' => [
-                'description' => 'Indicates whether the NPWP (Tax Identification Number) field is included in the request',
-                'example' => [0, 1]
-            ],
-            'isEmployeeStatus' => [
-                'description' => 'Indicates whether the employee status field is included in the request',
-                'example' => [0, 1]
-            ],
-            'isCurrentAddress' => [
-                'description' => 'Indicates whether the current address field is included in the request',
-                'example' => [0, 1]
-            ],
-            'isComplex' => [
-                'description' => 'Indicates whether the complex field is included in the request',
-                'example' => [0, 1]
-            ],
-            'isHomeNumber' => [
-                'description' => 'Indicates whether the home number field is included in the request',
-                'example' => [0, 1]
-            ],
-            'isPhoneNumber' => [
-                'description' => 'Indicates whether the phone number field is included in the request',
-                'example' => [0, 1]
-            ],
-            'isOfficeAddress' => [
-                'description' => 'Indicates whether the office address field is included in the request',
-                'example' => [0, 1]
-            ],
-            'isOfficeNumber' => [
-                'description' => 'Indicates whether the office number field is included in the request',
-                'example' => [0, 1]
-            ],
-            'isEmail' => [
-                'description' => 'Indicates whether the email field is included in the request',
-                'example' => [0, 1]
-            ],
-            'isPensionCap' => [
-                'description' => 'Indicates whether the pension cap field is included in the request',
-                'example' => [0, 1]
-            ],
-            'isPositionHistory' => [
-                'description' => 'Indicates whether the position history field is included in the request',
-                'example' => [0, 1]
-            ],
-            'isGradeHistory' => [
-                'description' => 'Indicates whether the grade history field is included in the request',
-                'example' => [0, 1]
-            ],
-            'isTrainingStructural' => [
-                'description' => 'Indicates whether the structural training field is included in the request',
-                'example' => [0, 1]
-            ],
-            'isTrainingFunctional' => [
-                'description' => 'Indicates whether the functional training field is included in the request',
-                'example' => [0, 1]
-            ],
-            'isTrainingTechnique' => [
-                'description' => 'Indicates whether the technique training field is included in the request',
-                'example' => [0, 1]
-            ],
-            'isSKP' => [
-                'description' => 'Indicates whether the SKP (Employee Performance Target) field is included in the request',
-                'example' => [0, 1]
-            ],
-            'isRecognition' => [
-                'description' => 'Indicates whether the recognition field is included in the request',
-                'example' => [0, 1]
-            ],
-            'isNotes' => [
-                'description' => 'Indicates whether the notes field is included in the request',
-                'example' => [0, 1]
-            ],
-            'isEducationHistory' => [
-                'description' => 'Indicates whether the education history field is included in the request',
-                'example' => [0, 1]
-            ],
-            'isDisciplinary' => [
-                'description' => 'Indicates whether the disciplinary field is included in the request',
-                'example' => [0, 1]
-            ],
-            'isFamilyHistory' => [
-                'description' => 'Indicates whether the family history field is included in the request',
-                'example' => [0, 1]
-            ],
-            'isLeave' => [
-                'description' => 'Indicates whether the leave field is included in the request',
-                'example' => [0, 1]
-            ],
-            'isAssessment' => [
-                'description' => 'Indicates whether the assessment field is included in the request',
-                'example' => [0, 1]
-            ],
-            'isCompetency' => [
-                'description' => 'Indicates whether the competency field is included in the request',
-                'example' => [0, 1]
-            ],
-            'isTalentPool' => [
-                'description' => 'Indicates whether the talent pool field is included in the request',
-                'example' => [0, 1]
-            ],
-            'deputy' => [
-                'description' => 'deputy int[] List of employees deputy. Example: [1,2]',
-                'example' => [1],
+                'example' => 1,
             ],
             'isEmployeeType' => [
                 'description' => 'Indicates whether the employee type field is included in the output document',
@@ -570,20 +471,56 @@ class PreviewExportEmployeesRequest extends FormRequest
                 'description' => 'Indicates whether the employment end date field is included in the request.',
                 'example' => 1,
             ],
+            'workDuration' => [
+                'description' => 'Indicates the duration of work',
+                'example' => 1,
+            ],
+            'isGradeDuration' => [
+                'description' => 'Indicates whether the grade duration field is included in the request',
+                'example' => 1,
+            ],
+            'isPosition' => [
+                'description' => 'Indicates whether the position field is included in the request',
+                'example' => 1,
+            ],
             'isDatePosition' => [
                 'description' => 'Indicates whether the position start date field is included in the request.',
                 'example' => 1,
+            ],
+            'isEchelons' => [
+                'description' => 'Indicates whether the echelons field is included in the request',
+                'example' => 1
             ],
             'isEchelonDate' => [
                 'description' => 'Indicates whether the echelon start date field is included in the request.',
                 'example' => 1,
             ],
+            'isGrade' => [
+                'description' => 'Indicates whether the grade field is included in the request',
+                'example' => 1
+            ],
             'isGradeDate' => [
                 'description' => 'Indicates whether the grade start date field is included in the request.',
                 'example' => 1,
             ],
+            'isAgency' => [
+                'description' => 'Indicates whether the agency field is included in the request',
+                'example' => 1,
+            ],
+            'isNoWorker' => [
+                'description' => 'Indicates whether the worker number field is included in the request',
+                'example' => 1,
+            ],
             'isKarisu' => [
                 'description' => 'Indicates whether the Number Karisu field is included in the request.',
+                'example' => 1,
+            ],
+            'isNPWP' => [
+                'description' => 'Indicates whether the NPWP (Tax Identification Number) field is included in the request',
+                'example' => 1,
+            ],
+            'isEmployeeStatus' => [
+                'description' => 'Indicates whether the employee status field is included in the request',
                 'example' => 1,
             ],
             'isNoFamily' => [
@@ -594,12 +531,116 @@ class PreviewExportEmployeesRequest extends FormRequest
                 'description' => 'Indicates whether the NIK field is included in the request.',
                 'example' => 1,
             ],
+            'isCurrentAddress' => [
+                'description' => 'Indicates whether the current address field is included in the request',
+                'example' => 1,
+            ],
+            'isComplex' => [
+                'description' => 'Indicates whether the complex field is included in the request',
+                'example' => 1,
+            ],
+            'isHomeNumber' => [
+                'description' => 'Indicates whether the home number field is included in the request',
+                'example' => 1,
+            ],
+            'isPhoneNumber' => [
+                'description' => 'Indicates whether the phone number field is included in the request',
+                'example' => 1,
+            ],
+            'isOfficeAddress' => [
+                'description' => 'Indicates whether the office address field is included in the request',
+                'example' => 1,
+            ],
+            'isOfficeNumber' => [
+                'description' => 'Indicates whether the office number field is included in the request',
+                'example' => 1,
+            ],
+            'isEmail' => [
+                'description' => 'Indicates whether the email field is included in the request',
+                'example' => 1,
+            ],
             'isOfficeEmail' => [
                 'description' => 'Indicates whether the office email field is included in the request.',
                 'example' => 1,
             ],
+            'isPositionDescription' => [
+                'description' => 'Indicates whether the position description field is included in the request',
+                'example' => 1
+            ],
             'isEmergencyContact' => [
                 'description' => 'Indicates whether the emergency contact field is included in the request.',
+                'example' => 1,
+            ],
+            'isPensionCap' => [
+                'description' => 'Indicates whether the pension cap field is included in the request',
+                'example' => 1,
+            ],
+            'isEducationHistory' => [
+                'description' => 'Indicates whether the education history field is included in the request',
+                'example' => 1,
+            ],
+            'isPositionHistory' => [
+                'description' => 'Indicates whether the position history field is included in the request',
+                'example' => 1,
+            ],
+            'isGradeHistory' => [
+                'description' => 'Indicates whether the grade history field is included in the request',
+                'example' => 1,
+            ],
+            'isTrainingStructural' => [
+                'description' => 'Indicates whether the structural training field is included in the request',
+                'example' => 1,
+            ],
+            'isTrainingFunctional' => [
+                'description' => 'Indicates whether the functional training field is included in the request',
+                'example' => 1,
+            ],
+            'isTrainingTechnique' => [
+                'description' => 'Indicates whether the technique training field is included in the request',
+                'example' => 1,
+            ],
+            'isRecognition' => [
+                'description' => 'Indicates whether the recognition field is included in the request',
+                'example' => 1,
+            ],
+            'isSKP' => [
+                'description' => 'Indicates whether the SKP (Employee Performance Target) field is included in the request',
+                'example' => 1,
+            ],
+            'isCredit' => [
+                'description' => 'Indicates whether the PAK history field is included in the request',
+                'example' => 1,
+            ],
+            'isPerformance' => [
+                'description' => 'Indicates whether the PPK history field is included in the request',
+                'example' => 1,
+            ],
+            'isDisciplinary' => [
+                'description' => 'Indicates whether the disciplinary field is included in the request',
+                'example' => 1,
+            ],
+            'isFamilyHistory' => [
+                'description' => 'Indicates whether the family history field is included in the request',
+                'example' => 1,
+            ],
+            'isLeave' => [
+                'description' => 'Indicates whether the leave field is included in the request',
+                'example' => 1,
+            ],
+            'isNotes' => [
+                'description' => 'Indicates whether the notes field is included in the request',
+                'example' => 1,
+            ],
+            'isAssessment' => [
+                'description' => 'Indicates whether the assessment field is included in the request',
+                'example' => 1,
+            ],
+            'isCompetency' => [
+                'description' => 'Indicates whether the competency field is included in the request',
+                'example' => 1,
+            ],
+            'isTalentPool' => [
+                'description' => 'Indicates whether the talent pool field is included in the request',
                 'example' => 1,
             ],
         ];
