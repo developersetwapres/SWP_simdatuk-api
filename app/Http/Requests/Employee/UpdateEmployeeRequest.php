@@ -82,6 +82,7 @@ class UpdateEmployeeRequest extends FormRequest
             'description' => 'max:160',
             'type' => 'required|in:1,2,3',
             'delete_employee_id_card' => 'required|boolean',
+            'quit_date' => 'nullable|date',
         ];
 
         $nonASNRules = [
@@ -128,6 +129,7 @@ class UpdateEmployeeRequest extends FormRequest
             'description' => 'max:160',
             'type' => 'required|in:1,2,3',
             'delete_employee_id_card' => 'required|boolean',
+            'quit_date' => 'nullable|date',
         ];
 
         $outsourceRules = [
@@ -161,6 +163,7 @@ class UpdateEmployeeRequest extends FormRequest
             'emergency_contact' => 'required',
             'description' => 'max:160',
             'type' => 'required|in:1,2,3',
+            'quit_date' => 'nullable|date',
         ];
 
         return array_merge(
@@ -270,6 +273,7 @@ class UpdateEmployeeRequest extends FormRequest
             'type.required' => 'Tipe pegawai tidak boleh kosong.',
             'type.in' => 'Tipe pegawai diantara 1, 2 atau 3',
             'delete_employee_id_card.required' => 'Status hapus kartu pegawai tidak boleh kosong.',
+            'quit_date.date' => 'Tanggal terakhir bekerja harus berupa tanggal.',
         ];
 
         return array_merge(
@@ -452,6 +456,10 @@ class UpdateEmployeeRequest extends FormRequest
             'delete_employee_id_card' => [
                 'description' => 'Refers to the Status delete employee id card.',
                 'example' => false,
+            ],
+            'quit_date' => [
+                'description' => 'Refers to the Quit Date of Employee.',
+                'example' => '2013-07-23',
             ],
         ];
 

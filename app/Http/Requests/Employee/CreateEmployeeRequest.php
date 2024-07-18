@@ -72,6 +72,7 @@ class CreateEmployeeRequest extends FormRequest
             'office_email' => 'nullable|email|unique:users,office_email',
             'description' => 'max:160',
             'type' => 'required|in:1,2,3',
+            'quit_date' => 'nullable|date',
         ];
 
         $nonASNRules = [
@@ -117,6 +118,7 @@ class CreateEmployeeRequest extends FormRequest
             'office_email' => 'nullable|email|unique:users,office_email',
             'description' => 'max:160',
             'type' => 'required|in:1,2,3',
+            'quit_date' => 'nullable|date',
         ];
 
         $outsourceRules = [
@@ -150,6 +152,7 @@ class CreateEmployeeRequest extends FormRequest
             'emergency_contact' => 'required',
             'description' => 'max:160',
             'type' => 'required|in:1,2,3',
+            'quit_date' => 'nullable|date',
         ];
 
         return array_merge(
@@ -258,6 +261,7 @@ class CreateEmployeeRequest extends FormRequest
             'position_effective_date.required' => 'TMT menjabat tidak boleh kosong',
             'office_email.email' => 'Format email dinas harus sesuai.',
             'office_email.unique' => 'Email dinas sudah terdaftar.',
+            'quit_date.date' => 'Tanggal terakhir bekerja harus berupa tanggal.',
         ];
 
         return array_merge(
@@ -448,6 +452,10 @@ class CreateEmployeeRequest extends FormRequest
             'position_effective_date' => [
                 'description' => 'Refers to the position effective date / TMT Menjabat',
                 'example' => '2023-01-01',
+            ],
+            'quit_date' => [
+                'description' => 'Refers to the Quit Date of Employee.',
+                'example' => '2013-07-23',
             ],
         ];
 
