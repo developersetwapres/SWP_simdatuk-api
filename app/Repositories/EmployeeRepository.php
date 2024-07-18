@@ -133,6 +133,33 @@ class EmployeeRepository
                 END AS retirement_age
             "),
             'u.created_at',
+            DB::raw("
+                IF(
+                    u.quit_date IS NULL,
+                    CONCAT(
+                        TIMESTAMPDIFF(YEAR, u.grade_effective_date, NOW()), ' Tahun, ',
+                        TIMESTAMPDIFF(MONTH, u.grade_effective_date, NOW()) % 12, ' Bulan, ',
+                        DATEDIFF(
+                            NOW(),
+                            DATE_ADD(
+                                u.grade_effective_date,
+                                INTERVAL TIMESTAMPDIFF(YEAR, u.grade_effective_date, NOW()) YEAR
+                            ) + INTERVAL TIMESTAMPDIFF(MONTH, u.grade_effective_date, NOW()) % 12 MONTH
+                        ), ' Hari'
+                    ),
+                    CONCAT(
+                        TIMESTAMPDIFF(YEAR, u.grade_effective_date, u.quit_date), ' Tahun, ',
+                        TIMESTAMPDIFF(MONTH, u.grade_effective_date, u.quit_date) % 12, ' Bulan, ',
+                        DATEDIFF(
+                            u.quit_date,
+                            DATE_ADD(
+                                u.grade_effective_date,
+                                INTERVAL TIMESTAMPDIFF(YEAR, u.grade_effective_date, quit_date) YEAR
+                            ) + INTERVAL TIMESTAMPDIFF(MONTH, u.grade_effective_date, quit_date) % 12 MONTH
+                        ), ' Hari'
+                    )
+                ) as grade_years_of_service
+            "),
         );
         $user = $user->first();
 
