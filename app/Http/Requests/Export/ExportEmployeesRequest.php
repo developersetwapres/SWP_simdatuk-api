@@ -342,6 +342,10 @@ class ExportEmployeesRequest extends FormRequest
                 'description' => 'Refers to IDs of type of employee (1: ASN, 2: Non ASN, 3: Outsourcing)',
                 'example' => [1, 3]
             ],
+            'employee_type.*' => [
+                'description' => 'Refers to IDs of type of employee (1: ASN, 2: Non ASN, 3: Outsourcing)',
+                'example' => [1, 3]
+            ],
             'deputy' => [
                 'description' => 'deputy int[] List of employees deputy',
                 'example' => [1, 3],
@@ -350,7 +354,15 @@ class ExportEmployeesRequest extends FormRequest
                 'description' => 'Refers to IDs of employee echelons',
                 'example' => [1, 3],
             ],
+            'echelons.*' => [
+                'description' => 'Refers to IDs of employee echelons',
+                'example' => [1, 3],
+            ],
             'grades' => [
+                'description' => 'Refers to IDs of employee grades',
+                'example' => [1, 3],
+            ],
+            'grades.*' => [
                 'description' => 'Refers to IDs of employee grades',
                 'example' => [1, 3],
             ],
@@ -380,6 +392,10 @@ class ExportEmployeesRequest extends FormRequest
                 'example' => [1, 3],
             ],
             'retirement_age' => [
+                'description' => 'Refers to retirement age of employee',
+                'example' => [58]
+            ],
+            'retirement_age.*' => [
                 'description' => 'Refers to retirement age of employee',
                 'example' => [58]
             ],

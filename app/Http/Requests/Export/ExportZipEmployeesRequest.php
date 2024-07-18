@@ -101,6 +101,10 @@ class ExportZipEmployeesRequest extends FormRequest
                 'description' => 'Refers to IDs of type of employee (1: ASN, 2: Non ASN, 3: Outsourcing)',
                 'example' => [1]
             ],
+            'employee_type.*' => [
+                'description' => 'Refers to IDs of type of employee (1: ASN, 2: Non ASN, 3: Outsourcing)',
+                'example' => [1]
+            ],
             'deputy' => [
                 'description' => 'Refers to Deputy ids list of employees',
                 'example' => [5],
@@ -109,7 +113,15 @@ class ExportZipEmployeesRequest extends FormRequest
                 'description' => 'Refers to IDs of employee echelons',
                 'example' => [1]
             ],
+            'echelons.*' => [
+                'description' => 'Refers to IDs of employee echelons',
+                'example' => [1]
+            ],
             'grades' => [
+                'description' => 'Refers to IDs of employee grades',
+                'example' => [1]
+            ],
+            'grades.*' => [
                 'description' => 'Refers to IDs of employee grades',
                 'example' => [1]
             ],
@@ -118,6 +130,10 @@ class ExportZipEmployeesRequest extends FormRequest
                 'example' => [1]
             ],
             'education' => [
+                'description' => 'Refers to type of employee education (1=SD/Sederajat, 2=SLTP/Sederajat, 3=SLTA/Sederajat, 4=Akademik/D3/S.Muda, 5=Diploma IV, 6=Strata I, 7=Strata II, 8=Strata III)',
+                'example' => [1]
+            ],
+            'education.*' => [
                 'description' => 'Refers to type of employee education (1=SD/Sederajat, 2=SLTP/Sederajat, 3=SLTA/Sederajat, 4=Akademik/D3/S.Muda, 5=Diploma IV, 6=Strata I, 7=Strata II, 8=Strata III)',
                 'example' => [1]
             ],
@@ -137,7 +153,15 @@ class ExportZipEmployeesRequest extends FormRequest
                 'description' => 'Refers to marital status of employee (1=Belum Menikah, 2=Menikah, 3=Cerai Hidup, 4=Cerai Mati)',
                 'example' => [1]
             ],
+            'marital_status.*' => [
+                'description' => 'Refers to marital status of employee (1=Belum Menikah, 2=Menikah, 3=Cerai Hidup, 4=Cerai Mati)',
+                'example' => [1]
+            ],
             'retirement_age' => [
+                'description' => 'Refers to retirement age of employee',
+                'example' => [58]
+            ],
+            'retirement_age.*' => [
                 'description' => 'Refers to retirement age of employee',
                 'example' => [58]
             ],

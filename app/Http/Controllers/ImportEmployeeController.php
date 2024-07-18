@@ -1016,22 +1016,44 @@ class ImportEmployeeController extends Controller
 
             // Check Unique
             if ($this->type == 3) { // OUTSOURCE
-                $user = User::where('email', '=', $personalInfoRow[$personalInfoPos['email']])
-                    ->orWhere('employee_id_number', '=', $personalInfoRow[$personalInfoPos['employee_id_number']])
-                    ->orWhere('id_tax', '=', $personalInfoRow[$personalInfoPos['id_tax']])
-                    ->orWhere('id_number', '=', $personalInfoRow[$personalInfoPos['id_number']])
-                    ->orWhere('family_registration_number', '=', $personalInfoRow[$personalInfoPos['family_registration_number']])
-                    ->first();
+                $user = User::where('id_number', '=', $personalInfoRow[$personalInfoPos['id_number']]);
+                if (!empty($personalInfoRow[$personalInfoPos['employee_id_number']])) {
+                    $user->orWhere('employee_id_number', '=', $personalInfoRow[$personalInfoPos['employee_id_number']]);
+                }
+                if (!empty($personalInfoRow[$personalInfoPos['id_tax']])) {
+                    $user->orWhere('id_tax', '=', $personalInfoRow[$personalInfoPos['id_tax']]);
+                }
+                if (!empty($personalInfoRow[$personalInfoPos['family_registration_number']])) {
+                    $user->orWhere('family_registration_number', '=', $personalInfoRow[$personalInfoPos['family_registration_number']]);
+                }
+                if (!empty($personalInfoRow[$personalInfoPos['email']])) {
+                    $user->orWhere('email', '=', $personalInfoRow[$personalInfoPos['email']]);
+                }
+                $user = $user->first();
             } else { // ASN & NON ASN
-                $user = User::where('email', '=', $personalInfoRow[$personalInfoPos['email']])
-                    ->orWhere('employee_id_number', '=', $personalInfoRow[$personalInfoPos['employee_id_number']])
-                    ->orWhere('employee_registration_number', '=', $personalInfoRow[$personalInfoPos['employee_registration_number']])
-                    ->orWhere('employee_id_card_number', '=', $personalInfoRow[$personalInfoPos['employee_id_card_number']])
-                    ->orWhere('karisu_number', '=', $personalInfoRow[$personalInfoPos['karisu_number']])
-                    ->orWhere('id_tax', '=', $personalInfoRow[$personalInfoPos['id_tax']])
-                    ->orWhere('id_number', '=', $personalInfoRow[$personalInfoPos['id_number']])
-                    ->orWhere('family_registration_number', '=', $personalInfoRow[$personalInfoPos['family_registration_number']])
-                    ->first();
+                $user = User::where('id_number', '=', $personalInfoRow[$personalInfoPos['id_number']]);
+                if (!empty($personalInfoRow[$personalInfoPos['employee_id_number']])) {
+                    $user->orWhere('employee_id_number', '=', $personalInfoRow[$personalInfoPos['employee_id_number']]);
+                }
+                if (!empty($personalInfoRow[$personalInfoPos['employee_registration_number']])) {
+                    $user->orWhere('employee_registration_number', '=', $personalInfoRow[$personalInfoPos['employee_registration_number']]);
+                }
+                if (!empty($personalInfoRow[$personalInfoPos['employee_id_card_number']])) {
+                    $user->orWhere('employee_id_card_number', '=', $personalInfoRow[$personalInfoPos['employee_id_card_number']]);
+                }
+                if (!empty($personalInfoRow[$personalInfoPos['karisu_number']])) {
+                    $user->orWhere('karisu_number', '=', $personalInfoRow[$personalInfoPos['karisu_number']]);
+                }
+                if (!empty($personalInfoRow[$personalInfoPos['id_tax']])) {
+                    $user->orWhere('id_tax', '=', $personalInfoRow[$personalInfoPos['id_tax']]);
+                }
+                if (!empty($personalInfoRow[$personalInfoPos['family_registration_number']])) {
+                    $user->orWhere('family_registration_number', '=', $personalInfoRow[$personalInfoPos['family_registration_number']]);
+                }
+                if (!empty($personalInfoRow[$personalInfoPos['email']])) {
+                    $user->orWhere('email', '=', $personalInfoRow[$personalInfoPos['email']]);
+                }
+                $user = $user->first();
             }
             if ($user !== null) {
                 $nonUnique = '';
@@ -1086,13 +1108,13 @@ class ImportEmployeeController extends Controller
             }
 
             // Format Date & Gender
-            $dateOfBirth = Carbon::createFromFormat('d/m/Y', $personalInfoRow[$personalInfoPos['date_of_birth']])->format('Y-m-d');
-            $cpnsEffectiveDate = Carbon::createFromFormat('d/m/Y', $personalInfoRow[$personalInfoPos['cpns_effective_date']])->format('Y-m-d');
-            $positionEffectiveDate = Carbon::createFromFormat('d/m/Y', $personalInfoRow[$personalInfoPos['position_effective_date']])->format('Y-m-d');
+            $dateOfBirth = $this->formatDate($personalInfoRow[$personalInfoPos['date_of_birth']], 'Data Pegawai', $personalInfoKey, $personalInfo[0][$personalInfoPos['date_of_birth']]);
+            $cpnsEffectiveDate = $this->formatDate($personalInfoRow[$personalInfoPos['cpns_effective_date']], 'Data Pegawai', $personalInfoKey, $personalInfo[0][$personalInfoPos['cpns_effective_date']]);
+            $positionEffectiveDate = $this->formatDate($personalInfoRow[$personalInfoPos['position_effective_date']], 'Data Pegawai', $personalInfoKey, $personalInfo[0][$personalInfoPos['position_effective_date']]);
 
             if ($this->type == 1 || $this->type == 2) { // ASN & NON ASN
-                $gradeEffectiveDate = Carbon::createFromFormat('d/m/Y', $personalInfoRow[$personalInfoPos['grade_effective_date']])->format('Y-m-d');
-                $echelonEffectiveDate = Carbon::createFromFormat('d/m/Y', $personalInfoRow[$personalInfoPos['echelon_effective_date']])->format('Y-m-d');
+                $gradeEffectiveDate = $this->formatDate($personalInfoRow[$personalInfoPos['grade_effective_date']], 'Data Pegawai', $personalInfoKey, $personalInfo[0][$personalInfoPos['grade_effective_date']]);
+                $echelonEffectiveDate = $this->formatDate($personalInfoRow[$personalInfoPos['echelon_effective_date']], 'Data Pegawai', $personalInfoKey, $personalInfo[0][$personalInfoPos['echelon_effective_date']]);
             }
 
             if ($this->type == 3) { // OUTSOURCE
@@ -1256,10 +1278,10 @@ class ImportEmployeeController extends Controller
             $decreeID = $this->findInArray($positionRow[$this->positionInfoPos['type_of_decree']], $this->decrees, 'Riwayat Jabatan', $positionKey, $positionInfo[0][$this->positionInfoPos['type_of_decree']]);
             $terminationDecreeID = $this->findInArray($positionRow[$this->positionInfoPos['type_of_termination_decree']], $this->decrees, 'Riwayat Jabatan', $positionKey, $positionInfo[0][$this->positionInfoPos['type_of_termination_decree']]);
 
-            $effectiveDate = Carbon::createFromFormat('d/m/Y', $positionRow[$this->positionInfoPos['effective_date']])->format('Y-m-d');
-            $decreeDate = Carbon::createFromFormat('d/m/Y', $positionRow[$this->positionInfoPos['decree_date']])->format('Y-m-d');
-            $terminationDate = Carbon::createFromFormat('d/m/Y', $positionRow[$this->positionInfoPos['termination_date']])->format('Y-m-d');
-            $terminationDecreeDate = Carbon::createFromFormat('d/m/Y', $positionRow[$this->positionInfoPos['termination_decree_date']])->format('Y-m-d');
+            $effectiveDate = $this->formatDate($positionRow[$this->positionInfoPos['effective_date']], 'Riwayat Jabatan', $positionKey, $positionInfo[0][$this->positionInfoPos['effective_date']]);
+            $decreeDate = $this->formatDate($positionRow[$this->positionInfoPos['decree_date']], 'Riwayat Jabatan', $positionKey, $positionInfo[0][$this->positionInfoPos['decree_date']]);
+            $terminationDate = $this->formatDate($positionRow[$this->positionInfoPos['termination_date']], 'Riwayat Jabatan', $positionKey, $positionInfo[0][$this->positionInfoPos['termination_date']]);
+            $terminationDecreeDate = $this->formatDate($positionRow[$this->positionInfoPos['termination_decree_date']], 'Riwayat Jabatan', $positionKey, $positionInfo[0][$this->positionInfoPos['termination_decree_date']]);
 
             $personalInfo[$positionRow[$this->positionInfoPos['nik']]]['position'][] = [
                 'name' => $positionRow[$this->positionInfoPos['name']],
@@ -1319,8 +1341,8 @@ class ImportEmployeeController extends Controller
             $decreeID = $this->findInArray($gradeRow[$this->gradeInfoPos['type_of_decree']], $this->decrees, 'Riwayat Golongan', $gradeKey, $gradeInfo[0][$this->gradeInfoPos['type_of_decree']]);
             $monthID = $this->findInArray($gradeRow[$this->gradeInfoPos['period_month']], $this->month, 'Riwayat Golongan', $gradeKey, $gradeInfo[0][$this->gradeInfoPos['period_month']]);
 
-            $effectiveDate = Carbon::createFromFormat('d/m/Y', $gradeRow[$this->gradeInfoPos['effective_date']])->format('Y-m-d');
-            $decreeDate = Carbon::createFromFormat('d/m/Y', $gradeRow[$this->gradeInfoPos['decree_date']])->format('Y-m-d');
+            $effectiveDate = $this->formatDate($gradeRow[$this->gradeInfoPos['effective_date']], 'Riwayat Golongan', $gradeKey, $gradeInfo[0][$this->gradeInfoPos['effective_date']]);
+            $decreeDate = $this->formatDate($gradeRow[$this->gradeInfoPos['decree_date']], 'Riwayat Golongan', $gradeKey, $gradeInfo[0][$this->gradeInfoPos['decree_date']]);
             $status = null;
             if ($gradeRow[$this->gradeInfoPos['status']] == 'Aktif') {
                 $status = 1;
@@ -1364,7 +1386,7 @@ class ImportEmployeeController extends Controller
             ];
 
             if ($trainingType == 3) { // Pelatihan Teknis
-                $startDate = Carbon::createFromFormat('d/m/Y', $trainingRow[$this->technicalTrainingInfoPos['start_date']])->format('Y-m-d');
+                $startDate = $this->formatDate($trainingRow[$this->trainingInfoPos['start_date']], 'Riwayat Pelatihan Teknis', $trainingKey, $trainingInfo[0][$this->technicalTrainingInfoPos['start_date']]);
 
                 $requiredFieldFilled = true;
                 foreach ($requiredFields as $key => $field) {
@@ -1390,14 +1412,13 @@ class ImportEmployeeController extends Controller
                     'reference_number' => $trainingRow[$this->technicalTrainingInfoPos['reference_number']],
                     'type' => $trainingType,
                 ];
-            } else { // Pelatihan Struktural and Pelatihan Fungsional
-                $startDate = Carbon::createFromFormat('d/m/Y', $trainingRow[$this->trainingInfoPos['start_date']])->format('Y-m-d');
-
+            } else { // Pelatihan Struktural and Pelatihan Fungsional                
                 if ($trainingType == 1) { // Struktural
                     $sheet = 'Riwayat Pelatihan Struktural';
                 } else {
                     $sheet = 'Riwayat Pelatihan Fungsional';
                 }
+                $startDate = $this->formatDate($trainingRow[$this->trainingInfoPos['start_date']], $sheet, $trainingKey, $trainingInfo[0][$this->trainingInfoPos['start_date']]);
 
                 $requiredFieldFilled = true;
                 foreach ($requiredFields as $key => $field) {
@@ -1466,8 +1487,8 @@ class ImportEmployeeController extends Controller
             $decreeID = $this->findInArray($recognitionRow[$this->recognitionInfoPos['type_of_decree']], $this->decrees, 'Riwayat Penghargaan', $recognitionKey, $recognitionInfo[0][$this->recognitionInfoPos['type_of_decree']]);
             $monthID = $this->findInArray($recognitionRow[$this->recognitionInfoPos['period_month']], $this->month, 'Riwayat Penghargaan', $recognitionKey, $recognitionInfo[0][$this->recognitionInfoPos['period_month']]);
 
-            $decreeDate = Carbon::createFromFormat('d/m/Y', $recognitionRow[$this->recognitionInfoPos['decree_date']])->format('Y-m-d');
-            $dateOfReceipt = Carbon::createFromFormat('d/m/Y', $recognitionRow[$this->recognitionInfoPos['date_of_receipt']])->format('Y-m-d');
+            $decreeDate = $this->formatDate($recognitionRow[$this->recognitionInfoPos['decree_date']], 'Riwayat Penghargaan', $recognitionKey, $recognitionInfo[0][$this->recognitionInfoPos['decree_date']]);
+            $dateOfReceipt = $this->formatDate($recognitionRow[$this->recognitionInfoPos['date_of_receipt']], 'Riwayat Penghargaan', $recognitionKey, $recognitionInfo[0][$this->recognitionInfoPos['date_of_receipt']]);
 
             $personalInfo[$recognitionRow[$this->recognitionInfoPos['nik']]]['recognition'][] = [
                 'recognition_id' => $recognitionID,
@@ -1619,9 +1640,9 @@ class ImportEmployeeController extends Controller
             $disciplinaryID = $this->findInArray($disciplinaryRow[$this->disciplinaryInfoPos['disciplinary']], $this->disciplinaries, 'Riwayat Hukuman Disiplin', $disciplinaryKey, $disciplinaryInfo[0][$this->disciplinaryInfoPos['disciplinary']]);
             $monthID = $this->findInArray($disciplinaryRow[$this->disciplinaryInfoPos['period_month']], $this->month, 'Riwayat Hukuman Disiplin', $disciplinaryKey, $disciplinaryInfo[0][$this->disciplinaryInfoPos['period_month']]);
 
-            $decreeDate = Carbon::createFromFormat('d/m/Y', $disciplinaryRow[$this->disciplinaryInfoPos['date_of_decree']])->format('Y-m-d');
-            $startDate = Carbon::createFromFormat('d/m/Y', $disciplinaryRow[$this->disciplinaryInfoPos['start_date']])->format('Y-m-d');
-            $endDate = Carbon::createFromFormat('d/m/Y', $disciplinaryRow[$this->disciplinaryInfoPos['end_date']])->format('Y-m-d');
+            $decreeDate = $this->formatDate($disciplinaryRow[$this->disciplinaryInfoPos['date_of_decree']], 'Riwayat Hukuman Disiplin', $disciplinaryKey, $disciplinaryInfo[0][$this->disciplinaryInfoPos['date_of_decree']]);
+            $startDate = $this->formatDate($disciplinaryRow[$this->disciplinaryInfoPos['start_date']], 'Riwayat Hukuman Disiplin', $disciplinaryKey, $disciplinaryInfo[0][$this->disciplinaryInfoPos['start_date']]);
+            $endDate = $this->formatDate($disciplinaryRow[$this->disciplinaryInfoPos['end_date']], 'Riwayat Hukuman Disiplin', $disciplinaryKey, $disciplinaryInfo[0][$this->disciplinaryInfoPos['end_date']]);
 
             $personalInfo[$disciplinaryRow[$this->disciplinaryInfoPos['nik']]]['disciplinary'][] = [
                 'name' => $disciplinaryRow[$this->disciplinaryInfoPos['name']],
@@ -1685,7 +1706,7 @@ class ImportEmployeeController extends Controller
             $familyEducationID = $this->findInArray($familyRow[$this->familyInfoPos['education']], $this->familyEducation, 'Riwayat Keluarga', $familyKey, $familyInfo[0][$this->familyInfoPos['education']]);
             $familyMaritalStatusID = $this->findInArray($familyRow[$this->familyInfoPos['marital_status']], $this->familyMaritalStatus, 'Riwayat Keluarga', $familyKey, $familyInfo[0][$this->familyInfoPos['marital_status']]);
 
-            $birthDate = Carbon::createFromFormat('d/m/Y', $familyRow[$this->familyInfoPos['date_of_birth']])->format('Y-m-d');
+            $birthDate = $this->formatDate($familyRow[$this->familyInfoPos['date_of_birth']], 'Riwayat Keluarga', $familyKey, $familyInfo[0][$this->familyInfoPos['date_of_birth']]);
 
             $personalInfo[$familyRow[$this->familyInfoPos['nik']]]['family'][] = [
                 'card_number' => $familyRow[$this->familyInfoPos['card_number']],
@@ -1742,8 +1763,8 @@ class ImportEmployeeController extends Controller
 
             $leaveTypeID = $this->findInArray($leaveRow[$this->leaveInfoPos['type']], $this->leaveType, 'Riwayat Cuti', $leaveKey, $leaveInfo[0][$this->leaveInfoPos['type']]);
 
-            $startDate = Carbon::createFromFormat('d/m/Y', $leaveRow[$this->leaveInfoPos['start_date']])->format('Y-m-d');
-            $endDate = Carbon::createFromFormat('d/m/Y', $leaveRow[$this->leaveInfoPos['end_date']])->format('Y-m-d');
+            $startDate = $this->formatDate($leaveRow[$this->leaveInfoPos['start_date']], 'Riwayat Cuti', $leaveKey, $leaveInfo[0][$this->leaveInfoPos['start_date']]);
+            $endDate = $this->formatDate($leaveRow[$this->leaveInfoPos['end_date']], 'Riwayat Cuti', $leaveKey, $leaveInfo[0][$this->leaveInfoPos['end_date']]);
 
             $personalInfo[$leaveRow[$this->leaveInfoPos['nik']]]['leave'][] = [
                 'start_date' => $startDate,
@@ -1821,7 +1842,7 @@ class ImportEmployeeController extends Controller
 
             $assessmentPointID = $this->findInArray($assessmentRow[$this->assessmentInfoPos['point']], $this->assessmentPoint, 'Hasil Assessment', $assessmentKey, $assessmentInfo[0][$this->assessmentInfoPos['point']]);
 
-            $eventDate = Carbon::createFromFormat('d/m/Y', $assessmentRow[$this->assessmentInfoPos['event_date']])->format('Y-m-d');
+            $eventDate = $this->formatDate($assessmentRow[$this->assessmentInfoPos['event_date']], 'Hasil Assessment', $assessmentKey, $assessmentInfo[0][$this->assessmentInfoPos['event_date']]);
 
             $personalInfo[$assessmentRow[$this->assessmentInfoPos['nik']]]['assessment'][] = [
                 'event_date' => $eventDate,
@@ -1862,7 +1883,7 @@ class ImportEmployeeController extends Controller
 
             $competencyPointID = $this->findInArray($competencyRow[$this->competencyInfoPos['point']], $this->competencyPoint, 'Hasil Uji Kompetensi', $competencyKey, $competencyInfo[0][$this->competencyInfoPos['point']]);
 
-            $eventDate = Carbon::createFromFormat('d/m/Y', $competencyRow[$this->competencyInfoPos['event_date']])->format('Y-m-d');
+            $eventDate = $this->formatDate($competencyRow[$this->competencyInfoPos['event_date']], 'Hasil Competency', $competencyKey, $competencyInfo[0][$this->competencyInfoPos['event_date']]);
 
             $personalInfo[$competencyRow[$this->competencyInfoPos['nik']]]['competency'][] = [
                 'event_date' => $eventDate,
@@ -1903,7 +1924,7 @@ class ImportEmployeeController extends Controller
 
             $talentPointID = $this->findInArray($talentRow[$this->talentInfoPos['point']], $this->talentPoint, 'Hasil Talent Pool', $talentKey, $talentInfo[0][$this->talentInfoPos['point']]);
 
-            $eventDate = Carbon::createFromFormat('d/m/Y', $talentRow[$this->talentInfoPos['event_date']])->format('Y-m-d');
+            $eventDate = $this->formatDate($talentRow[$this->talentInfoPos['event_date']], 'Hasil Talent', $talentKey, $talentInfo[0][$this->talentInfoPos['event_date']]);
 
             $personalInfo[$talentRow[$this->talentInfoPos['nik']]]['talent'][] = [
                 'event_date' => $eventDate,
@@ -2045,6 +2066,23 @@ class ImportEmployeeController extends Controller
         }
 
         return isset($positions['id']) ? $positions['id'] : null;
+    }
+
+    private function formatDate($stringDate, $sheet, $row, $colName)
+    {
+        $formatedDate = null;
+        if (empty($stringDate)) return $formatedDate;
+
+        // Regular expression to match the date format dd/mm/yyyy
+        $pattern = '/^\d{2}\/\d{2}\/\d{4}$/';
+
+        // Check if the value matches the pattern
+        if (preg_match($pattern, $stringDate)) {
+            $formatedDate = Carbon::createFromFormat('d/m/Y', $stringDate)->format('Y-m-d');
+        } else {
+            $this->skippedRow($sheet, $row, $colName . ' = "' . $stringDate . '" tidak sesuai. Pastikan format tanggal dd/mm/yyyy dan excel cell format adalah TEXT');
+        }
+        return $formatedDate;
     }
 
     /**
