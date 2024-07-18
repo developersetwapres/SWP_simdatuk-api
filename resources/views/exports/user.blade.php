@@ -7,7 +7,7 @@
     <style type="text/css">
         html * {
             font-family: Inter !important;
-            color: #394346 !important;
+            color: #394346;
         }
 
         table {
