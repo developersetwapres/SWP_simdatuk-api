@@ -64,11 +64,11 @@ class AuthController extends Controller
 
         $user->role = $role;
 
-        $permissions = DB::table('permissions');
-        $permissions->join('role_permissions', 'permissions.id', 'role_permissions.permission_id');
-        $permissions->join('roles', 'role_permissions.role_id', 'roles.id');
-        $permissions->join('users', 'roles.id', 'users.role_id');
-        $permissions->select('permissions.id', 'permissions.name', 'role_permissions.create', 'role_permissions.read', 'role_permissions.update', 'role_permissions.delete');
+        $permissions = DB::table('permissions as p');
+        $permissions->join('role_permissions as rp', 'p.id', 'rp.permission_id');
+        $permissions->join('roles as r', 'rp.role_id', 'r.id');
+        $permissions->where('rp.role_id', $role->id);
+        $permissions->select('p.id', 'p.name', 'rp.create', 'rp.read', 'rp.update', 'rp.delete');
         $permissions = $permissions->get();
 
         $user->permissions = $permissions;

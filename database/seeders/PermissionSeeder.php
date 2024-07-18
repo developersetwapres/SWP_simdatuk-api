@@ -60,10 +60,6 @@ class PermissionSeeder extends Seeder
                 'permitted_actions' => 'cru',
             ],
             [
-                'name' => 'Data Riwayat - Gaji',
-                'permitted_actions' => 'cru',
-            ],
-            [
                 'name' => 'Data Riwayat - Pelatihan Struktural',
                 'permitted_actions' => 'cru',
             ],
@@ -109,10 +105,6 @@ class PermissionSeeder extends Seeder
             ],
             [
                 'name' => 'Master Data - Data Instansi',
-                'permitted_actions' => 'crud',
-            ],
-            [
-                'name' => 'Master Data - Data Perguruan Tinggi',
                 'permitted_actions' => 'crud',
             ],
             [
