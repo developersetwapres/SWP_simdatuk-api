@@ -137,12 +137,15 @@ class employee implements FromView, WithDrawings, WithEvents
             }
             if (isset($this->toggleField['isPosition'])) {
                 $users->leftJoin('positions', 'users.position_id', '=', 'positions.id');
-                $users->addSelect('positions.name as position_name');
+                $users->addSelect('users.position_id', 'positions.name as position_name'); // position id to be used in get hierarchy below
             }
             if (isset($this->toggleField['isPositionDescription'])) {
                 $users->addSelect('users.description');
             }
             if (isset($this->toggleField['isEchelons'])) {
+                if ($this->toggleField['isPosition'] != 1) { // if isPosition not checked
+                    $users->addSelect('users.position_id'); // Get position id to be used in get hierarchy below
+                }
                 $users->leftJoin('echelons', 'users.echelon_id', '=', 'echelons.id');
                 $users->addSelect('echelons.name as echelons_name');
             }
@@ -670,7 +673,49 @@ class employee implements FromView, WithDrawings, WithEvents
             $users->whereIn('users.id', $userId);
             $users->groupBy('users.id');
             $users = $users->get();
-            $chunkResults = $users->map(function ($item) {
+            $chunkResults = $users->map(function ($item){
+                if (isset($this->toggleField['isPosition'])||isset($this->toggleField['isEchelons'])){
+                $sql =
+                        "WITH RECURSIVE hierarchy AS (
+                            -- Anchor member: Select the initial child row
+                            SELECT
+                                id,
+                                name,
+                                parent_id
+                            FROM
+                                positions
+                            WHERE
+                                id = '".$item->position_id."' -- Replace ? with the specific child employee_id
+                                
+                            UNION ALL
+                
+                            -- Recursive member: Select the parent row
+                            SELECT
+                                p.id,
+                                p.name,
+                                p.parent_id
+                            FROM
+                                positions p
+                            INNER JOIN
+                                hierarchy h ON p.id = h.parent_id
+                            WHERE
+                                p.entity = 1
+                                        AND p.parent_id IS NOT NULL
+                        )
+                        SELECT
+                            *
+                        FROM
+                            hierarchy WHERE id != '".$item->position_id."' ORDER BY id ASC;";
+
+                        $hierarchy = DB::select($sql);
+                        if(count($hierarchy) > 0){
+                            foreach($hierarchy as $key => $value){
+                                $e = "echelon_".$key+1;
+                                $item->$e = str_replace('Kepala ','',$value->name);
+                            }
+                        }
+                
+                }
                 return (array) $item;
             })->toArray();
             $usersData = $results->concat($chunkResults);

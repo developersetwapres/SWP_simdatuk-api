@@ -163,12 +163,16 @@
     "Tanggal Terakhir Bekerja" => $toggleField['isEndDate'],
     "Masa Kerja Keseluruhan" => $toggleField['isWorkDuration'],
     "Masa Kerja Golongan" => $toggleField['isGradeDuration'],
+    "Eselon I" => ($toggleField['isPosition'] || $toggleField['isEchelons']),
+    "Eselon II" =>($toggleField['isPosition'] || $toggleField['isEchelons']),
+    "Eselon III" =>($toggleField['isPosition'] || $toggleField['isEchelons']),
+    "Eselon IV" =>($toggleField['isPosition'] || $toggleField['isEchelons']),
     "Jabatan" => $toggleField['isPosition'],
     "Tanggal Mulai Menjabat" => $toggleField['isDatePosition'],
     "Eselon" => $toggleField['isEchelons'],
     "TMT Eselon" => $toggleField['isEchelonDate'],
     "Golongan" => $toggleField['isGrade'],
-    "TMT Grade" => $toggleField['isGradeDate'],
+    "TMT Golongan" => $toggleField['isGradeDate'],
     "Instansi" => $toggleField['isAgency'],
     "No. Karpeg" => $toggleField['isNoWorker'],
     "No Karisu" => $toggleField['isKarisu'],
@@ -313,6 +317,18 @@
                     @case("Masa Kerja Golongan")
                     {{ $value['grade_duration'] }}
                     @break
+                    @case("Eselon I")
+                    {{ $value['echelon_1'] ?? '-' }}
+                    @break
+                    @case("Eselon II")
+                    {{ $value['echelon_2'] ?? '-' }}
+                    @break
+                    @case("Eselon III")
+                    {{ $value['echelon_3'] ?? '-' }}
+                    @break
+                    @case("Eselon IV")
+                    {{ $value['echelon_4'] ?? '-' }}
+                    @break
                     @case("Jabatan")
                     {{ $value['position_name'] }}
                     @break
@@ -328,7 +344,7 @@
                     @case("Golongan")
                     {{ $value['grade_name'] }}
                     @break
-                    @case("TMT Grade")
+                    @case("TMT Golongan")
                     {{ $value['grade_effective_date'] }}
                     @break
                     @case("Instansi")

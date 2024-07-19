@@ -290,7 +290,7 @@ class ExportController extends Controller
             $user->whereIn('users.type', $request->employee_type);
         }
         if (isset($request->echelons)) {
-            $user->whereIn('echelons.name', $request->echelons);
+            $user->whereIn('echelons.id', $request->echelons);
         }
         if (isset($request->grades)) {
             $user->whereIn('users.grade_id', $request->grades);
@@ -398,7 +398,6 @@ class ExportController extends Controller
         set_time_limit(0);
         $pdfFiles = [];
         foreach ($userIds as $employeeId) {
-            // $pdfContent = $this->detailEmployee($employeeId);
 
             $religion = match ($employee[$employeeId]->religion) {
                 1 => 'Islam',
@@ -846,12 +845,15 @@ class ExportController extends Controller
                 }
                 if ($toggleFieldBio['isPosition']) {
                     $usersData->leftJoin('positions', 'users.position_id', '=', 'positions.id');
-                    $usersData->addSelect('positions.name as position_name');
+                    $usersData->addSelect('users.position_id', 'positions.name as position_name'); // position id to be used in get hierarchy below
                 }
                 if ($toggleFieldBio['isPositionDescription']) {
                     $usersData->addSelect('users.description');
                 }
                 if ($toggleFieldBio['isEchelons']) {
+                    if ($toggleFieldBio['isPosition'] != 1) { // if isPosition not checked
+                        $usersData->addSelect('users.position_id'); // Get position id to be used in get hierarchy below
+                    }
                     $usersData->addSelect('echelons.name as echelons_name');
                 }
                 if ($toggleFieldBio['isGrade']) {
@@ -1372,7 +1374,48 @@ class ExportController extends Controller
                 $usersData->whereIn('users.id', $userId);
                 $usersData->groupBy('users.id');
                 $usersData = $usersData->get();
-                $chunkResults = $usersData->map(function ($item) {
+                $chunkResults = $usersData->map(function ($item) use ($toggleFieldBio){
+                    if ($toggleFieldBio['isPosition']||$toggleFieldBio['isEchelons']){
+                        $sql =
+                        "WITH RECURSIVE hierarchy AS (
+                            -- Anchor member: Select the initial child row
+                            SELECT
+                                id,
+                                name,
+                                parent_id
+                            FROM
+                                positions
+                            WHERE
+                                id = '".$item->position_id."' -- Replace ? with the specific child employee_id
+                                
+                            UNION ALL
+                
+                            -- Recursive member: Select the parent row
+                            SELECT
+                                p.id,
+                                p.name,
+                                p.parent_id
+                            FROM
+                                positions p
+                            INNER JOIN
+                                hierarchy h ON p.id = h.parent_id
+                            WHERE
+                                p.entity = 1
+                                        AND p.parent_id IS NOT NULL
+                        )
+                        SELECT
+                            *
+                        FROM
+                            hierarchy WHERE id != '".$item->position_id."' ORDER BY id ASC;";
+
+                        $hierarchy = DB::select($sql);
+                        if(count($hierarchy) > 0){
+                            foreach($hierarchy as $key => $value){
+                                $e = "echelon_".$key+1;
+                                $item->$e = str_replace('Kepala ','',$value->name);
+                            }
+                        }
+                    }
                     return (array) $item;
                 })->toArray();
                 $usersData = $results->concat($chunkResults);

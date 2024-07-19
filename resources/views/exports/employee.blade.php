@@ -171,6 +171,18 @@
                 @if($toggleField['isGradeDuration'])
                 <th class="section-header-color">Masa Kerja Golongan</th>
                 @endif
+                @if($toggleField['isPosition'] || $toggleField['isEchelons'])
+                <th class="section-header-color">Eselon I</th>
+                @endif
+                @if($toggleField['isPosition'] || $toggleField['isEchelons'])
+                <th class="section-header-color">Eselon II</th>
+                @endif
+                @if($toggleField['isPosition'] || $toggleField['isEchelons'])
+                <th class="section-header-color">Eselon III</th>
+                @endif
+                @if($toggleField['isPosition'] || $toggleField['isEchelons'])
+                <th class="section-header-color">Eselon IV</th>
+                @endif
                 @if($toggleField['isPosition'])
                 <th class="section-header-color">Jabatan</th>
                 @endif
@@ -184,7 +196,7 @@
                 <th class="section-header-color">TMT Eselon</th>
                 @endif
                 @if($toggleField['isGrade'])
-                <th class="section-header-color">Grade</th>
+                <th class="section-header-color">Golongan</th>
                 @endif
                 @if($toggleField['isGradeDate'])
                 <th class="section-header-color">TMT Golongan</th>
@@ -390,6 +402,18 @@
                 @endif
                 @if($toggleField['isGradeDuration'])
                 <td>{{ $value['grade_duration'] }}</td>
+                @endif
+                @if($toggleField['isPosition'] || $toggleField['isEchelons'])
+                <td>{{ $value['echelon_1'] ?? '-' }}</td>
+                @endif
+                @if($toggleField['isPosition'] || $toggleField['isEchelons'])
+                <td>{{ $value['echelon_2'] ?? '-' }}</td>
+                @endif
+                @if($toggleField['isPosition'] || $toggleField['isEchelons'])
+                <td>{{ $value['echelon_3'] ?? '-' }}</td>
+                @endif
+                @if($toggleField['isPosition'] || $toggleField['isEchelons'])
+                <td>{{ $value['echelon_4'] ?? '-' }}</td>
                 @endif
                 @if($toggleField['isPosition'])
                 <td>{{ $value['position_name'] }}</td>
