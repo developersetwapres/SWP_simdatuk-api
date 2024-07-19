@@ -275,7 +275,7 @@ class ExportController extends Controller
      * @bodyParam min_age int Refers to minimum age of employee. Example: 50
      * @bodyParam max_age int Refers to maximum age of employee. Example: 55
      * @bodyParam marital_status int[] Refers to marital status of employee (1=Belum Menikah, 2=Menikah, 3=Cerai Hidup, 4=Cerai Mati). Example: [1, 3]
-     * @bodyParam retirement_age int[] Refers to retirement age of employee. Example: [58]
+     * @bodyParam retirement_year int Refers to retirement year of employee. Example: 2024
      * @bodyParam total_working_duration int[] Refers to total duration of employee employment. Example: ["5-10"]
      * @bodyParam grade_range int[] Refers to duration of grade in years. Example: ["5-10"]
     **/
@@ -339,8 +339,14 @@ class ExportController extends Controller
                 }
             });
         }
-        if (isset($request->retirement_age)) {
-            $user->whereIn('echelons.retirement_age', $request->retirement_age);
+        if (isset($request->retirement_year)) {
+            $user->whereRaw("
+                CASE
+                    WHEN users.type = 1 AND users.echelon_id IS NOT NULL AND date_of_birth IS NOT NULL THEN YEAR(date_of_birth) + echelons.retirement_age = ?
+                    WHEN users.type = 2 AND users.date_of_birth IS NOT NULL THEN YEAR(date_of_birth) + 58 = ?
+                    WHEN users.type = 3 AND users.date_of_birth IS NOT NULL THEN YEAR(date_of_birth) + 58 = ?
+                END
+            ", [$request->retirement_year, $request->retirement_year, $request->retirement_year]);
         }
         if (isset($request->total_working_duration)) {
             $gradeRanges = $request->input('total_working_duration', []);
@@ -567,7 +573,7 @@ class ExportController extends Controller
      * @bodyParam min_age int Refers to minimum age of employee. Example: 50
      * @bodyParam max_age int Refers to maximum age of employee. Example: 55
      * @bodyParam marital_status int[] Refers to marital status of employee (1=Belum Menikah, 2=Menikah, 3=Cerai Hidup, 4=Cerai Mati). Example: [1, 3]
-     * @bodyParam retirement_age int[] Refers to retirement age of employee. Example: [58]
+     * @bodyParam retirement_year int Refers to retirement year of employee. Example: 2024
      * @bodyParam total_working_duration int[] Refers to total duration of employee employment. Example: ["5-10"]
      * @bodyParam grade_range int[] Refers to duration of grade in years. Example: ["5-10"]
      * @bodyParam target_period string[] Refers to employees Target appraisal period ("Q1","Q2","Q3","Q4","Tahunan"). Example: ["Q1"]
@@ -638,7 +644,8 @@ class ExportController extends Controller
     {
         // filter user to get ids
         $users = DB::table('users')
-            ->leftjoin('user_credits', 'users.id', '=', 'user_credits.user_id')
+                ->leftJoin('echelons', 'users.echelon_id', '=', 'echelons.id')
+                ->leftjoin('user_credits', 'users.id', '=', 'user_credits.user_id')
             ->leftjoin('target_history_users', 'users.id', '=', 'target_history_users.user_id')
             ->leftJoin('target_histories', 'target_history_users.target_history_id', '=', 'target_histories.id')
             ->select('users.id');
@@ -651,7 +658,6 @@ class ExportController extends Controller
                 $users->whereIn('users.position_id', $positionIds);
             }
             if (isset($request->echelons)) {
-                $users->leftJoin('echelons', 'users.echelon_id', '=', 'echelons.id');
                 $users->whereIn('echelons.id', $request->echelons);
             }
             if (isset($request->grades)) {
@@ -689,11 +695,14 @@ class ExportController extends Controller
         if (isset($request->marital_status)) {
             $users->whereIn('users.marital_status', $request->marital_status);
         }
-        if (isset($request->retirement_age)) {
-            if (!isset($request->echelons)) {
-                $users->leftJoin('echelons', 'users.echelon_id', '=', 'echelons.id');
-            }
-            $users->whereIn('echelons.retirement_age', $request->retirement_age);
+        if (isset($request->retirement_year)) {
+            $users->whereRaw("
+            CASE
+                WHEN users.type = 1 AND users.echelon_id IS NOT NULL AND date_of_birth IS NOT NULL THEN YEAR(date_of_birth) + echelons.retirement_age = ?
+                WHEN users.type = 2 AND users.date_of_birth IS NOT NULL THEN YEAR(date_of_birth) + 58 = ?
+                WHEN users.type = 3 AND users.date_of_birth IS NOT NULL THEN YEAR(date_of_birth) + 58 = ?
+            END
+        ", [$request->retirement_year, $request->retirement_year, $request->retirement_year]);
         }
         if (isset($request->grade_range)) {
             $gradeRanges = $request->input('grade_range', []);
@@ -1455,7 +1464,7 @@ class ExportController extends Controller
      * @bodyParam min_age int Refers to minimum age of employee. Example: 50
      * @bodyParam max_age int Refers to maximum age of employee. Example: 55
      * @bodyParam marital_status int[] Refers to marital status of employee (1=Belum Menikah, 2=Menikah, 3=Cerai Hidup, 4=Cerai Mati). Example: [1, 3]
-     * @bodyParam retirement_age int[] Refers to retirement age of employee. Example: [58]
+     * @bodyParam retirement_year int Refers to retirement year of employee. Example: 2024
      * @bodyParam total_working_duration int[] Refers to total duration of employee employment. Example: ["5-10"]
      * @bodyParam grade_range int[] Refers to duration of grade in years. Example: ["5-10"]
      * @bodyParam target_period string[] Refers to employees Target appraisal period ("Q1","Q2","Q3","Q4","Tahunan"). Example: ["Q1"]
@@ -1570,6 +1579,15 @@ class ExportController extends Controller
         }
         if (isset($request->marital_status)) {
             $users->whereIn('users.marital_status', $request->marital_status);
+        }
+        if (isset($request->retirement_year)) {
+            $users->whereRaw("
+            CASE
+                WHEN users.type = 1 AND users.echelon_id IS NOT NULL AND date_of_birth IS NOT NULL THEN YEAR(date_of_birth) + echelons.retirement_age = ?
+                WHEN users.type = 2 AND users.date_of_birth IS NOT NULL THEN YEAR(date_of_birth) + 58 = ?
+                WHEN users.type = 3 AND users.date_of_birth IS NOT NULL THEN YEAR(date_of_birth) + 58 = ?
+            END
+        ", [$request->retirement_year, $request->retirement_year, $request->retirement_year]);
         }
         if (isset($request->grade_range)) {
             $gradeRanges = $request->input('grade_range', []);

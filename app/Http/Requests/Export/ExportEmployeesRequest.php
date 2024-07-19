@@ -36,8 +36,7 @@ class ExportEmployeesRequest extends FormRequest
             'min_age' => 'numeric|min:1|nullable',
             'max_age' => 'numeric|min:1|nullable',
             'marital_status' => 'array|min:1|nullable',
-            'retirement_age' => 'array|min:1|nullable',
-            'retirement_age.*' => 'numeric',
+            'retirement_year' => 'numeric|min:1|nullable',
             'grade_range' => 'array|min:1|nullable',
             'total_working_duration' => 'array|min:1|nullable',
             'target_period' => 'array|min:1|nullable',
@@ -135,9 +134,8 @@ class ExportEmployeesRequest extends FormRequest
             'max_age.numeric' => 'Max age harus berupa angka',
             'marital_status.array' => 'Marital Status harus berupa array',
             'marital_status.min' => 'Marital Status harus memiliki minimal 1 item',
-            'retirement_age.array' => 'Retirement age harus berupa array',
-            'retirement_age.min' => 'Retirement age minimal 1 angka didalam array',
-            'retirement_age.*.numeric' => 'Retirement age isi array harus berupa angka',
+            'retirement_year.min' => 'Retirement year minimal harus ada 1 value',
+            'retirement_year.numeric' => 'Retirement year harus berupa angka',
             'total_working_duration.array' => 'Total working duration harus berupa array',
             'total_working_duration.min' => 'Total working duration harus memiliki minimal 1 item',
             'grade_range.array' => 'Grade range harus berupa array',
@@ -391,13 +389,9 @@ class ExportEmployeesRequest extends FormRequest
                 'description' => 'Refers to marital status of employee (1=Belum Menikah, 2=Menikah, 3=Cerai Hidup, 4=Cerai Mati)',
                 'example' => [1, 3],
             ],
-            'retirement_age' => [
-                'description' => 'Refers to retirement age of employee',
-                'example' => [58]
-            ],
-            'retirement_age.*' => [
-                'description' => 'Refers to retirement age of employee',
-                'example' => [58]
+            'retirement_year' => [
+                'description' => 'Refers to employee retirement year',
+                'example' => 2024
             ],
             'total_working_duration' => [
                 'description' => 'Refers to total duration of employee employment',
