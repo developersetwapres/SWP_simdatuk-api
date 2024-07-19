@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('type');
-            $table->text('description');
+            $table->text('description')->nullable();
+            $table->text('log')->nullable();
+            $table->string('status', 10)->default('success');
             $table->timestamps();
 
             // Optional: Add foreign key constraint if you have a users table

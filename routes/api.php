@@ -118,6 +118,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::patch('/synchronization', [SynchronizationController::class, 'index']);
         Route::get('/import/download-template/{type}', [ImportEmployeeController::class, 'downloadTemplate']);
         Route::get('/import/histories', [ImportEmployeeController::class, 'getRiwayatImport']);
+        Route::get('/import/download-failed-import/{id}', [ImportEmployeeController::class, 'downloadImportErrorLog']);
     });
 
     Route::prefix('position-histories')->group(function () {

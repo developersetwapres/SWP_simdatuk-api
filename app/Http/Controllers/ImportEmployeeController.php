@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ImportEmployeeController extends Controller
 {
@@ -545,8 +546,7 @@ class ImportEmployeeController extends Controller
      * Import bulk employee with .XLSX file. This endpoint have type with 1=ASN, 2=Non ASN, 3=Outsource
      * @group Employee
      * @authenticated
-     * @response 400 {"code": 400,"message": "Import pegawai gagal","data": {"message": "Sheet Data Pegawai tidak sesuai atau kosong"}}
-     * @response 400 {"code": 400,"message": "Import pegawai gagal","data": [{"sheet": "Data Pegawai","row": 2,"reason": "Pegawai dengan No NIK  = 3573052203730999, sudah ada"},{"sheet": "Data Pegawai","row": 3,"reason": "Jabatan = \"Staf Khusus Wakil Presiden (Bidang Umu)\" tidak ditemukan"}]}
+     * @response 400 {"code": 400,"message": "Import pegawai gagal","data": {"log_id": 6}}
      * @response 200 {"code": 200,"message": "Import pegawai berhasil.","data": null}
      */
     public function import(Request $request)
@@ -601,8 +601,27 @@ class ImportEmployeeController extends Controller
         }
 
         $lastEl = ($this->type == 3) ? end($this->outsourcePersonalInfoPos) : end($this->personalInfoPos);
-        if (count($personalInfo) == 0 || !isset($personalInfo[0][$lastEl])) {
-            return $this->response(400, 'Import pegawai gagal', ['message' => 'Sheet Data Pegawai tidak sesuai atau kosong']);
+        if (count($personalInfo) == 0 || !isset($personalInfo[0][$lastEl])) { // Sheet Tidak sesuai
+
+            if ($this->type == 1) {
+                $logType = 'add-bulk-asn';
+                $logDescription = 'Tambah Massal Data Pegawai ASN';
+            } else if ($this->type == 2) {
+                $logType = 'add-bulk-non-asn';
+                $logDescription = 'Tambah Massal Data Pegawai NON ASN';
+            } else if ($this->type == 3) {
+                $logType = 'add-bulk-outsource';
+                $logDescription = 'Tambah Massal Data Pegawai OUTSOURCE';
+            }
+            $insertedId = DB::table('activity_logs')->insertGetId([
+                'user_id' => $request->user()->id,
+                'type' => $logType,
+                'description' => $logDescription,
+                'status' => 'failed',
+                'log' => json_encode(['Data Pegawai' => ['Sheet Data Pegawai tidak sesuai atau kosong']]),
+                'created_at' => date('Y-m-d H:i:s'),
+            ]);
+            return $this->response(400, 'Import pegawai gagal', ['log_id' => $insertedId]);
         }
 
         // Map Data Master
@@ -720,8 +739,34 @@ class ImportEmployeeController extends Controller
 
     private function save($personalInfo, $logUserID)
     {
+        $logType = '';
+        $logDescription = '';
+        if ($this->type == 1) {
+            $logType = 'add-bulk-asn';
+            $logDescription = 'Tambah Massal Data Pegawai ASN';
+        } else if ($this->type == 2) {
+            $logType = 'add-bulk-non-asn';
+            $logDescription = 'Tambah Massal Data Pegawai NON ASN';
+        } else if ($this->type == 3) {
+            $logType = 'add-bulk-outsource';
+            $logDescription = 'Tambah Massal Data Pegawai OUTSOURCE';
+        }
+
         if (sizeOf($this->skippedRow) > 0) {
-            return $this->response(400, 'Import pegawai gagal', $this->skippedRow);
+            $errorLog = [];
+            foreach ($this->skippedRow as $key => $value) {
+                $errorLog[$value['sheet']][] = 'Baris ' . $value['row'] . ' ' . $value['reason'];
+            }
+
+            $insertedId = DB::table('activity_logs')->insertGetId([
+                'user_id' => $logUserID,
+                'type' => $logType,
+                'description' => $logDescription,
+                'status' => 'failed',
+                'log' => json_encode($errorLog),
+                'created_at' => date('Y-m-d H:i:s'),
+            ]);
+            return $this->response(400, 'Import pegawai gagal', ['log_id' => $insertedId]);
         }
 
         foreach ($personalInfo as $nik => $data) {
@@ -857,18 +902,6 @@ class ImportEmployeeController extends Controller
             }
         }
 
-        $logType = '';
-        $logDescription = '';
-        if ($this->type == 1) {
-            $logType = 'add-bulk-asn';
-            $logDescription = 'Tambah Massal Data Pegawai ASN';
-        } else if ($this->type == 2) {
-            $logType = 'add-bulk-non-asn';
-            $logDescription = 'Tambah Massal Data Pegawai NON ASN';
-        } else if ($this->type == 3) {
-            $logType = 'add-bulk-outsource';
-            $logDescription = 'Tambah Massal Data Pegawai OUTSOURCE';
-        }
         DB::table('activity_logs')->insert([
             'user_id' => $logUserID,
             'type' => $logType,
@@ -1386,7 +1419,7 @@ class ImportEmployeeController extends Controller
             ];
 
             if ($trainingType == 3) { // Pelatihan Teknis
-                $startDate = $this->formatDate($trainingRow[$this->trainingInfoPos['start_date']], 'Riwayat Pelatihan Teknis', $trainingKey, $trainingInfo[0][$this->technicalTrainingInfoPos['start_date']]);
+                $startDate = $this->formatDate($trainingRow[$this->technicalTrainingInfoPos['start_date']], 'Riwayat Pelatihan Teknis', $trainingKey, $trainingInfo[0][$this->technicalTrainingInfoPos['start_date']]);
 
                 $requiredFieldFilled = true;
                 foreach ($requiredFields as $key => $field) {
@@ -1959,7 +1992,7 @@ class ImportEmployeeController extends Controller
         $id = $array[$key] ?? null;
 
         if (is_null($id)) {
-            $this->skippedRow($sheet, $row, $column . ' = "' . $find . '", tidak ditemukan');
+            $this->skippedRow($sheet, $row, $column . ' "' . $find . '", tidak ditemukan');
         }
 
         return $id;
@@ -2060,7 +2093,7 @@ class ImportEmployeeController extends Controller
                     $positions = $positions['child'];
                 }
             } else {
-                $this->skippedRow('Data Pegawai', $row, 'Jabatan = "' . $segment . '" tidak ditemukan');
+                $this->skippedRow('Data Pegawai', $row, 'Jabatan "' . $segment . '" tidak ditemukan');
                 return null;
             }
         }
@@ -2080,7 +2113,7 @@ class ImportEmployeeController extends Controller
         if (preg_match($pattern, $stringDate)) {
             $formatedDate = Carbon::createFromFormat('d/m/Y', $stringDate)->format('Y-m-d');
         } else {
-            $this->skippedRow($sheet, $row, $colName . ' = "' . $stringDate . '" tidak sesuai. Pastikan format tanggal dd/mm/yyyy dan excel cell format adalah TEXT');
+            $this->skippedRow($sheet, $row, $colName . ' "' . $stringDate . '" tidak sesuai. Pastikan format tanggal dd/mm/yyyy dan excel cell format adalah TEXT');
         }
         return $formatedDate;
     }
@@ -2126,7 +2159,7 @@ class ImportEmployeeController extends Controller
      * @queryParam type integer Refers to the type of employee 1=ASN 2=NON ASN 3=OUTSOURCE. Example: 1
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
      * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
-     * @response 200 {"code": 200,"message": "success","data": [{"user_id": 1,"name": "administrator","type": "add-bulk-asn","description": "Tambah Massal Data Pegawai ASN","created_at": "2024-07-02 00:00:00"}],"pagination": {"total": 1,"count": 1,"per_page": 5,"current_page": 1,"total_pages": 1,"links": {"first_page": "http://localhost/api/employees/import-histories?page=1","last_page": "http://localhost/api/employees/import-histories?page=1","next_page": null,"prev_page": null}}}
+     * @response 200 {"code": 200,"message": "success","data": [{"id":1,"user_id": 1,"name": "administrator","type": "add-bulk-asn","description": "Tambah Massal Data Pegawai ASN","status":"success","created_at": "2024-07-02 00:00:00"}],"pagination": {"total": 1,"count": 1,"per_page": 5,"current_page": 1,"total_pages": 1,"links": {"first_page": "http://localhost/api/employees/import-histories?page=1","last_page": "http://localhost/api/employees/import-histories?page=1","next_page": null,"prev_page": null}}}
      */
     public function getRiwayatImport(Request $request)
     {
@@ -2155,7 +2188,7 @@ class ImportEmployeeController extends Controller
         }
 
         $riwayat = DB::table('activity_logs as a')
-            ->select('a.user_id', 'u.name', 'a.type', 'a.description', 'a.created_at')
+            ->select('a.id', 'a.user_id', 'u.name', 'a.type', 'a.description', 'a.status', 'a.created_at')
             ->join('users as u', 'u.id', '=', 'a.user_id')
             ->where('a.type', $type)
             ->orderBy('a.created_at', 'desc');
@@ -2171,5 +2204,74 @@ class ImportEmployeeController extends Controller
 
             return $this->paginateResponse(200, $message, $riwayat);
         }
+    }
+
+    /**
+     * Download the error log of a specific import.
+     * @group Employee
+     * @queryParam $id integer The ID of the import activity log.
+     * @response 200 PDF File Downloaded
+     * @response 400 {"code": 400, "message": "Hasil error import tidak ditemukan","data": null}
+     */
+    public function downloadImportErrorLog($id)
+    {
+        // Check if the provided ID is numeric
+        if (!is_numeric($id)) {
+            return $this->response(400, 'Hasil error import tidak ditemukan'); // Return a 400 response if the ID is not valid
+        }
+
+        // Retrieve the error log from the activity logs table
+        $errorLog = DB::table('activity_logs')
+            ->select('log', 'created_at')
+            ->where('id', $id)
+            ->where('status', 'failed')
+            ->whereNotNull('log')
+            ->first();
+
+        // Check if the error log exists
+        if (!$errorLog) {
+            return $this->response(400, 'Hasil error import tidak ditemukan'); // Return a 400 response if the log is not found
+        }
+
+        // Extract the log and creation date from the retrieved error log
+        $logData = $errorLog->log;
+        $createdAt = $errorLog->created_at;
+
+        // Define an array to convert month numbers to Indonesian month names
+        $indonesianMonths = [
+            1 => 'Januari',
+            2 => 'Februari',
+            3 => 'Maret',
+            4 => 'April',
+            5 => 'Mei',
+            6 => 'Juni',
+            7 => 'Juli',
+            8 => 'Agustus',
+            9 => 'September',
+            10 => 'Oktober',
+            11 => 'November',
+            12 => 'Desember',
+        ];
+
+        // Format the date into Indonesian date format
+        $day = date('d', strtotime($createdAt));
+        $month = $indonesianMonths[date('n', strtotime($createdAt))];
+        $year = date('Y', strtotime($createdAt));
+        $formattedDate =  $day . ' ' . $month . ' ' . $year;
+
+        // Set up temporary directory for PDF generation
+        $temporaryDirectory = sys_get_temp_dir();
+
+        // Load and configure the PDF with the error log data and formatted date
+        $pdf = Pdf::loadview('imports/error', ['tanggal' => $formattedDate, 'errors' => json_decode($logData)]);
+        $pdf->set_option('isHtml5ParserEnabled', true);
+        $pdf->set_paper("A4", "portrait");
+        $pdf->set_option('isRemoteEnabled', true);
+        $pdf->set_option('fontDir', $temporaryDirectory);
+        $pdf->set_option('fontCache', $temporaryDirectory);
+        $pdf->set_option('tempDir', $temporaryDirectory);
+
+        // Download the generated PDF with a formatted filename
+        return $pdf->download('Hasil error import excel - ' . $formattedDate . '.pdf');
     }
 }
