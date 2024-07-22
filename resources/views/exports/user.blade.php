@@ -38,7 +38,7 @@
         }
 
         .page_break {
-            page-break-after: always;
+            page-break-before: always;
         }
 
         .profile-image {
@@ -207,11 +207,11 @@
         @endforeach
     </table>
 
-    <div class="page_break"></div>
+    <!-- <div class="page_break"></div> -->
 
     <!-- end of page 1 -->
 
-    <div class="title-profile">Riwayat Pendidikan</div>
+    <div class="title-profile page_break">Riwayat Pendidikan</div>
 
     <table class="table-section-3">
         <thead class="table-section-3-title-row">
