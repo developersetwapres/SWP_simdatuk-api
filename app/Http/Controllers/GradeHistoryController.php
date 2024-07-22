@@ -81,6 +81,12 @@ class GradeHistoryController extends Controller
                     $user['status'] = 1;
                     $user['grade_history_id'] = $gradeHistoryId;
                     array_push($users, $user);
+
+                    if (isset($user['grade_id']) && isset($user['user_id'])) {
+                        DB::table('users')->where('id', $user['user_id'])->updateTs([
+                            'grade_id' => $user['grade_id'],
+                        ]);
+                    }
                 }
                 DB::table('grade_history_users')->insertTs($users);
             }
@@ -183,6 +189,12 @@ class GradeHistoryController extends Controller
                 if (!is_null($user['id'])) {
                     // Update existing data
                     DB::table('grade_history_users')->where('id', $user['id'])->updateTs($user);
+
+                    if (isset($user['grade_id']) && isset($user['user_id'])) {
+                        DB::table('users')->where('id', $user['user_id'])->updateTs([
+                            'grade_id' => $user['grade_id'],
+                        ]);
+                    }
                 } else {
                     // Insert new item
                     $user['grade_history_id'] = $this->request->id;
