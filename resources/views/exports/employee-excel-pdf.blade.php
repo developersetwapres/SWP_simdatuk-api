@@ -318,16 +318,16 @@
                     {{ $value['grade_duration'] }}
                     @break
                     @case("Eselon I")
-                    {{ $value['echelon_1'] ?? '-' }}
+                    {{ $value['echelon_1'] ?? '' }}
                     @break
                     @case("Eselon II")
-                    {{ $value['echelon_2'] ?? '-' }}
+                    {{ $value['echelon_2'] ?? '' }}
                     @break
                     @case("Eselon III")
-                    {{ $value['echelon_3'] ?? '-' }}
+                    {{ $value['echelon_3'] ?? '' }}
                     @break
                     @case("Eselon IV")
-                    {{ $value['echelon_4'] ?? '-' }}
+                    {{ $value['echelon_4'] ?? '' }}
                     @break
                     @case("Jabatan")
                     {{ $value['position_name'] }}
@@ -383,7 +383,7 @@
                     CLTN
                     @break
                     @case(8)
-                    TBL
+                    TBLN
                     @break
                     @case(9)
                     Non Aktif

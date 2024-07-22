@@ -36,8 +36,11 @@ class ExportEmployeesRequest extends FormRequest
             'min_age' => 'numeric|min:1|nullable',
             'max_age' => 'numeric|min:1|nullable',
             'marital_status' => 'array|min:1|nullable',
+            'retirement_age' => 'array|min:1|nullable',
+            'retirement_age.*' => 'numeric',
             'retirement_year' => 'numeric|min:1|nullable',
             'grade_range' => 'array|min:1|nullable',
+            'employment_status' => 'array|min:1|nullable',
             'total_working_duration' => 'array|min:1|nullable',
             'target_period' => 'array|min:1|nullable',
             'target_year' => 'nullable|date_format:Y',
@@ -134,12 +137,18 @@ class ExportEmployeesRequest extends FormRequest
             'max_age.numeric' => 'Max age harus berupa angka',
             'marital_status.array' => 'Marital Status harus berupa array',
             'marital_status.min' => 'Marital Status harus memiliki minimal 1 item',
+            'retirement_age.array' => 'Retirement age harus berupa array',
+            'retirement_age.min' => 'Retirement age minimal 1 angka didalam array',
+            'retirement_age.*.numeric' => 'Retirement age isi array harus berupa angka',
             'retirement_year.min' => 'Retirement year minimal harus ada 1 value',
             'retirement_year.numeric' => 'Retirement year harus berupa angka',
             'total_working_duration.array' => 'Total working duration harus berupa array',
             'total_working_duration.min' => 'Total working duration harus memiliki minimal 1 item',
             'grade_range.array' => 'Grade range harus berupa array',
             'grade_range.min' => 'Grade range harus memiliki minimal 1 item',
+            'employment_status.array' => 'Employment status harus berupa array',
+            'employment_status.min' => 'Employment status minimal 1 angka didalam array',
+            'employment_status.*.numeric' => 'Employment status isi array harus berupa angka',
             'target_period.array' => 'Target period harus berupa array',
             'target_period.min' => 'Target period harus memiliki minimal 1 item',
             'target_year.date_format' => 'Target Year harus dalam format Y',
@@ -389,6 +398,14 @@ class ExportEmployeesRequest extends FormRequest
                 'description' => 'Refers to marital status of employee (1=Belum Menikah, 2=Menikah, 3=Cerai Hidup, 4=Cerai Mati)',
                 'example' => [1, 3],
             ],
+            'retirement_age' => [
+                'description' => 'Refers to retirement age of employee',
+                'example' => [58, 60]
+            ],
+            'retirement_age.*' => [
+                'description' => 'Refers to retirement age of employee',
+                'example' => [58, 60]
+            ],
             'retirement_year' => [
                 'description' => 'Refers to employee retirement year',
                 'example' => 2024
@@ -400,6 +417,14 @@ class ExportEmployeesRequest extends FormRequest
             'grade_range' => [
                 'description' => 'Refers to duration of grade in years',
                 'example' => ["5-10"],
+            ],
+            'employment_status' => [
+                'description' => 'Refers to employment status of employee (1=Aktif, 2=Pensiun, 3=Berhenti, 4=Meninggal, 5=Alih Status ,6=Aktif PS ,7=CLTN ,8=TBLN ,9=Non Aktif)',
+                'example' => [1, 3]
+            ],
+            'employment_status.*' => [
+                'description' => 'Refers to employment status of employee (1=Aktif, 2=Pensiun, 3=Berhenti, 4=Meninggal, 5=Alih Status ,6=Aktif PS ,7=CLTN ,8=TBLN ,9=Non Aktif)',
+                'example' => [1, 3]
             ],
             'target_period' => [
                 'description' => 'Refers to employees Target appraisal period ("Q1","Q2","Q3","Q4","Tahunan")',

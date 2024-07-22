@@ -404,16 +404,16 @@
                 <td>{{ $value['grade_duration'] }}</td>
                 @endif
                 @if($toggleField['isPosition'] || $toggleField['isEchelons'])
-                <td>{{ $value['echelon_1'] ?? '-' }}</td>
+                <td>{{ $value['echelon_1'] ?? '' }}</td>
                 @endif
                 @if($toggleField['isPosition'] || $toggleField['isEchelons'])
-                <td>{{ $value['echelon_2'] ?? '-' }}</td>
+                <td>{{ $value['echelon_2'] ?? '' }}</td>
                 @endif
                 @if($toggleField['isPosition'] || $toggleField['isEchelons'])
-                <td>{{ $value['echelon_3'] ?? '-' }}</td>
+                <td>{{ $value['echelon_3'] ?? '' }}</td>
                 @endif
                 @if($toggleField['isPosition'] || $toggleField['isEchelons'])
-                <td>{{ $value['echelon_4'] ?? '-' }}</td>
+                <td>{{ $value['echelon_4'] ?? '' }}</td>
                 @endif
                 @if($toggleField['isPosition'])
                 <td>{{ $value['position_name'] }}</td>
@@ -478,7 +478,7 @@
                     CLTN
                     @break
                     @case(8)
-                    TBL
+                    TBLN
                     @break
                     @case(9)
                     Non Aktif
@@ -542,7 +542,7 @@
                             @endphp
                             @endif
                             {!! '
-                        <li>'.$key.'. '.$v !!}
+                        <li>'.$key.'. '.str_replace('&','&amp;',$v) !!}
                             @endforeach
                     </ol>
                 </td>
@@ -556,7 +556,7 @@
                             @endphp
                             @endif
                             {!! '
-                        <li>'.$key.'. '.$v !!}
+                        <li>'.$key.'. '.str_replace('&','&amp;',$v) !!}
                             @endforeach
                     </ol>
                 </td>
@@ -570,7 +570,7 @@
                             @endphp
                             @endif
                             {!! '
-                        <li>'.$key.'. '.$v !!}
+                        <li>'.$key.'. '.str_replace('&','&amp;',$v) !!}
                             @endforeach
                     </ol>
                 </td>
@@ -584,7 +584,7 @@
                             @endphp
                             @endif
                             {!! '
-                        <li>'.$key.'. '.$v !!}
+                        <li>'.$key.'. '.str_replace('&','&amp;',$v) !!}
                             @endforeach
                     </ol>
                 </td>
@@ -598,7 +598,7 @@
                             @endphp
                             @endif
                             {!! '
-                        <li>'.$key.'. '.$v !!}
+                        <li>'.$key.'. '.str_replace('&','&amp;',$v) !!}
                             @endforeach
                     </ol>
                 </td>
@@ -612,7 +612,7 @@
                             @endphp
                             @endif
                             {!! '
-                        <li>'.$key.'. '.$v !!}
+                        <li>'.$key.'. '.str_replace('&','&amp;',$v) !!}
                             @endforeach
                     </ol>
                 </td>
@@ -626,7 +626,7 @@
                             @endphp
                             @endif
                             {!! '
-                        <li>'.$key.'. '.$v !!}
+                        <li>'.$key.'. '.str_replace('&','&amp;',$v) !!}
                             @endforeach
                     </ol>
                 </td>
@@ -640,7 +640,7 @@
                             @endphp
                             @endif
                             {!! '
-                        <li>'.$key.'. '.$v !!}
+                        <li>'.$key.'. '.str_replace('&','&amp;',$v) !!}
                             @endforeach
                     </ol>
                 </td>
@@ -654,7 +654,7 @@
                             @endphp
                             @endif
                             {!! '
-                        <li>'.$key.'. '.$v !!}
+                        <li>'.$key.'. '.str_replace('&','&amp;',$v) !!}
                             @endforeach
                     </ol>
                 </td>
@@ -668,7 +668,7 @@
                             @endphp
                             @endif
                             {!! '
-                        <li>'.$key.'. '.$v !!}
+                        <li>'.$key.'. '.str_replace('&','&amp;',$v) !!}
                             @endforeach
                     </ol>
                 </td>
@@ -682,7 +682,7 @@
                             @endphp
                             @endif
                             {!! '
-                        <li>'.$key.'. '.$v !!}
+                        <li>'.$key.'. '.str_replace('&','&amp;',$v) !!}
                             @endforeach
                     </ol>
                 </td>
@@ -696,7 +696,7 @@
                             @endphp
                             @endif
                             {!! '
-                        <li>'.$key.'. '.$v !!}
+                        <li>'.$key.'. '.str_replace('&','&amp;',$v) !!}
                             @endforeach
                     </ol>
                 </td>
@@ -710,7 +710,7 @@
                             @endphp
                             @endif
                             {!! '
-                        <li>'.$key.'. '.$v !!}
+                        <li>'.$key.'. '.str_replace('&','&amp;',$v) !!}
                             @endforeach
                     </ol>
                 </td>
@@ -724,7 +724,7 @@
                             @endphp
                             @endif
                             {!! '
-                        <li>'.$key.'. '.$v !!}
+                        <li>'.$key.'. '.str_replace('&','&amp;',$v) !!}
                             @endforeach
                     </ol>
                 </td>
@@ -738,7 +738,7 @@
                             @endphp
                             @endif
                             {!! '
-                        <li>'.$key.'. '.$v !!}
+                        <li>'.$key.'. '.str_replace('&','&amp;',$v) !!}
                             @endforeach
                     </ol>
                 </td>
@@ -752,7 +752,7 @@
                             @endphp
                             @endif
                             {!! '
-                        <li>'.$key.'. '.$v !!}
+                        <li>'.$key.'. '.str_replace('&','&amp;',$v) !!}
                             @endforeach
                     </ol>
                 </td>
@@ -766,7 +766,7 @@
                             @endphp
                             @endif
                             {!! '
-                        <li>'.$key.'. '.$v !!}
+                        <li>'.$key.'. '.str_replace('&','&amp;',$v) !!}
                             @endforeach
                     </ol>
                 </td>

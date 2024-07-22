@@ -275,9 +275,11 @@ class ExportController extends Controller
      * @bodyParam min_age int Refers to minimum age of employee. Example: 50
      * @bodyParam max_age int Refers to maximum age of employee. Example: 55
      * @bodyParam marital_status int[] Refers to marital status of employee (1=Belum Menikah, 2=Menikah, 3=Cerai Hidup, 4=Cerai Mati). Example: [1, 3]
+     * @bodyParam retirement_age int[] Refers to retirement year of employee. Example: [58,60]
      * @bodyParam retirement_year int Refers to retirement year of employee. Example: 2024
      * @bodyParam total_working_duration int[] Refers to total duration of employee employment. Example: ["5-10"]
      * @bodyParam grade_range int[] Refers to duration of grade in years. Example: ["5-10"]
+     * @bodyParam employment_status int[] Refers to employment status of employee (1=Aktif, 2=Pensiun, 3=Berhenti, 4=Meninggal, 5=Alih Status ,6=Aktif PS ,7=CLTN ,8=TBLN ,9=Non Aktif). Example: [1, 3]
     **/
     public function zipDetailEmployee(ExportZipEmployeesRequest $request)
     {
@@ -339,7 +341,20 @@ class ExportController extends Controller
                 }
             });
         }
-        if (isset($request->retirement_year)) {
+        if (isset($request->employment_status)) {
+            $user->whereIn('users.employment_status', $request->employment_status);
+        }
+        if (isset($request->retirement_age) && isset($request->retirement_year)) { // Age and year
+            $user->where(function ($query) use ($request) {
+                foreach ($request->retirement_age as $age) {
+                    $query->orWhere(DB::raw("YEAR(date_of_birth) + $age"), $request->retirement_year);
+                }
+            });
+        }
+        if (isset($request->retirement_age) && !isset($request->retirement_year)) { // Age only
+            $user->whereIn('echelons.retirement_age', $request->retirement_age);
+        }
+        if (!isset($request->returement_age) && isset($request->retirement_year)) { // Year only
             $user->whereRaw("
                 CASE
                     WHEN users.type = 1 AND users.echelon_id IS NOT NULL AND date_of_birth IS NOT NULL THEN YEAR(date_of_birth) + echelons.retirement_age = ?
@@ -573,9 +588,11 @@ class ExportController extends Controller
      * @bodyParam min_age int Refers to minimum age of employee. Example: 50
      * @bodyParam max_age int Refers to maximum age of employee. Example: 55
      * @bodyParam marital_status int[] Refers to marital status of employee (1=Belum Menikah, 2=Menikah, 3=Cerai Hidup, 4=Cerai Mati). Example: [1, 3]
+     * @bodyParam retirement_age int[] Refers to retirement year of employee. Example: [58,60]
      * @bodyParam retirement_year int Refers to retirement year of employee. Example: 2024
      * @bodyParam total_working_duration int[] Refers to total duration of employee employment. Example: ["5-10"]
      * @bodyParam grade_range int[] Refers to duration of grade in years. Example: ["5-10"]
+     * @bodyParam employment_status int[] Refers to employment status of employee (1=Aktif, 2=Pensiun, 3=Berhenti, 4=Meninggal, 5=Alih Status ,6=Aktif PS ,7=CLTN ,8=TBLN ,9=Non Aktif). Example: [1, 3]
      * @bodyParam target_period string[] Refers to employees Target appraisal period ("Q1","Q2","Q3","Q4","Tahunan"). Example: ["Q1"]
      * @bodyParam target_year string Refers to employees Target year period. Example: "2024"
      * @bodyParam work_behavior_rating int[] Refers to employees work behavior rating (1=Diatas Ekspektasi, 2=Sesuai Ekspektasi, 3=Dibawah Ekspektasi). Example: [1, 3]
@@ -695,7 +712,17 @@ class ExportController extends Controller
         if (isset($request->marital_status)) {
             $users->whereIn('users.marital_status', $request->marital_status);
         }
-        if (isset($request->retirement_year)) {
+        if (isset($request->retirement_age) && isset($request->retirement_year)) { // Age and year
+            $users->where(function ($query) use ($request) {
+                foreach ($request->retirement_age as $age) {
+                    $query->orWhere(DB::raw("YEAR(date_of_birth) + $age"), $request->retirement_year);
+                }
+            });
+        }
+        if (isset($request->retirement_age) && !isset($request->retirement_year)) { // Age only
+            $users->whereIn('echelons.retirement_age', $request->retirement_age);
+        }
+        if (!isset($request->returement_age) && isset($request->retirement_year)) { // Year only
             $users->whereRaw("
             CASE
                 WHEN users.type = 1 AND users.echelon_id IS NOT NULL AND date_of_birth IS NOT NULL THEN YEAR(date_of_birth) + echelons.retirement_age = ?
@@ -718,6 +745,9 @@ class ExportController extends Controller
                     $query->orWhereBetween('users.grade_effective_date', [$minDate, $maxDate]);
                 }
             });
+        }
+        if (isset($request->employment_status)) {
+            $users->whereIn('users.employment_status', $request->employment_status);
         }
         if (isset($request->total_working_duration)) {
             $gradeRanges = $request->input('total_working_duration', []);
@@ -1464,9 +1494,11 @@ class ExportController extends Controller
      * @bodyParam min_age int Refers to minimum age of employee. Example: 50
      * @bodyParam max_age int Refers to maximum age of employee. Example: 55
      * @bodyParam marital_status int[] Refers to marital status of employee (1=Belum Menikah, 2=Menikah, 3=Cerai Hidup, 4=Cerai Mati). Example: [1, 3]
+     * @bodyParam retirement_age int[] Refers to retirement year of employee. Example: [58,60]
      * @bodyParam retirement_year int Refers to retirement year of employee. Example: 2024
      * @bodyParam total_working_duration int[] Refers to total duration of employee employment. Example: ["5-10"]
      * @bodyParam grade_range int[] Refers to duration of grade in years. Example: ["5-10"]
+     * @bodyParam employment_status int[] Refers to employment status of employee (1=Aktif, 2=Pensiun, 3=Berhenti, 4=Meninggal, 5=Alih Status ,6=Aktif PS ,7=CLTN ,8=TBLN ,9=Non Aktif). Example: [1, 3]
      * @bodyParam target_period string[] Refers to employees Target appraisal period ("Q1","Q2","Q3","Q4","Tahunan"). Example: ["Q1"]
      * @bodyParam target_year string Refers to employees Target year period. Example: "2024"
      * @bodyParam work_behavior_rating int[] Refers to employees work behavior rating (1=Diatas Ekspektasi, 2=Sesuai Ekspektasi, 3=Dibawah Ekspektasi). Example: [1, 3]
@@ -1580,7 +1612,17 @@ class ExportController extends Controller
         if (isset($request->marital_status)) {
             $users->whereIn('users.marital_status', $request->marital_status);
         }
-        if (isset($request->retirement_year)) {
+        if (isset($request->retirement_age) && isset($request->retirement_year)) { // Age and year
+            $users->where(function ($query) use ($request) {
+                foreach ($request->retirement_age as $age) {
+                    $query->orWhere(DB::raw("YEAR(date_of_birth) + $age"), $request->retirement_year);
+                }
+            });
+        }
+        if (isset($request->retirement_age) && !isset($request->retirement_year)) { // Age only
+            $users->whereIn('echelons.retirement_age', $request->retirement_age);
+        }
+        if (!isset($request->returement_age) && isset($request->retirement_year)) { // Year only
             $users->whereRaw("
             CASE
                 WHEN users.type = 1 AND users.echelon_id IS NOT NULL AND date_of_birth IS NOT NULL THEN YEAR(date_of_birth) + echelons.retirement_age = ?
@@ -1603,6 +1645,9 @@ class ExportController extends Controller
                     $query->orWhereBetween('users.grade_effective_date', [$minDate, $maxDate]);
                 }
             });
+        }
+        if (isset($request->employment_status)) {
+            $users->whereIn('users.employment_status', $request->employment_status);
         }
         if (isset($request->total_working_duration)) {
             $gradeRanges = $request->input('total_working_duration', []);
