@@ -108,6 +108,10 @@ class PermissionSeeder extends Seeder
                 'permitted_actions' => 'crud',
             ],
             [
+                'name' => 'Master Data - Jenis Pegawai',
+                'permitted_actions' => 'crud',
+            ],
+            [
                 'name' => 'Export',
                 'permitted_actions' => 'r',
             ],
