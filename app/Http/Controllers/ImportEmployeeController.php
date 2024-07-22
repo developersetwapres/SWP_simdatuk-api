@@ -2209,6 +2209,7 @@ class ImportEmployeeController extends Controller
     /**
      * Download the error log of a specific import.
      * @group Employee
+     * @authenticated
      * @queryParam $id integer The ID of the import activity log.
      * @response 200 PDF File Downloaded
      * @response 400 {"code": 400, "message": "Hasil error import tidak ditemukan","data": null}
