@@ -32,14 +32,14 @@ class AuthController extends Controller
      * Below are the endpoints specifically tailored for the login process, utilizing Sanctum as the authentication method, ensuring secure access for users.
      * @response 200 {"code": 200,"message": "Pengguna berhasil login.","token": "12|Qt9HeTzHAmw5s2fLiRO09eovw1yF3EcSHFR4mU9Ga3cc24ab","user": {"id": 1,"email": "admin@setwapres.go.id","username": "admin","photo_profile": null,"employee_id_number": "0000000000000","employee_registration_number": "0000000000000","role": {"id": 1,"name": "administrator"},"permissions": [{"id": 8,"name": "Data Pegawai - ASN","create": 1,"read": 1,"update": 1,"delete": 0}]}}
      * @response 422 {"code": 422,"message": "Username tidak boleh kosong.","data": {"username": ["Username email tidak boleh kosong."], "password": ["Kata sandi tidak boleh kosong."]}}
-     * @response 401 {"code": 401,"message": "Kata sandi yang anda masukkan salah.","data": null}
+     * @response 401 {"code": 401,"message": "Password yang anda masukkan salah.","data": null}
      */
     public function login(LoginRequest $request)
     {
         $user = User::where('username', $this->request->username)->first();
 
         if (!$user || !Hash::check($this->request->password, $user->password)) {
-            return $this->response(401, 'Kata sandi yang anda masukkan salah.');
+            return $this->response(401, 'Password yang anda masukkan salah.');
         } else if (is_null($user->role_id)) {
             return $this->response(401, 'Anda tidak terdaftar sebagai pengguna, silakan hubungi tim IT.');
         } else if ($user->status != true) {
@@ -214,5 +214,4 @@ class AuthController extends Controller
             return $this->response(200, 'Verifikasi kode berhasil.');
         }
     }
-
 }
