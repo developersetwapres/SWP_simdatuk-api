@@ -115,7 +115,16 @@ class TargetHistoryController extends Controller
         $users = DB::table('target_history_users as thu');
         $users->join('users as u', 'u.id', '=', 'thu.user_id');
         $users->where('target_history_id', $targetHistory->id);
-        $users->select('thu.id', 'thu.employee_performance_predicate', 'thu.organizational_performance_achievement', 'thu.work_behavior_rating', 'u.name', 'u.employee_id_number', 'thu.created_at');
+        $users->select(
+            'thu.id',
+            'thu.employee_performance_predicate',
+            'thu.organizational_performance_achievement',
+            'thu.work_behavior_rating',
+            'u.id as user_id',
+            'u.name',
+            'u.employee_id_number',
+            'thu.created_at'
+        );
         $users = $users->get();
 
         $targetHistory->users = $users;
