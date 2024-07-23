@@ -103,13 +103,14 @@ class ImportEmployeeController extends Controller
      */
     protected $educationInfoPos = [
         'nik' => 0,
-        'level' => 1,
-        'name' => 2,
-        'faculty' => 3,
-        'major' => 4,
-        'status' => 5,
-        'year_of_graduation' => 6,
-        'description' => 7,
+        'nama' => 1,
+        'level' => 2,
+        'name' => 3,
+        'faculty' => 4,
+        'major' => 5,
+        'status' => 6,
+        'year_of_graduation' => 7,
+        'description' => 8,
     ];
 
     /**
@@ -120,20 +121,21 @@ class ImportEmployeeController extends Controller
         'period_month' => 1, // Bulan Periode Input Riwayat
         'period_year' => 2, // Tahun Periode Input Riwayat
         'nik' => 3,
-        'position' => 4, // Jabatan
-        'group' => 5, // Rumpun
-        'echelon' => 6, // Jenjang Jabatan
-        'position_status' => 7, // Keterangan Jabatan
-        'effective_date' => 8, // TMT Menjabat
-        'decree' => 9, // SK Jabatan
-        'type_of_decree' => 10, //Jenis SK Jabatan
-        'decree_number' => 11, // No SK Jabatan
-        'decree_date' => 12, // Tanggal SK Jabatan
-        'termination_date' => 13, // TMT Selesai
-        'termination_decree' => 14, // SK Selesai
-        'type_of_termination_decree' => 15, // Jenis SK Selesai
-        'termination_decree_number' => 16, // No SK Selesai
-        'termination_decree_date' => 17, // Tanggal SK Selesai
+        'nama' => 4,
+        'position' => 5, // Jabatan
+        'group' => 6, // Rumpun
+        'echelon' => 7, // Jenjang Jabatan
+        'position_status' => 8, // Keterangan Jabatan
+        'effective_date' => 9, // TMT Menjabat
+        'decree' => 10, // SK Jabatan
+        'type_of_decree' => 11, //Jenis SK Jabatan
+        'decree_number' => 12, // No SK Jabatan
+        'decree_date' => 13, // Tanggal SK Jabatan
+        'termination_date' => 14, // TMT Selesai
+        'termination_decree' => 15, // SK Selesai
+        'type_of_termination_decree' => 16, // Jenis SK Selesai
+        'termination_decree_number' => 17, // No SK Selesai
+        'termination_decree_date' => 18, // Tanggal SK Selesai
     ];
 
     /**
@@ -144,14 +146,15 @@ class ImportEmployeeController extends Controller
         'period_month' => 1, // Bulan Periode Input Riwayat
         'period_year' => 2, // Tahun Periode Input Riwayat
         'nik' => 3,
-        'grade' => 4, // Golongan
-        'effective_date' => 5, // TMT Golongan
-        'decree_name' => 6, // SK Golongan
-        'type_of_decree' => 7, // Jenis SK Golongan
-        'decree_number' => 8, // No. SK Golongan
-        'decree_date' => 9, // Tanggal SK Golongan
-        'description' => 10, // Keterangan Golongan
-        'status' => 11, // Status Golongan
+        'nama' => 4,
+        'grade' => 5, // Golongan
+        'effective_date' => 6, // TMT Golongan
+        'decree_name' => 7, // SK Golongan
+        'type_of_decree' => 8, // Jenis SK Golongan
+        'decree_number' => 9, // No. SK Golongan
+        'decree_date' => 10, // Tanggal SK Golongan
+        'description' => 11, // Keterangan Golongan
+        'status' => 12, // Status Golongan
     ];
 
     /**
@@ -167,6 +170,7 @@ class ImportEmployeeController extends Controller
         'duration' => 6, // Durasi Pelatihan
         'organizer' => 7, // Penyelenggara
         'nik' => 8,
+        'nama' => 9,
     ];
 
     /**
@@ -180,6 +184,7 @@ class ImportEmployeeController extends Controller
         'start_date' => 4, // Tanggal Pelaksanaan
         'duration' => 5, // Durasi Pelatihan
         'nik' => 6,
+        'nama' => 7,
     ];
 
     /**
@@ -197,6 +202,7 @@ class ImportEmployeeController extends Controller
         'awarding_institution' => 8, // Instansi Pemberi Penghargaan
         'date_of_receipt' => 9, // Tanggal Terima
         'nik' => 10,
+        'nama' => 11,
     ];
 
     /**
@@ -209,9 +215,10 @@ class ImportEmployeeController extends Controller
         'appraisal_period' => 3, // Periode Penilaian
         'year' => 4, // Tahun
         'nik' => 5,
-        'work_behavior_rating' => 6, // Rating Perilaku Kerja
-        'employee_performance_predicate' => 7, // Predikat Kinerja Pegawai
-        'organizational_performance_achievement' => 8, // Capaian Kinerja Organisasi
+        'nama' => 6,
+        'work_behavior_rating' => 7, // Rating Perilaku Kerja
+        'employee_performance_predicate' => 8, // Predikat Kinerja Pegawai
+        'organizational_performance_achievement' => 9, // Capaian Kinerja Organisasi
     ];
 
     /**
@@ -223,8 +230,9 @@ class ImportEmployeeController extends Controller
         'period_year' => 2, // Tahun Periode Input Riwayat
         'performance_period' => 3, // Periode PPK
         'nik' => 4,
-        'work_performance_score' => 5, // Nilai Prestasi Kerja
-        'description' => 6, // Keterangan
+        'nama' => 5,
+        'work_performance_score' => 6, // Nilai Prestasi Kerja
+        'description' => 7, // Keterangan
     ];
 
     /**
@@ -235,16 +243,17 @@ class ImportEmployeeController extends Controller
         'period_month' => 1, // Bulan Periode Input Riwayat
         'period_year' => 2, // Tahun Periode Input Riwayat
         'nik' => 3,
-        'grade' => 4, // Golongan
-        'position' => 5, // Jabatan
-        'disciplinary' => 6, // Jenis Hukuman
-        'decree_number' => 7, // No. SK Hukuman Disiplin
-        'date_of_decree' => 8, // Tanggal SK Hukuman Disiplin
-        'start_date' => 9, // Tanggal Awal Hukuman Disiplin
-        'end_date' => 10, // Tanggal Akhir Hukuman Disiplin
-        'authorizing_officer' => 11, // Pejabat Berwenang
-        'name_of_authorizing_officer' => 12, // Nama Pejabat Berwenang
-        'description' => 13, // Uraian
+        'nama' => 4,
+        'grade' => 5, // Golongan
+        'position' => 6, // Jabatan
+        'disciplinary' => 7, // Jenis Hukuman
+        'decree_number' => 8, // No. SK Hukuman Disiplin
+        'date_of_decree' => 9, // Tanggal SK Hukuman Disiplin
+        'start_date' => 10, // Tanggal Awal Hukuman Disiplin
+        'end_date' => 11, // Tanggal Akhir Hukuman Disiplin
+        'authorizing_officer' => 12, // Pejabat Berwenang
+        'name_of_authorizing_officer' => 13, // Nama Pejabat Berwenang
+        'description' => 14, // Uraian
 
     ];
 
@@ -253,22 +262,23 @@ class ImportEmployeeController extends Controller
      */
     protected $familyInfoPos = [
         'nik' => 0,
-        'card_number' => 1, // No. Kartu Keluarga
-        'name' => 2, // Nama Anggota Keluarga
-        'id_number' => 3, // No. NIK
-        'gender' => 4,
-        'religion' => 5,
-        'place_of_birth' => 6, // Tempat Lahir
-        'date_of_birth' => 7, // Tanggal Lahir
-        'name_of_father' => 8, // Nama Bapak
-        'name_of_mother' => 9, // Nama Ibu
-        'relationship_status' => 10, // Hubungan Keluarga
-        'education' => 11, // Pendidikan
-        'occupation' => 12, // Jenis Pekerjaan
-        'occupation_description' => 13, // Keterangan Pekerjaan
-        'marital_status' => 14, // Status Perkawinan
-        'mobile_phone' => 15, //No. HP
-        'sequence_number' => 16, // Urut Keluarga
+        'nama' => 1,
+        'card_number' => 2, // No. Kartu Keluarga
+        'name' => 3, // Nama Anggota Keluarga
+        'id_number' => 4, // No. NIK
+        'gender' => 5,
+        'religion' => 6,
+        'place_of_birth' => 7, // Tempat Lahir
+        'date_of_birth' => 8, // Tanggal Lahir
+        'name_of_father' => 9, // Nama Bapak
+        'name_of_mother' => 10, // Nama Ibu
+        'relationship_status' => 11, // Hubungan Keluarga
+        'education' => 12, // Pendidikan
+        'occupation' => 13, // Jenis Pekerjaan
+        'occupation_description' => 14, // Keterangan Pekerjaan
+        'marital_status' => 15, // Status Perkawinan
+        'mobile_phone' => 16, //No. HP
+        'sequence_number' => 17, // Urut Keluarga
     ];
 
     /**
@@ -276,11 +286,12 @@ class ImportEmployeeController extends Controller
      */
     protected $leaveInfoPos = [
         'nik' => 0,
-        'start_date' => 1, // Tanggal Awal Cuti
-        'end_date' => 2, // Tanggal Akhir Cuti
-        'type' => 3, // Jenis Cuti
-        'number' => 4, // No Cuti
-        'description' => 5, // Keterangan
+        'nama' => 1,
+        'start_date' => 2, // Tanggal Awal Cuti
+        'end_date' => 3, // Tanggal Akhir Cuti
+        'type' => 4, // Jenis Cuti
+        'number' => 5, // No Cuti
+        'description' => 6, // Keterangan
     ];
 
     /**
@@ -288,7 +299,8 @@ class ImportEmployeeController extends Controller
      */
     protected $noteInfoPos = [
         'nik' => 0,
-        'description' => 1,
+        'nama' => 1,
+        'description' => 2,
     ];
 
     /**
@@ -296,9 +308,10 @@ class ImportEmployeeController extends Controller
      */
     protected $assessmentInfoPos = [
         'nik' => 0,
-        'event_date' => 1,
-        'point' => 2,
-        'organizer' => 3,
+        'nama' => 1,
+        'event_date' => 2,
+        'point' => 3,
+        'organizer' => 4,
     ];
 
     /**
@@ -306,9 +319,10 @@ class ImportEmployeeController extends Controller
      */
     protected $competencyInfoPos = [
         'nik' => 0,
-        'event_date' => 1,
-        'point' => 2,
-        'organizer' => 3,
+        'nama' => 1,
+        'event_date' => 2,
+        'point' => 3,
+        'organizer' => 4,
     ];
 
     /**
@@ -316,9 +330,10 @@ class ImportEmployeeController extends Controller
      */
     protected $talentInfoPos = [
         'nik' => 0,
-        'event_date' => 1,
-        'point' => 2,
-        'organizer' => 3,
+        'nama' => 1,
+        'event_date' => 2,
+        'point' => 3,
+        'organizer' => 4,
     ];
     /**
      * END of maps the column names to their respective indexes
@@ -1376,7 +1391,7 @@ class ImportEmployeeController extends Controller
 
             $effectiveDate = $this->formatDate($gradeRow[$this->gradeInfoPos['effective_date']], 'Riwayat Golongan', $gradeKey, $gradeInfo[0][$this->gradeInfoPos['effective_date']]);
             $decreeDate = $this->formatDate($gradeRow[$this->gradeInfoPos['decree_date']], 'Riwayat Golongan', $gradeKey, $gradeInfo[0][$this->gradeInfoPos['decree_date']]);
-            $status = null;
+            $status = 1; //Default 1 = Aktif
             if ($gradeRow[$this->gradeInfoPos['status']] == 'Aktif') {
                 $status = 1;
             } else if ($gradeRow[$this->gradeInfoPos['status']] == 'Tidak Aktif') {
@@ -1607,7 +1622,6 @@ class ImportEmployeeController extends Controller
                 'performance_period',
                 'nik',
                 'work_performance_score',
-                'description',
             ];
 
             $requiredFieldFilled = true;
@@ -1986,6 +2000,9 @@ class ImportEmployeeController extends Controller
      */
     private function findInArray($find, $array, $sheet, $row, $column)
     {
+        if (empty($find)) { // Misal kosong atau tidak diisi
+            return null;
+        }
         // replace characters in a string that are not numbers, alphabets, or the specified symbols ()-/,. with empty
         $key = preg_replace('/[^a-zA-Z0-9\(\)\-\,\.\/]/', '', strtolower($find));
 
@@ -2210,7 +2227,7 @@ class ImportEmployeeController extends Controller
      * Download the error log of a specific import.
      * @group Employee
      * @authenticated
-     * @queryParam $id integer The ID of the import activity log.
+     * @queryParam id integer The ID of the import activity log.
      * @response 200 PDF File Downloaded
      * @response 400 {"code": 400, "message": "Hasil error import tidak ditemukan","data": null}
      */
