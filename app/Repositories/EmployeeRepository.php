@@ -359,6 +359,12 @@ class EmployeeRepository
             hierarchy;";
         $position = DB::select($sql);
         $names = array_column($position, 'name');
+
+        // Remove the text "Kepala" from each string in the array
+        $names = array_map(function ($item) {
+            return str_replace("Kepala ", "", $item);
+        }, $names);
+
         return implode(', ', $names);
     }
 }
