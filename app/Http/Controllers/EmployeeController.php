@@ -604,6 +604,8 @@ class EmployeeController extends Controller
                             $education['degree_document'] = $this->uploadDocument($education['degree_document'], 'degree_document');
                         } else if ($education['delete_degree_document'] == true) {
                             $education['degree_document'] = null;
+                        } else {
+                            unset($education['degree_document']);
                         }
                         unset($education['delete_degree_document']);
 
@@ -640,6 +642,8 @@ class EmployeeController extends Controller
                             $position['decree_document'] = $this->uploadDocument($position['decree_document'], 'decree_document');
                         } else if ($position['delete_decree_document'] == true) {
                             $position['decree_document'] = null;
+                        } else {
+                            unset($position['decree_document']);
                         }
                         unset($position['delete_decree_document']);
 
@@ -668,6 +672,8 @@ class EmployeeController extends Controller
                             $grade['decree_document'] = $this->uploadDocument($grade['decree_document'], 'decree_document');
                         } else if ($grade['delete_decree_document'] == true) {
                             $grade['decree_document'] = null;
+                        } else {
+                            unset($grade['decree_document']);
                         }
                         unset($grade['delete_decree_document']);
 
@@ -726,6 +732,8 @@ class EmployeeController extends Controller
                             $leave['letter'] = $this->uploadDocument($leave['letter'], 'letter');
                         } else if ($leave['delete_letter'] == true) {
                             $leave['letter'] = null;
+                        } else {
+                            unset($leave['letter']);
                         }
                         unset($leave['delete_letter']);
 
@@ -822,6 +830,8 @@ class EmployeeController extends Controller
                             $assessment['assessment_document'] = $this->uploadDocument($assessment['assessment_document'], 'assessment_document');
                         } else if ($assessment['delete_assessment_document'] == true) {
                             $assessment['assessment_document'] = null;
+                        } else {
+                            unset($assessment['assessment_document']);
                         }
                         unset($assessment['delete_assessment_document']);
 
@@ -859,6 +869,8 @@ class EmployeeController extends Controller
                             $competency['competency_document'] = $this->uploadDocument($competency['competency_document'], 'competency_document');
                         } else if ($competency['delete_competency_document'] == true) {
                             $competency['competency_document'] = null;
+                        } else {
+                            unset($competency['competency_document']);
                         }
                         unset($competency['delete_competency_document']);
 
@@ -896,6 +908,8 @@ class EmployeeController extends Controller
                             $talent['talent_document'] = $this->uploadDocument($talent['talent_document'], 'talent_document');
                         } else if ($talent['delete_talent_document'] == true) {
                             $talent['talent_document'] = null;
+                        } else {
+                            unset($talent['talent_document']);
                         }
                         unset($talent['delete_talent_document']);
 
@@ -934,6 +948,8 @@ class EmployeeController extends Controller
                             $training['certificate'] = $this->uploadDocument($training['certificate'], 'certificate');
                         } else if ($training['delete_certificate'] == true) {
                             $training['certificate'] = null;
+                        } else {
+                            unset($training['certificate']);
                         }
                         unset($training['delete_certificate']);
 
@@ -964,6 +980,8 @@ class EmployeeController extends Controller
                             $training['certificate'] = $this->uploadDocument($training['certificate'], 'certificate');
                         } else if ($training['delete_certificate'] == true) {
                             $training['certificate'] = null;
+                        } else {
+                            unset($training['certificate']);
                         }
                         unset($training['delete_certificate']);
 
@@ -994,6 +1012,8 @@ class EmployeeController extends Controller
                             $training['certificate'] = $this->uploadDocument($training['certificate'], 'certificate');
                         } else if ($training['delete_certificate'] == true) {
                             $training['certificate'] = null;
+                        } else {
+                            unset($training['certificate']);
                         }
                         unset($training['delete_certificate']);
 
