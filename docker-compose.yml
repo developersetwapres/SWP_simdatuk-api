@@ -7,7 +7,7 @@ services:
     ports:
       - 80:80
     volumes:
-       - ${APP_VOLUME}:/app
+      - ${APP_VOLUME}:/app
     networks:
       - simdatuk_network
   mysql:
@@ -21,6 +21,7 @@ services:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       MYSQL_USER: ${DB_USERNAME}
       MYSQL_PASSWORD: ${DB_PASSWORD}
+      TZ: Asia/Jakarta
     volumes:
       - ${DB_VOLUME}:/var/lib/mysql
     depends_on:
