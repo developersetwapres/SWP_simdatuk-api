@@ -65,7 +65,7 @@ class UpdatePositionHistoryRequest extends FormRequest
             'users.*.user_id.numeric' => 'User ID harus berupa angka.',
             'users.*.group_id.numeric' => 'Rumpun harus berupa angka.',
             'users.*.echelon.numeric' => 'Eselon harus berupa angka.',
-            'users.*.echelon.in' => 'Eselon harus diantara 1,2,3,4,5 atau 6.',
+            'users.*.echelon.exists' => 'Eselon tidak ditemukan.',
             'users.*.position_status.numeric' => 'Keterangan Jabatan harus berupa angka.',
             'users.*.position_status.in' => 'Keterangan Jabatan harus diantara 1, 2, 3 atau 4.',
             'users.*.effective_date.date' => 'Tanggal efektif jabatan harus berupa tanggal.',
@@ -122,7 +122,7 @@ class UpdatePositionHistoryRequest extends FormRequest
                 'example' => 1,
             ],
             'users.*.echelon' => [
-                'description' => 'Refers to the ID Echelon of Employee Position. 1=Eselon I, 2=Eselon II, 3=Eselon III, 4=Fungsional, 5=Pelaksana, 6=Staf',
+                'description' => 'Refers to the ID Echelon of Employee Position on Echelon.',
                 'example' => 1,
             ],
             'users.*.position_status' => [
