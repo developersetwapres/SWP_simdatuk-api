@@ -308,11 +308,11 @@ class ExportController extends Controller
         }
         if (isset($request->min_age)) {
             $minAge = $request->input('min_age');
-            $user->where('TIMESTAMPDIFF(YEAR, users.date_of_birth, NOW())','>=',$minAge);
+            $user->where(DB::raw('TIMESTAMPDIFF(YEAR, users.date_of_birth, NOW())'),'>=',$minAge);
         }
         if (isset($request->max_age)) {
             $maxAge = $request->input('max_age'); 
-            $user->where('TIMESTAMPDIFF(YEAR, users.date_of_birth, NOW())','<=',$maxAge);
+            $user->where(DB::raw('TIMESTAMPDIFF(YEAR, users.date_of_birth, NOW())'),'<=',$maxAge);
         }
         if (isset($request->marital_status)) {
             $user->whereIn('users.marital_status', $request->marital_status);
@@ -686,11 +686,11 @@ class ExportController extends Controller
         }
         if (isset($request->min_age)) {
             $minAge = $request->input('min_age');
-            $users->where('TIMESTAMPDIFF(YEAR, users.date_of_birth, NOW())','>=',$minAge);
+            $users->where(DB::raw('TIMESTAMPDIFF(YEAR, users.date_of_birth, NOW())'),'>=',$minAge);
         }
         if (isset($request->max_age)) {
             $maxAge = $request->input('max_age');
-            $users->where('TIMESTAMPDIFF(YEAR, users.date_of_birth, NOW())','<=',$maxAge);
+            $users->where(DB::raw('TIMESTAMPDIFF(YEAR, users.date_of_birth, NOW())'),'<=',$maxAge);
         }
         if (isset($request->marital_status)) {
             $users->whereIn('users.marital_status', $request->marital_status);
@@ -1581,12 +1581,12 @@ class ExportController extends Controller
         }
         if (isset($request->min_age)) {
             $minAge = $request->input('min_age');
-            $users->where('TIMESTAMPDIFF(YEAR, users.date_of_birth, NOW())','>=',$minAge);
+            $users->where(DB::raw('TIMESTAMPDIFF(YEAR, users.date_of_birth, NOW())'),'>=',$minAge);
 
         }
         if (isset($request->max_age)) {
             $maxAge = $request->input('max_age');
-            $users->where('TIMESTAMPDIFF(YEAR, users.date_of_birth, NOW())','<=',$maxAge);
+            $users->where(DB::raw('TIMESTAMPDIFF(YEAR, users.date_of_birth, NOW())'),'<=',$maxAge);
         }
         if (isset($request->marital_status)) {
             $users->whereIn('users.marital_status', $request->marital_status);
