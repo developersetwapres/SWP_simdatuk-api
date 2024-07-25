@@ -308,20 +308,11 @@ class ExportController extends Controller
         }
         if (isset($request->min_age)) {
             $minAge = $request->input('min_age');
-            $now = Carbon::now();
-
-            $minDate = $now->copy()->subYears($minAge + 1)->addDay()->toDateString();
-
-            $user->where('users.date_of_birth', '<=', $minDate);
+            $user->where('TIMESTAMPDIFF(YEAR, users.date_of_birth, NOW())','>=',$minAge);
         }
-
         if (isset($request->max_age)) {
-            $maxAge = $request->input('max_age');
-            $now = Carbon::now();
-
-            $maxDate = $now->copy()->subYears($maxAge)->toDateString();
-
-            $user->where('users.date_of_birth', '>=', $maxDate);
+            $maxAge = $request->input('max_age'); 
+            $user->where('TIMESTAMPDIFF(YEAR, users.date_of_birth, NOW())','<=',$maxAge);
         }
         if (isset($request->marital_status)) {
             $user->whereIn('users.marital_status', $request->marital_status);
@@ -354,7 +345,7 @@ class ExportController extends Controller
         if (isset($request->retirement_age) && !isset($request->retirement_year)) { // Age only
             $user->whereIn('echelons.retirement_age', $request->retirement_age);
         }
-        if (!isset($request->returement_age) && isset($request->retirement_year)) { // Year only
+        if (!isset($request->retirement_age) && isset($request->retirement_year)) { // Year only
             $user->whereRaw("
                 CASE
                     WHEN users.type = 1 AND users.echelon_id IS NOT NULL AND date_of_birth IS NOT NULL THEN YEAR(date_of_birth) + echelons.retirement_age = ?
@@ -695,19 +686,11 @@ class ExportController extends Controller
         }
         if (isset($request->min_age)) {
             $minAge = $request->input('min_age');
-            $now = Carbon::now();
-
-            $minDate = $now->copy()->subYears($minAge + 1)->addDay()->toDateString();
-
-            $users->where('users.date_of_birth', '<=', $minDate);
+            $users->where('TIMESTAMPDIFF(YEAR, users.date_of_birth, NOW())','>=',$minAge);
         }
         if (isset($request->max_age)) {
             $maxAge = $request->input('max_age');
-            $now = Carbon::now();
-
-            $maxDate = $now->copy()->subYears($maxAge)->toDateString();
-
-            $users->where('users.date_of_birth', '>=', $maxDate);
+            $users->where('TIMESTAMPDIFF(YEAR, users.date_of_birth, NOW())','<=',$maxAge);
         }
         if (isset($request->marital_status)) {
             $users->whereIn('users.marital_status', $request->marital_status);
@@ -722,7 +705,7 @@ class ExportController extends Controller
         if (isset($request->retirement_age) && !isset($request->retirement_year)) { // Age only
             $users->whereIn('echelons.retirement_age', $request->retirement_age);
         }
-        if (!isset($request->returement_age) && isset($request->retirement_year)) { // Year only
+        if (!isset($request->retirement_age) && isset($request->retirement_year)) { // Year only
             $users->whereRaw("
             CASE
                 WHEN users.type = 1 AND users.echelon_id IS NOT NULL AND date_of_birth IS NOT NULL THEN YEAR(date_of_birth) + echelons.retirement_age = ?
@@ -1598,15 +1581,12 @@ class ExportController extends Controller
         }
         if (isset($request->min_age)) {
             $minAge = $request->input('min_age');
-            $now = Carbon::now();
-            $minDate = $now->copy()->subYears($minAge + 1)->addDay()->toDateString();
-            $users->where('users.date_of_birth', '<=', $minDate);
+            $users->where('TIMESTAMPDIFF(YEAR, users.date_of_birth, NOW())','>=',$minAge);
+
         }
         if (isset($request->max_age)) {
             $maxAge = $request->input('max_age');
-            $now = Carbon::now();
-            $maxDate = $now->copy()->subYears($maxAge)->toDateString();
-            $users->where('users.date_of_birth', '>=', $maxDate);
+            $users->where('TIMESTAMPDIFF(YEAR, users.date_of_birth, NOW())','<=',$maxAge);
         }
         if (isset($request->marital_status)) {
             $users->whereIn('users.marital_status', $request->marital_status);
@@ -1621,7 +1601,7 @@ class ExportController extends Controller
         if (isset($request->retirement_age) && !isset($request->retirement_year)) { // Age only
             $users->whereIn('echelons.retirement_age', $request->retirement_age);
         }
-        if (!isset($request->returement_age) && isset($request->retirement_year)) { // Year only
+        if (!isset($request->retirement_age) && isset($request->retirement_year)) { // Year only
             $users->whereRaw("
             CASE
                 WHEN users.type = 1 AND users.echelon_id IS NOT NULL AND date_of_birth IS NOT NULL THEN YEAR(date_of_birth) + echelons.retirement_age = ?
