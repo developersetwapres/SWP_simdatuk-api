@@ -192,7 +192,6 @@ class employee implements FromView, WithDrawings, WithEvents
                     )
                 ) as grade_duration
             "));
-                
             }
             if (isset($this->toggleField['isNPWP'])) {
                 $users->addSelect('users.id_tax');
@@ -673,9 +672,9 @@ class employee implements FromView, WithDrawings, WithEvents
             $users->whereIn('users.id', $userId);
             $users->groupBy('users.id');
             $users = $users->get();
-            $chunkResults = $users->map(function ($item){
-                if (isset($this->toggleField['isPosition'])||isset($this->toggleField['isEchelons'])){
-                $sql =
+            $chunkResults = $users->map(function ($item) {
+                if (isset($this->toggleField['isPosition']) || isset($this->toggleField['isEchelons'])) {
+                    $sql =
                         "WITH RECURSIVE hierarchy AS (
                             -- Anchor member: Select the initial child row
                             SELECT
@@ -685,9 +684,9 @@ class employee implements FromView, WithDrawings, WithEvents
                             FROM
                                 positions
                             WHERE
-                                id = '".$item->position_id."' -- Replace ? with the specific child employee_id
+                                id = '" . $item->position_id . "' -- Replace ? with the specific child employee_id
                                 
-                            UNION ALL
+                            UNION DISTINCT
                 
                             -- Recursive member: Select the parent row
                             SELECT
@@ -705,16 +704,15 @@ class employee implements FromView, WithDrawings, WithEvents
                         SELECT
                             *
                         FROM
-                            hierarchy WHERE id != '".$item->position_id."' ORDER BY id ASC;";
+                            hierarchy WHERE id != '" . $item->position_id . "' ORDER BY id ASC;";
 
-                        $hierarchy = DB::select($sql);
-                        if(count($hierarchy) > 0){
-                            foreach($hierarchy as $key => $value){
-                                $e = "echelon_".$key+1;
-                                $item->$e = str_replace('Kepala ','',$value->name);
-                            }
+                    $hierarchy = DB::select($sql);
+                    if (count($hierarchy) > 0) {
+                        foreach ($hierarchy as $key => $value) {
+                            $e = "echelon_" . $key + 1;
+                            $item->$e = str_replace('Kepala ', '', $value->name);
                         }
-                
+                    }
                 }
                 return (array) $item;
             })->toArray();

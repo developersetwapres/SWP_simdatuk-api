@@ -120,7 +120,7 @@ class PositionRepository
             WHERE
                 id = '$positionId' -- Replace ? with the specific child employee_id
 
-            UNION ALL
+            UNION DISTINCT
 
             -- Recursive member: Select the parent row
             SELECT

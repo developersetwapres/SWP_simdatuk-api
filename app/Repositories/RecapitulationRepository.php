@@ -229,7 +229,7 @@ class RecapitulationRepository
                     WHERE
                         po.id = '$position->id' -- Replace ? with the specific parent id
 
-                    UNION ALL
+                    UNION DISTINCT
 
                     -- Recursive member: Select the child row
                     SELECT
@@ -454,7 +454,7 @@ class RecapitulationRepository
                 WHERE
                     po.id = '$parentId' -- Replace ? with the specific parent id
 
-                UNION ALL
+                UNION DISTINCT
 
                 -- Recursive member: Select the child row
                 SELECT

@@ -197,7 +197,7 @@ class RecapitulationEmployeeController extends Controller
                 WHERE
                     po.id = '$parentId' -- Replace ? with the specific parent id
 
-                UNION ALL
+                UNION DISTINCT
 
                 -- Recursive member: Select the child row
                 SELECT
@@ -342,7 +342,7 @@ class RecapitulationEmployeeController extends Controller
                 WHERE
                     po.id = 4 -- Replace ? with the specific parent id
 
-                UNION ALL
+                UNION DISTINCT
 
                 -- Recursive member: Select the child row
                 SELECT
