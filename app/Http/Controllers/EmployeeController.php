@@ -286,33 +286,19 @@ class EmployeeController extends Controller
 
                     if ($existsPositionEchelon > 0) {
                         return $this->response(404, 'Masukan eselon terlebih dahulu untuk mengisi posisi ini.');
-                    } else {
-                        return $this->response(404, 'Posisi tersedia untuk jabatan ini adalah 0');
                     }
                 }
 
-                if (isset($this->posted['echelon_id']) && ($existsPosition->type == 2 || $availablePosition == 0)) {
+                if (isset($this->posted['echelon_id']) && $availablePosition == 0) {
                     $existsPositionEchelon = DB::table('position_echelons')
-                        ->where('position_id', $this->posted['position_id']);
-
-                    if ($existsPosition->type == 2) {
-                        $existsPositionEchelon->where('echelon_id', $this->posted['echelon_id']);
-                    }
-
-                    $existsPositionEchelon = $existsPositionEchelon->first();
+                        ->where('position_id', $this->posted['position_id'])
+                        ->where('echelon_id', $this->posted['echelon_id'])
+                        ->first();
 
                     if (!$existsPositionEchelon) {
-                        if ($existsPosition->type == 2) {
-                            return $this->response(404, 'Jabatan untuk eselon ini tidak ditemukan!');
-                        } else {
-                            return $this->response(404, 'Jabatan tidak tersedia.');
-                        }
+                        return $this->response(404, 'Jabatan untuk eselon ini tidak ditemukan!');
                     } else if ($existsPositionEchelon->available == 0) {
-                        if ($existsPosition->type == 2) {
-                            return $this->response(404, 'Jabatan untuk eselon ini tidak tersedia!');
-                        } else {
-                            return $this->response(404, 'Jabatan tidak tersedia.');
-                        }
+                        return $this->response(404, 'Jabatan tidak tersedia.');
                     }
 
                     $availablePosition = $existsPositionEchelon->available;
@@ -555,33 +541,19 @@ class EmployeeController extends Controller
 
                     if ($existsPositionEchelon > 0) {
                         return $this->response(404, 'Masukan eselon terlebih dahulu untuk mengisi posisi ini.');
-                    } else {
-                        return $this->response(404, 'Posisi tersedia untuk jabatan ini adalah 0');
                     }
                 }
 
-                if (isset($this->posted['echelon_id']) && ($existsPosition->type == 2 || $availablePosition == 0)) {
+                if (isset($this->posted['echelon_id']) && $availablePosition == 0) {
                     $existsPositionEchelon = DB::table('position_echelons')
-                        ->where('position_id', $this->posted['position_id']);
-
-                    if ($existsPosition->type == 2) {
-                        $existsPositionEchelon->where('echelon_id', $this->posted['echelon_id']);
-                    }
-
-                    $existsPositionEchelon = $existsPositionEchelon->first();
+                        ->where('position_id', $this->posted['position_id'])
+                        ->where('echelon_id', $this->posted['echelon_id'])
+                        ->first();
 
                     if (!$existsPositionEchelon) {
-                        if ($existsPosition->type == 2) {
-                            return $this->response(404, 'Jabatan untuk eselon ini tidak ditemukan!');
-                        } else {
-                            return $this->response(404, 'Jabatan tidak tersedia.');
-                        }
+                        return $this->response(404, 'Jabatan untuk eselon ini tidak ditemukan!');
                     } else if ($existsPositionEchelon->available == 0) {
-                        if ($existsPosition->type == 2) {
-                            return $this->response(404, 'Jabatan untuk eselon ini tidak tersedia!');
-                        } else {
-                            return $this->response(404, 'Jabatan tidak tersedia.');
-                        }
+                        return $this->response(404, 'Jabatan tidak tersedia.');
                     }
 
                     $availablePosition = $existsPositionEchelon->available;
