@@ -279,6 +279,18 @@ class EmployeeController extends Controller
 
                 $availablePosition = $existsPosition->available;
 
+                if (!isset($this->posted['echelon_id']) && $availablePosition == 0) {
+                    $existsPositionEchelon = DB::table('position_echelons')
+                        ->where('position_id', $this->posted['position_id'])
+                        ->count();
+
+                    if ($existsPositionEchelon > 0) {
+                        return $this->response(404, 'Masukan eselon terlebih dahulu untuk mengisi posisi ini.');
+                    } else {
+                        return $this->response(404, 'Posisi tersedia untuk jabatan ini adalah 0');
+                    }
+                }
+
                 if (isset($this->posted['echelon_id']) && ($existsPosition->type == 2 || $availablePosition == 0)) {
                     $existsPositionEchelon = DB::table('position_echelons')
                         ->where('position_id', $this->posted['position_id']);
@@ -535,6 +547,18 @@ class EmployeeController extends Controller
                 }
 
                 $availablePosition = $existsPosition->available;
+
+                if (!isset($this->posted['echelon_id']) && $availablePosition == 0) {
+                    $existsPositionEchelon = DB::table('position_echelons')
+                        ->where('position_id', $this->posted['position_id'])
+                        ->count();
+
+                    if ($existsPositionEchelon > 0) {
+                        return $this->response(404, 'Masukan eselon terlebih dahulu untuk mengisi posisi ini.');
+                    } else {
+                        return $this->response(404, 'Posisi tersedia untuk jabatan ini adalah 0');
+                    }
+                }
 
                 if (isset($this->posted['echelon_id']) && ($existsPosition->type == 2 || $availablePosition == 0)) {
                     $existsPositionEchelon = DB::table('position_echelons')
