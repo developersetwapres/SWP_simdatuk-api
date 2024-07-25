@@ -143,6 +143,13 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 5,
             ],
             [
+                'position_id' => 52,
+                'echelon_id' => 9,
+                'available' => 1,
+                'vertical_order' => 1,
+                'horizontal_order' => 6,
+            ],
+            [
                 'position_id' => 53,
                 'echelon_id' => 6,
                 'available' => 3,
@@ -197,6 +204,13 @@ class PositionEchelonSeeder extends Seeder
                 'available' => 1,
                 'vertical_order' => 1,
                 'horizontal_order' => 5,
+            ],
+            [
+                'position_id' => 57,
+                'echelon_id' => 9,
+                'available' => 1,
+                'vertical_order' => 1,
+                'horizontal_order' => 6,
             ],
             [
                 'position_id' => 58,
@@ -421,6 +435,13 @@ class PositionEchelonSeeder extends Seeder
                 'available' => 2,
                 'vertical_order' => 1,
                 'horizontal_order' => 3,
+            ],
+            [
+                'position_id' => 86,
+                'echelon_id' => 9,
+                'available' => 2,
+                'vertical_order' => 1,
+                'horizontal_order' => 4,
             ],
             [
                 'position_id' => 87,
@@ -1167,6 +1188,13 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 5,
             ],
             [
+                'position_id' => 104,
+                'echelon_id' => 3,
+                'available' => 1,
+                'vertical_order' => 1,
+                'horizontal_order' => 3,
+            ],
+            [
                 'position_id' => 105,
                 'echelon_id' => 3,
                 'available' => 1,
@@ -1314,6 +1342,13 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 1,
             ],
             [
+                'position_id' => 129,
+                'echelon_id' => 4,
+                'available' => 1,
+                'vertical_order' => 1,
+                'horizontal_order' => 2,
+            ],
+            [
                 'position_id' => 130,
                 'echelon_id' => 4,
                 'available' => 1,
@@ -1389,6 +1424,13 @@ class PositionEchelonSeeder extends Seeder
                 'available' => 1,
                 'vertical_order' => 1,
                 'horizontal_order' => 2,
+            ],
+            [
+                'position_id' => 152,
+                'echelon_id' => 9,
+                'available' => 1,
+                'vertical_order' => 1,
+                'horizontal_order' => 3,
             ],
             [
                 'position_id' => 153,
@@ -1531,6 +1573,13 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 2,
             ],
             [
+                'position_id' => 180,
+                'echelon_id' => 4,
+                'available' => 1,
+                'vertical_order' => 1,
+                'horizontal_order' => 3,
+            ],
+            [
                 'position_id' => 183,
                 'echelon_id' => 9,
                 'available' => 1,
@@ -1587,6 +1636,13 @@ class PositionEchelonSeeder extends Seeder
                 'horizontal_order' => 4,
             ],
             [
+                'position_id' => 199,
+                'echelon_id' => 9,
+                'available' => 1,
+                'vertical_order' => 1,
+                'horizontal_order' => 3,
+            ],
+            [
                 'position_id' => 182,
                 'echelon_id' => 9,
                 'available' => 2,
@@ -1641,6 +1697,13 @@ class PositionEchelonSeeder extends Seeder
                 'available' => 1,
                 'vertical_order' => 1,
                 'horizontal_order' => 7,
+            ],
+            [
+                'position_id' => 219,
+                'echelon_id' => 9,
+                'available' => 1,
+                'vertical_order' => 1,
+                'horizontal_order' => 8,
             ],
             [
                 'position_id' => 37,

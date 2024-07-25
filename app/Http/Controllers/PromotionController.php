@@ -266,8 +266,8 @@ class PromotionController extends Controller
             $result = [
                 "id" => (int) $item->echelon_id,
                 "name" => isset($positionName)
-                ? $item->echelon_name
-                : $cards[$index]["name"],
+                    ? $item->echelon_name
+                    : $cards[$index]["name"],
                 "unoccupied" => (int) $item->unoccupied,
             ];
             $total += $item->unoccupied;

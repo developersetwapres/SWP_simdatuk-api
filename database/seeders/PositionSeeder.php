@@ -2076,7 +2076,7 @@ class PositionSeeder extends Seeder
                                                 'id' => 152,
                                                 'parent_id' => 149,
                                                 'name' => 'Analis Tata Usaha',
-                                                'available' => 1,
+                                                'available' => 0,
                                                 'type' => 1,
                                                 'entity' => 1,
                                                 'vertical_order' => 1,
