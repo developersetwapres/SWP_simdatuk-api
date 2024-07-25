@@ -361,9 +361,11 @@ class EmployeeRepository
         $names = array_column($position, 'name');
 
         // Remove the text "Kepala" from each string in the array
-        $names = array_map(function ($item) {
-            return str_replace("Kepala ", "", $item);
-        }, $names);
+        foreach ($names as $index => $name) {
+            if ($index != 0) {
+                $names[$index] = str_replace("Kepala ", "", $name);
+            }
+        }
 
         return implode(', ', $names);
     }
