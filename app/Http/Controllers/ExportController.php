@@ -169,12 +169,8 @@ class ExportController extends Controller
         };
 
         // Housing
-        $complex = 'Luar';
-        $complexName = '-';
-        if ($employee->residence_name != 'Luar Komplek') {
-            $complex = 'Dalam';
-            $complexName = $employee->residence_name;
-        }
+        $complex = $employee->residence_name;
+        $complexName = $employee->residence_description;
 
         // Batas Usia Pensiun
         $indonesianMonth = [

@@ -54,14 +54,15 @@ class ImportEmployeeController extends Controller
         'family_registration_number' => 26, // No KK
         'id_number' => 27, // NIK
         'residence' => 28, // Komplek
-        'current_address' => 29, // Alamat Tempat Tinggal Saat Ini
-        'home_phone_number' => 30, // No Telepon Rumah
-        'mobile_phone' => 31, // No HP
-        'office_address' => 32, // Alamat Kantor
-        'office_phone_number' => 33, // No Telepon Kantor
-        'email' => 34,
-        'office_email' => 35,
-        'emergency_contact' => 36, // Kontak Darurat
+        'residence_description' => 29, // Nama Komplek
+        'current_address' => 30, // Alamat Tempat Tinggal Saat Ini
+        'home_phone_number' => 31, // No Telepon Rumah
+        'mobile_phone' => 32, // No HP
+        'office_address' => 33, // Alamat Kantor
+        'office_phone_number' => 34, // No Telepon Kantor
+        'email' => 35,
+        'office_email' => 36,
+        'emergency_contact' => 37, // Kontak Darurat
     ];
 
     /**
@@ -88,14 +89,15 @@ class ImportEmployeeController extends Controller
         'family_registration_number' => 16, // No KK
         'id_number' => 17, // NIK
         'residence' => 18, // Komplek
-        'current_address' => 19, // Alamat Tempat Tinggal Saat Ini
-        'home_phone_number' => 20, // No Telepon Rumah
-        'mobile_phone' => 21, // No HP
-        'office_address' => 22, // Alamat Kantor
-        'office_phone_number' => 23, // No Telepon Kantor
-        'email' => 24,
-        'description' => 25, // Keterangan
-        'emergency_contact' => 26, // Kontak Darurat
+        'residence_description' => 19, // Nama Komplek
+        'current_address' => 20, // Alamat Tempat Tinggal Saat Ini
+        'home_phone_number' => 21, // No Telepon Rumah
+        'mobile_phone' => 22, // No HP
+        'office_address' => 23, // Alamat Kantor
+        'office_phone_number' => 24, // No Telepon Kantor
+        'email' => 25,
+        'description' => 26, // Keterangan
+        'emergency_contact' => 27, // Kontak Darurat
     ];
 
     /**
@@ -1187,6 +1189,7 @@ class ImportEmployeeController extends Controller
                     'id_number' => $personalInfoRow[$personalInfoPos['id_number']],
                     'family_registration_number' => $personalInfoRow[$personalInfoPos['family_registration_number']],
                     'residence_id' => $residenceID,
+                    'residence_description' => $personalInfoRow[$personalInfoPos['residence_description']],
                     'current_address' => $personalInfoRow[$personalInfoPos['current_address']],
                     'home_phone_number' => $personalInfoRow[$personalInfoPos['home_phone_number']],
                     'mobile_phone' => $personalInfoRow[$personalInfoPos['mobile_phone']],
@@ -1228,6 +1231,7 @@ class ImportEmployeeController extends Controller
                     'id_number' => $personalInfoRow[$personalInfoPos['id_number']],
                     'family_registration_number' => $personalInfoRow[$personalInfoPos['family_registration_number']],
                     'residence_id' => $residenceID,
+                    'residence_description' => $personalInfoRow[$personalInfoPos['residence_description']],
                     'current_address' => $personalInfoRow[$personalInfoPos['current_address']],
                     'home_phone_number' => $personalInfoRow[$personalInfoPos['home_phone_number']],
                     'mobile_phone' => $personalInfoRow[$personalInfoPos['mobile_phone']],
