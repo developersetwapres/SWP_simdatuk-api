@@ -1,3 +1,20 @@
+Enum "target_histories_appraisal_period_enum" {
+  "Q1"
+  "Q2"
+  "Q3"
+  "Q4"
+  "Tahunan"
+}
+
+Table "activity_logs" {
+  "id" bigint [pk, not null]
+  "user_id" bigint [default: NULL]
+  "type" varchar(255) [not null]
+  "description" text [not null]
+  "created_at" timestamp [default: NULL]
+  "updated_at" timestamp [default: NULL]
+}
+
 Table "colleges" {
   "id" bigint [pk, not null]
   "name" varchar(160) [not null]
@@ -9,16 +26,55 @@ Table "colleges" {
   "updated_at" timestamp [default: NULL]
 }
 
-Table "employee_educations" {
+Table "decrees" {
   "id" bigint [pk, not null]
-  "employee_id" bigint [not null]
-  "level" smallint [not null, default: "1", note: '1=TK / Sederajat, 2=SD / Sederajat, 3=SLTP / Sederajat, 4=SLTA / Sederajat, 5=Diploma I / II, 6=Akademi / Diploma III / Sarjana Muda, 7=Diploma IV / Strata I, 8=Strata II, 9=Strata III']
   "name" varchar(160) [not null]
-  "faculty" varchar(160) [not null]
-  "major" varchar(160) [not null]
-  "status" smallint [not null, default: "1", note: '1=Lulus, 2=DO, 3=Aktif, 4=Non-Aktif, 5=Mengundurkan diri']
-  "year_of_graduation" date [not null]
-  "description" text [not null]
+  "acronym" varchar(160) [not null]
+  "created_at" timestamp [not null]
+  "updated_at" timestamp [default: NULL]
+}
+
+Table "disciplinaries" {
+  "id" bigint [pk, not null]
+  "name" varchar(160) [not null]
+  "description" varchar(255) [not null]
+  "performance_allowance_deduction" double(8,2) [default: NULL, note: 'persentase pemontongan tunjangan kinerja']
+  "performance_allowance_duration" int [default: NULL, note: 'jangka waktu pemotongan (dalam bulan)']
+  "created_at" timestamp [not null]
+  "updated_at" timestamp [default: NULL]
+}
+
+Table "disciplinary_histories" {
+  "id" bigint [pk, not null]
+  "name" varchar(160) [not null]
+  "period_month" tinyint [not null]
+  "period_year" year [not null]
+  "created_at" timestamp [not null]
+  "updated_at" timestamp [default: NULL]
+}
+
+Table "disciplinary_history_users" {
+  "id" bigint [pk, not null]
+  "disciplinary_history_id" bigint [not null]
+  "user_id" bigint [not null]
+  "grade" varchar(255) [default: NULL]
+  "position" varchar(255) [default: NULL]
+  "disciplinary_id" bigint [default: NULL]
+  "decree_number" varchar(160) [default: NULL]
+  "date_of_decree" date [default: NULL]
+  "start_date" date [default: NULL]
+  "end_date" date [default: NULL]
+  "authorizing_officer" varchar(255) [default: NULL]
+  "name_of_authorizing_officer" varchar(160) [default: NULL]
+  "description" varchar(160) [default: NULL]
+  "created_at" timestamp [not null]
+  "updated_at" timestamp [default: NULL]
+}
+
+Table "echelons" {
+  "id" bigint [pk, not null]
+  "name" varchar(160) [not null]
+  "retirement_age" int [default: NULL]
   "created_at" timestamp [not null]
   "updated_at" timestamp [default: NULL]
 }
@@ -26,8 +82,8 @@ Table "employee_educations" {
 Table "employment_types" {
   "id" bigint [pk, not null]
   "name" varchar(160) [not null]
-  "status" tinyint(1) [not null, default: "1"]
   "type" tinyint [not null, default: "1", note: '1=ASN, 2=NON-ASN, 3=OUTSOURCE']
+  "status" tinyint(1) [not null, default: "1"]
   "created_at" timestamp [not null]
   "updated_at" timestamp [default: NULL]
 }
@@ -35,8 +91,41 @@ Table "employment_types" {
 Table "grades" {
   "id" bigint [pk, not null]
   "name" varchar(30) [not null]
-  "code" varchar(5) [not null]
-  "type" smallint [not null, default: "1", note: '1=PNS, 2=PPPK']
+  "code" varchar(10) [not null]
+  "type" tinyint [not null, default: "1", note: '1=PNS, 2=PPPK']
+  "created_at" timestamp [not null]
+  "updated_at" timestamp [default: NULL]
+}
+
+Table "grade_histories" {
+  "id" bigint [pk, not null]
+  "name" varchar(160) [not null]
+  "period_month" tinyint [not null]
+  "period_year" year [not null]
+  "created_at" timestamp [not null]
+  "updated_at" timestamp [default: NULL]
+}
+
+Table "grade_history_users" {
+  "id" bigint [pk, not null]
+  "grade_history_id" bigint [not null]
+  "user_id" bigint [not null]
+  "grade_id" bigint [default: NULL]
+  "effective_date" date [default: NULL]
+  "decree_name" varchar(160) [default: NULL]
+  "decree_document" varchar(255) [default: NULL]
+  "type_of_decree" bigint [default: NULL]
+  "decree_number" varchar(160) [default: NULL]
+  "decree_date" date [default: NULL]
+  "description" varchar(160) [default: NULL]
+  "status" tinyint [not null, default: "0", note: '0=tidak aktif, 1=aktif']
+  "created_at" timestamp [not null]
+  "updated_at" timestamp [default: NULL]
+}
+
+Table "groups" {
+  "id" bigint [pk, not null]
+  "name" varchar(160) [not null]
   "created_at" timestamp [not null]
   "updated_at" timestamp [default: NULL]
 }
@@ -61,6 +150,26 @@ Table "password_reset_tokens" {
   "created_at" timestamp [default: NULL]
 }
 
+Table "performance_histories" {
+  "id" bigint [pk, not null]
+  "name" varchar(160) [not null]
+  "period_month" tinyint [not null]
+  "period_year" year [not null]
+  "performance_period" varchar(160) [not null]
+  "created_at" timestamp [not null]
+  "updated_at" timestamp [default: NULL]
+}
+
+Table "performance_history_users" {
+  "id" bigint [pk, not null]
+  "performance_history_id" bigint [not null]
+  "user_id" bigint [not null]
+  "work_performance_score" double(5,2) [not null]
+  "description" tinyint [default: NULL, note: '1=Kurang (<50), 2=Sedang (51-60), 3=Cukup (61-75), 4=Baik (76-90), 5=Sangat Baik (91-100)']
+  "created_at" timestamp [not null]
+  "updated_at" timestamp [default: NULL]
+}
+
 Table "permissions" {
   "id" bigint [pk, not null]
   "name" varchar(160) [not null]
@@ -79,6 +188,103 @@ Table "personal_access_tokens" {
   "last_used_at" timestamp [default: NULL]
   "expires_at" timestamp [default: NULL]
   "created_at" timestamp [default: NULL]
+  "updated_at" timestamp [default: NULL]
+}
+
+Table "positions" {
+  "id" bigint [pk, not null]
+  "parent_id" bigint [default: NULL]
+  "name" varchar(255) [not null]
+  "available" tinyint [not null, default: "0"]
+  "type" tinyint [not null, note: '1=struktural, 2=fungsional, 3=outsource']
+  "entity" tinyint [not null, note: '1=personil, 2=badan']
+  "vertical_order" tinyint [not null, default: "0"]
+  "horizontal_order" tinyint [not null, default: "0"]
+  "status" tinyint(1) [not null, default: "1"]
+  "created_at" timestamp [not null]
+  "updated_at" timestamp [default: NULL]
+}
+
+Table "position_echelons" {
+  "id" bigint [pk, not null]
+  "position_id" bigint [default: NULL]
+  "echelon_id" bigint [default: NULL]
+  "available" tinyint [not null, default: "0"]
+  "vertical_order" tinyint [not null, default: "0"]
+  "horizontal_order" tinyint [not null, default: "0"]
+  "created_at" timestamp [not null]
+  "updated_at" timestamp [default: NULL]
+}
+
+Table "position_histories" {
+  "id" bigint [pk, not null]
+  "name" varchar(160) [not null]
+  "period_month" tinyint [not null]
+  "period_year" year [not null]
+  "created_at" timestamp [not null]
+  "updated_at" timestamp [default: NULL]
+}
+
+Table "position_history_users" {
+  "id" bigint [pk, not null]
+  "position_history_id" bigint [not null]
+  "user_id" bigint [not null]
+  "position" varchar(1024) [default: NULL]
+  "group_id" bigint [default: NULL]
+  "echelon" tinyint [default: NULL, note: '1=Eselon I, 2=Eselon II, 3=Eselon III, 4=Fungsional, 5=Pelaksana, 6=Staf']
+  "position_status" tinyint [default: NULL, note: '1=Promosi, 2=Mutasi, 3=Inpassing, 4=Konversi']
+  "effective_date" date [default: NULL]
+  "decree" varchar(255) [default: NULL]
+  "decree_document" varchar(255) [default: NULL]
+  "type_of_decree" bigint [default: NULL]
+  "decree_number" varchar(255) [default: NULL]
+  "decree_date" date [default: NULL]
+  "termination_date" date [default: NULL]
+  "termination_decree" varchar(255) [default: NULL]
+  "type_of_termination_decree" bigint [default: NULL]
+  "termination_decree_number" varchar(255) [default: NULL]
+  "termination_decree_date" date [default: NULL]
+  "status" tinyint(1) [default: NULL, note: 'false=tidak aktif, true=aktif']
+  "created_at" timestamp [not null]
+  "updated_at" timestamp [default: NULL]
+}
+
+Table "recognitions" {
+  "id" bigint [pk, not null]
+  "name" varchar(160) [not null]
+  "description" text [not null]
+  "created_at" timestamp [not null]
+  "updated_at" timestamp [default: NULL]
+}
+
+Table "recognition_histories" {
+  "id" bigint [pk, not null]
+  "period_month" tinyint [not null]
+  "period_year" year [not null]
+  "recognition_id" bigint [default: NULL]
+  "description" varchar(255) [default: NULL]
+  "type_of_decree" bigint [default: NULL]
+  "decree_date" date [default: NULL]
+  "decree_number" varchar(160) [default: NULL]
+  "decree_year" year [default: NULL]
+  "awarding_institution" varchar(160) [default: NULL]
+  "date_of_receipt" date [default: NULL]
+  "created_at" timestamp [not null]
+  "updated_at" timestamp [default: NULL]
+}
+
+Table "recognition_history_users" {
+  "id" bigint [pk, not null]
+  "recognition_history_id" bigint [not null]
+  "user_id" bigint [not null]
+  "created_at" timestamp [not null]
+  "updated_at" timestamp [default: NULL]
+}
+
+Table "residences" {
+  "id" bigint [pk, not null]
+  "name" varchar(160) [not null]
+  "created_at" timestamp [not null]
   "updated_at" timestamp [default: NULL]
 }
 
@@ -101,56 +307,293 @@ Table "role_permissions" {
   "updated_at" timestamp [default: NULL]
 }
 
+Table "target_histories" {
+  "id" bigint [pk, not null]
+  "name" varchar(160) [not null]
+  "period_month" tinyint [not null]
+  "period_year" year [not null]
+  "appraisal_period" target_histories_appraisal_period_enum [not null]
+  "year" year [default: NULL]
+  "created_at" timestamp [not null]
+  "updated_at" timestamp [default: NULL]
+}
+
+Table "target_history_users" {
+  "id" bigint [pk, not null]
+  "target_history_id" bigint [not null]
+  "user_id" bigint [not null]
+  "work_behavior_rating" tinyint [not null, note: '1=Diatas Ekspektasi, 2=Sesuai Ekspektasi, 3=Dibawah Ekspektasi']
+  "employee_performance_predicate" tinyint [not null, note: '1=Sangat Baik, 2=Baik, 3=Butuh Perbaikan, 4=Kurang, 5=Sangat Kurang']
+  "organizational_performance_achievement" tinyint [not null, note: '1=Sangat Baik, 2=Baik, 3=Cukup']
+  "created_at" timestamp [not null]
+  "updated_at" timestamp [default: NULL]
+}
+
+Table "training_histories" {
+  "id" bigint [pk, not null]
+  "name" varchar(512) [default: NULL]
+  "level" varchar(160) [default: NULL]
+  "period_month" tinyint [default: NULL]
+  "period_year" year [default: NULL]
+  "start_date" date [default: NULL]
+  "duration" smallint [default: NULL, note: 'in days']
+  "organizer" varchar(512) [default: NULL]
+  "reference_number" varchar(160) [default: NULL]
+  "link" text
+  "type" tinyint [not null, default: "1", note: '1=Struktural, 2=Fungsional, 3=Teknis']
+  "created_at" timestamp [default: NULL]
+  "updated_at" timestamp [default: NULL]
+}
+
+Table "training_history_users" {
+  "id" bigint [pk, not null]
+  "training_history_id" bigint [not null]
+  "user_id" bigint [not null]
+  "certificate" varchar(255) [default: NULL]
+  "created_at" timestamp [not null]
+  "updated_at" timestamp [default: NULL]
+}
+
 Table "users" {
   "id" bigint [pk, not null]
   "role_id" bigint [default: NULL]
   "email" varchar(160) [default: NULL]
   "username" varchar(160) [default: NULL]
   "password" varchar(255) [default: NULL]
+  "title_prefix" varchar(160) [default: NULL]
   "name" varchar(160) [not null]
+  "title_suffix" varchar(160) [default: NULL]
   "photo_profile" varchar(160) [default: NULL]
-  "id_number" varchar(255) [default: NULL]
   "employee_id_number" varchar(20) [default: NULL]
   "employee_registration_number" varchar(20) [default: NULL]
   "place_of_birth" varchar(30) [default: NULL]
   "date_of_birth" date [default: NULL]
-  "religion" smallint [not null, default: "1", note: '1=Islam, 2=Kristen, 3=Katolik, 4=Hindu, 5=Buddha, 6=Konghucu']
-  "gender" tinyint(1) [not null, default: "1", note: 'true=Pria, false=Wanita']
-  "marital_status" smallint [not null, default: "1", note: '1=Belum Menikah, 2=Menikah, 3=Cerai, 4=Janda, 5=Duda']
+  "religion" tinyint [default: NULL, note: '1=Islam, 2=Kristen, 3=Katolik, 4=Hindu, 5=Buddha, 6=Konghucu']
+  "gender" tinyint(1) [default: NULL, note: 'true=Pria, false=Wanita']
+  "marital_status" tinyint [default: NULL, note: '1=Belum Menikah, 2=Menikah, 3=Cerai Hidup, 4=Cerai Mati']
   "employment_type_id" bigint [default: NULL]
   "grade_id" bigint [default: NULL]
   "grade_effective_date" date [default: NULL]
   "position_id" bigint [default: NULL]
+  "position_effective_date" date [default: NULL]
   "echelon_id" bigint [default: NULL]
   "echelon_effective_date" date [default: NULL]
   "institution_id" bigint [default: NULL]
-  "organization_id" bigint [default: NULL]
-  "work_unit_id" bigint [default: NULL]
+  "education_level" tinyint [default: NULL, note: '1=SD/Sederajat, 2=SLTP/Sederajat, 3=SLTA/Sederajat, 4=Diploma I/II, 5=Akademik/D3/S.Muda, 6=Diploma IV/Strata I, 7=Strata II, 8=Strata III']
+  "education_name" varchar(160) [default: NULL]
+  "education_year" year [default: NULL]
   "employee_id_card_number" varchar(20) [default: NULL]
   "employee_id_card" varchar(160) [default: NULL]
-  "wife_id_card_number" varchar(20) [default: NULL]
-  "husband_id_card_number" varchar(20) [default: NULL]
+  "karisu_number" varchar(20) [default: NULL]
   "id_tax" varchar(20) [default: NULL]
-  "employment_status" tinyint(1) [not null, default: "1", note: 'true=aktif, false=tidak aktif']
-  "inner_housing_complex" tinyint(1) [not null, default: "1", note: 'true=dalam, false=luar']
+  "employment_status" tinyint [default: NULL, note: '1=Aktif, 2=Pensiun, 3=Berhenti, 4=Meninggal, 5=Alih Status, 6=Aktif Perbantuan Setneg, 7=CLTN, 8=TBLN, 9=Non Aktif']
+  "quit_date" date [default: NULL]
+  "id_number" varchar(255) [default: NULL]
+  "family_registration_number" varchar(255) [default: NULL]
+  "residence_id" bigint [default: NULL]
+  "residence_description" varchar(255) [default: NULL]
   "current_address" text
   "home_phone_number" varchar(20) [default: NULL]
   "mobile_phone" varchar(20) [default: NULL]
   "office_address" text
   "office_phone_number" varchar(20) [default: NULL]
+  "emergency_contact" varchar(300) [default: NULL]
   "description" text
-  "type" tinyint [default: "1", note: '1=ASN, 2=NON ASN, 3=OUTSOURCING']
+  "type" tinyint [default: NULL, note: '1=ASN, 2=NON ASN, 3=OUTSOURCING']
   "status" tinyint(1) [not null, default: "0", note: 'true=active, false=deactivate']
   "verification_code" varchar(160) [default: NULL]
   "expire_at" date [default: NULL]
+  "cpns_effective_date" date [default: NULL]
+  "pns_effective_date" date [default: NULL]
+  "office_email" varchar(255) [default: NULL, note: 'email dinas']
   "created_at" timestamp [not null]
   "updated_at" timestamp [default: NULL]
 }
+
+Table "user_assessments" {
+  "id" bigint [pk, not null]
+  "user_id" bigint [not null]
+  "event_date" date [default: NULL]
+  "point" tinyint [not null, note: '1=Kurang Memenuhi Syarat, 2=Masih Memenuhi Syarat, 3=Memenuhi Syarat']
+  "organizer" varchar(160) [default: NULL]
+  "assessment_document" varchar(255) [default: NULL]
+  "created_at" timestamp [not null]
+  "updated_at" timestamp [default: NULL]
+}
+
+Table "user_competencies" {
+  "id" bigint [pk, not null]
+  "user_id" bigint [not null]
+  "event_date" date [default: NULL]
+  "point" tinyint [not null, note: '1=Lulus, 2=Tidak Lulus']
+  "organizer" varchar(160) [default: NULL]
+  "competency_document" varchar(255) [default: NULL]
+  "created_at" timestamp [not null]
+  "updated_at" timestamp [default: NULL]
+}
+
+Table "user_credits" {
+  "id" bigint [pk, not null]
+  "user_id" bigint [not null]
+  "position" varchar(160) [default: NULL]
+  "period" tinyint [not null, note: '1=Triwulan 1, 2=Triwulan 2, 3=Triwulan 3, 4=Triwulan 4, 5=Tahunan']
+  "year" year [not null]
+  "start_month" tinyint [default: NULL]
+  "end_month" tinyint [default: NULL]
+  "score" double(5,2) [default: NULL]
+  "created_at" timestamp [not null]
+  "updated_at" timestamp [default: NULL]
+}
+
+Table "user_educations" {
+  "id" bigint [pk, not null]
+  "user_id" bigint [not null]
+  "level" tinyint [default: NULL, note: '1=SD/Sederajat, 2=SLTP/Sederajat, 3=SLTA/Sederajat, 4=Diploma I/II, 5=Akademik/D3/S.Muda, 6=Diploma IV/Strata I, 7=Strata II, 8=Strata III']
+  "name" varchar(160) [default: NULL]
+  "faculty" varchar(160) [default: NULL]
+  "major" varchar(160) [default: NULL]
+  "status" tinyint [default: NULL, note: '1=Lulus, 2=DO, 3=Aktif, 4=Non-Aktif, 5=Mengundurkan diri']
+  "year_of_graduation" year [default: NULL]
+  "description" text
+  "degree_document" text
+  "created_at" timestamp [not null]
+  "updated_at" timestamp [default: NULL]
+}
+
+Table "user_families" {
+  "id" bigint [pk, not null]
+  "user_id" bigint [not null]
+  "card_number" varchar(160) [default: NULL]
+  "name" varchar(160) [default: NULL]
+  "id_number" varchar(20) [default: NULL]
+  "gender" tinyint(1) [default: NULL, note: 'true=Pria, false=Wanita']
+  "religion" tinyint [default: NULL, note: '1=Islam, 2=Kristen, 3=Katolik, 4=Hindu, 5=Buddha, 6=Konghucu']
+  "place_of_birth" varchar(160) [default: NULL]
+  "date_of_birth" date [default: NULL]
+  "name_of_father" varchar(160) [default: NULL]
+  "name_of_mother" varchar(160) [default: NULL]
+  "relationship_status" tinyint [default: NULL, note: '1=Kepala Keluarga, 2=Suami, 3=Istri, 4=Anak, 5=Menantu, 6=Cucu, 7=Orang Tua, 8=Mertua, 9=Famili Lainnya, 10=Pembantu, 11=Lainnya']
+  "education" tinyint [default: NULL, note: '1=Tidak/Belum Sekolah, 2=Belum Tamat SD/Sederajat, 3=Tamat SD/Sederajat, 4=SLTP/Sederajat, 5=SLTA/Sederajat, 6=Diploma I/II, 7=Akademi/Diploma III/Sarjana Muda, 8=Diploma IV/Strata I, 9=Strata II, 10=Strata III']
+  "occupation" varchar(160) [default: NULL]
+  "occupation_description" varchar(160) [default: NULL]
+  "marital_status" tinyint [default: NULL, note: '1=Belum Menikah, 2=Menikah, 3=Cerai Hidup, 4=Cerai Mati']
+  "mobile_phone" varchar(16) [default: NULL]
+  "sequence_number" tinyint [default: NULL]
+  "created_at" timestamp [not null]
+  "updated_at" timestamp [default: NULL]
+}
+
+Table "user_leaves" {
+  "id" bigint [pk, not null]
+  "user_id" bigint [not null]
+  "start_date" date [default: NULL]
+  "end_date" date [default: NULL]
+  "type" tinyint [default: NULL, note: '1=Cuti diluar Tanggungan Negara, 2=Cuti Sakit, 3=Cuti Besar, 4=Cuti Bersalin, 5=Cuti Belajar Luar Negeri, 6=Cuti Tahunan Luar Negeri']
+  "number" text
+  "description" text
+  "letter" varchar(255) [default: NULL]
+  "created_at" timestamp [not null]
+  "updated_at" timestamp [default: NULL]
+}
+
+Table "user_notes" {
+  "id" bigint [pk, not null]
+  "user_id" bigint [not null]
+  "giver_id" bigint [not null]
+  "description" text [not null]
+  "created_at" timestamp [not null]
+  "updated_at" timestamp [default: NULL]
+}
+
+Table "user_talents" {
+  "id" bigint [pk, not null]
+  "user_id" bigint [not null]
+  "event_date" date [default: NULL]
+  "point" tinyint [not null, note: '1=Kotak 1, 2=Kotak 2, 3=Kotak 3, 4=Kotak 4, 5=Kotak 5, 6=Kotak 6, 7=Kotak 7, 8=Kotak 8, 9=Kotak 9']
+  "organizer" varchar(160) [default: NULL]
+  "talent_document" varchar(255) [default: NULL]
+  "created_at" timestamp [not null]
+  "updated_at" timestamp [default: NULL]
+}
+
+Ref "activity_logs_user_id_foreign":"users"."id" < "activity_logs"."user_id" [delete: set null]
+
+Ref "disciplinary_history_users_disciplinary_history_id_foreign":"disciplinary_histories"."id" < "disciplinary_history_users"."disciplinary_history_id" [delete: cascade]
+
+Ref "disciplinary_history_users_disciplinary_id_foreign":"disciplinaries"."id" < "disciplinary_history_users"."disciplinary_id" [delete: cascade]
+
+Ref "disciplinary_history_users_user_id_foreign":"users"."id" < "disciplinary_history_users"."user_id" [delete: cascade]
+
+Ref "grade_history_users_grade_history_id_foreign":"grade_histories"."id" < "grade_history_users"."grade_history_id" [delete: cascade]
+
+Ref "grade_history_users_grade_id_foreign":"grades"."id" < "grade_history_users"."grade_id" [delete: cascade]
+
+Ref "grade_history_users_type_of_decree_foreign":"decrees"."id" < "grade_history_users"."type_of_decree" [delete: cascade]
+
+Ref "grade_history_users_user_id_foreign":"users"."id" < "grade_history_users"."user_id" [delete: cascade]
+
+Ref "performance_history_users_performance_history_id_foreign":"performance_histories"."id" < "performance_history_users"."performance_history_id" [delete: cascade]
+
+Ref "performance_history_users_user_id_foreign":"users"."id" < "performance_history_users"."user_id" [delete: cascade]
+
+Ref "position_echelons_echelon_id_foreign":"echelons"."id" < "position_echelons"."echelon_id" [delete: cascade]
+
+Ref "position_echelons_position_id_foreign":"positions"."id" < "position_echelons"."position_id" [delete: cascade]
+
+Ref "position_history_users_group_id_foreign":"groups"."id" < "position_history_users"."group_id" [delete: set null]
+
+Ref "position_history_users_position_history_id_foreign":"position_histories"."id" < "position_history_users"."position_history_id" [delete: cascade]
+
+Ref "position_history_users_type_of_decree_foreign":"decrees"."id" < "position_history_users"."type_of_decree" [delete: set null]
+
+Ref "position_history_users_type_of_termination_decree_foreign":"decrees"."id" < "position_history_users"."type_of_termination_decree" [delete: set null]
+
+Ref "position_history_users_user_id_foreign":"users"."id" < "position_history_users"."user_id" [delete: cascade]
+
+Ref "recognition_histories_recognition_id_foreign":"recognitions"."id" < "recognition_histories"."recognition_id" [delete: cascade]
+
+Ref "recognition_histories_type_of_decree_foreign":"decrees"."id" < "recognition_histories"."type_of_decree" [delete: cascade]
+
+Ref "recognition_history_users_recognition_history_id_foreign":"recognition_histories"."id" < "recognition_history_users"."recognition_history_id" [delete: cascade]
+
+Ref "recognition_history_users_user_id_foreign":"users"."id" < "recognition_history_users"."user_id" [delete: cascade]
 
 Ref "role_permissions_permission_id_foreign":"permissions"."id" < "role_permissions"."permission_id" [delete: cascade]
 
 Ref "role_permissions_role_id_foreign":"roles"."id" < "role_permissions"."role_id" [delete: cascade]
 
+Ref "target_history_users_target_history_id_foreign":"target_histories"."id" < "target_history_users"."target_history_id" [delete: cascade]
+
+Ref "target_history_users_user_id_foreign":"users"."id" < "target_history_users"."user_id" [delete: cascade]
+
+Ref "training_history_users_training_history_id_foreign":"training_histories"."id" < "training_history_users"."training_history_id" [delete: cascade]
+
+Ref "training_history_users_user_id_foreign":"users"."id" < "training_history_users"."user_id" [delete: cascade]
+
+Ref "users_echelon_id_foreign":"echelons"."id" < "users"."echelon_id" [delete: set null]
+
 Ref "users_employment_type_id_foreign":"employment_types"."id" < "users"."employment_type_id" [delete: set null]
 
+Ref "users_position_id_foreign":"positions"."id" < "users"."position_id" [delete: set null]
+
+Ref "users_residence_id_foreign":"residences"."id" < "users"."residence_id" [delete: set null]
+
 Ref "users_role_id_foreign":"roles"."id" < "users"."role_id" [delete: set null]
+
+Ref "user_assessments_user_id_foreign":"users"."id" < "user_assessments"."user_id" [delete: cascade]
+
+Ref "user_competencies_user_id_foreign":"users"."id" < "user_competencies"."user_id" [delete: cascade]
+
+Ref "user_credits_user_id_foreign":"users"."id" < "user_credits"."user_id" [delete: cascade]
+
+Ref "user_educations_user_id_foreign":"users"."id" < "user_educations"."user_id" [delete: cascade]
+
+Ref "user_families_user_id_foreign":"users"."id" < "user_families"."user_id" [delete: cascade]
+
+Ref "user_leaves_user_id_foreign":"users"."id" < "user_leaves"."user_id" [delete: cascade]
+
+Ref "user_notes_giver_id_foreign":"users"."id" < "user_notes"."giver_id" [delete: cascade]
+
+Ref "user_notes_user_id_foreign":"users"."id" < "user_notes"."user_id" [delete: cascade]
+
+Ref "user_talents_user_id_foreign":"users"."id" < "user_talents"."user_id" [delete: cascade]
