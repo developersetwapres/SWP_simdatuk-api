@@ -127,7 +127,7 @@ class TrainingHistoryController extends Controller
         $users = DB::table('training_history_users as thu');
         $users->join('users as u', 'u.id', '=', 'thu.user_id');
         $users->where('thu.training_history_id', $trainingHistory->id);
-        $users->select('thu.id', 'thu.user_id', DB::raw("CONCAT(u.title_prefix,' ',u.name,' ',u.title_suffix) as name"), 'u.employee_id_number', 'thu.certificate', 'thu.created_at');
+        $users->select('thu.id', 'thu.user_id', DB::raw("CONCAT(COALESCE(u.title_prefix,''),' ',u.name,' ',COALESCE(u.title_suffix,'')) as name"), 'u.employee_id_number', 'thu.certificate', 'thu.created_at');
         $users = $users->get();
 
         foreach ($users as $user) {
