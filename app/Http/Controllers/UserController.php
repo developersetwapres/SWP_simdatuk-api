@@ -57,16 +57,10 @@ class UserController extends Controller
         if (is_null($this->request->limit)) {
             $users = $users->get();
             $message = (count($users) < 1) ? 'Mohon maaf, data tidak ditemukan.' : 'success';
-            foreach ($users as $key => $item) {
-                $item->status = ($item == true) ? 'Aktif' : 'Nonaktif';
-            }
             return $this->response(200, $message, $users);
         } else {
             $users = $users->paginate($this->request->limit);
             $message = ($users->isEmpty()) ? 'Mohon maaf, data tidak ditemukan.' : 'success';
-            foreach ($users->items() as $key => $item) {
-                $item->status = ($item == true) ? 'Aktif' : 'Nonaktif';
-            }
             return $this->paginateResponse(200, $message, $users);
         }
     }
