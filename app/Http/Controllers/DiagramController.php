@@ -192,6 +192,7 @@ class DiagramController extends Controller
                 $join->on('position_echelons.echelon_id', '=', 'e.id');
             });
             $positions->leftJoin('grades as g', 'u.grade_id', '=', 'g.id');
+            $positions->orderBy('u.type', 'ASC');
             $positions->orderBy('u.position_effective_date', 'ASC');
             $positions->orderBy('u.grade_id', 'ASC');
             $positions->orderBy('u.grade_effective_date', 'ASC');
@@ -256,20 +257,24 @@ class DiagramController extends Controller
                     if ($position->entity == 1 && $position->type == 1 && $positionId != $position->id) {
                         $count = collect($positions)->where('id', $position->id);
 
-                        for ($i = 0; $i < $position->available - $count->count(); $i++) {
-                            $positionWithEmptySlot->push($placeholder);
-                        }
+                        if (($key < sizeof($positions) - 1 && $positions[$key + 1]->id != $position->id) || $key == sizeof($positions) - 1) {
+                            for ($i = 0; $i < $position->available - $count->count(); $i++) {
+                                $positionWithEmptySlot->push($placeholder);
+                            }
 
-                        $positionId = $position->id;
+                            $positionId = $position->id;
+                        }
                     } else if ($position->type == 2 && ($echelonName != $position->echelon_name || $positionId != $position->id)) {
                         $count = collect($positions)->where('id', $position->id)->where('echelon_name', $position->echelon_name);
 
-                        for ($i = 0; $i < $position->available - $count->count(); $i++) {
-                            $positionWithEmptySlot->push($placeholder);
-                        }
+                        if (($key < sizeof($positions) - 1 && $positions[$key + 1]->id != $position->id) || $key == sizeof($positions) - 1) {
+                            for ($i = 0; $i < $position->available - $count->count(); $i++) {
+                                $positionWithEmptySlot->push($placeholder);
+                            }
 
-                        $echelonName = $position->echelon_name;
-                        $positionId = $position->id;
+                            $echelonName = $position->echelon_name;
+                            $positionId = $position->id;
+                        }
                     }
                 }
             }
@@ -303,6 +308,7 @@ class DiagramController extends Controller
             ->leftJoin('echelons', 'echelons.id', '=', 'users.echelon_id')
             ->leftJoin('grades', 'grades.id', '=', 'users.grade_id')
             ->where('users.position_id', $positionId)
+            ->orderBy('users.type', 'ASC')
             ->orderBy('users.position_effective_date', 'ASC')
             ->orderBy('users.grade_id', 'ASC');
 

@@ -577,7 +577,7 @@ class PositionSeeder extends Seeder
                                             [
                                                 'id' => 57,
                                                 'parent_id' => 54,
-                                                'name' => 'Pengadministrasi Umum',
+                                                'name' => 'Pengadministrasi Umum / Pengadministrasi Perkantoran',
                                                 'available' => 1,
                                                 'type' => 1,
                                                 'entity' => 1,
@@ -761,7 +761,7 @@ class PositionSeeder extends Seeder
                                             [
                                                 'id' => 233,
                                                 'parent_id' => 67,
-                                                'name' => 'Analis Tata Usaha',
+                                                'name' => 'Analis Tata Usaha / Penelaah Teknis Kebijakan',
                                                 'available' => 1,
                                                 'type' => 1,
                                                 'entity' => 1,
@@ -793,7 +793,7 @@ class PositionSeeder extends Seeder
                                     [
                                         'id' => 68,
                                         'parent_id' => 60,
-                                        'name' => 'Penyusun Bahan Kebijakan',
+                                        'name' => 'Penyusun Bahan Kebijakan / Penelaah Teknis Kebijakan',
                                         'available' => 1,
                                         'type' => 1,
                                         'entity' => 1,
@@ -847,7 +847,7 @@ class PositionSeeder extends Seeder
                                             [
                                                 'id' => 72,
                                                 'parent_id' => 70,
-                                                'name' => 'Analis Tata Usaha',
+                                                'name' => 'Analis Tata Usaha / Penelaah Teknis Kebijakan',
                                                 'available' => 1,
                                                 'type' => 1,
                                                 'entity' => 1,
@@ -978,7 +978,7 @@ class PositionSeeder extends Seeder
                                     [
                                         'id' => 81,
                                         'parent_id' => 75,
-                                        'name' => 'Penyusun Bahan Kebijakan',
+                                        'name' => 'Penyusun Bahan Kebijakan / Penelaah Teknis Kebijakan',
                                         'available' => 1,
                                         'type' => 1,
                                         'entity' => 1,
@@ -1054,7 +1054,7 @@ class PositionSeeder extends Seeder
                                     [
                                         'id' => 86,
                                         'parent_id' => 76,
-                                        'name' => 'Penyusun Bahan Kebijakan',
+                                        'name' => 'Penyusun Bahan Kebijakan / Penelaah Teknis Kebijakan',
                                         'available' => 1,
                                         'type' => 1,
                                         'entity' => 1,
@@ -1284,7 +1284,7 @@ class PositionSeeder extends Seeder
                                                     [
                                                         'id' => 110,
                                                         'parent_id' => 107,
-                                                        'name' => 'Analis Tata Usaha',
+                                                        'name' => 'Analis Tata Usaha / Penelaah Teknis Kebijakan',
                                                         'available' => 0,
                                                         'type' => 1,
                                                         'entity' => 1,
@@ -1294,7 +1294,7 @@ class PositionSeeder extends Seeder
                                                     [
                                                         'id' => 111,
                                                         'parent_id' => 107,
-                                                        'name' => 'Petugas Protokol Kepresidenan',
+                                                        'name' => 'Petugas Protokol Kepresidenan / Pengelola Keprotokolan',
                                                         'available' => 0,
                                                         'type' => 1,
                                                         'entity' => 1,
@@ -1317,7 +1317,7 @@ class PositionSeeder extends Seeder
                                                     [
                                                         'id' => 112,
                                                         'parent_id' => 108,
-                                                        'name' => 'Analis Protokol',
+                                                        'name' => 'Analis Protokol / Penelaah Teknis Kebijakan',
                                                         'available' => 0,
                                                         'type' => 1,
                                                         'entity' => 1,
@@ -1337,7 +1337,7 @@ class PositionSeeder extends Seeder
                                                     [
                                                         'id' => 113,
                                                         'parent_id' => 108,
-                                                        'name' => 'Petugas Protokol Kepresidenan',
+                                                        'name' => 'Petugas Protokol Kepresidenan / Pengelola Keprotokolan',
                                                         'available' => 0,
                                                         'type' => 1,
                                                         'entity' => 1,
@@ -1360,7 +1360,7 @@ class PositionSeeder extends Seeder
                                                     [
                                                         'id' => 114,
                                                         'parent_id' => 109,
-                                                        'name' => 'Analis Protokol',
+                                                        'name' => 'Analis Protokol / Penelaah Teknis Kebijakan',
                                                         'available' => 2,
                                                         'type' => 1,
                                                         'entity' => 1,
@@ -1400,7 +1400,7 @@ class PositionSeeder extends Seeder
                                                     [
                                                         'id' => 116,
                                                         'parent_id' => 109,
-                                                        'name' => 'Pengadministrasi Umum',
+                                                        'name' => 'Pengadministrasi Umum / Pengadministrasi Perkantoran',
                                                         'available' => 0,
                                                         'type' => 1,
                                                         'entity' => 1,
@@ -1446,7 +1446,7 @@ class PositionSeeder extends Seeder
                                                     [
                                                         'id' => 120,
                                                         'parent_id' => 117,
-                                                        'name' => 'Pengelola Sarana dan Prasarana Kantor',
+                                                        'name' => 'Pengelola Sarana dan Prasarana Kantor / Pengolah Data dan Informasi',
                                                         'available' => 0,
                                                         'type' => 1,
                                                         'entity' => 1,
@@ -1476,7 +1476,7 @@ class PositionSeeder extends Seeder
                                                     [
                                                         'id' => 121,
                                                         'parent_id' => 117,
-                                                        'name' => 'Pramusaji Kepresidenan',
+                                                        'name' => 'Pramusaji Kepresidenan / Pengadministrasi Perkantoran',
                                                         'available' => 0,
                                                         'type' => 1,
                                                         'entity' => 1,
@@ -1539,7 +1539,7 @@ class PositionSeeder extends Seeder
                                                     [
                                                         'id' => 123,
                                                         'parent_id' => 118,
-                                                        'name' => 'Pranata Jamuan',
+                                                        'name' => 'Pranata Jamuan / Pengadministrasi Perkantoran',
                                                         'available' => 1,
                                                         'type' => 1,
                                                         'entity' => 1,
@@ -1559,7 +1559,7 @@ class PositionSeeder extends Seeder
                                                     [
                                                         'id' => 124,
                                                         'parent_id' => 118,
-                                                        'name' => 'Pengadministrasi Umum',
+                                                        'name' => 'Pengadministrasi Umum / Pengadministrasi Perkantoran',
                                                         'available' => 0,
                                                         'type' => 1,
                                                         'entity' => 1,
@@ -1582,7 +1582,7 @@ class PositionSeeder extends Seeder
                                                     [
                                                         'id' => 125,
                                                         'parent_id' => 119,
-                                                        'name' => 'Penyusun Rencana Kebutuhan Rumah Tangga dan Perlengkapan',
+                                                        'name' => 'Penyusun Rencana Kebutuhan Rumah Tangga dan Perlengkapan / Penelaah Teknis Kebijakan',
                                                         'available' => 0,
                                                         'type' => 1,
                                                         'entity' => 1,
@@ -1592,7 +1592,7 @@ class PositionSeeder extends Seeder
                                                     [
                                                         'id' => 126,
                                                         'parent_id' => 119,
-                                                        'name' => 'Pranata Jamuan',
+                                                        'name' => 'Pranata Jamuan / Pengelola Keprotokolan',
                                                         'available' => 0,
                                                         'type' => 1,
                                                         'entity' => 1,
@@ -1602,7 +1602,7 @@ class PositionSeeder extends Seeder
                                                     [
                                                         'id' => 127,
                                                         'parent_id' => 119,
-                                                        'name' => 'Pemelihara Sarana dan Prasarana',
+                                                        'name' => 'Pemelihara Sarana dan Prasarana / Pengadministrasi Perkantoran',
                                                         'available' => 0,
                                                         'type' => 1,
                                                         'entity' => 1,
@@ -1638,7 +1638,7 @@ class PositionSeeder extends Seeder
                                                     [
                                                         'id' => 131,
                                                         'parent_id' => 128,
-                                                        'name' => 'Analis Tata Usaha',
+                                                        'name' => 'Analis Tata Usaha / Penelaah Teknis Kebijakan',
                                                         'available' => 4,
                                                         'type' => 1,
                                                         'entity' => 1,
@@ -1671,7 +1671,7 @@ class PositionSeeder extends Seeder
                                                     [
                                                         'id' => 132,
                                                         'parent_id' => 129,
-                                                        'name' => 'Analis Tata Usaha',
+                                                        'name' => 'Analis Tata Usaha / Penelaah Teknis Kebijakan',
                                                         'available' => 0,
                                                         'type' => 1,
                                                         'entity' => 1,
@@ -1691,7 +1691,7 @@ class PositionSeeder extends Seeder
                                                     [
                                                         'id' => 133,
                                                         'parent_id' => 129,
-                                                        'name' => 'Pengadministrasi Umum',
+                                                        'name' => 'Pengadministrasi Umum / Pengadministrasi Perkantoran',
                                                         'available' => 1,
                                                         'type' => 1,
                                                         'entity' => 1,
@@ -1714,7 +1714,7 @@ class PositionSeeder extends Seeder
                                                     [
                                                         'id' => 134,
                                                         'parent_id' => 130,
-                                                        'name' => 'Analis Tata Usaha',
+                                                        'name' => 'Analis Tata Usaha / Penelaah Teknis Kebijakan',
                                                         'available' => 3,
                                                         'type' => 1,
                                                         'entity' => 1,
@@ -1734,7 +1734,7 @@ class PositionSeeder extends Seeder
                                                     [
                                                         'id' => 135,
                                                         'parent_id' => 130,
-                                                        'name' => 'Pengadministrasi Umum',
+                                                        'name' => 'Pengadministrasi Umum / Pengadministrasi Perkantoran',
                                                         'available' => 0,
                                                         'type' => 1,
                                                         'entity' => 1,
@@ -1801,7 +1801,7 @@ class PositionSeeder extends Seeder
                                     [
                                         'id' => 137,
                                         'parent_id' => 98,
-                                        'name' => 'Analis Tata Usaha',
+                                        'name' => 'Analis Tata Usaha / Penelaah Teknis Kebijakan',
                                         'available' => 1,
                                         'type' => 1,
                                         'entity' => 1,
@@ -1811,7 +1811,7 @@ class PositionSeeder extends Seeder
                                     [
                                         'id' => 138,
                                         'parent_id' => 98,
-                                        'name' => 'Analis Humas',
+                                        'name' => 'Analis Humas / Penelaah Teknis Kebijakan',
                                         'available' => 0,
                                         'type' => 1,
                                         'entity' => 1,
@@ -1821,7 +1821,7 @@ class PositionSeeder extends Seeder
                                     [
                                         'id' => 139,
                                         'parent_id' => 98,
-                                        'name' => 'Analis Sistem Informasi',
+                                        'name' => 'Analis Sistem Informasi / Penata Kelola Sistem dan Teknologi Informasi',
                                         'available' => 0,
                                         'type' => 1,
                                         'entity' => 1,
@@ -1831,7 +1831,7 @@ class PositionSeeder extends Seeder
                                     [
                                         'id' => 140,
                                         'parent_id' => 98,
-                                        'name' => 'Penata Liputan',
+                                        'name' => 'Penata Liputan / Pengolah Data dan Informasi',
                                         'available' => 6,
                                         'type' => 1,
                                         'entity' => 1,
@@ -1841,7 +1841,7 @@ class PositionSeeder extends Seeder
                                     [
                                         'id' => 141,
                                         'parent_id' => 98,
-                                        'name' => 'Pengadministrasi Umum',
+                                        'name' => 'Pengadministrasi Umum / Pengadministrasi Perkantoran',
                                         'available' => 4,
                                         'type' => 1,
                                         'entity' => 1,
@@ -1916,7 +1916,7 @@ class PositionSeeder extends Seeder
                                     [
                                         'id' => 143,
                                         'parent_id' => 99,
-                                        'name' => 'Analis Tata Usaha',
+                                        'name' => 'Analis Tata Usaha / Penelaah Teknis Kebijakan',
                                         'available' => 1,
                                         'type' => 1,
                                         'entity' => 1,
@@ -1926,7 +1926,7 @@ class PositionSeeder extends Seeder
                                     [
                                         'id' => 145,
                                         'parent_id' => 99,
-                                        'name' => 'Pengolah Data',
+                                        'name' => 'Pengolah Data / Pengolah Data dan Informasi',
                                         'available' => 0,
                                         'type' => 1,
                                         'entity' => 1,
@@ -1946,7 +1946,7 @@ class PositionSeeder extends Seeder
                                     [
                                         'id' => 146,
                                         'parent_id' => 99,
-                                        'name' => 'Pengadministrasi Umum',
+                                        'name' => 'Pengadministrasi Umum / Pengadministrasi Perkantoran',
                                         'available' => 0,
                                         'type' => 1,
                                         'entity' => 1,
@@ -2043,7 +2043,7 @@ class PositionSeeder extends Seeder
                                                     [
                                                         'id' => 156,
                                                         'parent_id' => 151,
-                                                        'name' => 'Analis Tata Usaha',
+                                                        'name' => 'Analis Tata Usaha / Penelaah Teknis Kebijakan',
                                                         'available' => 1,
                                                         'type' => 1,
                                                         'entity' => 1,
@@ -2063,7 +2063,7 @@ class PositionSeeder extends Seeder
                                                     [
                                                         'id' => 157,
                                                         'parent_id' => 151,
-                                                        'name' => 'Pengadministrasi Umum',
+                                                        'name' => 'Pengadministrasi Umum / Pengadministrasi Perkantoran',
                                                         'available' => 0,
                                                         'type' => 1,
                                                         'entity' => 1,
@@ -2075,7 +2075,7 @@ class PositionSeeder extends Seeder
                                             [
                                                 'id' => 152,
                                                 'parent_id' => 149,
-                                                'name' => 'Analis Tata Usaha',
+                                                'name' => 'Analis Tata Usaha / Penelaah Teknis Kebijakan',
                                                 'available' => 0,
                                                 'type' => 1,
                                                 'entity' => 1,
@@ -2085,7 +2085,7 @@ class PositionSeeder extends Seeder
                                             [
                                                 'id' => 153,
                                                 'parent_id' => 149,
-                                                'name' => 'Pengolah Data',
+                                                'name' => 'Pengolah Data / Pengolah Data dan Informasi',
                                                 'available' => 0,
                                                 'type' => 1,
                                                 'entity' => 1,
@@ -2115,7 +2115,7 @@ class PositionSeeder extends Seeder
                                             [
                                                 'id' => 154,
                                                 'parent_id' => 149,
-                                                'name' => 'Pengadministrasi Umum',
+                                                'name' => 'Pengadministrasi Umum / Pengadministrasi Perkantoran',
                                                 'available' => 0,
                                                 'type' => 1,
                                                 'entity' => 1,
@@ -2181,7 +2181,7 @@ class PositionSeeder extends Seeder
                                             [
                                                 'id' => 164,
                                                 'parent_id' => 159,
-                                                'name' => 'Penyusun Rencana Kebutuhan Rumah Tangga dan Perlengkapan',
+                                                'name' => 'Penyusun Rencana Kebutuhan Rumah Tangga dan Perlengkapan / Penelaah Teknis Kebijakan',
                                                 'available' => 0,
                                                 'type' => 1,
                                                 'entity' => 1,
@@ -2211,7 +2211,7 @@ class PositionSeeder extends Seeder
                                             [
                                                 'id' => 166,
                                                 'parent_id' => 159,
-                                                'name' => 'Pengolah Data',
+                                                'name' => 'Pengolah Data / Pengolah Data dan Informasi',
                                                 'available' => 0,
                                                 'type' => 1,
                                                 'entity' => 1,
@@ -2265,7 +2265,7 @@ class PositionSeeder extends Seeder
                                                     [
                                                         'id' => 172,
                                                         'parent_id' => 167,
-                                                        'name' => 'Pengadministrasi Umum',
+                                                        'name' => 'Pengadministrasi Umum / Pengadministrasi Perkantoran',
                                                         'available' => 0,
                                                         'type' => 1,
                                                         'entity' => 1,
@@ -2288,7 +2288,7 @@ class PositionSeeder extends Seeder
                                                     [
                                                         'id' => 173,
                                                         'parent_id' => 168,
-                                                        'name' => 'Analis Tata Usaha',
+                                                        'name' => 'Analis Tata Usaha / Penelaah Teknis Kebijakan',
                                                         'available' => 1,
                                                         'type' => 1,
                                                         'entity' => 1,
@@ -2308,7 +2308,7 @@ class PositionSeeder extends Seeder
                                                     [
                                                         'id' => 174,
                                                         'parent_id' => 168,
-                                                        'name' => 'Pengelola Bangunan Gedung',
+                                                        'name' => 'Pengelola Bangunan Gedung / Penata Bangunan Gedung dan Pemukiman',
                                                         'available' => 0,
                                                         'type' => 1,
                                                         'entity' => 1,
@@ -2318,7 +2318,7 @@ class PositionSeeder extends Seeder
                                                     [
                                                         'id' => 175,
                                                         'parent_id' => 168,
-                                                        'name' => 'Pengadministrasi Umum',
+                                                        'name' => 'Pengadministrasi Umum / Pengadministrasi Perkantoran',
                                                         'available' => 3,
                                                         'type' => 1,
                                                         'entity' => 1,
@@ -2341,7 +2341,7 @@ class PositionSeeder extends Seeder
                                                     [
                                                         'id' => 176,
                                                         'parent_id' => 169,
-                                                        'name' => 'Analis Tata Usaha',
+                                                        'name' => 'Analis Tata Usaha / Penelaah Teknis Kebijakan',
                                                         'available' => 0,
                                                         'type' => 1,
                                                         'entity' => 1,
@@ -2361,7 +2361,7 @@ class PositionSeeder extends Seeder
                                                     [
                                                         'id' => 177,
                                                         'parent_id' => 169,
-                                                        'name' => 'Pengelola Bangunan Gedung',
+                                                        'name' => 'Pengelola Bangunan Gedung / Pengolah Data dan Informasi',
                                                         'available' => 1,
                                                         'type' => 1,
                                                         'entity' => 1,
@@ -2407,7 +2407,7 @@ class PositionSeeder extends Seeder
                                                     [
                                                         'id' => 181,
                                                         'parent_id' => 178,
-                                                        'name' => 'Penata Kendaraan Dinas',
+                                                        'name' => 'Penata Kendaraan Dinas / Penata Layanan Operasional',
                                                         'available' => 2,
                                                         'type' => 1,
                                                         'entity' => 1,
@@ -2417,7 +2417,7 @@ class PositionSeeder extends Seeder
                                                     [
                                                         'id' => 182,
                                                         'parent_id' => 178,
-                                                        'name' => 'Pengadministrasi Umum',
+                                                        'name' => 'Pengadministrasi Umum / Pengadministrasi Perkantoran',
                                                         'available' => 0,
                                                         'type' => 1,
                                                         'entity' => 1,
@@ -2470,7 +2470,7 @@ class PositionSeeder extends Seeder
                                                     [
                                                         'id' => 184,
                                                         'parent_id' => 179,
-                                                        'name' => 'Pengadministrasi Umum',
+                                                        'name' => 'Pengadministrasi Umum / Pengadministrasi Perkantoran',
                                                         'available' => 0,
                                                         'type' => 1,
                                                         'entity' => 1,
@@ -2490,7 +2490,7 @@ class PositionSeeder extends Seeder
                                                     [
                                                         'id' => 186,
                                                         'parent_id' => 179,
-                                                        'name' => 'Pengemudi VIP',
+                                                        'name' => 'Pengemudi VIP / Operator Layanan Operasional',
                                                         'available' => 7,
                                                         'type' => 1,
                                                         'entity' => 1,
@@ -2523,7 +2523,7 @@ class PositionSeeder extends Seeder
                                                     [
                                                         'id' => 187,
                                                         'parent_id' => 180,
-                                                        'name' => 'Pengadministrasi Umum',
+                                                        'name' => 'Pengadministrasi Umum / Pengadministrasi Perkantoran',
                                                         'available' => 0,
                                                         'type' => 1,
                                                         'entity' => 1,
