@@ -2,13 +2,20 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
 
     <style type="text/css">
         html * {
             font-family: Inter !important;
             color: #394346;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            font-size: 12px;
+            font-weight: 400;
         }
 
         @page {
@@ -110,6 +117,7 @@
             padding: 4px;
             color: white;
             word-wrap: break-word;
+            text-align: left;
         }
 
         .table-section-3-title-row {
