@@ -169,8 +169,12 @@ class ExportController extends Controller
         };
 
         // Housing
-        $complex = $employee->residence_name;
-        $complexName = $employee->residence_description;
+        $complex = 'Luar Komplek';
+        $complexName = '-';
+        if ($employee->residence_name != 'Luar Komplek') {
+            $complex = 'Dalam Komplek';
+            $complexName = $employee->residence_name;
+        }
 
         // Batas Usia Pensiun
         $indonesianMonth = [
@@ -281,7 +285,7 @@ class ExportController extends Controller
     {
         ini_set('memory_limit', '-1');
         set_time_limit(300);
-        
+
         $user = DB::table('users');
         $user->leftJoin('echelons', 'echelons.id', '=', 'users.echelon_id');
         $user->leftJoin('user_educations', 'user_educations.user_id', '=', 'users.id');
