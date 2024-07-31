@@ -49,10 +49,11 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $e)
     {
         if ($request->wantsJson()) {
+            if (config('app.debug')) {
+                return parent::render($request, $e);
+            }
+
             if ($e instanceof QueryException) {
-                if (config('app.debug')) {
-                    return parent::render($request, $e);
-                }
                 return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
             } else if ($e instanceof ValidationException) {
                 $messages = $e->validator->errors()->all();
@@ -66,9 +67,6 @@ class Handler extends ExceptionHandler
             } else if ($e instanceof MethodNotAllowedHttpException) {
                 return $this->response(405, 'Method yang digunakan salah!');
             } else {
-                if (config('app.debug')) {
-                    return parent::render($request, $e);
-                }
                 return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
             }
         }
