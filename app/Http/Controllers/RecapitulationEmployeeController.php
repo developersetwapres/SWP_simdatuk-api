@@ -147,7 +147,7 @@ class RecapitulationEmployeeController extends Controller
                     $query->where('p.status', true)->orWhere('u.employment_type_id', '=', 15);
                 });
             } elseif ($type == 3) {
-                $users->where('p.employment_type_id', 19);
+                $users->where('u.employment_type_id', 19);
             }
         }
         if ($filter == 'gender') {
@@ -416,9 +416,9 @@ class RecapitulationEmployeeController extends Controller
             'u.type'
         );
         $users->where('u.type', 1);
-        $users->where('u.employment_status', [1, 6]);
         $users->whereIn('u.position_id', $positions);
         $users->where('u.echelon_id', $echelon);
+        $users->whereIn('u.employment_status', [1, 6]);
         $users->orderBy('u.echelon_id', 'asc');
         $users->orderBy('u.position_id', 'asc');
         $users->orderBy('u.date_of_birth', 'desc');
