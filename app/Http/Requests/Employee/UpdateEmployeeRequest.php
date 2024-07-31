@@ -3,21 +3,21 @@
 namespace App\Http\Requests\Employee;
 
 use App\Http\Requests\Assessment\UpdateAssessmentEmployeeRequest;
+use App\Http\Requests\Competency\UpdateCompetencyEmployeeRequest;
+use App\Http\Requests\Credit\UpdateCreditEmployeeRequest;
+use App\Http\Requests\DisciplinaryHistory\UpdateDisciplinaryHistoryEmployeeRequest;
 use App\Http\Requests\Education\UpdateEducationEmployeeRequest;
 use App\Http\Requests\Family\UpdateFamilyEmployeeRequest;
+use App\Http\Requests\GradeHistory\UpdateGradeHistoryEmployeeRequest;
 use App\Http\Requests\Leave\UpdateLeaveEmployeeRequest;
 use App\Http\Requests\Note\UpdateNoteEmployeeRequest;
-use App\Http\Requests\Credit\UpdateCreditEmployeeRequest;
-use App\Http\Requests\Competency\UpdateCompetencyEmployeeRequest;
-use App\Http\Requests\Talent\UpdateTalentEmployeeRequest;
-use App\Http\Requests\PositionHistory\UpdatePositionHistoryEmployeeRequest;
-use App\Http\Requests\GradeHistory\UpdateGradeHistoryEmployeeRequest;
-use App\Http\Requests\TrainingHistory\UpdateTrainingHistoryStructuralEmployeeRequest;
-use App\Http\Requests\TrainingHistory\UpdateTrainingHistoryFunctionalEmployeeRequest;
-use App\Http\Requests\TrainingHistory\UpdateTrainingHistoryTechnicalEmployeeRequest;
-use App\Http\Requests\TargetHistory\UpdateTargetHistoryEmployeeRequest;
 use App\Http\Requests\PerformanceHistory\UpdatePerformanceHistoryEmployeeRequest;
-use App\Http\Requests\DisciplinaryHistory\UpdateDisciplinaryHistoryEmployeeRequest;
+use App\Http\Requests\PositionHistory\UpdatePositionHistoryEmployeeRequest;
+use App\Http\Requests\Talent\UpdateTalentEmployeeRequest;
+use App\Http\Requests\TargetHistory\UpdateTargetHistoryEmployeeRequest;
+use App\Http\Requests\TrainingHistory\UpdateTrainingHistoryFunctionalEmployeeRequest;
+use App\Http\Requests\TrainingHistory\UpdateTrainingHistoryStructuralEmployeeRequest;
+use App\Http\Requests\TrainingHistory\UpdateTrainingHistoryTechnicalEmployeeRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateEmployeeRequest extends FormRequest
@@ -460,6 +460,34 @@ class UpdateEmployeeRequest extends FormRequest
             'quit_date' => [
                 'description' => 'Refers to the Quit Date of Employee.',
                 'example' => '2013-07-23',
+            ],
+            'cpns_effective_date' => [
+                'description' => 'Refers to TMT CPNS / Tanggal Mulai Bekerja',
+                'example' => '2023-01-01',
+            ],
+            'position_effective_date' => [
+                'description' => 'Refers to the position effective date / TMT Menjabat',
+                'example' => '2023-01-01',
+            ],
+            'education_level' => [
+                'description' => 'Refers to the Level of Education of Employee. 1=SD/Sederajat, 2=SLTP/Sederajat, 3=SLTA/Sederajat, 4=Diploma I/II, 5=Akademik/D3/S.Muda, 6=Diploma IV/Strata I, 7=Strata II, 8=Strata III',
+                'example' => 1,
+            ],
+            'education_name' => [
+                'description' => 'Refers to the Name of Education of Employee.',
+                'example' => 'Universitas Indonesia',
+            ],
+            'education_year' => [
+                'description' => 'Refers to the Year of Education of Employee.',
+                'example' => '1990',
+            ],
+            'family_registration_number' => [
+                'description' => 'Refers to the Family Registration Number of Employee.',
+                'example' => '3279034401000001',
+            ],
+            'office_email' => [
+                'description' => 'Refers to the office email / email dinas',
+                'example' => 'padmi@wapresri.go.id',
             ],
         ];
 

@@ -40,6 +40,10 @@ class UpdatePositionEchelonRequest
     public static function bodyParameters(): array
     {
         return [
+            'position_echelons.*.id' => [
+                'description' => 'Refers to the ID of Position Echelon.',
+                'example' => 1,
+            ],
             'position_echelons.*.echelon_id' => [
                 'description' => 'Refers to the ID of Echelon.',
                 'example' => 1,

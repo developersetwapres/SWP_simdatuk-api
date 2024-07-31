@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests\GradeHistory;
 
-use Illuminate\Foundation\Http\FormRequest;
-
 class UpdateGradeHistoryEmployeeRequest
 {
 
@@ -87,6 +85,22 @@ class UpdateGradeHistoryEmployeeRequest
             'grades.*.delete_decree_document' => [
                 'description' => 'Refers to the Status of Delete decree document.',
                 'example' => false,
+            ],
+            'grades.*.decree_name' => [
+                'description' => 'Refers to the Decree Name of Employee Grades.',
+                'example' => 'Nomor 50 Tahun 2008',
+            ],
+            'grades.*.type_of_decree' => [
+                'description' => 'Refers to the Type of Decree of Employee Grades.',
+                'example' => 1,
+            ],
+            'grades.*.decree_date' => [
+                'description' => 'Refers to the Decree Date of Employee Grades.',
+                'example' => '2020-10-22',
+            ],
+            'grades.*.description' => [
+                'description' => 'Refers to the Description of Employee Grades.',
+                'example' => 'Kenaikan Jabatan',
             ],
         ];
     }
