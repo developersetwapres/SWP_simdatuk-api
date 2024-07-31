@@ -179,19 +179,22 @@ class TrainingHistoryController extends Controller
             DB::table('training_history_users')->whereIn('id', $result)->delete();
 
             foreach ($this->request->users as $user) {
+                // Upload Document
                 if (isset($user['certificate']) && is_file($user['certificate'])) {
                     $user['certificate'] = $this->uploadDocument($user['certificate'], 'certificate');
+                } else if ($user['delete_certificate'] == true) {
+                    $user['certificate'] = null;
+                } else {
+                    unset($user['certificate']);
                 }
+                unset($user['delete_certificate']);
 
                 if (!is_null($user['id'])) {
                     // Update existing data
-                    $user['certificate'] = ($user['delete_certificate'] == true) ? null : $user['certificate'];
-                    unset($user['delete_certificate']);
                     DB::table('training_history_users')->where('id', $user['id'])->updateTs($user);
                 } else {
                     // Insert new item
                     $user['training_history_id'] = $this->request->id;
-                    unset($user['delete_certificate']);
                     array_push($users, $user);
                 }
             }
