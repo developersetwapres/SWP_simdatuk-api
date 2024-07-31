@@ -452,9 +452,9 @@ class ExportController extends Controller
 
             // Housing
             $complex = 'Luar Komplek';
-            $complexName = $employee->residence_description;
-            if ($employee->residence_name != 'Luar Komplek') {
-                $complex = $employee->residence_name;
+            $complexName = $employee[$employeeId]->residence_description;
+            if ($employee[$employeeId]->residence_name != 'Luar Komplek') {
+                $complex = $employee[$employeeId]->residence_name;
                 $complexName = null;
             }
 
@@ -940,7 +940,13 @@ class ExportController extends Controller
                 }
                 if ($toggleFieldBio['isComplex']) {
                     $usersData->leftJoin('residences as r', 'users.residence_id', '=', 'r.id');
-                    $usersData->addSelect('r.name as residence_name');
+                    $usersData->addSelect(DB::raw("
+                    IF(
+                        users.residence_id = 1,
+                        CONCAT('Luar Komplek', IF(users.residence_description IS NULL,'',CONCAT(' - ',users.residence_description))),
+                        COALESCE(r.name,'-')
+                    ) as residence_name
+                    "));
                 }
                 if ($toggleFieldBio['isHomeNumber']) {
                     $usersData->addSelect('users.home_phone_number');
@@ -1771,7 +1777,13 @@ class ExportController extends Controller
         }
         if ($this->request->isComplex == 1) {
             $usersPreview->leftJoin('residences as r', 'users.residence_id', '=', 'r.id');
-            $usersPreview->addSelect('r.name as residence_name');
+            $usersPreview->addSelect(DB::raw("
+                    IF(
+                        users.residence_id = 1,
+                        CONCAT('Luar Komplek', IF(users.residence_description IS NULL,'',CONCAT(' - ',users.residence_description))),
+                        COALESCE(r.name,'-')
+                    ) as residence_name
+            "));
         }
         if ($this->request->isHomeNumber == 1) {
             $usersPreview->addSelect('users.home_phone_number');

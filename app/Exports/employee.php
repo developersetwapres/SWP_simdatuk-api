@@ -204,7 +204,13 @@ class employee implements FromView, WithDrawings, WithEvents
             }
             if (isset($this->toggleField['isComplex'])) {
                 $users->leftJoin('residences as r', 'users.residence_id', '=', 'r.id');
-                $users->addSelect('r.name as residence_name');
+                $users->addSelect(DB::raw("
+                IF(
+                    users.residence_id = 1,
+                    CONCAT('Luar Komplek', IF(users.residence_description IS NULL,'',CONCAT(' - ',users.residence_description))),
+                    COALESCE(r.name,'-')
+                ) as residence_name
+                "));
             }
             if (isset($this->toggleField['isHomeNumber'])) {
                 $users->addSelect('users.home_phone_number');
