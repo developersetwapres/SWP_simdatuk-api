@@ -279,6 +279,9 @@ class ExportController extends Controller
      **/
     public function zipDetailEmployee(ExportZipEmployeesRequest $request)
     {
+        ini_set('memory_limit', '-1');
+        set_time_limit(300);
+        
         $user = DB::table('users');
         $user->leftJoin('echelons', 'echelons.id', '=', 'users.echelon_id');
         $user->leftJoin('user_educations', 'user_educations.user_id', '=', 'users.id');
@@ -646,6 +649,9 @@ class ExportController extends Controller
      **/
     public function employees(ExportEmployeesRequest $request)
     {
+        ini_set('memory_limit', '-1');
+        set_time_limit(300);
+
         // filter user to get ids
         $users = DB::table('users')
             ->leftJoin('echelons', 'users.echelon_id', '=', 'echelons.id')
