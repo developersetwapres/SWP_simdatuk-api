@@ -1579,7 +1579,7 @@ class ExportController extends Controller
             $users->whereIn('users.position_id', $positionIds);
         }
         if (isset($request->echelons)) {
-            $users->whereIn('echelons.name', $request->echelons);
+            $users->whereIn('echelons.id', $request->echelons);
         }
         if (isset($request->grades)) {
             $users->whereIn('users.grade_id', $request->grades);
