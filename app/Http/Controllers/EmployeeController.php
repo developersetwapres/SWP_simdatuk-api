@@ -595,21 +595,20 @@ class EmployeeController extends Controller
                 DB::table('user_educations')->whereIn('id', $result)->delete();
 
                 foreach ($this->request->educations as $education) {
-                    if (isset($education['id'])) {
-                        if (isset($education['degree_document']) && is_file($education['degree_document'])) {
-                            $education['degree_document'] = $this->uploadDocument($education['degree_document'], 'degree_document');
-                        } else if ($education['delete_degree_document'] == true) {
-                            $education['degree_document'] = null;
-                        } else {
-                            unset($education['degree_document']);
-                        }
-                        unset($education['delete_degree_document']);
+                    if (isset($education['degree_document']) && is_file($education['degree_document'])) {
+                        $education['degree_document'] = $this->uploadDocument($education['degree_document'], 'degree_document');
+                    } else if ($education['delete_degree_document'] == true) {
+                        $education['degree_document'] = null;
+                    } else {
+                        unset($education['degree_document']);
+                    }
+                    unset($education['delete_degree_document']);
 
+                    if (isset($education['id'])) {
                         // Update existing data
                         DB::table('user_educations')->where('id', $education['id'])->updateTs($education);
                     } else if (isset($education)) {
                         // Insert new item
-                        unset($education['delete_degree_document']);
                         $education['user_id'] = $this->request->id;
                         array_push($educations, $education);
                     }
@@ -723,21 +722,20 @@ class EmployeeController extends Controller
                 DB::table('user_leaves')->whereIn('id', $result)->delete();
 
                 foreach ($this->request->leaves as $leave) {
-                    if (isset($leave['id'])) {
-                        if (isset($leave['letter']) && is_file($leave['letter'])) {
-                            $leave['letter'] = $this->uploadDocument($leave['letter'], 'letter');
-                        } else if ($leave['delete_letter'] == true) {
-                            $leave['letter'] = null;
-                        } else {
-                            unset($leave['letter']);
-                        }
-                        unset($leave['delete_letter']);
+                    if (isset($leave['letter']) && is_file($leave['letter'])) {
+                        $leave['letter'] = $this->uploadDocument($leave['letter'], 'letter');
+                    } else if ($leave['delete_letter'] == true) {
+                        $leave['letter'] = null;
+                    } else {
+                        unset($leave['letter']);
+                    }
+                    unset($leave['delete_letter']);
 
+                    if (isset($leave['id'])) {
                         // Update existing data
                         DB::table('user_leaves')->where('id', $leave['id'])->updateTs($leave);
                     } else if (isset($leave)) {
                         // Insert new item
-                        unset($leave['delete_letter']);
                         $leave['user_id'] = $this->request->id;
                         array_push($leaves, $leave);
                     }
@@ -821,21 +819,20 @@ class EmployeeController extends Controller
                 DB::table('user_assessments')->whereIn('id', $result)->delete();
 
                 foreach ($this->request->assessments as $assessment) {
-                    if (isset($assessment['id'])) {
-                        if (isset($assessment['assessment_document']) && is_file($assessment['assessment_document'])) {
-                            $assessment['assessment_document'] = $this->uploadDocument($assessment['assessment_document'], 'assessment_document');
-                        } else if ($assessment['delete_assessment_document'] == true) {
-                            $assessment['assessment_document'] = null;
-                        } else {
-                            unset($assessment['assessment_document']);
-                        }
-                        unset($assessment['delete_assessment_document']);
+                    if (isset($assessment['assessment_document']) && is_file($assessment['assessment_document'])) {
+                        $assessment['assessment_document'] = $this->uploadDocument($assessment['assessment_document'], 'assessment_document');
+                    } else if ($assessment['delete_assessment_document'] == true) {
+                        $assessment['assessment_document'] = null;
+                    } else {
+                        unset($assessment['assessment_document']);
+                    }
+                    unset($assessment['delete_assessment_document']);
 
+                    if (isset($assessment['id'])) {
                         // Update existing data
                         DB::table('user_assessments')->where('id', $assessment['id'])->updateTs($assessment);
                     } else if (isset($assessment)) {
                         // Insert new item
-                        unset($assessment['delete_assessment_document']);
                         $assessment['user_id'] = $this->request->id;
                         array_push($assessments, $assessment);
                     }
@@ -860,21 +857,20 @@ class EmployeeController extends Controller
                 DB::table('user_competencies')->whereIn('id', $result)->delete();
 
                 foreach ($this->request->competencies as $competency) {
-                    if (isset($competency['id'])) {
-                        if (isset($competency['competency_document']) && is_file($competency['competency_document'])) {
-                            $competency['competency_document'] = $this->uploadDocument($competency['competency_document'], 'competency_document');
-                        } else if ($competency['delete_competency_document'] == true) {
-                            $competency['competency_document'] = null;
-                        } else {
-                            unset($competency['competency_document']);
-                        }
-                        unset($competency['delete_competency_document']);
+                    if (isset($competency['competency_document']) && is_file($competency['competency_document'])) {
+                        $competency['competency_document'] = $this->uploadDocument($competency['competency_document'], 'competency_document');
+                    } else if ($competency['delete_competency_document'] == true) {
+                        $competency['competency_document'] = null;
+                    } else {
+                        unset($competency['competency_document']);
+                    }
+                    unset($competency['delete_competency_document']);
 
+                    if (isset($competency['id'])) {
                         // Update existing data
                         DB::table('user_competencies')->where('id', $competency['id'])->updateTs($competency);
                     } else if (isset($competency)) {
                         // Insert new item
-                        unset($competency['delete_competency_document']);
                         $competency['user_id'] = $this->request->id;
                         array_push($competencies, $competency);
                     }
@@ -899,21 +895,20 @@ class EmployeeController extends Controller
                 DB::table('user_talents')->whereIn('id', $result)->delete();
 
                 foreach ($this->request->talents as $talent) {
-                    if (isset($talent['id'])) {
-                        if (isset($talent['talent_document']) && is_file($talent['talent_document'])) {
-                            $talent['talent_document'] = $this->uploadDocument($talent['talent_document'], 'talent_document');
-                        } else if ($talent['delete_talent_document'] == true) {
-                            $talent['talent_document'] = null;
-                        } else {
-                            unset($talent['talent_document']);
-                        }
-                        unset($talent['delete_talent_document']);
+                    if (isset($talent['talent_document']) && is_file($talent['talent_document'])) {
+                        $talent['talent_document'] = $this->uploadDocument($talent['talent_document'], 'talent_document');
+                    } else if ($talent['delete_talent_document'] == true) {
+                        $talent['talent_document'] = null;
+                    } else {
+                        unset($talent['talent_document']);
+                    }
+                    unset($talent['delete_talent_document']);
 
+                    if (isset($talent['id'])) {
                         // Update existing data
                         DB::table('user_talents')->where('id', $talent['id'])->updateTs($talent);
                     } else if (isset($talent)) {
                         // Insert new item
-                        unset($talent['delete_talent_document']);
                         $talent['user_id'] = $this->request->id;
                         array_push($talents, $talent);
                     }
