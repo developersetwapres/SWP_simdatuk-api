@@ -58,12 +58,8 @@ class EmployeeRepository
             'u.id_number',
             'u.family_registration_number',
             'u.residence_id',
-            DB::raw("
-                IF(u.residence_id = 1,'Luar Komplek','Dalam Komplek') as residence_name
-            "),
-            DB::raw("
-                IF(u.residence_id = 1,COALESCE(u.residence_description,'-'),COALESCE(r.name,'-')) as residence_description
-            "),
+            'r.name as residence_name',
+            'u.residence_description',
             'u.current_address',
             'u.home_phone_number',
             'u.mobile_phone',
