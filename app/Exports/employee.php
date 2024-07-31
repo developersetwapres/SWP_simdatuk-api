@@ -113,6 +113,9 @@ class employee implements FromView, WithDrawings, WithEvents
         $results = collect();
         $usersData = array();
         foreach ($userIdsChunk as $userId) {
+            // Set the group_concat_max_len session variable
+            DB::statement("SET SESSION group_concat_max_len = 10000");
+
             $users = DB::table('users');
             if (isset($this->toggleField['isName'])) {
                 $users->addSelect('users.name');

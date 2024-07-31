@@ -832,6 +832,9 @@ class ExportController extends Controller
             $userIdsChunk = $userIdArray->chunk(200);
             $results = collect();
             foreach ($userIdsChunk as $userId) {
+                // Set the group_concat_max_len session variable
+                DB::statement("SET SESSION group_concat_max_len = 10000");
+
                 $usersData = DB::table('users');
                 $usersData->leftJoin('echelons', 'users.echelon_id', '=', 'echelons.id');
                 if ($toggleFieldBio['isName']) {
@@ -1663,6 +1666,9 @@ class ExportController extends Controller
         $userId = collect($userIds);
         // $userIdsChunk = $userId->chunk(200);
         $results = collect();
+        // Set the group_concat_max_len session variable
+        DB::statement("SET SESSION group_concat_max_len = 10000");
+
         $usersPreview = DB::table('users')->select('users.id');
         $usersPreview->leftJoin('echelons', 'echelons.id', '=', 'users.echelon_id');
         if ($this->request->isName == 1) {
