@@ -201,6 +201,10 @@
 
     <table style="width: 100%; margin-top: 8px;">
         @foreach($userProfile as $key => $value)
+        @if($key == 'Nama Komplek' && $userProfile['Komplek'] !== 'Luar Komplek' && $value == null)
+        @php continue;
+        @endphp
+        @endif
         <tr style="border-bottom: 1px solid #F0F0F0;">
             <td class="table-section-2-title">{{ $key }}:</td>
             <td class="table-section-2-body">{{ $value }}</td>
@@ -339,7 +343,13 @@
                     @endswitch</td>
                 <td class="table-section-3-body">{{ $value->effective_date }}</td>
                 <td class="table-section-3-body">{{ $value->decree }}</td>
-                <td class="table-section-3-body"><a href="{{ $value->decree_document }}">Lihat File</a></td>
+                <td class="table-section-3-body">
+                    @if(!is_null($value->decree_document))
+                    <a href="{{ $value->decree_document }}">Lihat File</a>
+                    @else
+                    -
+                    @endif
+                </td>
                 <td class="table-section-3-body">{{ $value->type_decree_name }}</td>
                 <td class="table-section-3-body">{{ $value->decree_number }}</td>
                 <td class="table-section-3-body">{{ $value->decree_date }}</td>
@@ -378,7 +388,13 @@
                 <td class="table-section-3-body">{{ $value->grade_name }} ({{ $value->grade_code }})</td>
                 <td class="table-section-3-body">{{ $value->effective_date }}</td>
                 <td class="table-section-3-body">{{ $value->decree_name }}</td>
-                <td class="table-section-3-body"><a href="{{ $value->decree_document }}">Lihat File</a></td>
+                <td class="table-section-3-body">
+                    @if(!is_null($value->decree_document))
+                    <a href="{{ $value->decree_document }}">Lihat File</a>
+                    @else
+                    -
+                    @endif
+                </td>
                 <td class="table-section-3-body">{{ $value->type_of_decree_name }}</td>
                 <td class="table-section-3-body">{{ $value->decree_number }}</td>
                 <td class="table-section-3-body">{{ $value->decree_date }}</td>
@@ -414,7 +430,13 @@
                 <td class="table-section-3-body">{{ $value->start_date }}</td>
                 <td class="table-section-3-body">{{ $value->duration }}</td>
                 <td class="table-section-3-body">{{ $value->organizer }}</td>
-                <td class="table-section-3-body"><a href="{{ $value->link }}">Lihat File</a></td>
+                <td class="table-section-3-body">
+                    @if(!is_null($value->certificate))
+                    <a href="{{ $value->certificate }}">Lihat File</a>
+                    @else
+                    -
+                    @endif
+                </td>
             </tr>
             @endforeach
         </tbody>
@@ -445,7 +467,13 @@
                 <td class="table-section-3-body">{{ $value->start_date }}</td>
                 <td class="table-section-3-body">{{ $value->duration }}</td>
                 <td class="table-section-3-body">{{ $value->organizer }}</td>
-                <td class="table-section-3-body"><a href="{{ $value->link }}">Lihat File</a></td>
+                <td class="table-section-3-body">
+                    @if(!is_null($value->certificate))
+                    <a href="{{ $value->certificate }}">Lihat File</a>
+                    @else
+                    -
+                    @endif
+                </td>
             </tr>
             @endforeach
         </tbody>
@@ -472,7 +500,13 @@
                 <td class="table-section-3-body">{{ $value->reference_number }}</td>
                 <td class="table-section-3-body">{{ $value->start_date }}</td>
                 <td class="table-section-3-body">{{ $value->duration }}</td>
-                <td class="table-section-3-body"><a href="{{ $value->link }}">Lihat File</a></td>
+                <td class="table-section-3-body">
+                    @if(!is_null($value->certificate))
+                    <a href="{{ $value->certificate }}">Lihat File</a>
+                    @else
+                    -
+                    @endif
+                </td>
             </tr>
             @endforeach
         </tbody>
@@ -926,7 +960,13 @@
                     @endswitch</td>
                 <td class="table-section-3-body">{{ $value->number }}</td>
                 <td class="table-section-3-body">{{ $value->description }}</td>
-                <td class="table-section-3-body"><a href="{{ $value->letter }}">Lihat File</a></td>
+                <td class="table-section-3-body">
+                    @if(!is_null($value->letter))
+                    <a href="{{ $value->letter }}">Lihat File</a>
+                    @else
+                    -
+                    @endif
+                </td>
             </tr>
             @endforeach
         </tbody>
@@ -993,7 +1033,13 @@
                     -
                     @endswitch</td>
                 <td class="table-section-3-body">{{ $value->organizer }}</td>
-                <td class="table-section-3-body"><a href="{{ $value->assessment_document }}">Lihat File</a></td>
+                <td class="table-section-3-body">
+                    @if(!is_null($value->assessment_document))
+                    <a href="{{ $value->assessment_document }}">Lihat File</a>
+                    @else
+                    -
+                    @endif
+                </td>
             </tr>
             @endforeach
         </tbody>
@@ -1037,7 +1083,13 @@
                     -
                     @endswitch</td>
                 <td class="table-section-3-body">{{ $value->organizer }}</td>
-                <td class="table-section-3-body"><a href="{{ $value->competency_document }}">Lihat File</a></td>
+                <td class="table-section-3-body">
+                    @if(!is_null($value->competency_document))
+                    <a href="{{ $value->competency_document }}">Lihat File</a>
+                    @else
+                    -
+                    @endif
+                </td>
             </tr>
             @endforeach
         </tbody>
@@ -1081,7 +1133,13 @@
                     -
                     @endswitch</td>
                 <td class="table-section-3-body">{{ $value->organizer }}</td>
-                <td class="table-section-3-body"><a href="{{ $value->talent_document }}">Lihat File</a></td>
+                <td class="table-section-3-body">
+                    @if(!is_null($value->talent_document))
+                    <a href="{{ $value->talent_document }}">Lihat File</a>
+                    @else
+                    -
+                    @endif
+                </td>
             </tr>
             @endforeach
         </tbody>

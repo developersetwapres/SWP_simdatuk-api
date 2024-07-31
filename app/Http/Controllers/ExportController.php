@@ -168,6 +168,15 @@ class ExportController extends Controller
             default => '-',
         };
 
+        // Housing
+        $complex = 'Luar Komplek';
+        $complexName = $employee->residence_description;
+        if ($employee->residence_name != 'Luar Komplek') {
+            $complex = $employee->residence_name;
+            $complexName = null;
+        }
+
+
         // Batas Usia Pensiun
         $indonesianMonth = [
             1 => 'Januari',
@@ -206,8 +215,8 @@ class ExportController extends Controller
                 'NPWP' => $employee->id_tax,
                 'Status Pegawai' => ($employee->employment_status ? 'Aktif' : 'Tidak Aktif'),
                 'No NIK' => $employee->id_number,
-                'Komplek' => $employee->residence_name,
-                'Nama Komplek' => $employee->residence_description,
+                'Komplek' => $complex,
+                'Nama Komplek' => $complexName,
                 'Alamat Tempat Tinggal Saat Ini' => $employee->current_address,
                 'No. Telepon Rumah' => $employee->home_phone_number,
                 'No. HP' => $employee->mobile_phone,
@@ -441,6 +450,14 @@ class ExportController extends Controller
                 default => '-',
             };
 
+            // Housing
+            $complex = 'Luar Komplek';
+            $complexName = $employee->residence_description;
+            if ($employee->residence_name != 'Luar Komplek') {
+                $complex = $employee->residence_name;
+                $complexName = null;
+            }
+
             // Batas Usia Pensiun
             $indonesianMonth = [
                 1 => 'Januari',
@@ -482,8 +499,8 @@ class ExportController extends Controller
                     'NPWP' => $employee[$employeeId]->id_tax,
                     'Status Pegawai' => ($employee[$employeeId]->employment_status ? 'Aktif' : 'Tidak Aktif'),
                     'No NIK' => $employee[$employeeId]->id_number,
-                    'Komplek' => $employee[$employeeId]->residence_name,
-                    'Nama Komplek' => $employee[$employeeId]->residence_description,
+                    'Komplek' => $complex,
+                    'Nama Komplek' => $complexName,
                     'Alamat Tempat Tinggal Saat Ini' => $employee[$employeeId]->current_address,
                     'No. Telepon Rumah' => $employee[$employeeId]->home_phone_number,
                     'No. HP' => $employee[$employeeId]->mobile_phone,
