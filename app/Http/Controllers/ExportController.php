@@ -289,9 +289,6 @@ class ExportController extends Controller
 
         $user = DB::table('users');
         $user->leftJoin('echelons', 'echelons.id', '=', 'users.echelon_id');
-        $user->leftJoin('user_educations', 'user_educations.user_id', '=', 'users.id');
-        $user->leftJoin('grades', 'grades.id', '=', 'users.grade_id');
-        $user->leftJoin('position_history_users', 'position_history_users.user_id', '=', 'users.id');
         if (isset($request->employee_type)) {
             $user->whereIn('users.type', $request->employee_type);
         }
