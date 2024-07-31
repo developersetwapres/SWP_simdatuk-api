@@ -71,6 +71,7 @@ return new class extends Migration
             $table->foreign('residence_id')->references('id')->on('residences')->onDelete('set null');
             $table->foreign('position_id')->references('id')->on('positions')->onDelete('set null');
             $table->foreign('echelon_id')->references('id')->on('echelons')->onDelete('set null');
+            $table->foreign('grade_id')->references('id')->on('grades')->onDelete('set null');
         });
     }
 
