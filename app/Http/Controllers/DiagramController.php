@@ -84,6 +84,8 @@ class DiagramController extends Controller
                                 foreach ($childPosition->users as $user) {
                                     $uniqueChild = unserialize(serialize($childPosition));
                                     $uniqueChild->users = [$user];
+                                    $uniqueChild->available = 1;
+                                    $uniqueChild->filled = sizeof($uniqueChild->users);
                                     $ass->push($uniqueChild);
                                 }
                                 $positions->childs = $ass;
