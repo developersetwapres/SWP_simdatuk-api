@@ -23,7 +23,6 @@ class ResetPasswordRequest extends FormRequest
     {
         return [
             'code' => 'required',
-            'status' => 'required|boolean',
             'password' => 'required|min:6|confirmed',
             'password_confirmation' => 'required',
         ];
@@ -38,8 +37,6 @@ class ResetPasswordRequest extends FormRequest
     {
         return [
             'code.required' => 'Kode tidak boleh kosong.',
-            'status.required' => 'Status tidak boleh kosong.',
-            'status.boolean' => 'Status harus berupa boolean.',
             'password.required' => 'Password tidak boleh kosong.',
             'password.min' => 'Password minimal memiliki 6 karakter.',
             'password.confirmed' => 'Konfirmasi password harus sama.',
@@ -58,10 +55,6 @@ class ResetPasswordRequest extends FormRequest
             'code' => [
                 'description' => 'Verification code from email.',
                 'example' => 'HJ7xKpi0z4wpSas306CTuRNjULb7dNve8qPDMTxK65ded5a7',
-            ],
-            'status' => [
-                'description' => 'Status of code, true for register and false for forgot password.',
-                'example' => true,
             ],
             'password' => [
                 'description' => 'Refers to the Password of User.',

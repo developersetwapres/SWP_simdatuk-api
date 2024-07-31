@@ -57,8 +57,8 @@ Route::get('/', function () {
 
 Route::post('login', [AuthController::class, 'login']);
 Route::post('forgot-password', [AuthController::class, 'forgotPassword']);
-Route::post('code-verification', [AuthController::class, 'codeVerification']);
 Route::post('reset-password', [AuthController::class, 'resetPassword']);
+Route::post('new-password', [AuthController::class, 'newPassword']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::delete('logout', [AuthController::class, 'logout']);

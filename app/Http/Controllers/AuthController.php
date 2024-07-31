@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Auth\CodeVerificationRequest;
 use App\Http\Requests\Auth\ForgotPasswordRequest;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\ResetPasswordRequest;
@@ -116,32 +115,53 @@ class AuthController extends Controller
     }
 
     /**
-     * Code Verification
-     *
-     * Below are the endpoints designated for token verification during both registration and password recovery processes, ensuring secure validation of user actions.
-     * @response 200 {"code": 200,"message": "Verifikasi kode berhasil.", "data": null}
-     * @response 404 {"code": 404,"message": "Verifikasi kode tidak tersedia.","data": null}
-     * @response 404 {"code": 404,"message": "Verifikasi kode sudah kadaluarsa.","data": null}
-     */
-    public function codeVerification(CodeVerificationRequest $request)
-    {
-        return $this->codeValidation();
-    }
-
-    /**
      * Reset Password
      *
-     * Below are the endpoints designed for resetting passwords or setting new passwords after token verification, providing a secure mechanism for users to regain access to their accounts.
+     * Below are the endpoints designed for resetting password.
      * @response 200 {"code": 200,"message": "Reset password berhasil disimpan","data": null}
-     * @response 200 {"code": 200,"message": "Password baru berhasil disimpan.","data": null}
      */
     public function resetPassword(ResetPasswordRequest $request)
     {
-        $codeValidation = $this->codeValidation();
+        $codeValidation = $this->codeValidation(false);
         if ($codeValidation->getStatusCode() !== 200) {
             return $codeValidation;
         }
-        if ($request->status == true) {
+
+        $user = DB::table('password_reset_tokens');
+        $user->where('verification_code', $this->request->code);
+        $user->select('email');
+        $user = $user->first();
+
+        try {
+            $query = DB::table('users');
+            $query->where('email', $user->email);
+            $query->update([
+                'password' => Hash::make($this->request->password),
+            ]);
+
+            $user = DB::table('password_reset_tokens');
+            $user->where('verification_code', $this->request->code);
+            $user->delete();
+            return $this->response(200, 'Reset password berhasil disimpan.');
+        } catch (\Throwable $th) {
+            return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
+        }
+    }
+
+    /**
+     * New Password
+     *
+     * Below are the endpoints designed for setting new password.
+     * @response 200 {"code": 200,"message": "Password baru berhasil disimpan.","data": null}
+     */
+    public function newPassword(ResetPasswordRequest $request)
+    {
+        $codeValidation = $this->codeValidation(true);
+        if ($codeValidation->getStatusCode() !== 200) {
+            return $codeValidation;
+        }
+
+        try {
             $user = DB::table('users');
             $user->where('verification_code', $this->request->code);
             $user->update([
@@ -150,28 +170,8 @@ class AuthController extends Controller
                 'expire_at' => null,
             ]);
             return $this->response(200, 'Password baru berhasil disimpan.');
-        } else {
-            $user = DB::table('password_reset_tokens');
-            $user->where('verification_code', $this->request->code);
-            $user->select('email');
-            $user = $user->first();
-
-            try {
-                // Update password user
-                $user = DB::table('users');
-                $user->where('email', $user->email);
-                $user->update([
-                    'password' => Hash::make($this->request->password),
-                ]);
-
-                $user = DB::table('password_reset_tokens');
-                $user->where('verification_code', $this->request->code);
-                $user->delete();
-
-                return $this->response(200, 'Reset password berhasil disimpan.');
-            } catch (\Throwable $th) {
-                return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
-            }
+        } catch (\Throwable $th) {
+            return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
         }
     }
 
@@ -195,9 +195,9 @@ class AuthController extends Controller
      *
      * @return void
      */
-    public function codeValidation()
+    public function codeValidation($status)
     {
-        if ($this->request->status == true) {
+        if ($status == true) {
             $user = DB::table("users");
         } else {
             $user = DB::table("password_reset_tokens");
