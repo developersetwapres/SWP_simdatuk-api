@@ -762,7 +762,7 @@ class EmployeeController extends Controller
             } else {
                 DB::table('user_leaves')
                     ->where('user_id', $this->request->id)
-                    ->select();
+                    ->delete();
             }
 
             if (isset($this->request->notes)) {
