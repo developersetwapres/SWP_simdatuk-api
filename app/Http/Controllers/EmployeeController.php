@@ -616,6 +616,10 @@ class EmployeeController extends Controller
                 if (count($educations) > 0) {
                     DB::table('user_educations')->insertTs($educations);
                 }
+            } else {
+                DB::table('user_educations')
+                    ->where('user_id', $this->request->id)
+                    ->delete();
             }
 
             if (isset($this->request->positions)) {
@@ -646,6 +650,10 @@ class EmployeeController extends Controller
                         DB::table('position_history_users')->where('id', $position['id'])->updateTs($position);
                     }
                 }
+            } else {
+                DB::table('position_history_users')
+                    ->where('user_id', $this->request->id)
+                    ->delete();
             }
 
             if (isset($this->request->grades)) {
@@ -676,6 +684,10 @@ class EmployeeController extends Controller
                         DB::table('grade_history_users')->where('id', $grade['id'])->updateTs($grade);
                     }
                 }
+            } else {
+                DB::table('grade_history_users')
+                    ->where('user_id', $this->request->id)
+                    ->delete();
             }
 
             if (isset($this->request->families)) {
@@ -705,6 +717,10 @@ class EmployeeController extends Controller
                 if (count($families) > 0) {
                     DB::table('user_families')->insertTs($families);
                 }
+            } else {
+                DB::table('user_families')
+                    ->where('user_id', $this->request->id)
+                    ->delete();
             }
 
             if (isset($this->request->leaves)) {
@@ -743,6 +759,10 @@ class EmployeeController extends Controller
                 if (count($leaves) > 0) {
                     DB::table('user_leaves')->insertTs($leaves);
                 }
+            } else {
+                DB::table('user_leaves')
+                    ->where('user_id', $this->request->id)
+                    ->select();
             }
 
             if (isset($this->request->notes)) {
@@ -773,6 +793,10 @@ class EmployeeController extends Controller
                 if (count($notes) > 0) {
                     DB::table('user_notes')->insertTs($notes);
                 }
+            } else {
+                DB::table('user_notes')
+                    ->where('user_id', $this->request->id)
+                    ->delete();
             }
 
             if (isset($this->request->credits)) {
@@ -802,6 +826,10 @@ class EmployeeController extends Controller
                 if (count($credits) > 0) {
                     DB::table('user_credits')->insertTs($credits);
                 }
+            } else {
+                DB::table('user_credits')
+                    ->where('user_id', $this->request->id)
+                    ->delete();
             }
 
             if (isset($this->request->assessments)) {
@@ -840,6 +868,10 @@ class EmployeeController extends Controller
                 if (count($assessments) > 0) {
                     DB::table('user_assessments')->insertTs($assessments);
                 }
+            } else {
+                DB::table('user_assessments')
+                    ->where('user_id', $this->request->id)
+                    ->delete();
             }
 
             if (isset($this->request->competencies)) {
@@ -878,6 +910,10 @@ class EmployeeController extends Controller
                 if (count($competencies) > 0) {
                     DB::table('user_competencies')->insertTs($competencies);
                 }
+            } else {
+                DB::table('user_competencies')
+                    ->where('user_id', $this->request->id)
+                    ->delete();
             }
 
             if (isset($this->request->talents)) {
@@ -916,6 +952,10 @@ class EmployeeController extends Controller
                 if (count($talents) > 0) {
                     DB::table('user_talents')->insertTs($talents);
                 }
+            } else {
+                DB::table('user_talents')
+                    ->where('user_id', $this->request->id)
+                    ->delete();
             }
 
             if (isset($this->request->structurals)) {
@@ -948,6 +988,12 @@ class EmployeeController extends Controller
                         DB::table('training_history_users')->where('id', $training['id'])->updateTs($training);
                     }
                 }
+            } else {
+                DB::table('training_history_users')
+                    ->leftJoin('training_histories', 'training_histories.id', '=', 'training_history_users.training_history_id')
+                    ->where('training_history_users.user_id', $this->request->id)
+                    ->where('training_histories.type', 1)
+                    ->delete();
             }
 
             if (isset($this->request->functionals)) {
@@ -980,6 +1026,12 @@ class EmployeeController extends Controller
                         DB::table('training_history_users')->where('id', $training['id'])->updateTs($training);
                     }
                 }
+            } else {
+                DB::table('training_history_users')
+                    ->leftJoin('training_histories', 'training_histories.id', '=', 'training_history_users.training_history_id')
+                    ->where('training_history_users.user_id', $this->request->id)
+                    ->where('training_histories.type', 2)
+                    ->delete();
             }
 
             if (isset($this->request->technicals)) {
@@ -1012,6 +1064,12 @@ class EmployeeController extends Controller
                         DB::table('training_history_users')->where('id', $training['id'])->updateTs($training);
                     }
                 }
+            } else {
+                DB::table('training_history_users')
+                    ->leftJoin('training_histories', 'training_histories.id', '=', 'training_history_users.training_history_id')
+                    ->where('training_history_users.user_id', $this->request->id)
+                    ->where('training_histories.type', 3)
+                    ->delete();
             }
 
             if (isset($this->request->recognitions)) {
@@ -1026,6 +1084,10 @@ class EmployeeController extends Controller
                 $array2 = Arr::pluck($this->request->recognitions, 'id');
                 $result = array_diff($array1, $array2);
                 DB::table('recognition_history_users')->whereIn('id', $result)->delete();
+            } else {
+                DB::table('recognition_history_users')
+                    ->where('user_id', $this->request->id)
+                    ->delete();
             }
 
             if (isset($this->request->targets)) {
@@ -1047,6 +1109,10 @@ class EmployeeController extends Controller
                         DB::table('target_history_users')->where('id', $target['id'])->updateTs($target);
                     }
                 }
+            } else {
+                DB::table('target_history_users')
+                    ->where('user_id', $this->request->id)
+                    ->delete();
             }
 
             if (isset($this->request->performances)) {
@@ -1068,6 +1134,10 @@ class EmployeeController extends Controller
                         DB::table('performance_history_users')->where('id', $performance['id'])->updateTs($performance);
                     }
                 }
+            } else {
+                DB::table('performance_history_users')
+                    ->where('user_id', $this->request->id)
+                    ->delete();
             }
 
             if (isset($this->request->disciplinaries)) {
@@ -1089,6 +1159,10 @@ class EmployeeController extends Controller
                         DB::table('disciplinary_history_users')->where('id', $disciplinary['id'])->updateTs($disciplinary);
                     }
                 }
+            } else {
+                DB::table('disciplinary_history_users')
+                    ->where('user_id', $this->request->id)
+                    ->delete();
             }
 
             DB::commit();
