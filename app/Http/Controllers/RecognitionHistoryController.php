@@ -180,7 +180,7 @@ class RecognitionHistoryController extends Controller
             DB::table('recognition_history_users')->whereIn('id', $result)->delete();
 
             foreach ($this->request->users as $user) {
-                if (!is_null($user['id'])) {
+                if (isset($user['id'])) {
                     // Update existing data
                     DB::table('recognition_history_users')->where('id', $user['id'])->updateTs($user);
                 } else {
