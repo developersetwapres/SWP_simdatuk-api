@@ -30,9 +30,9 @@ class CreateRecognitionHistoryRequest extends FormRequest
             'type_of_decree' => 'required|numeric',
             'decree_date' => 'required|date',
             'decree_number' => 'required|max:160',
-            'decree_year' => 'date_format:Y',
+            'decree_year' => 'nullable|date_format:Y',
             'awarding_institution' => 'max:160',
-            'date_of_receipt' => 'date',
+            'date_of_receipt' => 'nullable|date',
             'users.*.user_id' => 'required|numeric',
         ];
     }
