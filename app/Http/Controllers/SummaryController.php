@@ -52,7 +52,7 @@ class SummaryController extends Controller
         $users->where('type', 1);
         $users->where('employment_status', 1);
         $users->orderBy('date_of_birth', 'asc');
-        $users = $users->take(8)->get();
+        $users = $users->get();
         foreach ($users as $item) {
             $item->photo_profile = $this->getDocument($item->photo_profile, true);
         }
