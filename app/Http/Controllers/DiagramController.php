@@ -575,7 +575,7 @@ class DiagramController extends Controller
                     </tr>
                     <tr>
                         <td class="node-photo-container">
-                            <img src="' . ('img/profile.jpg') . '" class="node-photo"/>
+                            <img src="' . (isset($hierarchy->user_photo_profile) ? $this->getDocument($hierarchy->user_photo_profile, true) : 'img/profile.jpg') . '" class="node-photo"/>
                         </td>
                     </tr>
                     <tr>
