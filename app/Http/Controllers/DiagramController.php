@@ -195,10 +195,11 @@ class DiagramController extends Controller
             });
             $positions->leftJoin('grades as g', 'u.grade_id', '=', 'g.id');
             $positions->orderBy('u.type', 'ASC');
-            $positions->orderBy('u.position_effective_date', 'ASC');
+            $positions->orderBy('u.employment_type_id', 'DESC');
             $positions->orderBy('u.grade_id', 'ASC');
-            $positions->orderBy('u.grade_effective_date', 'ASC');
+            $positions->orderBy('u.position_effective_date', 'ASC');
             $positions->orderBy('u.name', 'ASC');
+            $positions->orderBy('u.grade_effective_date', 'ASC');
         }
 
         if ($idType == 1) {
@@ -231,7 +232,6 @@ class DiagramController extends Controller
 
         $positionId = '';
         $echelonName = '';
-
         $positionWithEmptySlot = collect([]);
 
         if ($withEmptySlot === true && $withUser === true) {
@@ -256,24 +256,28 @@ class DiagramController extends Controller
                         "employee_registration_number" => null,
                         "children" => [],
                     ];
-                    if ($position->entity == 1 && $position->type == 1 && $positionId != $position->id) {
-                        $count = collect($positions)->where('id', $position->id);
-
+                    if ($position->entity == 1 && $position->type == 1) {
                         if (($key < sizeof($positions) - 1 && $positions[$key + 1]->id != $position->id) || $key == sizeof($positions) - 1) {
+                            $count = collect($positions)->where('id', $position->id);
+
                             for ($i = 0; $i < $position->available - $count->count(); $i++) {
                                 $positionWithEmptySlot->push($placeholder);
                             }
+                        }
 
+                        if ($positionId != $position->id) {
                             $positionId = $position->id;
                         }
-                    } else if ($position->type == 2 && ($echelonName != $position->echelon_name || $positionId != $position->id)) {
-                        $count = collect($positions)->where('id', $position->id)->where('echelon_name', $position->echelon_name);
+                    } else if ($position->type == 2) {
+                        if (($key < sizeof($positions) - 1 && ($positions[$key + 1]->id != $position->id || $positions[$key + 1]->echelon_name != $position->echelon_name)) || $key == sizeof($positions) - 1) {
+                            $count = collect($positions)->where('id', $position->id)->where('echelon_name', $position->echelon_name);
 
-                        if (($key < sizeof($positions) - 1 && $positions[$key + 1]->id != $position->id) || $key == sizeof($positions) - 1) {
                             for ($i = 0; $i < $position->available - $count->count(); $i++) {
                                 $positionWithEmptySlot->push($placeholder);
                             }
+                        }
 
+                        if ($echelonName != $position->echelon_name || $positionId != $position->id) {
                             $echelonName = $position->echelon_name;
                             $positionId = $position->id;
                         }
@@ -311,8 +315,11 @@ class DiagramController extends Controller
             ->leftJoin('grades', 'grades.id', '=', 'users.grade_id')
             ->where('users.position_id', $positionId)
             ->orderBy('users.type', 'ASC')
+            ->orderBy('users.employment_type_id', 'DESC')
+            ->orderBy('users.grade_id', 'ASC')
             ->orderBy('users.position_effective_date', 'ASC')
-            ->orderBy('users.grade_id', 'ASC');
+            ->orderBy('users.name', 'ASC')
+            ->orderBy('users.grade_effective_date', 'ASC');
 
         if (isset($echelonId)) {
             $users->where('users.echelon_id', '=', $echelonId);
@@ -398,19 +405,33 @@ class DiagramController extends Controller
 
         foreach ($positions as $position) {
             $children = $this->getHierarchy($position->id, $position->type);
-            $position->children = $children;
 
-            if (collect($children)->values()->contains(function ($child) {
-                return $child->type == 2;
-            })) {
-                $uniqueChildrens = $children->where('type', 2)->unique('id')->values();
+            $grandChildParentId  = '';
+            $childrenWithGrandchild = collect([]);
+            foreach ($children as $key => $child) {
+                $childrenWithGrandchild->push($child);
+                if (
+                    $child->type == 2 &&
+                    $child->id != $grandChildParentId &&
+                    (
+                        (
+                            $key < sizeof($children) - 1 &&
+                            $children[$key + 1]->id != $child->id
+                        ) ||
+                        (
+                            $key == sizeof($children) - 1
+                        )
+                    )
+                ) {
+                    $grandChild = $this->getHierarchy($child->id, null);
 
-                foreach ($uniqueChildrens as $uniqueChildren) {
-                    $grandChild = $this->getHierarchy($uniqueChildren->id, null);
+                    $childrenWithGrandchild = $childrenWithGrandchild->merge($grandChild);
 
-                    $position->children = $position->children->merge($grandChild);
+                    $grandChildParentId = $child->id;
                 }
             }
+
+            $position->children = $childrenWithGrandchild;
         }
 
         return $positions;
@@ -554,7 +575,7 @@ class DiagramController extends Controller
                     </tr>
                     <tr>
                         <td class="node-photo-container">
-                            <img src="' . (isset($hierarchy->user_photo_profile) ? $this->getDocument($hierarchy->user_photo_profile, true) : 'img/profile.jpg') . '" class="node-photo"/>
+                            <img src="' . ('img/profile.jpg') . '" class="node-photo"/>
                         </td>
                     </tr>
                     <tr>

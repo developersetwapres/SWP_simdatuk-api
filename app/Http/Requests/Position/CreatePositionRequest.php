@@ -25,7 +25,7 @@ class CreatePositionRequest extends FormRequest
         $userRules = [
             'name' => 'required|max:512',
             'parent_id' => 'numeric|nullable',
-            'available' => 'numeric',
+            'available' => 'nullable|numeric',
             'type' => 'required|in:1,2,3',
             'entity' => 'required|in:1,2',
             'order' => 'required|numeric',
