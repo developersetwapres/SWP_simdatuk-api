@@ -24,6 +24,7 @@ class LoginRequest extends FormRequest
         return [
             'username' => 'required|exists:users,username',
             'password' => 'required',
+            'recaptcha_token' => 'required',
         ];
     }
 
@@ -38,6 +39,7 @@ class LoginRequest extends FormRequest
             'username.required' => 'Username tidak boleh kosong.',
             'username.exists' => 'Username anda tidak terdaftar.',
             'password.required' => 'Kata sandi tidak boleh kosong.',
+            'recaptcha_token.required' => 'Token recaptcha tidak boleh kosong.',
         ];
     }
 
@@ -56,6 +58,10 @@ class LoginRequest extends FormRequest
             'password' => [
                 'description' => 'Password of user.',
                 'example' => 'password',
+            ],
+            'recaptcha_token' => [
+                'description' => 'Recaptcha token.',
+                'example' => '03AFcWeA4z8yaB38pOzK',
             ],
         ];
     }

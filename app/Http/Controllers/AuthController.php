@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 
 /**
@@ -35,6 +36,11 @@ class AuthController extends Controller
      */
     public function login(LoginRequest $request)
     {
+        $recaptchaValidation = $this->recaptchaValidation($this->request->recaptcha_token);
+        if ($recaptchaValidation->getStatusCode() !== 200) {
+            return $recaptchaValidation;
+        }
+
         $user = User::where('username', $this->request->username)->first();
 
         if (!$user || !Hash::check($this->request->password, $user->password)) {
@@ -212,6 +218,23 @@ class AuthController extends Controller
             return $this->response(404, 'Verifikasi kode sudah kadaluarsa.');
         } else {
             return $this->response(200, 'Verifikasi kode berhasil.');
+        }
+    }
+
+    private function recaptchaValidation($token)
+    {
+        $secretKey = env('RECAPTCHA_SECRET_KEY'); // Store your secret key in .env
+
+        // Make a request to Google's API to verify the reCAPTCHA response
+        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+            'secret' => $secretKey,
+            'response' => $token,
+        ]);
+
+        $result = $response->json();
+
+        if (!$result['success']) {
+            return $this->response(404, 'reCAPTCHA verification failed.');
         }
     }
 }
