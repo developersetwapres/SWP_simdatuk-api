@@ -235,6 +235,8 @@ class AuthController extends Controller
 
         if (!$result['success']) {
             return $this->response(404, 'reCAPTCHA verification failed.');
+        } else {
+            return $this->response(200, 'success');
         }
     }
 }
