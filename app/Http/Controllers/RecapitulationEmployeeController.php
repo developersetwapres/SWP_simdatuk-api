@@ -174,8 +174,9 @@ class RecapitulationEmployeeController extends Controller
             $users->whereIn('u.echelon_id', $cardId);
         }
         $users->orderBy('u.echelon_id', 'asc');
-        $users->orderBy('u.position_id', 'asc');
-        $users->orderBy('u.date_of_birth', 'desc');
+        $users->orderBy('u.grade_id', 'asc');
+        $users->orderBy('u.employment_type_id', 'desc');
+        $users->orderBy('u.name', 'asc');
         $users = $users->get();
         foreach ($users as $item) {
             $item->photo_profile = $this->getDocument($item->photo_profile, true);
@@ -234,7 +235,12 @@ class RecapitulationEmployeeController extends Controller
             WHERE
                 u.employment_status
             IN
-                (1,6);
+                (1,6)
+            ORDER BY
+                u.echelon_id ASC,
+                u.grade_id ASC,
+                u.employment_type_id DESC,
+                u.name ASC;
         ";
 
         $sql2 = "
@@ -265,7 +271,11 @@ class RecapitulationEmployeeController extends Controller
                 (1,6)
             AND
                 position_id = 2
-            ;
+            ORDER BY
+                u.echelon_id ASC,
+                u.grade_id ASC,
+                u.employment_type_id DESC,
+                u.name ASC;
         ";
 
         if ($parentId == 2) {
@@ -314,8 +324,9 @@ class RecapitulationEmployeeController extends Controller
             $users->where('u.employment_type_id', '=', 1);
         }
         $users->orderBy('u.echelon_id', 'asc');
-        $users->orderBy('u.position_id', 'asc');
-        $users->orderBy('u.date_of_birth', 'desc');
+        $users->orderBy('u.grade_id', 'asc');
+        $users->orderBy('u.employment_type_id', 'desc');
+        $users->orderBy('u.name', 'asc');
         $users = $users->get();
         foreach ($users as $item) {
             $item->photo_profile = $this->getDocument($item->photo_profile, true);
@@ -380,7 +391,12 @@ class RecapitulationEmployeeController extends Controller
             AND
               u.employment_status
             IN
-              (1,6);
+              (1,6)
+            ORDER BY
+                u.echelon_id ASC,
+                u.grade_id ASC,
+                u.employment_type_id DESC,
+                u.name ASC;
         ";
         $users = DB::select($sql);
         foreach ($users as $item) {
@@ -420,8 +436,9 @@ class RecapitulationEmployeeController extends Controller
         $users->where('u.echelon_id', $echelon);
         $users->whereIn('u.employment_status', [1, 6]);
         $users->orderBy('u.echelon_id', 'asc');
-        $users->orderBy('u.position_id', 'asc');
-        $users->orderBy('u.date_of_birth', 'desc');
+        $users->orderBy('u.grade_id', 'asc');
+        $users->orderBy('u.employment_type_id', 'desc');
+        $users->orderBy('u.name', 'asc');
         $users = $users->get();
         foreach ($users as $item) {
             $item->photo_profile = $this->getDocument($item->photo_profile, true);
