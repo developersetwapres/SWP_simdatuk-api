@@ -98,7 +98,7 @@ class RecapitulationController extends Controller
         $data = [
             "id" => 1,
             "name" => 'Apartur Sipil Negara (ASN) Aktif + Perbantuan TNI/POLRI Pelaksana',
-            "total" => $pejabat->total_pejabat_pimpinan + $pelaksana->total + $pejabat->total_pejabat_fungsional_keahlian + $pejabat->total_pejabat_fungsional_keterampilan + $pejabatDiperbantukan->total,
+            "total" => $pejabat->total_pejabat_pimpinan + $pelaksana->total + $pejabat->total_pejabat_fungsional_keahlian + $pejabat->total_pejabat_fungsional_keterampilan,
             "cards" => [
                 [
                     "id" => 1,

@@ -180,7 +180,7 @@ class ExportRecapitulationController extends Controller
             ],
             [
                 'title' => 'Aparatur Sipil Negara (ASN) Aktif + Perbantuan TNI/POLRI Pelaksana',
-                'body' => 'Total : ' . $pejabat->total_pejabat_pimpinan + $pelaksana->total + $pejabat->total_pejabat_fungsional_keahlian + $pejabat->total_pejabat_fungsional_keterampilan + $pejabatDiperbantukan->total,
+                'body' => 'Total : ' . $pejabat->total_pejabat_pimpinan + $pelaksana->total + $pejabat->total_pejabat_fungsional_keahlian + $pejabat->total_pejabat_fungsional_keterampilan,
                 'type' => 3,
             ],
             [
