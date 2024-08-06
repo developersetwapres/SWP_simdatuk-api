@@ -166,7 +166,7 @@ class RecapitulationEmployeeController extends Controller
         if ($filter == 'status') {
             $users->where('u.employment_status', $cardId);
         } else {
-            $users->where('u.employment_status', [1, 6]);
+            $users->whereIn('u.employment_status', [1, 6]);
         }
         if ($filter == 'echelon') {
             $cardId = explode(',', $cardId);
