@@ -72,6 +72,7 @@ class OldUserSeeder extends Seeder
                     END AS marital_status,
                     CASE
                         WHEN jns_kepeg = 'TNI/POLRI' THEN '1'
+                        WHEN jns_kepeg = 'TNI' THEN '1'
                         WHEN jns_kepeg = 'Sipil' THEN '2'
                         WHEN jns_kepeg = 'Organik' THEN '3'
                         WHEN jns_kepeg = 'PPPK' THEN '4'
