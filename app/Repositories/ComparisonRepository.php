@@ -638,7 +638,7 @@ class ComparisonRepository
     private function getPositions($ids)
     {
         $positions = DB::table('users as u');
-        $positions->select('u.id', 'phu.position');
+        $positions->select('phu.id', 'u.id as user_id', 'phu.position');
         $positions->join('position_history_users as phu', 'u.id', '=', 'phu.user_id');
         $positions->whereIn('u.id', $ids);
         $positions = $positions->get();
@@ -648,7 +648,7 @@ class ComparisonRepository
     private function getTrainings($ids, $type)
     {
         $trainings = DB::table('users as u');
-        $trainings->select('u.id', 'th.name');
+        $trainings->select('thu.id', 'u.id as user_id', 'th.name');
         $trainings->join('training_history_users as thu', 'u.id', '=', 'thu.user_id');
         $trainings->join('training_histories as th', 'thu.training_history_id', '=', 'th.id');
         $trainings->whereIn('u.id', $ids);
@@ -660,7 +660,7 @@ class ComparisonRepository
     private function getTargets($ids)
     {
         $targets = DB::table('users as u');
-        $targets->select('u.id', 'thu.work_behavior_rating', 'thu.employee_performance_predicate', 'thu.organizational_performance_achievement');
+        $targets->select('thu.id', 'u.id as user_id', 'thu.work_behavior_rating', 'thu.employee_performance_predicate', 'thu.organizational_performance_achievement');
         $targets->join('target_history_users as thu', 'u.id', '=', 'thu.user_id');
         $targets->whereIn('u.id', $ids);
         $targets = $targets->get();
@@ -684,7 +684,8 @@ class ComparisonRepository
     {
         $disciplinaries = DB::table('users as u');
         $disciplinaries->select(
-            'u.id',
+            'dhu.id',
+            'u.id as user_id',
             'd.description',
             DB::raw("DATE_FORMAT(dhu.start_date, '%d-%m-%Y') as start_date")
         );
@@ -697,10 +698,18 @@ class ComparisonRepository
 
     private function getNotes($ids)
     {
-        $notes = DB::table('users as u');
-        $notes->select('u.id', 'un.description');
-        $notes->join('user_notes as un', 'u.id', '=', 'un.user_id');
-        $notes->whereIn('u.id', $ids);
+        $notes = DB::table('user_notes as un');
+        $notes->leftJoin('users as u1', 'u1.id', '=', 'un.user_id');
+        $notes->leftJoin('users as u2', 'u2.id', '=', 'un.giver_id');
+        $notes->select(
+            'un.id',
+            'u1.id as user_id',
+            'u2.id as giver_id',
+            'u2.name as giver_name',
+            'un.description',
+            'un.created_at',
+        );
+        $notes->whereIn('u1.id', $ids);
         $notes = $notes->get();
         return $this->groupingData($ids, $notes);
     }
@@ -709,7 +718,8 @@ class ComparisonRepository
     {
         $assessments = DB::table('users as u');
         $assessments->select(
-            'u.id',
+            'ua.id',
+            'u.id as user_id',
             DB::raw("DATE_FORMAT(ua.event_date, '%d-%m-%Y') as event_date"),
             'ua.point'
         );
@@ -726,7 +736,8 @@ class ComparisonRepository
     {
         $competencies = DB::table('users as u');
         $competencies->select(
-            'u.id',
+            'uc.id',
+            'u.id as user_id',
             DB::raw("DATE_FORMAT(uc.event_date, '%d-%m-%Y') as event_date"),
             'uc.point'
         );
@@ -743,7 +754,8 @@ class ComparisonRepository
     {
         $talents = DB::table('users as u');
         $talents->select(
-            'u.id',
+            'ut.id',
+            'u.id as user_id',
             DB::raw("DATE_FORMAT(ut.event_date, '%d-%m-%Y') as event_date"),
             'ut.point'
         );
@@ -762,8 +774,8 @@ class ComparisonRepository
 
         // Group the data based on IDs
         foreach (json_decode(json_encode($data), true) as $item) {
-            if (in_array($item['id'], $ids)) {
-                $groupedData[$item['id']][] = $item;
+            if (in_array($item['user_id'], $ids)) {
+                $groupedData[$item['user_id']][] = $item;
             }
         }
         return $groupedData;
