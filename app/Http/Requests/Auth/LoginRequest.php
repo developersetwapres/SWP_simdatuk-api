@@ -21,11 +21,18 @@ class LoginRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'username' => 'required|exists:users,username',
-            'password' => 'required',
-            'recaptcha_token' => 'required',
-        ];
+        if (config('app.env') == 'production') {
+            return [
+                'username' => 'required|exists:users,username',
+                'password' => 'required',
+                'recaptcha_token' => 'required',
+            ];
+        } else {
+            return [
+                'username' => 'required|exists:users,username',
+                'password' => 'required',
+            ];
+        }
     }
 
     /**

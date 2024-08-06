@@ -36,9 +36,11 @@ class AuthController extends Controller
      */
     public function login(LoginRequest $request)
     {
-        $recaptchaValidation = $this->recaptchaValidation($this->request->recaptcha_token);
-        if ($recaptchaValidation->getStatusCode() !== 200) {
-            return $recaptchaValidation;
+        if (config('app.env') == 'production') {
+            $recaptchaValidation = $this->recaptchaValidation($this->request->recaptcha_token);
+            if ($recaptchaValidation->getStatusCode() !== 200) {
+                return $recaptchaValidation;
+            }
         }
 
         $user = User::where('username', $this->request->username)->first();
