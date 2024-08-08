@@ -2762,7 +2762,7 @@ class PositionSeeder extends Seeder
                                 'parent_id' => 220,
                                 'name' => 'Manggala Informatika Ahli Pertama',
                                 'available' => 1,
-                                'type' => 1,
+                                'type' => 2,
                                 'entity' => 1,
                                 'vertical_order' => 1,
                                 'horizontal_order' => 1,
