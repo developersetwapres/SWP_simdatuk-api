@@ -2132,6 +2132,7 @@ class ExportController extends Controller
             $employmeeType = DB::table('employment_types as et');
             $employmeeType->join('users', 'et.id', '=', 'users.employment_type_id');
             $employmeeType->select('users.id as user_id', DB::raw("GROUP_CONCAT( CONCAT('<li>',et.name,'</li>') SEPARATOR '') as employee_type"));
+            $employmeeType->where('et.type', 1);
             $employmeeType->whereIn('users.id', $userId);
             $employmeeType->groupBy('users.id');
 
