@@ -93,6 +93,9 @@ class SynchronizationController extends Controller
      */
     public function index()
     {
+        ini_set('memory_limit', '-1');
+        set_time_limit(600);
+
         try {
             $this->getAccessToken();
             $this->getPegawai();
