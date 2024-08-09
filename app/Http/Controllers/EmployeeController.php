@@ -267,7 +267,7 @@ class EmployeeController extends Controller
 
         try {
             DB::beginTransaction();
-            if (isset($this->posted['position_id']) && !is_null($this->posted['position_id'])) {
+            if (isset($this->posted['position_id'])) {
 
                 $existsPosition = DB::table('positions')
                     ->where('id', $this->posted['position_id'])
@@ -322,6 +322,11 @@ class EmployeeController extends Controller
             if ($this->request->hasFile('employee_id_card')) {
                 $path = $this->uploadDocument($this->request->file('employee_id_card'), 'employee_id_card', $this->request->employee_id_number);
                 $this->posted['employee_id_card'] = $path;
+            }
+
+            // Set position_id null if employment status is not 1 or 6
+            if ($this->posted['employment_status'] != 1 && $this->posted['employment_status'] != 6) {
+                $this->posted['position_id'] = null;
             }
 
             $userId = DB::table('users')->insertGetIdTs($this->posted);
@@ -579,7 +584,7 @@ class EmployeeController extends Controller
             $user->where('id', $this->request->id);
 
             // Set position_id null if employment status is not 1 or 6
-            if ($this->posted['employment_status'] !== 1 || $this->posted['employment_status'] !== 6) {
+            if ($this->posted['employment_status'] != 1 && $this->posted['employment_status'] != 6) {
                 $this->posted['position_id'] = null;
             }
 
@@ -1198,7 +1203,7 @@ class EmployeeController extends Controller
         }
 
         // Set position_id null if employment status is not 1 or 6
-        if ($this->posted['employment_status'] !== 1 || $this->posted['employment_status'] !== 6) {
+        if ($this->posted['employment_status'] != 1 && $this->posted['employment_status'] != 6) {
             $this->posted['position_id'] = null;
         }
 
