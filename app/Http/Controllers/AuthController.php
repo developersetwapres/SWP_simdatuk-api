@@ -36,12 +36,6 @@ class AuthController extends Controller
      */
     public function login(LoginRequest $request)
     {
-        if (config('app.env') == 'production') {
-            $recaptchaValidation = $this->recaptchaValidation($this->request->recaptcha_token);
-            if ($recaptchaValidation->getStatusCode() !== 200) {
-                return $recaptchaValidation;
-            }
-        }
 
         $user = User::where('username', $this->request->username)->first();
 
@@ -55,6 +49,13 @@ class AuthController extends Controller
             return $this->response(401, 'Email belum terverifikasi.');
         } else {
             $token = $user->createToken('web')->plainTextToken;
+        }
+
+        if (config('app.env') == 'production') {
+            $recaptchaValidation = $this->recaptchaValidation($this->request->recaptcha_token);
+            if ($recaptchaValidation->getStatusCode() !== 200) {
+                return $recaptchaValidation;
+            }
         }
 
         $user = DB::table('users');
