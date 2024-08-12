@@ -82,6 +82,10 @@ class ProfileController extends Controller
 
             // Check if password submitted
             if (isset($this->request->password) && $this->request->password !== null) {
+                if (!Hash::check($this->request->old_password, $this->request->user()->password)) {
+                    return $this->response(400, 'Password saat ini tidak sesuai.');
+                }
+
                 DB::table('users')->where('id', $this->request->user()->id)->updateTs([
                     'password' => Hash::make($this->request->password),
                 ]);
@@ -90,6 +94,7 @@ class ProfileController extends Controller
             return $this->response(200, 'Profil berhasil diupdate.');
         } catch (\Throwable $th) {
             DB::rollback();
+            \Log::warning($th);
             return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
         }
     }
