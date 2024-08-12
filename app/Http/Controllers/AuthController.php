@@ -118,7 +118,11 @@ class AuthController extends Controller
         ]);
 
         // Send Email
-        Mail::to($this->request->email)->send(new ForgotPassword($this->request));
+        try {
+            Mail::to($this->request->email)->send(new ForgotPassword($this->request));
+        } catch (\Exception $e) {
+            return $this->response(200, config('app.fe_url') . '/auth/reset-password/' . $this->request->verification_code);
+        }
 
         return $this->response(200, 'Email sudah dikirim.');
     }

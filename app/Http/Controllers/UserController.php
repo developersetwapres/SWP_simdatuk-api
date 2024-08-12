@@ -107,9 +107,15 @@ class UserController extends Controller
                 'expire_at' => date('Y-m-d', strtotime('+7 days', strtotime(date('Y-m-d')))),
                 'status' => true,
             ]);
-            Mail::to($this->request->email)->send(new RegisterVerification($this->request));
 
             DB::commit();
+
+            try {
+                Mail::to($this->request->email)->send(new RegisterVerification($this->request));
+            } catch (\Exception $e) {
+                return $this->response(200, config('app.fe_url') . '/auth/new-password/' . $this->request->verification_code);
+            }
+
             return $this->response(200, 'Pengguna berhasil ditambah.');
         } catch (\Throwable $th) {
             DB::rollback();
@@ -192,7 +198,6 @@ class UserController extends Controller
                     'verification_code' => $this->request->verification_code,
                     'expire_at' => date('Y-m-d', strtotime('+7 days', strtotime(date('Y-m-d')))),
                 ]);
-                Mail::to($this->request->email)->send(new RegisterVerification($this->request));
             }
 
             $user = DB::table('users');
@@ -203,6 +208,15 @@ class UserController extends Controller
             ]);
 
             DB::commit();
+
+            if ($user->email !== $this->request->email) {
+                try {
+                    Mail::to($this->request->email)->send(new RegisterVerification($this->request));
+                } catch (\Exception $e) {
+                    return $this->response(200, config('app.fe_url') . '/auth/new-password/' . $this->request->verification_code);
+                }
+            }
+
             return $this->response(200, 'Pengguna berhasil diupdate.');
         } catch (\Throwable $th) {
             DB::rollback();
