@@ -80,6 +80,22 @@ class SynchronizationController extends Controller
             'S1' => 6,
             'S2' => 7,
             'S3' => 8,
+            "" => null,
+        ];
+        $this->religionList = [
+            'Islam' => 1,
+            'Protestan' => 2,
+            'Katolik' => 3,
+            'Hindu' => 4,
+            'Buddha' => 5,
+            'Konghucu' => 6,
+            "" => null,
+        ];
+        $this->employmentTypeList = [
+            'TNI & Polri' => 1,
+            'Sipil' => 2,
+            'Organik' => 3,
+            'PPPK' => 4,
         ];
     }
 
@@ -94,7 +110,7 @@ class SynchronizationController extends Controller
     public function index()
     {
         ini_set('memory_limit', '-1');
-        set_time_limit(600);
+        set_time_limit(3000);
 
         try {
             $this->getAccessToken();
@@ -106,6 +122,7 @@ class SynchronizationController extends Controller
             $this->getTraining();
             return $this->response(200, 'Pegawai berhasil disinkronisasi.');
         } catch (\Throwable $th) {
+            \Log::warning($th);
             return $this->response(400, 'Gagal melakukan sinkronisasi.');
         }
     }
@@ -151,17 +168,39 @@ class SynchronizationController extends Controller
                         'employee_registration_number' => $item['niplama'],
                         'employee_id_card_number' => $item['karpeg'],
                         'id_tax' => $item['npwp'],
+                        'years_of_service_total' => $item['mkseluruhtahun'],
+                        'month_of_service_total' => $item['mkseluruhbulan'],
+                        'years_of_service_rank' => $item['mkgoltahun'],
+                        'month_of_service_rank' => $item['mkgolbulan'],
                         'office_email' => strtolower($item['email']),
-                        // tmt_cpns & tmt_pns belum ada
                     ]);
                 } else {
+                    $dateString = ($item['tgllahir'] == "" || $item['tgllahir'] == "00-00-0000") ? null : $item['tgllahir'];
+                    $date = new DateTime($dateString);
                     // Insert Data
                     DB::table('users')->insertTs([
+                        'title_prefix' => $item['gelardepan'],
+                        'name' => $item['nmpeg'],
+                        'title_suffix' => $item['gelarbelakang'],
                         'employee_id_number' => $item['nipbaru'],
                         'employee_registration_number' => $item['niplama'],
-                        'name' => $item['nmpeg'],
+                        'place_of_birth' => $item['tempatlahir'],
+                        'date_of_birth' => $date,
+                        'religion' => $this->religionList[$item['agama']],
+                        'gender' => ($item['jeniskelamin'] == 'Perempuan') ? 0 : 1,
+                        'marital_status' => ($item['statkwn'] == 'Kawin') ? 2 : 1,
+                        'employment_type_id' => $this->employmentTypeList[$item['jenispeg']],
+                        'education_level' => $this->educationList[$item['pend_terakhir']],
                         'employee_id_card_number' => $item['karpeg'],
                         'id_tax' => $item['npwp'],
+                        'employment_status' => ($item['statuspeg'] == 'Aktif') ? 1 : 9,
+                        'id_number' => $item['nik'],
+                        'current_address' => $item['alamat'],
+                        'mobile_phone' => $item['nohp'],
+                        'years_of_service_total' => $item['mkseluruhtahun'],
+                        'month_of_service_total' => $item['mkseluruhbulan'],
+                        'years_of_service_rank' => $item['mkgoltahun'],
+                        'month_of_service_rank' => $item['mkgolbulan'],
                         'office_email' => strtolower($item['email']),
                     ]);
                 }

@@ -61,7 +61,11 @@ return new class extends Migration
             $table->string('verification_code', 160)->nullable()->unique();
             $table->date('expire_at')->nullable();
             $table->date('cpns_effective_date')->nullable();
+            $table->integer('years_of_service_total')->nullable();
+            $table->integer('month_of_service_total')->nullable();
             $table->date('pns_effective_date')->nullable();
+            $table->integer('years_of_service_rank')->nullable();
+            $table->integer('month_of_service_rank')->nullable();
             $table->string('office_email')->nullable()->comment('email dinas');
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();

@@ -96,6 +96,8 @@ class EmployeeRepository
                     )
                 ) as cpns_years_of_service
             "),
+            'years_of_service_total',
+            'month_of_service_total',
             DB::raw("DATE_FORMAT(u.pns_effective_date, '%d-%m-%Y') as pns_effective_date"),
             DB::raw("
                 IF(
@@ -124,6 +126,8 @@ class EmployeeRepository
                     )
                 ) as pns_years_of_service
             "),
+            'years_of_service_rank',
+            'month_of_service_rank',
             DB::raw("
                 CASE
                     WHEN u.type = 1 && u.echelon_id IS NOT NULL && u.date_of_birth IS NOT NULL THEN DATE_FORMAT(DATE_ADD(DATE_ADD(u.date_of_birth, INTERVAL e.retirement_age YEAR), INTERVAL 1 MONTH),'%d-%m-%Y')
@@ -133,33 +137,6 @@ class EmployeeRepository
                 END AS retirement_age
             "),
             'u.created_at',
-            DB::raw("
-                IF(
-                    u.quit_date IS NULL,
-                    CONCAT(
-                        TIMESTAMPDIFF(YEAR, u.grade_effective_date, NOW()), ' Tahun, ',
-                        TIMESTAMPDIFF(MONTH, u.grade_effective_date, NOW()) % 12, ' Bulan, ',
-                        DATEDIFF(
-                            NOW(),
-                            DATE_ADD(
-                                u.grade_effective_date,
-                                INTERVAL TIMESTAMPDIFF(YEAR, u.grade_effective_date, NOW()) YEAR
-                            ) + INTERVAL TIMESTAMPDIFF(MONTH, u.grade_effective_date, NOW()) % 12 MONTH
-                        ), ' Hari'
-                    ),
-                    CONCAT(
-                        TIMESTAMPDIFF(YEAR, u.grade_effective_date, u.quit_date), ' Tahun, ',
-                        TIMESTAMPDIFF(MONTH, u.grade_effective_date, u.quit_date) % 12, ' Bulan, ',
-                        DATEDIFF(
-                            u.quit_date,
-                            DATE_ADD(
-                                u.grade_effective_date,
-                                INTERVAL TIMESTAMPDIFF(YEAR, u.grade_effective_date, quit_date) YEAR
-                            ) + INTERVAL TIMESTAMPDIFF(MONTH, u.grade_effective_date, quit_date) % 12 MONTH
-                        ), ' Hari'
-                    )
-                ) as grade_years_of_service
-            "),
         );
         $user = $user->first();
 
