@@ -159,6 +159,9 @@
                 @if($toggleField['isDateCPNS'])
                 <th class="section-header-color">TMT CPNS</th>
                 @endif
+                @if($toggleField['isDatePNS'])
+                <th class="section-header-color">TMT PNS</th>
+                @endif
                 @if($toggleField['isStartDate'])
                 <th class="section-header-color">Tanggal Mulai Bekerja</th>
                 @endif
@@ -391,8 +394,11 @@
                 @if($toggleField['isDateCPNS'])
                 <td>{{ $value['cpns_effective_date'] }}</td>
                 @endif
-                @if($toggleField['isStartDate'])
+                @if($toggleField['isDatePNS'])
                 <td>{{ $value['pns_effective_date'] }}</td>
+                @endif
+                @if($toggleField['isStartDate'])
+                <td>{{ $value['start_date'] }}</td>
                 @endif
                 @if($toggleField['isEndDate'])
                 <td>{{ $value['retirement_effective_date'] }}</td>

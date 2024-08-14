@@ -59,6 +59,7 @@ class ExportEmployeesRequest extends FormRequest
             'isEmployeeType' => 'nullable|numeric|min:0|max:1',
             'isAssistanceType' => 'nullable|numeric|min:0|max:1',
             'isOutsourcingType' => 'nullable|numeric|min:0|max:1',
+            'isDatePNS' => 'nullable|numeric|min:0|max:1',
             'isDateCPNS' => 'nullable|numeric|min:0|max:1',
             'isStartDate' => 'nullable|numeric|min:0|max:1',
             'isEndDate' => 'nullable|numeric|min:0|max:1',
@@ -191,6 +192,9 @@ class ExportEmployeesRequest extends FormRequest
             'isOutsourcingType.numeric' => 'IsOutsourcingType harus berupa angka',
             'isOutsourcingType.min' => 'IsOutsourcingType tidak boleh kurang dari 0',
             'isOutsourcingType.max' => 'IsOutsourcingType tidak boleh lebih dari 1',
+            'isDatePNS.numeric' => 'IsDatePNS harus berupa angka',
+            'isDatePNS.min' => 'IsDatePNS tidak boleh kurang dari 0',
+            'isDatePNS.max' => 'IsDatePNS tidak boleh lebih dari 1',
             'isDateCPNS.numeric' => 'IsDateCPNS harus berupa angka',
             'isDateCPNS.min' => 'IsDateCPNS tidak boleh kurang dari 0',
             'isDateCPNS.max' => 'IsDateCPNS tidak boleh lebih dari 1',
@@ -492,6 +496,10 @@ class ExportEmployeesRequest extends FormRequest
             ],
             'isOutsourcingType' => [
                 'description' => 'Indicates whether the employee type outsourcing  field is included in the output document. Example: 1',
+                'example' => 1,
+            ],
+            'isDatePNS' => [
+                'description' => 'Indicates whether the PNS Start date field is included in the request.',
                 'example' => 1,
             ],
             'isDateCPNS' => [

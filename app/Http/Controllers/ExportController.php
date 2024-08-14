@@ -197,21 +197,32 @@ class ExportController extends Controller
             $credits[$key]->end_month_name = ($value->end_month) ? $indonesianMonth[$value->end_month] : '';
         }
 
-        $pdf = Pdf::loadview('exports/user', [
-            'userProfile' => [
+        $masaKerjaKeseluruhan = null;
+        if(!is_null($employee->years_of_service_total) || !is_null($employee->month_of_service_total)){
+            $masaKerjaKeseluruhan = ($employee->years_of_service_total ?? 0)." Tahun, ". ($employee->month_of_service_total ?? 0)." Bulan";
+        }
+        $masaKerjaGolongan = null;
+        if(!is_null($employee->years_of_service_total) || !is_null($employee->month_of_service_total)){
+            $masaKerjaGolongan = ($employee->years_of_service_rank ?? 0)." Tahun, ". ($employee->month_of_service_rank ?? 0)." Bulan";
+        }
+
+        if($employee->type == 1){
+            $userProfile = [
                 'Tempat, Tanggal Lahir' => $employee->place_of_birth . ', ' . $employee->date_of_birth,
                 'Agama' => $religion,
                 'Jenis Kelamin' => ($employee->gender ? 'Pria' : 'Wanita'),
                 'Status Perkawinan' => $maritalStatus,
                 'Jenis Pegawai' => $employeeType,
+                'TMT CPNS' => $employee->cpns_effective_date,
+                'TMT PNS' => $employee->pns_effective_date,
                 'TMT Menjabat' => ($employee->position_effective_date ?? '-'),
                 'Instansi Induk' => ($employee->institution_name ?? '-'),
                 'Tingkat' => $educationLevel,
                 'Nama Sekolah/Universitas' => $employee->education_name,
                 'Tahun Lulus' => $employee->education_year,
                 'No. Karpeg/No. Karisu' => $employee->employee_id_card_number . ' / ' . $employee->karisu_number,
-                'Masa Kerja Keseluruhan' => $employee->cpns_years_of_service,
-                'Masa Kerja Golongan' => $employee->pns_years_of_service,
+                'Masa Kerja Keseluruhan' => $masaKerjaKeseluruhan,
+                'Masa Kerja Golongan' => $masaKerjaGolongan,
                 'NPWP' => $employee->id_tax,
                 'Status Pegawai' => ($employee->employment_status ? 'Aktif' : 'Tidak Aktif'),
                 'No NIK' => $employee->id_number,
@@ -226,7 +237,72 @@ class ExportController extends Controller
                 'Email Dinas' => $employee->office_email,
                 'Kontak Darurat' => $employee->emergency_contact,
                 'Batas Usia Pensiun' => $employee->retirement_age,
-            ],
+            ];
+        }else if($employee->type == 2){
+            $userProfile = [
+                'Tempat, Tanggal Lahir' => $employee->place_of_birth . ', ' . $employee->date_of_birth,
+                'Agama' => $religion,
+                'Jenis Kelamin' => ($employee->gender ? 'Pria' : 'Wanita'),
+                'Status Perkawinan' => $maritalStatus,
+                'Jenis Pegawai' => $employeeType,
+                'Tanggal Mulai Bekerja' => $employee->cpns_effective_date,
+                'TMT Menjabat' => ($employee->position_effective_date ?? '-'),
+                'Instansi Induk' => ($employee->institution_name ?? '-'),
+                'Tingkat' => $educationLevel,
+                'Nama Sekolah/Universitas' => $employee->education_name,
+                'Tahun Lulus' => $employee->education_year,
+                'No. Karpeg/No. Karisu' => $employee->employee_id_card_number . ' / ' . $employee->karisu_number,
+                'Masa Kerja Keseluruhan' => $masaKerjaKeseluruhan,
+                'Masa Kerja Golongan' => $masaKerjaGolongan,
+                'NPWP' => $employee->id_tax,
+                'Status Pegawai' => ($employee->employment_status ? 'Aktif' : 'Tidak Aktif'),
+                'No NIK' => $employee->id_number,
+                'Komplek' => $complex,
+                'Nama Komplek' => $complexName,
+                'Alamat Tempat Tinggal Saat Ini' => $employee->current_address,
+                'No. Telepon Rumah' => $employee->home_phone_number,
+                'No. HP' => $employee->mobile_phone,
+                'Alamat Kantor' => $employee->office_address,
+                'No. Telepon Kantor' => $employee->office_phone_number,
+                'Email' => $employee->email,
+                'Email Dinas' => $employee->office_email,
+                'Kontak Darurat' => $employee->emergency_contact,
+                'Batas Usia Pensiun' => $employee->retirement_age,
+            ];
+        }else{
+            $userProfile = [
+                'Tempat, Tanggal Lahir' => $employee->place_of_birth . ', ' . $employee->date_of_birth,
+                'Agama' => $religion,
+                'Jenis Kelamin' => ($employee->gender ? 'Pria' : 'Wanita'),
+                'Status Perkawinan' => $maritalStatus,
+                'Jenis Pegawai' => $employeeType,
+                'Tanggal Mulai Bekerja' => $employee->cpns_effective_date,
+                'TMT Menjabat' => ($employee->position_effective_date ?? '-'),
+                'Instansi Induk' => ($employee->institution_name ?? '-'),
+                'Tingkat' => $educationLevel,
+                'Nama Sekolah/Universitas' => $employee->education_name,
+                'Tahun Lulus' => $employee->education_year,
+                'No. Karpeg/No. Karisu' => $employee->employee_id_card_number . ' / ' . $employee->karisu_number,
+                'Masa Kerja Keseluruhan' => $masaKerjaKeseluruhan,
+                'NPWP' => $employee->id_tax,
+                'Status Pegawai' => ($employee->employment_status ? 'Aktif' : 'Tidak Aktif'),
+                'No NIK' => $employee->id_number,
+                'Komplek' => $complex,
+                'Nama Komplek' => $complexName,
+                'Alamat Tempat Tinggal Saat Ini' => $employee->current_address,
+                'No. Telepon Rumah' => $employee->home_phone_number,
+                'No. HP' => $employee->mobile_phone,
+                'Alamat Kantor' => $employee->office_address,
+                'No. Telepon Kantor' => $employee->office_phone_number,
+                'Email' => $employee->email,
+                'Email Dinas' => $employee->office_email,
+                'Kontak Darurat' => $employee->emergency_contact,
+                'Batas Usia Pensiun' => $employee->retirement_age,
+            ];
+        }
+
+        $pdf = Pdf::loadview('exports/user', [
+            'userProfile' => $userProfile,
             'currentPosition' => ($employee->position_merged ?? '-'),
             'photoProfile' => $employee->photo_profile,
             'userNIP' => $employee->employee_id_number,
@@ -320,16 +396,26 @@ class ExportController extends Controller
         }
         if (isset($request->grade_range)) {
             $gradeRanges = $request->input('grade_range', []);
-            $now = Carbon::now();
 
-            $user->where(function ($query) use ($gradeRanges, $now) {
+            $user->where(function ($query) use ($gradeRanges) {
                 foreach ($gradeRanges as $range) {
                     [$minYears, $maxYears] = explode('-', $range);
 
-                    $maxDate = $now->copy()->subYears($minYears)->toDateString();
-                    $minDate = $now->copy()->subYears($maxYears + 1)->addDay()->toDateString();
-
-                    $query->orWhereBetween('users.grade_effective_date', [$minDate, $maxDate]);
+                    if($minYears == "0"){
+                        $query->whereRaw(DB::raw("
+                        (
+                            ((years_of_service_rank = 0 OR years_of_service_rank IS NULL) AND month_of_service_rank > 0)
+                            OR (years_of_service_rank = ".$maxYears." AND (month_of_service_rank IS NULL OR month_of_service_rank = 0))
+                            OR (years_of_service_rank > 0 AND years_of_service_rank < ".$maxYears.")
+                         )"));
+                    }else{
+                        $query->whereRaw(DB::raw("
+                        (
+                            years_of_service_rank = ".$minYears." AND month_of_service_rank > 0
+                            OR (years_of_service_rank = ".$maxYears." AND (month_of_service_rank IS NULL OR month_of_service_rank = 0))
+                            OR (years_of_service_rank > ".$minYears." AND years_of_service_rank < ".$maxYears.")
+                         )"));
+                    }
                 }
             });
         }
@@ -357,16 +443,26 @@ class ExportController extends Controller
         }
         if (isset($request->total_working_duration)) {
             $gradeRanges = $request->input('total_working_duration', []);
-            $now = Carbon::now();
 
-            $user->where(function ($query) use ($gradeRanges, $now) {
+            $user->where(function ($query) use ($gradeRanges) {
                 foreach ($gradeRanges as $range) {
                     [$minYears, $maxYears] = explode('-', $range);
 
-                    $maxDate = $now->copy()->subYears($minYears)->toDateString();
-                    $minDate = $now->copy()->subYears($maxYears + 1)->addDay()->toDateString();
-
-                    $query->orWhereBetween('users.position_effective_date', [$minDate, $maxDate]);
+                    if($minYears == "0"){
+                        $query->whereRaw(DB::raw("
+                        (
+                            ((years_of_service_total = 0 OR years_of_service_total IS NULL) AND month_of_service_total > 0)
+                            OR (years_of_service_total = ".$maxYears." AND (month_of_service_total IS NULL OR month_of_service_total = 0))
+                            OR (years_of_service_total > 0 AND years_of_service_total < ".$maxYears.")
+                         )"));
+                    }else{
+                        $query->whereRaw(DB::raw("
+                        (
+                            years_of_service_total = ".$minYears." AND month_of_service_total > 0
+                            OR (years_of_service_total = ".$maxYears." AND (month_of_service_total IS NULL OR month_of_service_total = 0))
+                            OR (years_of_service_total > ".$minYears." AND years_of_service_total < ".$maxYears.")
+                         )"));
+                    }
                 }
             });
         }
@@ -477,22 +573,32 @@ class ExportController extends Controller
                 }
             }
 
-            $tmp = sys_get_temp_dir();
-            $pdf = Pdf::loadview('exports/user', [
-                'userProfile' => [
+            $masaKerjaKeseluruhan = null;
+            if(!is_null($employee[$employeeId]->years_of_service_total) || !is_null($employee[$employeeId]->month_of_service_total)){
+                $masaKerjaKeseluruhan = ($employee[$employeeId]->years_of_service_total ?? 0)." Tahun, ". ($employee[$employeeId]->month_of_service_total ?? 0)." Bulan";
+            }
+            $masaKerjaGolongan = null;
+            if(!is_null($employee[$employeeId]->years_of_service_total) || !is_null($employee[$employeeId]->month_of_service_total)){
+                $masaKerjaGolongan = ($employee[$employeeId]->years_of_service_rank ?? 0)." Tahun, ". ($employee[$employeeId]->month_of_service_rank ?? 0)." Bulan";
+            }
+
+            if($employee[$employeeId]->type == 1){
+                $userProfile = [
                     'Tempat, Tanggal Lahir' => $employee[$employeeId]->place_of_birth . ', ' . $employee[$employeeId]->date_of_birth,
                     'Agama' => $religion,
                     'Jenis Kelamin' => ($employee[$employeeId]->gender ? 'Pria' : 'Wanita'),
                     'Status Perkawinan' => $maritalStatus,
                     'Jenis Pegawai' => $employeeType,
+                    'TMT CPNS' => $employee[$employeeId]->cpns_effective_date,
+                    'TMT PNS' => $employee[$employeeId]->pns_effective_date,
                     'TMT Menjabat' => ($employee[$employeeId]->position_effective_date ?? '-'),
                     'Instansi Induk' => ($employee[$employeeId]->institution_name ?? '-'),
                     'Tingkat' => $educationLevel,
                     'Nama Sekolah/Universitas' => $employee[$employeeId]->education_name,
                     'Tahun Lulus' => $employee[$employeeId]->education_year,
                     'No. Karpeg/No. Karisu' => $employee[$employeeId]->employee_id_card_number . ' / ' . $employee[$employeeId]->karisu_number,
-                    'Masa Kerja Keseluruhan' => $employee[$employeeId]->cpns_years_of_service,
-                    'Masa Kerja Golongan' => $employee[$employeeId]->pns_years_of_service,
+                    'Masa Kerja Keseluruhan' => $masaKerjaKeseluruhan,
+                    'Masa Kerja Golongan' => $masaKerjaGolongan,
                     'NPWP' => $employee[$employeeId]->id_tax,
                     'Status Pegawai' => ($employee[$employeeId]->employment_status ? 'Aktif' : 'Tidak Aktif'),
                     'No NIK' => $employee[$employeeId]->id_number,
@@ -507,7 +613,73 @@ class ExportController extends Controller
                     'Email Dinas' => $employee[$employeeId]->office_email,
                     'Kontak Darurat' => $employee[$employeeId]->emergency_contact,
                     'Batas Usia Pensiun' => $employee[$employeeId]->retirement_age,
-                ],
+                ];
+            }else if($employee[$employeeId]->type == 2){
+                $userProfile = [
+                    'Tempat, Tanggal Lahir' => $employee[$employeeId]->place_of_birth . ', ' . $employee[$employeeId]->date_of_birth,
+                    'Agama' => $religion,
+                    'Jenis Kelamin' => ($employee[$employeeId]->gender ? 'Pria' : 'Wanita'),
+                    'Status Perkawinan' => $maritalStatus,
+                    'Jenis Pegawai' => $employeeType,
+                    'Tanggal Mulai Bekerja' => $employee[$employeeId]->cpns_effective_date,
+                    'TMT Menjabat' => ($employee[$employeeId]->position_effective_date ?? '-'),
+                    'Instansi Induk' => ($employee[$employeeId]->institution_name ?? '-'),
+                    'Tingkat' => $educationLevel,
+                    'Nama Sekolah/Universitas' => $employee[$employeeId]->education_name,
+                    'Tahun Lulus' => $employee[$employeeId]->education_year,
+                    'No. Karpeg/No. Karisu' => $employee[$employeeId]->employee_id_card_number . ' / ' . $employee[$employeeId]->karisu_number,
+                    'Masa Kerja Keseluruhan' => $masaKerjaKeseluruhan,
+                    'Masa Kerja Golongan' => $masaKerjaGolongan,
+                    'NPWP' => $employee[$employeeId]->id_tax,
+                    'Status Pegawai' => ($employee[$employeeId]->employment_status ? 'Aktif' : 'Tidak Aktif'),
+                    'No NIK' => $employee[$employeeId]->id_number,
+                    'Komplek' => $complex,
+                    'Nama Komplek' => $complexName,
+                    'Alamat Tempat Tinggal Saat Ini' => $employee[$employeeId]->current_address,
+                    'No. Telepon Rumah' => $employee[$employeeId]->home_phone_number,
+                    'No. HP' => $employee[$employeeId]->mobile_phone,
+                    'Alamat Kantor' => $employee[$employeeId]->office_address,
+                    'No. Telepon Kantor' => $employee[$employeeId]->office_phone_number,
+                    'Email' => $employee[$employeeId]->email,
+                    'Email Dinas' => $employee[$employeeId]->office_email,
+                    'Kontak Darurat' => $employee[$employeeId]->emergency_contact,
+                    'Batas Usia Pensiun' => $employee[$employeeId]->retirement_age,
+                ];
+            }else{
+                $userProfile = [
+                    'Tempat, Tanggal Lahir' => $employee[$employeeId]->place_of_birth . ', ' . $employee[$employeeId]->date_of_birth,
+                    'Agama' => $religion,
+                    'Jenis Kelamin' => ($employee[$employeeId]->gender ? 'Pria' : 'Wanita'),
+                    'Status Perkawinan' => $maritalStatus,
+                    'Jenis Pegawai' => $employeeType,
+                    'Tanggal Mulai Bekerja' => $employee[$employeeId]->cpns_effective_date,
+                    'TMT Menjabat' => ($employee[$employeeId]->position_effective_date ?? '-'),
+                    'Instansi Induk' => ($employee[$employeeId]->institution_name ?? '-'),
+                    'Tingkat' => $educationLevel,
+                    'Nama Sekolah/Universitas' => $employee[$employeeId]->education_name,
+                    'Tahun Lulus' => $employee[$employeeId]->education_year,
+                    'No. Karpeg/No. Karisu' => $employee[$employeeId]->employee_id_card_number . ' / ' . $employee[$employeeId]->karisu_number,
+                    'Masa Kerja Keseluruhan' => $masaKerjaKeseluruhan,
+                    'NPWP' => $employee[$employeeId]->id_tax,
+                    'Status Pegawai' => ($employee[$employeeId]->employment_status ? 'Aktif' : 'Tidak Aktif'),
+                    'No NIK' => $employee[$employeeId]->id_number,
+                    'Komplek' => $complex,
+                    'Nama Komplek' => $complexName,
+                    'Alamat Tempat Tinggal Saat Ini' => $employee[$employeeId]->current_address,
+                    'No. Telepon Rumah' => $employee[$employeeId]->home_phone_number,
+                    'No. HP' => $employee[$employeeId]->mobile_phone,
+                    'Alamat Kantor' => $employee[$employeeId]->office_address,
+                    'No. Telepon Kantor' => $employee[$employeeId]->office_phone_number,
+                    'Email' => $employee[$employeeId]->email,
+                    'Email Dinas' => $employee[$employeeId]->office_email,
+                    'Kontak Darurat' => $employee[$employeeId]->emergency_contact,
+                    'Batas Usia Pensiun' => $employee[$employeeId]->retirement_age,
+                ];
+            }
+
+            $tmp = sys_get_temp_dir();
+            $pdf = Pdf::loadview('exports/user', [
+                'userProfile' => $userProfile,
                 'currentPosition' => ($employee[$employeeId]->position_merged ?? '-'),
                 'photoProfile' => $employee[$employeeId]->photo_profile,
                 'userNIP' => $employee[$employeeId]->employee_id_number,
@@ -602,6 +774,7 @@ class ExportController extends Controller
      * @bodyParam isEmployeeType int Indicates whether the employee type field is included in the output document. Example: 1
      * @bodyParam isAssistanceType int Indicates whether the employee type assistance field is included in the output document. Example: 1
      * @bodyParam isOutsourcingType int Indicates whether the employee type outsourcing field is included in the output document. Example: 1
+     * @bodyParam isDatePNS int Indicates whether the PNS Start date field is included in the request. Example: 1
      * @bodyParam isDateCPNS int Indicates whether the CPNS Start date field is included in the request. Example: 1
      * @bodyParam isStartDate int Indicates whether the employment start date field is included in the request. Example: 1
      * @bodyParam isEndDate int Indicates whether the employment end date field is included in the request. Example: 1
@@ -720,16 +893,26 @@ class ExportController extends Controller
         }
         if (isset($request->grade_range)) {
             $gradeRanges = $request->input('grade_range', []);
-            $now = Carbon::now();
 
-            $users->where(function ($query) use ($gradeRanges, $now) {
+            $users->where(function ($query) use ($gradeRanges) {
                 foreach ($gradeRanges as $range) {
                     [$minYears, $maxYears] = explode('-', $range);
 
-                    $maxDate = $now->copy()->subYears($minYears)->toDateString();
-                    $minDate = $now->copy()->subYears($maxYears + 1)->addDay()->toDateString();
-
-                    $query->orWhereBetween('users.grade_effective_date', [$minDate, $maxDate]);
+                    if($minYears == "0"){
+                        $query->whereRaw(DB::raw("
+                        (
+                            ((years_of_service_rank = 0 OR years_of_service_rank IS NULL) AND month_of_service_rank > 0)
+                            OR (years_of_service_rank = ".$maxYears." AND (month_of_service_rank IS NULL OR month_of_service_rank = 0))
+                            OR (years_of_service_rank > 0 AND years_of_service_rank < ".$maxYears.")
+                         )"));
+                    }else{
+                        $query->whereRaw(DB::raw("
+                        (
+                            years_of_service_rank = ".$minYears." AND month_of_service_rank > 0
+                            OR (years_of_service_rank = ".$maxYears." AND (month_of_service_rank IS NULL OR month_of_service_rank = 0))
+                            OR (years_of_service_rank > ".$minYears." AND years_of_service_rank < ".$maxYears.")
+                         )"));
+                    }
                 }
             });
         }
@@ -738,16 +921,26 @@ class ExportController extends Controller
         }
         if (isset($request->total_working_duration)) {
             $gradeRanges = $request->input('total_working_duration', []);
-            $now = Carbon::now();
 
-            $users->where(function ($query) use ($gradeRanges, $now) {
+            $users->where(function ($query) use ($gradeRanges) {
                 foreach ($gradeRanges as $range) {
                     [$minYears, $maxYears] = explode('-', $range);
 
-                    $maxDate = $now->copy()->subYears($minYears)->toDateString();
-                    $minDate = $now->copy()->subYears($maxYears + 1)->addDay()->toDateString();
-
-                    $query->orWhereBetween('users.position_effective_date', [$minDate, $maxDate]);
+                    if($minYears == "0"){
+                        $query->whereRaw(DB::raw("
+                        (
+                            ((years_of_service_total = 0 OR years_of_service_total IS NULL) AND month_of_service_total > 0)
+                            OR (years_of_service_total = ".$maxYears." AND (month_of_service_total IS NULL OR month_of_service_total = 0))
+                            OR (years_of_service_total > 0 AND years_of_service_total < ".$maxYears.")
+                         )"));
+                    }else{
+                        $query->whereRaw(DB::raw("
+                        (
+                            years_of_service_total = ".$minYears." AND month_of_service_total > 0
+                            OR (years_of_service_total = ".$maxYears." AND (month_of_service_total IS NULL OR month_of_service_total = 0))
+                            OR (years_of_service_total > ".$minYears." AND years_of_service_total < ".$maxYears.")
+                         )"));
+                    }
                 }
             });
         }
@@ -790,6 +983,7 @@ class ExportController extends Controller
         $toggleFieldBio['isEmployeeType'] = $request->isEmployeeType == 1;
         $toggleFieldBio['isAssistanceType'] = $request->isAssistanceType == 1;
         $toggleFieldBio['isOutsourcingType'] = $request->isOutsourcingType == 1;
+        $toggleFieldBio['isDatePNS'] = $request->isDatePNS == 1;
         $toggleFieldBio['isDateCPNS'] = $request->isDateCPNS == 1;
         $toggleFieldBio['isStartDate'] = $request->isStartDate == 1;
         $toggleFieldBio['isEndDate'] = $request->isEndDate == 1;
@@ -900,33 +1094,15 @@ class ExportController extends Controller
                     $usersData->addSelect('users.employee_id_card_number');
                 }
                 if ($toggleFieldBio['isGradeDuration']) {
-                    // $usersData->addSelect(['users.grade_effective_date']);
                     $usersData->addSelect(DB::raw("
-                    IF(
-                        users.quit_date IS NULL,
-                        CONCAT(
-                            TIMESTAMPDIFF(YEAR, users.pns_effective_date, NOW()), ' Tahun, ',
-                            TIMESTAMPDIFF(MONTH, users.pns_effective_date, NOW()) % 12, ' Bulan, ',
-                            DATEDIFF(
-                                NOW(),
-                                DATE_ADD(
-                                    users.pns_effective_date,
-                                    INTERVAL TIMESTAMPDIFF(YEAR, users.pns_effective_date, NOW()) YEAR
-                                ) + INTERVAL TIMESTAMPDIFF(MONTH, users.pns_effective_date, NOW()) % 12 MONTH
-                            ), ' Hari'
-                        ),
-                        CONCAT(
-                            TIMESTAMPDIFF(YEAR, users.pns_effective_date, users.quit_date), ' Tahun, ',
-                            TIMESTAMPDIFF(MONTH, users.pns_effective_date, users.quit_date) % 12, ' Bulan, ',
-                            DATEDIFF(
-                                users.quit_date,
-                                DATE_ADD(
-                                    users.pns_effective_date,
-                                    INTERVAL TIMESTAMPDIFF(YEAR, users.pns_effective_date, quit_date) YEAR
-                                ) + INTERVAL TIMESTAMPDIFF(MONTH, users.pns_effective_date, quit_date) % 12 MONTH
-                            ), ' Hari'
-                        )
-                    ) as grade_duration
+                    CASE 
+                        WHEN users.years_of_service_rank IS NULL AND users.month_of_service_rank IS NULL 
+                        THEN NULL 
+                        ELSE CONCAT(
+                            COALESCE(users.years_of_service_rank, 0), ' Tahun, ', 
+                            COALESCE(users.month_of_service_rank, 0), ' Bulan'
+                        ) 
+                    END as grade_duration
                 "));
                 }
                 if ($toggleFieldBio['isNPWP']) {
@@ -1317,7 +1493,7 @@ class ExportController extends Controller
                     $usersData->addSelect('users.id_number');
                 }
                 if ($toggleFieldBio['isStartDate']) {
-                    $usersData->addSelect(DB::raw("DATE_FORMAT(users.pns_effective_date, '%d-%m-%Y') as pns_effective_date"));
+                    $usersData->addSelect(DB::raw("DATE_FORMAT(users.cpns_effective_date, '%d-%m-%Y') as start_date"));
                 }
                 if ($toggleFieldBio['isEndDate']) {
                     $usersData->addSelect(DB::raw("
@@ -1328,6 +1504,9 @@ class ExportController extends Controller
                                     ELSE NULL
                                 END AS retirement_effective_date
                             "));
+                }
+                if ($toggleFieldBio['isDatePNS']) {
+                    $usersData->addSelect(DB::raw("DATE_FORMAT(users.pns_effective_date, '%d-%m-%Y') as pns_effective_date"));
                 }
                 if ($toggleFieldBio['isDateCPNS']) {
                     $usersData->addSelect(DB::raw("DATE_FORMAT(users.cpns_effective_date, '%d-%m-%Y') as cpns_effective_date"));
@@ -1376,33 +1555,15 @@ class ExportController extends Controller
                     $usersData->addSelect('echelons.retirement_age as pension_cap');
                 }
                 if ($toggleFieldBio['isWorkDuration']) {
-                    // $usersData->addSelect(DB::raw("TIMESTAMPDIFF(YEAR, users.position_effective_date, CURDATE()) AS work_duration"));
                     $usersData->addSelect(DB::raw("
-                    IF(
-                        users.quit_date IS NULL,
-                        CONCAT(
-                            TIMESTAMPDIFF(YEAR, users.cpns_effective_date, NOW()), ' Tahun, ',
-                            TIMESTAMPDIFF(MONTH, users.cpns_effective_date, NOW()) % 12, ' Bulan, ',
-                            DATEDIFF(
-                                NOW(),
-                                DATE_ADD(
-                                    users.cpns_effective_date,
-                                    INTERVAL TIMESTAMPDIFF(YEAR, users.cpns_effective_date, NOW()) YEAR
-                                ) + INTERVAL TIMESTAMPDIFF(MONTH, users.cpns_effective_date, NOW()) % 12 MONTH
-                            ), ' Hari'
-                        ),
-                        CONCAT(
-                            TIMESTAMPDIFF(YEAR, users.cpns_effective_date, users.quit_date), ' Tahun, ',
-                            TIMESTAMPDIFF(MONTH, users.cpns_effective_date, users.quit_date) % 12, ' Bulan, ',
-                            DATEDIFF(
-                                users.quit_date,
-                                DATE_ADD(
-                                    users.cpns_effective_date,
-                                    INTERVAL TIMESTAMPDIFF(YEAR, users.cpns_effective_date, quit_date) YEAR
-                                ) + INTERVAL TIMESTAMPDIFF(MONTH, users.cpns_effective_date, quit_date) % 12 MONTH
-                            ), ' Hari'
-                        )
-                    ) as work_duration
+                    CASE 
+                        WHEN users.years_of_service_total IS NULL AND users.month_of_service_total IS NULL 
+                        THEN NULL 
+                        ELSE CONCAT(
+                            COALESCE(users.years_of_service_total, 0), ' Tahun, ', 
+                            COALESCE(users.month_of_service_total, 0), ' Bulan'
+                        ) 
+                    END as work_duration
                 "));
                 }
                 $usersData->whereIn('users.id', $userId);
@@ -1511,6 +1672,7 @@ class ExportController extends Controller
      * @bodyParam isEmployeeType int Indicates whether the employee type field is included in the output document. Example: 1
      * @bodyParam isAssistanceType int Indicates whether the employee type assistance field is included in the output document. Example: 1
      * @bodyParam isOutsourcingType int Indicates whether the employee type outsourcing field is included in the output document. Example: 1
+     * @bodyParam isDatePNS int Indicates whether the CPNS Start date field is included in the request. Example: 1
      * @bodyParam isDateCPNS int Indicates whether the CPNS Start date field is included in the request. Example: 1
      * @bodyParam isStartDate int Indicates whether the employment start date field is included in the request. Example: 1
      * @bodyParam isEndDate int Indicates whether the employment end date field is included in the request. Example: 1
@@ -1630,10 +1792,21 @@ class ExportController extends Controller
                 foreach ($gradeRanges as $range) {
                     [$minYears, $maxYears] = explode('-', $range);
 
-                    $maxDate = $now->copy()->subYears($minYears)->toDateString();
-                    $minDate = $now->copy()->subYears($maxYears + 1)->addDay()->toDateString();
-
-                    $query->orWhereBetween('users.grade_effective_date', [$minDate, $maxDate]);
+                    if($minYears == "0"){
+                        $query->whereRaw(DB::raw("
+                        (
+                            ((years_of_service_rank = 0 OR years_of_service_rank IS NULL) AND month_of_service_rank > 0)
+                            OR (years_of_service_rank = ".$maxYears." AND (month_of_service_rank IS NULL OR month_of_service_rank = 0))
+                            OR (years_of_service_rank > 0 AND years_of_service_rank < ".$maxYears.")
+                         )"));
+                    }else{
+                        $query->whereRaw(DB::raw("
+                        (
+                            years_of_service_rank = ".$minYears." AND month_of_service_rank > 0
+                            OR (years_of_service_rank = ".$maxYears." AND (month_of_service_rank IS NULL OR month_of_service_rank = 0))
+                            OR (years_of_service_rank > ".$minYears." AND years_of_service_rank < ".$maxYears.")
+                         )"));
+                    }
                 }
             });
         }
@@ -1648,10 +1821,21 @@ class ExportController extends Controller
                 foreach ($gradeRanges as $range) {
                     [$minYears, $maxYears] = explode('-', $range);
 
-                    $maxDate = $now->copy()->subYears($minYears)->toDateString();
-                    $minDate = $now->copy()->subYears($maxYears + 1)->addDay()->toDateString();
-
-                    $query->orWhereBetween('users.position_effective_date', [$minDate, $maxDate]);
+                    if($minYears == "0"){
+                        $query->whereRaw(DB::raw("
+                        (
+                            ((years_of_service_total = 0 OR years_of_service_total IS NULL) AND month_of_service_total > 0)
+                            OR (years_of_service_total = ".$maxYears." AND (month_of_service_total IS NULL OR month_of_service_total = 0))
+                            OR (years_of_service_total > 0 AND years_of_service_total < ".$maxYears.")
+                         )"));
+                    }else{
+                        $query->whereRaw(DB::raw("
+                        (
+                            years_of_service_total = ".$minYears." AND month_of_service_total > 0
+                            OR (years_of_service_total = ".$maxYears." AND (month_of_service_total IS NULL OR month_of_service_total = 0))
+                            OR (years_of_service_total > ".$minYears." AND years_of_service_total < ".$maxYears.")
+                         )"));
+                    }
                 }
             });
         }
@@ -1737,34 +1921,16 @@ class ExportController extends Controller
             $usersPreview->addSelect('users.employee_id_card_number');
         }
         if ($this->request->isGradeDuration == 1) {
-            // $usersPreview->addSelect(['users.grade_effective_date']);
             $usersPreview->addSelect(DB::raw("
-                IF(
-                    users.quit_date IS NULL,
-                    CONCAT(
-                        TIMESTAMPDIFF(YEAR, users.pns_effective_date, NOW()), ' Tahun, ',
-                        TIMESTAMPDIFF(MONTH, users.pns_effective_date, NOW()) % 12, ' Bulan, ',
-                        DATEDIFF(
-                            NOW(),
-                            DATE_ADD(
-                                users.pns_effective_date,
-                                INTERVAL TIMESTAMPDIFF(YEAR, users.pns_effective_date, NOW()) YEAR
-                            ) + INTERVAL TIMESTAMPDIFF(MONTH, users.pns_effective_date, NOW()) % 12 MONTH
-                        ), ' Hari'
-                    ),
-                    CONCAT(
-                        TIMESTAMPDIFF(YEAR, users.pns_effective_date, users.quit_date), ' Tahun, ',
-                        TIMESTAMPDIFF(MONTH, users.pns_effective_date, users.quit_date) % 12, ' Bulan, ',
-                        DATEDIFF(
-                            users.quit_date,
-                            DATE_ADD(
-                                users.pns_effective_date,
-                                INTERVAL TIMESTAMPDIFF(YEAR, users.pns_effective_date, quit_date) YEAR
-                            ) + INTERVAL TIMESTAMPDIFF(MONTH, users.pns_effective_date, quit_date) % 12 MONTH
-                        ), ' Hari'
-                    )
-                ) as grade_duration
-            "));
+            CASE 
+                WHEN users.years_of_service_rank IS NULL AND users.month_of_service_rank IS NULL 
+                THEN NULL 
+                ELSE CONCAT(
+                    COALESCE(users.years_of_service_rank, 0), ' Tahun, ', 
+                    COALESCE(users.month_of_service_rank, 0), ' Bulan'
+                ) 
+            END as grade_duration
+        "));
         }
         if ($this->request->isNPWP == 1) {
             $usersPreview->addSelect('users.id_tax');
@@ -2155,7 +2321,7 @@ class ExportController extends Controller
             $usersPreview->addSelect('users.id_number');
         }
         if ($this->request->isStartDate == 1) {
-            $usersPreview->addSelect(DB::raw("DATE_FORMAT(users.pns_effective_date, '%d-%m-%Y') as pns_effective_date"));
+            $usersPreview->addSelect(DB::raw("DATE_FORMAT(users.cpns_effective_date, '%d-%m-%Y') as start_date"));
         }
         if ($this->request->isEndDate == 1) {
             $usersPreview->addSelect(DB::raw("
@@ -2166,6 +2332,9 @@ class ExportController extends Controller
                         ELSE NULL
                     END AS retirement_effective_date
                 "));
+        }
+        if ($this->request->isDatePNS == 1) {
+            $usersPreview->addSelect(DB::raw("DATE_FORMAT(users.pns_effective_date, '%d-%m-%Y') as pns_effective_date"));
         }
         if ($this->request->isDateCPNS == 1) {
             $usersPreview->addSelect(DB::raw("DATE_FORMAT(users.cpns_effective_date, '%d-%m-%Y') as cpns_effective_date"));
@@ -2214,34 +2383,16 @@ class ExportController extends Controller
             $usersPreview->addSelect('echelons.retirement_age as pension_cap');
         }
         if ($this->request->isWorkDuration == 1) {
-            // $usersPreview->addSelect(DB::raw("TIMESTAMPDIFF(YEAR, users.position_effective_date, CURDATE()) AS work_duration"));
             $usersPreview->addSelect(DB::raw("
-                IF(
-                    users.quit_date IS NULL,
-                    CONCAT(
-                        TIMESTAMPDIFF(YEAR, users.cpns_effective_date, NOW()), ' Tahun, ',
-                        TIMESTAMPDIFF(MONTH, users.cpns_effective_date, NOW()) % 12, ' Bulan, ',
-                        DATEDIFF(
-                            NOW(),
-                            DATE_ADD(
-                                users.cpns_effective_date,
-                                INTERVAL TIMESTAMPDIFF(YEAR, users.cpns_effective_date, NOW()) YEAR
-                            ) + INTERVAL TIMESTAMPDIFF(MONTH, users.cpns_effective_date, NOW()) % 12 MONTH
-                        ), ' Hari'
-                    ),
-                    CONCAT(
-                        TIMESTAMPDIFF(YEAR, users.cpns_effective_date, users.quit_date), ' Tahun, ',
-                        TIMESTAMPDIFF(MONTH, users.cpns_effective_date, users.quit_date) % 12, ' Bulan, ',
-                        DATEDIFF(
-                            users.quit_date,
-                            DATE_ADD(
-                                users.cpns_effective_date,
-                                INTERVAL TIMESTAMPDIFF(YEAR, users.cpns_effective_date, quit_date) YEAR
-                            ) + INTERVAL TIMESTAMPDIFF(MONTH, users.cpns_effective_date, quit_date) % 12 MONTH
-                        ), ' Hari'
-                    )
-                ) as work_duration
-            "));
+            CASE 
+                WHEN users.years_of_service_total IS NULL AND users.month_of_service_total IS NULL 
+                THEN NULL 
+                ELSE CONCAT(
+                    COALESCE(users.years_of_service_total, 0), ' Tahun, ', 
+                    COALESCE(users.month_of_service_total, 0), ' Bulan'
+                ) 
+            END as work_duration
+        "));
         }
         $usersPreview->whereIn('users.id', $userId);
         $usersPreview->groupBy('users.id');

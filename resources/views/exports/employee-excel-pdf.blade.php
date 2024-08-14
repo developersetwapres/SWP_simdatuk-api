@@ -168,6 +168,7 @@
     "Jenis Perbantuan" => $toggleField['isAssistanceType'],
     "Jenis Outsourcing" => $toggleField['isOutsourcingType'],
     "TMT CPNS" => $toggleField['isDateCPNS'],
+    "TMT PNS" => $toggleField['isDatePNS'],
     "Tanggal Mulai Bekerja" => $toggleField['isStartDate'],
     "Tanggal Terakhir Bekerja" => $toggleField['isEndDate'],
     "Masa Kerja Keseluruhan" => $toggleField['isWorkDuration'],
@@ -314,8 +315,11 @@
                     @case("TMT CPNS")
                     {{ $value['cpns_effective_date'] }}
                     @break
-                    @case("Tanggal Mulai Bekerja")
+                    @case("TMT PNS")
                     {{ $value['pns_effective_date'] }}
+                    @break
+                    @case("Tanggal Mulai Bekerja")
+                    {{ $value['start_date'] }}
                     @break
                     @case("Tanggal Terakhir Bekerja")
                     {{ $value['retirement_effective_date'] }}

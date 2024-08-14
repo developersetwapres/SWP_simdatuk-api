@@ -167,33 +167,15 @@ class employee implements FromView, WithDrawings, WithEvents
                 $users->addSelect('users.employee_id_card_number');
             }
             if (isset($this->toggleField['isGradeDuration'])) {
-                // $users->addSelect('users.grade_effective_date');
                 $users->addSelect(DB::raw("
-                IF(
-                    users.quit_date IS NULL,
-                    CONCAT(
-                        TIMESTAMPDIFF(YEAR, users.pns_effective_date, NOW()), ' Tahun, ',
-                        TIMESTAMPDIFF(MONTH, users.pns_effective_date, NOW()) % 12, ' Bulan, ',
-                        DATEDIFF(
-                            NOW(),
-                            DATE_ADD(
-                                users.pns_effective_date,
-                                INTERVAL TIMESTAMPDIFF(YEAR, users.pns_effective_date, NOW()) YEAR
-                            ) + INTERVAL TIMESTAMPDIFF(MONTH, users.pns_effective_date, NOW()) % 12 MONTH
-                        ), ' Hari'
-                    ),
-                    CONCAT(
-                        TIMESTAMPDIFF(YEAR, users.pns_effective_date, users.quit_date), ' Tahun, ',
-                        TIMESTAMPDIFF(MONTH, users.pns_effective_date, users.quit_date) % 12, ' Bulan, ',
-                        DATEDIFF(
-                            users.quit_date,
-                            DATE_ADD(
-                                users.pns_effective_date,
-                                INTERVAL TIMESTAMPDIFF(YEAR, users.pns_effective_date, quit_date) YEAR
-                            ) + INTERVAL TIMESTAMPDIFF(MONTH, users.pns_effective_date, quit_date) % 12 MONTH
-                        ), ' Hari'
-                    )
-                ) as grade_duration
+                CASE 
+                    WHEN users.years_of_service_rank IS NULL AND users.month_of_service_rank IS NULL 
+                    THEN NULL 
+                    ELSE CONCAT(
+                        COALESCE(users.years_of_service_rank, 0), ' Tahun, ', 
+                        COALESCE(users.month_of_service_rank, 0), ' Bulan'
+                    ) 
+                END as grade_duration
             "));
             }
             if (isset($this->toggleField['isNPWP'])) {
@@ -584,7 +566,7 @@ class employee implements FromView, WithDrawings, WithEvents
                 $users->addSelect('users.id_number');
             }
             if (isset($this->toggleField['isStartDate'])) {
-                $users->addSelect(DB::raw("DATE_FORMAT(users.pns_effective_date, '%d-%m-%Y') as pns_effective_date"));
+                $users->addSelect(DB::raw("DATE_FORMAT(users.cpns_effective_date, '%d-%m-%Y') as start_date"));
             }
             if (isset($this->toggleField['isEndDate'])) {
                 if (!isset($this->toggleField['isEchelons'])) {
@@ -598,6 +580,9 @@ class employee implements FromView, WithDrawings, WithEvents
                                 ELSE NULL
                             END AS retirement_effective_date
                         "));
+            }
+            if (isset($this->toggleField['isDatePNS'])) {
+                $users->addSelect(DB::raw("DATE_FORMAT(users.pns_effective_date, '%d-%m-%Y') as pns_effective_date"));
             }
             if (isset($this->toggleField['isDateCPNS'])) {
                 $users->addSelect(DB::raw("DATE_FORMAT(users.cpns_effective_date, '%d-%m-%Y') as cpns_effective_date"));
@@ -649,33 +634,15 @@ class employee implements FromView, WithDrawings, WithEvents
                 $users->addSelect('echelons.retirement_age as pension_cap');
             }
             if (isset($this->toggleField['isWorkDuration'])) {
-                // $users->addSelect(DB::raw("TIMESTAMPDIFF(YEAR, users.position_effective_date, CURDATE()) AS work_duration"));
                 $users->addSelect(DB::raw("
-                IF(
-                    users.quit_date IS NULL,
-                    CONCAT(
-                        TIMESTAMPDIFF(YEAR, users.cpns_effective_date, NOW()), ' Tahun, ',
-                        TIMESTAMPDIFF(MONTH, users.cpns_effective_date, NOW()) % 12, ' Bulan, ',
-                        DATEDIFF(
-                            NOW(),
-                            DATE_ADD(
-                                users.cpns_effective_date,
-                                INTERVAL TIMESTAMPDIFF(YEAR, users.cpns_effective_date, NOW()) YEAR
-                            ) + INTERVAL TIMESTAMPDIFF(MONTH, users.cpns_effective_date, NOW()) % 12 MONTH
-                        ), ' Hari'
-                    ),
-                    CONCAT(
-                        TIMESTAMPDIFF(YEAR, users.cpns_effective_date, users.quit_date), ' Tahun, ',
-                        TIMESTAMPDIFF(MONTH, users.cpns_effective_date, users.quit_date) % 12, ' Bulan, ',
-                        DATEDIFF(
-                            users.quit_date,
-                            DATE_ADD(
-                                users.cpns_effective_date,
-                                INTERVAL TIMESTAMPDIFF(YEAR, users.cpns_effective_date, quit_date) YEAR
-                            ) + INTERVAL TIMESTAMPDIFF(MONTH, users.cpns_effective_date, quit_date) % 12 MONTH
-                        ), ' Hari'
-                    )
-                ) as work_duration
+                CASE 
+                    WHEN users.years_of_service_total IS NULL AND users.month_of_service_total IS NULL 
+                    THEN NULL 
+                    ELSE CONCAT(
+                        COALESCE(users.years_of_service_total, 0), ' Tahun, ', 
+                        COALESCE(users.month_of_service_total, 0), ' Bulan'
+                    ) 
+                END as work_duration
             "));
             }
             $users->whereIn('users.id', $userId);
