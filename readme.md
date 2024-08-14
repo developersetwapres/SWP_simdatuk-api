@@ -74,10 +74,16 @@ git pull origin main
 
 Update .env file
 
+Build sourcecode
+
 ```bash
-docker build . -t simdatuk-api —-no-cache
-docker rm simdatuk-api --force && docker run -d -p 8080:80 --name simdatuk-api --network simdatuk_network --restart always simdatuk-api
-docker image prune -f
+docker build -t simdatuk-api --no-cache .
+```
+
+Run Container
+
+```bash
+docker rm simdatuk-api --force && docker run -d -p 8080:80 --name simdatuk-api --network simdatuk_network --restart always simdatuk-api && docker image prune -f
 ```
 
 Run migration
