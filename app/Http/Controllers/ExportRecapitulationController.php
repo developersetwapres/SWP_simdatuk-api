@@ -250,7 +250,7 @@ class ExportRecapitulationController extends Controller
          */
         $grandTotal = [[
             'title' => 'Grand Total',
-            'body' => 'Total : ' . $pejabat->total_pejabat_pimpinan + $pelaksana->total + $pejabat->total_pejabat_fungsional_keahlian + $pejabat->total_pejabat_fungsional_keterampilan + $pejabatDiperbantukan->total + $nonActive->total + $jabatanNonAsn[0] + $outsource[0],
+            'body' => 'Total : ' . $pejabat->total_pejabat_pimpinan + $pelaksana->total + $pejabat->total_pejabat_fungsional_keahlian + $pejabat->total_pejabat_fungsional_keterampilan + $nonActive->total + $jabatanNonAsn[0] + $tim + $outsource[0],
             'type' => 3,
         ]];
 
