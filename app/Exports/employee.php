@@ -169,12 +169,12 @@ class employee implements FromView, WithDrawings, WithEvents
             if (isset($this->toggleField['isGradeDuration'])) {
                 $users->addSelect(DB::raw("
                 CASE 
-                    WHEN users.years_of_service_rank IS NULL AND users.month_of_service_rank IS NULL 
-                    THEN NULL 
-                    ELSE CONCAT(
-                        COALESCE(users.years_of_service_rank, 0), ' Tahun, ', 
-                        COALESCE(users.month_of_service_rank, 0), ' Bulan'
+                    WHEN users.years_of_service_rank > 0 OR users.month_of_service_rank > 0 
+                    THEN CONCAT(
+                        IF(users.years_of_service_rank > 0, users.years_of_service_rank, 0), ' Tahun, ',
+                        IF(users.month_of_service_rank > 0, users.month_of_service_rank, 0), ' Bulan' 
                     ) 
+                    ELSE '-'
                 END as grade_duration
             "));
             }
@@ -636,12 +636,12 @@ class employee implements FromView, WithDrawings, WithEvents
             if (isset($this->toggleField['isWorkDuration'])) {
                 $users->addSelect(DB::raw("
                 CASE 
-                    WHEN users.years_of_service_total IS NULL AND users.month_of_service_total IS NULL 
-                    THEN NULL 
-                    ELSE CONCAT(
-                        COALESCE(users.years_of_service_total, 0), ' Tahun, ', 
-                        COALESCE(users.month_of_service_total, 0), ' Bulan'
+                    WHEN users.years_of_service_total > 0 OR users.month_of_service_total > 0 
+                    THEN CONCAT(
+                        IF(users.years_of_service_total > 0, users.years_of_service_total, 0), ' Tahun, ',
+                        IF(users.month_of_service_total > 0, users.month_of_service_total, 0), ' Bulan' 
                     ) 
+                    ELSE '-'
                 END as work_duration
             "));
             }

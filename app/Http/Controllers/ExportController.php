@@ -197,13 +197,13 @@ class ExportController extends Controller
             $credits[$key]->end_month_name = ($value->end_month) ? $indonesianMonth[$value->end_month] : '';
         }
 
-        $masaKerjaKeseluruhan = null;
-        if(!is_null($employee->years_of_service_total) || !is_null($employee->month_of_service_total)){
-            $masaKerjaKeseluruhan = ($employee->years_of_service_total ?? 0)." Tahun, ". ($employee->month_of_service_total ?? 0)." Bulan";
+        $masaKerjaKeseluruhan = '-';
+        if($employee->years_of_service_total > 0 || $employee->month_of_service_total > 0){
+            $masaKerjaKeseluruhan = (($employee->years_of_service_total > 0) ? $employee->years_of_service_total : 0)." Tahun, ". (($employee->month_of_service_total > 0) ? $employee->month_of_service_total : 0)." Bulan";
         }
-        $masaKerjaGolongan = null;
-        if(!is_null($employee->years_of_service_total) || !is_null($employee->month_of_service_total)){
-            $masaKerjaGolongan = ($employee->years_of_service_rank ?? 0)." Tahun, ". ($employee->month_of_service_rank ?? 0)." Bulan";
+        $masaKerjaGolongan = '-';
+        if($employee->years_of_service_rank > 0 || $employee->month_of_service_rank > 0){
+            $masaKerjaGolongan = (($employee->years_of_service_rank > 0) ? $employee->years_of_service_rank : 0)." Tahun, ". (($employee->month_of_service_rank > 0) ? $employee->month_of_service_rank : 0)." Bulan";
         }
 
         if($employee->type == 1){
@@ -573,13 +573,13 @@ class ExportController extends Controller
                 }
             }
 
-            $masaKerjaKeseluruhan = null;
-            if(!is_null($employee[$employeeId]->years_of_service_total) || !is_null($employee[$employeeId]->month_of_service_total)){
-                $masaKerjaKeseluruhan = ($employee[$employeeId]->years_of_service_total ?? 0)." Tahun, ". ($employee[$employeeId]->month_of_service_total ?? 0)." Bulan";
+            $masaKerjaKeseluruhan = '-';
+            if($employee[$employeeId]->years_of_service_total > 0 || $employee[$employeeId]->month_of_service_total > 0){
+                $masaKerjaKeseluruhan = (($employee[$employeeId]->years_of_service_total > 0) ? $employee[$employeeId]->years_of_service_total : 0)." Tahun, ". (($employee[$employeeId]->month_of_service_total > 0) ? $employee[$employeeId]->month_of_service_total : 0)." Bulan";
             }
-            $masaKerjaGolongan = null;
-            if(!is_null($employee[$employeeId]->years_of_service_total) || !is_null($employee[$employeeId]->month_of_service_total)){
-                $masaKerjaGolongan = ($employee[$employeeId]->years_of_service_rank ?? 0)." Tahun, ". ($employee[$employeeId]->month_of_service_rank ?? 0)." Bulan";
+            $masaKerjaGolongan = '-';
+            if($employee[$employeeId]->years_of_service_rank > 0 || $employee[$employeeId]->month_of_service_rank > 0){
+                $masaKerjaGolongan = (($employee[$employeeId]->years_of_service_rank > 0) ? $employee[$employeeId]->years_of_service_rank : 0)." Tahun, ". (($employee[$employeeId]->month_of_service_rank > 0) ? $employee[$employeeId]->month_of_service_rank : 0)." Bulan";
             }
 
             if($employee[$employeeId]->type == 1){
@@ -1096,12 +1096,12 @@ class ExportController extends Controller
                 if ($toggleFieldBio['isGradeDuration']) {
                     $usersData->addSelect(DB::raw("
                     CASE 
-                        WHEN users.years_of_service_rank IS NULL AND users.month_of_service_rank IS NULL 
-                        THEN NULL 
-                        ELSE CONCAT(
-                            COALESCE(users.years_of_service_rank, 0), ' Tahun, ', 
-                            COALESCE(users.month_of_service_rank, 0), ' Bulan'
+                        WHEN users.years_of_service_rank > 0 OR users.month_of_service_rank > 0 
+                        THEN CONCAT(
+                            IF(users.years_of_service_rank > 0, users.years_of_service_rank, 0), ' Tahun, ',
+                            IF(users.month_of_service_rank > 0, users.month_of_service_rank, 0), ' Bulan' 
                         ) 
+                        ELSE '-'
                     END as grade_duration
                 "));
                 }
@@ -1557,12 +1557,12 @@ class ExportController extends Controller
                 if ($toggleFieldBio['isWorkDuration']) {
                     $usersData->addSelect(DB::raw("
                     CASE 
-                        WHEN users.years_of_service_total IS NULL AND users.month_of_service_total IS NULL 
-                        THEN NULL 
-                        ELSE CONCAT(
-                            COALESCE(users.years_of_service_total, 0), ' Tahun, ', 
-                            COALESCE(users.month_of_service_total, 0), ' Bulan'
+                        WHEN users.years_of_service_total > 0 OR users.month_of_service_total > 0 
+                        THEN CONCAT(
+                            IF(users.years_of_service_total > 0, users.years_of_service_total, 0), ' Tahun, ',
+                            IF(users.month_of_service_total > 0, users.month_of_service_total, 0), ' Bulan' 
                         ) 
+                        ELSE '-'
                     END as work_duration
                 "));
                 }
@@ -1923,12 +1923,12 @@ class ExportController extends Controller
         if ($this->request->isGradeDuration == 1) {
             $usersPreview->addSelect(DB::raw("
             CASE 
-                WHEN users.years_of_service_rank IS NULL AND users.month_of_service_rank IS NULL 
-                THEN NULL 
-                ELSE CONCAT(
-                    COALESCE(users.years_of_service_rank, 0), ' Tahun, ', 
-                    COALESCE(users.month_of_service_rank, 0), ' Bulan'
+                WHEN users.years_of_service_rank > 0 OR users.month_of_service_rank > 0 
+                THEN CONCAT(
+                    IF(users.years_of_service_rank > 0, users.years_of_service_rank, 0), ' Tahun, ',
+                    IF(users.month_of_service_rank > 0, users.month_of_service_rank, 0), ' Bulan' 
                 ) 
+                ELSE '-'
             END as grade_duration
         "));
         }
@@ -2385,12 +2385,12 @@ class ExportController extends Controller
         if ($this->request->isWorkDuration == 1) {
             $usersPreview->addSelect(DB::raw("
             CASE 
-                WHEN users.years_of_service_total IS NULL AND users.month_of_service_total IS NULL 
-                THEN NULL 
-                ELSE CONCAT(
-                    COALESCE(users.years_of_service_total, 0), ' Tahun, ', 
-                    COALESCE(users.month_of_service_total, 0), ' Bulan'
+                WHEN users.years_of_service_total > 0 OR users.month_of_service_total > 0 
+                THEN CONCAT(
+                    IF(users.years_of_service_total > 0, users.years_of_service_total, 0), ' Tahun, ',
+                    IF(users.month_of_service_total > 0, users.month_of_service_total, 0), ' Bulan' 
                 ) 
+                ELSE '-'
             END as work_duration
         "));
         }
