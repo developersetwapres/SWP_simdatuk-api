@@ -649,28 +649,29 @@ class ImportEmployeeController extends Controller
         $employeesData = $employeesImport->data;
 
         if ($request->type == 3) { // Outsource
-            $personalInfo = $employeesData[0] ?? []; // Sheet 1 : Data Pegawai
-            $educationInfo = $employeesData[1] ?? []; // Sheet 2 : Riwayat Pendidikan
-            $noteInfo = $employeesData[2] ?? []; // Sheet 3 : Riwayat Catatan
+            $personalInfo = $this->removeNullRows($employeesData[0]) ?? []; // Sheet 1 : Data Pegawai
+            $educationInfo = $this->removeNullRows($employeesData[1]) ?? []; // Sheet 2 : Riwayat Pendidikan
+            $noteInfo = $this->removeNullRows($employeesData[2]) ?? []; // Sheet 3 : Riwayat Catatan
 
         } else { // ASN / NON ASN
-            $personalInfo = $employeesData[0] ?? []; // Sheet 1 : Data Pegawai
-            $educationInfo = $employeesData[1] ?? []; // Sheet 2 : Riwayat Pendidikan
-            $positionInfo = $employeesData[2] ?? []; // Sheet 3 : Riwayat Jabatan
-            $gradeInfo = $employeesData[3] ?? []; // Sheet 4 : Riwayat Golongan
-            $structuralTrainingInfo = $employeesData[4] ?? []; // Sheet 5 : Riwayat Pelatihan Struktural
-            $functionalTrainingInfo = $employeesData[5] ?? []; // Sheet 6 : Riwayat Pelatihan Fungsional
-            $technicalTrainingInfo = $employeesData[6] ?? []; // Sheet 7 : Riwayat Pelatihan Teknis
-            $recognitionInfo = $employeesData[7] ?? []; // Sheet 8 : Riwayat Penghaargaan
-            $targetInfo = $employeesData[8] ?? []; // Sheet 9 : Riwayat SKP
-            $performanceInfo = $employeesData[9] ?? []; // Sheet 10 : Penilaian Prestasi Kerja
-            $disciplinaryInfo = $employeesData[10] ?? []; // Sheet 11 : Riwayat Hukuman Disiplin
-            $familyInfo = $employeesData[11] ?? []; // Sheet 12 : Riwayat Keluarga
-            $leaveInfo = $employeesData[12] ?? []; // Sheet 13 : Riwayat Cuti
-            $noteInfo = $employeesData[13] ?? []; // Sheet 14 : Riwayat Catatan
-            $assessmentInfo = $employeesData[14] ?? []; // Sheet 15 : Hasil Assessment
-            $competencyInfo = $employeesData[15] ?? []; // Sheet 16 : Hasil Uji Kompetensi
-            $talentInfo = $employeesData[16] ?? []; // Sheet 17 : Hasil Talent Pool
+            $personalInfo = $this->removeNullRows($employeesData[0]) ?? []; // Sheet 1 : Data Pegawai
+            $educationInfo = $this->removeNullRows($employeesData[1]) ?? []; // Sheet 2 : Riwayat Pendidikan
+            $positionInfo = $this->removeNullRows($employeesData[2]) ?? []; // Sheet 3 : Riwayat Jabatan
+            $gradeInfo = $this->removeNullRows($employeesData[3]) ?? []; // Sheet 4 : Riwayat Golongan
+            $structuralTrainingInfo = $this->removeNullRows($employeesData[4]) ?? []; // Sheet 5 : Riwayat Pelatihan Struktural
+            $functionalTrainingInfo = $this->removeNullRows($employeesData[5]) ?? []; // Sheet 6 : Riwayat Pelatihan Fungsional
+            $technicalTrainingInfo = $this->removeNullRows($employeesData[6]) ?? []; // Sheet 7 : Riwayat Pelatihan Teknis
+            $recognitionInfo = $this->removeNullRows($employeesData[7]) ?? []; // Sheet 8 : Riwayat Penghaargaan
+            $targetInfo = $this->removeNullRows($employeesData[8]) ?? []; // Sheet 9 : Riwayat SKP
+            $performanceInfo = $this->removeNullRows($employeesData[9]) ?? []; // Sheet 10 : Penilaian Prestasi Kerja
+            $disciplinaryInfo = $this->removeNullRows($employeesData[10]) ?? []; // Sheet 11 : Riwayat Hukuman Disiplin
+            // $disciplinaryInfo = $employeesData[10] ?? []; // Sheet 11 : Riwayat Hukuman Disiplin
+            $familyInfo = $this->removeNullRows($employeesData[11]) ?? []; // Sheet 12 : Riwayat Keluarga
+            $leaveInfo = $this->removeNullRows($employeesData[12]) ?? []; // Sheet 13 : Riwayat Cuti
+            $noteInfo = $this->removeNullRows($employeesData[13]) ?? []; // Sheet 14 : Riwayat Catatan
+            $assessmentInfo = $this->removeNullRows($employeesData[14]) ?? []; // Sheet 15 : Hasil Assessment
+            $competencyInfo = $this->removeNullRows($employeesData[15]) ?? []; // Sheet 16 : Hasil Uji Kompetensi
+            $talentInfo = $this->removeNullRows($employeesData[16]) ?? []; // Sheet 17 : Hasil Talent Pool
         }
 
         if ($this->type == 2) {
@@ -909,7 +910,7 @@ class ImportEmployeeController extends Controller
                     }
 
                     // Save Recognition
-                    if (isset($data['training'])) {
+                    if (isset($data['recognition'])) {
                         $data['recognition'] = $this->historySave($data['recognition'], 'recognition_histories', 0, 'recognition_history_id');
                         $data['recognition'] = $this->mergeValuesIntoArrayElements($additionalInfo, $data['recognition']);
                         DB::table('recognition_history_users')->insert($data['recognition']);
@@ -2244,6 +2245,16 @@ class ImportEmployeeController extends Controller
         }
 
         return isset($positions['id']) ? $positions['id'] : null;
+    }
+
+    // Filter out rows where all elements are null
+    private function removeNullRows($data)
+    {
+        return array_filter($data, function ($row) {
+            return !empty(array_filter($row, function ($value) {
+                return !is_null($value);
+            }));
+        });
     }
 
     private function formatDate($stringDate, $sheet, $row, $colName)
