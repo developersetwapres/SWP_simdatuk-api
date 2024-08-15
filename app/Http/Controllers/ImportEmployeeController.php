@@ -1239,6 +1239,11 @@ class ImportEmployeeController extends Controller
                 $echelonEffectiveDate = $this->formatDate($personalInfoRow[$personalInfoPos['echelon_effective_date']], 'Data Pegawai', $personalInfoKey, $personalInfo[0][$personalInfoPos['echelon_effective_date']]);
             }
 
+            $masaKerjaKeseluruhanJumlahTahun = !is_null($personalInfoRow[$personalInfoPos['years_of_service_total']]) ? (int) preg_replace('/\D/', '', $personalInfoRow[$personalInfoPos['years_of_service_total']]) : null;
+            $masaKerjaKeseluruhanJumlahBulan = !is_null($personalInfoRow[$personalInfoPos['month_of_service_total']]) ? (int) preg_replace('/\D/', '', $personalInfoRow[$personalInfoPos['month_of_service_total']]) : null;
+            $masaKerjaGolonganJumlahTahun = !is_null($personalInfoRow[$personalInfoPos['years_of_service_rank']]) ? (int) preg_replace('/\D/', '', $personalInfoRow[$personalInfoPos['years_of_service_rank']]) : null;
+            $masaKerjaGolonganJumlahBulan = !is_null($personalInfoRow[$personalInfoPos['month_of_service_rank']]) ? (int) preg_replace('/\D/', '', $personalInfoRow[$personalInfoPos['month_of_service_rank']]) : null;
+
             if ($this->type == 3) { // OUTSOURCE
                 $result[$personalInfoRow[$personalInfoPos['id_number']]]['personal_info'] = [
                     'email' => $personalInfoRow[$personalInfoPos['email']],
@@ -1256,8 +1261,8 @@ class ImportEmployeeController extends Controller
                     'education_level' => $educationLevelID,
                     'education_name' => $personalInfoRow[$personalInfoPos['education_name']],
                     'education_year' => $personalInfoRow[$personalInfoPos['education_year']],
-                    'years_of_service_total' => $personalInfoRow[$personalInfoPos['years_of_service_total']],
-                    'month_of_service_total' => $personalInfoRow[$personalInfoPos['month_of_service_total']],
+                    'years_of_service_total' => $masaKerjaKeseluruhanJumlahTahun,
+                    'month_of_service_total' => $masaKerjaKeseluruhanJumlahBulan,
                     'id_tax' => $personalInfoRow[$personalInfoPos['id_tax']],
                     'employment_status' => $employmentStatusID,
                     'id_number' => $personalInfoRow[$personalInfoPos['id_number']],
@@ -1300,10 +1305,10 @@ class ImportEmployeeController extends Controller
                     'education_year' => $personalInfoRow[$personalInfoPos['education_year']],
                     'employee_id_card_number' => $personalInfoRow[$personalInfoPos['employee_id_card_number']],
                     'karisu_number' => $personalInfoRow[$personalInfoPos['karisu_number']],
-                    'years_of_service_total' => $personalInfoRow[$personalInfoPos['years_of_service_total']],
-                    'month_of_service_total' => $personalInfoRow[$personalInfoPos['month_of_service_total']],
-                    'years_of_service_rank' => $personalInfoRow[$personalInfoPos['years_of_service_rank']],
-                    'month_of_service_rank' => $personalInfoRow[$personalInfoPos['month_of_service_rank']],
+                    'years_of_service_total' => $masaKerjaKeseluruhanJumlahTahun,
+                    'month_of_service_total' => $masaKerjaKeseluruhanJumlahBulan,
+                    'years_of_service_rank' => $masaKerjaGolonganJumlahTahun,
+                    'month_of_service_rank' => $masaKerjaGolonganJumlahBulan,
                     'id_tax' => $personalInfoRow[$personalInfoPos['id_tax']],
                     'employment_status' => $employmentStatusID,
                     'id_number' => $personalInfoRow[$personalInfoPos['id_number']],
@@ -1347,10 +1352,10 @@ class ImportEmployeeController extends Controller
                     'education_year' => $personalInfoRow[$personalInfoPos['education_year']],
                     'employee_id_card_number' => $personalInfoRow[$personalInfoPos['employee_id_card_number']],
                     'karisu_number' => $personalInfoRow[$personalInfoPos['karisu_number']],
-                    'years_of_service_total' => $personalInfoRow[$personalInfoPos['years_of_service_total']],
-                    'month_of_service_total' => $personalInfoRow[$personalInfoPos['month_of_service_total']],
-                    'years_of_service_rank' => $personalInfoRow[$personalInfoPos['years_of_service_rank']],
-                    'month_of_service_rank' => $personalInfoRow[$personalInfoPos['month_of_service_rank']],
+                    'years_of_service_total' => $masaKerjaKeseluruhanJumlahTahun,
+                    'month_of_service_total' => $masaKerjaKeseluruhanJumlahBulan,
+                    'years_of_service_rank' => $masaKerjaGolonganJumlahTahun,
+                    'month_of_service_rank' => $masaKerjaGolonganJumlahBulan,
                     'id_tax' => $personalInfoRow[$personalInfoPos['id_tax']],
                     'employment_status' => $employmentStatusID,
                     'id_number' => $personalInfoRow[$personalInfoPos['id_number']],
