@@ -22,7 +22,7 @@ class ImportEmployeeController extends Controller
 
     /**
      * Maps the column names to their respective indexes in the `Data Pegawai` Sheet.
-     * ASN & NON ASN
+     * ASN
      */
     protected $personalInfoPos = [
         'name' => 0,
@@ -36,7 +36,57 @@ class ImportEmployeeController extends Controller
         'gender' => 8,
         'marital_status' => 9,
         'employment_type' => 10, // ASN = Jenis Pegawai / NON ASN = Jenis Perbantuan
-        'cpns_effective_date' => 11, // ASN = TMT CPNS / NON ASN = Tanggal Mulai Bekerja
+        'cpns_effective_date' => 11, // TMT CPNS
+        'pns_effective_date' => 12, // TMT PNS
+        'position' => 13, // Jabatan
+        'position_effective_date' => 14, // TMT Menjabat
+        'grade' => 15, // Golongan
+        'grade_effective_date' => 16, // TMT Golongan
+        'echelon' => 17, // Eselon
+        'echelon_effective_date' => 18, // TMT Eselon
+        'institution' => 19, // Instansi Induk
+        'education_level' => 20, // Tingkat Pendidikan Terakhir
+        'education_name' => 21, // Nama Sekolah/Universitas
+        'education_year' => 22, // Tahun Lulus
+        'employee_id_card_number' => 23, // No Karpeg
+        'karisu_number' => 24,
+        'years_of_service_total' => 25,
+        'month_of_service_total' => 26,
+        'years_of_service_rank' => 27,
+        'month_of_service_rank' => 28,
+        'id_tax' => 29, // NPWP
+        'employment_status' => 30, // Status Pegawai
+        'family_registration_number' => 31, // No KK
+        'id_number' => 32, // NIK
+        'residence' => 33, // Komplek
+        'residence_description' => 34, // Nama Komplek
+        'current_address' => 35, // Alamat Tempat Tinggal Saat Ini
+        'home_phone_number' => 36, // No Telepon Rumah
+        'mobile_phone' => 37, // No HP
+        'office_address' => 38, // Alamat Kantor
+        'office_phone_number' => 39, // No Telepon Kantor
+        'email' => 40,
+        'office_email' => 41,
+        'emergency_contact' => 42, // Kontak Darurat
+    ];
+
+    /**
+     * Maps the column names to their respective indexes in the `Data Pegawai` Sheet.
+     * NON ASN
+     */
+    protected $nonAsnPersonalInfoPos = [
+        'name' => 0,
+        'title_prefix' => 1, // Nama Gelar Depan
+        'title_suffix' => 2, // Nama Gelar Belakang
+        'employee_id_number' => 3, // NIP
+        'employee_registration_number' => 4, // NRP
+        'place_of_birth' => 5,
+        'date_of_birth' => 6,
+        'religion' => 7,
+        'gender' => 8,
+        'marital_status' => 9,
+        'employment_type' => 10, // Jenis Perbantuan
+        'cpns_effective_date' => 11, // Tanggal Mulai Bekerja
         'position' => 12, // Jabatan
         'position_effective_date' => 13, // TMT Menjabat
         'grade' => 14, // Golongan
@@ -49,20 +99,24 @@ class ImportEmployeeController extends Controller
         'education_year' => 21, // Tahun Lulus
         'employee_id_card_number' => 22, // No Karpeg
         'karisu_number' => 23,
-        'id_tax' => 24, // NPWP
-        'employment_status' => 25, // Status Pegawai
-        'family_registration_number' => 26, // No KK
-        'id_number' => 27, // NIK
-        'residence' => 28, // Komplek
-        'residence_description' => 29, // Nama Komplek
-        'current_address' => 30, // Alamat Tempat Tinggal Saat Ini
-        'home_phone_number' => 31, // No Telepon Rumah
-        'mobile_phone' => 32, // No HP
-        'office_address' => 33, // Alamat Kantor
-        'office_phone_number' => 34, // No Telepon Kantor
-        'email' => 35,
-        'office_email' => 36,
-        'emergency_contact' => 37, // Kontak Darurat
+        'years_of_service_total' => 24,
+        'month_of_service_total' => 25,
+        'years_of_service_rank' => 26,
+        'month_of_service_rank' => 27,
+        'id_tax' => 28, // NPWP
+        'employment_status' => 29, // Status Pegawai
+        'family_registration_number' => 30, // No KK
+        'id_number' => 31, // NIK
+        'residence' => 32, // Komplek
+        'residence_description' => 33, // Nama Komplek
+        'current_address' => 34, // Alamat Tempat Tinggal Saat Ini
+        'home_phone_number' => 35, // No Telepon Rumah
+        'mobile_phone' => 36, // No HP
+        'office_address' => 37, // Alamat Kantor
+        'office_phone_number' => 38, // No Telepon Kantor
+        'email' => 39,
+        'office_email' => 40,
+        'emergency_contact' => 41, // Kontak Darurat
     ];
 
     /**
@@ -84,20 +138,22 @@ class ImportEmployeeController extends Controller
         'education_level' => 11, // Tingkat Pendidikan Terakhir
         'education_name' => 12, // Nama Sekolah/Universitas
         'education_year' => 13, // Tahun Lulus
-        'id_tax' => 14, // NPWP
-        'employment_status' => 15, // Status Pegawai
-        'family_registration_number' => 16, // No KK
-        'id_number' => 17, // NIK
-        'residence' => 18, // Komplek
-        'residence_description' => 19, // Nama Komplek
-        'current_address' => 20, // Alamat Tempat Tinggal Saat Ini
-        'home_phone_number' => 21, // No Telepon Rumah
-        'mobile_phone' => 22, // No HP
-        'office_address' => 23, // Alamat Kantor
-        'office_phone_number' => 24, // No Telepon Kantor
-        'email' => 25,
-        'description' => 26, // Keterangan
-        'emergency_contact' => 27, // Kontak Darurat
+        'years_of_service_total' => 14,
+        'month_of_service_total' => 15,
+        'id_tax' => 16, // NPWP
+        'employment_status' => 17, // Status Pegawai
+        'family_registration_number' => 18, // No KK
+        'id_number' => 19, // NIK
+        'residence' => 20, // Komplek
+        'residence_description' => 21, // Nama Komplek
+        'current_address' => 22, // Alamat Tempat Tinggal Saat Ini
+        'home_phone_number' => 23, // No Telepon Rumah
+        'mobile_phone' => 24, // No HP
+        'office_address' => 25, // Alamat Kantor
+        'office_phone_number' => 26, // No Telepon Kantor
+        'email' => 27,
+        'description' => 28, // Keterangan
+        'emergency_contact' => 29, // Kontak Darurat
     ];
 
     /**
@@ -617,7 +673,14 @@ class ImportEmployeeController extends Controller
             $talentInfo = $employeesData[16] ?? []; // Sheet 17 : Hasil Talent Pool
         }
 
-        $lastEl = ($this->type == 3) ? end($this->outsourcePersonalInfoPos) : end($this->personalInfoPos);
+        if ($this->type == 2) {
+            $lastEl = end($this->nonAsnPersonalInfoPos);
+        } else if ($this->type == 3) {
+            $lastEl = end($this->outsourcePersonalInfoPos);
+        } else {
+            $lastEl = end($this->personalInfoPos);
+        }
+
         if (count($personalInfo) == 0 || !isset($personalInfo[0][$lastEl])) { // Sheet Tidak sesuai
 
             if ($this->type == 1) {
@@ -1024,7 +1087,11 @@ class ImportEmployeeController extends Controller
                     'emergency_contact',
                 ];
             } else { // ASN & NON ASN
-                $personalInfoPos = $this->personalInfoPos;
+                if ($this->type == 2) {
+                    $personalInfoPos = $this->nonAsnPersonalInfoPos;
+                } else {
+                    $personalInfoPos = $this->personalInfoPos;
+                }
                 $requiredFields = [
                     'id_number',
                     'name',
@@ -1162,6 +1229,10 @@ class ImportEmployeeController extends Controller
             $cpnsEffectiveDate = $this->formatDate($personalInfoRow[$personalInfoPos['cpns_effective_date']], 'Data Pegawai', $personalInfoKey, $personalInfo[0][$personalInfoPos['cpns_effective_date']]);
             $positionEffectiveDate = $this->formatDate($personalInfoRow[$personalInfoPos['position_effective_date']], 'Data Pegawai', $personalInfoKey, $personalInfo[0][$personalInfoPos['position_effective_date']]);
 
+            if ($this->type == 1) {
+                $pnsEffectiveDate = $this->formatDate($personalInfoRow[$personalInfoPos['pns_effective_date']], 'Data Pegawai', $personalInfoKey, $personalInfo[0][$personalInfoPos['pns_effective_date']]);
+            }
+
             if ($this->type == 1 || $this->type == 2) { // ASN & NON ASN
                 $gradeEffectiveDate = $this->formatDate($personalInfoRow[$personalInfoPos['grade_effective_date']], 'Data Pegawai', $personalInfoKey, $personalInfo[0][$personalInfoPos['grade_effective_date']]);
                 $echelonEffectiveDate = $this->formatDate($personalInfoRow[$personalInfoPos['echelon_effective_date']], 'Data Pegawai', $personalInfoKey, $personalInfo[0][$personalInfoPos['echelon_effective_date']]);
@@ -1184,6 +1255,8 @@ class ImportEmployeeController extends Controller
                     'education_level' => $educationLevelID,
                     'education_name' => $personalInfoRow[$personalInfoPos['education_name']],
                     'education_year' => $personalInfoRow[$personalInfoPos['education_year']],
+                    'years_of_service_total' => $personalInfoRow[$personalInfoPos['years_of_service_total']],
+                    'month_of_service_total' => $personalInfoRow[$personalInfoPos['month_of_service_total']],
                     'id_tax' => $personalInfoRow[$personalInfoPos['id_tax']],
                     'employment_status' => $employmentStatusID,
                     'id_number' => $personalInfoRow[$personalInfoPos['id_number']],
@@ -1199,7 +1272,7 @@ class ImportEmployeeController extends Controller
                     'emergency_contact' => $personalInfoRow[$personalInfoPos['emergency_contact']],
                     'type' => $this->type,
                 ];
-            } else { // ASN & NON ASN
+            } else if ($this->type == 2) { // NON ASN
                 $result[$personalInfoRow[$personalInfoPos['id_number']]]['personal_info'] = [
                     'email' => $personalInfoRow[$personalInfoPos['email']],
                     'title_prefix' => $personalInfoRow[$personalInfoPos['title_prefix']],
@@ -1226,6 +1299,57 @@ class ImportEmployeeController extends Controller
                     'education_year' => $personalInfoRow[$personalInfoPos['education_year']],
                     'employee_id_card_number' => $personalInfoRow[$personalInfoPos['employee_id_card_number']],
                     'karisu_number' => $personalInfoRow[$personalInfoPos['karisu_number']],
+                    'years_of_service_total' => $personalInfoRow[$personalInfoPos['years_of_service_total']],
+                    'month_of_service_total' => $personalInfoRow[$personalInfoPos['month_of_service_total']],
+                    'years_of_service_rank' => $personalInfoRow[$personalInfoPos['years_of_service_rank']],
+                    'month_of_service_rank' => $personalInfoRow[$personalInfoPos['month_of_service_rank']],
+                    'id_tax' => $personalInfoRow[$personalInfoPos['id_tax']],
+                    'employment_status' => $employmentStatusID,
+                    'id_number' => $personalInfoRow[$personalInfoPos['id_number']],
+                    'family_registration_number' => $personalInfoRow[$personalInfoPos['family_registration_number']],
+                    'residence_id' => $residenceID,
+                    'residence_description' => $personalInfoRow[$personalInfoPos['residence_description']],
+                    'current_address' => $personalInfoRow[$personalInfoPos['current_address']],
+                    'home_phone_number' => $personalInfoRow[$personalInfoPos['home_phone_number']],
+                    'mobile_phone' => $personalInfoRow[$personalInfoPos['mobile_phone']],
+                    'office_address' => $personalInfoRow[$personalInfoPos['office_address']],
+                    'office_phone_number' => $personalInfoRow[$personalInfoPos['office_phone_number']],
+                    'office_email' => $personalInfoRow[$personalInfoPos['office_email']],
+                    'emergency_contact' => $personalInfoRow[$personalInfoPos['emergency_contact']],
+                    'type' => $this->type,
+                ];
+            } else { // ASN
+                $result[$personalInfoRow[$personalInfoPos['id_number']]]['personal_info'] = [
+                    'email' => $personalInfoRow[$personalInfoPos['email']],
+                    'title_prefix' => $personalInfoRow[$personalInfoPos['title_prefix']],
+                    'name' => $personalInfoRow[$personalInfoPos['name']],
+                    'title_suffix' => $personalInfoRow[$personalInfoPos['title_suffix']],
+                    'employee_id_number' => $personalInfoRow[$personalInfoPos['employee_id_number']],
+                    'employee_registration_number' => $personalInfoRow[$personalInfoPos['employee_registration_number']],
+                    'place_of_birth' => $personalInfoRow[$personalInfoPos['place_of_birth']],
+                    'date_of_birth' => $dateOfBirth,
+                    'religion' => $religionID,
+                    'gender' => $gender,
+                    'marital_status' => $maritalStatusID,
+                    'employment_type_id' => $employmentTypeID,
+                    'cpns_effective_date' => $cpnsEffectiveDate,
+                    'pns_effective_date' => $pnsEffectiveDate,
+                    'position_id' => $positionID,
+                    'position_effective_date' => $positionEffectiveDate,
+                    'grade_id' => $gradeID,
+                    'grade_effective_date' => $gradeEffectiveDate,
+                    'echelon_id' => $echelonID,
+                    'echelon_effective_date' => $echelonEffectiveDate,
+                    'institution_id' => $institutionID,
+                    'education_level' => $educationLevelID,
+                    'education_name' => $personalInfoRow[$personalInfoPos['education_name']],
+                    'education_year' => $personalInfoRow[$personalInfoPos['education_year']],
+                    'employee_id_card_number' => $personalInfoRow[$personalInfoPos['employee_id_card_number']],
+                    'karisu_number' => $personalInfoRow[$personalInfoPos['karisu_number']],
+                    'years_of_service_total' => $personalInfoRow[$personalInfoPos['years_of_service_total']],
+                    'month_of_service_total' => $personalInfoRow[$personalInfoPos['month_of_service_total']],
+                    'years_of_service_rank' => $personalInfoRow[$personalInfoPos['years_of_service_rank']],
+                    'month_of_service_rank' => $personalInfoRow[$personalInfoPos['month_of_service_rank']],
                     'id_tax' => $personalInfoRow[$personalInfoPos['id_tax']],
                     'employment_status' => $employmentStatusID,
                     'id_number' => $personalInfoRow[$personalInfoPos['id_number']],
