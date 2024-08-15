@@ -289,6 +289,10 @@ class EmployeeController extends Controller
                     }
                 }
 
+                $countExistsPosition = DB::table('users')
+                    ->where('position_id', $this->posted['position_id'])
+                    ->where('id', '!=', $this->request->id);
+
                 if (isset($this->posted['echelon_id']) && $availablePosition == 0) {
                     $existsPositionEchelon = DB::table('position_echelons')
                         ->where('position_id', $this->posted['position_id'])
@@ -302,12 +306,11 @@ class EmployeeController extends Controller
                     }
 
                     $availablePosition = $existsPositionEchelon->available;
+
+                    $countExistsPosition = $countExistsPosition->where('echelon_id', $this->posted['echelon_id']);
                 }
 
-                $countExistsPosition = DB::table('users')
-                    ->where('position_id', $this->posted['position_id'])
-                    ->where('id', '!=', $this->request->id)
-                    ->count();
+                $countExistsPosition = $countExistsPosition->count();
 
                 if ($availablePosition <= $countExistsPosition) {
                     return $this->response(404, 'Jabatan sudah terisi seluruhnya.');
@@ -549,6 +552,10 @@ class EmployeeController extends Controller
                     }
                 }
 
+                $countExistsPosition = DB::table('users')
+                    ->where('position_id', $this->posted['position_id'])
+                    ->where('id', '!=', $this->request->id);
+
                 if (isset($this->posted['echelon_id']) && $availablePosition == 0) {
                     $existsPositionEchelon = DB::table('position_echelons')
                         ->where('position_id', $this->posted['position_id'])
@@ -562,12 +569,12 @@ class EmployeeController extends Controller
                     }
 
                     $availablePosition = $existsPositionEchelon->available;
+
+                    $countExistsPosition = $countExistsPosition
+                        ->where('echelon_id', $this->posted['echelon_id']);
                 }
 
-                $countExistsPosition = DB::table('users')
-                    ->where('position_id', $this->posted['position_id'])
-                    ->where('id', '!=', $this->request->id)
-                    ->count();
+                $countExistsPosition = $countExistsPosition->count();
 
                 if ($availablePosition <= $countExistsPosition) {
                     return $this->response(404, 'Jabatan sudah terisi seluruhnya.');

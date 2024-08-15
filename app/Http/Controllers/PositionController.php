@@ -278,7 +278,7 @@ class PositionController extends Controller
                 ->get();
 
             foreach ($positionEchelons as $positionEchelon) {
-                $users = DB::select('SELECT COUNT(1) as count FROM users WHERE echelon_id = ? AND position_id = ?', [$positionEchelon->id, $positionEchelon->position_id]);
+                $users = DB::select('SELECT COUNT(1) as count FROM users WHERE echelon_id = ? AND position_id = ?', [$positionEchelon->echelon_id, $positionEchelon->position_id]);
                 $positionEchelon->filled = $users[0]->count;
                 unset($positionEchelon->position_id);
             }
