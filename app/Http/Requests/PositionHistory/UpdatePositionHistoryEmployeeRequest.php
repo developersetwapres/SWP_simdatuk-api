@@ -19,7 +19,7 @@ class UpdatePositionHistoryEmployeeRequest
             'positions.*.echelon' => 'numeric|in:1,2,3,4,5,6|nullable',
             'positions.*.position_status' => 'numeric|in:1,2,3,4|nullable',
             'positions.*.effective_date' => 'date|nullable',
-            'positions.*.decree' => 'max:160|nullable',
+            'positions.*.decree' => 'max:256|nullable',
             'positions.*.decree_document' => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
             'positions.*.type_of_decree' => 'numeric|nullable',
             'positions.*.decree_number' => 'max:160|nullable',
