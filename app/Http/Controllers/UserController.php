@@ -200,9 +200,9 @@ class UserController extends Controller
                 ]);
             }
 
-            $user = DB::table('users');
-            $user->where('id', $this->request->id);
-            $user->updateTs([
+            $query = DB::table('users');
+            $query->where('id', $this->request->id);
+            $query->updateTs([
                 'username' => $this->request->username,
                 'role_id' => $this->request->role_id,
             ]);
@@ -219,6 +219,7 @@ class UserController extends Controller
 
             return $this->response(200, 'Pengguna berhasil diupdate.');
         } catch (\Throwable $th) {
+            \Log::warning($th);
             DB::rollback();
             return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
         }
