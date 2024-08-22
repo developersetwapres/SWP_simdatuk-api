@@ -144,7 +144,7 @@ class RecapitulationEmployeeController extends Controller
             $users->where('u.education_level', $cardId);
             if ($type == 2) {
                 $users->where(function ($query) {
-                    $query->where('p.status', true)->orWhere('u.employment_type_id', '=', 15);
+                    $query->where('u.employment_type_id', '!=', 16);
                 });
             } elseif ($type == 3) {
                 $users->where('u.employment_type_id', 19);
@@ -154,7 +154,7 @@ class RecapitulationEmployeeController extends Controller
             $users->where('u.gender', $cardId);
             if ($type == 2) {
                 $users->where(function ($query) {
-                    $query->where('p.status', true)->orWhere('u.employment_type_id', '=', 15);
+                    $query->where('u.employment_type_id', '!=', 16);
                 });
             } elseif ($type == 3) {
                 $users->where('u.employment_type_id', 19);
