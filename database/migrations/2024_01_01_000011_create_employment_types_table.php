@@ -15,6 +15,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('name', 160);
             $table->tinyInteger('type')->default(1)->comment('1=ASN, 2=NON-ASN, 3=OUTSOURCE');
+            $table->tinyInteger('sequence_number')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('echelons', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 160)->unique();
+            $table->tinyInteger('sequence_number')->nullable();
             $table->integer('retirement_age')->nullable();
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
