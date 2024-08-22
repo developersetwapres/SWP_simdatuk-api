@@ -14,19 +14,19 @@ class EchelonSeeder extends Seeder
     {
         DB::table('echelons')->delete();
         $echelons = [
-            ['id' => 1, 'name' => 'Eselon I', "retirement_age" => 60],
-            ['id' => 2, 'name' => 'Eselon II', "retirement_age" => 60],
-            ['id' => 3, 'name' => 'Eselon III', "retirement_age" => 58],
-            ['id' => 4, 'name' => 'Eselon IV', "retirement_age" => 58],
-            ['id' => 5, 'name' => 'Ahli Utama', "retirement_age" => 65],
-            ['id' => 6, 'name' => 'Ahli Madya', "retirement_age" => 60],
-            ['id' => 7, 'name' => 'Ahli Muda', "retirement_age" => 58],
-            ['id' => 8, 'name' => 'Ahli Pertama', "retirement_age" => 58],
-            ['id' => 9, 'name' => 'Pelaksana', "retirement_age" => 58],
-            ['id' => 10, 'name' => 'Penyelia', "retirement_age" => 58],
-            ['id' => 11, 'name' => 'Mahir', "retirement_age" => 58],
-            ['id' => 12, 'name' => 'Terampil', "retirement_age" => 58],
-            ['id' => 13, 'name' => 'Pemula', "retirement_age" => 58],
+            ['id' => 1, 'name' => 'Eselon I', 'sort' => 1, "retirement_age" => 60],
+            ['id' => 2, 'name' => 'Eselon II', 'sort' => 2, "retirement_age" => 60],
+            ['id' => 3, 'name' => 'Eselon III', 'sort' => 3, "retirement_age" => 58],
+            ['id' => 4, 'name' => 'Eselon IV', 'sort' => 4, "retirement_age" => 58],
+            ['id' => 5, 'name' => 'Ahli Utama', 'sort' => 5, "retirement_age" => 65],
+            ['id' => 6, 'name' => 'Ahli Madya', 'sort' => 6, "retirement_age" => 60],
+            ['id' => 7, 'name' => 'Ahli Muda', 'sort' => 7, "retirement_age" => 58],
+            ['id' => 8, 'name' => 'Ahli Pertama', 'sort' => 8, "retirement_age" => 58],
+            ['id' => 9, 'name' => 'Pelaksana', 'sort' => 13, "retirement_age" => 58],
+            ['id' => 10, 'name' => 'Penyelia', 'sort' => 9, "retirement_age" => 58],
+            ['id' => 11, 'name' => 'Mahir', 'sort' => 10, "retirement_age" => 58],
+            ['id' => 12, 'name' => 'Terampil', 'sort' => 11, "retirement_age" => 58],
+            ['id' => 13, 'name' => 'Pemula', 'sort' => 12, "retirement_age" => 58],
         ];
         DB::table('echelons')->insertTs($echelons);
     }
