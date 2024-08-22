@@ -68,9 +68,13 @@ class OldGradeSeeder extends Seeder
                   ON
                       db_lama_golongan.id_pegawai = db_baru_users.employee_id_number
                   LEFT JOIN
+                      simdatuk_dump.tbl_mst_golongan as db_lama_mst_golongan
+                  ON
+                      db_lama_golongan.id_golongan = db_lama_mst_golongan.id_golongan
+                  LEFT JOIN
                       simdatuk.grades as db_baru_grades
                   ON
-                      db_lama_golongan.id_golongan = db_baru_grades.id
+                      db_lama_mst_golongan.pangkat = db_baru_grades.name
                   LEFT JOIN
                       simdatuk.decrees as db_baru_decrees
                   ON
