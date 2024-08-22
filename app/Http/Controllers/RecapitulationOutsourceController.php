@@ -32,7 +32,7 @@ class RecapitulationOutsourceController extends Controller
     public function index()
     {
         $outsource = $this->recapitulationRepository->getOutsource(19);
-        $nonOutsource = $this->recapitulationRepository->getOutsource(20);
+        // $nonOutsource = $this->recapitulationRepository->getOutsource(20);
         $educationAndGender = $this->recapitulationRepository->getEducationAndGender(3);
         $data = [
             "name" => "Rekapitulasi Pegawai Outsourcing",
@@ -44,12 +44,12 @@ class RecapitulationOutsourceController extends Controller
                     "total" => $outsource[0],
                     "cards" => $outsource[1],
                 ],
-                [
-                    "id" => 2,
-                    "name" => "Tenaga Non Outsourcing",
-                    "total" => $nonOutsource[0],
-                    "cards" => $nonOutsource[1],
-                ],
+                // [
+                //     "id" => 2,
+                //     "name" => "Tenaga Non Outsourcing",
+                //     "total" => $nonOutsource[0],
+                //     "cards" => $nonOutsource[1],
+                // ],
                 [
                     "id" => 3,
                     "name" => "Pendidikan",
