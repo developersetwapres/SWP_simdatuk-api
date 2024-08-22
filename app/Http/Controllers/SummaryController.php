@@ -59,23 +59,23 @@ class SummaryController extends Controller
 
         $unitKerja = $this->recapitulationRepository->getTotalUnitKerja();
 
-        $countable = DB::table('users')
+        $countable = DB::table('users as u')
             ->select(
-                DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6) THEN 1 END) as active'),
-                DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6, 7, 8, 9) THEN 1 END) as total'),
-                DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6) AND gender = 1 THEN 1 END) as male'),
-                DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6) AND gender = 0 THEN 1 END) as female'),
-                DB::raw('COUNT(CASE WHEN type = 2 AND employment_status IN (1) THEN 1 END) as assistance'),
-                DB::raw('COUNT(CASE WHEN type = 3 AND employment_status IN (1) AND employment_type_id = 19 THEN 1 END) as outsource'),
-                DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6) AND education_level IS NOT NULL THEN 1 END) as total_education'),
-                DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6) AND education_level = 1 THEN 1 END) as sd'),
-                DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6) AND education_level = 2 THEN 1 END) as smp'),
-                DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6) AND education_level = 3 THEN 1 END) as sma'),
-                DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6) AND education_level = 4 THEN 1 END) as d1'),
-                DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6) AND education_level = 5 THEN 1 END) as d3'),
-                DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6) AND education_level = 6 THEN 1 END) as s1'),
-                DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6) AND education_level = 7 THEN 1 END) as s2'),
-                DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6) AND education_level = 8 THEN 1 END) as s3'),
+                DB::raw('COUNT(CASE WHEN u.type = 1 AND u.employment_status IN (1, 6) THEN 1 END) as active'),
+                DB::raw('COUNT(CASE WHEN u.type = 1 AND u.employment_status IN (1, 6, 7, 8, 9) THEN 1 END) as total'),
+                DB::raw('COUNT(CASE WHEN u.type = 1 AND u.employment_status IN (1, 6) AND u.gender = 1 THEN 1 END) as male'),
+                DB::raw('COUNT(CASE WHEN u.type = 1 AND u.employment_status IN (1, 6) AND u.gender = 0 THEN 1 END) as female'),
+                DB::raw('COUNT(CASE WHEN u.type = 2 AND u.employment_status IN (1, 6) AND u.employment_type_id != 16 THEN 1 END) as assistance'),
+                DB::raw('COUNT(CASE WHEN u.type = 3 AND u.employment_status IN (1, 6) AND u.employment_type_id = 19 THEN 1 END) as outsource'),
+                DB::raw('COUNT(CASE WHEN u.type = 1 AND u.employment_status IN (1, 6) AND u.education_level IS NOT NULL THEN 1 END) as total_education'),
+                DB::raw('COUNT(CASE WHEN u.type = 1 AND u.employment_status IN (1, 6) AND u.education_level = 1 THEN 1 END) as sd'),
+                DB::raw('COUNT(CASE WHEN u.type = 1 AND u.employment_status IN (1, 6) AND u.education_level = 2 THEN 1 END) as smp'),
+                DB::raw('COUNT(CASE WHEN u.type = 1 AND u.employment_status IN (1, 6) AND u.education_level = 3 THEN 1 END) as sma'),
+                DB::raw('COUNT(CASE WHEN u.type = 1 AND u.employment_status IN (1, 6) AND u.education_level = 4 THEN 1 END) as d1'),
+                DB::raw('COUNT(CASE WHEN u.type = 1 AND u.employment_status IN (1, 6) AND u.education_level = 5 THEN 1 END) as d3'),
+                DB::raw('COUNT(CASE WHEN u.type = 1 AND u.employment_status IN (1, 6) AND u.education_level = 6 THEN 1 END) as s1'),
+                DB::raw('COUNT(CASE WHEN u.type = 1 AND u.employment_status IN (1, 6) AND u.education_level = 7 THEN 1 END) as s2'),
+                DB::raw('COUNT(CASE WHEN u.type = 1 AND u.employment_status IN (1, 6) AND u.education_level = 8 THEN 1 END) as s3'),
             )
             ->first();
 

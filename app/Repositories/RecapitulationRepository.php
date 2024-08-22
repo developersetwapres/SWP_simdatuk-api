@@ -159,7 +159,7 @@ class RecapitulationRepository
 
         if ($type == 2) {
             $total->where(function ($query) {
-                $query->where('p.status', true)->orWhere('u.employment_type_id', '=', 15);
+                $query->where('u.employment_type_id', '!=', 16);
             });
         } elseif ($type == 3) {
             $total->where('u.employment_type_id', 19);
@@ -367,7 +367,9 @@ class RecapitulationRepository
         $positions->join('positions as p', 'u.position_id', '=', 'p.id');
         $positions->select(DB::raw('GROUP_CONCAT(p.id) AS id'), 'p.name', DB::raw('COUNT(u.id) as total'));
         $positions->where('u.type', 2);
-        $positions->where('p.status', true);
+        $positions->where('u.employment_type_id', '!=', 16);
+        $positions->where('u.employment_type_id', '!=', 15);
+        $positions->wherein('u.employment_status', [1, 6]);
         $positions->groupBy('p.name');
         $positions->orderBy('p.id', 'asc');
         $positions = $positions->get();
