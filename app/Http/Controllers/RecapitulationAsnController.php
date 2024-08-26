@@ -233,7 +233,7 @@ class RecapitulationAsnController extends Controller
                     "cards" => [
                         [
                             "id" => 3,
-                            "name" => "Jabatan Jabatan Administrasi",
+                            "name" => "Jabatan Administrasi",
                             "total" => $pejabat->jabatan_administrasi,
                         ],
                         [
