@@ -76,6 +76,10 @@ class SummaryController extends Controller
                 DB::raw('COUNT(CASE WHEN u.type = 1 AND u.employment_status IN (1, 6) AND u.education_level = 6 THEN 1 END) as s1'),
                 DB::raw('COUNT(CASE WHEN u.type = 1 AND u.employment_status IN (1, 6) AND u.education_level = 7 THEN 1 END) as s2'),
                 DB::raw('COUNT(CASE WHEN u.type = 1 AND u.employment_status IN (1, 6) AND u.education_level = 8 THEN 1 END) as s3'),
+                DB::raw('COUNT(CASE WHEN u.type = 1 AND u.employment_status IN (1, 6) AND u.date_of_birth >= "2000-01-01" AND u.date_of_birth <= "2006-12-31" THEN 1 END) as genz'),
+                DB::raw('COUNT(CASE WHEN u.type = 1 AND u.employment_status IN (1, 6) AND u.date_of_birth >= "1981-01-01" AND u.date_of_birth <= "1999-12-31" THEN 1 END) as geny'),
+                DB::raw('COUNT(CASE WHEN u.type = 1 AND u.employment_status IN (1, 6) AND u.date_of_birth >= "1965-01-01" AND u.date_of_birth <= "1980-12-31" THEN 1 END) as genx'),
+                DB::raw('COUNT(CASE WHEN u.type = 1 AND u.employment_status IN (1, 6) AND u.date_of_birth >= "1946-01-01" AND u.date_of_birth <= "1964-12-31" THEN 1 END) as babyboomer')
             )
             ->first();
 
@@ -126,6 +130,24 @@ class SummaryController extends Controller
                 [
                     "name" => 'SD / Sederajat',
                     "quantity" => $countable->sd,
+                ],
+            ],
+            "generations" => [
+                [
+                    "name" => 'Gen Z',
+                    "total" => $countable->genz,
+                ],
+                [
+                    "name" => 'Gen Y',
+                    "total" => $countable->geny,
+                ],
+                [
+                    "name" => 'Gen X',
+                    "total" => $countable->genx,
+                ],
+                [
+                    "name" => 'Baby Boomer',
+                    "total" => $countable->babyboomer,
                 ],
             ],
         ];
