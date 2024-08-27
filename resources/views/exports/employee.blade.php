@@ -129,6 +129,15 @@
                 @if($toggleField['isName'])
                 <th class="section-header-color">Nama</th>
                 @endif
+                @if($toggleField['isTitlePrefix'])
+                <th class="section-header-color">Gelar Depan</th>
+                @endif
+                @if($toggleField['isTitleSuffix'])
+                <th class="section-header-color">Gelar Belakang</th>
+                @endif
+                @if($toggleField['isNameWithTitle'])
+                <th class="section-header-color">Nama Beserta Gelar</th>
+                @endif
                 @if($toggleField['isNip'])
                 <th class="section-header-color">NIP/NRP</th>
                 @endif
@@ -319,6 +328,15 @@
                 <td>{{ $indexData++ }}</td>
                 @if($toggleField['isName'])
                 <td>{{ $value['name'] }}</td>
+                @endif
+                @if($toggleField['isTitlePrefix'])
+                <td>{{ $value['title_prefix'] }}</td>
+                @endif
+                @if($toggleField['isTitleSuffix'])
+                <td>{{ $value['title_suffix'] }}</td>
+                @endif
+                @if($toggleField['isNameWithTitle'])
+                <td>{{ $value['name_with_title'] }}</td>
                 @endif
                 @if($toggleField['isNip'])
                 <td>{!! $value['employee_id_number'] !!}/{!! $value['employee_registration_number'] !!}</td>

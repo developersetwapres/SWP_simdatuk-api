@@ -765,6 +765,9 @@ class ExportController extends Controller
      * @bodyParam credit_period int[] Refers to employees credit period (1=Triwulan 1, 2=Triwulan 2, 3=Triwulan 3, 4=Triwulan 4, 5=Tahunan). Example: [1, 3]
      * @bodyParam credit_year string Refers to employees credit year period. Example: "2024"
      * @bodyParam isName int Indicates whether the name field is included in the request. Example: 1
+     * @bodyParam isTitlePrefix int Indicates whether the prefix title field is included in the request. Example: 1
+     * @bodyParam isTitleSuffix int Indicates whether the suffix title field is included in the request. Example: 1
+     * @bodyParam isNameWithTitle int Indicates whether the name with title field is included in the request. Example: 1
      * @bodyParam isNip int Indicates whether the NIP (National Identification Number) field is included in the request. Example: 1
      * @bodyParam isBirthPlaceDate int Indicates whether the birth place and date field is included in the request. Example: 1
      * @bodyParam isAge int Indicates whether the age field is included in the request. Example: 1
@@ -974,6 +977,9 @@ class ExportController extends Controller
         // toggle field
         $toggleFieldBio = array();
         $toggleFieldBio['isName'] = $request->isName == 1;
+        $toggleFieldBio['isTitlePrefix'] = $request->isTitlePrefix == 1;
+        $toggleFieldBio['isTitleSuffix'] = $request->isTitleSuffix == 1;
+        $toggleFieldBio['isNameWithTitle'] = $request->isNameWithTitle == 1;
         $toggleFieldBio['isNip'] = $request->isNip == 1;
         $toggleFieldBio['isBirthPlaceDate'] = $request->isBirthPlaceDate == 1;
         $toggleFieldBio['isAge'] = $request->isAge == 1;
@@ -1047,6 +1053,15 @@ class ExportController extends Controller
                 $usersData->leftJoin('echelons', 'users.echelon_id', '=', 'echelons.id');
                 if ($toggleFieldBio['isName']) {
                     $usersData->addSelect('users.name');
+                }
+                if ($toggleFieldBio['isTitlePrefix']) {
+                    $usersData->addSelect('users.title_prefix');
+                }
+                if ($toggleFieldBio['isTitleSuffix']) {
+                    $usersData->addSelect('users.title_suffix');
+                }
+                if ($toggleFieldBio['isNameWithTitle']) {
+                    $usersData->addSelect(DB::raw("CONCAT(COALESCE(users.title_prefix,''),' ',users.name,' ',COALESCE(users.title_suffix,'')) as name_with_title"));
                 }
                 if ($toggleFieldBio['isNip']) {
                     $usersData->addSelect('users.employee_id_number', 'users.employee_registration_number');
@@ -1663,6 +1678,9 @@ class ExportController extends Controller
      * @bodyParam credit_period int[] Refers to employees credit period (1=Triwulan 1, 2=Triwulan 2, 3=Triwulan 3, 4=Triwulan 4, 5=Tahunan). Example: [1, 3]
      * @bodyParam credit_year string Refers to employees credit year period. Example: "2024"
      * @bodyParam isName int Indicates whether the name field is included in the request. Example: 1
+     * @bodyParam isTitlePrefix int Indicates whether the prefix title field is included in the request. Example: 1
+     * @bodyParam isTitleSuffix int Indicates whether the suffix title field is included in the request. Example: 1
+     * @bodyParam isNameWithTitle int Indicates whether the name with title field is included in the request. Example: 1
      * @bodyParam isNip int Indicates whether the NIP (National Identification Number) field is included in the request. Example: 1
      * @bodyParam isBirthPlaceDate int Indicates whether the birth place and date field is included in the request. Example: 1
      * @bodyParam isAge int Indicates whether the age field is included in the request. Example: 1
@@ -1877,6 +1895,15 @@ class ExportController extends Controller
         $usersPreview->leftJoin('echelons', 'echelons.id', '=', 'users.echelon_id');
         if ($this->request->isName == 1) {
             $usersPreview->addSelect('users.name');
+        }
+        if ($this->request->isTitlePrefix) {
+            $usersPreview->addSelect('users.title_prefix');
+        }
+        if ($this->request->isTitleSuffix) {
+            $usersPreview->addSelect('users.title_suffix');
+        }
+        if ($this->request->isNameWithTitle) {
+            $usersPreview->addSelect(DB::raw("CONCAT(COALESCE(users.title_prefix,''),' ',users.name,' ',COALESCE(users.title_suffix,'')) as name_with_title"));
         }
         if ($this->request->isNip == 1) {
             $usersPreview->addSelect('users.employee_id_number', 'users.employee_registration_number');

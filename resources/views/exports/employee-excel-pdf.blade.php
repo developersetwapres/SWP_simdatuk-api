@@ -158,6 +158,9 @@
     $columns = [
     "No" => true,
     "Nama" => $toggleField['isName'],
+    "Gelar Depan" => $toggleField['isTitlePrefix'],
+    "Gelar Belakang" => $toggleField['isTitleSuffix'],
+    "Nama Beserta Gelar" => $toggleField['isNameWithTitle'],
     "NIP/NRP" => $toggleField['isNip'],
     "Tempat, Tanggal Lahir" => $toggleField['isBirthPlaceDate'],
     "Usia" => $toggleField['isAge'],
@@ -248,6 +251,15 @@
                     @break
                     @case("Nama")
                     {{ $value['name'] }}
+                    @break
+                    @case("Gelar Depan")
+                    {{ $value['title_prefix'] }}
+                    @break
+                    @case("Gelar Belakang")
+                    {{ $value['title_suffix'] }}
+                    @break
+                    @case("Nama Beserta Gelar")
+                    {{ $value['name_with_title'] }}
                     @break
                     @case("NIP/NRP")
                     {{ $value['employee_id_number'] . "/". $value['employee_registration_number'] }}

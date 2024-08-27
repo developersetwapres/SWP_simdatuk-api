@@ -120,6 +120,15 @@ class employee implements FromView, WithDrawings, WithEvents
             if (isset($this->toggleField['isName'])) {
                 $users->addSelect('users.name');
             }
+            if (isset($this->toggleField['isTitlePrefix'])) {
+                $users->addSelect('users.title_prefix');
+            }
+            if (isset($this->toggleField['isTitleSuffix'])) {
+                $users->addSelect('users.title_suffix');
+            }
+            if (isset($this->toggleField['isNameWithTitle'])) {
+                $users->addSelect(DB::raw("CONCAT(COALESCE(users.title_prefix,''),' ',users.name,' ',COALESCE(users.title_suffix,'')) as name_with_title"));
+            }
             if (isset($this->toggleField['isNip'])) {
                 $users->addSelect('users.employee_id_number', 'users.employee_registration_number');
             }
