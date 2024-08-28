@@ -110,8 +110,7 @@ class employee implements FromView, WithDrawings, WithEvents
     {
         $userId = collect($this->userIds);
         $userIdsChunk = $userId->chunk(200);
-        $results = collect();
-        $usersData = array();
+        $results = array();
         foreach ($userIdsChunk as $userId) {
             // Set the group_concat_max_len session variable
             DB::statement("SET SESSION group_concat_max_len = 10000");
@@ -701,10 +700,10 @@ class employee implements FromView, WithDrawings, WithEvents
                 }
                 return (array) $item;
             })->toArray();
-            $usersData = $results->concat($chunkResults);
+            $results = array_merge($results, $chunkResults);
         }
         return view('exports.employee', [
-            'userData' => $usersData,
+            'userData' => collect($results),
             'toggleField' => $this->toggleField,
         ]);
     }

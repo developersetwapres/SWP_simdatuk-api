@@ -467,8 +467,37 @@ class ExportController extends Controller
             });
         }
         if (isset($request->deputy)) {
-            $parentIds = DB::table('positions')->whereIn('id', $request->deputy)->pluck('parent_id')->toArray();
-            $positionIds = array_merge($parentIds, $request->deputy);
+            $sql = "
+                WITH RECURSIVE hierarchy AS (
+                    -- Anchor member: Select the initial parent row
+                    SELECT
+                        po.id,
+                        po.name,
+                        po.parent_id
+                    FROM
+                        positions po
+                    WHERE
+                        po.id IN (".implode(',',$request->deputy).") -- Replace ? with the specific parent id
+
+                    UNION DISTINCT
+
+                    -- Recursive member: Select the child row
+                    SELECT
+                        p.id,
+                        p.name,
+                        p.parent_id
+                    FROM
+                        positions p
+                    INNER JOIN
+                        hierarchy h ON p.parent_id = h.id
+                )
+                SELECT id FROM hierarchy;";
+
+            $ids = DB::select($sql);
+            $positionIds = [];
+            foreach ($ids as $key => $value) {
+                $positionIds[] = $value->id;
+            }
             $user->whereIn('users.position_id', $positionIds);
         }
 
@@ -841,8 +870,38 @@ class ExportController extends Controller
             $users->whereIn('users.type', $request->employee_type);
         }
         if (isset($request->deputy)) {
-            $parentIds = DB::table('positions')->whereIn('id', $request->deputy)->pluck('parent_id')->toArray();
-            $positionIds = array_merge($parentIds, $request->deputy);
+            $sql = "
+                WITH RECURSIVE hierarchy AS (
+                    -- Anchor member: Select the initial parent row
+                    SELECT
+                        po.id,
+                        po.name,
+                        po.parent_id
+                    FROM
+                        positions po
+                    WHERE
+                        po.id IN (".implode(',',$request->deputy).") -- Replace ? with the specific parent id
+
+                    UNION DISTINCT
+
+                    -- Recursive member: Select the child row
+                    SELECT
+                        p.id,
+                        p.name,
+                        p.parent_id
+                    FROM
+                        positions p
+                    INNER JOIN
+                        hierarchy h ON p.parent_id = h.id
+                )
+                SELECT id FROM hierarchy;";
+
+            $ids = DB::select($sql);
+            $positionIds = [];
+            foreach ($ids as $key => $value) {
+                $positionIds[] = $value->id;
+            }
+
             $users->whereIn('users.position_id', $positionIds);
         }
         if (isset($request->echelons)) {
@@ -1044,7 +1103,7 @@ class ExportController extends Controller
             $tmp = sys_get_temp_dir();
             $userIdArray = collect($userIds);
             $userIdsChunk = $userIdArray->chunk(200);
-            $results = collect();
+            $results = array();
             foreach ($userIdsChunk as $userId) {
                 // Set the group_concat_max_len session variable
                 DB::statement("SET SESSION group_concat_max_len = 10000");
@@ -1584,6 +1643,7 @@ class ExportController extends Controller
                 $usersData->whereIn('users.id', $userId);
                 $usersData->groupBy('users.id');
                 $usersData = $usersData->get();
+
                 $chunkResults = $usersData->map(function ($item) use ($toggleFieldBio) {
                     if ($toggleFieldBio['isPosition'] || $toggleFieldBio['isEchelons']) {
                         $sql =
@@ -1628,11 +1688,12 @@ class ExportController extends Controller
                     }
                     return (array) $item;
                 })->toArray();
-                $usersData = $results->concat($chunkResults);
+
+                $results = array_merge($results, $chunkResults);
             }
 
             $pdf = pdf::loadView('exports/employee-excel-pdf', [
-                'userData' => $usersData,
+                'userData' => collect($results),
                 'toggleField' => $toggleFieldBio,
             ]);
             $pdf->setOption('isHtml5ParserEnabled', true);
@@ -1751,8 +1812,37 @@ class ExportController extends Controller
             $users->whereIn('users.type', $request->employee_type);
         }
         if (isset($request->deputy)) {
-            $parentIds = DB::table('positions')->whereIn('id', $request->deputy)->pluck('parent_id')->toArray();
-            $positionIds = array_merge($parentIds, $request->deputy);
+            $sql = "
+                WITH RECURSIVE hierarchy AS (
+                    -- Anchor member: Select the initial parent row
+                    SELECT
+                        po.id,
+                        po.name,
+                        po.parent_id
+                    FROM
+                        positions po
+                    WHERE
+                        po.id IN (".implode(',',$request->deputy).") -- Replace ? with the specific parent id
+
+                    UNION DISTINCT
+
+                    -- Recursive member: Select the child row
+                    SELECT
+                        p.id,
+                        p.name,
+                        p.parent_id
+                    FROM
+                        positions p
+                    INNER JOIN
+                        hierarchy h ON p.parent_id = h.id
+                )
+                SELECT id FROM hierarchy;";
+
+            $ids = DB::select($sql);
+            $positionIds = [];
+            foreach ($ids as $key => $value) {
+                $positionIds[] = $value->id;
+            }
             $users->whereIn('users.position_id', $positionIds);
         }
         if (isset($request->echelons)) {
