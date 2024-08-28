@@ -315,7 +315,7 @@ class PositionSeeder extends Seeder
                 'available' => 0,
                 'type' => 1,
                 'entity' => 1,
-                'vertical_order' => 3,
+                'vertical_order' => 2,
                 'horizontal_order' => 1,
                 'child' => [
                     // child of Kepala Sekretariat Wakil Presiden
@@ -2567,7 +2567,7 @@ class PositionSeeder extends Seeder
                 'available' => 0,
                 'type' => 1,
                 'entity' => 2,
-                'vertical_order' => 2,
+                'vertical_order' => 3,
                 'horizontal_order' => 1,
                 'child' => [
                     [
