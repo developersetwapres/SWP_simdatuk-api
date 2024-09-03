@@ -205,6 +205,12 @@ class ExportController extends Controller
         if($employee->years_of_service_rank > 0 || $employee->month_of_service_rank > 0){
             $masaKerjaGolongan = (($employee->years_of_service_rank > 0) ? $employee->years_of_service_rank : 0)." Tahun, ". (($employee->month_of_service_rank > 0) ? $employee->month_of_service_rank : 0)." Bulan";
         }
+        $retirementAge = '';
+        if(!is_null($employee->retirement_age)){
+            $month = date('n',strtotime($employee->retirement_age));
+            $year = date('Y',strtotime($employee->retirement_age));
+            $retirementAge = $indonesianMonth[$month]. ' '.$year.' ('.$employee->retirement_age_years.' Tahun)';
+        }
 
         if($employee->type == 1){
             $userProfile = [
@@ -236,7 +242,7 @@ class ExportController extends Controller
                 'Email' => $employee->email,
                 'Email Dinas' => $employee->office_email,
                 'Kontak Darurat' => $employee->emergency_contact,
-                'Batas Usia Pensiun' => $employee->retirement_age,
+                'Batas Usia Pensiun' => $retirementAge,
             ];
         }else if($employee->type == 2){
             $userProfile = [
@@ -267,7 +273,7 @@ class ExportController extends Controller
                 'Email' => $employee->email,
                 'Email Dinas' => $employee->office_email,
                 'Kontak Darurat' => $employee->emergency_contact,
-                'Batas Usia Pensiun' => $employee->retirement_age,
+                'Batas Usia Pensiun' => $retirementAge,
             ];
         }else{
             $userProfile = [
@@ -297,7 +303,7 @@ class ExportController extends Controller
                 'Email' => $employee->email,
                 'Email Dinas' => $employee->office_email,
                 'Kontak Darurat' => $employee->emergency_contact,
-                'Batas Usia Pensiun' => $employee->retirement_age,
+                'Batas Usia Pensiun' => $retirementAge,
             ];
         }
 
@@ -610,6 +616,12 @@ class ExportController extends Controller
             if($employee[$employeeId]->years_of_service_rank > 0 || $employee[$employeeId]->month_of_service_rank > 0){
                 $masaKerjaGolongan = (($employee[$employeeId]->years_of_service_rank > 0) ? $employee[$employeeId]->years_of_service_rank : 0)." Tahun, ". (($employee[$employeeId]->month_of_service_rank > 0) ? $employee[$employeeId]->month_of_service_rank : 0)." Bulan";
             }
+            $retirementAge = '';
+            if(!is_null($employee[$employeeId]->retirement_age)){
+                $month = date('n',strtotime($employee[$employeeId]->retirement_age));
+                $year = date('Y',strtotime($employee[$employeeId]->retirement_age));
+                $retirementAge = $indonesianMonth[$month]. ' '.$year.' ('.$employee[$employeeId]->retirement_age_years.' Tahun)';
+            }
 
             if($employee[$employeeId]->type == 1){
                 $userProfile = [
@@ -641,7 +653,7 @@ class ExportController extends Controller
                     'Email' => $employee[$employeeId]->email,
                     'Email Dinas' => $employee[$employeeId]->office_email,
                     'Kontak Darurat' => $employee[$employeeId]->emergency_contact,
-                    'Batas Usia Pensiun' => $employee[$employeeId]->retirement_age,
+                    'Batas Usia Pensiun' => $retirementAge,
                 ];
             }else if($employee[$employeeId]->type == 2){
                 $userProfile = [
@@ -672,7 +684,7 @@ class ExportController extends Controller
                     'Email' => $employee[$employeeId]->email,
                     'Email Dinas' => $employee[$employeeId]->office_email,
                     'Kontak Darurat' => $employee[$employeeId]->emergency_contact,
-                    'Batas Usia Pensiun' => $employee[$employeeId]->retirement_age,
+                    'Batas Usia Pensiun' => $retirementAge,
                 ];
             }else{
                 $userProfile = [
@@ -702,7 +714,7 @@ class ExportController extends Controller
                     'Email' => $employee[$employeeId]->email,
                     'Email Dinas' => $employee[$employeeId]->office_email,
                     'Kontak Darurat' => $employee[$employeeId]->emergency_contact,
-                    'Batas Usia Pensiun' => $employee[$employeeId]->retirement_age,
+                    'Batas Usia Pensiun' => $retirementAge,
                 ];
             }
 
