@@ -386,31 +386,19 @@ class RecapitulationRepository
             $position->id = $uniqueCommaSeparatedString;
         }
         $data = array();
-        foreach ($positions as $item) {
-            if (strpos($item->name, 'Staf Khusus Wakil Presiden') === 0) {
-                $result = $this->getFirstIndex($data, 'Staf Khusus Wakil Presiden');
-                if (is_null($result)) {
-                    array_push($data, ['id' => $item->id, 'name' => 'Staf Khusus Wakil Presiden', 'total' => $item->total]);
-                } else {
-                    $data[$result]['id'] = $data[$result]['id'] . ',' . $item->id;
-                    $data[$result]['total'] += $item->total;
-                }
-            } elseif (strpos($item->name, 'Asisten Staf Khusus Wakil Presiden') === 0) {
-                $result = $this->getFirstIndex($data, 'Asisten Staf Khusus Wakil Presiden');
-                if (is_null($result)) {
-                    array_push($data, ['id' => $item->id, 'name' => 'Asisten Staf Khusus Wakil Presiden', 'total' => $item->total]);
-                } else {
-                    $data[$result]['id'] = $data[$result]['id'] . ',' . $item->id;
-                    $data[$result]['total'] += $item->total;
-                }
-            } elseif (strpos($item->name, 'Pembantu Asisten Staf Khusus Wakil Presiden') === 0) {
-                $result = $this->getFirstIndex($data, 'Pembantu Asisten Staf Khusus Wakil Presiden');
-                if (is_null($result)) {
-                    array_push($data, ['id' => $item->id, 'name' => 'Pembantu Asisten Staf Khusus Wakil Presiden', 'total' => $item->total]);
-                } else {
-                    $data[$result]['id'] = $data[$result]['id'] . ',' . $item->id;
-                    $data[$result]['total'] += $item->total;
-                }
+        foreach ($positions as $index => $item) {
+            if (str_starts_with($item->name, 'Staf Khusus Wakil Presiden')) {
+                $this->addOrUpdateGroupData($data, $item, 'Staf Khusus Wakil Presiden');
+            } elseif (str_contains($item->name, 'Pembantu Asisten Staf Khusus Wakil Presiden')) {
+                $this->addOrUpdateGroupData($data, $item, 'Pembantu Asisten Staf Khusus Wakil Presiden');
+            } elseif (str_contains($item->name, 'Asisten Staf Khusus Wakil Presiden')) {
+                $this->addOrUpdateGroupData($data, $item, 'Asisten Staf Khusus Wakil Presiden');
+            } elseif (str_contains($item->name, 'Pengemudi')) {
+                $this->addOrUpdateGroupData($data, $item, 'Pengemudi VVIP');
+            } elseif (str_contains($item->name, "Mudi Wapres RI KH. Ma'ruf Amin, Ba Mudi-2 VVIP Unit Mudi Tim Pampri Don 1 Grup B Paspamres")) {
+                $this->addOrUpdateGroupData($data, $item, 'Pengemudi VVIP');
+            } elseif (str_contains($item->name, "Sekretariat Staf Khusus Wakil Presiden")) {
+                $this->addOrUpdateGroupData($data, $item, 'Sekretariat Staf Khusus Wakil Presiden');
             } else {
                 array_push($data, $item);
             }
@@ -426,14 +414,17 @@ class RecapitulationRepository
         return array($totalSum, $data);
     }
 
-    public function getFirstIndex($data, $substring)
+    private function addOrUpdateGroupData(&$data, $item, $name)
     {
-        foreach ($data as $index => $item) {
-            if (strpos($item['name'], $substring) !== false) {
-                return $index;
-            }
+        $groupName = array_column($data, 'name');
+        $newIndex = array_search($name, $groupName);
+
+        if ($newIndex === false) {
+            array_push($data, ['id' => $item->id, 'name' => $name, 'total' => $item->total]);
+        } else {
+            $data[$newIndex]['id'] = $data[$newIndex]['id'] . ',' . $item->id;
+            $data[$newIndex]['total'] += $item->total;
         }
-        return null; // Return null if no match is found
     }
 
     /**
