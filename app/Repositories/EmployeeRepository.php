@@ -136,6 +136,14 @@ class EmployeeRepository
                     ELSE NULL
                 END AS retirement_age
             "),
+            DB::raw("
+                CASE
+                    WHEN u.type = 1 THEN e.retirement_age
+                    WHEN u.type = 2 THEN 58 
+                    WHEN u.type = 3 THEN 58 
+                    ELSE NULL
+                END AS retirement_age_years
+            "),
             'u.created_at',
         );
         $user = $user->first();
@@ -278,6 +286,14 @@ class EmployeeRepository
                     WHEN u.type = 3 && u.date_of_birth IS NOT NULL THEN DATE_FORMAT(DATE_ADD(DATE_ADD(u.date_of_birth, INTERVAL 58 YEAR), INTERVAL 1 MONTH),'%d-%m-%Y')
                     ELSE NULL
                 END AS retirement_age
+            "),
+            DB::raw("
+                CASE
+                    WHEN u.type = 1 THEN e.retirement_age
+                    WHEN u.type = 2 THEN 58 
+                    WHEN u.type = 3 THEN 58 
+                    ELSE NULL
+                END AS retirement_age_years
             "),
             'u.created_at',
         );
