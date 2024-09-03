@@ -232,14 +232,15 @@ class RecapitulationEmployeeController extends Controller
             LEFT JOIN positions p ON u.position_id=p.id
             LEFT JOIN echelons e ON u.echelon_id=e.id
             LEFT JOIN grades g ON u.grade_id=g.id
+            LEFT JOIN employment_types et ON u.employment_type_id=et.id
             WHERE
                 u.employment_status
             IN
                 (1,6)
             ORDER BY
-                u.echelon_id ASC,
+                et.sequence_number ASC,
+                e.sequence_number ASC,
                 u.grade_id ASC,
-                u.employment_type_id DESC,
                 u.name ASC;
         ";
 
@@ -265,6 +266,7 @@ class RecapitulationEmployeeController extends Controller
             LEFT JOIN positions p ON u.position_id=p.id
             LEFT JOIN echelons e ON u.echelon_id=e.id
             LEFT JOIN grades g ON u.grade_id=g.id
+            LEFT JOIN employment_types et ON u.employment_type_id=et.id
             WHERE
                 u.employment_status
             IN
@@ -272,9 +274,9 @@ class RecapitulationEmployeeController extends Controller
             AND
                 position_id = 2
             ORDER BY
-                u.echelon_id ASC,
+                et.sequence_number ASC,
+                e.sequence_number ASC,
                 u.grade_id ASC,
-                u.employment_type_id DESC,
                 u.name ASC;
         ";
 
@@ -283,6 +285,7 @@ class RecapitulationEmployeeController extends Controller
         } else {
             $users = DB::select($sql);
         }
+
         foreach ($users as $item) {
             $item->photo_profile = $this->getDocument($item->photo_profile, true);
         }
