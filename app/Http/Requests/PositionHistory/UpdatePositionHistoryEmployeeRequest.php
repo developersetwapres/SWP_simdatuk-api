@@ -15,7 +15,7 @@ class UpdatePositionHistoryEmployeeRequest
         return [
             'positions.*.id' => 'numeric|nullable',
             'positions.*.position' => 'nullable',
-            'positions.*.group_id' => 'numeric',
+            'positions.*.group_id' => 'nullable|numeric',
             'positions.*.echelon' => 'numeric|in:1,2,3,4,5,6|nullable',
             'positions.*.position_status' => 'numeric|in:1,2,3,4|nullable',
             'positions.*.effective_date' => 'date|nullable',
