@@ -28,7 +28,7 @@ class CreatePositionHistoryRequest extends FormRequest
             'name' => 'required|max:160',
             'users.*.user_id' => 'required|numeric',
             'users.*.position' => 'nullable',
-            'users.*.group_id' => 'numeric',
+            'users.*.group_id' => 'nullable|numeric',
             'users.*.echelon' => 'nullable|numeric|exists:echelons,id',
             'users.*.position_status' => 'nullable|numeric|in:1,2,3,4',
             'users.*.effective_date' => 'nullable|date',
