@@ -646,11 +646,14 @@ class ImportEmployeeController extends Controller
 
         if ($request->type == 3) { // Outsource
             $personalInfo = $this->removeNullRows($employeesData[0]) ?? []; // Sheet 1 : Data Pegawai
-            $educationInfo = $this->removeNullRows($employeesData[1]) ?? []; // Sheet 2 : Riwayat Pendidikan
-            $noteInfo = $this->removeNullRows($employeesData[2]) ?? []; // Sheet 3 : Riwayat Catatan
+            $positionInfo = $this->removeNullRows($employeesData[1]) ?? []; // Sheet 2 : Riwayat Jabatan
+            $technicalTrainingInfo = $this->removeNullRows($employeesData[2]) ?? []; // Sheet 3 : Riwayat Pelatihan Teknis
             $familyInfo = $this->removeNullRows($employeesData[3]) ?? []; // Sheet 4 : Riwayat Keluarga
+        } else if ($request->type == 2) { // NON ASN
+            $personalInfo = $this->removeNullRows($employeesData[0]) ?? []; // Sheet 1 : Data Pegawai
+            $positionInfo = $this->removeNullRows($employeesData[1]) ?? []; // Sheet 3 : Riwayat Jabatan
 
-        } else { // ASN / NON ASN
+        } else { // ASN
             $personalInfo = $this->removeNullRows($employeesData[0]) ?? []; // Sheet 1 : Data Pegawai
             $educationInfo = $this->removeNullRows($employeesData[1]) ?? []; // Sheet 2 : Riwayat Pendidikan
             $positionInfo = $this->removeNullRows($employeesData[2]) ?? []; // Sheet 3 : Riwayat Jabatan
@@ -665,11 +668,9 @@ class ImportEmployeeController extends Controller
             $familyInfo = $this->removeNullRows($employeesData[11]) ?? []; // Sheet 12 : Riwayat Keluarga
             $leaveInfo = $this->removeNullRows($employeesData[12]) ?? []; // Sheet 13 : Riwayat Cuti
             $noteInfo = $this->removeNullRows($employeesData[13]) ?? []; // Sheet 14 : Riwayat Catatan
-            if ($request->type == 1) {
-                $assessmentInfo = $this->removeNullRows($employeesData[14]) ?? []; // Sheet 15 : Hasil Assessment
-                $competencyInfo = $this->removeNullRows($employeesData[15]) ?? []; // Sheet 16 : Hasil Uji Kompetensi
-                $talentInfo = $this->removeNullRows($employeesData[16]) ?? []; // Sheet 17 : Hasil Talent Pool
-            }
+            $assessmentInfo = $this->removeNullRows($employeesData[14]) ?? []; // Sheet 15 : Hasil Assessment
+            $competencyInfo = $this->removeNullRows($employeesData[15]) ?? []; // Sheet 16 : Hasil Uji Kompetensi
+            $talentInfo = $this->removeNullRows($employeesData[16]) ?? []; // Sheet 17 : Hasil Talent Pool
         }
 
         if ($this->type == 2) {
@@ -720,21 +721,29 @@ class ImportEmployeeController extends Controller
             // Process personal info
             $personalInfo = $this->personalInfo($personalInfo);
 
-            // Process education info
-            if (count($educationInfo) > 0 && isset($educationInfo[0][end($this->educationInfoPos)])) {
-                $personalInfo = $this->educationInfo($educationInfo, $personalInfo);
+            // Process position info
+            if (count($positionInfo) > 0 && isset($positionInfo[0][end($this->positionInfoPos)])) {
+                $personalInfo = $this->positionInfo($positionInfo, $personalInfo);
+            }
+
+            // Process technical training info
+            if (count($technicalTrainingInfo) > 0 && isset($technicalTrainingInfo[0][end($this->technicalTrainingInfoPos)])) {
+                $personalInfo = $this->trainingInfo($technicalTrainingInfo, $personalInfo, 3);
             }
 
             // Process family info
             if (count($familyInfo) > 0 && isset($familyInfo[0][end($this->familyInfoPos)])) {
                 $personalInfo = $this->familyInfo($familyInfo, $personalInfo);
             }
+        } else if ($request->type == 2) { // NON ASN
+            // Process personal info
+            $personalInfo = $this->personalInfo($personalInfo);
 
-            // Process note info
-            if (count($noteInfo) > 0 && isset($noteInfo[0][end($this->noteInfoPos)])) {
-                $personalInfo = $this->noteInfo($noteInfo, $personalInfo, $request->user()->id);
+            // Process position info
+            if (count($positionInfo) > 0 && isset($positionInfo[0][end($this->positionInfoPos)])) {
+                $personalInfo = $this->positionInfo($positionInfo, $personalInfo);
             }
-        } else { // ASN / NON ASN
+        } else { // ASN
             // Process personal info
             $personalInfo = $this->personalInfo($personalInfo);
 
@@ -802,21 +811,20 @@ class ImportEmployeeController extends Controller
             if (count($noteInfo) > 0 && isset($noteInfo[0][end($this->noteInfoPos)])) {
                 $personalInfo = $this->noteInfo($noteInfo, $personalInfo, $request->user()->id);
             }
-            if ($request->type == 1) {
-                // Process assessment info
-                if (count($assessmentInfo) > 0 && isset($assessmentInfo[0][end($this->assessmentInfoPos)])) {
-                    $personalInfo = $this->assessmentInfo($assessmentInfo, $personalInfo);
-                }
 
-                // Process competency info
-                if (count($competencyInfo) > 0 && isset($competencyInfo[0][end($this->competencyInfoPos)])) {
-                    $personalInfo = $this->competencyInfo($competencyInfo, $personalInfo);
-                }
+            // Process assessment info
+            if (count($assessmentInfo) > 0 && isset($assessmentInfo[0][end($this->assessmentInfoPos)])) {
+                $personalInfo = $this->assessmentInfo($assessmentInfo, $personalInfo);
+            }
 
-                // Process talent info
-                if (count($talentInfo) > 0 && isset($talentInfo[0][end($this->talentInfoPos)])) {
-                    $personalInfo = $this->talentInfo($talentInfo, $personalInfo);
-                }
+            // Process competency info
+            if (count($competencyInfo) > 0 && isset($competencyInfo[0][end($this->competencyInfoPos)])) {
+                $personalInfo = $this->competencyInfo($competencyInfo, $personalInfo);
+            }
+
+            // Process talent info
+            if (count($talentInfo) > 0 && isset($talentInfo[0][end($this->talentInfoPos)])) {
+                $personalInfo = $this->talentInfo($talentInfo, $personalInfo);
             }
         }
 
@@ -874,10 +882,18 @@ class ImportEmployeeController extends Controller
                 ];
 
                 if ($this->type == 3) { // OUTSOURCE
-                    // Save Education
-                    if (isset($data['education'])) {
-                        $data['education'] = $this->mergeValuesIntoArrayElements($additionalInfo, $data['education']);
-                        DB::table('user_educations')->insert($data['education']);
+                    // Save Position
+                    if (isset($data['position'])) {
+                        $data['position'] = $this->mergeValuesIntoArrayElements($additionalInfo, $data['position']);
+                        $data['position'] = $this->historySave($data['position'], 'position_histories', 3, 'position_history_id');
+                        DB::table('position_history_users')->insert($data['position']);
+                    }
+
+                    // Save Training
+                    if (isset($data['training'])) {
+                        $data['training'] = $this->historySave($data['training'], 'training_histories', 0, 'training_history_id');
+                        $data['training'] = $this->mergeValuesIntoArrayElements($additionalInfo, $data['training']);
+                        DB::table('training_history_users')->insert($data['training']);
                     }
 
                     // Save Family
@@ -885,13 +901,14 @@ class ImportEmployeeController extends Controller
                         $data['family'] = $this->mergeValuesIntoArrayElements($additionalInfo, $data['family']);
                         DB::table('user_families')->insert($data['family']);
                     }
-
-                    // Save Notes
-                    if (isset($data['note'])) {
-                        $data['note'] = $this->mergeValuesIntoArrayElements($additionalInfo, $data['note']);
-                        DB::table('user_notes')->insert($data['note']);
+                } else if ($this->type == 2) { // NON ASN
+                    // Save Position
+                    if (isset($data['position'])) {
+                        $data['position'] = $this->mergeValuesIntoArrayElements($additionalInfo, $data['position']);
+                        $data['position'] = $this->historySave($data['position'], 'position_histories', 3, 'position_history_id');
+                        DB::table('position_history_users')->insert($data['position']);
                     }
-                } else { // ASN/NON ASN
+                } else { // ASN
 
                     // Save Education
                     if (isset($data['education'])) {
