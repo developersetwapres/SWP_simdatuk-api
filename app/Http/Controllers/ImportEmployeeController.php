@@ -617,6 +617,9 @@ class ImportEmployeeController extends Controller
      */
     public function import(Request $request)
     {
+        ini_set('memory_limit', '-1');
+        set_time_limit(300);
+
         // Validate the uploaded file
         $request->validate([
             'file' => 'required|file|mimes:xlsx,csv',
