@@ -1098,40 +1098,51 @@ class ImportEmployeeController extends Controller
                 $requiredFields = [
                     'id_number',
                     'name',
-                    'gender',
+                    'employee_id_number',
                     'place_of_birth',
                     'date_of_birth',
                     'religion',
-                    'employee_id_number',
-                    'email'
+                    'gender',
+                    'employment_type',
+                    'education_level',
+                    'employment_status',
+                    'email',
+                    'emergency_contact'
                 ];
             } else if ($this->type == 2) { // NON ASN
                 $personalInfoPos = $this->nonAsnPersonalInfoPos;
                 $requiredFields = [
                     'id_number',
                     'name',
-                    'gender',
+                    'employee_id_number',
                     'place_of_birth',
                     'date_of_birth',
                     'religion',
-                    'employee_id_number',
-                    'email'
+                    'gender',
+                    'employment_type',
+                    'education_level',
+                    'employment_status',
+                    'email',
+                    'emergency_contact'
                 ];
             } else { // ASN
                 $personalInfoPos = $this->personalInfoPos;
                 $requiredFields = [
-                    'name',
-                    'gender',
                     'id_number',
+                    'name',
+                    'employee_id_number',
                     'place_of_birth',
                     'date_of_birth',
                     'religion',
-                    'employee_id_number',
-                    'office_email',
+                    'gender',
+                    'employment_type',
+                    'cpns_effective_date',
                     'grade',
                     'grade_effective_date',
-                    'cpns_effective_date',
-                    'education_level'
+                    'education_level',
+                    'employment_status',
+                    'office_email',
+                    'emergency_contact'
                 ];
             }
 
@@ -1150,9 +1161,6 @@ class ImportEmployeeController extends Controller
                 if (!empty($personalInfoRow[$personalInfoPos['id_tax']])) {
                     $user->orWhere('id_tax', '=', $personalInfoRow[$personalInfoPos['id_tax']]);
                 }
-                if (!empty($personalInfoRow[$personalInfoPos['family_registration_number']])) {
-                    $user->orWhere('family_registration_number', '=', $personalInfoRow[$personalInfoPos['family_registration_number']]);
-                }
                 if (!empty($personalInfoRow[$personalInfoPos['email']])) {
                     $user->orWhere('email', '=', $personalInfoRow[$personalInfoPos['email']]);
                 }
@@ -1167,9 +1175,6 @@ class ImportEmployeeController extends Controller
                 }
                 if (!empty($personalInfoRow[$personalInfoPos['id_tax']])) {
                     $user->orWhere('id_tax', '=', $personalInfoRow[$personalInfoPos['id_tax']]);
-                }
-                if (!empty($personalInfoRow[$personalInfoPos['family_registration_number']])) {
-                    $user->orWhere('family_registration_number', '=', $personalInfoRow[$personalInfoPos['family_registration_number']]);
                 }
                 if (!empty($personalInfoRow[$personalInfoPos['email']])) {
                     $user->orWhere('email', '=', $personalInfoRow[$personalInfoPos['email']]);
@@ -1197,9 +1202,6 @@ class ImportEmployeeController extends Controller
                 }
                 if (!is_null($personalInfoRow[$personalInfoPos['id_number']]) && $user->id_number == $personalInfoRow[$personalInfoPos['id_number']]) {
                     $nonUnique .= $personalInfo[0][$personalInfoPos['id_number']] . ' = ' . $personalInfoRow[$personalInfoPos['id_number']] . ',';
-                }
-                if (!is_null($personalInfoRow[$personalInfoPos['family_registration_number']]) && $user->family_registration_number == $personalInfoRow[$personalInfoPos['family_registration_number']]) {
-                    $nonUnique .= $personalInfo[0][$personalInfoPos['family_registration_number']] . ' = ' . $personalInfoRow[$personalInfoPos['family_registration_number']] . ',';
                 }
                 if ($this->type == 1 || $this->type == 2) { // ASN & NON ASN
                     if (!is_null($personalInfoRow[$personalInfoPos['employee_registration_number']]) && $user->employee_registration_number == $personalInfoRow[$personalInfoPos['employee_registration_number']]) {
