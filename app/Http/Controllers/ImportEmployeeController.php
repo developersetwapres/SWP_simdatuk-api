@@ -1135,18 +1135,11 @@ class ImportEmployeeController extends Controller
                 ];
             }
 
-            $requiredFieldFilled = true;
             foreach ($requiredFields as $key => $field) {
                 if (empty($personalInfoRow[$personalInfoPos[$field]])) {
-                    $requiredFieldFilled = false;
-
                     $this->skippedRow('Data Pegawai', $personalInfoKey, 'Kolom ' . $personalInfo[0][$personalInfoPos[$field]] . ' harus diisi');
                 }
             }
-            if (!$requiredFieldFilled) {
-                continue;
-            }
-            // Skip jika ada required field yang tidak diisi
 
             // Check Unique
             if ($this->type == 3) { // OUTSOURCE
@@ -1193,38 +1186,36 @@ class ImportEmployeeController extends Controller
             }
             if ($user !== null) {
                 $nonUnique = '';
-                if ($user->email == $personalInfoRow[$personalInfoPos['email']]) {
+                if (!is_null($personalInfoRow[$personalInfoPos['email']]) && $user->email == $personalInfoRow[$personalInfoPos['email']]) {
                     $nonUnique .= $personalInfo[0][$personalInfoPos['email']] . ' = ' . $personalInfoRow[$personalInfoPos['email']] . ',';
                 }
-                if ($user->employee_id_number == $personalInfoRow[$personalInfoPos['employee_id_number']]) {
+                if (!is_null($personalInfoRow[$personalInfoPos['employee_id_number']]) && $user->employee_id_number == $personalInfoRow[$personalInfoPos['employee_id_number']]) {
                     $nonUnique .= $personalInfo[0][$personalInfoPos['employee_id_number']] . ' = ' . $personalInfoRow[$personalInfoPos['employee_id_number']] . ',';
                 }
-
-                if ($user->id_tax == $personalInfoRow[$personalInfoPos['id_tax']]) {
+                if (!is_null($personalInfoRow[$personalInfoPos['id_tax']]) && $user->id_tax == $personalInfoRow[$personalInfoPos['id_tax']]) {
                     $nonUnique .= $personalInfo[0][$personalInfoPos['id_tax']] . ' = ' . $personalInfoRow[$personalInfoPos['id_tax']] . ',';
                 }
-                if ($user->id_number == $personalInfoRow[$personalInfoPos['id_number']]) {
+                if (!is_null($personalInfoRow[$personalInfoPos['id_number']]) && $user->id_number == $personalInfoRow[$personalInfoPos['id_number']]) {
                     $nonUnique .= $personalInfo[0][$personalInfoPos['id_number']] . ' = ' . $personalInfoRow[$personalInfoPos['id_number']] . ',';
                 }
-                if ($user->family_registration_number == $personalInfoRow[$personalInfoPos['family_registration_number']]) {
+                if (!is_null($personalInfoRow[$personalInfoPos['family_registration_number']]) && $user->family_registration_number == $personalInfoRow[$personalInfoPos['family_registration_number']]) {
                     $nonUnique .= $personalInfo[0][$personalInfoPos['family_registration_number']] . ' = ' . $personalInfoRow[$personalInfoPos['family_registration_number']] . ',';
                 }
-
                 if ($this->type == 1 || $this->type == 2) { // ASN & NON ASN
-                    if ($user->employee_registration_number == $personalInfoRow[$personalInfoPos['employee_registration_number']]) {
+                    if (!is_null($personalInfoRow[$personalInfoPos['employee_registration_number']]) && $user->employee_registration_number == $personalInfoRow[$personalInfoPos['employee_registration_number']]) {
                         $nonUnique .= $personalInfo[0][$personalInfoPos['employee_registration_number']] . ' = ' . $personalInfoRow[$personalInfoPos['employee_registration_number']] . ',';
                     }
-                    if ($user->employee_id_card_number == $personalInfoRow[$personalInfoPos['employee_id_card_number']]) {
-                        $nonUnique .= $personalInfo[0][$personalInfoPos['employee_id_card_number']] . ' = ' . $personalInfoRow[$personalInfoPos['employee_id_card_number']] . ',';
-                    }
-                    if ($user->karisu_number == $personalInfoRow[$personalInfoPos['karisu_number']]) {
-                        $nonUnique .= $personalInfo[0][$personalInfoPos['karisu_number']] . ' = ' . $personalInfoRow[$personalInfoPos['karisu_number']] . ',';
+                    if ($this->type == 1) {
+                        if (!is_null($personalInfoRow[$personalInfoPos['employee_id_card_number']]) && $user->employee_id_card_number == $personalInfoRow[$personalInfoPos['employee_id_card_number']]) {
+                            $nonUnique .= $personalInfo[0][$personalInfoPos['employee_id_card_number']] . ' = ' . $personalInfoRow[$personalInfoPos['employee_id_card_number']] . ',';
+                        }
+                        if (!is_null($personalInfoRow[$personalInfoPos['karisu_number']]) && $user->karisu_number == $personalInfoRow[$personalInfoPos['karisu_number']]) {
+                            $nonUnique .= $personalInfo[0][$personalInfoPos['karisu_number']] . ' = ' . $personalInfoRow[$personalInfoPos['karisu_number']] . ',';
+                        }
                     }
                 }
 
                 $this->skippedRow('Data Pegawai', $personalInfoKey, 'Pegawai dengan ' . $nonUnique . ' sudah ada');
-
-                continue; // Skip jika tidak unique
             }
 
             // Get ID
