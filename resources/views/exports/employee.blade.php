@@ -156,6 +156,15 @@
                 @if($toggleField['isMaritalStatus'])
                 <th class="section-header-color">Status Perkawinan</th>
                 @endif
+                @if($toggleField['isMarriageDate'])
+                <th class="section-header-color">Tanggal Perkawinan</th>
+                @endif
+                @if($toggleField['isMarriageDescription'])
+                <th class="section-header-color">Keterangan Perkawinan</th>
+                @endif
+                @if($toggleField['isMarriageOtherNotes'])
+                <th class="section-header-color">Keterangan Lainnya</th>
+                @endif
                 @if($toggleField['isEmployeeType'])
                 <th class="section-header-color">Jenis Pegawai</th>
                 @endif
@@ -235,10 +244,13 @@
                 <th class="section-header-color">No. NIK</th>
                 @endif
                 @if($toggleField['isComplex'])
-                <th class="section-header-color">Nama Komplek</th>
+                <th class="section-header-color">Komplek</th>
+                @endif
+                @if($toggleField['isIDCardAddress'])
+                <th class="section-header-color">Alamat Tempat Tinggal Saat Ini</th>
                 @endif
                 @if($toggleField['isCurrentAddress'])
-                <th class="section-header-color">Alamat Tempat Tinggal Saat Ini</th>
+                <th class="section-header-color">Alamat Sesuai KTP</th>
                 @endif
                 @if($toggleField['isHomeNumber'])
                 <th class="section-header-color">No. Telepon Rumah</th>
@@ -394,6 +406,15 @@
                     -
                     @endswitch</td>
                 @endif
+                @if($toggleField['isMarriageDate'])
+                <td>{{ $value['marriage_date'] }}</td>
+                @endif
+                @if($toggleField['isMarriageDescription'])
+                <td>{{ $value['marriage_description'] }}</td>
+                @endif
+                @if($toggleField['isMarriageOtherNotes'])
+                <td>{{ $value['marriage_other_notes'] }}</td>
+                @endif
                 @if($toggleField['isEmployeeType'])
                 <td>
                     <ol>{!! $value['employee_type'] !!}</ol>
@@ -523,6 +544,9 @@
                 @endif
                 @if($toggleField['isComplex'])
                 <td>{{ $value['residence_name'] }}</td>
+                @endif
+                @if($toggleField['isIDCardAddress'])
+                <td>{{ $value['residence_description'] }}</td>
                 @endif
                 @if($toggleField['isCurrentAddress'])
                 <td>{{ $value['current_address'] }}</td>

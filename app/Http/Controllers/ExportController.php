@@ -168,15 +168,6 @@ class ExportController extends Controller
             default => '-',
         };
 
-        // Housing
-        $complex = 'Luar Komplek';
-        $complexName = $employee->residence_description;
-        if ($employee->residence_name != 'Luar Komplek') {
-            $complex = $employee->residence_name;
-            $complexName = null;
-        }
-
-
         // Batas Usia Pensiun
         $indonesianMonth = [
             1 => 'Januari',
@@ -212,18 +203,29 @@ class ExportController extends Controller
             $retirementAge = $indonesianMonth[$month]. ' '.$year.' ('.$employee->retirement_age_years.' Tahun)';
         }
 
+        $exportData = [
+            'currentPosition' => ($employee->position_merged ?? '-'),
+            'photoProfile' => $employee->photo_profile,
+            'userNIP' => $employee->employee_id_number,
+            'userName' => $employee->name,
+            'userEchelons' => ($employee->echelon_name ?? '') . ', ' . ($employee->echelon_effective_date ?? ' '),
+            'userCurrentGrade' => ($employee->grade_name ?? '') . '(' . ($employee->grade_code ?? '') . '), ' . ($employee->grade_effective_date ?? ''),
+        ];
         if($employee->type == 1){
             $userProfile = [
                 'Tempat, Tanggal Lahir' => $employee->place_of_birth . ', ' . $employee->date_of_birth,
                 'Agama' => $religion,
                 'Jenis Kelamin' => ($employee->gender ? 'Pria' : 'Wanita'),
                 'Status Perkawinan' => $maritalStatus,
+                'Tanggal Perkawinan' => $employee->marriage_date,
+                'Keterangan Perkawinan' => $employee->marriage_description,
+                'Keterangan Lainnya' => $employee->marriage_other_notes,
                 'Jenis Pegawai' => $employeeType,
                 'TMT CPNS' => $employee->cpns_effective_date,
                 'TMT PNS' => $employee->pns_effective_date,
                 'TMT Menjabat' => ($employee->position_effective_date ?? '-'),
                 'Instansi Induk' => ($employee->institution_name ?? '-'),
-                'Tingkat' => $educationLevel,
+                'Tingkat Pendidikan Akhir' => $educationLevel,
                 'Nama Sekolah/Universitas' => $employee->education_name,
                 'Tahun Lulus' => $employee->education_year,
                 'No. Karpeg/No. Karisu' => $employee->employee_id_card_number . ' / ' . $employee->karisu_number,
@@ -232,9 +234,9 @@ class ExportController extends Controller
                 'NPWP' => $employee->id_tax,
                 'Status Pegawai' => ($employee->employment_status ? 'Aktif' : 'Tidak Aktif'),
                 'No NIK' => $employee->id_number,
-                'Komplek' => $complex,
-                'Nama Komplek' => $complexName,
-                'Alamat Tempat Tinggal Saat Ini' => $employee->current_address,
+                'Komplek' => $employee->residence_name,
+                'Alamat Tempat Tinggal Saat Ini' => $employee->residence_description,
+                'Alamat Sesuai KTP' => $employee->current_address,
                 'No. Telepon Rumah' => $employee->home_phone_number,
                 'No. HP' => $employee->mobile_phone,
                 'Alamat Kantor' => $employee->office_address,
@@ -244,6 +246,24 @@ class ExportController extends Controller
                 'Kontak Darurat' => $employee->emergency_contact,
                 'Batas Usia Pensiun' => $retirementAge,
             ];
+            $exportData['userProfile'] = $userProfile;
+            $exportData['userCollege'] = $educations;
+            $exportData['userPosition'] = $positions;
+            $exportData['userGrade'] = $grades;
+            $exportData['userTrainingStructural'] = $structurals;
+            $exportData['userTrainingFunctional'] = $functionals;
+            $exportData['userTrainingTechnical'] = $technicals;
+            $exportData['userAward'] = $recognitions;
+            $exportData['userSKP'] = $targets;
+            $exportData['userCredit'] = $credits;
+            $exportData['userPerformance'] = $performances;
+            $exportData['userPunishment'] = $disciplinaries;
+            $exportData['userFamily'] = $families;
+            $exportData['userLeave'] = $leaves;
+            $exportData['userNotes'] = $notes;
+            $exportData['userAssessment'] = $assessments;
+            $exportData['userAssessmentCompetency'] = $competencies;
+            $exportData['userAssessmentTalent'] = $talents;
         }else if($employee->type == 2){
             $userProfile = [
                 'Tempat, Tanggal Lahir' => $employee->place_of_birth . ', ' . $employee->date_of_birth,
@@ -251,21 +271,17 @@ class ExportController extends Controller
                 'Jenis Kelamin' => ($employee->gender ? 'Pria' : 'Wanita'),
                 'Status Perkawinan' => $maritalStatus,
                 'Jenis Pegawai' => $employeeType,
-                'Tanggal Mulai Bekerja' => $employee->cpns_effective_date,
+                'Tanggal Mulai Bekerja di Sekretariat Wakil Presiden' => $employee->cpns_effective_date,
                 'TMT Menjabat' => ($employee->position_effective_date ?? '-'),
                 'Instansi Induk' => ($employee->institution_name ?? '-'),
-                'Tingkat' => $educationLevel,
+                'Tingkat Pendidikan Akhir' => $educationLevel,
                 'Nama Sekolah/Universitas' => $employee->education_name,
                 'Tahun Lulus' => $employee->education_year,
-                'No. Karpeg/No. Karisu' => $employee->employee_id_card_number . ' / ' . $employee->karisu_number,
-                'Masa Kerja Keseluruhan' => $masaKerjaKeseluruhan,
-                'Masa Kerja Golongan' => $masaKerjaGolongan,
                 'NPWP' => $employee->id_tax,
                 'Status Pegawai' => ($employee->employment_status ? 'Aktif' : 'Tidak Aktif'),
                 'No NIK' => $employee->id_number,
-                'Komplek' => $complex,
-                'Nama Komplek' => $complexName,
-                'Alamat Tempat Tinggal Saat Ini' => $employee->current_address,
+                'Alamat Tempat Tinggal Saat Ini' => $employee->residence_description,
+                'Alamat Sesuai KTP' => $employee->current_address,
                 'No. Telepon Rumah' => $employee->home_phone_number,
                 'No. HP' => $employee->mobile_phone,
                 'Alamat Kantor' => $employee->office_address,
@@ -273,8 +289,9 @@ class ExportController extends Controller
                 'Email' => $employee->email,
                 'Email Dinas' => $employee->office_email,
                 'Kontak Darurat' => $employee->emergency_contact,
-                'Batas Usia Pensiun' => $retirementAge,
             ];
+            $exportData['userProfile'] = $userProfile;
+            $exportData['userPosition'] = $positions;
         }else{
             $userProfile = [
                 'Tempat, Tanggal Lahir' => $employee->place_of_birth . ', ' . $employee->date_of_birth,
@@ -284,18 +301,14 @@ class ExportController extends Controller
                 'Jenis Pegawai' => $employeeType,
                 'Tanggal Mulai Bekerja' => $employee->cpns_effective_date,
                 'TMT Menjabat' => ($employee->position_effective_date ?? '-'),
-                'Instansi Induk' => ($employee->institution_name ?? '-'),
-                'Tingkat' => $educationLevel,
+                'Tingkat Pendidikan Akhir' => $educationLevel,
                 'Nama Sekolah/Universitas' => $employee->education_name,
                 'Tahun Lulus' => $employee->education_year,
-                'No. Karpeg/No. Karisu' => $employee->employee_id_card_number . ' / ' . $employee->karisu_number,
-                'Masa Kerja Keseluruhan' => $masaKerjaKeseluruhan,
                 'NPWP' => $employee->id_tax,
                 'Status Pegawai' => ($employee->employment_status ? 'Aktif' : 'Tidak Aktif'),
                 'No NIK' => $employee->id_number,
-                'Komplek' => $complex,
-                'Nama Komplek' => $complexName,
-                'Alamat Tempat Tinggal Saat Ini' => $employee->current_address,
+                'Alamat Tempat Tinggal Saat Ini' => $employee->residence_description,
+                'Alamat Sesuai KTP' => $employee->current_address,
                 'No. Telepon Rumah' => $employee->home_phone_number,
                 'No. HP' => $employee->mobile_phone,
                 'Alamat Kantor' => $employee->office_address,
@@ -303,36 +316,24 @@ class ExportController extends Controller
                 'Email' => $employee->email,
                 'Email Dinas' => $employee->office_email,
                 'Kontak Darurat' => $employee->emergency_contact,
-                'Batas Usia Pensiun' => $retirementAge,
             ];
+            $exportData['userProfile'] = $userProfile;
+            $exportData['userPosition'] = $positions;
+            $exportData['userTrainingTechnical'] = $technicals;
+            $exportData['userFamily'] = $families;
         }
 
-        $pdf = Pdf::loadview('exports/user', [
-            'userProfile' => $userProfile,
-            'currentPosition' => ($employee->position_merged ?? '-'),
-            'photoProfile' => $employee->photo_profile,
-            'userNIP' => $employee->employee_id_number,
-            'userName' => $employee->name,
-            'userEchelons' => ($employee->echelon_name ?? '') . ', ' . ($employee->echelon_effective_date ?? ' '),
-            'userCurrentGrade' => ($employee->grade_name ?? '') . '(' . ($employee->grade_code ?? '') . '), ' . ($employee->grade_effective_date ?? ''),
-            'userCollege' => $educations,
-            'userPosition' => $positions,
-            'userGrade' => $grades,
-            'userTrainingStructural' => $structurals,
-            'userTrainingFunctional' => $functionals,
-            'userTrainingTechnical' => $technicals,
-            'userAward' => $recognitions,
-            'userSKP' => $targets,
-            'userCredit' => $credits,
-            'userPerformance' => $performances,
-            'userPunishment' => $disciplinaries,
-            'userFamily' => $families,
-            'userLeave' => $leaves,
-            'userNotes' => $notes,
-            'userAssessment' => $assessments,
-            'userAssessmentCompetency' => $competencies,
-            'userAssessmentTalent' => $talents,
-        ]);
+        // $pdf = Pdf::loadview('exports/user', [
+        //     'userProfile' => $userProfile,
+        //     'currentPosition' => ($employee->position_merged ?? '-'),
+        //     'photoProfile' => $employee->photo_profile,
+        //     'userNIP' => $employee->employee_id_number,
+        //     'userName' => $employee->name,
+        //     'userEchelons' => ($employee->echelon_name ?? '') . ', ' . ($employee->echelon_effective_date ?? ' '),
+        //     'userCurrentGrade' => ($employee->grade_name ?? '') . '(' . ($employee->grade_code ?? '') . '), ' . ($employee->grade_effective_date ?? ''),
+            
+        // ]);
+        $pdf = Pdf::loadview('exports/user', $exportData);
         $pdf->set_option('isHtml5ParserEnabled', true);
         $pdf->set_paper("A4", "portrait");
         $pdf->set_option('isRemoteEnabled', true);
@@ -578,14 +579,6 @@ class ExportController extends Controller
                 default => '-',
             };
 
-            // Housing
-            $complex = 'Luar Komplek';
-            $complexName = $employee[$employeeId]->residence_description;
-            if ($employee[$employeeId]->residence_name != 'Luar Komplek') {
-                $complex = $employee[$employeeId]->residence_name;
-                $complexName = null;
-            }
-
             // Batas Usia Pensiun
             $indonesianMonth = [
                 1 => 'Januari',
@@ -629,12 +622,15 @@ class ExportController extends Controller
                     'Agama' => $religion,
                     'Jenis Kelamin' => ($employee[$employeeId]->gender ? 'Pria' : 'Wanita'),
                     'Status Perkawinan' => $maritalStatus,
+                    'Tanggal Perkawinan' => $employee[$employeeId]->marriage_date,
+                    'Keterangan Perkawinan' => $employee[$employeeId]->marriage_description,
+                    'Keterangan Lainnya' => $employee[$employeeId]->marriage_other_notes,
                     'Jenis Pegawai' => $employeeType,
                     'TMT CPNS' => $employee[$employeeId]->cpns_effective_date,
                     'TMT PNS' => $employee[$employeeId]->pns_effective_date,
                     'TMT Menjabat' => ($employee[$employeeId]->position_effective_date ?? '-'),
                     'Instansi Induk' => ($employee[$employeeId]->institution_name ?? '-'),
-                    'Tingkat' => $educationLevel,
+                    'Tingkat Pendidikan Akhir' => $educationLevel,
                     'Nama Sekolah/Universitas' => $employee[$employeeId]->education_name,
                     'Tahun Lulus' => $employee[$employeeId]->education_year,
                     'No. Karpeg/No. Karisu' => $employee[$employeeId]->employee_id_card_number . ' / ' . $employee[$employeeId]->karisu_number,
@@ -643,9 +639,9 @@ class ExportController extends Controller
                     'NPWP' => $employee[$employeeId]->id_tax,
                     'Status Pegawai' => ($employee[$employeeId]->employment_status ? 'Aktif' : 'Tidak Aktif'),
                     'No NIK' => $employee[$employeeId]->id_number,
-                    'Komplek' => $complex,
-                    'Nama Komplek' => $complexName,
-                    'Alamat Tempat Tinggal Saat Ini' => $employee[$employeeId]->current_address,
+                    'Komplek' => $employee[$employeeId]->residence_name,
+                    'Alamat Tempat Tinggal Saat Ini' => $employee[$employeeId]->residence_description,
+                    'Alamat Sesuai KTP' => $employee[$employeeId]->current_address,
                     'No. Telepon Rumah' => $employee[$employeeId]->home_phone_number,
                     'No. HP' => $employee[$employeeId]->mobile_phone,
                     'Alamat Kantor' => $employee[$employeeId]->office_address,
@@ -662,21 +658,17 @@ class ExportController extends Controller
                     'Jenis Kelamin' => ($employee[$employeeId]->gender ? 'Pria' : 'Wanita'),
                     'Status Perkawinan' => $maritalStatus,
                     'Jenis Pegawai' => $employeeType,
-                    'Tanggal Mulai Bekerja' => $employee[$employeeId]->cpns_effective_date,
+                    'Tanggal Mulai Bekerja di Sekretariat Wakil Presiden' => $employee[$employeeId]->cpns_effective_date,
                     'TMT Menjabat' => ($employee[$employeeId]->position_effective_date ?? '-'),
                     'Instansi Induk' => ($employee[$employeeId]->institution_name ?? '-'),
-                    'Tingkat' => $educationLevel,
+                    'Tingkat Pedidikan Akhir' => $educationLevel,
                     'Nama Sekolah/Universitas' => $employee[$employeeId]->education_name,
-                    'Tahun Lulus' => $employee[$employeeId]->education_year,
-                    'No. Karpeg/No. Karisu' => $employee[$employeeId]->employee_id_card_number . ' / ' . $employee[$employeeId]->karisu_number,
-                    'Masa Kerja Keseluruhan' => $masaKerjaKeseluruhan,
-                    'Masa Kerja Golongan' => $masaKerjaGolongan,
+                    'Tahun Lulus' => $employee[$employeeId]->education_year,                   
                     'NPWP' => $employee[$employeeId]->id_tax,
                     'Status Pegawai' => ($employee[$employeeId]->employment_status ? 'Aktif' : 'Tidak Aktif'),
                     'No NIK' => $employee[$employeeId]->id_number,
-                    'Komplek' => $complex,
-                    'Nama Komplek' => $complexName,
-                    'Alamat Tempat Tinggal Saat Ini' => $employee[$employeeId]->current_address,
+                    'Alamat Tempat Tinggal Saat Ini' => $employee[$employeeId]->residence_description,
+                    'Alamat Sesuai KTP' => $employee[$employeeId]->current_address,
                     'No. Telepon Rumah' => $employee[$employeeId]->home_phone_number,
                     'No. HP' => $employee[$employeeId]->mobile_phone,
                     'Alamat Kantor' => $employee[$employeeId]->office_address,
@@ -684,7 +676,6 @@ class ExportController extends Controller
                     'Email' => $employee[$employeeId]->email,
                     'Email Dinas' => $employee[$employeeId]->office_email,
                     'Kontak Darurat' => $employee[$employeeId]->emergency_contact,
-                    'Batas Usia Pensiun' => $retirementAge,
                 ];
             }else{
                 $userProfile = [
@@ -696,17 +687,14 @@ class ExportController extends Controller
                     'Tanggal Mulai Bekerja' => $employee[$employeeId]->cpns_effective_date,
                     'TMT Menjabat' => ($employee[$employeeId]->position_effective_date ?? '-'),
                     'Instansi Induk' => ($employee[$employeeId]->institution_name ?? '-'),
-                    'Tingkat' => $educationLevel,
+                    'Tingkat Pendidikan Akhir' => $educationLevel,
                     'Nama Sekolah/Universitas' => $employee[$employeeId]->education_name,
                     'Tahun Lulus' => $employee[$employeeId]->education_year,
-                    'No. Karpeg/No. Karisu' => $employee[$employeeId]->employee_id_card_number . ' / ' . $employee[$employeeId]->karisu_number,
-                    'Masa Kerja Keseluruhan' => $masaKerjaKeseluruhan,
                     'NPWP' => $employee[$employeeId]->id_tax,
                     'Status Pegawai' => ($employee[$employeeId]->employment_status ? 'Aktif' : 'Tidak Aktif'),
                     'No NIK' => $employee[$employeeId]->id_number,
-                    'Komplek' => $complex,
-                    'Nama Komplek' => $complexName,
-                    'Alamat Tempat Tinggal Saat Ini' => $employee[$employeeId]->current_address,
+                    'Alamat Tempat Tinggal Saat Ini' => $employee[$employeeId]->residence_description,
+                    'Alamat Sesuai KTP' => $employee[$employeeId]->current_address,
                     'No. Telepon Rumah' => $employee[$employeeId]->home_phone_number,
                     'No. HP' => $employee[$employeeId]->mobile_phone,
                     'Alamat Kantor' => $employee[$employeeId]->office_address,
@@ -714,7 +702,6 @@ class ExportController extends Controller
                     'Email' => $employee[$employeeId]->email,
                     'Email Dinas' => $employee[$employeeId]->office_email,
                     'Kontak Darurat' => $employee[$employeeId]->emergency_contact,
-                    'Batas Usia Pensiun' => $retirementAge,
                 ];
             }
 
@@ -815,6 +802,9 @@ class ExportController extends Controller
      * @bodyParam isReligion int Indicates whether the religion field is included in the request. Example: 1
      * @bodyParam isGender int Indicates whether the gender field is included in the request. Example: 1
      * @bodyParam isMaritalStatus int Indicates whether the marital status field is included in the request. Example: 1
+     * @bodyParam isMarriageDate int Indicates whether the marriage date field is included in the request. Example: 1
+     * @bodyParam isMarriageDescription int Indicates whether the marriage description field is included in the request. Example: 1
+     * @bodyParam isMarriageOtherNotes int Indicates whether the marriage other notes field is included in the request. Example: 1
      * @bodyParam isEmployeeType int Indicates whether the employee type field is included in the output document. Example: 1
      * @bodyParam isAssistanceType int Indicates whether the employee type assistance field is included in the output document. Example: 1
      * @bodyParam isOutsourcingType int Indicates whether the employee type outsourcing field is included in the output document. Example: 1
@@ -839,6 +829,7 @@ class ExportController extends Controller
      * @bodyParam isNIK int Indicates whether the NIK field is included in the request. Example: 1
      * @bodyParam isCurrentAddress int Indicates whether the current address field is included in the request. Example: 1
      * @bodyParam isComplex int Indicates whether the complex field is included in the request. Example: 1
+     * @bodyParam isIDCardAddress int Indicates whether the id card address field is included in the request. Example: 1
      * @bodyParam isHomeNumber int Indicates whether the home number field is included in the request. Example: 1
      * @bodyParam isPhoneNumber int Indicates whether the phone number field is included in the request. Example: 1
      * @bodyParam isOfficeAddress int Indicates whether the office address field is included in the request. Example: 1
@@ -1057,6 +1048,9 @@ class ExportController extends Controller
         $toggleFieldBio['isReligion'] = $request->isReligion == 1;
         $toggleFieldBio['isGender'] = $request->isGender == 1;
         $toggleFieldBio['isMaritalStatus'] = $request->isMaritalStatus == 1;
+        $toggleFieldBio['isMarriageDate'] = $request->isMarriageDate == 1;
+        $toggleFieldBio['isMarriageDescription'] = $request->isMarriageDescription == 1;
+        $toggleFieldBio['isMarriageOtherNotes'] = $request->isMarriageOtherNotes == 1;
         $toggleFieldBio['isEmployeeType'] = $request->isEmployeeType == 1;
         $toggleFieldBio['isAssistanceType'] = $request->isAssistanceType == 1;
         $toggleFieldBio['isOutsourcingType'] = $request->isOutsourcingType == 1;
@@ -1082,6 +1076,7 @@ class ExportController extends Controller
         $toggleFieldBio['isNIK'] = $request->isNIK == 1;
         $toggleFieldBio['isCurrentAddress'] = $request->isCurrentAddress == 1;
         $toggleFieldBio['isComplex'] = $request->isComplex == 1;
+        $toggleFieldBio['isIDCardAddress'] = $request->isIDCardAddress == 1;
         $toggleFieldBio['isHomeNumber'] = $request->isHomeNumber == 1;
         $toggleFieldBio['isPhoneNumber'] = $request->isPhoneNumber == 1;
         $toggleFieldBio['isOfficeAddress'] = $request->isOfficeAddress == 1;
@@ -1120,7 +1115,7 @@ class ExportController extends Controller
                 // Set the group_concat_max_len session variable
                 DB::statement("SET SESSION group_concat_max_len = 10000");
 
-                $usersData = DB::table('users');
+                $usersData = DB::table('users')->select('users.type');
                 $usersData->leftJoin('echelons', 'users.echelon_id', '=', 'echelons.id');
                 if ($toggleFieldBio['isName']) {
                     $usersData->addSelect('users.name');
@@ -1151,6 +1146,15 @@ class ExportController extends Controller
                 }
                 if ($toggleFieldBio['isMaritalStatus']) {
                     $usersData->addSelect('users.marital_status');
+                }
+                if ($toggleFieldBio['isMarriageDate']) {
+                    $usersData->addSelect('users.marriage_date');
+                }
+                if ($toggleFieldBio['isMarriageDescription']) {
+                    $usersData->addSelect('users.marriage_description');
+                }
+                if ($toggleFieldBio['isMarriageOtherNotes']) {
+                    $usersData->addSelect('users.marriage_other_notes');
                 }
                 if ($toggleFieldBio['isPosition']) {
                     $usersData->leftJoin('positions', 'users.position_id', '=', 'positions.id');
@@ -1199,13 +1203,10 @@ class ExportController extends Controller
                 }
                 if ($toggleFieldBio['isComplex']) {
                     $usersData->leftJoin('residences as r', 'users.residence_id', '=', 'r.id');
-                    $usersData->addSelect(DB::raw("
-                    IF(
-                        users.residence_id = 1,
-                        CONCAT('Luar Komplek', IF(users.residence_description IS NULL,'',CONCAT(' - ',users.residence_description))),
-                        COALESCE(r.name,'-')
-                    ) as residence_name
-                    "));
+                    $usersData->addSelect(DB::raw("r.name as residence_name"));
+                }
+                if ($toggleFieldBio['isIDCardAddress']) {
+                    $usersData->addSelect('users.residence_description');
                 }
                 if ($toggleFieldBio['isHomeNumber']) {
                     $usersData->addSelect('users.home_phone_number');
@@ -1760,6 +1761,9 @@ class ExportController extends Controller
      * @bodyParam isReligion int Indicates whether the religion field is included in the request. Example: 1
      * @bodyParam isGender int Indicates whether the gender field is included in the request. Example: 1
      * @bodyParam isMaritalStatus int Indicates whether the marital status field is included in the request. Example: 1
+     * @bodyParam isMarriageDate int Indicates whether the marriage date field is included in the request. Example: 1
+     * @bodyParam isMarriageDescription int Indicates whether the marriage description field is included in the request. Example: 1
+     * @bodyParam isMarriageOtherNotes int Indicates whether the marriage other notes field is included in the request. Example: 1
      * @bodyParam isEmployeeType int Indicates whether the employee type field is included in the output document. Example: 1
      * @bodyParam isAssistanceType int Indicates whether the employee type assistance field is included in the output document. Example: 1
      * @bodyParam isOutsourcingType int Indicates whether the employee type outsourcing field is included in the output document. Example: 1
@@ -1784,6 +1788,7 @@ class ExportController extends Controller
      * @bodyParam isNIK int Indicates whether the NIK field is included in the request. Example: 1
      * @bodyParam isCurrentAddress int Indicates whether the current address field is included in the request. Example: 1
      * @bodyParam isComplex int Indicates whether the complex field is included in the request. Example: 1
+     * @bodyParam isIDCardAddress int Indicates whether the ID Card address is included in the request. Example: 1
      * @bodyParam isHomeNumber int Indicates whether the home number field is included in the request. Example: 1
      * @bodyParam isPhoneNumber int Indicates whether the phone number field is included in the request. Example: 1
      * @bodyParam isOfficeAddress int Indicates whether the office address field is included in the request. Example: 1
@@ -2025,6 +2030,15 @@ class ExportController extends Controller
         if ($this->request->isMaritalStatus == 1) {
             $usersPreview->addSelect('users.marital_status');
         }
+        if ($this->request->isMarriageDate == 1) {
+            $usersPreview->addSelect('users.marriage_date');
+        }
+        if ($this->request->isMarriageDescription == 1) {
+            $usersPreview->addSelect('users.marriage_description');
+        }
+        if ($this->request->isMarriageOtherNotes == 1) {
+            $usersPreview->addSelect('users.marriage_other_notes');
+        }
         if ($this->request->isPosition == 1) {
             $usersPreview->leftJoin('positions', 'users.position_id', '=', 'positions.id');
             $usersPreview->addSelect('positions.name as position_name');
@@ -2069,13 +2083,10 @@ class ExportController extends Controller
         }
         if ($this->request->isComplex == 1) {
             $usersPreview->leftJoin('residences as r', 'users.residence_id', '=', 'r.id');
-            $usersPreview->addSelect(DB::raw("
-                    IF(
-                        users.residence_id = 1,
-                        CONCAT('Luar Komplek', IF(users.residence_description IS NULL,'',CONCAT(' - ',users.residence_description))),
-                        COALESCE(r.name,'-')
-                    ) as residence_name
-            "));
+            $usersPreview->addSelect(DB::raw("r.name as residence_name"));
+        }
+        if ($this->request->isIDCardAddress == 1) {
+            $usersPreview->addSelect('users.residence_description');
         }
         if ($this->request->isHomeNumber == 1) {
             $usersPreview->addSelect('users.home_phone_number');

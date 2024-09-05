@@ -167,6 +167,9 @@
     "Agama" => $toggleField['isReligion'],
     "Jenis Kelamin" => $toggleField['isGender'],
     "Status Perkawinan" => $toggleField['isMaritalStatus'],
+    "Tanggal Perkawinan" => $toggleField['isMarriageDate'],
+    "Keterangan Perkawinan" => $toggleField['isMarriageDescription'],
+    "Keterangan Lainnya" => $toggleField['isMarriageOtherNotes'],
     "Jenis Pegawai" => $toggleField['isEmployeeType'],
     "Jenis Perbantuan" => $toggleField['isAssistanceType'],
     "Jenis Outsourcing" => $toggleField['isOutsourcingType'],
@@ -193,8 +196,9 @@
     "Status Pegawai" => $toggleField['isEmployeeStatus'],
     "No KK" => $toggleField['isNoFamily'],
     "No NIK" => $toggleField['isNIK'],
-    "Alamat Tempat Tinggal Saat Ini" => $toggleField['isCurrentAddress'],
-    "Nama Kompleks" => $toggleField['isComplex'],
+    "Komplek" => $toggleField['isComplex'],
+    "Alamat Tempat Tinggal Saat Ini" => $toggleField['isIDCardAddress'],
+    "Alamat Sesuai KTP" => $toggleField['isCurrentAddress'],
     "No. Telp Rumah" => $toggleField['isHomeNumber'],
     "No. HP" => $toggleField['isPhoneNumber'],
     "Alamat Kantor" => $toggleField['isOfficeAddress'],
@@ -315,6 +319,15 @@
                     -
                     @endswitch
                     @break
+                    @case("Tanggal Perkawinan")
+                    {{ $value['marriage_date'] }}
+                    @break
+                    @case("Keterangan Perkawinan")
+                    {{ $value['marriage_description'] }}
+                    @break
+                    @case("Keterangan Lainnya")
+                    {{ $value['marriage_other_notes'] }}
+                    @break
                     @case("Jenis Pegawai")
                     {!! $value['employee_type'] !!}
                     @break
@@ -423,10 +436,13 @@
                     @case("No NIK")
                     {{ $value['id_number'] }}
                     @break
-                    @case("Nama Kompleks")
+                    @case("Komplek")
                     {{ $value['residence_name'] }}
                     @break
                     @case("Alamat Tempat Tinggal Saat Ini")
+                    {{ $value['residence_description'] }}
+                    @break
+                    @case("Alamat Sesuai KTP")
                     {{ $value['current_address'] }}
                     @break
                     @case("No. Telp Rumah")

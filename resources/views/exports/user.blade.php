@@ -201,10 +201,6 @@
 
     <table style="width: 100%; margin-top: 8px;">
         @foreach($userProfile as $key => $value)
-        @if($key == 'Nama Komplek' && $userProfile['Komplek'] !== 'Luar Komplek' && $value == null)
-        @php continue;
-        @endphp
-        @endif
         <tr style="border-bottom: 1px solid #F0F0F0;">
             <td class="table-section-2-title">{{ $key }}:</td>
             <td class="table-section-2-body">{{ $value }}</td>
@@ -215,7 +211,7 @@
     <!-- <div class="page_break"></div> -->
 
     <!-- end of page 1 -->
-
+    @if(isset($userCollege))
     <div class="title-profile page_break">Riwayat Pendidikan</div>
 
     <table class="table-section-3">
@@ -293,8 +289,14 @@
             @endforeach
         </tbody>
     </table>
+    @endif
 
+    @if(isset($userPosition))
+    @if(!isset($userCollege))
+    <div class="title-profile page_break">Riwayat Jabatan</div>
+    @else
     <div class="title-profile">Riwayat Jabatan</div>
+    @endif
     <table class="table-section-3">
         <thead class="table-section-3-title-row">
             <td class="table-section-3-title">No</td>
@@ -363,7 +365,9 @@
             @endforeach
         </tbody>
     </table>
+    @endif
 
+    @if(isset($userGrade))
     <div class="title-profile">Riwayat Golongan</div>
 
     <table class="table-section-3">
@@ -404,7 +408,9 @@
             @endforeach
         </tbody>
     </table>
+    @endif
 
+    @if(isset($userTrainingStructural))
     <div class="title-profile">Riwayat Pelatihan Struktural</div>
 
     <table class="table-section-3">
@@ -441,7 +447,9 @@
             @endforeach
         </tbody>
     </table>
+    @endif
 
+    @if(isset($userTrainingFunctional))
     <div class="title-profile">Riwayat Pelatihan Fungsional</div>
 
     <table class="table-section-3">
@@ -478,7 +486,9 @@
             @endforeach
         </tbody>
     </table>
+    @endif
 
+    @if(isset($userTrainingTechnical))
     <div class="title-profile">Riwayat Pelatihan Teknis</div>
 
     <table class="table-section-3">
@@ -511,7 +521,9 @@
             @endforeach
         </tbody>
     </table>
+    @endif
 
+    @if(isset($userAward))
     <div class="title-profile">Riwayat Penghargaan</div>
 
     <table class="table-section-3">
@@ -544,7 +556,9 @@
             @endforeach
         </tbody>
     </table>
+    @endif
 
+    @if(isset($userSKP))
     <div class="title-profile">Riwayat SKP</div>
 
     <table class="table-section-3">
@@ -617,7 +631,9 @@
             @endforeach
         </tbody>
     </table>
+    @endif
 
+    @if(isset($userCredit))
     <div class="title-profile">Riwayat Penetapan Angka Kredit Terakhir</div>
 
     <table class="table-section-3">
@@ -663,7 +679,9 @@
             @endforeach
         </tbody>
     </table>
+    @endif
 
+    @if(isset($userPerformance))
     <div class="title-profile">Riwayat Penilaian Prestasi Kerja</div>
 
     <table class="table-section-3">
@@ -705,7 +723,9 @@
             @endforeach
         </tbody>
     </table>
+    @endif
 
+    @if(isset($userPunishment))
     <div class="title-profile">Riwayat Hukuman Disiplin</div>
 
     <table class="table-section-3">
@@ -750,7 +770,9 @@
             @endforeach
         </tbody>
     </table>
+    @endif
 
+    @if(isset($userFamily))
     <div class="title-profile">Keluarga</div>
 
     <table class="table-section-3">
@@ -912,7 +934,9 @@
             @endforeach
         </tbody>
     </table>
+    @endif
 
+    @if(isset($userLeave))
     <div class="title-profile">Cuti</div>
 
     <table class="table-section-3">
@@ -971,7 +995,9 @@
             @endforeach
         </tbody>
     </table>
+    @endif
 
+    @if(isset($userNotes))
     <div class="title-profile">Catatan</div>
 
     <table class="table-section-3">
@@ -994,7 +1020,9 @@
             @endforeach
         </tbody>
     </table>
+    @endif
 
+    @if(isset($userAssessment))
     <div class="title-profile">Hasil Assessment</div>
 
     <table class="table-section-3">
@@ -1044,7 +1072,9 @@
             @endforeach
         </tbody>
     </table>
+    @endif
 
+    @if(isset($userAssessmentCompetency))
     <div class="title-profile">Hasil Uji Kompetensi</div>
 
     <table class="table-section-3">
@@ -1094,7 +1124,9 @@
             @endforeach
         </tbody>
     </table>
+    @endif
 
+    @if(isset($userAssessmentTalent))
     <div class="title-profile">Hasil Talent Pool</div>
 
     <table class="table-section-3">
@@ -1144,6 +1176,7 @@
             @endforeach
         </tbody>
     </table>
+    @endif
 </body>
 
 </html>
