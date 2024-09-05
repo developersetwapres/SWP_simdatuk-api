@@ -29,7 +29,8 @@ class FamilyRepository
             'mobile_phone',
             'sequence_number',
         );
-        $families->orderBy('sequence_number', 'asc');
+        // note: '1=Kepala Keluarga, 2=Suami, 3=Istri, 4=Anak, 5=Menantu, 6=Cucu, 7=Orang Tua, 8=Mertua, 9=Famili Lainnya, 10=Pembantu, 11=Lainnya'
+        $families->orderByRaw("FIELD(relationship_status, 2,3,4,7,8,1,5,6,9,10,11) ASC");
         return $families = $families->get();
     }
 
@@ -57,7 +58,8 @@ class FamilyRepository
             'mobile_phone',
             'sequence_number',
         );
-        $families->orderBy('sequence_number', 'asc');
+        // note: '1=Kepala Keluarga, 2=Suami, 3=Istri, 4=Anak, 5=Menantu, 6=Cucu, 7=Orang Tua, 8=Mertua, 9=Famili Lainnya, 10=Pembantu, 11=Lainnya'
+        $families->orderByRaw("FIELD(relationship_status, 2,3,4,7,8,1,5,6,9,10,11) ASC");
         $families = $families->get();
 
         $newFamilies = [];
