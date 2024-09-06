@@ -42,7 +42,7 @@ class UpdatePositionHistoryEmployeeRequest
     public static function messages(): array
     {
         return [
-            'positions.*.id.numeric' => 'Education ID harus berupa angka.',
+            'positions.*.id.numeric' => 'Jabatan ID harus berupa angka.',
             'positions.*.group_id.numeric' => 'Rumpun harus berupa angka.',
             'positions.*.echelon.numeric' => 'Eselon harus berupa angka.',
             'positions.*.echelon.in' => 'Eselon harus diantara 1,2,3,4,5 atau 6.',
