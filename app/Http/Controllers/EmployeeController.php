@@ -1239,45 +1239,28 @@ class EmployeeController extends Controller
         try {
             DB::beginTransaction();
             // Delete Employee's Families if exist
-            $userFamilies  = DB::table('user_families')->where('user_id', $employee->id);
-            if ($userFamilies->count() > 0) {
-                $userFamilies->delete();
-            }
+            DB::table('user_families')->where('user_id', $employee->id)->delete();
+            
             // Delete Employee's Educations if exist
-            $userEducations  = DB::table('user_educations')->where('user_id', $employee->id);
-            if ($userEducations->count() > 0) {
-                $userEducations->delete();
-            }
+            DB::table('user_educations')->where('user_id', $employee->id)->delete();
+            
             // Delete Employee's Assessments if exist
-            $userAssessments  = DB::table('user_assessments')->where('user_id', $employee->id);
-            if ($userAssessments->count() > 0) {
-                $userAssessments->delete();
-            }
+            DB::table('user_assessments')->where('user_id', $employee->id)->delete();
+            
             // Delete Employee's Competencies if exist
-            $userCompetencies  = DB::table('user_competencies')->where('user_id', $employee->id);
-            if ($userCompetencies->count() > 0) {
-                $userCompetencies->delete();
-            }
+            DB::table('user_competencies')->where('user_id', $employee->id)->delete();
+            
             // Delete Employee's Credits if exist
-            $userCredits  = DB::table('user_credits')->where('user_id', $employee->id);
-            if ($userCredits->count() > 0) {
-                $userCredits->delete();
-            }
+            DB::table('user_credits')->where('user_id', $employee->id)->delete();
+            
             // Delete Employee's Leaves if exist
-            $userLeaves  = DB::table('user_leaves')->where('user_id', $employee->id);
-            if ($userLeaves->count() > 0) {
-                $userLeaves->delete();
-            }
+            DB::table('user_leaves')->where('user_id', $employee->id)->delete();
+            
             // Delete Employee's Notes if exist
-            $userNotes  = DB::table('user_notes')->where('user_id', $employee->id);
-            if ($userNotes->count() > 0) {
-                $userNotes->delete();
-            }
+            DB::table('user_notes')->where('user_id', $employee->id)->delete();
+            
             // Delete Employee's Talents if exist
-            $userTalents  = DB::table('user_talents')->where('user_id', $employee->id);
-            if ($userTalents->count() > 0) {
-                $userTalents->delete();
-            }
+            DB::table('user_talents')->where('user_id', $employee->id)->delete();
 
             // Delete Employee Her/His self
             DB::table('users')->where('id', $employee->id)->delete();
