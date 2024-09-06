@@ -115,6 +115,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/synchronization', [SynchronizationController::class, 'index']); // Put this on top, to ensure the synchronization route is defined before the "show" route to avoid conflicts
         Route::get('/{id}', [EmployeeController::class, 'show']);
         Route::post('/{id}', [EmployeeController::class, 'update']);
+        Route::delete('/{id}', [EmployeeController::class, 'delete']);
         Route::put('/status', [EmployeeController::class, 'status']);
         Route::get('/import/download-template/{type}', [ImportEmployeeController::class, 'downloadTemplate']);
         Route::get('/import/histories', [ImportEmployeeController::class, 'getRiwayatImport']);
