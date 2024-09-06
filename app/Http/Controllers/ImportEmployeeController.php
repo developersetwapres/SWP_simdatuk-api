@@ -1216,8 +1216,9 @@ class ImportEmployeeController extends Controller
                         }
                     }
                 }
-
-                $this->skippedRow('Data Pegawai', $personalInfoKey, 'Pegawai dengan ' . $nonUnique . ' sudah ada');
+                if ($nonUnique !== '') {
+                    $this->skippedRow('Data Pegawai', $personalInfoKey, 'Pegawai dengan ' . $nonUnique . ' sudah ada');
+                }
             }
 
             // Get ID
