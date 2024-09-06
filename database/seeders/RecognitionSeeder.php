@@ -19,6 +19,7 @@ class RecognitionSeeder extends Seeder
             ['id' => 3, 'name' => 'Satyalancana Karya Satya 30th', 'description' => 'ASN yang telah berbakti selama 30 tahun'],
             ['id' => 4, 'name' => 'Satyalancana Wira Karya', 'description' => 'ASN yang telah berjasa dan berbakti kepada negara'],
             ['id' => 5, 'name' => 'Bintang Jasa Utama', 'description' => 'ASN yang berjasa besar terhadap negara dan bangsa dalam suatu bidang, peristiwa, atau hal tertentu'],
+            ['id' => 6, 'name' => 'Penghargaan Lainnya', 'description' => 'ASN yang mendapat jenis penghargaan lainnya'],
         ];
         DB::table('recognitions')->insertTs($recognitions);
     }
