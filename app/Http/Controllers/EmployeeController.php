@@ -473,7 +473,7 @@ class EmployeeController extends Controller
         $assessments = $this->assessmentRepository->getDetail($this->request->id);
         $competencies = $this->competencyRepository->getDetail($this->request->id);
         $talents = $this->talentRepository->getDetail($this->request->id);
-        $position = array_reverse($this->positionRepository->getRecursivePosition($employee->position_id));
+        $position = array_reverse((array)$this->positionRepository->getRecursivePosition($employee->position_id));
 
         $employee->position = $position;
         $employee->educations = $educations;
@@ -1218,5 +1218,61 @@ class EmployeeController extends Controller
         $query->where('id', $this->request->id);
         $query->updateTs($this->posted);
         return $this->response(200, 'Pegawai berhasil diupdate.');
+    }
+
+    /**
+     * Delete Employee by ID
+     *
+     * Delete a specific employee.
+     * @group Employee
+     * @authenticated
+     * @response 404 {"code": 404,"message": "Mohon maaf, pegawai tidak ditemukan.","data": null}
+     * @response 200 {"code": 200,"message": "Pegawai berhasil dihapus.","data": null}
+    */
+    public function delete() 
+    {
+        $employee = DB::table('users')->select('id')->where('id', $this->request->id)->first();
+        if (!$employee) {
+            return $this->response(404, 'Pegawai tidak ditemukan.');
+        }
+
+        try {
+            DB::beginTransaction();
+            // Delete Employee's Families if exist
+            DB::table('user_families')->where('user_id', $employee->id)->delete();
+            
+            // Delete Employee's Educations if exist
+            DB::table('user_educations')->where('user_id', $employee->id)->delete();
+            
+            // Delete Employee's Assessments if exist
+            DB::table('user_assessments')->where('user_id', $employee->id)->delete();
+            
+            // Delete Employee's Competencies if exist
+            DB::table('user_competencies')->where('user_id', $employee->id)->delete();
+            
+            // Delete Employee's Credits if exist
+            DB::table('user_credits')->where('user_id', $employee->id)->delete();
+            
+            // Delete Employee's Leaves if exist
+            DB::table('user_leaves')->where('user_id', $employee->id)->delete();
+            
+            // Delete Employee's Notes if exist
+            DB::table('user_notes')->where('user_id', $employee->id)->delete();
+            
+            // Delete Employee's Talents if exist
+            DB::table('user_talents')->where('user_id', $employee->id)->delete();
+
+            // Delete Employee Her/His self
+            DB::table('users')->where('id', $employee->id)->delete();
+
+            DB::commit();
+            return $this->response(200, 'Pegawai berhasil dihapus.');
+
+        } catch (\Throwable $th) {
+            DB::rollback();
+            Log::warning($th);
+            return $this->response(500, 'Pegawai gagal dihapus.');
+        }
+
     }
 }
