@@ -7,6 +7,7 @@ use App\Http\Requests\TrainingHistory\UpdateTrainingHistoryRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 /**
  * @group History
@@ -15,6 +16,9 @@ use Illuminate\Support\Facades\DB;
  */
 class TrainingHistoryController extends Controller
 {
+    protected $request;
+    protected $posted;
+
     public function __construct(Request $request)
     {
         $this->request = $request;
@@ -30,8 +34,8 @@ class TrainingHistoryController extends Controller
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
      * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
      * @queryParam type integer Refers to the types of items to be displayed per page. Example: 1
-     * @queryParam search string The keyword search field for the name. Example: Sepadya tahun 1994
-     * @response 200 {"code": 200,"message": "success","data": [{"id": 1,"created_at": "2024-05-03 05:29:30","name": "Sepadya tahun 1994","period_month": 3,"period_year": "2020","start_date": "2020-10-22","total": 2}],"pagination": {"total": 4,"count": 4,"per_page": 10,"current_page": 1,"total_pages": 1,"links": {"first_page": "http://localhost/api/trainings?page=1","last_page": "http://localhost/api/trainings?page=1","next_page": null,"prev_page": null}}}
+     * @queryParam search string The keyword search field for the level_name. Example: Sepadya tahun 1994
+     * @response 200 {"code": 200,"message": "success","data": [{"id": 1,"created_at": "2024-05-03 05:29:30","level_name": "Sepadya tahun 1994","period_month": 3,"period_year": "2020","start_date": "2020-10-22","total": 2}],"pagination": {"total": 4,"count": 4,"per_page": 10,"current_page": 1,"total_pages": 1,"links": {"first_page": "http://localhost/api/trainings?page=1","last_page": "http://localhost/api/trainings?page=1","next_page": null,"prev_page": null}}}
      */
     public function index()
     {
@@ -53,7 +57,10 @@ class TrainingHistoryController extends Controller
 
         $trainingHistories = DB::table('training_histories as th');
         $trainingHistories->leftjoin('training_history_users as thu', 'th.id', '=', 'thu.training_history_id');
-        $trainingHistories->select('th.id', 'th.created_at', 'th.name', 'th.period_month', 'th.period_year', 'th.start_date', DB::raw("COUNT(thu.id) AS total"));
+        $trainingHistories->select(
+            'th.id', 'th.created_at', 'th.name', 'th.period_month', 'th.period_year', 
+            'th.start_date', 'th.end_date', DB::raw("COUNT(thu.id) AS total")
+        );
         $trainingHistories->where('th.name', 'like', '%' . $this->request->search . '%');
         $trainingHistories->where('th.type', $this->request->type);
         $trainingHistories->orderBy('th.updated_at', 'desc');
@@ -97,7 +104,7 @@ class TrainingHistoryController extends Controller
             DB::commit();
             return $this->response(200, 'Pelatihan berhasil ditambah.');
         } catch (\Throwable $th) {
-            \Log::warning($th);
+            Log::warning($th);
             DB::rollback();
             return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
         }
@@ -115,9 +122,13 @@ class TrainingHistoryController extends Controller
      */
     public function show()
     {
-        $trainingHistory = DB::table('training_histories');
-        $trainingHistory->where('id', $this->request->id);
-        $trainingHistory->select('id', 'period_month', 'period_year', 'name', 'reference_number', 'level', 'start_date', 'duration', 'organizer', 'link');
+        $trainingHistory = DB::table('training_histories as th');
+        $trainingHistory->where('th.id', $this->request->id);
+        $trainingHistory->select(
+            'th.id', 'th.period_month', 'th.period_year', 'th.name', 'th.reference_number', 'tl.level_name', 
+            'th.start_date', 'th.end_date', 'th.duration', 'th.organizer', 'th.link', 'th.description',
+        );
+        $trainingHistory->join('training_levels as tl', 'th.level', '=', 'tl.id');
         $trainingHistory = $trainingHistory->first();
 
         if (!$trainingHistory) {
@@ -204,4 +215,47 @@ class TrainingHistoryController extends Controller
         }
         return $this->response(200, 'Pelatihan berhasil diupdate.');
     }
+
+    /**
+     * Get List of Training Levels
+     *
+     * Retrieve the Level of master data.
+     * @subgroup Level
+     * @authenticated
+     * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
+     * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
+     * @queryParam search string The keyword search field for the name. Example: Fungsional
+     * @response 200 {"code": 200,"message": "success","data": [{"id": 1,"name": "Fungsional", "description": "-"}],"pagination": {"total": 32,"count": 1,"per_page": 1,"current_page": 1,"total_pages": 32,"links": {"first_page": "http://localhost/api/training-histories/levels?page=1","last_page": "http://localhost/api/training-histories/levels?page=32","next_page": "http://localhost/api/training-histories/levels?page=2","prev_page": null}}}
+     *
+    */
+    public function levels() {
+        $messages = [
+            'page.numeric'  => 'Page harus berupa angka.',
+            'page.min'      => 'Page minimal harus 1 atau lebih.',
+            'limit.numeric' => 'Limit harus berupa angka.',
+            'limit.min'     => 'Limit minimal harus 1 atau lebih.',
+        ];
+
+        $validatedData = $this->request->validate([
+            'page'  => 'nullable|numeric|min:1',
+            'limit' => 'nullable|numeric|min:1',
+        ], $messages);
+
+        $levels = DB::table('training_levels');
+        $levels->select('training_levels.id', 'training_levels.level_name', 'training_levels.description');
+        $levels->where('training_levels.level_name', 'like', '%' . $this->request->search . '%');
+        $levels->orderBy('id', 'asc');
+
+        if (is_null($this->request->limit)) {
+            $levels = $levels->get();
+            $message = (count($levels) < 1) ? 'Mohon maaf, data tidak ditemukan.' : 'success';
+            return $this->response(200, $message, $levels);
+        } else {
+            $levels = $levels->paginate($this->request->limit);
+            $message = ($levels->isEmpty()) ? 'Mohon maaf, data tidak ditemukan.' : 'success';
+            return $this->paginateResponse(200, $message, $levels);
+        }
+
+    }
+
 }

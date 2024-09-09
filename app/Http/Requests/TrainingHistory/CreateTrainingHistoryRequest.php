@@ -26,12 +26,14 @@ class CreateTrainingHistoryRequest extends FormRequest
             'period_year' => 'required|date_format:Y',
             'name' => 'required|max:160',
             'reference_number' => 'required|max:160',
-            'level' => 'nullable|max:160',
+            'level' => 'nullable',
             'start_date' => 'required|date',
+            'end_date' => 'nullable|date',
             'duration' => 'nullable|numeric',
             'organizer' => 'nullable|max:160',
             'link' => 'nullable|url',
             'type' => 'required|numeric|in:1,2,3',
+            'description' => 'nullable|max:255',
             'users.*.user_id' => 'required|numeric',
             'users.*.certificate' => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
         ];
@@ -54,15 +56,16 @@ class CreateTrainingHistoryRequest extends FormRequest
             'name.max' => 'Nama diklat tidak boleh lebih dari 160 karakter.',
             'reference_number.required' => 'No surat perintah tidak boleh kosong.',
             'reference_number.max' => 'No surat perintah tidak boleh lebih dari 160 karakter.',
-            'level.max' => 'Jenjang tidak boleh lebih dari 160 karakter.',
             'start_date.required' => 'Tanggal pelaksanaan tidak boleh kosong.',
             'start_date.date' => 'Tanggal pelaksanaan harus berupa tanggal.',
+            'end_date.date' => 'Tanggal akhir pelaksanaan harus berupa tanggal.',
             'duration.numeric' => 'Durasi pelatihan harus berupa angka.',
             'organizer.max' => 'Penyelenggara tidak boleh lebih dari 160 karakter.',
             'link.url' => 'Format link tidak sesuai.',
             'type.required' => 'Tipe pelatihan tidak boleh kosong.',
             'type.numeric' => 'Tipe pelatihan harus berupa angka.',
             'type.in' => 'Tipe pelatihan harus diantara 1, 2 atau 3.',
+            'description.max' => 'Keterangan tidak boleh lebih dari 255 karakter.',
             'users.*.user_id.required' => 'User ID tidak boleh kosong.',
             'users.*.user_id.numeric' => 'User ID harus berupa angka.',
             'users.*.certificate.file' => 'Sertifikat harus berupa file.',
@@ -96,12 +99,16 @@ class CreateTrainingHistoryRequest extends FormRequest
                 'example' => '13936/PPKASN/09/2021',
             ],
             'level' => [
-                'description' => 'Refers to the Level of Employee Training.',
-                'example' => 'Diklat PIM Tk.III',
+                'description' => 'Refers to the ID Level of Employee Training.',
+                'example' => 1,
             ],
             'start_date' => [
                 'description' => 'Refers to the Start Date of Employee Training.',
                 'example' => '2020-10-22',
+            ],
+            'end_date' => [
+                'description' => 'Refers to the End Date of Employee Training.',
+                'example' => '2020-10-23',
             ],
             'duration' => [
                 'description' => 'Refers to the Duration of Employee Training.',
@@ -118,6 +125,10 @@ class CreateTrainingHistoryRequest extends FormRequest
             'type' => [
                 'description' => 'Refers to the Type of Employee Training. 1=Struktural, 2=Fungsional, 3=Teknis.',
                 'example' => 1,
+            ],
+            'description' => [
+                'description' => 'Refers to the Description of Employee Training.',
+                'example' => "Pelatihan lainnya",
             ],
             'users.*.user_id' => [
                 'description' => 'Refers to the User ID of List Employee Training.',
