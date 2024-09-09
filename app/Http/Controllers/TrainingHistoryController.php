@@ -53,12 +53,14 @@ class TrainingHistoryController extends Controller
             'limit' => 'nullable|numeric|min:1',
             'type' => 'required|in:1,2,3',
         ], $messages);
-        $limit = ($this->request->limit) ? $this->request->limit : 10;
-        $this->request->request->add(['limit' => $limit]);
+        $this->request->limit = ($this->request->limit) ? $this->request->limit : 10;
 
         $trainingHistories = DB::table('training_histories as th');
         $trainingHistories->leftjoin('training_history_users as thu', 'th.id', '=', 'thu.training_history_id');
-        $trainingHistories->select('th.id', 'th.created_at', 'th.name', 'th.period_month', 'th.period_year', 'th.start_date', DB::raw("COUNT(thu.id) AS total"));
+        $trainingHistories->select(
+            'th.id', 'th.created_at', 'th.name', 'th.period_month', 'th.period_year', 
+            'th.start_date', 'th.end_date', DB::raw("COUNT(thu.id) AS total")
+        );
         $trainingHistories->where('th.name', 'like', '%' . $this->request->search . '%');
         $trainingHistories->where('th.type', $this->request->type);
         $trainingHistories->orderBy('th.updated_at', 'desc');
@@ -120,9 +122,13 @@ class TrainingHistoryController extends Controller
      */
     public function show()
     {
-        $trainingHistory = DB::table('training_histories');
-        $trainingHistory->where('id', $this->request->id);
-        $trainingHistory->select('id', 'period_month', 'period_year', 'name', 'reference_number', 'level', 'start_date', 'duration', 'organizer', 'link');
+        $trainingHistory = DB::table('training_histories as th');
+        $trainingHistory->where('th.id', $this->request->id);
+        $trainingHistory->select(
+            'th.id', 'th.period_month', 'th.period_year', 'th.name', 'th.reference_number', 'tl.level_name', 
+            'th.start_date', 'th.end_date', 'th.duration', 'th.organizer', 'th.link', 'th.description',
+        );
+        $trainingHistory->join('training_levels as tl', 'th.level', '=', 'tl.id');
         $trainingHistory = $trainingHistory->first();
 
         if (!$trainingHistory) {
