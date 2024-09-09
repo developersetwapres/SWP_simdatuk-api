@@ -70,13 +70,31 @@ class OldTrainingSeeder extends Seeder
         // Output the grouped data
         foreach ($groupedData as $key => $group) {
             $item = explode("|", $key);
+            // insert jenjang
+            if ($item[1] == 'null') {
+                $trainingLevelId = 6;   // Pelatihan Lainnya refers to training_levels
+            } elseif (ucfirst($item[1]) == 'Fungsional') {
+                $trainingLevelId = 7;
+            } else {
+                $checkLevel = DB::table('training_levels')->where('level_name', 'LIKE', DB::raw('%'.$item[1].'%'));
+                if ($checkLevel->count() > 0) {
+                    $trainingLevelId = $checkLevel->first();
+                    $trainingLevelId = $trainingLevelId->id;
+                } else {
+                    $trainingLevelId = DB::table('training_levels');
+                    $trainingLevelId = $trainingLevelId->insertGetIdTs([
+                        'level_name' => $item[1],
+                    ]);
+                }
+            }
+            // insert riwayat pelatihan
             $trainingId = DB::table('training_histories');
             $trainingId = $trainingId->insertGetIdTs([
-                'name' => ($item[0] == 'null') ? null : $item[0],
-                'level' => ($item[1] == 'null') ? null : $item[1],
+                'name'        => ($item[0] == 'null') ? null : $item[0],
+                'level'       => ($trainingLevelId == null) ? null : $trainingLevelId,
                 'period_year' => ($item[2] == 'null') ? null : $item[2],
-                'organizer' => ($item[3] == 'null') ? null : $item[3],
-                'type' => $type,
+                'organizer'   => ($item[3] == 'null') ? null : $item[3],
+                'type'        => $type,
             ]);
             foreach ($group as $item) {
                 $user = DB::table('training_history_users');
