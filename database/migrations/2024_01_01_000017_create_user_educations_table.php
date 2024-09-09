@@ -16,12 +16,16 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->tinyInteger('level')->nullable()->comment('1=SD/Sederajat, 2=SLTP/Sederajat, 3=SLTA/Sederajat, 4=Diploma I/II, 5=Akademik/D3/S.Muda, 6=Diploma IV/Strata I, 7=Strata II, 8=Strata III');
             $table->string('name', 160)->nullable();
+            $table->tinyInteger('study_area')->nullable()->comment('1=Dalam Negeri, 2=Luar Negeri');
+            $table->string('accreditation', 30)->nullable()->comment('Akreditasi A, B, C, atau BAN-PT Unggul, Baik Sekali, Baik');
             $table->string('faculty', 160)->nullable();
             $table->string('major', 160)->nullable();
             $table->tinyInteger('status')->nullable()->comment('1=Lulus, 2=DO, 3=Aktif, 4=Non-Aktif, 5=Mengundurkan diri');
             $table->year('year_of_graduation')->nullable();
             $table->text('description')->nullable();
-            $table->text('degree_document')->nullable();
+            $table->text('degree_document')->nullable()->comment('Dokumen Ijazah / SKL / Sejenisnya');
+            $table->string('study_assignment_letter', 512)->nullable()->comment('Surat Keterangan Tugas Belajar');
+            $table->string('academic_title_letter', 512)->nullable()->comment('Surat Keputusan Pencantuman Gelar');
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
 

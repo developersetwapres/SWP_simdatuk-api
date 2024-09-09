@@ -341,6 +341,12 @@ class EmployeeController extends Controller
                     if (isset($education['degree_document']) && is_file($education['degree_document'])) {
                         $education['degree_document'] = $this->uploadDocument($education['degree_document'], 'degree_document');
                     }
+                    if (isset($education['study_assignment_letter']) && is_file($education['study_assignment_letter'])) {
+                        $education['study_assignment_letter'] = $this->uploadDocument($education['study_assignment_letter'], 'study_assignment_letter');
+                    }
+                    if (isset($education['academic_title_letter']) && is_file($education['academic_title_letter'])) {
+                        $education['academic_title_letter'] = $this->uploadDocument($education['academic_title_letter'], 'academic_title_letter');
+                    }
                     $education['user_id'] = $userId;
                     array_push($educations, $education);
                 }
@@ -620,6 +626,24 @@ class EmployeeController extends Controller
                         unset($education['degree_document']);
                     }
                     unset($education['delete_degree_document']);
+
+                    if (isset($education['study_assignment_letter']) && is_file($education['study_assignment_letter'])) {
+                        $education['study_assignment_letter'] = $this->uploadDocument($education['study_assignment_letter'], 'study_assignment_letter');
+                    } else if ($education['delete_study_assignment_letter'] == true) {
+                        $education['study_assignment_letter'] = null;
+                    } else {
+                        unset($education['study_assignment_letter']);
+                    }
+                    unset($education['delete_study_assignment_letter']);
+
+                    if (isset($education['academic_title_letter']) && is_file($education['academic_title_letter'])) {
+                        $education['academic_title_letter'] = $this->uploadDocument($education['academic_title_letter'], 'academic_title_letter');
+                    } else if ($education['delete_academic_title_letter'] == true) {
+                        $education['academic_title_letter'] = null;
+                    } else {
+                        unset($education['academic_title_letter']);
+                    }
+                    unset($education['delete_academic_title_letter']);
 
                     if (isset($education['id'])) {
                         // Update existing data

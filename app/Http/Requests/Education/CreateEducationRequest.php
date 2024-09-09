@@ -15,12 +15,16 @@ class CreateEducationRequest
         return [
             'educations.*.level' => 'required|numeric|in:1,2,3,4,5,6,7,8',
             'educations.*.name' => 'required|max:160',
+            'educations.*.study_area' => 'nullable|numeric|in:1,2',
+            'educations.*.accreditation' => 'nullable|max:30',
             'educations.*.faculty' => 'max:160',
             'educations.*.major' => 'max:160',
             'educations.*.status' => 'required|numeric|in:1,2,3,4,5',
             'educations.*.year_of_graduation' => 'required|date_format:Y',
             'educations.*.description' => 'max:160',
             'educations.*.degree_document' => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
+            'educations.*.study_assignment_letter' => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
+            'educations.*.academic_title_letter' => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
         ];
     }
 
@@ -37,6 +41,8 @@ class CreateEducationRequest
             'educations.*.level.in' => 'Tingkat pendidikan harus diantara 1,2,3,4,5,6,7,8 atau 9',
             'educations.*.name.requird' => 'Nama tidak boleh kosong.',
             'educations.*.name.max' => 'Nama tidak boleh lebih dari 160 karakter.',
+            'educations.*.study_area.numeric' => 'Wilayah Sekolah/Kampus harus berupa angka.',
+            'educations.*.accreditation.max' => 'Akreditasi tidak boleh lebih dari 30 karakter.',
             'educations.*.faculty.max' => 'Nama fakultas tidak boleh lebih dari 160 karakter.',
             'educations.*.major.max' => 'Jurusan tidak boleh lebih dari 160 karakter.',
             'educations.*.status.required' => 'Status tidak boleh kosong.',
@@ -48,6 +54,12 @@ class CreateEducationRequest
             'educations.*.degree_document.file' => 'Ijazah harus berupa file.',
             'educations.*.degree_document.extensions' => 'Ijazah harus berupa jpg, jpeg atau png.',
             'educations.*.degree_document.max' => 'Ukuran ijazah tidak boleh lebih dari 2MB.',
+            'educations.*.study_assignment_letter.file' => 'Surat Keterangan Tugas Belajar harus berupa file.',
+            'educations.*.study_assignment_letter.extensions' => 'Surat Keterangan Tugas Belajar harus berupa jpg, jpeg atau png.',
+            'educations.*.study_assignment_letter.max' => 'Ukuran Surat Keterangan Tugas Belajar tidak boleh lebih dari 2MB.',
+            'educations.*.academic_title_letter.file' => 'SK Pencantuman Gelar harus berupa file.',
+            'educations.*.academic_title_letter.extensions' => 'SK Pencantuman Gelar harus berupa jpg, jpeg atau png.',
+            'educations.*.academic_title_letter.max' => 'Ukuran SK Pencantuman Gelar tidak boleh lebih dari 2MB.',
         ];
     }
 
@@ -66,6 +78,14 @@ class CreateEducationRequest
             'educations.*.name' => [
                 'description' => 'Refers to the Name of Employee Education.',
                 'example' => 'Universitas Indonesia',
+            ],
+            'educations.*.study_area' => [
+                'description' => 'Refers to the Study Area of Employee Education.',
+                'example' => 'Dalam Negeri',
+            ],
+            'educations.*.accreditation' => [
+                'description' => 'Refers to the Accreditation of Employee Education.',
+                'example' => 'A',
             ],
             'educations.*.faculty' => [
                 'description' => 'Refers to the Faculty of Employee Education.',
@@ -89,6 +109,14 @@ class CreateEducationRequest
             ],
             'educations.*.degree_document' => [
                 'description' => 'Refers to the Degree Document of Employee Education.',
+                'example' => public_path('/img/logo.svg'),
+            ],
+            'educations.*.study_assignment_letter' => [
+                'description' => 'Refers to the Study Assignment Letter of Employee Education.',
+                'example' => public_path('/img/logo.svg'),
+            ],
+            'educations.*.academic_title_letter' => [
+                'description' => 'Refers to the Academic Title Letter of Employee Education.',
                 'example' => public_path('/img/logo.svg'),
             ],
         ];

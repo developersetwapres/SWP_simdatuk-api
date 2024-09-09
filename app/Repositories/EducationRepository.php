@@ -17,12 +17,16 @@ class EducationRepository
                 'id',
                 'level',
                 'name',
+                'study_area',
+                'accreditation',
                 'faculty',
                 'major',
                 'status',
                 'year_of_graduation',
                 'description',
                 'degree_document',
+                'study_assignment_letter',
+                'academic_title_letter',
             )
             ->orderBy('level', 'desc')
             ->orderBy('year_of_graduation', 'desc')->get();
@@ -43,12 +47,16 @@ class EducationRepository
                 'user_id',
                 'level',
                 'name',
+                'study_area',
+                'accreditation',
                 'faculty',
                 'major',
                 'status',
                 'year_of_graduation',
                 'description',
                 'degree_document',
+                'study_assignment_letter',
+                'academic_title_letter',
             )
             ->orderBy('level', 'desc')
             ->orderBy('year_of_graduation', 'desc')->get();

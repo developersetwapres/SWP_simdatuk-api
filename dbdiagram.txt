@@ -450,12 +450,16 @@ Table "user_educations" {
   "user_id" bigint [not null]
   "level" tinyint [default: NULL, note: '1=SD/Sederajat, 2=SLTP/Sederajat, 3=SLTA/Sederajat, 4=Diploma I/II, 5=Akademik/D3/S.Muda, 6=Diploma IV/Strata I, 7=Strata II, 8=Strata III']
   "name" varchar(160) [default: NULL]
+  "study_area" tinyint [default: NULL, note: '1=Dalam Negeri, 2=Luar Negeri']
+  "accreditation" varchar(30) [default: NULL]
   "faculty" varchar(160) [default: NULL]
   "major" varchar(160) [default: NULL]
   "status" tinyint [default: NULL, note: '1=Lulus, 2=DO, 3=Aktif, 4=Non-Aktif, 5=Mengundurkan diri']
   "year_of_graduation" year [default: NULL]
   "description" text
   "degree_document" text
+  "study_assignment_letter" varchar(512) [default: NULL]
+  "academic_title_letter" varchar(512) [default: NULL]
   "created_at" timestamp [not null]
   "updated_at" timestamp [default: NULL]
 }

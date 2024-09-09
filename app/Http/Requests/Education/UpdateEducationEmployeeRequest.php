@@ -16,6 +16,8 @@ class UpdateEducationEmployeeRequest
             'educations.*.id' => 'numeric|nullable',
             'educations.*.level' => 'required|numeric|in:1,2,3,4,5,6,7,8',
             'educations.*.name' => 'required|max:160',
+            'educations.*.study_area' => 'nullable|numeric|in:1,2',
+            'educations.*.accreditation' => 'nullable|max:30',
             'educations.*.faculty' => 'max:160',
             'educations.*.major' => 'max:160',
             'educations.*.status' => 'required|numeric|in:1,2,3,4,5',
@@ -23,6 +25,10 @@ class UpdateEducationEmployeeRequest
             'educations.*.description' => 'max:160',
             'educations.*.degree_document' => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
             'educations.*.delete_degree_document' => 'required|boolean',
+            'educations.*.study_assignment_letter' => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
+            'educations.*.delete_study_assignment_letter' => 'required|boolean',
+            'educations.*.academic_title_letter' => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
+            'educations.*.delete_academic_title_letter' => 'required|boolean',
         ];
     }
 
@@ -38,8 +44,10 @@ class UpdateEducationEmployeeRequest
             'educations.*.level.required' => 'Tingkat pendidikan tidak boleh kosong.',
             'educations.*.level.numeric' => 'Tingkat pendidikan harus berupa angka.',
             'educations.*.level.in' => 'Tingkat pendidikan harus diantara 1,2,3,4,5,6,7, atau 8',
-            'educations.*.name.requird' => 'Nama tidak boleh kosong.',
+            'educations.*.name.required' => 'Nama tidak boleh kosong.',
             'educations.*.name.max' => 'Nama tidak boleh lebih dari 160 karakter.',
+            'educations.*.study_area.numeric' => 'Wilayah Sekolah/Kampus harus berupa angka.',
+            'educations.*.accreditation.max' => 'Akreditasi tidak boleh lebih dari 30 karakter.',
             'educations.*.faculty.max' => 'Nama fakultas tidak boleh lebih dari 160 karakter.',
             'educations.*.major.max' => 'Jurusan tidak boleh lebih dari 160 karakter.',
             'educations.*.status.required' => 'Status tidak boleh kosong.',
@@ -52,6 +60,14 @@ class UpdateEducationEmployeeRequest
             'educations.*.degree_document.extensions' => 'Ijazah harus berupa jpg, jpeg atau png.',
             'educations.*.degree_document.max' => 'Ukuran ijazah tidak boleh lebih dari 2MB.',
             'educations.*.delete_degree_document.required' => 'Status hapus ijazah tidak boleh kosong.',
+            'educations.*.study_assignment_letter.file' => 'Surat Keterangan Tugas Belajar harus berupa file.',
+            'educations.*.study_assignment_letter.extensions' => 'Surat Keterangan Tugas Belajar harus berupa jpg, jpeg atau png.',
+            'educations.*.study_assignment_letter.max' => 'Ukuran Surat Keterangan Tugas Belajar tidak boleh lebih dari 2MB.',
+            'educations.*.delete_study_assignment_letter.required' => 'Status hapus Surat Keterangan Tugas Belajar tidak boleh kosong.',
+            'educations.*.academic_title_letter.file' => 'SK Pencantuman Gelar harus berupa file.',
+            'educations.*.academic_title_letter.extensions' => 'SK Pencantuman Gelar harus berupa jpg, jpeg atau png.',
+            'educations.*.academic_title_letter.max' => 'Ukuran SK Pencantuman Gelar tidak boleh lebih dari 2MB.',
+            'educations.*.delete_academic_title_letter.required' => 'Status hapus SK Pencantuman Gelar tidak boleh kosong.',
         ];
     }
 
@@ -74,6 +90,14 @@ class UpdateEducationEmployeeRequest
             'educations.*.name' => [
                 'description' => 'Refers to the Name of Employee Education.',
                 'example' => 'Universitas Indonesia',
+            ],
+            'educations.*.study_area' => [
+                'description' => 'Refers to the Study Area of Employee Education.',
+                'example' => 'Dalam Negeri',
+            ],
+            'educations.*.accreditation' => [
+                'description' => 'Refers to the Accreditation of Employee Education.',
+                'example' => 'A',
             ],
             'educations.*.faculty' => [
                 'description' => 'Refers to the Faculty of Employee Education.',
@@ -101,6 +125,22 @@ class UpdateEducationEmployeeRequest
             ],
             'educations.*.delete_degree_document' => [
                 'description' => 'Refers to the Status Delete Degree Document of Employee Education.',
+                'example' => false,
+            ],
+            'educations.*.study_assignment_letter' => [
+                'description' => 'Refers to the Study Assignment Letter of Employee Education.',
+                'example' => public_path('/img/logo.svg'),
+            ],
+            'educations.*.delete_study_assignment_letter' => [
+                'description' => 'Refers to the Status Delete Study Assignment Letter of Employee Education.',
+                'example' => false,
+            ],
+            'educations.*.academic_title_letter' => [
+                'description' => 'Refers to the Academic Title Letter of Employee Education.',
+                'example' => public_path('/img/logo.svg'),
+            ],
+            'educations.*.delete_academic_title_letter' => [
+                'description' => 'Refers to the Status Delete Academic Title Letter of Employee Education.',
                 'example' => false,
             ],
         ];
