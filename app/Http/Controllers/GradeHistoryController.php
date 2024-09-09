@@ -85,7 +85,6 @@ class GradeHistoryController extends Controller
                     if (isset($user['grade_id']) && isset($user['user_id'])) {
                         DB::table('users')
                             ->where('id', $user['user_id'])
-                            ->where('grade_id', '>', $user['grade_id'])
                             ->updateTs([
                                 'grade_id' => $user['grade_id'],
                                 'grade_effective_date' => $user['effective_date'],
@@ -197,7 +196,6 @@ class GradeHistoryController extends Controller
                     if (isset($user['grade_id']) && isset($user['user_id'])) {
                         DB::table('users')
                             ->where('id', $user['user_id'])
-                            ->where('grade_id', '>', $user['grade_id'])
                             ->updateTs([
                                 'grade_id' => $user['grade_id'],
                                 'grade_effective_date' => $user['effective_date'],
@@ -211,7 +209,6 @@ class GradeHistoryController extends Controller
                     if (isset($user['grade_id']) && isset($user['user_id'])) {
                         DB::table('users')
                             ->where('id', $user['user_id'])
-                            ->where('grade_id', '>', $user['grade_id'])
                             ->updateTs([
                                 'grade_id' => $user['grade_id'],
                                 'grade_effective_date' => $user['effective_date'],
