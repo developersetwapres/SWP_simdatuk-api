@@ -88,6 +88,7 @@ class GradeHistoryController extends Controller
                             ->where('grade_id', '>', $user['grade_id'])
                             ->updateTs([
                                 'grade_id' => $user['grade_id'],
+                                'grade_effective_date' => $user['effective_date'],
                             ]);
                     }
                 }
@@ -199,6 +200,7 @@ class GradeHistoryController extends Controller
                             ->where('grade_id', '>', $user['grade_id'])
                             ->updateTs([
                                 'grade_id' => $user['grade_id'],
+                                'grade_effective_date' => $user['effective_date'],
                             ]);
                     }
                 } else {
@@ -212,6 +214,7 @@ class GradeHistoryController extends Controller
                             ->where('grade_id', '>', $user['grade_id'])
                             ->updateTs([
                                 'grade_id' => $user['grade_id'],
+                                'grade_effective_date' => $user['effective_date'],
                             ]);
                     }
                 }
