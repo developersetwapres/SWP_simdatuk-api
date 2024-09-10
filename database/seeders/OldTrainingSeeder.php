@@ -76,7 +76,7 @@ class OldTrainingSeeder extends Seeder
             } elseif (ucfirst($item[1]) == 'Fungsional') {
                 $trainingLevelId = 7;
             } else {
-                $checkLevel = DB::table('training_levels')->where('level_name', 'LIKE', DB::raw('%'.$item[1].'%'));
+                $checkLevel = DB::table('training_levels')->where('level_name', 'LIKE', DB::raw("'%".$item[1]."%'"));
                 if ($checkLevel->count() > 0) {
                     $trainingLevelId = $checkLevel->first();
                     $trainingLevelId = $trainingLevelId->id;
