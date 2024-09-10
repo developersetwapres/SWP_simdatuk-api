@@ -30,6 +30,11 @@ class OldEducationSeeder extends Seeder
                   ELSE NULL
                 END AS level,
                 db_lama_pddk.ket_sekolah as name,
+                CASE
+                  WHEN db_lama_pddk.wilayah LIKE '%DN%' THEN 1
+                  WHEN db_lama_pddk.wilayah LIKE '%LN%' THEN 2
+                  ELSE NULL
+                END AS study_area,
                 db_lama_pddk.fakultas as faculty,
                 db_lama_pddk.jurusan as major,
                 '1' as status,
