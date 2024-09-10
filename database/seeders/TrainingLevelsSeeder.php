@@ -20,8 +20,8 @@ class TrainingLevelsSeeder extends Seeder
             ['id' => 3, 'level_name' => 'Pelatihan Kepemimpinan Administrator'],
             ['id' => 4, 'level_name' => 'Pelatihan Kepemimpinan Pengawas'],
             ['id' => 5, 'level_name' => 'Pelatihan Dasar CPNS'],
-            ['id' => 6, 'level_name' => 'Fungsional'],
-            ['id' => 7, 'level_name' => 'Pelatihan Lainnya'],
+            ['id' => 6, 'level_name' => 'Pelatihan Lainnya'],
+            ['id' => 7, 'level_name' => 'Fungsional'],
         ];
         DB::table('training_levels')->insertTs($training_levels);
     }
