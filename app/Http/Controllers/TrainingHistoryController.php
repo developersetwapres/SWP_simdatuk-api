@@ -217,18 +217,18 @@ class TrainingHistoryController extends Controller
     }
 
     /**
-     * Get List of Training Levels
+     * Get List of Training Structural Levels
      *
      * Retrieve the Level of master data.
      * @subgroup Level
      * @authenticated
      * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
      * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
-     * @queryParam search string The keyword search field for the name. Example: Fungsional
-     * @response 200 {"code": 200,"message": "success","data": [{"id": 1,"name": "Fungsional", "description": "-"}],"pagination": {"total": 32,"count": 1,"per_page": 1,"current_page": 1,"total_pages": 32,"links": {"first_page": "http://localhost/api/training-histories/levels?page=1","last_page": "http://localhost/api/training-histories/levels?page=32","next_page": "http://localhost/api/training-histories/levels?page=2","prev_page": null}}}
+     * @queryParam search string The keyword search field for the name. Example: Struktural
+     * @response 200 {"code": 200,"message": "success","data": [{"id": 1,"level_name": "Struktural", "level_type": "Jenjang Struktural", "description": "-"}],"pagination": {"total": 32,"count": 1,"per_page": 1,"current_page": 1,"total_pages": 32,"links": {"first_page": "http://localhost/api/training-histories/levels/structural?page=1","last_page": "http://localhost/api/training-histories/levels/structural?page=32","next_page": "http://localhost/api/training-histories/levels/structural?page=2","prev_page": null}}}
      *
     */
-    public function levels() {
+    public function structuralLevels() {
         $messages = [
             'page.numeric'  => 'Page harus berupa angka.',
             'page.min'      => 'Page minimal harus 1 atau lebih.',
@@ -242,20 +242,74 @@ class TrainingHistoryController extends Controller
         ], $messages);
 
         $levels = DB::table('training_levels');
-        $levels->select('training_levels.id', 'training_levels.level_name', 'training_levels.description');
-        $levels->where('training_levels.level_name', 'like', '%' . $this->request->search . '%');
+        $levels->select('training_levels.id', 'training_levels.level_name', 'training_levels.level_type', 'training_levels.description');
+        $levels->where('training_levels.level_name', 'like', '%' . $this->request->search . '%');        
+        $levels->where('training_levels.level_type', '=', 1); // jenjang struktural
         $levels->orderBy('id', 'asc');
 
         if (is_null($this->request->limit)) {
             $levels = $levels->get();
             $message = (count($levels) < 1) ? 'Mohon maaf, data tidak ditemukan.' : 'success';
+            foreach ($levels as $key => $item) {
+                $item->level_type = ($item->level_type == 1) ? 'Jenjang Struktural' : 'Jenjang Fungsional';
+            }
             return $this->response(200, $message, $levels);
         } else {
             $levels = $levels->paginate($this->request->limit);
             $message = ($levels->isEmpty()) ? 'Mohon maaf, data tidak ditemukan.' : 'success';
+            foreach ($levels as $key => $item) {
+                $item->level_type = ($item->level_type == 1) ? 'Jenjang Struktural' : 'Jenjang Fungsional';
+            }
             return $this->paginateResponse(200, $message, $levels);
         }
+    }
 
+    /**
+     * Get List of Training Functional Levels
+     *
+     * Retrieve the Level of master data.
+     * @subgroup Level
+     * @authenticated
+     * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
+     * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
+     * @queryParam search string The keyword search field for the name. Example: Fungsional
+     * @response 200 {"code": 200,"message": "success","data": [{"id": 1,"level_name": "Fungsional", "level_name": "Jenjang Fungsional", "description": "-"}],"pagination": {"total": 32,"count": 1,"per_page": 1,"current_page": 1,"total_pages": 32,"links": {"first_page": "http://localhost/api/training-histories/levels/functional?page=1","last_page": "http://localhost/api/training-histories/levels/functional?page=32","next_page": "http://localhost/api/training-histories/levels/functional?page=2","prev_page": null}}}
+     *
+    */
+    public function functionalLevels() {
+        $messages = [
+            'page.numeric'  => 'Page harus berupa angka.',
+            'page.min'      => 'Page minimal harus 1 atau lebih.',
+            'limit.numeric' => 'Limit harus berupa angka.',
+            'limit.min'     => 'Limit minimal harus 1 atau lebih.',
+        ];
+
+        $validatedData = $this->request->validate([
+            'page'  => 'nullable|numeric|min:1',
+            'limit' => 'nullable|numeric|min:1',
+        ], $messages);
+
+        $levels = DB::table('training_levels');
+        $levels->select('training_levels.id', 'training_levels.level_name', 'training_levels.level_type', 'training_levels.description');
+        $levels->where('training_levels.level_name', 'like', '%' . $this->request->search . '%');        
+        $levels->where('training_levels.level_type', '=', 2); // jenjang fungsional
+        $levels->orderBy('id', 'asc');
+
+        if (is_null($this->request->limit)) {
+            $levels = $levels->get();
+            $message = (count($levels) < 1) ? 'Mohon maaf, data tidak ditemukan.' : 'success';
+            foreach ($levels as $key => $item) {
+                $item->level_type = ($item->level_type == 1) ? 'Jenjang Struktural' : 'Jenjang Fungsional';
+            }
+            return $this->response(200, $message, $levels);
+        } else {
+            $levels = $levels->paginate($this->request->limit);
+            $message = ($levels->isEmpty()) ? 'Mohon maaf, data tidak ditemukan.' : 'success';
+            foreach ($levels as $key => $item) {
+                $item->level_type = ($item->level_type == 1) ? 'Jenjang Struktural' : 'Jenjang Fungsional';
+            }
+            return $this->paginateResponse(200, $message, $levels);
+        }
     }
 
 }

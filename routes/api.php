@@ -138,10 +138,14 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('training-histories')->group(function () {
         Route::get('/', [TrainingHistoryController::class, 'index']);
-        Route::get('/levels', [TrainingHistoryController::class, 'levels']); // jenjang
         Route::post('/', [TrainingHistoryController::class, 'create']);
         Route::get('/{id}', [TrainingHistoryController::class, 'show']);
         Route::post('/{id}', [TrainingHistoryController::class, 'update']);
+
+        Route::prefix('/levels')->group(function () {
+            Route::get('/structural', [TrainingHistoryController::class, 'structuralLevels']); // jenjang struktural
+            Route::get('/functional', [TrainingHistoryController::class, 'functionalLevels']); // jenjang functional
+        });
     });
 
     Route::prefix('recognition-histories')->group(function () {
