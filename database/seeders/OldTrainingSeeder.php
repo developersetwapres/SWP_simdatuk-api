@@ -84,6 +84,7 @@ class OldTrainingSeeder extends Seeder
                     $trainingLevelId = DB::table('training_levels');
                     $trainingLevelId = $trainingLevelId->insertGetIdTs([
                         'level_name' => $item[1],
+                        'level_type' => (ucfirst($item[1]) == 'Fungsional') ? 2 : 1,
                     ]);
                 }
             }
