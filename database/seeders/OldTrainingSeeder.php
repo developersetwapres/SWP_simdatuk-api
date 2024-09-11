@@ -120,8 +120,9 @@ class OldTrainingSeeder extends Seeder
                 db_lama_teknis.nm_dik_teknis as name,
                 db_lama_teknis.mulai as start_date,
                 CASE
-                    WHEN db_lama_teknis.durasi = '' THEN NULL
-                    ELSE db_lama_teknis.durasi
+                    WHEN db_lama_teknis.mulai = NULL OR db_lama_teknis.selesai = NULL OR 
+                        db_lama_teknis.mulai = NULL AND db_lama_teknis.selesai = NULL THEN NULL
+                    ELSE TIMESTAMPDIFF(hour, db_lama_teknis.mulai, db_lama_teknis.selesai)
                 END AS duration,
                 db_lama_teknis.nm_evorg as organizer
             FROM
