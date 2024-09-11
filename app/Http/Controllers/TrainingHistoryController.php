@@ -312,4 +312,53 @@ class TrainingHistoryController extends Controller
         }
     }
 
+    /**
+     * Get List of Training Technical Groups
+     *
+     * Retrieve the Level of master data.
+     * @subgroup Level
+     * @authenticated
+     * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
+     * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
+     * @queryParam search string The keyword search field for the name. Example: Tata Usaha
+     * @response 200 {"code": 200,"message": "success","data": [{"id": 1,"name": "Tata Usaha", "type": "Rumpun Pelatihan Teknis"}],"pagination": {"total": 32,"count": 1,"per_page": 1,"current_page": 1,"total_pages": 32,"links": {"first_page": "http://localhost/api/training-histories/groups?page=1","last_page": "http://localhost/api/training-histories/groups?page=32","next_page": "http://localhost/api/training-histories/groups?page=2","prev_page": null}}}
+     *
+    */
+    public function technicalGroups() 
+    {
+        $messages = [
+            'page.numeric' => 'Page harus berupa angka.',
+            'page.min' => 'Page minimal harus 1 atau lebih.',
+            'limit.numeric' => 'Limit harus berupa angka.',
+            'limit.min' => 'Limit minimal harus 1 atau lebih.',
+        ];
+
+        $validatedData = $this->request->validate([
+            'page' => 'nullable|numeric|min:1',
+            'limit' => 'nullable|numeric|min:1',
+        ], $messages);
+
+        $groups = DB::table('groups');
+        $groups->select('id', 'name', 'type', 'created_at');
+        $groups->where('name', 'like', '%' . $this->request->search . '%');
+        $groups->where('type', '=', 2); // 1=Rumpun Pelatihan Teknis
+        $groups->orderBy('id', 'asc');
+
+        if (is_null($this->request->limit)) {
+            $groups = $groups->get();
+            $message = (count($groups) < 1) ? 'Mohon maaf, data tidak ditemukan.' : 'success';
+            foreach ($groups as $key => $item) {
+                $item->type = ($item->type == 1) ? 'Rumpun Riwayat Pegawai' : 'Rumpun Pelatihan Teknis';
+            }
+            return $this->response(200, $message, $groups);
+        } else {
+            $groups = $groups->paginate($this->request->limit);
+            $message = ($groups->isEmpty()) ? 'Mohon maaf, data tidak ditemukan.' : 'success';
+            foreach ($groups as $key => $item) {
+                $item->type = ($item->type == 1) ? 'Rumpun Riwayat Pegawai' : 'Rumpun Pelatihan Teknis';
+            }
+            return $this->paginateResponse(200, $message, $groups);
+        }
+    }
+
 }
