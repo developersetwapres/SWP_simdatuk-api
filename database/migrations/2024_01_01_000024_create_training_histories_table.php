@@ -19,7 +19,7 @@ return new class extends Migration
             $table->year('period_year')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
-            $table->smallInteger('duration')->nullable()->comment('in hours');
+            $table->integer('duration')->nullable()->comment('in hours');
             $table->string('organizer', 512)->nullable();
             $table->string('reference_number', 160)->nullable();
             $table->text('link')->nullable();
