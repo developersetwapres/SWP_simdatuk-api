@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\DB;
  */
 class GroupController extends Controller
 {
+    protected $request;
+    protected $posted;
+
     public function __construct(Request $request)
     {
         $this->request = $request;
@@ -44,17 +47,24 @@ class GroupController extends Controller
         ], $messages);
 
         $groups = DB::table('groups');
-        $groups->select('id', 'name', 'created_at');
+        $groups->select('id', 'name', 'type', 'created_at');
         $groups->where('name', 'like', '%' . $this->request->search . '%');
+        $groups->where('type', '=', 1); // 1=Rumpun Riwayat Pegawai
         $groups->orderBy('id', 'asc');
 
         if (is_null($this->request->limit)) {
             $groups = $groups->get();
             $message = (count($groups) < 1) ? 'Mohon maaf, data tidak ditemukan.' : 'success';
+            foreach ($groups as $key => $item) {
+                $item->type = ($item->type == 1) ? 'Rumpun Riwayat Pegawai' : 'Rumpun Pelatihan Teknis';
+            }
             return $this->response(200, $message, $groups);
         } else {
             $groups = $groups->paginate($this->request->limit);
             $message = ($groups->isEmpty()) ? 'Mohon maaf, data tidak ditemukan.' : 'success';
+            foreach ($groups as $key => $item) {
+                $item->type = ($item->type == 1) ? 'Rumpun Riwayat Pegawai' : 'Rumpun Pelatihan Teknis';
+            }
             return $this->paginateResponse(200, $message, $groups);
         }
     }

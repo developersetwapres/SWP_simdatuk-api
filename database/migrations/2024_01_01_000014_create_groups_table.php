@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('groups', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 160);
+            $table->tinyInteger('type')->nullable()->comment('1=Rumpun Riwayat Pegawai, 2=Rumpun Pelatihan Teknis');
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
         });
