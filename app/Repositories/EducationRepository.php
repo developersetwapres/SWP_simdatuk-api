@@ -34,6 +34,8 @@ class EducationRepository
 
         foreach ($educations as $education) {
             $education->degree_document = $this->getDocument($education->degree_document);
+            $education->study_assignment_letter = $this->getDocument($education->study_assignment_letter);
+            $education->academic_title_letter = $this->getDocument($education->academic_title_letter);
         }
         return $educations;
     }
@@ -64,6 +66,8 @@ class EducationRepository
         $usersEducation = [];
         foreach ($educations as $education) {
             $education->degree_document = $this->getDocument($education->degree_document);
+            $education->study_assignment_letter = $this->getDocument($education->study_assignment_letter);
+            $education->academic_title_letter = $this->getDocument($education->academic_title_letter);
             $usersEducation[$education->user_id][] = $education;
         }
 

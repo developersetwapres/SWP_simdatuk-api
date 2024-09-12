@@ -219,11 +219,15 @@
             <td class="table-section-3-title">No</td>
             <td class="table-section-3-title">Tingkat</td>
             <td class="table-section-3-title">Nama Sekolah</td>
+            <td class="table-section-3-title">Wilayah</td>
+            <td class="table-section-3-title">Akreditasi</td>
             <td class="table-section-3-title">Fakultas</td>
             <td class="table-section-3-title">Jurusan</td>
             <td class="table-section-3-title">Status</td>
             <td class="table-section-3-title">Tahun Lulus</td>
-            <td class="table-section-3-title">Keterangan Sekolah</td>
+            <td class="table-section-3-title">Ijasah</td>
+            <td class="table-section-3-title">Surat Keterangan Tugas Belajar</td>
+            <td class="table-section-3-title">Surat Keputusan Pencantuman Gelar</td>
         </thead>
 
         <tbody>
@@ -261,6 +265,19 @@
                     -
                     @endswitch</td>
                 <td class="table-section-3-body">{{ $value->name }}</td>
+                <td class="table-section-3-body">
+                    @switch($value->study_area)
+                    @case(1)
+                    Dalam Negeri
+                    @break
+                    @case(2)
+                    Luar Negeri
+                    @break
+                    @default
+                    -
+                    @endswitch
+                </td>
+                <td class="table-section-3-body">{{ $value->accreditation }}</td>
                 <td class="table-section-3-body">{{ $value->faculty }}</td>
                 <td class="table-section-3-body">{{ $value->major }}</td>
                 <td class="table-section-3-body">
@@ -284,7 +301,27 @@
                     -
                     @endswitch</td>
                 <td class="table-section-3-body">{{ $value->year_of_graduation }}</td>
-                <td class="table-section-3-body">{{ $value->description }}</td>
+                <td class="table-section-3-body">
+                    @if(!is_null($value->degree_document))
+                    <a href="{{ $value->certificate }}">Lihat File</a>
+                    @else
+                    -
+                    @endif
+                </td>
+                <td class="table-section-3-body">
+                    @if(!is_null($value->study_assignment_letter))
+                    <a href="{{ $value->study_assignment_letter }}">Lihat File</a>
+                    @else
+                    -
+                    @endif
+                </td>
+                <td class="table-section-3-body">
+                    @if(!is_null($value->academic_title_letter))
+                    <a href="{{ $value->academic_title_letter }}">Lihat File</a>
+                    @else
+                    -
+                    @endif
+                </td>
             </tr>
             @endforeach
         </tbody>
@@ -420,7 +457,7 @@
             <td class="table-section-3-title">No Surat Perintah</td>
             <td class="table-section-3-title">Jenjang</td>
             <td class="table-section-3-title">Tanggal Pelaksanaan</td>
-            <td class="table-section-3-title">Durasi Pelatihan (Hari)</td>
+            <td class="table-section-3-title">Jam Pelajaran</td>
             <td class="table-section-3-title">Penyelenggara</td>
             <td class="table-section-3-title">Sertifikat</td>
         </thead>
@@ -433,7 +470,7 @@
                 <td class="table-section-3-body">{{ $value->name }}</td>
                 <td class="table-section-3-body">{{ $value->reference_number }}</td>
                 <td class="table-section-3-body">{{ $value->level }}</td>
-                <td class="table-section-3-body">{{ $value->start_date }}</td>
+                <td class="table-section-3-body">{{ $value->start_date.' - '.$value->end_date }}</td>
                 <td class="table-section-3-body">{{ $value->duration }}</td>
                 <td class="table-section-3-body">{{ $value->organizer }}</td>
                 <td class="table-section-3-body">
@@ -459,7 +496,7 @@
             <td class="table-section-3-title">No Surat Perintah</td>
             <td class="table-section-3-title">Jenjang</td>
             <td class="table-section-3-title">Tanggal Pelaksanaan</td>
-            <td class="table-section-3-title">Durasi Pelatihan (Hari)</td>
+            <td class="table-section-3-title">Jam Pelajaran</td>
             <td class="table-section-3-title">Penyelenggara</td>
             <td class="table-section-3-title">Sertifikat</td>
         </thead>
@@ -472,7 +509,7 @@
                 <td class="table-section-3-body">{{ $value->name }}</td>
                 <td class="table-section-3-body">{{ $value->reference_number }}</td>
                 <td class="table-section-3-body">{{ $value->level }}</td>
-                <td class="table-section-3-body">{{ $value->start_date }}</td>
+                <td class="table-section-3-body">{{ $value->start_date.' - '.$value->end_date }}</td>
                 <td class="table-section-3-body">{{ $value->duration }}</td>
                 <td class="table-section-3-body">{{ $value->organizer }}</td>
                 <td class="table-section-3-body">
@@ -497,7 +534,8 @@
             <td class="table-section-3-title">Nama Diklat</td>
             <td class="table-section-3-title">No Surat Perintah</td>
             <td class="table-section-3-title">Tanggal Pelaksanaan</td>
-            <td class="table-section-3-title">Durasi Pelatihan (Hari)</td>
+            <td class="table-section-3-title">Jam Pelajaran</td>
+            <td class="table-section-3-title">Penyelenggara</td>
             <td class="table-section-3-title">Sertifikat</td>
         </thead>
 
@@ -508,8 +546,9 @@
                 <td class="table-section-3-body">{{ $indexTrainingTechnical++ }}</td>
                 <td class="table-section-3-body">{{ $value->name }}</td>
                 <td class="table-section-3-body">{{ $value->reference_number }}</td>
-                <td class="table-section-3-body">{{ $value->start_date }}</td>
+                <td class="table-section-3-body">{{ $value->start_date.' - '.$value->end_date }}</td>
                 <td class="table-section-3-body">{{ $value->duration }}</td>
+                <td class="table-section-3-body">{{ $value->organizer }}</td>
                 <td class="table-section-3-body">
                     @if(!is_null($value->certificate))
                     <a href="{{ $value->certificate }}">Lihat File</a>

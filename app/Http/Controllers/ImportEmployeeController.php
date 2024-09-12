@@ -157,11 +157,13 @@ class ImportEmployeeController extends Controller
         'nama' => 1,
         'level' => 2,
         'name' => 3,
-        'faculty' => 4,
-        'major' => 5,
-        'status' => 6,
-        'year_of_graduation' => 7,
-        'description' => 8,
+        'study_area' => 4,
+        'accreditation' => 5,
+        'faculty' => 6,
+        'major' => 7,
+        'status' => 8,
+        'year_of_graduation' => 9,
+        'description' => 10,
     ];
 
     /**
@@ -211,17 +213,36 @@ class ImportEmployeeController extends Controller
     /**
      *
      */
-    protected $trainingInfoPos = [
+    protected $structuralTrainingInfoPos = [
         'name' => 0, // Nama Diklat
         'period_month' => 1, // Bulan Periode Input Riwayat
         'period_year' => 2, // Tahun Periode Input Riwayat
         'reference_number' => 3, // No Surat Perintah
         'level' => 4, // Jenjang
         'start_date' => 5, // Tanggal Pelaksanaan
-        'duration' => 6, // Durasi Pelatihan
-        'organizer' => 7, // Penyelenggara
-        'nik' => 8,
-        'nama' => 9,
+        'end_date' => 6, // Tanggal Pelaksanaan Selesai
+        'duration' => 7, // Jam Pelajaran
+        'organizer' => 8, // Penyelenggara
+        'description' => 9, // Keterangan
+        'nik' => 10,
+        'nama' => 11,
+    ];
+
+    /**
+     *
+     */
+    protected $functionalTrainingInfoPos = [
+        'name' => 0, // Nama Diklat
+        'period_month' => 1, // Bulan Periode Input Riwayat
+        'period_year' => 2, // Tahun Periode Input Riwayat
+        'reference_number' => 3, // No Surat Perintah
+        'level' => 4, // Jenjang
+        'start_date' => 5, // Tanggal Pelaksanaan
+        'end_date' => 6, // Tanggal Pelaksanaan Selesai
+        'duration' => 7, // Jam Pelajaran
+        'organizer' => 8, // Penyelenggara
+        'nik' => 9,
+        'nama' => 10,
     ];
 
     /**
@@ -233,9 +254,12 @@ class ImportEmployeeController extends Controller
         'period_year' => 2, // Tahun Periode Input Riwayat
         'reference_number' => 3, // No Surat Perintah
         'start_date' => 4, // Tanggal Pelaksanaan
-        'duration' => 5, // Durasi Pelatihan
-        'nik' => 6,
-        'nama' => 7,
+        'end_date' => 5, // Tanggal Pelaksanaan Selesai
+        'duration' => 6, // Jam Pelajaran
+        'organizer' => 7, // Penyelenggara
+        'group' => 8, // Rumpun
+        'nik' => 9,
+        'nama' => 10
     ];
 
     /**
@@ -304,7 +328,7 @@ class ImportEmployeeController extends Controller
         'end_date' => 11, // Tanggal Akhir Hukuman Disiplin
         'authorizing_officer' => 12, // Pejabat Berwenang
         'name_of_authorizing_officer' => 13, // Nama Pejabat Berwenang
-        'description' => 14, // Uraian
+        'description' => 14, // Keterangan
 
     ];
 
@@ -410,6 +434,7 @@ class ImportEmployeeController extends Controller
     protected $decrees;
     protected $recognitions;
     protected $disciplinaries;
+    protected $levels;
 
     // Array mapping gender to their respective numeric codes
     protected $month = [
@@ -471,6 +496,11 @@ class ImportEmployeeController extends Controller
         'aktif' => 3,
         'non-aktif' => 4,
         'mengundurkandiri' => 5,
+    ];
+
+    protected $educationStudyArea = [
+        'dalamnegeri' => 1,
+        'luarnegeri' => 2,
     ];
 
     protected $positionEchelon = [
@@ -712,10 +742,11 @@ class ImportEmployeeController extends Controller
         $this->echelons = $this->getNameIdMapping('echelons');
         $this->institutions = $this->getNameIdMapping('institutions');
         $this->residences = $this->getNameIdMapping('residences');
-        $this->groups = $this->getNameIdMapping('groups');
+        $this->groups = $this->getNameIdMapping('groups', ['type' => 2]);
         $this->decrees = $this->getNameIdMapping('decrees');
         $this->recognitions = $this->getNameIdMapping('recognitions');
         $this->disciplinaries = $this->getNameIdMapping('disciplinaries');
+        $this->levels = $this->getNameIdMapping('training_levels', [], 'level_name');
 
         if ($request->type == 3) { // Outsource
             // Process personal info
@@ -763,12 +794,12 @@ class ImportEmployeeController extends Controller
             }
 
             // Process structural training info
-            if (count($structuralTrainingInfo) > 0 && isset($structuralTrainingInfo[0][end($this->trainingInfoPos)])) {
+            if (count($structuralTrainingInfo) > 0 && isset($structuralTrainingInfo[0][end($this->structuralTrainingInfoPos)])) {
                 $personalInfo = $this->trainingInfo($structuralTrainingInfo, $personalInfo, 1);
             }
 
             // Process functional training info
-            if (count($functionalTrainingInfo) > 0 && isset($functionalTrainingInfo[0][end($this->trainingInfoPos)])) {
+            if (count($functionalTrainingInfo) > 0 && isset($functionalTrainingInfo[0][end($this->functionalTrainingInfoPos)])) {
                 $personalInfo = $this->trainingInfo($functionalTrainingInfo, $personalInfo, 2);
             }
 
@@ -1414,10 +1445,13 @@ class ImportEmployeeController extends Controller
 
             $levelID = $this->findInArray($educationRow[$this->educationInfoPos['level']], $this->educationLevel, 'Riwayat Pendidikan', $educationKey, $educationInfo[0][$this->educationInfoPos['level']]);
             $statusID = $this->findInArray($educationRow[$this->educationInfoPos['status']], $this->educationStatus, 'Riwayat Pendidikan', $educationKey, $educationInfo[0][$this->educationInfoPos['status']]);
+            $studyAreaID = $this->findInArray($educationRow[$this->educationInfoPos['study_area']], $this->educationStudyArea, 'Riwayat Pendidikan', $educationKey, $educationInfo[0][$this->educationInfoPos['study_area']]);
 
             $personalInfo[$educationRow[$this->educationInfoPos['nik']]]['education'][] = [
                 'level' => $levelID,
                 'name' => $educationRow[$this->educationInfoPos['name']],
+                'study_area' => $studyAreaID,
+                'accreditation' => $educationRow[$this->educationInfoPos['accreditation']],
                 'faculty' => $educationRow[$this->educationInfoPos['faculty']],
                 'major' => $educationRow[$this->educationInfoPos['major']],
                 'status' => $statusID,
@@ -1575,6 +1609,7 @@ class ImportEmployeeController extends Controller
 
             if ($trainingType == 3) { // Pelatihan Teknis
                 $startDate = $this->formatDate($trainingRow[$this->technicalTrainingInfoPos['start_date']], 'Riwayat Pelatihan Teknis', $trainingKey, $trainingInfo[0][$this->technicalTrainingInfoPos['start_date']]);
+                $endDate = $this->formatDate($trainingRow[$this->technicalTrainingInfoPos['end_date']], 'Riwayat Pelatihan Teknis', $trainingKey, $trainingInfo[0][$this->technicalTrainingInfoPos['end_date']]);
 
                 $requiredFieldFilled = true;
                 foreach ($requiredFields as $key => $field) {
@@ -1589,6 +1624,7 @@ class ImportEmployeeController extends Controller
                 }
                 // Skip jika ada required field yang tidak diisi
 
+                $groupID = $this->findInArray($trainingRow[$this->technicalTrainingInfoPos['group']], $this->groups, 'Riwayat Pelatihan Teknis', $trainingKey, $trainingInfo[0][$this->technicalTrainingInfoPos['group']]);
                 $monthID = $this->findInArray($trainingRow[$this->technicalTrainingInfoPos['period_month']], $this->month, 'Riwayat Pelatihan Teknis', $trainingKey, $trainingInfo[0][$this->technicalTrainingInfoPos['period_month']]);
 
                 $personalInfo[$trainingRow[$this->technicalTrainingInfoPos['nik']]]['training'][] = [
@@ -1596,24 +1632,23 @@ class ImportEmployeeController extends Controller
                     'period_month' => $monthID,
                     'period_year' => $trainingRow[$this->technicalTrainingInfoPos['period_year']],
                     'start_date' => $startDate,
+                    'end_date' => $endDate,
                     'duration' => $trainingRow[$this->technicalTrainingInfoPos['duration']],
                     'reference_number' => $trainingRow[$this->technicalTrainingInfoPos['reference_number']],
+                    'group_id' => $groupID,
                     'type' => $trainingType,
                 ];
-            } else { // Pelatihan Struktural and Pelatihan Fungsional                
-                if ($trainingType == 1) { // Struktural
-                    $sheet = 'Riwayat Pelatihan Struktural';
-                } else {
-                    $sheet = 'Riwayat Pelatihan Fungsional';
-                }
-                $startDate = $this->formatDate($trainingRow[$this->trainingInfoPos['start_date']], $sheet, $trainingKey, $trainingInfo[0][$this->trainingInfoPos['start_date']]);
+            } else if ($trainingType == 2) { // Pelatihan Fungsional
+                $sheet = 'Riwayat Pelatihan Fungsional';
+                $startDate = $this->formatDate($trainingRow[$this->functionalTrainingInfoPos['start_date']], $sheet, $trainingKey, $trainingInfo[0][$this->functionalTrainingInfoPos['start_date']]);
+                $endDate = $this->formatDate($trainingRow[$this->functionalTrainingInfoPos['end_date']], $sheet, $trainingKey, $trainingInfo[0][$this->functionalTrainingInfoPos['end_date']]);
 
                 $requiredFieldFilled = true;
                 foreach ($requiredFields as $key => $field) {
-                    if (empty($trainingRow[$this->trainingInfoPos[$field]])) {
+                    if (empty($trainingRow[$this->functionalTrainingInfoPos[$field]])) {
                         $requiredFieldFilled = false;
 
-                        $this->skippedRow($sheet, $trainingKey, 'Kolom ' . $trainingInfo[0][$this->trainingInfoPos[$field]] . ' harus diisi');
+                        $this->skippedRow($sheet, $trainingKey, 'Kolom ' . $trainingInfo[0][$this->functionalTrainingInfoPos[$field]] . ' harus diisi');
                     }
                 }
                 if (!$requiredFieldFilled) {
@@ -1621,17 +1656,57 @@ class ImportEmployeeController extends Controller
                 }
                 // Skip jika ada required field yang tidak diisi
 
-                $monthID = $this->findInArray($trainingRow[$this->trainingInfoPos['period_month']], $this->month, $sheet, $trainingKey, $trainingInfo[0][$this->trainingInfoPos['period_month']]);
+                $monthID = $this->findInArray($trainingRow[$this->functionalTrainingInfoPos['period_month']], $this->month, $sheet, $trainingKey, $trainingInfo[0][$this->functionalTrainingInfoPos['period_month']]);
+                $levelID = $this->findInArray($trainingRow[$this->functionalTrainingInfoPos['level']], $this->levels, $sheet, $trainingKey, $trainingInfo[0][$this->functionalTrainingInfoPos['level']]);
 
-                $personalInfo[$trainingRow[$this->trainingInfoPos['nik']]]['training'][] = [
-                    'name' => $trainingRow[$this->trainingInfoPos['name']],
+                $duration = !is_null($trainingRow[$this->functionalTrainingInfoPos['duration']]) ? (int) preg_replace('/\D/', '', $trainingRow[$this->functionalTrainingInfoPos['duration']]) : null;
+
+                $personalInfo[$trainingRow[$this->functionalTrainingInfoPos['nik']]]['training'][] = [
+                    'name' => $trainingRow[$this->functionalTrainingInfoPos['name']],
                     'period_month' => $monthID,
-                    'period_year' => $trainingRow[$this->trainingInfoPos['period_year']],
-                    'level' => $trainingRow[$this->trainingInfoPos['level']],
+                    'period_year' => $trainingRow[$this->functionalTrainingInfoPos['period_year']],
+                    'level' => $levelID,
                     'start_date' => $startDate,
-                    'duration' => $trainingRow[$this->trainingInfoPos['duration']],
-                    'organizer' => $trainingRow[$this->trainingInfoPos['organizer']],
-                    'reference_number' => $trainingRow[$this->trainingInfoPos['reference_number']],
+                    'end_date' => $endDate,
+                    'duration' => $duration,
+                    'organizer' => $trainingRow[$this->functionalTrainingInfoPos['organizer']],
+                    'reference_number' => $trainingRow[$this->functionalTrainingInfoPos['reference_number']],
+                    'type' => $trainingType,
+                ];
+            } else { // Pelatihan Struktural              
+                $sheet = 'Riwayat Pelatihan Struktural';
+                $startDate = $this->formatDate($trainingRow[$this->structuralTrainingInfoPos['start_date']], $sheet, $trainingKey, $trainingInfo[0][$this->structuralTrainingInfoPos['start_date']]);
+                $endDate = $this->formatDate($trainingRow[$this->structuralTrainingInfoPos['end_date']], $sheet, $trainingKey, $trainingInfo[0][$this->structuralTrainingInfoPos['end_date']]);
+
+                $requiredFieldFilled = true;
+                foreach ($requiredFields as $key => $field) {
+                    if (empty($trainingRow[$this->structuralTrainingInfoPos[$field]])) {
+                        $requiredFieldFilled = false;
+
+                        $this->skippedRow($sheet, $trainingKey, 'Kolom ' . $trainingInfo[0][$this->structuralTrainingInfoPos[$field]] . ' harus diisi');
+                    }
+                }
+                if (!$requiredFieldFilled) {
+                    continue;
+                }
+                // Skip jika ada required field yang tidak diisi
+
+                $monthID = $this->findInArray($trainingRow[$this->structuralTrainingInfoPos['period_month']], $this->month, $sheet, $trainingKey, $trainingInfo[0][$this->structuralTrainingInfoPos['period_month']]);
+                $levelID = $this->findInArray($trainingRow[$this->structuralTrainingInfoPos['level']], $this->levels, $sheet, $trainingKey, $trainingInfo[0][$this->structuralTrainingInfoPos['level']]);
+
+                $duration = !is_null($trainingRow[$this->structuralTrainingInfoPos['duration']]) ? (int) preg_replace('/\D/', '', $trainingRow[$this->structuralTrainingInfoPos['duration']]) : null;
+
+                $personalInfo[$trainingRow[$this->structuralTrainingInfoPos['nik']]]['training'][] = [
+                    'name' => $trainingRow[$this->structuralTrainingInfoPos['name']],
+                    'period_month' => $monthID,
+                    'period_year' => $trainingRow[$this->structuralTrainingInfoPos['period_year']],
+                    'level' => $levelID,
+                    'start_date' => $startDate,
+                    'end_date' => $endDate,
+                    'duration' => $duration,
+                    'organizer' => $trainingRow[$this->structuralTrainingInfoPos['organizer']],
+                    'reference_number' => $trainingRow[$this->structuralTrainingInfoPos['reference_number']],
+                    'description' => $trainingRow[$this->structuralTrainingInfoPos['description']],
                     'type' => $trainingType,
                 ];
             }
@@ -2178,11 +2253,11 @@ class ImportEmployeeController extends Controller
      * @param array $conditions (Optional) An associative array of conditions for the query.
      * @return array An associative array where the keys are the processed names and the values are the IDs.
      */
-    private function getNameIdMapping($tableName, $conditions = [])
+    private function getNameIdMapping($tableName, $conditions = [], $name = 'name')
     {
         // Query the specified table and select the id and the processed name
         $query = DB::table($tableName);
-        $query->select("id", DB::raw("LOWER(REPLACE(name, ' ', '')) as name"));
+        $query->select("id", DB::raw("LOWER(REPLACE(" . $name . ", ' ', '')) as name"));
 
         // Apply conditions if provided
         if (count($conditions) > 0) {

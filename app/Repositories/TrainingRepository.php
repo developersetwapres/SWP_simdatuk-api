@@ -13,6 +13,7 @@ class TrainingRepository
     {
         $trainings = DB::table('training_histories as th');
         $trainings->join('training_history_users as thu', 'th.id', '=', 'thu.training_history_id');
+        $trainings->leftJoin('training_levels as tl', 'th.level', '=', 'tl.id');
         $trainings->where('thu.user_id', $userId);
         $trainings->where('th.type', $type);
         $trainings->select(
@@ -20,14 +21,16 @@ class TrainingRepository
             'th.period_month',
             'th.period_year',
             'th.name',
-            'th.level',
+            DB::raw('tl.level_name as level'),
             DB::raw("DATE_FORMAT(th.start_date, '%d-%m-%Y') as start_date"),
+            DB::raw("DATE_FORMAT(th.end_date, '%d-%m-%Y') as end_date"),
             'th.duration',
             'th.organizer',
             'th.reference_number',
             'th.link',
             'thu.certificate',
             'th.type',
+            'th.description',
         );
         $trainings->orderBy('th.start_date', 'desc');
         $trainings = $trainings->get();
@@ -41,6 +44,7 @@ class TrainingRepository
     {
         $trainings = DB::table('training_histories as th');
         $trainings->join('training_history_users as thu', 'th.id', '=', 'thu.training_history_id');
+        $trainings->leftJoin('training_levels as tl', 'th.level', '=', 'tl.id');
         $trainings->whereIn('thu.user_id', $usersID);
         $trainings->where('th.type', 31);
         $trainings->select(
@@ -49,14 +53,16 @@ class TrainingRepository
             'th.period_month',
             'th.period_year',
             'th.name',
-            'th.level',
+            DB::raw('tl.level_name as level'),
             DB::raw("DATE_FORMAT(th.start_date, '%d-%m-%Y') as start_date"),
+            DB::raw("DATE_FORMAT(th.end_date, '%d-%m-%Y') as end_date"),
             'th.duration',
             'th.organizer',
             'th.reference_number',
             'th.link',
             'thu.certificate',
             'th.type',
+            'th.description',
         );
         $trainings->orderBy('th.start_date', 'desc');
         $trainings = $trainings->get();
