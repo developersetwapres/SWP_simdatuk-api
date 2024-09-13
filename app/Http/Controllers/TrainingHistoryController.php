@@ -122,18 +122,29 @@ class TrainingHistoryController extends Controller
      */
     public function show()
     {
-        $trainingHistory = DB::table('training_histories as th');
-        $trainingHistory->where('th.id', $this->request->id);
-        $trainingHistory->select(
-            'th.id', 'th.period_month', 'th.period_year', 'th.name', 'th.reference_number', 'tl.level_name', 
-            'th.start_date', 'th.end_date', 'th.duration', 'th.organizer', 'th.link', 'th.description',
-        );
-        $trainingHistory->join('training_levels as tl', 'th.level', '=', 'tl.id');
-        $trainingHistory = $trainingHistory->first();
-
-        if (!$trainingHistory) {
+        $checkTraining = DB::table('training_histories')->find($this->request->id);
+        if (!$checkTraining) {
             return $this->response(404, 'Pelatihan tidak ditemukan.');
         }
+
+        $trainingHistory = DB::table('training_histories as th')->where('th.id', $this->request->id);
+        $trainingHistory->select(
+            'th.id', 'th.period_month', 'th.period_year', 'th.name', 'th.reference_number', 'th.type',
+            'th.start_date', 'th.end_date', 'th.duration', 'th.organizer', 'th.link', 'th.description', 
+            'th.level', 'th.group_id',
+        );
+        if ($trainingHistory->first()->type == 3 && !is_null($trainingHistory->first()->group_id)) {
+            $trainingHistory->join('groups as rumpun', 'rumpun.id', '=', 'th.id');
+            $trainingHistory->selectRaw('rumpun.name as group_name, NULL as `level_name`');
+        } elseif ($trainingHistory->first()->type == (1 || 2) && !is_null($trainingHistory->first()->level)) {
+            $trainingHistory->join('training_levels as jenjang', 'th.level', '=', 'jenjang.id');
+            $trainingHistory->selectRaw('jenjang.level_name, NULL as `group_name`');
+        } else {
+            $trainingHistory->selectRaw('NULL as `level_name`, NULL as `group_name`');
+        }
+        $trainingHistory = $trainingHistory->first();
+        
+        $trainingHistory->type = ($trainingHistory->type==1 ? 'Pelatihan Struktural' : ($trainingHistory->type==2 ? 'Pelatihan Fungsional' : ($trainingHistory->type==3 ? 'Pelatihan Teknis' : NULL)));;
 
         $users = DB::table('training_history_users as thu');
         $users->join('users as u', 'u.id', '=', 'thu.user_id');
@@ -160,60 +171,67 @@ class TrainingHistoryController extends Controller
      */
     public function update(UpdateTrainingHistoryRequest $request)
     {
-        $trainingHistory = DB::table('training_histories');
-        $trainingHistory->where('id', $this->request->id);
-        $trainingHistory->select('id');
-        $trainingHistory = $trainingHistory->first();
+        try {
+            $trainingHistory = DB::table('training_histories');
+            $trainingHistory->where('id', $this->request->id);
+            $trainingHistory->select('id');
+            $trainingHistory = $trainingHistory->first();
 
-        if (!$trainingHistory) {
-            return $this->response(404, 'Pelatihan tidak ditemukan.');
-        }
+            if (!$trainingHistory) {
+                return $this->response(404, 'Pelatihan tidak ditemukan.');
+            }
 
-        $trainingHistory = DB::table('training_histories');
-        $trainingHistory->where('id', $this->request->id);
-        $trainingHistory = $trainingHistory->updateTs($this->request->except('users'));
+            $trainingHistory = DB::table('training_histories');
+            $trainingHistory->where('id', $this->request->id);
+            $trainingHistory = $trainingHistory->updateTs($this->request->except('users'));
 
-        $users = array();
+            $users = array();
 
-        if (isset($this->request->users)) {
+            if (isset($this->request->users)) {
 
-            // Get existing data
-            $trainingHistoryUsers = DB::table('training_history_users');
-            $trainingHistoryUsers->where('training_history_id', $this->request->id);
-            $trainingHistoryUsers->select('id');
-            $trainingHistoryUsers = $trainingHistoryUsers->get();
+                // Get existing data
+                $trainingHistoryUsers = DB::table('training_history_users');
+                $trainingHistoryUsers->where('training_history_id', $this->request->id);
+                $trainingHistoryUsers->select('id');
+                $trainingHistoryUsers = $trainingHistoryUsers->get();
 
-            // Delete data
-            $array1 = Arr::pluck($trainingHistoryUsers, 'id');
-            $array2 = Arr::pluck($this->request->users, 'id');
-            $result = array_diff($array1, $array2);
-            DB::table('training_history_users')->whereIn('id', $result)->delete();
+                // Delete data
+                $array1 = Arr::pluck($trainingHistoryUsers, 'id');
+                $array2 = Arr::pluck($this->request->users, 'id');
+                $result = array_diff($array1, $array2);
+                DB::table('training_history_users')->whereIn('id', $result)->delete();
 
-            foreach ($this->request->users as $user) {
-                // Upload Document
-                if (isset($user['certificate']) && is_file($user['certificate'])) {
-                    $user['certificate'] = $this->uploadDocument($user['certificate'], 'certificate');
-                } else if ($user['delete_certificate'] == true) {
-                    $user['certificate'] = null;
-                } else {
-                    unset($user['certificate']);
+                foreach ($this->request->users as $user) {
+                    // Upload Document
+                    if (isset($user['certificate']) && is_file($user['certificate'])) {
+                        $user['certificate'] = $this->uploadDocument($user['certificate'], 'certificate');
+                    } else if ($user['delete_certificate'] == true) {
+                        $user['certificate'] = null;
+                    } else {
+                        unset($user['certificate']);
+                    }
+                    unset($user['delete_certificate']);
+
+                    if (!is_null($user['id'])) {
+                        // Update existing data
+                        DB::table('training_history_users')->where('id', $user['id'])->updateTs($user);
+                    } else {
+                        // Insert new item
+                        $user['training_history_id'] = $this->request->id;
+                        array_push($users, $user);
+                    }
                 }
-                unset($user['delete_certificate']);
-
-                if (!is_null($user['id'])) {
-                    // Update existing data
-                    DB::table('training_history_users')->where('id', $user['id'])->updateTs($user);
-                } else {
-                    // Insert new item
-                    $user['training_history_id'] = $this->request->id;
-                    array_push($users, $user);
+                if (count($users) > 0) {
+                    DB::table('training_history_users')->insertTs($users);
                 }
             }
-            if (count($users) > 0) {
-                DB::table('training_history_users')->insertTs($users);
-            }
+            return $this->response(200, 'Pelatihan berhasil diupdate.');
+            
+        } catch (\Throwable $th) {
+            Log::warning($th);
+            DB::rollback();
+            return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
         }
-        return $this->response(200, 'Pelatihan berhasil diupdate.');
     }
 
     /**

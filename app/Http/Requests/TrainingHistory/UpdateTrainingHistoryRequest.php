@@ -27,6 +27,7 @@ class UpdateTrainingHistoryRequest extends FormRequest
             'name' => 'required|max:160',
             'reference_number' => 'required|max:160',
             'level' => 'nullable',
+            'group_id' => 'nullable',
             'start_date' => 'required|date',
             'end_date' => 'nullable|date',
             'duration' => 'nullable|numeric',
@@ -35,7 +36,7 @@ class UpdateTrainingHistoryRequest extends FormRequest
             'type' => 'required|numeric|in:1,2,3',
             'description' => 'nullable|max:255',
             'users.*.id' => 'numeric|nullable',
-            'users.*.user_id' => 'required|numeric',
+            'users.*.user_id' => 'required|numeric|exists:users,id',
             'users.*.certificate' => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
             'users.*.delete_certificate' => 'required|boolean',
         ];
@@ -71,6 +72,7 @@ class UpdateTrainingHistoryRequest extends FormRequest
             'users.*.id.numeric' => 'ID harus berupa angka.',
             'users.*.user_id.required' => 'User ID tidak boleh kosong.',
             'users.*.user_id.numeric' => 'User ID harus berupa angka.',
+            'users.*.user_id.exists' => 'User ID tidak terdaftar!',
             'users.*.certificate.file' => 'Sertifikat harus berupa file.',
             'users.*.certificate.extensions' => 'Sertifikat harus berupa jpg, jpeg atau png.',
             'users.*.certificate.max' => 'Ukuran sertifikat tidak boleh lebih dari 2MB.',
@@ -106,6 +108,10 @@ class UpdateTrainingHistoryRequest extends FormRequest
             'level' => [
                 'description' => 'Refers to the Level of Employee Training.',
                 'example' => 'Diklat PIM Tk.III',
+            ],
+            'group_id' => [
+                'description' => 'Refers to the ID Groups of Employee Training.',
+                'example' => 1,
             ],
             'start_date' => [
                 'description' => 'Refers to the Start Date of Employee Training.',

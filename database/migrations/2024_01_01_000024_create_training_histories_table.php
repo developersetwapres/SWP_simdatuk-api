@@ -15,6 +15,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('name', 512)->nullable();
             $table->unsignedBigInteger('level')->nullable();
+            $table->unsignedBigInteger('group_id')->nullable();
             $table->tinyInteger('period_month')->nullable();
             $table->year('period_year')->nullable();
             $table->date('start_date')->nullable();
@@ -27,6 +28,7 @@ return new class extends Migration
             $table->string('description', 255)->nullable();
             
             $table->foreign('level')->references('id')->on('training_levels')->onDelete('cascade');
+            $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
             $table->timestamps();
         });
     }
