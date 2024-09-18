@@ -134,19 +134,19 @@ class SummaryController extends Controller
             ],
             "generations" => [
                 [
-                    "name" => 'Gen Z',
+                    "name" => 'Gen Z (18-24) (2000-2006)',
                     "total" => $countable->genz,
                 ],
                 [
-                    "name" => 'Gen Y',
+                    "name" => 'Gen Y (25-40) (1981-1999)',
                     "total" => $countable->geny,
                 ],
                 [
-                    "name" => 'Gen X',
+                    "name" => 'Gen X (41-58) (1965-1980)',
                     "total" => $countable->genx,
                 ],
                 [
-                    "name" => 'Baby Boomer',
+                    "name" => 'Baby Boomer (59-75) (1946-1964)',
                     "total" => $countable->babyboomer,
                 ],
             ],
