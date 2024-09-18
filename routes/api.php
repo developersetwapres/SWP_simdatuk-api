@@ -127,6 +127,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/', [PositionHistoryController::class, 'create']);
         Route::get('/{id}', [PositionHistoryController::class, 'show']);
         Route::post('/{id}', [PositionHistoryController::class, 'update']);
+        Route::delete('/{id}', [PositionHistoryController::class, 'delete']);
     });
 
     Route::prefix('grade-histories')->group(function () {
@@ -134,6 +135,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/', [GradeHistoryController::class, 'create']);
         Route::get('/{id}', [GradeHistoryController::class, 'show']);
         Route::post('/{id}', [GradeHistoryController::class, 'update']);
+        Route::delete('/{id}', [GradeHistoryController::class, 'delete']);
     });
 
     Route::prefix('training-histories')->group(function () {
@@ -142,6 +144,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/', [TrainingHistoryController::class, 'create']);
         Route::get('/{id}', [TrainingHistoryController::class, 'show']);
         Route::post('/{id}', [TrainingHistoryController::class, 'update']);
+        Route::delete('/{id}', [TrainingHistoryController::class, 'delete']);
 
         Route::prefix('/levels')->group(function () {
             Route::get('/structural', [TrainingHistoryController::class, 'structuralLevels']); // jenjang struktural
@@ -154,6 +157,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/', [RecognitionHistoryController::class, 'create']);
         Route::get('/{id}', [RecognitionHistoryController::class, 'show']);
         Route::post('/{id}', [RecognitionHistoryController::class, 'update']);
+        Route::delete('/{id}', [RecognitionHistoryController::class, 'delete']);
     });
 
     Route::prefix('target-histories')->group(function () {
@@ -161,6 +165,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/', [TargetHistoryController::class, 'create']);
         Route::get('/{id}', [TargetHistoryController::class, 'show']);
         Route::post('/{id}', [TargetHistoryController::class, 'update']);
+        Route::delete('/{id}', [TargetHistoryController::class, 'delete']);
     });
 
     Route::prefix('performance-histories')->group(function () {
@@ -168,6 +173,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/', [PerformanceHistoryController::class, 'create']);
         Route::get('/{id}', [PerformanceHistoryController::class, 'show']);
         Route::post('/{id}', [PerformanceHistoryController::class, 'update']);
+        Route::delete('/{id}', [PerformanceHistoryController::class, 'delete']);
     });
 
     Route::prefix('disciplinary-histories')->group(function () {
@@ -175,6 +181,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/', [DisciplinaryHistoryController::class, 'create']);
         Route::get('/{id}', [DisciplinaryHistoryController::class, 'show']);
         Route::post('/{id}', [DisciplinaryHistoryController::class, 'update']);
+        Route::delete('/{id}', [DisciplinaryHistoryController::class, 'delete']);
     });
 
     Route::prefix('positions')->group(function () {

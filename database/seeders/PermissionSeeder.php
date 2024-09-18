@@ -41,51 +41,51 @@ class PermissionSeeder extends Seeder
             ],
             [
                 'name' => 'Data Pegawai - ASN',
-                'permitted_actions' => 'cru',
+                'permitted_actions' => 'crud',
             ],
             [
                 'name' => 'Data Pegawai - Non ASN',
-                'permitted_actions' => 'cru',
+                'permitted_actions' => 'crud',
             ],
             [
                 'name' => 'Data Pegawai - Outsourcing',
-                'permitted_actions' => 'cru',
+                'permitted_actions' => 'crud',
             ],
             [
                 'name' => 'Data Riwayat - Jabatan',
-                'permitted_actions' => 'cru',
+                'permitted_actions' => 'crud',
             ],
             [
                 'name' => 'Data Riwayat - Golongan',
-                'permitted_actions' => 'cru',
+                'permitted_actions' => 'crud',
             ],
             [
                 'name' => 'Data Riwayat - Pelatihan Struktural',
-                'permitted_actions' => 'cru',
+                'permitted_actions' => 'crud',
             ],
             [
                 'name' => 'Data Riwayat - Pelatihan Fungsional',
-                'permitted_actions' => 'cru',
+                'permitted_actions' => 'crud',
             ],
             [
                 'name' => 'Data Riwayat - Pelatihan Teknis',
-                'permitted_actions' => 'cru',
+                'permitted_actions' => 'crud',
             ],
             [
                 'name' => 'Data Riwayat - Penghargaan',
-                'permitted_actions' => 'cru',
+                'permitted_actions' => 'crud',
             ],
             [
                 'name' => 'Data Riwayat - SKP',
-                'permitted_actions' => 'cru',
+                'permitted_actions' => 'crud',
             ],
             [
                 'name' => 'Data Riwayat - Penilaian Prestasi Kerja',
-                'permitted_actions' => 'cru',
+                'permitted_actions' => 'crud',
             ],
             [
                 'name' => 'Data Riwayat - Hukuman Disiplin',
-                'permitted_actions' => 'cru',
+                'permitted_actions' => 'crud',
             ],
             [
                 'name' => 'Master Data - Data Pengguna',

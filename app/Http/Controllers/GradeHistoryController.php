@@ -222,4 +222,36 @@ class GradeHistoryController extends Controller
         }
         return $this->response(200, 'Riwayat golongan berhasil diupdate.');
     }
+
+    /**
+     * Delete Grade History by ID
+     *
+     * Delete a specific Grade History.
+     * @subgroup Grade
+     * @authenticated
+     * @urlParam id Refers to the ID of Grade History. Example: 1
+     * @response 404 {"code": 404,"message": "Mohon maaf, riwayat golongan tidak ditemukan.","data": null}
+     * @response 200 {"code": 200,"message": "Riwayat golongan berhasil dihapus.","data": null}
+     */
+    public function delete()
+    {
+        $histories = DB::table('grade_histories')->select('id')->where('id', $this->request->id)->first();
+        if (!$histories) {
+            return $this->response(404, 'Riwayat golongan tidak ditemukan.');
+        }
+
+        try {
+            DB::beginTransaction();
+
+            // Delete Grade History
+            DB::table('grade_histories')->where('id', $histories->id)->delete();
+
+            DB::commit();
+            return $this->response(200, 'Riwayat golongan berhasil dihapus.');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            Log::warning($th);
+            return $this->response(500, 'Riwayat golongan gagal dihapus.');
+        }
+    }
 }

@@ -185,4 +185,36 @@ class PerformanceHistoryController extends Controller
         }
         return $this->response(200, 'PPK berhasil diupdate.');
     }
+
+    /**
+     * Delete Performance History by ID
+     *
+     * Delete a specific Performance History.
+     * @subgroup Performance
+     * @authenticated
+     * @urlParam id Refers to the ID of Performance History. Example: 1
+     * @response 404 {"code": 404,"message": "Mohon maaf, riwayat PPK tidak ditemukan.","data": null}
+     * @response 200 {"code": 200,"message": "Riwayat PPK berhasil dihapus.","data": null}
+     */
+    public function delete()
+    {
+        $histories = DB::table('performance_histories')->select('id')->where('id', $this->request->id)->first();
+        if (!$histories) {
+            return $this->response(404, 'Riwayat PPK tidak ditemukan.');
+        }
+
+        try {
+            DB::beginTransaction();
+
+            // Delete Performance History
+            DB::table('performance_histories')->where('id', $histories->id)->delete();
+
+            DB::commit();
+            return $this->response(200, 'Riwayat PPK berhasil dihapus.');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            Log::warning($th);
+            return $this->response(500, 'Riwayat jabatan gagal dihapus.');
+        }
+    }
 }

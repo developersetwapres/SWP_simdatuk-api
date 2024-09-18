@@ -195,4 +195,36 @@ class RecognitionHistoryController extends Controller
         }
         return $this->response(200, 'Penghargaan berhasil diupdate.');
     }
+
+    /**
+     * Delete Recognition History by ID
+     *
+     * Delete a specific Recognition History.
+     * @subgroup Recognition
+     * @authenticated
+     * @urlParam id Refers to the ID of Recognition History. Example: 1
+     * @response 404 {"code": 404,"message": "Mohon maaf, riwayat penghargaan tidak ditemukan.","data": null}
+     * @response 200 {"code": 200,"message": "Riwayat penghargaan berhasil dihapus.","data": null}
+     */
+    public function delete()
+    {
+        $histories = DB::table('recognition_histories')->select('id')->where('id', $this->request->id)->first();
+        if (!$histories) {
+            return $this->response(404, 'Riwayat penghargaan tidak ditemukan.');
+        }
+
+        try {
+            DB::beginTransaction();
+
+            // Delete Recognition History
+            DB::table('recognition_histories')->where('id', $histories->id)->delete();
+
+            DB::commit();
+            return $this->response(200, 'Riwayat penghargaan berhasil dihapus.');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            Log::warning($th);
+            return $this->response(500, 'Riwayat penghargaan gagal dihapus.');
+        }
+    }
 }

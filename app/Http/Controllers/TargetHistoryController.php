@@ -189,4 +189,36 @@ class TargetHistoryController extends Controller
         }
         return $this->response(200, 'SKP berhasil diupdate.');
     }
+
+    /**
+     * Delete Target History by ID
+     *
+     * Delete a specific Target History.
+     * @subgroup Target
+     * @authenticated
+     * @urlParam id Refers to the ID of Target History. Example: 1
+     * @response 404 {"code": 404,"message": "Mohon maaf, riwayat SKP tidak ditemukan.","data": null}
+     * @response 200 {"code": 200,"message": "Riwayat SKP berhasil dihapus.","data": null}
+     */
+    public function delete()
+    {
+        $histories = DB::table('target_histories')->select('id')->where('id', $this->request->id)->first();
+        if (!$histories) {
+            return $this->response(404, 'Riwayat SKP tidak ditemukan.');
+        }
+
+        try {
+            DB::beginTransaction();
+
+            // Delete Target History
+            DB::table('target_histories')->where('id', $histories->id)->delete();
+
+            DB::commit();
+            return $this->response(200, 'Riwayat SKP berhasil dihapus.');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            Log::warning($th);
+            return $this->response(500, 'Riwayat SKP gagal dihapus.');
+        }
+    }
 }

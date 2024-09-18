@@ -180,4 +180,36 @@ class DisciplinaryHistoryController extends Controller
         }
         return $this->response(200, 'Hukuman disiplin berhasil diupdate.');
     }
+
+    /**
+     * Delete Disciplinary History by ID
+     *
+     * Delete a specific Disciplinary History.
+     * @subgroup Disciplinary
+     * @authenticated
+     * @urlParam id Refers to the ID of Disciplinary History. Example: 1
+     * @response 404 {"code": 404,"message": "Mohon maaf, riwayat hukuman disiplin tidak ditemukan.","data": null}
+     * @response 200 {"code": 200,"message": "Riwayat hukuman disiplin berhasil dihapus.","data": null}
+     */
+    public function delete()
+    {
+        $histories = DB::table('disciplinary_histories')->select('id')->where('id', $this->request->id)->first();
+        if (!$histories) {
+            return $this->response(404, 'Riwayat hukuman disiplin tidak ditemukan.');
+        }
+
+        try {
+            DB::beginTransaction();
+
+            // Delete Disciplinary History
+            DB::table('disciplinary_histories')->where('id', $histories->id)->delete();
+
+            DB::commit();
+            return $this->response(200, 'Riwayat hukuman disiplin berhasil dihapus.');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            Log::warning($th);
+            return $this->response(500, 'Riwayat jabatan gagal dihapus.');
+        }
+    }
 }

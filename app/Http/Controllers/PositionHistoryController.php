@@ -217,4 +217,36 @@ class PositionHistoryController extends Controller
         }
         return $this->response(200, 'Riwayat jabatan berhasil diupdate.');
     }
+
+    /**
+     * Delete Position History by ID
+     *
+     * Delete a specific Position History.
+     * @subgroup Position
+     * @authenticated
+     * @urlParam id Refers to the ID of Position History. Example: 1
+     * @response 404 {"code": 404,"message": "Mohon maaf, riwayat jabatan tidak ditemukan.","data": null}
+     * @response 200 {"code": 200,"message": "Riwayat jabatan berhasil dihapus.","data": null}
+     */
+    public function delete()
+    {
+        $histories = DB::table('position_histories')->select('id')->where('id', $this->request->id)->first();
+        if (!$histories) {
+            return $this->response(404, 'Riwayat jabatan tidak ditemukan.');
+        }
+
+        try {
+            DB::beginTransaction();
+
+            // Delete Position History
+            DB::table('position_histories')->where('id', $histories->id)->delete();
+
+            DB::commit();
+            return $this->response(200, 'Riwayat jabatan berhasil dihapus.');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            Log::warning($th);
+            return $this->response(500, 'Riwayat jabatan gagal dihapus.');
+        }
+    }
 }

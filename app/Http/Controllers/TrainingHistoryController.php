@@ -58,8 +58,14 @@ class TrainingHistoryController extends Controller
         $trainingHistories = DB::table('training_histories as th');
         $trainingHistories->leftjoin('training_history_users as thu', 'th.id', '=', 'thu.training_history_id');
         $trainingHistories->select(
-            'th.id', 'th.created_at', 'th.name', 'th.period_month', 'th.period_year', 
-            'th.start_date', 'th.end_date', DB::raw("COUNT(thu.id) AS total")
+            'th.id',
+            'th.created_at',
+            'th.name',
+            'th.period_month',
+            'th.period_year',
+            'th.start_date',
+            'th.end_date',
+            DB::raw("COUNT(thu.id) AS total")
         );
         $trainingHistories->where('th.name', 'like', '%' . $this->request->search . '%');
         $trainingHistories->where('th.type', $this->request->type);
@@ -129,9 +135,20 @@ class TrainingHistoryController extends Controller
 
         $trainingHistory = DB::table('training_histories as th')->where('th.id', $this->request->id);
         $trainingHistory->select(
-            'th.id', 'th.period_month', 'th.period_year', 'th.name', 'th.reference_number', 'th.type',
-            'th.start_date', 'th.end_date', 'th.duration', 'th.organizer', 'th.link', 'th.description', 
-            'th.level', 'th.group_id',
+            'th.id',
+            'th.period_month',
+            'th.period_year',
+            'th.name',
+            'th.reference_number',
+            'th.type',
+            'th.start_date',
+            'th.end_date',
+            'th.duration',
+            'th.organizer',
+            'th.link',
+            'th.description',
+            'th.level',
+            'th.group_id',
         );
         if ($trainingHistory->first()->type == 3 && !is_null($trainingHistory->first()->group_id)) {
             $trainingHistory->join('groups as rumpun', 'rumpun.id', '=', 'th.id');
@@ -143,8 +160,8 @@ class TrainingHistoryController extends Controller
             $trainingHistory->selectRaw('NULL as `level_name`, NULL as `group_name`');
         }
         $trainingHistory = $trainingHistory->first();
-        
-        $trainingHistory->type = ($trainingHistory->type==1 ? 'Pelatihan Struktural' : ($trainingHistory->type==2 ? 'Pelatihan Fungsional' : ($trainingHistory->type==3 ? 'Pelatihan Teknis' : NULL)));;
+
+        $trainingHistory->type = ($trainingHistory->type == 1 ? 'Pelatihan Struktural' : ($trainingHistory->type == 2 ? 'Pelatihan Fungsional' : ($trainingHistory->type == 3 ? 'Pelatihan Teknis' : NULL)));;
 
         $users = DB::table('training_history_users as thu');
         $users->join('users as u', 'u.id', '=', 'thu.user_id');
@@ -226,11 +243,42 @@ class TrainingHistoryController extends Controller
                 }
             }
             return $this->response(200, 'Pelatihan berhasil diupdate.');
-            
         } catch (\Throwable $th) {
             Log::warning($th);
             DB::rollback();
             return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
+        }
+    }
+
+    /**
+     * Delete Training History by ID
+     *
+     * Delete a specific Training History.
+     * @subgroup Training
+     * @authenticated
+     * @urlParam id Refers to the ID of Training History. Example: 1
+     * @response 404 {"code": 404,"message": "Mohon maaf, riwayat pelatihan tidak ditemukan.","data": null}
+     * @response 200 {"code": 200,"message": "Riwayat pelatihan berhasil dihapus.","data": null}
+     */
+    public function delete()
+    {
+        $histories = DB::table('training_histories')->select('id')->where('id', $this->request->id)->first();
+        if (!$histories) {
+            return $this->response(404, 'Riwayat pelatihan tidak ditemukan.');
+        }
+
+        try {
+            DB::beginTransaction();
+
+            // Delete Training History
+            DB::table('training_histories')->where('id', $histories->id)->delete();
+
+            DB::commit();
+            return $this->response(200, 'Riwayat pelatihan berhasil dihapus.');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            Log::warning($th);
+            return $this->response(500, 'Riwayat pelatihan gagal dihapus.');
         }
     }
 
@@ -245,8 +293,9 @@ class TrainingHistoryController extends Controller
      * @queryParam search string The keyword search field for the name. Example: Struktural
      * @response 200 {"code": 200,"message": "success","data": [{"id": 1,"level_name": "Struktural", "level_type": "Jenjang Struktural", "description": "-"}],"pagination": {"total": 32,"count": 1,"per_page": 1,"current_page": 1,"total_pages": 32,"links": {"first_page": "http://localhost/api/training-histories/levels/structural?page=1","last_page": "http://localhost/api/training-histories/levels/structural?page=32","next_page": "http://localhost/api/training-histories/levels/structural?page=2","prev_page": null}}}
      *
-    */
-    public function structuralLevels() {
+     */
+    public function structuralLevels()
+    {
         $messages = [
             'page.numeric'  => 'Page harus berupa angka.',
             'page.min'      => 'Page minimal harus 1 atau lebih.',
@@ -261,7 +310,7 @@ class TrainingHistoryController extends Controller
 
         $levels = DB::table('training_levels');
         $levels->select('training_levels.id', 'training_levels.level_name', 'training_levels.level_type', 'training_levels.description');
-        $levels->where('training_levels.level_name', 'like', '%' . $this->request->search . '%');        
+        $levels->where('training_levels.level_name', 'like', '%' . $this->request->search . '%');
         $levels->where('training_levels.level_type', '=', 1); // jenjang struktural
         $levels->orderBy('id', 'asc');
 
@@ -293,8 +342,9 @@ class TrainingHistoryController extends Controller
      * @queryParam search string The keyword search field for the name. Example: Fungsional
      * @response 200 {"code": 200,"message": "success","data": [{"id": 1,"level_name": "Fungsional", "level_name": "Jenjang Fungsional", "description": "-"}],"pagination": {"total": 32,"count": 1,"per_page": 1,"current_page": 1,"total_pages": 32,"links": {"first_page": "http://localhost/api/training-histories/levels/functional?page=1","last_page": "http://localhost/api/training-histories/levels/functional?page=32","next_page": "http://localhost/api/training-histories/levels/functional?page=2","prev_page": null}}}
      *
-    */
-    public function functionalLevels() {
+     */
+    public function functionalLevels()
+    {
         $messages = [
             'page.numeric'  => 'Page harus berupa angka.',
             'page.min'      => 'Page minimal harus 1 atau lebih.',
@@ -309,7 +359,7 @@ class TrainingHistoryController extends Controller
 
         $levels = DB::table('training_levels');
         $levels->select('training_levels.id', 'training_levels.level_name', 'training_levels.level_type', 'training_levels.description');
-        $levels->where('training_levels.level_name', 'like', '%' . $this->request->search . '%');        
+        $levels->where('training_levels.level_name', 'like', '%' . $this->request->search . '%');
         $levels->where('training_levels.level_type', '=', 2); // jenjang fungsional
         $levels->orderBy('id', 'asc');
 
@@ -341,8 +391,8 @@ class TrainingHistoryController extends Controller
      * @queryParam search string The keyword search field for the name. Example: Tata Usaha
      * @response 200 {"code": 200,"message": "success","data": [{"id": 1,"name": "Tata Usaha", "type": "Rumpun Pelatihan Teknis"}],"pagination": {"total": 32,"count": 1,"per_page": 1,"current_page": 1,"total_pages": 32,"links": {"first_page": "http://localhost/api/training-histories/groups?page=1","last_page": "http://localhost/api/training-histories/groups?page=32","next_page": "http://localhost/api/training-histories/groups?page=2","prev_page": null}}}
      *
-    */
-    public function technicalGroups() 
+     */
+    public function technicalGroups()
     {
         $messages = [
             'page.numeric' => 'Page harus berupa angka.',
@@ -378,5 +428,4 @@ class TrainingHistoryController extends Controller
             return $this->paginateResponse(200, $message, $groups);
         }
     }
-
 }
