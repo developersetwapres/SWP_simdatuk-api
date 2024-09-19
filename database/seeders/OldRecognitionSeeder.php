@@ -32,7 +32,7 @@ class OldRecognitionSeeder extends Seeder
                     db_lama_mstbintang.ket_bintang as description,
                     db_baru_decrees.id as type_of_decree,
                     db_lama_bintang.tgl_sk as decree_date,
-                    db_lama_bintang.tahun_sk as decree_year,
+                    db_lama_bintang.tahun_sk as decree_year
                 FROM
                     simdatuk_dump.tbl_sk_bintang as db_lama_bintang
                 JOIN
@@ -84,7 +84,9 @@ class OldRecognitionSeeder extends Seeder
                 ";
 
                 $userRecognition = DB::select($userRecognition);
-                DB::table('recognition_history_users')->insertTs(json_decode(json_encode($userRecognition), true));
+                if (sizeof($userRecognition)) {
+                    DB::table('recognition_history_users')->insertTs(json_decode(json_encode($userRecognition), true));
+                }
             }
         }
     }
