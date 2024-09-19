@@ -151,7 +151,7 @@ class TrainingHistoryController extends Controller
             'th.group_id',
         );
         if ($trainingHistory->first()->type == 3 && !is_null($trainingHistory->first()->group_id)) {
-            $trainingHistory->join('groups as rumpun', 'rumpun.id', '=', 'th.id');
+            $trainingHistory->join('groups as rumpun', 'rumpun.id', '=', 'th.group_id');
             $trainingHistory->selectRaw('rumpun.name as group_name, NULL as `level_name`');
         } elseif ($trainingHistory->first()->type == (1 || 2) && !is_null($trainingHistory->first()->level)) {
             $trainingHistory->join('training_levels as jenjang', 'th.level', '=', 'jenjang.id');
