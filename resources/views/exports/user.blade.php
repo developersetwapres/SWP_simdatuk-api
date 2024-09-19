@@ -338,21 +338,13 @@
         <thead class="table-section-3-title-row">
             <td class="table-section-3-title">No</td>
             <td class="table-section-3-title">Jabatan</td>
-            <td class="table-section-3-title">Rumpun</td>
             <td class="table-section-3-title">Jenjang Jabatan</td>
             <td class="table-section-3-title">Keterangan Jabatan</td>
             <td class="table-section-3-title">TMT Menjabat</td>
             <td class="table-section-3-title">SK Menjabat</td>
             <td class="table-section-3-title">SK Jabatan</td>
-            <td class="table-section-3-title">Jenis SK Jabatan</td>
             <td class="table-section-3-title">No SK Jabatan</td>
             <td class="table-section-3-title">Tanggal SK Jabatan</td>
-            <td class="table-section-3-title">TMT Selesai</td>
-            <td class="table-section-3-title">SK Selesai</td>
-            <td class="table-section-3-title">Jenis SK Selesai</td>
-            <td class="table-section-3-title">No SK Selesai</td>
-            <td class="table-section-3-title">Tanggal SK Selesai</td>
-            <td class="table-section-3-title">Status Jabatan</td>
         </thead>
 
         <tbody>
@@ -361,7 +353,6 @@
             <tr style="border-bottom: 1px solid #F0F0F0;">
                 <td class="table-section-3-body">{{ $indexPosition++ }}</td>
                 <td class="table-section-3-body">{{ $value->position }}</td>
-                <td class="table-section-3-body">{{ $value->group_name }}</td>
                 <td class="table-section-3-body">{{ $value->echelon_name }}</td>
                 <td class="table-section-3-body">
                     @switch($value->position_status)
@@ -389,15 +380,8 @@
                     -
                     @endif
                 </td>
-                <td class="table-section-3-body">{{ $value->type_decree_name }}</td>
                 <td class="table-section-3-body">{{ $value->decree_number }}</td>
                 <td class="table-section-3-body">{{ $value->decree_date }}</td>
-                <td class="table-section-3-body">{{ $value->termination_date }}</td>
-                <td class="table-section-3-body">{{ $value->termination_decree }}</td>
-                <td class="table-section-3-body">{{ $value->type_termination_decree_name }}</td>
-                <td class="table-section-3-body">{{ $value->termination_decree_number }}</td>
-                <td class="table-section-3-body">{{ $value->termination_decree_date }}</td>
-                <td class="table-section-3-body">{{ $value->status === 1 ? 'Aktif' : 'Tidak Aktif' }}</td>
             </tr>
             @endforeach
         </tbody>
@@ -454,11 +438,10 @@
         <thead class="table-section-3-title-row">
             <td class="table-section-3-title">No</td>
             <td class="table-section-3-title">Nama Diklat</td>
-            <td class="table-section-3-title">No Surat Perintah</td>
             <td class="table-section-3-title">Jenjang</td>
             <td class="table-section-3-title">Tanggal Pelaksanaan</td>
-            <td class="table-section-3-title">Jam Pelajaran</td>
             <td class="table-section-3-title">Penyelenggara</td>
+            <td class="table-section-3-title">Jam Pelajaran</td>
             <td class="table-section-3-title">Sertifikat</td>
         </thead>
 
@@ -468,11 +451,10 @@
             <tr style="border-bottom: 1px solid #F0F0F0;">
                 <td class="table-section-3-body">{{ $indexTrainingStructural++ }}</td>
                 <td class="table-section-3-body">{{ $value->name }}</td>
-                <td class="table-section-3-body">{{ $value->reference_number }}</td>
                 <td class="table-section-3-body">{{ $value->level }}</td>
                 <td class="table-section-3-body">{{ $value->start_date.' - '.$value->end_date }}</td>
-                <td class="table-section-3-body">{{ $value->duration }}</td>
                 <td class="table-section-3-body">{{ $value->organizer }}</td>
+                <td class="table-section-3-body">{{ $value->duration }}</td>
                 <td class="table-section-3-body">
                     @if(!is_null($value->certificate))
                     <a href="{{ $value->certificate }}">Lihat File</a>
@@ -493,11 +475,9 @@
         <thead class="table-section-3-title-row">
             <td class="table-section-3-title">No</td>
             <td class="table-section-3-title">Nama Diklat</td>
-            <td class="table-section-3-title">No Surat Perintah</td>
-            <td class="table-section-3-title">Jenjang</td>
             <td class="table-section-3-title">Tanggal Pelaksanaan</td>
-            <td class="table-section-3-title">Jam Pelajaran</td>
             <td class="table-section-3-title">Penyelenggara</td>
+            <td class="table-section-3-title">Jam Pelajaran</td>
             <td class="table-section-3-title">Sertifikat</td>
         </thead>
 
@@ -507,11 +487,9 @@
             <tr style="border-bottom: 1px solid #F0F0F0;">
                 <td class="table-section-3-body">{{ $indexTrainingFunctional++ }}</td>
                 <td class="table-section-3-body">{{ $value->name }}</td>
-                <td class="table-section-3-body">{{ $value->reference_number }}</td>
-                <td class="table-section-3-body">{{ $value->level }}</td>
                 <td class="table-section-3-body">{{ $value->start_date.' - '.$value->end_date }}</td>
-                <td class="table-section-3-body">{{ $value->duration }}</td>
                 <td class="table-section-3-body">{{ $value->organizer }}</td>
+                <td class="table-section-3-body">{{ $value->duration }}</td>
                 <td class="table-section-3-body">
                     @if(!is_null($value->certificate))
                     <a href="{{ $value->certificate }}">Lihat File</a>
@@ -532,10 +510,9 @@
         <thead class="table-section-3-title-row">
             <td class="table-section-3-title">No</td>
             <td class="table-section-3-title">Nama Diklat</td>
-            <td class="table-section-3-title">No Surat Perintah</td>
             <td class="table-section-3-title">Tanggal Pelaksanaan</td>
-            <td class="table-section-3-title">Jam Pelajaran</td>
             <td class="table-section-3-title">Penyelenggara</td>
+            <td class="table-section-3-title">Jam Pelajaran</td>
             <td class="table-section-3-title">Sertifikat</td>
         </thead>
 
@@ -545,10 +522,9 @@
             <tr style="border-bottom: 1px solid #F0F0F0;">
                 <td class="table-section-3-body">{{ $indexTrainingTechnical++ }}</td>
                 <td class="table-section-3-body">{{ $value->name }}</td>
-                <td class="table-section-3-body">{{ $value->reference_number }}</td>
                 <td class="table-section-3-body">{{ $value->start_date.' - '.$value->end_date }}</td>
-                <td class="table-section-3-body">{{ $value->duration }}</td>
                 <td class="table-section-3-body">{{ $value->organizer }}</td>
+                <td class="table-section-3-body">{{ $value->duration }}</td>
                 <td class="table-section-3-body">
                     @if(!is_null($value->certificate))
                     <a href="{{ $value->certificate }}">Lihat File</a>
@@ -569,13 +545,8 @@
         <thead class="table-section-3-title-row">
             <td class="table-section-3-title">No</td>
             <td class="table-section-3-title">Nama Penghargaan</td>
-            <td class="table-section-3-title">Keterangan Penghargaan</td>
-            <td class="table-section-3-title">Jenis SK</td>
-            <td class="table-section-3-title">Tanggal SK</td>
-            <td class="table-section-3-title">No SK Penghargaan</td>
             <td class="table-section-3-title">Tahun SK</td>
             <td class="table-section-3-title">Instansi Pemberi Penghargaan</td>
-            <td class="table-section-3-title">Tanggal Terima</td>
         </thead>
 
         <tbody>
@@ -584,13 +555,8 @@
             <tr style="border-bottom: 1px solid #F0F0F0;">
                 <td class="table-section-3-body">{{ $indexAward++ }}</td>
                 <td class="table-section-3-body">{{ $value->recognition_name }}</td>
-                <td class="table-section-3-body">{{ $value->description }}</td>
-                <td class="table-section-3-body">{{ $value->type_of_decree_name }}</td>
-                <td class="table-section-3-body">{{ $value->decree_date }}</td>
-                <td class="table-section-3-body">{{ $value->decree_number }}</td>
                 <td class="table-section-3-body">{{ $value->decree_year }}</td>
                 <td class="table-section-3-body">{{ $value->awarding_institution }}</td>
-                <td class="table-section-3-body">{{ $value->date_of_receipt }}</td>
             </tr>
             @endforeach
         </tbody>
@@ -770,20 +736,11 @@
     <table class="table-section-3">
         <thead class="table-section-3-title-row">
             <td class="table-section-3-title">No</td>
-            <td class="table-section-3-title">Golongan</td>
-            <td class="table-section-3-title">Jabatan</td>
             <td class="table-section-3-title">Jenis Hukuman</td>
             <td class="table-section-3-title">Tingkat Hukuman</td>
-            <td class="table-section-3-title">Pemotongan Tunjangan Kinerja (Persentase)</td>
-            <td class="table-section-3-title">Jangka Waktu Pemotongan (Bulan)</td>
             <td class="table-section-3-title">No SK Hukuman Disiplin</td>
             <td class="table-section-3-title">Tanggal SK Hukuman Disiplin</td>
             <td class="table-section-3-title">Tanggal Hukuman Disiplin</td>
-            <td class="table-section-3-title">Status</td>
-            <td class="table-section-3-title">Masa Berlaku</td>
-            <td class="table-section-3-title">Pejabat Berwenang</td>
-            <td class="table-section-3-title">Nama Pejabat Berwenang</td>
-            <td class="table-section-3-title">Uraian</td>
         </thead>
 
         <tbody>
@@ -791,20 +748,11 @@
             @foreach($userPunishment as $value)
             <tr style="border-bottom: 1px solid #F0F0F0;">
                 <td class="table-section-3-body">{{ $indexPunishment++ }}</td>
-                <td class="table-section-3-body">{{ $value->grade }}</td>
-                <td class="table-section-3-body">{{ $value->position }}</td>
                 <td class="table-section-3-body">{{ $value->disciplinary_name }}</td>
                 <td class="table-section-3-body">{{ $value->disciplinary_description }}</td>
-                <td class="table-section-3-body">{{ $value->performance_allowance_deduction }}</td>
-                <td class="table-section-3-body">{{ $value->performance_allowance_duration }}</td>
                 <td class="table-section-3-body">{{ $value->decree_number }}</td>
                 <td class="table-section-3-body">{{ $value->date_of_decree }}</td>
                 <td class="table-section-3-body">{{ $value->start_date }} - {{ $value->end_date }}</td>
-                <td class="table-section-3-body"> {{ ($value->status) ? 'Aktif': 'Pasif'}}</td>
-                <td class="table-section-3-body">{{ $value->validity_period }} Hari</td>
-                <td class="table-section-3-body">{{ $value->authorizing_officer }}</td>
-                <td class="table-section-3-body">{{ $value->name_of_authorizing_officer }}</td>
-                <td class="table-section-3-body">{{ $value->description }}</td>
             </tr>
             @endforeach
         </tbody>
@@ -817,22 +765,11 @@
     <table class="table-section-3">
         <thead class="table-section-3-title-row">
             <td class="table-section-3-title">No</td>
-            <td class="table-section-3-title">No Kartu Keluarga</td>
             <td class="table-section-3-title">Nama Anggota Keluarga</td>
-            <td class="table-section-3-title">No NIK</td>
             <td class="table-section-3-title">Jenis Kelamin</td>
-            <td class="table-section-3-title">Agama</td>
             <td class="table-section-3-title">Tempat Lahir</td>
             <td class="table-section-3-title">Tanggal Lahir</td>
-            <td class="table-section-3-title">Nama Bapak</td>
-            <td class="table-section-3-title">Nama Ibu</td>
             <td class="table-section-3-title">Hubungan Keluarga</td>
-            <td class="table-section-3-title">Pendidikan</td>
-            <td class="table-section-3-title">Jenis Pekerjaan</td>
-            <td class="table-section-3-title">Keterangan Pekerjaan</td>
-            <td class="table-section-3-title">Status Perkawinan</td>
-            <td class="table-section-3-title">No HP</td>
-            <td class="table-section-3-title">Urut Keluarga</td>
         </thead>
 
         <tbody>
@@ -840,9 +777,7 @@
             @foreach($userFamily as $value)
             <tr style="border-bottom: 1px solid #F0F0F0;">
                 <td class="table-section-3-body">{{ $indexFamily++ }}</td>
-                <td class="table-section-3-body">{{ $value->card_number }}</td>
                 <td class="table-section-3-body">{{ $value->name }}</td>
-                <td class="table-section-3-body">{{ $value->id_number }}</td>
                 <td class="table-section-3-body">
                     @switch($value->gender)
                     @case(0)
@@ -854,33 +789,8 @@
                     @default
                     -
                     @endswitch</td>
-                <td class="table-section-3-body">
-                    @switch($value->religion)
-                    @case(1)
-                    Islam
-                    @break
-                    @case(2)
-                    Kristen
-                    @break
-                    @case(3)
-                    Katolik
-                    @break
-                    @case(4)
-                    Hindu
-                    @break
-                    @case(5)
-                    Buddha
-                    @break
-                    @case(6)
-                    Konguchu
-                    @break
-                    @default
-                    -
-                    @endswitch</td>
                 <td class="table-section-3-body">{{ $value->place_of_birth }}</td>
                 <td class="table-section-3-body">{{ $value->date_of_birth }}</td>
-                <td class="table-section-3-body">{{ $value->name_of_father }}</td>
-                <td class="table-section-3-body">{{ $value->name_of_mother }}</td>
                 <td class="table-section-3-body">
                     @switch($value->relationship_status)
                     @case(1)
@@ -913,62 +823,6 @@
                     @default
                     -
                     @endswitch</td>
-                <td class="table-section-3-body">
-                    @switch($value->education)
-                    @case(1)
-                    Tidak/Belum Sekolah
-                    @break
-                    @case(2)
-                    Belum Tamat SD/Sederajat
-                    @break
-                    @case(3)
-                    Tamat SD/Sederajat
-                    @break
-                    @case(4)
-                    SLTP/Sederajat
-                    @break
-                    @case(5)
-                    SLTA/Sederajat
-                    @break
-                    @case(6)
-                    Diploma I/II
-                    @break
-                    @case(7)
-                    Akademi/Diploma III/Sarjana Muda
-                    @break
-                    @case(8)
-                    Diploma IV/Strata I
-                    @break
-                    @case(9)
-                    Strata II
-                    @break
-                    @case(10)
-                    Strata III
-                    @break
-                    @default
-                    -
-                    @endswitch</td>
-                <td class="table-section-3-body">{{ $value->occupation }}</td>
-                <td class="table-section-3-body">{{ $value->occupation_description }}</td>
-                <td class="table-section-3-body">
-                    @switch($value->marital_status)
-                    @case(1)
-                    Belum Menikah
-                    @break
-                    @case(2)
-                    Menikah
-                    @break
-                    @case(3)
-                    Cerai Hidup
-                    @break
-                    @case(4)
-                    Cerai Mati
-                    @break
-                    @default
-                    -
-                    @endswitch</td>
-                <td class="table-section-3-body">{{ $value->mobile_phone }}</td>
-                <td class="table-section-3-body">{{ $value->sequence_number }}</td>
             </tr>
             @endforeach
         </tbody>
@@ -981,12 +835,10 @@
     <table class="table-section-3">
         <thead class="table-section-3-title-row">
             <td class="table-section-3-title">No</td>
-            <td class="table-section-3-title">Golongan</td>
-            <td class="table-section-3-title">Jabatan</td>
             <td class="table-section-3-title">Periode</td>
-            <td class="table-section-3-title">Alasan</td>
+            <td class="table-section-3-title">Jenis Cuti</td>
             <td class="table-section-3-title">No Cuti</td>
-            <td class="table-section-3-title">Tujuan</td>
+            <td class="table-section-3-title">Keterangan</td>
             <td class="table-section-3-title">Surat Cuti</td>
         </thead>
 
@@ -995,8 +847,6 @@
             @foreach($userLeave as $value)
             <tr style="border-bottom: 1px solid #F0F0F0;">
                 <td class="table-section-3-body">{{ $indexLeave++ }}</td>
-                <td class="table-section-3-body">{{ $value->grade }}</td>
-                <td class="table-section-3-body">{{ $value->position_merged }}</td>
                 <td class="table-section-3-body">{{ $value->start_date }} - {{ $value->end_date }}</td>
                 <td class="table-section-3-body">
                     @switch($value->type)
