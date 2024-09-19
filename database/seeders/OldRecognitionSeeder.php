@@ -33,7 +33,6 @@ class OldRecognitionSeeder extends Seeder
                     db_baru_decrees.id as type_of_decree,
                     db_lama_bintang.tgl_sk as decree_date,
                     db_lama_bintang.tahun_sk as decree_year,
-                    db_lama_bintang.tgl_sk as date_of_receipt
                 FROM
                     simdatuk_dump.tbl_sk_bintang as db_lama_bintang
                 JOIN
@@ -67,7 +66,6 @@ class OldRecognitionSeeder extends Seeder
                     'type_of_decree' => $item->type_of_decree,
                     'decree_date' => $item->decree_date,
                     'decree_year' => $item->decree_year,
-                    'date_of_receipt' => $item->date_of_receipt,
                 ]);
 
                 $userRecognition = "

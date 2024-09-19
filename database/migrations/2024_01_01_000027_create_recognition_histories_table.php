@@ -22,7 +22,6 @@ return new class extends Migration
             $table->string('decree_number', 160)->nullable();
             $table->year('decree_year')->nullable();
             $table->string('awarding_institution', 160)->nullable();
-            $table->date('date_of_receipt')->nullable();
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
 

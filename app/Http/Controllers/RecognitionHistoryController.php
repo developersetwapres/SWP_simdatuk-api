@@ -101,7 +101,7 @@ class RecognitionHistoryController extends Controller
      * @authenticated
      * @urlParam id Refers to the ID of Recognition. Example: 1
      * @response 404 {"code": 404,"message": "Penghargaan tidak ditemukan.","data": null}
-     * @response 200 {"code": 200,"message": "success","data": {"id": 1,"period_month": 8,"period_year": "2008","recognition_id": 2,"recognition_name": "Satyalancana Karya Satya 20th","description": "ASN yang telah berbakti selama 20 tahun","type_of_decree": 1,"decree_date": "2008-08-17","decree_number": null,"decree_year": "2008","awarding_institution": null,"date_of_receipt": "2008-08-17","created_at": "2024-06-23 04:49:42","users": [{"id": 34,"user_id": 1428,"name": "M. Hatta Sulaiman","employee_id_number": "195709231985031001","created_at": "2024-06-23 04:49:42"}]}}
+     * @response 200 {"code": 200,"message": "success","data": {"id": 1,"period_month": 8,"period_year": "2008","recognition_id": 2,"recognition_name": "Satyalancana Karya Satya 20th","description": "ASN yang telah berbakti selama 20 tahun","type_of_decree": 1,"decree_date": "2008-08-17","decree_number": null,"decree_year": "2008","awarding_institution": null,"created_at": "2024-06-23 04:49:42","users": [{"id": 34,"user_id": 1428,"name": "M. Hatta Sulaiman","employee_id_number": "195709231985031001","created_at": "2024-06-23 04:49:42"}]}}
      */
     public function show()
     {
@@ -120,7 +120,6 @@ class RecognitionHistoryController extends Controller
             'rh.decree_number',
             'rh.decree_year',
             'rh.awarding_institution',
-            'rh.date_of_receipt',
             'rh.created_at'
         );
         $recognitionHistory = $recognitionHistory->first();

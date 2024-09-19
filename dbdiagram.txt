@@ -268,7 +268,6 @@ Table "recognition_histories" {
   "decree_number" varchar(160) [default: NULL]
   "decree_year" year [default: NULL]
   "awarding_institution" varchar(160) [default: NULL]
-  "date_of_receipt" date [default: NULL]
   "created_at" timestamp [not null]
   "updated_at" timestamp [default: NULL]
 }
