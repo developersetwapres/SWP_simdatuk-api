@@ -26,7 +26,6 @@ class RecognitionRepository
             'rh.decree_number',
             'rh.decree_year',
             'rh.awarding_institution',
-            DB::raw("DATE_FORMAT(rh.date_of_receipt, '%d-%m-%Y') as date_of_receipt"),
         );
         $recognitions->orderBy('rh.decree_date', 'desc');
         return $recognitions = $recognitions->get();
@@ -53,7 +52,6 @@ class RecognitionRepository
             'rh.decree_number',
             'rh.decree_year',
             'rh.awarding_institution',
-            DB::raw("DATE_FORMAT(rh.date_of_receipt, '%d-%m-%Y') as date_of_receipt"),
         );
         $recognitions->orderBy('rh.decree_date', 'desc');
         $recognitions = $recognitions->get();

@@ -32,8 +32,6 @@ class CreateRecognitionHistoryRequest extends FormRequest
             'decree_number' => 'required|max:160',
             'decree_year' => 'nullable|date_format:Y',
             'awarding_institution' => 'max:160',
-            'date_of_receipt' => 'nullable|date',
-            'users.*.user_id' => 'required|numeric',
         ];
     }
 
@@ -61,7 +59,6 @@ class CreateRecognitionHistoryRequest extends FormRequest
             'decree_number.max' => 'No SK Penghargaan tidak boleh lebih dari 160 karakter.',
             'decree_year.date_format' => 'Tahun SK harus dengan format YYYY.',
             'awarding_institution.max' => 'Instansi pemberi penghargaan tidak boleh lebih dari 160 karakter.',
-            'date_of_receipt.date' => 'Tanggal diterima harus berupa tanggal.',
             'users.*.user_id.required' => 'User ID tidak boleh kosong.',
             'users.*.user_id.numeric' => 'User ID harus berupa angka.',
         ];
@@ -110,10 +107,6 @@ class CreateRecognitionHistoryRequest extends FormRequest
             'awarding_institution' => [
                 'description' => 'Refers to the Awarding Institution of Employee Recognition.',
                 'example' => 'Setwapres',
-            ],
-            'date_of_receipt' => [
-                'description' => 'Refers to the Date of Receipt of Employee Recognition.',
-                'example' => '2020-10-22',
             ],
             'users.*.user_id' => [
                 'description' => 'Refers to the User ID of List Employee Recognition.',
