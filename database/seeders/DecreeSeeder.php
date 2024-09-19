@@ -30,7 +30,7 @@ class DecreeSeeder extends Seeder
             ["id" => 14, "name" => "Keputusan Kepala Staf Angkatan Udara", "acronym" => "Kepkasau"],
             ["id" => 15, "name" => "Keputusan Menteri PPN", "acronym" => "KepmenPPN"],
             ["id" => 16, "name" => "Keputusan Koordinator Bidang Pembangunan Manusia dan Kebudayaan Republik Indonesia", "acronym" => "Kemenko PKM"],
-            ["id" => 17, "name" => "", "SK Penghargaan Lainnya" => "Surat Keputusan Penghargaan Lainnya"],
+            ["id" => 17, "name" => "SK Penghargaan Lainnya", "acronym" => "SK Penghargaan Lainnya"],
         ];
         DB::table('decrees')->insertTs($decrees);
 
