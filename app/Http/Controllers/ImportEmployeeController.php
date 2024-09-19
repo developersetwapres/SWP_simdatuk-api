@@ -275,8 +275,8 @@ class ImportEmployeeController extends Controller
         'decree_number' => 6, // Nomor SK Penghargaan
         'decree_year' => 7, // Tahun SK
         'awarding_institution' => 8, // Instansi Pemberi Penghargaan
-        'nik' => 10,
-        'nama' => 11,
+        'nik' => 9,
+        'nama' => 10,
     ];
 
     /**
@@ -1750,7 +1750,7 @@ class ImportEmployeeController extends Controller
             $monthID = $this->findInArray($recognitionRow[$this->recognitionInfoPos['period_month']], $this->month, 'Riwayat Penghargaan', $recognitionKey, $recognitionInfo[0][$this->recognitionInfoPos['period_month']]);
 
             $decreeDate = $this->formatDate($recognitionRow[$this->recognitionInfoPos['decree_date']], 'Riwayat Penghargaan', $recognitionKey, $recognitionInfo[0][$this->recognitionInfoPos['decree_date']]);
-            
+
             $personalInfo[$recognitionRow[$this->recognitionInfoPos['nik']]]['recognition'][] = [
                 'recognition_id' => $recognitionID,
                 'period_month' => $monthID,
