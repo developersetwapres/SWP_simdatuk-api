@@ -72,6 +72,7 @@ class PreviewExportEmployeesRequest extends FormRequest
             'isWorkDuration' => 'nullable|numeric|min:0|max:1',
             'isGradeDuration' => 'nullable|numeric|min:0|max:1',
             'isPosition' => 'nullable|numeric|min:0|max:1',
+            'isFullPosition' => 'nullable|numeric|min:0|max:1',
             'isDatePosition' => 'nullable|numeric|min:0|max:1',
             'isEchelons' => 'nullable|numeric|min:0|max:1',
             'isEchelonDate' => 'nullable|numeric|min:0|max:1',
@@ -237,6 +238,9 @@ class PreviewExportEmployeesRequest extends FormRequest
             'isPosition.numeric' => 'IsPosition harus berupa angka',
             'isPosition.min' => 'IsPosition tidak boleh kurang dari 0',
             'isPosition.max' => 'IsPosition tidak boleh lebih dari 1',
+            'isFullPosition.numeric' => 'IsFullPosition harus berupa angka',
+            'isFullPosition.min' => 'IsFullPosition tidak boleh kurang dari 0',
+            'isFullPosition.max' => 'IsFullPosition tidak boleh lebih dari 1',
             'isDatePosition.numeric' => 'IsDatePosition harus berupa angka',
             'isDatePosition.min' => 'IsDatePosition tidak boleh kurang dari 0',
             'isDatePosition.max' => 'IsDatePosition tidak boleh lebih dari 1',
@@ -572,6 +576,10 @@ class PreviewExportEmployeesRequest extends FormRequest
             ],
             'isPosition' => [
                 'description' => 'Indicates whether the position field is included in the request',
+                'example' => 1,
+            ],
+            'isFullPosition' => [
+                'description' => 'Indicates whether the full position field is included in the request',
                 'example' => 1,
             ],
             'isDatePosition' => [

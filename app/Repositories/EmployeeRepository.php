@@ -43,6 +43,7 @@ class EmployeeRepository
             DB::raw("DATE_FORMAT(u.grade_effective_date, '%d-%m-%Y') as grade_effective_date"),
             'u.position_id',
             'p.name as position_name',
+            'p.type as position_type',
             DB::raw("DATE_FORMAT(u.position_effective_date, '%d-%m-%Y') as position_effective_date"),
             'u.echelon_id',
             'e.name as echelon_name',
@@ -158,7 +159,7 @@ class EmployeeRepository
             $user->employee_id_card = $this->getDocument($user->employee_id_card, true);
         }
         if (isset($user->position_id)) {
-            $user->position_merged = $this->getRecursivePosition($user->position_id);
+            $user->position_merged = $this->getRecursivePosition($user->position_id, $user->position_type, $user->echelon_name);
         }
         return $user;
     }
@@ -197,6 +198,7 @@ class EmployeeRepository
             DB::raw("DATE_FORMAT(u.grade_effective_date, '%d-%m-%Y') as grade_effective_date"),
             'u.position_id',
             'p.name as position_name',
+            'p.type as position_type',
             DB::raw("DATE_FORMAT(u.position_effective_date, '%d-%m-%Y') as position_effective_date"),
             'u.echelon_id',
             'e.name as echelon_name',
@@ -314,7 +316,7 @@ class EmployeeRepository
                 $user->employee_id_card = $this->getDocument($user->employee_id_card, true);
             }
             if (isset($user->position_id)) {
-                $user->position_merged = $this->getRecursivePosition($user->position_id);
+                $user->position_merged = $this->getRecursivePosition($user->position_id, $user->position_type, $user->echelon_name);
             }
 
             $newUsers[$user->id] = $user;
@@ -328,7 +330,7 @@ class EmployeeRepository
      * @param int $positionId
      * @return void
      */
-    private function getRecursivePosition($positionId)
+    private function getRecursivePosition($positionId, $type = null, $echelonsName = '')
     {
         $sql =
             "WITH RECURSIVE hierarchy AS (
@@ -362,6 +364,13 @@ class EmployeeRepository
             hierarchy;";
         $position = DB::select($sql);
         $names = array_column($position, 'name');
+
+        /**
+         * For functional positions, add the name of the echelon in the position
+         */
+        if ($type == 2) {
+            $names[0] = $names[0] . ' ' . $echelonsName;
+        }
 
         // Remove the text "Kepala" from each string in the array
         foreach ($names as $index => $name) {

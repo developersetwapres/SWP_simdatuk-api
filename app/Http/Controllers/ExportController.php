@@ -210,6 +210,7 @@ class ExportController extends Controller
             'userName' => $employee->name,
             'userEchelons' => ($employee->echelon_name ?? '') . ', ' . ($employee->echelon_effective_date ?? ' '),
             'userCurrentGrade' => ($employee->grade_name ?? '') . '(' . ($employee->grade_code ?? '') . '), ' . ($employee->grade_effective_date ?? ''),
+            'userType' => $employee->type
         ];
         if($employee->type == 1){
             $userProfile = [
@@ -340,7 +341,7 @@ class ExportController extends Controller
         $pdf->set_option('fontDir', $tmp);
         $pdf->set_option('fontCache', $tmp);
         $pdf->set_option('tempDir', $tmp);
-        return $pdf->download($employee->name . ' - ' . $employee->employee_id_number . '.pdf');
+        return $pdf->download($employee->name . '_' . $employee->employee_id_number . '.pdf');
     }
     /**
      * Export Detail DRH Employee
@@ -714,6 +715,7 @@ class ExportController extends Controller
                 'userName' => $employee[$employeeId]->name,
                 'userEchelons' => ($employee[$employeeId]->echelon_name ?? '') . ', ' . ($employee[$employeeId]->echelon_effective_date ?? ' '),
                 'userCurrentGrade' => ($employee[$employeeId]->grade_name ?? '') . '(' . ($employee[$employeeId]->grade_code ?? '') . '), ' . ($employee[$employeeId]->grade_effective_date ?? ''),
+                'userType' => $employee[$employeeId]->type,
                 'userCollege' => $educations[$employeeId] ?? [],
                 'userPosition' => $positions[$employeeId] ?? [],
                 'userGrade' => $grades[$employeeId] ?? [],
@@ -740,7 +742,7 @@ class ExportController extends Controller
             $pdf->set_option('tempDir', $tmp);
             $pdfContent = $pdf->download($employee[$employeeId]->name . ' - ' . $employee[$employeeId]->employee_id_number . '.pdf');
 
-            $pdfFileName = 'employee_' . $employeeId . '.pdf';
+            $pdfFileName = $employee[$employeeId]->name.'_' . $employee[$employeeId]->employee_id_number . '.pdf';
             $pdfFilePath = 'public/document/' . $pdfFileName;
             Storage::put($pdfFilePath, $pdfContent);
             $pdfFiles[] = $pdfFilePath;
@@ -815,6 +817,7 @@ class ExportController extends Controller
      * @bodyParam isWorkDuration int Indicates the duration of work. Example: 1
      * @bodyParam isGradeDuration int Indicates whether the grade duration field is included in the request. Example: 1
      * @bodyParam isPosition int Indicates whether the position field is included in the request. Example: 1
+     * @bodyParam isFullPosition int Indicates whether the full position field is included in the request. Example: 1
      * @bodyParam isDatePosition int Indicates whether the position start date field is included in the request. Example: 1
      * @bodyParam isEchelons int Indicates whether the echelons field is included in the request. Example: 1
      * @bodyParam isEchelonDate int Indicates whether the echelon start date field is included in the request. Example: 1
@@ -1061,6 +1064,7 @@ class ExportController extends Controller
         $toggleFieldBio['isWorkDuration'] = $request->isWorkDuration == 1; //note
         $toggleFieldBio['isGradeDuration'] = $request->isGradeDuration == 1;
         $toggleFieldBio['isPosition'] = $request->isPosition == 1;
+        $toggleFieldBio['isFullPosition'] = $request->isFullPosition == 1;
         $toggleFieldBio['isDatePosition'] = $request->isDatePosition == 1;
         $toggleFieldBio['isEchelons'] = $request->isEchelons == 1;
         $toggleFieldBio['isEchelonDate'] = $request->isEchelonDate == 1;
@@ -1117,6 +1121,7 @@ class ExportController extends Controller
 
                 $usersData = DB::table('users')->select('users.type');
                 $usersData->leftJoin('echelons', 'users.echelon_id', '=', 'echelons.id');
+                $usersData->leftJoin('positions', 'users.position_id', '=', 'positions.id');
                 if ($toggleFieldBio['isName']) {
                     $usersData->addSelect('users.name');
                 }
@@ -1157,17 +1162,24 @@ class ExportController extends Controller
                     $usersData->addSelect('users.marriage_other_notes');
                 }
                 if ($toggleFieldBio['isPosition']) {
-                    $usersData->leftJoin('positions', 'users.position_id', '=', 'positions.id');
-                    $usersData->addSelect('users.position_id', 'positions.name as position_name'); // position id to be used in get hierarchy below
+                    $usersData->addSelect('users.position_id', 'positions.name as position_name', 'positions.type as position_type'); // position id to be used in get hierarchy below
                 }
                 if ($toggleFieldBio['isPositionDescription']) {
                     $usersData->addSelect('users.description');
                 }
                 if ($toggleFieldBio['isEchelons']) {
                     if ($toggleFieldBio['isPosition'] != 1) { // if isPosition not checked
-                        $usersData->addSelect('users.position_id'); // Get position id to be used in get hierarchy below
+                        $usersData->addSelect('users.position_id','positions.name as position_name', 'positions.type as position_type'); // Get position id to be used in get hierarchy below
                     }
                     $usersData->addSelect('echelons.name as echelons_name');
+                }
+                if ($toggleFieldBio['isFullPosition']) {
+                    if ($toggleFieldBio['isPosition'] != 1) { // if isPosition not checked
+                        $usersData->addSelect('users.position_id','positions.name as position_name', 'positions.type as position_type'); // Get position id to be used in get hierarchy below
+                    }
+                    if ($toggleFieldBio['isEchelons'] != 1) { // if isEchelons not checked
+                        $usersData->addSelect('echelons.name as echelons_name');// Get echelons to be used in get hierarchy below
+                    }
                 }
                 if ($toggleFieldBio['isGrade']) {
                     $usersData->leftJoin('grades as g', 'users.grade_id', '=', 'g.id');
@@ -1658,7 +1670,7 @@ class ExportController extends Controller
                 $usersData = $usersData->get();
 
                 $chunkResults = $usersData->map(function ($item) use ($toggleFieldBio) {
-                    if ($toggleFieldBio['isPosition'] || $toggleFieldBio['isEchelons']) {
+                    if ($toggleFieldBio['isPosition'] || $toggleFieldBio['isEchelons'] || $toggleFieldBio['isFullPosition']) {
                         $sql =
                             "WITH RECURSIVE hierarchy AS (
                             -- Anchor member: Select the initial child row
@@ -1692,12 +1704,22 @@ class ExportController extends Controller
                             hierarchy WHERE id != '" . $item->position_id . "' ORDER BY id ASC;";
 
                         $hierarchy = DB::select($sql);
+                        $add=[];
                         if (count($hierarchy) > 0) {
                             foreach ($hierarchy as $key => $value) {
+                                $name = str_replace('Kepala ', '', $value->name);
                                 $e = "echelon_" . $key + 1;
-                                $item->$e = str_replace('Kepala ', '', $value->name);
+                                $item->$e = $name;
+                                $add[] = $name;
                             }
                         }
+
+                        if($item->position_type == 2){
+                            $add[] = $item->position_name . ' ' . $item->echelons_name;
+                        }else{
+                            $add[] = $item->position_name;
+                        }
+                        $item->full_position = implode(', ',array_reverse($add));
                     }
                     return (array) $item;
                 })->toArray();
@@ -1774,6 +1796,7 @@ class ExportController extends Controller
      * @bodyParam isWorkDuration int Indicates the duration of work. Example: 1
      * @bodyParam isGradeDuration int Indicates whether the grade duration field is included in the request. Example: 1
      * @bodyParam isPosition int Indicates whether the position field is included in the request. Example: 1
+     * @bodyParam isFullPosition int Indicates whether the full position field is included in the request. Example: 1
      * @bodyParam isDatePosition int Indicates whether the position start date field is included in the request. Example: 1
      * @bodyParam isEchelons int Indicates whether the echelons field is included in the request. Example: 1
      * @bodyParam isEchelonDate int Indicates whether the echelon start date field is included in the request. Example: 1

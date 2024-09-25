@@ -116,6 +116,8 @@ class employee implements FromView, WithDrawings, WithEvents
             DB::statement("SET SESSION group_concat_max_len = 10000");
 
             $users = DB::table('users');
+            $users->leftJoin('positions', 'users.position_id', '=', 'positions.id');
+
             if (isset($this->toggleField['isName'])) {
                 $users->addSelect('users.name');
             }
@@ -156,18 +158,25 @@ class employee implements FromView, WithDrawings, WithEvents
                 $users->addSelect('users.marriage_other_notes');
             }
             if (isset($this->toggleField['isPosition'])) {
-                $users->leftJoin('positions', 'users.position_id', '=', 'positions.id');
-                $users->addSelect('users.position_id', 'positions.name as position_name'); // position id to be used in get hierarchy below
+                $users->addSelect('users.position_id', 'positions.name as position_name','positions.type as position_type'); // position id to be used in get hierarchy below
             }
             if (isset($this->toggleField['isPositionDescription'])) {
                 $users->addSelect('users.description');
             }
             if (isset($this->toggleField['isEchelons'])) {
                 if ($this->toggleField['isPosition'] != 1) { // if isPosition not checked
-                    $users->addSelect('users.position_id'); // Get position id to be used in get hierarchy below
+                    $users->addSelect('users.position_id','positions.name as position_name','positions.type as position_type'); // Get position id to be used in get hierarchy below
                 }
                 $users->leftJoin('echelons', 'users.echelon_id', '=', 'echelons.id');
                 $users->addSelect('echelons.name as echelons_name');
+            }
+            if (isset($this->toggleFieldBio['isFullPosition'])) {
+                if ($this->toggleFieldBio['isPosition'] != 1) { // if isPosition not checked
+                    $users->addSelect('users.position_id','positions.name as position_name','positions.type as position_type'); // Get position id to be used in get hierarchy below
+                }
+                if ($this->toggleFieldBio['isEchelons'] != 1) { // if isEchelons not checked
+                    $users->addSelect('echelons.name as echelons_name');// Get echelons to be used in get hierarchy below
+                }
             }
             if (isset($this->toggleField['isGrade'])) {
                 $users->leftJoin('grades as g', 'users.grade_id', '=', 'g.id');
@@ -700,12 +709,21 @@ class employee implements FromView, WithDrawings, WithEvents
                             hierarchy WHERE id != '" . $item->position_id . "' ORDER BY id ASC;";
 
                     $hierarchy = DB::select($sql);
+                    $add=[];
                     if (count($hierarchy) > 0) {
                         foreach ($hierarchy as $key => $value) {
+                            $name = str_replace('Kepala ', '', $value->name);
                             $e = "echelon_" . $key + 1;
-                            $item->$e = str_replace('Kepala ', '', $value->name);
+                            $item->$e = $name;
+                            $add[] = $name;
                         }
                     }
+                     if($item->position_type == 2){
+                            $add[] = $item->position_name . ' ' . $item->echelons_name;
+                        }else{
+                            $add[] = $item->position_name;
+                        }
+                        $item->full_position = implode(', ',array_reverse($add));
                 }
                 return (array) $item;
             })->toArray();

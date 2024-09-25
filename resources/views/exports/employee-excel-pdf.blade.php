@@ -184,6 +184,7 @@
     "Eselon III" =>($toggleField['isPosition'] || $toggleField['isEchelons']),
     "Eselon IV" =>($toggleField['isPosition'] || $toggleField['isEchelons']),
     "Jabatan" => $toggleField['isPosition'],
+    "Jabatan Lengkap" => $toggleField['isFullPosition'],
     "Tanggal Mulai Menjabat" => $toggleField['isDatePosition'],
     "Eselon" => $toggleField['isEchelons'],
     "TMT Eselon" => $toggleField['isEchelonDate'],
@@ -369,6 +370,9 @@
                     @break
                     @case("Jabatan")
                     {{ $value['position_name'] }}
+                    @break
+                    @case("Jabatan Lengkap")
+                    {{ $value['full_position'] }}
                     @break
                     @case("Tanggal Mulai Menjabat")
                     {{ $value['position_effective_date'] }}

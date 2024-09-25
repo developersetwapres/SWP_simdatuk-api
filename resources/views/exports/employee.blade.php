@@ -207,6 +207,9 @@
                 @if($toggleField['isPosition'])
                 <th class="section-header-color">Jabatan</th>
                 @endif
+                @if($toggleField['isFullPosition'])
+                <th class="section-header-color">Jabatan Lengkap</th>
+                @endif
                 @if($toggleField['isDatePosition'])
                 <th class="section-header-color">TMT Menjabat</th>
                 @endif
@@ -462,6 +465,9 @@
                 @endif
                 @if($toggleField['isPosition'])
                 <td>{{ $value['position_name'] }}</td>
+                @endif
+                @if($toggleField['isFullPosition'])
+                <td>{{ $value['full_position'] }}</td>
                 @endif
                 @if($toggleField['isDatePosition'])
                 <td>
