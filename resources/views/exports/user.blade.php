@@ -169,6 +169,11 @@
                     <tr>
                         <table style="width: 100%; margin-top: 4px;">
                             <tr>
+                                @if($userType == 3)
+                                <td class="table-section-1-title">
+                                    NIP
+                                </td>
+                                @else
                                 <td class="table-section-1-title">
                                     Eselon
                                 </td>
@@ -178,8 +183,14 @@
                                 <td class="table-section-1-title">
                                     NIP/NRP
                                 </td>
+                                @endif
                             </tr>
                             <tr>
+                                @if($userType == 3)
+                                <td class="table-section-1-body">
+                                    {{ $userNIP }}
+                                </td>
+                                @else
                                 <td class="table-section-1-body">
                                     {{ $userEchelons }}
                                 </td>
@@ -189,6 +200,7 @@
                                 <td class="table-section-1-body">
                                     {{ $userNIP }}
                                 </td>
+                                @endif
                             </tr>
                         </table>
                     </tr>
@@ -303,7 +315,7 @@
                 <td class="table-section-3-body">{{ $value->year_of_graduation }}</td>
                 <td class="table-section-3-body">
                     @if(!is_null($value->degree_document))
-                    <a href="{{ $value->certificate }}">Lihat File</a>
+                    <a href="{{ $value->degree_document }}">Lihat File</a>
                     @else
                     -
                     @endif
