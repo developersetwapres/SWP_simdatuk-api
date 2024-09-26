@@ -2572,48 +2572,50 @@ class ExportController extends Controller
         $usersPreview = $usersPreview->paginate($this->request->limit ?? 10);
         if ($this->request->isFullPosition == 1) {
             $usersPreview->getCollection()->transform(function ($value) {
-                // Your code here
-                $sql =
-                    "WITH RECURSIVE hierarchy AS (
-                    -- Anchor member: Select the initial child row
+                if(!is_null($value->position_id)){
+                    // Your code here
+                    $sql =
+                        "WITH RECURSIVE hierarchy AS (
+                        -- Anchor member: Select the initial child row
+                        SELECT
+                            id,
+                            name,
+                            parent_id
+                        FROM
+                            positions
+                        WHERE
+                            id = ".$value->position_id." -- Replace ? with the specific child employee_id
+
+                        UNION DISTINCT
+
+                        -- Recursive member: Select the parent row
+                        SELECT
+                            p.id,
+                            p.name,
+                            p.parent_id
+                        FROM
+                            positions p
+                        INNER JOIN
+                            hierarchy h ON p.id = h.parent_id
+                        WHERE
+                            p.entity = 1
+                    )
                     SELECT
-                        id,
-                        name,
-                        parent_id
+                        *
                     FROM
-                        positions
-                    WHERE
-                        id = ".$value->position_id." -- Replace ? with the specific child employee_id
+                        hierarchy WHERE id != ".$value->position_id." AND parent_id IS NOT NULL;";
 
-                    UNION DISTINCT
+                    $position = DB::select($sql);
+                    $names = array_column($position, 'name');
 
-                    -- Recursive member: Select the parent row
-                    SELECT
-                        p.id,
-                        p.name,
-                        p.parent_id
-                    FROM
-                        positions p
-                    INNER JOIN
-                        hierarchy h ON p.id = h.parent_id
-                    WHERE
-                        p.entity = 1
-                )
-                SELECT
-                    *
-                FROM
-                    hierarchy WHERE id != ".$value->position_id." AND parent_id IS NOT NULL;";
-
-                $position = DB::select($sql);
-                $names = array_column($position, 'name');
-
-                // Remove the text "Kepala" from each string in the array
-                foreach ($names as $index => $name) {
-                    $names[$index] = str_replace("Kepala ", "", $name);
-                }
-                $parents = implode(', ', $names);
-                if(!empty($parents)){
-                    $value->full_position = $value->full_position.', '.$parents;
+                    // Remove the text "Kepala" from each string in the array
+                    foreach ($names as $index => $name) {
+                        $names[$index] = str_replace("Kepala ", "", $name);
+                    }
+                    $parents = implode(', ', $names);
+                    if(!empty($parents)){
+                        $value->full_position = $value->full_position.', '.$parents;
+                    }
                 }
                 unset($value->position_id);
 
