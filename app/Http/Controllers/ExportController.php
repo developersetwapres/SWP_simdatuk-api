@@ -207,7 +207,7 @@ class ExportController extends Controller
             'currentPosition' => ($employee->position_merged ?? '-'),
             'photoProfile' => $employee->photo_profile,
             'userNIP' => $employee->employee_id_number,
-            'userName' => $employee->name,
+            'userName' => $employee->title_prefix. ' '.$employee->name.' '.$employee->title_suffix,
             'userEchelons' => ($employee->echelon_name ?? '') . ', ' . ($employee->echelon_effective_date ?? ' '),
             'userCurrentGrade' => ($employee->grade_name ?? '') . '(' . ($employee->grade_code ?? '') . '), ' . ($employee->grade_effective_date ?? ''),
             'userType' => $employee->type
@@ -712,7 +712,7 @@ class ExportController extends Controller
                 'currentPosition' => ($employee[$employeeId]->position_merged ?? '-'),
                 'photoProfile' => $employee[$employeeId]->photo_profile,
                 'userNIP' => $employee[$employeeId]->employee_id_number,
-                'userName' => $employee[$employeeId]->name,
+                'userName' => $employee[$employeeId]->title_prefix. ' ' .$employee[$employeeId]->name. ' '.$employee[$employeeId]->title_suffix,
                 'userEchelons' => ($employee[$employeeId]->echelon_name ?? '') . ', ' . ($employee[$employeeId]->echelon_effective_date ?? ' '),
                 'userCurrentGrade' => ($employee[$employeeId]->grade_name ?? '') . '(' . ($employee[$employeeId]->grade_code ?? '') . '), ' . ($employee[$employeeId]->grade_effective_date ?? ''),
                 'userType' => $employee[$employeeId]->type,
@@ -2023,6 +2023,7 @@ class ExportController extends Controller
 
         $usersPreview = DB::table('users')->select('users.id');
         $usersPreview->leftJoin('echelons', 'echelons.id', '=', 'users.echelon_id');
+        $usersPreview->leftJoin('positions', 'users.position_id', '=', 'positions.id');
         if ($this->request->isName == 1) {
             $usersPreview->addSelect('users.name');
         }
@@ -2063,8 +2064,16 @@ class ExportController extends Controller
             $usersPreview->addSelect('users.marriage_other_notes');
         }
         if ($this->request->isPosition == 1) {
-            $usersPreview->leftJoin('positions', 'users.position_id', '=', 'positions.id');
             $usersPreview->addSelect('positions.name as position_name');
+        }
+        if ($this->request->isFullPosition == 1) {
+            $usersPreview->addSelect('positions.id as position_id');
+            $usersPreview->addSelect(DB::raw("
+                CASE
+                    WHEN positions.type = 2 THEN CONCAT(positions.name, ' ',COALESCE(echelons.name,''))
+                    ELSE positions.name
+                END as full_position
+            "));
         }
         if ($this->request->isPositionDescription == 1) {
             $usersPreview->addSelect('users.description');
@@ -2561,6 +2570,57 @@ class ExportController extends Controller
         $usersPreview->groupBy('users.id');
 
         $usersPreview = $usersPreview->paginate($this->request->limit ?? 10);
+        if ($this->request->isFullPosition == 1) {
+            $usersPreview->getCollection()->transform(function ($value) {
+                // Your code here
+                $sql =
+                    "WITH RECURSIVE hierarchy AS (
+                    -- Anchor member: Select the initial child row
+                    SELECT
+                        id,
+                        name,
+                        parent_id
+                    FROM
+                        positions
+                    WHERE
+                        id = ".$value->position_id." -- Replace ? with the specific child employee_id
+
+                    UNION DISTINCT
+
+                    -- Recursive member: Select the parent row
+                    SELECT
+                        p.id,
+                        p.name,
+                        p.parent_id
+                    FROM
+                        positions p
+                    INNER JOIN
+                        hierarchy h ON p.id = h.parent_id
+                    WHERE
+                        p.entity = 1
+                )
+                SELECT
+                    *
+                FROM
+                    hierarchy WHERE id != ".$value->position_id." AND parent_id IS NOT NULL;";
+
+                $position = DB::select($sql);
+                $names = array_column($position, 'name');
+
+                // Remove the text "Kepala" from each string in the array
+                foreach ($names as $index => $name) {
+                    $names[$index] = str_replace("Kepala ", "", $name);
+                }
+                $parents = implode(', ', $names);
+                if(!empty($parents)){
+                    $value->full_position = $value->full_position.', '.$parents;
+                }
+                unset($value->position_id);
+
+                return $value;
+            });
+        }
+
         $message = ($usersPreview->isEmpty()) ? 'Mohon maaf, data tidak ditemukan.' : 'success';
         return $this->paginateResponse(200, $message, $usersPreview);
     }
