@@ -15,9 +15,9 @@ class UpdateTargetHistoryEmployeeRequest
     {
         return [
             'targets.*.id' => 'numeric|nullable',
-            'targets.*.work_behavior_rating' => 'required|numeric|in:1,2,3,4,5',
-            'targets.*.employee_performance_predicate' => 'required|numeric|in:1,2,3,4,5',
-            'targets.*.organizational_performance_achievement' => 'required|numeric|in:1,2,3,4,5',
+            'targets.*.work_behavior_rating' => 'nullable|numeric|in:1,2,3,4,5',
+            'targets.*.employee_performance_predicate' => 'nullable|numeric|in:1,2,3,4,5',
+            'targets.*.organizational_performance_achievement' => 'nullable|numeric|in:1,2,3,4,5',
         ];
     }
 
@@ -31,12 +31,12 @@ class UpdateTargetHistoryEmployeeRequest
         return [
             'targets.*.id.numeric' => 'ID harus berupa angka.',
             'targets.*.work_behavior_rating.in' => 'Rating perilaku kerja harus diantara 1,2,3',
-            'targets.*.work_behavior_rating.required' => 'Rating perilaku kerja tidak boleh kosong.',
+            // 'targets.*.work_behavior_rating.required' => 'Rating perilaku kerja tidak boleh kosong.',
             'targets.*.work_behavior_rating.numeric' => 'Rating perilaku kerja harus berupa angka.',
             'targets.*.employee_performance_predicate.in' => 'Predikat kinerja pegawai harus diantara 1,2,3,4 dan 5',
-            'targets.*.employee_performance_predicate.required' => 'Predikat kinerja pegawai tidak boleh kosong.',
+            // 'targets.*.employee_performance_predicate.required' => 'Predikat kinerja pegawai tidak boleh kosong.',
             'targets.*.employee_performance_predicate.numeric' => 'Predikat kinerja pegawai harus berupa angka.',
-            'targets.*.organizational_performance_achievement.required' => 'Capaian kinerja organisasi tidak boleh kosong.',
+            // 'targets.*.organizational_performance_achievement.required' => 'Capaian kinerja organisasi tidak boleh kosong.',
             'targets.*.organizational_performance_achievement.numeric' => 'Capaian kinerja organisasi harus berupa angka.',
             'targets.*.organizational_performance_achievement.in' => 'Capaian kinerja organisasi harus diantara 1,2, dan 3',
         ];

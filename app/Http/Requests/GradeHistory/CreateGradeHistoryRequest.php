@@ -22,14 +22,14 @@ class CreateGradeHistoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'period_month' => 'required|numeric|digits_between:1,12',
-            'period_year' => 'required|date_format:Y',
-            'name' => 'required|max:160',
-            'users.*.user_id' => 'required|numeric',
-            'users.*.grade_id' => 'required|numeric',
-            'users.*.effective_date' => 'required|date',
-            'users.*.decree_number' => 'max:160',
-            'users.*.status' => 'required|boolean',
+            'period_month'           => 'nullable|numeric|digits_between:1,12',
+            'period_year'            => 'nullable|date_format:Y',
+            'name'                   => 'nullable|max:160',
+            'users.*.user_id'        => 'required|numeric',
+            'users.*.grade_id'       => 'required|numeric',
+            'users.*.effective_date' => 'nullable|date',
+            'users.*.decree_number'  => 'max:160',
+            'users.*.status'         => 'nullable|boolean',
         ];
     }
 
@@ -41,21 +41,21 @@ class CreateGradeHistoryRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'period_month.required' => 'Bulan periode riwayat tidak boleh kosong.',
+            // 'period_month.required' => 'Bulan periode riwayat tidak boleh kosong.',
             'period_month.numeric' => 'Bulan periode riwayat harus berupa angka.',
             'period_month.digits_between' => 'Bulan periode riwayat harus diantara 1 hingga 12.',
-            'period_year.required' => 'Tahun periode riwayat tidak boleh kosong.',
+            // 'period_year.required' => 'Tahun periode riwayat tidak boleh kosong.',
             'period_year.date_format' => 'Tahun periode riwayat harus dengan format YYYY.',
-            'name.required' => 'Nama riwayat golongan tidak boleh kosong.',
+            // 'name.required' => 'Nama riwayat golongan tidak boleh kosong.',
             'name.max' => 'Nama riwayat golongan tidak boleh lebih dari 160 karakter.',
             'users.*.user_id.required' => 'User ID tidak boleh kosong.',
             'users.*.user_id.numeric' => 'User ID harus berupa angka.',
             'users.*.grade_id.required' => 'Golongan tidak boleh kosong.',
             'users.*.grade_id.numeric' => 'Golongan harus berupa angka.',
-            'users.*.effective_date.required' => 'Tanggal efektif golongan tidak boleh kosong.',
+            // 'users.*.effective_date.required' => 'Tanggal efektif golongan tidak boleh kosong.',
             'users.*.effective_date.date' => 'Tanggal efektif golongan harus berupa tanggal.',
             'users.*.decree_number.max' => 'Nomor SK golongan tidak beloh lebih dari 160 karakter.',
-            'users.*.status.required' => 'Status tidak boleh kosong.',
+            // 'users.*.status.required' => 'Status tidak boleh kosong.',
             'users.*.status.boolean' => 'Status harus berupa boolean.',
         ];
     }
