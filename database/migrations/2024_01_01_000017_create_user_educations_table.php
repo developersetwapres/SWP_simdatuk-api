@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('accreditation', 30)->nullable()->comment('Akreditasi A, B, C, atau BAN-PT Unggul, Baik Sekali, Baik');
             $table->string('faculty', 160)->nullable();
             $table->string('major', 160)->nullable();
-            $table->tinyInteger('status')->nullable()->comment('1=Lulus, 2=DO, 3=Aktif, 4=Non-Aktif, 5=Mengundurkan diri');
             $table->year('year_of_graduation')->nullable();
             $table->text('description')->nullable();
             $table->text('degree_document')->nullable()->comment('Dokumen Ijazah / SKL / Sejenisnya');

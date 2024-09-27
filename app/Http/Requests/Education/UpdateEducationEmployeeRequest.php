@@ -20,7 +20,6 @@ class UpdateEducationEmployeeRequest
             'educations.*.accreditation'                  => 'nullable|max:30',
             'educations.*.faculty'                        => 'nullable|max:160',
             'educations.*.major'                          => 'nullable|max:160',
-            'educations.*.status'                         => 'nullable|numeric|in:1,2,3,4,5',
             'educations.*.year_of_graduation'             => 'nullable|date_format:Y',
             'educations.*.description'                    => 'nullable|max:160',
             'educations.*.degree_document'                => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
@@ -48,8 +47,6 @@ class UpdateEducationEmployeeRequest
             'educations.*.accreditation.max' => 'Akreditasi tidak boleh lebih dari 30 karakter.',
             'educations.*.faculty.max' => 'Nama fakultas tidak boleh lebih dari 160 karakter.',
             'educations.*.major.max' => 'Jurusan tidak boleh lebih dari 160 karakter.',
-            'educations.*.status.numeric' => 'Status harus berupa angka.',
-            'educations.*.status.in' => 'Status harus diantara 1,2,3,4 atau 5.',
             'educations.*.year_of_graduation.date_format' => 'Tahun kelulusan harus dengan format YYYY.',
             'educations.*.description.max' => 'Keterangan tidak boleh lebih dari 160 karakter.',
             'educations.*.degree_document.file' => 'Ijazah harus berupa file.',
@@ -102,10 +99,6 @@ class UpdateEducationEmployeeRequest
             'educations.*.major' => [
                 'description' => 'Refers to the Major of Employee Education.',
                 'example' => 'Teknik Informatika',
-            ],
-            'educations.*.status' => [
-                'description' => 'Refers to the Status of Employee Education. 1=Lulus, 2=DO, 3=Aktif, 4=Non-Aktif, 5=Mengundurkan Diri',
-                'example' => 1,
             ],
             'educations.*.year_of_graduation' => [
                 'description' => 'Refers to the Year of Graduation of Employee Education.',

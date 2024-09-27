@@ -37,7 +37,6 @@ class OldEducationSeeder extends Seeder
                 END AS study_area,
                 db_lama_pddk.fakultas as faculty,
                 db_lama_pddk.jurusan as major,
-                '1' as status,
                 CASE
                   WHEN db_lama_pddk.thn_lulus < '1900' THEN NULL
                   ELSE db_lama_pddk.thn_lulus
