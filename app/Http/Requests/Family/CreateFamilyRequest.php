@@ -26,9 +26,10 @@ class CreateFamilyRequest
             'families.*.education'              => 'nullable|numeric|in:1,2,3,4,5,6,7,8,9',
             'families.*.occupation'             => 'max:160',
             'families.*.occupation_description' => 'max:160',
-            'families.*.marital_status'         => 'nullable|numeric|in:1,2,3,4,5',
-            'families.*.mobile_phone'           => 'max:16',
-            'families.*.sequence_number'        => 'nullable|numeric',
+            'families.*.marital_status' => 'required|numeric|in:1,2,3,4,5',
+            'families.*.marriage_other_notes' => 'nullable',
+            'families.*.mobile_phone' => 'max:16',
+            'families.*.sequence_number' => 'nullable|numeric',
         ];
     }
 
@@ -135,6 +136,10 @@ class CreateFamilyRequest
             ],
             'families.*.marital_status' => [
                 'description' => 'Refers to the Marital Status of Employee Family. 1=Belum Menikah, 2=Menikah, 3=Cerai Hidup, 4=Cerai Mati',
+                'example' => 1,
+            ],
+            'families.*.marriage_other_notes' => [
+                'description' => 'Refers to the Marriage Other Notes of Employee Family',
                 'example' => 1,
             ],
             'families.*.mobile_phone' => [

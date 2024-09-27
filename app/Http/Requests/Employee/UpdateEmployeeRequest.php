@@ -52,7 +52,6 @@ class UpdateEmployeeRequest extends FormRequest
             'marital_status'                => 'nullable|in:1,2,3,4,5',
             'marriage_date'                 => 'nullable|date',
             'marriage_description'          => 'nullable',
-            'marriage_other_notes'          => 'nullable',
             'employment_type_id'            => 'required',
             'cpns_effective_date'           => 'required|date',
             'position_id'                   => 'nullable|numeric',
@@ -102,7 +101,6 @@ class UpdateEmployeeRequest extends FormRequest
             'marital_status'                => 'nullable|in:1,2,3,4,5',
             'marriage_date'                 => 'nullable|date',
             'marriage_description'          => 'nullable',
-            'marriage_other_notes'          => 'nullable',
             'employment_type_id'            => 'required',
             'cpns_effective_date'           => 'nullable|date',
             'position_id'                   => 'nullable|numeric',
@@ -149,7 +147,6 @@ class UpdateEmployeeRequest extends FormRequest
             'marital_status'                => 'nullable|in:1,2,3,4,5',
             'marriage_date'                 => 'nullable|date',
             'marriage_description'          => 'nullable',
-            'marriage_other_notes'          => 'nullable',
             'employment_type_id'            => 'required',
             'cpns_effective_date'           => 'nullable|date',
             'position_id'                   => 'nullable|numeric',
@@ -376,10 +373,6 @@ class UpdateEmployeeRequest extends FormRequest
             ],
             'marriage_description' => [
                 'description' => 'Refers to the Marriage Description of Employee',
-                'example' => 1,
-            ],
-            'marriage_other_notes' => [
-                'description' => 'Refers to the Marriage Other Notes of Employee',
                 'example' => 1,
             ],
             'employment_type_id' => [

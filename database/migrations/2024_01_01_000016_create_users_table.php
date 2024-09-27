@@ -30,7 +30,6 @@ return new class extends Migration
             $table->tinyInteger('marital_status')->nullable()->comment('1=Belum Menikah, 2=Menikah, 3=Cerai Hidup, 4=Cerai Mati');
             $table->date('marriage_date')->nullable();
             $table->text('marriage_description')->nullable();
-            $table->text('marriage_other_notes')->nullable();
             $table->unsignedBigInteger('employment_type_id')->nullable();
             $table->unsignedBigInteger('grade_id')->nullable();
             $table->date('grade_effective_date')->nullable();

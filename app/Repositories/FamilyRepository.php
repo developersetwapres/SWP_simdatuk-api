@@ -26,6 +26,7 @@ class FamilyRepository
             'occupation',
             'occupation_description',
             'marital_status',
+            'marriage_other_notes',
             'mobile_phone',
             'sequence_number',
         );
@@ -55,6 +56,7 @@ class FamilyRepository
             'occupation',
             'occupation_description',
             'marital_status',
+            'marriage_other_notes',
             'mobile_phone',
             'sequence_number',
         );

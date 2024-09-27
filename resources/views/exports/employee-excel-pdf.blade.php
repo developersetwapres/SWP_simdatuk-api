@@ -169,7 +169,6 @@
     "Status Perkawinan" => $toggleField['isMaritalStatus'],
     "Tanggal Perkawinan" => $toggleField['isMarriageDate'],
     "Keterangan Perkawinan" => $toggleField['isMarriageDescription'],
-    "Keterangan Lainnya" => $toggleField['isMarriageOtherNotes'],
     "Jenis Pegawai" => $toggleField['isEmployeeType'],
     "Jenis Perbantuan" => $toggleField['isAssistanceType'],
     "Jenis Outsourcing" => $toggleField['isOutsourcingType'],
@@ -325,9 +324,6 @@
                     @break
                     @case("Keterangan Perkawinan")
                     {{ $value['marriage_description'] }}
-                    @break
-                    @case("Keterangan Lainnya")
-                    {{ $value['marriage_other_notes'] }}
                     @break
                     @case("Jenis Pegawai")
                     {!! $value['employee_type'] !!}

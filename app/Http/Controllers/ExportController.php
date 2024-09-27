@@ -220,7 +220,7 @@ class ExportController extends Controller
                 'Status Perkawinan' => $maritalStatus,
                 'Tanggal Perkawinan' => $employee->marriage_date,
                 'Keterangan Perkawinan' => $employee->marriage_description,
-                'Keterangan Lainnya' => $employee->marriage_other_notes,
+                // 'Keterangan Lainnya' => $employee->marriage_other_notes,
                 'Jenis Pegawai' => $employeeType,
                 'TMT CPNS' => $employee->cpns_effective_date,
                 'TMT PNS' => $employee->pns_effective_date,
@@ -625,7 +625,7 @@ class ExportController extends Controller
                     'Status Perkawinan' => $maritalStatus,
                     'Tanggal Perkawinan' => $employee[$employeeId]->marriage_date,
                     'Keterangan Perkawinan' => $employee[$employeeId]->marriage_description,
-                    'Keterangan Lainnya' => $employee[$employeeId]->marriage_other_notes,
+                    // 'Keterangan Lainnya' => $employee[$employeeId]->marriage_other_notes,
                     'Jenis Pegawai' => $employeeType,
                     'TMT CPNS' => $employee[$employeeId]->cpns_effective_date,
                     'TMT PNS' => $employee[$employeeId]->pns_effective_date,
@@ -1158,9 +1158,9 @@ class ExportController extends Controller
                 if ($toggleFieldBio['isMarriageDescription']) {
                     $usersData->addSelect('users.marriage_description');
                 }
-                if ($toggleFieldBio['isMarriageOtherNotes']) {
-                    $usersData->addSelect('users.marriage_other_notes');
-                }
+                // if ($toggleFieldBio['isMarriageOtherNotes']) {
+                //     $usersData->addSelect('users.marriage_other_notes');
+                // }
                 if ($toggleFieldBio['isPosition']) {
                     $usersData->addSelect('users.position_id', 'positions.name as position_name', 'positions.type as position_type'); // position id to be used in get hierarchy below
                 }
@@ -2060,9 +2060,9 @@ class ExportController extends Controller
         if ($this->request->isMarriageDescription == 1) {
             $usersPreview->addSelect('users.marriage_description');
         }
-        if ($this->request->isMarriageOtherNotes == 1) {
-            $usersPreview->addSelect('users.marriage_other_notes');
-        }
+        // if ($this->request->isMarriageOtherNotes == 1) {
+        //     $usersPreview->addSelect('users.marriage_other_notes');
+        // }
         if ($this->request->isPosition == 1) {
             $usersPreview->addSelect('positions.name as position_name');
         }

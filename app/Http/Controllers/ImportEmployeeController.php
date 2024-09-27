@@ -37,40 +37,39 @@ class ImportEmployeeController extends Controller
         'marital_status' => 9,
         'marriage_date' => 10, // Tanggal Perkawinan
         'marriage_description' => 11, // Keterangan Perkawinan
-        'marriage_other_notes' => 12, // Keterangan Lainnya
-        'employment_type' => 13, // ASN = Jenis Pegawai / NON ASN = Jenis Perbantuan
-        'cpns_effective_date' => 14, // TMT CPNS
-        'pns_effective_date' => 15, // TMT PNS
-        'position' => 16, // Jabatan
-        'position_effective_date' => 17, // TMT Menjabat
-        'grade' => 18, // Golongan
-        'grade_effective_date' => 19, // TMT Golongan
-        'echelon' => 20, // Eselon
-        'echelon_effective_date' => 21, // TMT Eselon
-        'institution' => 22, // Instansi Induk
-        'education_level' => 23, // Tingkat Pendidikan Akhir
-        'education_name' => 24, // Nama Sekolah/Universitas
-        'education_year' => 25, // Tahun Lulus
-        'employee_id_card_number' => 26, // No Karpeg
-        'karisu_number' => 27,
-        'years_of_service_total' => 28,
-        'month_of_service_total' => 29,
-        'years_of_service_rank' => 30,
-        'month_of_service_rank' => 31,
-        'id_tax' => 32, // NPWP
-        'employment_status' => 33, // Status Pegawai
-        'family_registration_number' => 34, // No KK
-        'id_number' => 35, // NIK
-        'residence' => 36, // Komplek
-        'residence_description' => 37, // Alamat Tempat Tinggal Saat Ini
-        'current_address' => 38, // Alamat Sesuai KTP
-        'home_phone_number' => 39, // No Telepon Rumah
-        'mobile_phone' => 40, // No HP
-        'office_address' => 41, // Alamat Kantor
-        'office_phone_number' => 42, // No Telepon Kantor
-        'email' => 43,
-        'office_email' => 44,
-        'emergency_contact' => 45, // Kontak Darurat
+        'employment_type' => 12, // ASN = Jenis Pegawai / NON ASN = Jenis Perbantuan
+        'cpns_effective_date' => 13, // TMT CPNS
+        'pns_effective_date' => 14, // TMT PNS
+        'position' => 15, // Jabatan
+        'position_effective_date' => 16, // TMT Menjabat
+        'grade' => 17, // Golongan
+        'grade_effective_date' => 18, // TMT Golongan
+        'echelon' => 19, // Eselon
+        'echelon_effective_date' => 20, // TMT Eselon
+        'institution' => 21, // Instansi Induk
+        'education_level' => 22, // Tingkat Pendidikan Akhir
+        'education_name' => 23, // Nama Sekolah/Universitas
+        'education_year' => 24, // Tahun Lulus
+        'employee_id_card_number' => 25, // No Karpeg
+        'karisu_number' => 26,
+        'years_of_service_total' => 27,
+        'month_of_service_total' => 28,
+        'years_of_service_rank' => 29,
+        'month_of_service_rank' => 30,
+        'id_tax' => 31, // NPWP
+        'employment_status' => 32, // Status Pegawai
+        'family_registration_number' => 33, // No KK
+        'id_number' => 34, // NIK
+        'residence' => 35, // Komplek
+        'residence_description' => 36, // Alamat Tempat Tinggal Saat Ini
+        'current_address' => 37, // Alamat Sesuai KTP
+        'home_phone_number' => 38, // No Telepon Rumah
+        'mobile_phone' => 39, // No HP
+        'office_address' => 40, // Alamat Kantor
+        'office_phone_number' => 41, // No Telepon Kantor
+        'email' => 42,
+        'office_email' => 43,
+        'emergency_contact' => 44, // Kontak Darurat
     ];
 
     /**
@@ -351,8 +350,9 @@ class ImportEmployeeController extends Controller
         'occupation' => 13, // Jenis Pekerjaan
         'occupation_description' => 14, // Keterangan Pekerjaan
         'marital_status' => 15, // Status Perkawinan
-        'mobile_phone' => 16, //No. HP
-        'sequence_number' => 17, // Urut Keluarga
+        'marriage_other_notes' => 16, // Keterangan Lainnya
+        'mobile_phone' => 17, //No. HP
+        'sequence_number' => 18, // Urut Keluarga
     ];
 
     /**
@@ -1372,7 +1372,7 @@ class ImportEmployeeController extends Controller
                     'marital_status' => $maritalStatusID,
                     'marriage_date' => $maritalDate,
                     'marriage_description' => $personalInfoRow[$personalInfoPos['marriage_description']],
-                    'marriage_other_notes' => $personalInfoRow[$personalInfoPos['marriage_other_notes']],
+                    // 'marriage_other_notes' => $personalInfoRow[$personalInfoPos['marriage_other_notes']],
                     'employment_type_id' => $employmentTypeID,
                     'cpns_effective_date' => $cpnsEffectiveDate,
                     'pns_effective_date' => $pnsEffectiveDate,
@@ -1982,6 +1982,7 @@ class ImportEmployeeController extends Controller
                 'occupation' => $familyRow[$this->familyInfoPos['occupation']],
                 'occupation_description' => $familyRow[$this->familyInfoPos['occupation_description']],
                 'marital_status' => $familyMaritalStatusID,
+                'marriage_other_notes' => $familyRow[$this->familyInfoPos['marriage_other_notes']],
                 'mobile_phone' => $familyRow[$this->familyInfoPos['mobile_phone']],
                 'sequence_number' => $familyRow[$this->familyInfoPos['sequence_number']],
             ];

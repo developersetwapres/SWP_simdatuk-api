@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('occupation', 160)->nullable();
             $table->string('occupation_description', 160)->nullable();
             $table->tinyInteger('marital_status')->nullable()->comment('1=Belum Menikah, 2=Menikah, 3=Cerai Hidup, 4=Cerai Mati');
+            $table->text('marriage_other_notes')->nullable();
             $table->string('mobile_phone', 16)->nullable();
             $table->tinyInteger('sequence_number')->nullable();
             $table->timestamp('created_at');
