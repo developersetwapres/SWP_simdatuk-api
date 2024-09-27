@@ -50,7 +50,7 @@ class UpdateFamilyEmployeeRequest
             'families.*.religion.numeric' => 'Agama harus berupa angka.',
             'families.*.religion.in' => 'Agama harus diantara 1,2,3,4,5 atau 6.',
             'families.*.place_of_birth.max' => 'Tempat lahir tidak boleh lebih dari 160 karakter.',
-            'families.*.date_of_birth.date' => 'Tanggal lahir harus berupa tangg/al.',
+            'families.*.date_of_birth.date' => 'Tanggal lahir harus berupa tanggal.',
             'families.*.name_of_father.max' => 'Nama bapak tidak boleh lebih dari 160 karakter.',
             'families.*.name_of_mother.max' => 'Nama ibu tidak boleh lebih dari 160 karakter.',
             'families.*.relationship_status.numeric' => 'Hubungan keluarga harus berupa angka.',

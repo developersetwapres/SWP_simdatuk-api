@@ -1424,10 +1424,6 @@ class ImportEmployeeController extends Controller
 
             $requiredFields = [
                 'nik',
-                // 'level',
-                // 'name',
-                // 'status',
-                // 'year_of_graduation',
             ];
 
             $requiredFieldFilled = true;
@@ -1473,11 +1469,6 @@ class ImportEmployeeController extends Controller
 
             $requiredFields = [
                 'nik',
-                // 'name',
-                // 'period_month',
-                // 'period_year',
-                // 'position',
-                // 'effective_date',
             ];
 
             $requiredFieldFilled = true;
@@ -1539,11 +1530,6 @@ class ImportEmployeeController extends Controller
 
             $requiredFields = [
                 'nik',
-                // 'name',
-                // 'period_month',
-                // 'period_year',
-                // 'grade',
-                // 'effective_date',
             ];
 
             $requiredFieldFilled = true;
@@ -1599,11 +1585,6 @@ class ImportEmployeeController extends Controller
             // Skip header row
 
             $requiredFields = [
-                // 'name',
-                // 'period_month',
-                // 'period_year',
-                // 'reference_number',
-                // 'start_date',
                 'nik',
             ];
 
@@ -1724,12 +1705,6 @@ class ImportEmployeeController extends Controller
             // Skip header row
 
             $requiredFields = [
-                // 'recognition',
-                // 'period_month',
-                // 'period_year',
-                // 'type_of_decree',
-                // 'decree_date',
-                // 'decree_number',
                 'nik',
             ];
 
@@ -1778,13 +1753,6 @@ class ImportEmployeeController extends Controller
 
             $requiredFields = [
                 'nik',
-                // 'name',
-                // 'period_month',
-                // 'period_year',
-                // 'appraisal_period',
-                // 'work_behavior_rating',
-                // 'employee_performance_predicate',
-                // 'organizational_performance_achievement',
             ];
 
             $requiredFieldFilled = true;
@@ -1830,11 +1798,6 @@ class ImportEmployeeController extends Controller
 
             $requiredFields = [
                 'nik',
-                // 'name',
-                // 'period_month',
-                // 'period_year',
-                // 'performance_period',
-                // 'work_performance_score',
             ];
 
             $requiredFieldFilled = true;
@@ -1876,12 +1839,6 @@ class ImportEmployeeController extends Controller
 
             $requiredFields = [
                 'nik',
-                // 'name',
-                // 'period_month',
-                // 'period_year',
-                // 'disciplinary',
-                // 'start_date',
-                // 'end_date',
             ];
 
             $requiredFieldFilled = true;
@@ -1935,16 +1892,6 @@ class ImportEmployeeController extends Controller
 
             $requiredFields = [
                 'nik',
-                // 'card_number',
-                // 'name',
-                // 'id_number',
-                // 'gender',
-                // 'religion',
-                // 'place_of_birth',
-                // 'date_of_birth',
-                // 'relationship_status',
-                // 'education',
-                // 'marital_status',
             ];
 
             $requiredFieldFilled = true;
@@ -2002,11 +1949,6 @@ class ImportEmployeeController extends Controller
 
             $requiredFields = [
                 'nik',
-                // 'start_date',
-                // 'end_date',
-                // 'type',
-                // 'number',
-                // 'description',
             ];
 
             $requiredFieldFilled = true;
@@ -2049,7 +1991,6 @@ class ImportEmployeeController extends Controller
 
             $requiredFields = [
                 'nik',
-                // 'description',
             ];
 
             $requiredFieldFilled = true;
@@ -2084,8 +2025,6 @@ class ImportEmployeeController extends Controller
 
             $requiredFields = [
                 'nik',
-                // 'event_date',
-                // 'point',
             ];
 
             $requiredFieldFilled = true;
@@ -2125,8 +2064,6 @@ class ImportEmployeeController extends Controller
 
             $requiredFields = [
                 'nik',
-                // 'event_date',
-                // 'point',
             ];
 
             $requiredFieldFilled = true;
@@ -2166,8 +2103,6 @@ class ImportEmployeeController extends Controller
 
             $requiredFields = [
                 'nik',
-                // 'event_date',
-                // 'point',
             ];
 
             $requiredFieldFilled = true;

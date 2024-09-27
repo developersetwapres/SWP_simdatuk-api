@@ -38,10 +38,10 @@ class UpdatePositionHistoryRequest extends FormRequest
             'users.*.decree_number'              => 'nullable|max:160',
             'users.*.decree_date'                => 'nullable|date',
             'users.*.termination_date'           => 'nullable|date',
-            'users.*.termination_decree'         => 'nullablemax:160',
-            'users.*.type_of_termination_decree' => 'nullablenumeric',
-            'users.*.termination_decree_number'  => 'nullablemax:160',
-            'users.*.termination_decree_date'    => 'nullabledate',
+            'users.*.termination_decree'         => 'nullable|max:160',
+            'users.*.type_of_termination_decree' => 'nullable|numeric',
+            'users.*.termination_decree_number'  => 'nullable|max:160',
+            'users.*.termination_decree_date'    => 'nullable|date',
             'users.*.status'                     => 'boolean',
         ];
     }
@@ -54,12 +54,9 @@ class UpdatePositionHistoryRequest extends FormRequest
     public function messages(): array
     {
         return [
-            // 'period_month.required' => 'Bulan periode riwayat tidak boleh kosong.',
             'period_month.numeric' => 'Bulan periode riwayat harus berupa angka.',
             'period_month.digits_between' => 'Bulan periode riwayat harus diantara 1 hingga 12.',
-            // 'period_year.required' => 'Tahun periode riwayat tidak boleh kosong.',
             'period_year.date_format' => 'Tahun periode riwayat harus dengan format YYYY.',
-            // 'name.required' => 'Nama nilai prestasi kerja tidak boleh kosong.',
             'name.max' => 'Nama nilai prestasi tidak boleh lebih dari 160 karakter.',
             'users.*.user_id.required' => 'User ID tidak boleh kosong.',
             'users.*.user_id.numeric' => 'User ID harus berupa angka.',
