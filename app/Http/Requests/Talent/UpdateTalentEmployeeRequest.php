@@ -32,7 +32,6 @@ class UpdateTalentEmployeeRequest
         return [
             'talents.*.id.numeric' => 'Talent ID harus berupa angka.',
             'talents.*.event_date.date' => 'Tanggal talent pool harus berupa tanggal.',
-            // 'talents.*.point.required' => 'Tanggal talent pool tidak boleh kosong.',
             'talents.*.point.numeric' => 'Penilaian talent pool harus berupa angka.',
             'talents.*.point.in' => 'Penilaian talent pool harus diantara 1 sampai 9.',
             'talents.*.organizer.max' => 'Penyelenggara tidak boleh lebih dari 160 karakter.',

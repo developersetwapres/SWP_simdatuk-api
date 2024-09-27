@@ -43,26 +43,19 @@ class UpdateTargetHistoryRequest extends FormRequest
     public function messages(): array
     {
         return [
-            // 'period_month.required' => 'Bulan periode riwayat tidak boleh kosong.',
             'period_month.numeric' => 'Bulan periode riwayat harus berupa angka.',
             'period_month.digits_between' => 'Bulan periode riwayat harus diantara 1 hingga 12.',
-            // 'period_year.required' => 'Tahun periode riwayat tidak boleh kosong.',
             'period_year.date_format' => 'Tahun periode riwayat harus dengan format YYYY.',
-            // 'name.required' => 'Nama target tidak boleh kosong.',
             'name.max' => 'Nama target tidak boleh lebih dari 160 karakter.',
-            // 'appraisal_period.required' => 'Periode penilaian tidak boleh kosong.',
             'appraisal_period.in' => 'Periode penilaian harus diantara Q1, Q2, Q3, Q4, Tahunan.',
             'year.date_format' => 'Tahun target harus dengan format YYYY.',
             'users.*.id.numeric' => 'ID harus berupa angka.',
             'users.*.user_id.required' => 'User ID tidak boleh kosong.',
             'users.*.user_id.numeric' => 'User ID harus berupa angka.',
             'users.*.work_behavior_rating.in' => 'Rating perilaku kerja harus diantara 1,2,3',
-            // 'users.*.work_behavior_rating.required' => 'Rating perilaku kerja tidak boleh kosong.',
             'users.*.work_behavior_rating.numeric' => 'Rating perilaku kerja harus berupa angka.',
             'users.*.employee_performance_predicate.in' => 'Predikat kinerja pegawai harus diantara 1,2,3,4 dan 5',
-            // 'users.*.employee_performance_predicate.required' => 'Predikat kinerja pegawai tidak boleh kosong.',
             'users.*.employee_performance_predicate.numeric' => 'Predikat kinerja pegawai harus berupa angka.',
-            // 'users.*.organizational_performance_achievement.required' => 'Capaian kinerja organisasi tidak boleh kosong.',
             'users.*.organizational_performance_achievement.numeric' => 'Capaian kinerja organisasi harus berupa angka.',
             'users.*.organizational_performance_achievement.in' => 'Capaian kinerja organisasi harus diantara 1,2, dan 3',
         ];

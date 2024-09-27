@@ -41,18 +41,13 @@ class CreatePerformanceHistoryRequest extends FormRequest
     public function messages(): array
     {
         return [
-            // 'period_month.required' => 'Bulan periode riwayat tidak boleh kosong.',
             'period_month.numeric' => 'Bulan periode riwayat harus berupa angka.',
             'period_month.digits_between' => 'Bulan periode riwayat harus diantara 1 hingga 12.',
-            // 'period_year.required' => 'Tahun periode riwayat tidak boleh kosong.',
             'period_year.date_format' => 'Tahun periode riwayat harus dengan format YYYY.',
-            // 'performance_period.required' => 'PPK periode tidak boleh kosong.',
             'performance_period.max' => 'PPK periode tidak boleh lebih dari 160 karakter.',
-            // 'name.required' => 'Nama nilai prestasi kerja tidak boleh kosong.',
             'name.max' => 'Nama nilai prestasi tidak boleh lebih dari 160 karakter.',
             'users.*.user_id.required' => 'User ID tidak boleh kosong.',
             'users.*.user_id.numeric' => 'User ID harus berupa angka.',
-            // 'users.*.work_performance_score.required' => 'Nilai prestasi kerja tidak boleh kosong.',
             'users.*.work_performance_score.numeric' => 'Nilai prestasi kerja harus berupa angka.',
             'users.*.description.numeric' => 'Deskripsi harus berupa angka.',
             'users.*.description.in' => 'Deskripsi harus diantara 1, 2, 3, 4 atau 5.',

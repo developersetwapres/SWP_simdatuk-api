@@ -29,7 +29,6 @@ class UpdatePerformanceHistoryEmployeeRequest
     {
         return [
             'performances.*.id.numeric' => 'ID harus berupa angka.',
-            // 'performances.*.work_performance_score.required' => 'Nilai prestasi kerja tidak boleh kosong.',
             'performances.*.work_performance_score.numeric' => 'Nilai prestasi kerja harus berupa angka.',
             'performances.*.description.numeric' => 'Deskripsi harus berupa angka.',
             'performances.*.description.in' => 'Deskripsi harus diantara 1, 2, 3, 4 atau 5.',

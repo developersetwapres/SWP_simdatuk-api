@@ -33,15 +33,10 @@ class UpdateLeaveEmployeeRequest
     {
         return [
             'leaves.*.id.numeric' => 'Leave ID harus berupa angka.',
-            // 'leaves.*.start_date.required' => 'Periode mulai tidak boleh kosong.',
             'leaves.*.start_date.date' => 'Periode mulai harus berupa tanggal.',
-            // 'leaves.*.end_date.required' => 'Periode akhir tidak boleh kosong.',
             'leaves.*.end_date.date' => 'Periode akhir harus berupa tanggal.',
-            // 'leaves.*.type.required' => 'Jenis cuti tidak boleh kosong.',
             'leaves.*.type.in' => 'Jenis cuti harus diantara 1,2,3,4,5 atau 6.',
-            // 'leaves.*.number.required' => 'Nomor cuti tidak boleh kosong.',
             'leaves.*.number.max' => 'Nomor cuti tidak boleh lebih dari 160 karakter.',
-            // 'leaves.*.purpose.required' => 'Tujuan tidak boleh kosong.',
             'leaves.*.purpose.max' => 'Tujuan tidak boleh lebih dari 160 karakter',
             'leaves.*.letter.file' => 'Surat cuti harus berupa file.',
             'leaves.*.letter.extensions' => 'Surat cuti harus berupa jpg, jpeg atau png.',

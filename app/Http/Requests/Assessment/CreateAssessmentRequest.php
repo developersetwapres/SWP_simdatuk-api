@@ -29,7 +29,6 @@ class CreateAssessmentRequest
     {
         return [
             'assessments.*.event_date.date' => 'Tanggal assessment harus berupa tanggal.',
-            // 'assessments.*.point.required' => 'Penilaian assessment tidak boleh kosong.',
             'assessments.*.point.numeric' => 'Penilaian assessment harus berupa angka.',
             'assessments.*.point.in' => 'Penilaian assessment harus diantara 1, 2 atau 3.',
             'assessments.*.organizer.max' => 'Penyelenggara tidak boleh lebih dari 160 karakter.',
