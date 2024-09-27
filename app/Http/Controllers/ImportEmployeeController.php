@@ -161,9 +161,8 @@ class ImportEmployeeController extends Controller
         'accreditation' => 5,
         'faculty' => 6,
         'major' => 7,
-        'status' => 8,
-        'year_of_graduation' => 9,
-        'description' => 10,
+        'year_of_graduation' => 8,
+        'description' => 9,
     ];
 
     /**
@@ -487,15 +486,6 @@ class ImportEmployeeController extends Controller
         'diplomaiv/stratai' => 6,
         'strataii' => 7,
         'strataiii' => 8,
-    ];
-
-    // Array mapping education status to their respective numeric codes
-    protected $educationStatus = [
-        'lulus' => 1,
-        'do' => 2,
-        'aktif' => 3,
-        'non-aktif' => 4,
-        'mengundurkandiri' => 5,
     ];
 
     protected $educationStudyArea = [
@@ -1440,7 +1430,6 @@ class ImportEmployeeController extends Controller
             // Skip jika ada required field yang tidak diisi
 
             $levelID = $this->findInArray($educationRow[$this->educationInfoPos['level']], $this->educationLevel, 'Riwayat Pendidikan', $educationKey, $educationInfo[0][$this->educationInfoPos['level']]);
-            $statusID = $this->findInArray($educationRow[$this->educationInfoPos['status']], $this->educationStatus, 'Riwayat Pendidikan', $educationKey, $educationInfo[0][$this->educationInfoPos['status']]);
             $studyAreaID = $this->findInArray($educationRow[$this->educationInfoPos['study_area']], $this->educationStudyArea, 'Riwayat Pendidikan', $educationKey, $educationInfo[0][$this->educationInfoPos['study_area']]);
 
             $personalInfo[$educationRow[$this->educationInfoPos['nik']]]['education'][] = [
@@ -1450,7 +1439,6 @@ class ImportEmployeeController extends Controller
                 'accreditation' => $educationRow[$this->educationInfoPos['accreditation']],
                 'faculty' => $educationRow[$this->educationInfoPos['faculty']],
                 'major' => $educationRow[$this->educationInfoPos['major']],
-                'status' => $statusID,
                 'year_of_graduation' => $educationRow[$this->educationInfoPos['year_of_graduation']],
                 'description' => $educationRow[$this->educationInfoPos['description']],
             ];
