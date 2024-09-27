@@ -7,6 +7,7 @@ use App\Http\Requests\PositionHistory\UpdatePositionHistoryRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 /**
  * @group History
@@ -14,6 +15,9 @@ use Illuminate\Support\Facades\DB;
  */
 class PositionHistoryController extends Controller
 {
+    protected $request;
+    protected $posted;
+
     public function __construct(Request $request)
     {
         $this->request = $request;
@@ -91,7 +95,7 @@ class PositionHistoryController extends Controller
             DB::commit();
             return $this->response(200, 'Riwayat jabatan berhasil ditambah.');
         } catch (\Throwable $th) {
-            \Log::warning($th);
+            Log::warning($th);
             DB::rollback();
             return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
         }

@@ -23,17 +23,17 @@ class CreateDisciplinaryHistoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'period_month' => 'required|numeric|digits_between:1,12',
-            'period_year' => 'required|date_format:Y',
-            'name' => 'required|max:160',
+            'period_month' => 'nullable|numeric|digits_between:1,12',
+            'period_year' => 'nullable|date_format:Y',
+            'name' => 'nullable|max:160',
             'users.*.user_id' => 'required|numeric',
             'users.*.grade' => 'max:160',
             'users.*.position' => 'max:160',
             'users.*.disciplinary_id' => 'required|numeric',
             'users.*.decree_number' => 'max:160',
             'users.*.date_of_decree' => 'nullable|date',
-            'users.*.start_date' => 'required|date',
-            'users.*.end_date' => 'required|date',
+            'users.*.start_date' => 'nullable|date',
+            'users.*.end_date' => 'nullable|date',
             'users.*.authorizing_officer' => 'max:160',
             'users.*.name_of_authorizing_officer' => 'max:160',
         ];
@@ -47,12 +47,9 @@ class CreateDisciplinaryHistoryRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'period_month.required' => 'Bulan periode riwayat tidak boleh kosong.',
             'period_month.numeric' => 'Bulan periode riwayat harus berupa angka.',
             'period_month.digits_between' => 'Bulan periode riwayat harus diantara 1 hingga 12.',
-            'period_year.required' => 'Tahun periode riwayat tidak boleh kosong.',
             'period_year.date_format' => 'Tahun periode riwayat harus dengan format YYYY.',
-            'name.required' => 'Nama tidak boleh kosong.',
             'name.max' => 'Nama tidak boleh lebih dari 160 karakter.',
             'users.*.user_id.required' => 'User ID tidak boleh kosong.',
             'users.*.user_id.numeric' => 'User ID harus berupa angka.',
@@ -62,10 +59,8 @@ class CreateDisciplinaryHistoryRequest extends FormRequest
             'users.*.disciplinary_id.numeric' => 'Jenis hukuman harus berupa angka.',
             'users.*.decree_number.max' => 'No SK hukuman tidak boleh lebih dari 160 karakter.',
             'users.*.date_of_decree.date' => 'Tanggal SK harus berupa tanggal.',
-            'users.*.start_date.required' => 'Tanggal mulai hukuman tidak boleh kosong.',
             'users.*.start_date.date' => 'Tanggal mulai hukuman harus berupa tanggal.',
             'users.*.end_date.required' => 'Tanggal selesai hukuman tidak boleh kosong.',
-            'users.*.end_date.date' => 'Tanggal selesai hukuman harus berupa tanggal.',
             'users.*.authorizing_officer.max' => 'Pejabat berwenang tidak boleh lebih dari 160 karakter.',
             'users.*.name_of_authorizing_officer' => 'Nama pejabat berwenang tidak boleh lebih dari 160 karakter.',
         ];

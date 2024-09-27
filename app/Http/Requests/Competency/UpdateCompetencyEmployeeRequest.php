@@ -15,7 +15,7 @@ class UpdateCompetencyEmployeeRequest
         return [
             'competencies.*.id' => 'numeric|nullable',
             'competencies.*.event_date' => 'date',
-            'competencies.*.point' => 'required|numeric|in:1,2',
+            'competencies.*.point' => 'nullable|numeric|in:1,2',
             'competencies.*.organizer' => 'max:160',
             'competencies.*.competency_document' => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
             'competencies.*.delete_competency_document' => 'required|boolean',
@@ -32,7 +32,6 @@ class UpdateCompetencyEmployeeRequest
         return [
             'competencies.*.id.numeric' => 'Assessments ID harus berupa angka.',
             'competencies.*.event_date.date' => 'Tanggal kompetensi harus berupa tanggal.',
-            'competencies.*.point.required' => 'Tanggal kompetensi tidak boleh kosong.',
             'competencies.*.point.numeric' => 'Penilaian kompetensi harus berupa angka.',
             'competencies.*.point.in' => 'Penilaian kompetensi harus diantara 1 atau 2.',
             'competencies.*.organizer.max' => 'Penyelenggara tidak boleh lebih dari 160 karakter.',
