@@ -154,9 +154,9 @@ class employee implements FromView, WithDrawings, WithEvents
             if (isset($this->toggleField['isMarriageDescription'])) {
                 $users->addSelect('users.marriage_description');
             }
-            if (isset($this->toggleField['isMarriageOtherNotes'])) {
-                $users->addSelect('users.marriage_other_notes');
-            }
+            // if (isset($this->toggleField['isMarriageOtherNotes'])) {
+            //     $users->addSelect('users.marriage_other_notes');
+            // }
             if (isset($this->toggleField['isPosition'])) {
                 $users->addSelect('users.position_id', 'positions.name as position_name','positions.type as position_type'); // position id to be used in get hierarchy below
             }

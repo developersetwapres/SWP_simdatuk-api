@@ -162,9 +162,6 @@
                 @if($toggleField['isMarriageDescription'])
                 <th class="section-header-color">Keterangan Perkawinan</th>
                 @endif
-                @if($toggleField['isMarriageOtherNotes'])
-                <th class="section-header-color">Keterangan Lainnya</th>
-                @endif
                 @if($toggleField['isEmployeeType'])
                 <th class="section-header-color">Jenis Pegawai</th>
                 @endif
@@ -414,9 +411,6 @@
                 @endif
                 @if($toggleField['isMarriageDescription'])
                 <td>{{ $value['marriage_description'] }}</td>
-                @endif
-                @if($toggleField['isMarriageOtherNotes'])
-                <td>{{ $value['marriage_other_notes'] }}</td>
                 @endif
                 @if($toggleField['isEmployeeType'])
                 <td>
