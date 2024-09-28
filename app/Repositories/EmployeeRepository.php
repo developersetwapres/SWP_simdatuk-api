@@ -9,7 +9,7 @@ class EmployeeRepository
 {
     use Document;
 
-    public function getDetail($userId)
+    public function getDetail($userId, $export = false)
     {
         $user = DB::table('users as u');
         $user->leftJoin('positions as p', 'u.position_id', '=', 'p.id');
@@ -152,10 +152,18 @@ class EmployeeRepository
         $user = $user->first();
 
         if (isset($user->photo_profile)) {
-            $user->photo_profile = $this->getDocument($user->photo_profile, true);
+            if ($export == true) {
+                $user->photo_profile = $this->getDocument($user->photo_profile, true, true);
+            } else {
+                $user->photo_profile = $this->getDocument($user->photo_profile, true);
+            }
         }
         if (isset($user->employee_id_card)) {
-            $user->employee_id_card = $this->getDocument($user->employee_id_card, true);
+            if ($export == true) {
+                $user->employee_id_card = $this->getDocument($user->employee_id_card, true, true);
+            } else {
+                $user->employee_id_card = $this->getDocument($user->employee_id_card, true);
+            }   
         }
         if (isset($user->position_id)) {
             $user->position_merged = $this->getRecursivePosition($user->position_id, $user->position_type, $user->echelon_name);
@@ -163,7 +171,7 @@ class EmployeeRepository
         return $user;
     }
 
-    public function getDetailBulkUser($usersID)
+    public function getDetailBulkUser($usersID, $export = false)
     {
         $user = DB::table('users as u');
         $user->leftJoin('positions as p', 'u.position_id', '=', 'p.id');
@@ -308,10 +316,19 @@ class EmployeeRepository
         $newUsers = [];
         foreach ($users as $key => $user) {
             if (isset($user->photo_profile)) {
-                $user->photo_profile = $this->getDocument($user->photo_profile, true);
+                if ($export == true) {
+                    $user->photo_profile = $this->getDocument($user->photo_profile, true, true);
+                } else {
+                    $user->photo_profile = $this->getDocument($user->photo_profile, true);
+                }
+                
             }
             if (isset($user->employee_id_card)) {
-                $user->employee_id_card = $this->getDocument($user->employee_id_card, true);
+                if ($export == true) {
+                    $user->employee_id_card = $this->getDocument($user->employee_id_card, true, true);
+                } else {
+                    $user->employee_id_card = $this->getDocument($user->employee_id_card, true);
+                }
             }
             if (isset($user->position_id)) {
                 $user->position_merged = $this->getRecursivePosition($user->position_id, $user->position_type, $user->echelon_name);

@@ -371,7 +371,7 @@ class DiagramController extends Controller
         $hierarchies = $this->getHierarchy(null, 1);
 
         $html = '<ul><li class="li-last">
-        <div class="node-non-person">
+                    <div class="node-non-person">
                         <table style="width: 100%; table-layout: fixed;">
                             <tr>
                                 <td class="node-position-name-non-person">
@@ -575,7 +575,7 @@ class DiagramController extends Controller
                     </tr>
                     <tr>
                         <td class="node-photo-container">
-                            <img src="' . (isset($hierarchy->user_photo_profile) ? $this->getDocument($hierarchy->user_photo_profile, true) : 'img/profile.jpg') . '" class="node-photo"/>
+                            <img src="' . (isset($hierarchy->user_photo_profile) ? $this->getDocument($hierarchy->user_photo_profile, true, true) : 'img/profile.jpg') . '" class="node-photo"/>
                         </td>
                     </tr>
                     <tr>

@@ -51,7 +51,7 @@ class ExportComparisonController extends Controller
             'output' => 'required|in:.pdf,.xlsx,.csv',
         ], $messages);
 
-        $data = $this->comparisonRepository->getDetailUsers($this->request->user_id);
+        $data = $this->comparisonRepository->getDetailUsers($this->request->user_id, true);
 
         $title = 'Bandingkan Pegawai';
         $date = Carbon::now()->timezone('Asia/Jakarta')->locale('id')->isoFormat('D MMMM Y');
@@ -109,7 +109,7 @@ class ExportComparisonController extends Controller
             '#C22551',
         ];
 
-        $users = $this->comparisonRepository->getUserByIds($this->request->user_id);
+        $users = $this->comparisonRepository->getUserByIds($this->request->user_id, true);
 
         foreach ($users as $key => $user) {
             $user->color = $colors[$key];

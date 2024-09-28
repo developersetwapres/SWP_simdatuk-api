@@ -110,7 +110,7 @@ class ExportController extends Controller
             return response()->json(['error' => 'No employee ID provided'], 400);
         }
         $tmp = sys_get_temp_dir();
-        $employee = $this->employeeRepository->getDetail($employeeId);
+        $employee = $this->employeeRepository->getDetail($employeeId, true);
         if (!$employee) {
             return $this->response(404, 'Pegawai tidak ditemukan.');
         }
@@ -514,7 +514,7 @@ class ExportController extends Controller
             return $this->response(400, 'Data pegawai tidak ditemukan');
         }
 
-        $employee = $this->employeeRepository->getDetailBulkUser($userIds);
+        $employee = $this->employeeRepository->getDetailBulkUser($userIds, true);
         $families = $this->familyRepository->getDetailBulkUser($userIds);
         $educations = $this->educationRepository->getDetailBulkUser($userIds);
         $positions = $this->positionRepository->getDetailBulkUser($userIds);

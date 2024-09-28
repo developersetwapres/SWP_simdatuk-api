@@ -125,7 +125,7 @@ class ComparisonRepository
         return $users;
     }
 
-    public function getUserByIds($userIds = [])
+    public function getUserByIds($userIds = [], $export = false)
     {
         $users = DB::table('users as u')
             ->select(
@@ -482,12 +482,19 @@ class ComparisonRepository
                     break;
             }
 
+            if ($export == true) {
+                $photoProfile = $this->getDocument($user->photo_profile, true, true);
+            } else {
+                $photoProfile = $this->getDocument($user->photo_profile, true);
+            }
+            
+
             $returnedData[] = (object) [
                 'id' => $user->user_id,
                 'name' => $user->user_name,
                 'title_prefix' => $user->title_prefix,
                 'title_suffix' => $user->title_suffix,
-                'photo_profile' => $this->getDocument($user->photo_profile, true),
+                'photo_profile' => $photoProfile,
                 'employee_id_number' => $user->employee_id_number,
                 'employee_registration_number' => $user->employee_registration_number,
                 'echelon' => (object) [
@@ -550,9 +557,9 @@ class ComparisonRepository
         return $notes = $notes->get();
     }
 
-    public function getDetailUsers($ids)
+    public function getDetailUsers($ids, $export = false)
     {
-        $users = $this->getUsers($ids);
+        $users = $this->getUsers($ids, $export);
 
         // Get Only Available Users
         $ids = array();
@@ -587,7 +594,7 @@ class ComparisonRepository
         return $data;
     }
 
-    private function getUsers($ids)
+    private function getUsers($ids, $export = false)
     {
         $users = DB::table('users as u');
         $users->leftJoin('positions as p', 'u.position_id', '=', 'p.id');
@@ -617,7 +624,11 @@ class ComparisonRepository
         $users->orderBy('u.grade_id', 'asc');
         $users = $users->get();
         foreach ($users as $item) {
-            $item->photo_profile = $this->getDocument($item->photo_profile, true);
+            if ($export == true) {
+                $item->photo_profile = $this->getDocument($item->photo_profile, true, true);
+            } else {
+                $item->photo_profile = $this->getDocument($item->photo_profile, true);
+            }
 
             $educationLevel = [
                 1 => 'SD/Sederajat',

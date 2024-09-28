@@ -29,10 +29,14 @@ trait Document
      * @param string $path
      * @return void
      */
-    public function getDocument($path, $status = false)
+    public function getDocument($path, $status = false, $export = false)
     {
         if ($status) {
-            return (is_null($path)) ? asset('img/profile.jpg') : Storage::disk('s3')->url($path);
+            if ($export ==  true) {
+                return (is_null($path)) ? asset('img/profile.jpg') : env('AWS_URL_BY_IP'). '/'. $path;
+            } else {
+                return (is_null($path)) ? asset('img/profile.jpg') : Storage::disk('s3')->url($path);
+            }
         } else {
             return (is_null($path)) ? null : Storage::disk('s3')->url($path);
         }
