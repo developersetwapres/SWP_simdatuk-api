@@ -40,12 +40,21 @@ class RecapitulationEmployeeController extends Controller
             if ($this->request->category_id == 1) {
                 if ($this->request->section_id == 1) {
                     $data = $this->getUsers(1, 'echelon', $this->request->card_id);
+                    $data2 = $this->getUsers(1, 'echelon', $this->request->card_id, true);
+                    $data = array_merge($data['items']->toArray(), $data2['items']->toArray());
+                    $data = ['total' => count($data), 'items' => $data];
                 } elseif ($this->request->section_id == 2) {
                     $data = $this->getUsersByGolongan($this->request->card_id);
                 } elseif ($this->request->section_id == 3) {
                     $data = $this->getUsers(1, 'echelon', $this->request->card_id);
+                    $data2 = $this->getUsers(1, 'echelon', $this->request->card_id, true);
+                    $data = array_merge($data['items']->toArray(), $data2['items']->toArray());
+                    $data = ['total' => count($data), 'items' => $data];
                 } elseif ($this->request->section_id == 4) {
                     $data = $this->getUsers(1, 'echelon', $this->request->card_id);
+                    $data2 = $this->getUsers(1, 'echelon', $this->request->card_id, true);
+                    $data = array_merge($data['items']->toArray(), $data2['items']->toArray());
+                    $data = ['total' => count($data), 'items' => $data];
                 } elseif ($this->request->section_id == 5) {
                     $data = $this->getUsersByPejabatDiperbantukan($this->request->card_id);
                 }
@@ -71,20 +80,41 @@ class RecapitulationEmployeeController extends Controller
                 $data = $this->getUsersByUnitKerja($this->request->card_id);
             } elseif ($this->request->section_id == 3 || $this->request->section_id == 4) {
                 $data = $this->getUsers(1, 'grade', $this->request->card_id);
+                $data2 = $this->getUsers(1, 'grade', $this->request->card_id, true);
+                $data = array_merge($data['items']->toArray(), $data2['items']->toArray());
+                $data = ['total' => count($data), 'items' => $data];
             } elseif ($this->request->section_id == 5) {
                 $data = $this->getUsers(1, 'status', $this->request->card_id);
+                $data2 = $this->getUsers(1, 'status', $this->request->card_id, true);
+                $data = array_merge($data['items']->toArray(), $data2['items']->toArray());
+                $data = ['total' => count($data), 'items' => $data];
             } elseif ($this->request->section_id == 6) {
                 $data = $this->getUsers(1, 'education', $this->request->card_id);
+                $data2 = $this->getUsers(1, 'education', $this->request->card_id, true);
+                $data = array_merge($data['items']->toArray(), $data2['items']->toArray());
+                $data = ['total' => count($data), 'items' => $data];
             } elseif ($this->request->section_id == 7) {
                 $data = $this->getUsers(1, 'gender', $this->request->card_id);
+                $data2 = $this->getUsers(1, 'gender', $this->request->card_id, true);
+                $data = array_merge($data['items']->toArray(), $data2['items']->toArray());
+                $data = ['total' => count($data), 'items' => $data];
             }
 
             if ($this->request->category_id == 1) {
                 $data = $this->getUsers(1, 'echelon', $this->request->card_id);
+                $data2 = $this->getUsers(1, 'echelon', $this->request->card_id, true);
+                $data = array_merge($data['items']->toArray(), $data2['items']->toArray());
+                $data = ['total' => count($data), 'items' => $data];
             } elseif ($this->request->category_id == 2) {
                 $data = $this->getUsers(1, 'echelon', $this->request->card_id);
+                $data2 = $this->getUsers(1, 'echelon', $this->request->card_id, true);
+                $data = array_merge($data['items']->toArray(), $data2['items']->toArray());
+                $data = ['total' => count($data), 'items' => $data];
             } elseif ($this->request->category_id == 3) {
                 $data = $this->getUsersByJabatanFungsional($this->request->section_id, $this->request->card_id);
+                $data2 = $this->getUsersByJabatanFungsional($this->request->section_id, $this->request->card_id, true);
+                $data = array_merge($data['items']->toArray(), $data2['items']->toArray());
+                $data = ['total' => count($data), 'items' => $data];
             }
         } elseif ($this->request->page == 'nonasn') {
             if ($this->request->section_id == 1) {
@@ -108,7 +138,7 @@ class RecapitulationEmployeeController extends Controller
         return $this->response(200, 'success', ["total" => $data['total'], "items" => $data['items']]);
     }
 
-    public function getUsers($type, $filter, $cardId)
+    public function getUsers($type, $filter, $cardId, $pppk = false)
     {
         $users = DB::table('users as u');
         $users->leftJoin('positions as p', 'u.position_id', '=', 'p.id');
@@ -173,7 +203,13 @@ class RecapitulationEmployeeController extends Controller
             $cardId = array_map('intval', $cardId);
             $users->whereIn('u.echelon_id', $cardId);
         }
-        $users->orderBy('u.echelon_id', 'asc');
+        if($type == 1 && $pppk == true) {
+            $users->whereIn('u.employment_type_id', [4]);
+        } elseif ($type == 1 && $pppk == false) {
+            $users->whereIn('u.employment_type_id', [1,2,3]);
+        }
+
+        $users->orderBy('e.sequence_number', 'asc');
         $users->orderBy('u.grade_id', 'asc');
         $users->orderBy('u.employment_type_id', 'desc');
         $users->orderBy('u.name', 'asc');
@@ -237,8 +273,72 @@ class RecapitulationEmployeeController extends Controller
                 u.employment_status
             IN
                 (1,6)
+            AND
+                u.employment_type_id
+            IN
+                (1,2,3)
             ORDER BY
-                et.sequence_number ASC,
+                e.sequence_number ASC,
+                u.grade_id ASC,
+                u.name ASC;
+        ";
+
+        $sql3 = "
+            WITH RECURSIVE hierarchy AS (
+                -- Anchor member: Select the initial parent row
+                SELECT
+                    po.id,
+                    po.name,
+                    po.parent_id
+                FROM
+                    positions po
+                WHERE
+                    po.id = '$parentId' -- Replace ? with the specific parent id
+
+                UNION DISTINCT
+
+                -- Recursive member: Select the child row
+                SELECT
+                    p.id,
+                    p.name,
+                    p.parent_id
+                FROM
+                    positions p
+                INNER JOIN
+                    hierarchy h ON p.parent_id = h.id
+            )
+            SELECT
+                u.id,
+                p.name as position_name,
+                u.photo_profile,
+                u.name,
+                u.title_prefix,
+                u.title_suffix,
+                DATE_FORMAT(u.position_effective_date, '%d-%m-%Y') as position_effective_date,
+                e.name as echelon_name,
+                DATE_FORMAT(u.echelon_effective_date, '%d-%m-%Y') as echelon_effective_date,
+                g.name as grade_name,
+                g.code as grade_code,
+                DATE_FORMAT(u.grade_effective_date, '%d-%m-%Y') as grade_effective_date,
+                u.employee_id_number,
+                u.employee_registration_number,
+                u.type
+            FROM
+                hierarchy
+            JOIN users u ON hierarchy.id=u.position_id
+            LEFT JOIN positions p ON u.position_id=p.id
+            LEFT JOIN echelons e ON u.echelon_id=e.id
+            LEFT JOIN grades g ON u.grade_id=g.id
+            LEFT JOIN employment_types et ON u.employment_type_id=et.id
+            WHERE
+                u.employment_status
+            IN
+                (1,6)
+            AND
+                u.employment_type_id
+            IN
+                (4)
+            ORDER BY
                 e.sequence_number ASC,
                 u.grade_id ASC,
                 u.name ASC;
@@ -274,7 +374,6 @@ class RecapitulationEmployeeController extends Controller
             AND
                 position_id = 2
             ORDER BY
-                et.sequence_number ASC,
                 e.sequence_number ASC,
                 u.grade_id ASC,
                 u.name ASC;
@@ -284,6 +383,8 @@ class RecapitulationEmployeeController extends Controller
             $users = DB::select($sql2);
         } else {
             $users = DB::select($sql);
+            $users2 = DB::select($sql3);
+            $users = array_merge($users, $users2);
         }
 
         foreach ($users as $item) {
@@ -408,7 +509,7 @@ class RecapitulationEmployeeController extends Controller
         return ['total' => count($users), 'items' => $users];
     }
 
-    public function getUsersByJabatanFungsional($positions, $echelon)
+    public function getUsersByJabatanFungsional($positions, $echelon, $pppk = false)
     {
         $positions = explode(',', $positions);
         $positions = array_map('intval', $positions);
@@ -438,6 +539,11 @@ class RecapitulationEmployeeController extends Controller
         $users->whereIn('u.position_id', $positions);
         $users->where('u.echelon_id', $echelon);
         $users->whereIn('u.employment_status', [1, 6]);
+        if($pppk == true) {
+            $users->whereIn('u.employment_type_id', [4]);
+        } elseif ($pppk == false) {
+            $users->whereIn('u.employment_type_id', [1,2,3]);
+        }
         $users->orderBy('u.echelon_id', 'asc');
         $users->orderBy('u.grade_id', 'asc');
         $users->orderBy('u.employment_type_id', 'desc');
