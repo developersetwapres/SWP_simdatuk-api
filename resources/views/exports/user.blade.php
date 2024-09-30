@@ -235,7 +235,6 @@
             <td class="table-section-3-title">Akreditasi</td>
             <td class="table-section-3-title">Fakultas</td>
             <td class="table-section-3-title">Jurusan</td>
-            <td class="table-section-3-title">Status</td>
             <td class="table-section-3-title">Tahun Lulus</td>
             <td class="table-section-3-title">Ijasah</td>
             <td class="table-section-3-title">Surat Keterangan Tugas Belajar</td>
@@ -292,26 +291,6 @@
                 <td class="table-section-3-body">{{ $value->accreditation }}</td>
                 <td class="table-section-3-body">{{ $value->faculty }}</td>
                 <td class="table-section-3-body">{{ $value->major }}</td>
-                <td class="table-section-3-body">
-                    @switch($value->status)
-                    @case(1)
-                    Lulus
-                    @break
-                    @case(2)
-                    DO
-                    @break
-                    @case(3)
-                    Aktif
-                    @break
-                    @case(4)
-                    Non-Aktif
-                    @break
-                    @case(5)
-                    Mengundurkan diri
-                    @break
-                    @default
-                    -
-                    @endswitch</td>
                 <td class="table-section-3-body">{{ $value->year_of_graduation }}</td>
                 <td class="table-section-3-body">
                     @if(!is_null($value->degree_document))
