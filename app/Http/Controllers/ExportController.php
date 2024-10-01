@@ -319,9 +319,11 @@ class ExportController extends Controller
                 'Kontak Darurat' => $employee->emergency_contact,
             ];
             $exportData['userProfile'] = $userProfile;
+            $exportData['userCollege'] = $educations;
             $exportData['userPosition'] = $positions;
             $exportData['userTrainingTechnical'] = $technicals;
             $exportData['userFamily'] = $families;
+            $exportData['userNotes'] = $notes;
         }
 
         // $pdf = Pdf::loadview('exports/user', [
