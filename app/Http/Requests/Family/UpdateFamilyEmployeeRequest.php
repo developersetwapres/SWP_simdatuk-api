@@ -27,10 +27,10 @@ class UpdateFamilyEmployeeRequest
             'families.*.education'              => 'nullable|numeric|in:1,2,3,4,5,6,7,8,9,10',
             'families.*.occupation'             => 'max:160',
             'families.*.occupation_description' => 'max:160',
-            'families.*.marital_status' => 'required|numeric|in:1,2,3,4,5',
-            'families.*.marriage_other_notes' => 'nullable',
-            'families.*.mobile_phone' => 'max:16',
-            'families.*.sequence_number' => 'nullable|numeric',
+            'families.*.marital_status'         => 'nullable|numeric|in:1,2,3,4,5',
+            'families.*.marriage_other_notes'   => 'nullable',
+            'families.*.mobile_phone'           => 'max:16',
+            'families.*.sequence_number'        => 'nullable|numeric',
         ];
     }
 

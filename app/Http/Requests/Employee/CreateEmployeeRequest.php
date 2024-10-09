@@ -207,7 +207,6 @@ class CreateEmployeeRequest extends FormRequest
             'religion.in' => 'Agama harus diantara 1, 2, 3, 4, 5 atau 6.',
             'gender.required' => 'Jenis kelamin tidak boleh kosong.',
             'gender.boolean' => 'Jenis kelamin harus berupa boolean.',
-            'marital_status.required' => 'Status perkawinan tidak boleh kosong.',
             'marital_status.in' => 'Status perkawinan harus diantara 1, 2, 3, 4 atau 5.',
             'marriage_date.date' => 'Tanggal Pernikahan harus berupa tanggal.',
             'employment_type_id.required' => 'Jenis pegawai tidak boleh kosong.',
