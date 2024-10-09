@@ -15,7 +15,7 @@ class CreateCompetencyRequest
         return [
             'competencies.*.event_date' => 'date',
             'competencies.*.point' => 'nullable|numeric|in:1,2',
-            'competencies.*.organizer' => 'max:160',
+            'competencies.*.organizer' => 'nullable|max:512',
             'competencies.*.competency_document' => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
         ];
     }
@@ -31,7 +31,7 @@ class CreateCompetencyRequest
             'competencies.*.event_date.date' => 'Tanggal kompetensi harus berupa tanggal.',
             'competencies.*.point.numeric' => 'Penilaian kompetensi harus berupa angka.',
             'competencies.*.point.in' => 'Penilaian kompetensi harus diantara 1 atau 2.',
-            'competencies.*.organizer.max' => 'Penyelenggara tidak boleh lebih dari 160 karakter.',
+            'competencies.*.organizer.max' => 'Penyelenggara tidak boleh lebih dari 512 karakter.',
             'competencies.*.competency_document.file' => 'Sertifikat harus berupa file.',
             'competencies.*.competency_document.extensions' => 'Sertifikat harus berupa jpg, jpeg atau png.',
             'competencies.*.competency_document.max' => 'Ukuran sertifikat tidak boleh lebih dari 2MB.',

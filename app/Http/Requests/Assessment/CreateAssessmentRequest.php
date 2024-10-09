@@ -15,7 +15,7 @@ class CreateAssessmentRequest
         return [
             'assessments.*.event_date' => 'date',
             'assessments.*.point' => 'nullable|numeric|in:1,2,3',
-            'assessments.*.organizer' => 'max:160',
+            'assessments.*.organizer' => 'nullable|max:512',
             'assessments.*.assessment_document' => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
         ];
     }
@@ -31,7 +31,7 @@ class CreateAssessmentRequest
             'assessments.*.event_date.date' => 'Tanggal assessment harus berupa tanggal.',
             'assessments.*.point.numeric' => 'Penilaian assessment harus berupa angka.',
             'assessments.*.point.in' => 'Penilaian assessment harus diantara 1, 2 atau 3.',
-            'assessments.*.organizer.max' => 'Penyelenggara tidak boleh lebih dari 160 karakter.',
+            'assessments.*.organizer.max' => 'Penyelenggara tidak boleh lebih dari 512 karakter.',
             'assessments.*.assessment_document.file' => 'Sertifikat harus berupa file.',
             'assessments.*.assessment_document.extensions' => 'Sertifikat harus berupa jpg, jpeg atau png.',
             'assessments.*.assessment_document.max' => 'Ukuran sertifikat tidak boleh lebih dari 2MB.',

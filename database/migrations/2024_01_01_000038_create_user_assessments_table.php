@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->date('event_date')->nullable();
             $table->tinyInteger('point')->comment('1=Kurang Memenuhi Syarat, 2=Masih Memenuhi Syarat, 3=Memenuhi Syarat');
-            $table->string('organizer', 160)->nullable();
+            $table->string('organizer', 512)->nullable();
             $table->string('assessment_document')->nullable();
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();

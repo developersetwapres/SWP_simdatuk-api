@@ -15,7 +15,7 @@ class CreateTalentRequest
         return [
             'talents.*.event_date'      => 'date',
             'talents.*.point'           => 'nullable|numeric|in:1,2,3,4,5,6,7,8,9',
-            'talents.*.organizer'       => 'max:160',
+            'talents.*.organizer'       => 'nullable|max:512',
             'talents.*.talent_document' => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
         ];
     }
@@ -31,7 +31,7 @@ class CreateTalentRequest
             'talents.*.event_date.date' => 'Tanggal talent pool harus berupa tanggal.',
             'talents.*.point.numeric' => 'Penilaian talent pool harus berupa angka.',
             'talents.*.point.in' => 'Penilaian talent pool harus diantara 1 sampai 9.',
-            'talents.*.organizer.max' => 'Penyelenggara tidak boleh lebih dari 160 karakter.',
+            'talents.*.organizer.max' => 'Penyelenggara tidak boleh lebih dari 512 karakter.',
             'talents.*.talent_document.file' => 'Sertifikat harus berupa file.',
             'talents.*.talent_document.extensions' => 'Sertifikat harus berupa jpg, jpeg atau png.',
             'talents.*.talent_document.max' => 'Ukuran sertifikat tidak boleh lebih dari 2MB.',
