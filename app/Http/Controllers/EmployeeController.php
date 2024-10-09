@@ -537,7 +537,7 @@ class EmployeeController extends Controller
                 unset($this->posted['employee_id_card']);
             }
 
-            if (isset($this->posted['position_id']) && !is_null($this->posted['position_id'])) {
+            if (isset($this->posted['position_id']) && !is_null($this->posted['position_id']) && $this->posted['position_id'] != $user->position_id) {
                 $existsPosition = DB::table('positions')
                     ->where('id', $this->posted['position_id'])
                     ->first();
@@ -1252,8 +1252,8 @@ class EmployeeController extends Controller
      * @authenticated
      * @response 404 {"code": 404,"message": "Mohon maaf, pegawai tidak ditemukan.","data": null}
      * @response 200 {"code": 200,"message": "Pegawai berhasil dihapus.","data": null}
-    */
-    public function delete() 
+     */
+    public function delete()
     {
         $employee = DB::table('users')->select('id')->where('id', $this->request->id)->first();
         if (!$employee) {
@@ -1264,25 +1264,25 @@ class EmployeeController extends Controller
             DB::beginTransaction();
             // Delete Employee's Families if exist
             DB::table('user_families')->where('user_id', $employee->id)->delete();
-            
+
             // Delete Employee's Educations if exist
             DB::table('user_educations')->where('user_id', $employee->id)->delete();
-            
+
             // Delete Employee's Assessments if exist
             DB::table('user_assessments')->where('user_id', $employee->id)->delete();
-            
+
             // Delete Employee's Competencies if exist
             DB::table('user_competencies')->where('user_id', $employee->id)->delete();
-            
+
             // Delete Employee's Credits if exist
             DB::table('user_credits')->where('user_id', $employee->id)->delete();
-            
+
             // Delete Employee's Leaves if exist
             DB::table('user_leaves')->where('user_id', $employee->id)->delete();
-            
+
             // Delete Employee's Notes if exist
             DB::table('user_notes')->where('user_id', $employee->id)->delete();
-            
+
             // Delete Employee's Talents if exist
             DB::table('user_talents')->where('user_id', $employee->id)->delete();
 
@@ -1291,12 +1291,10 @@ class EmployeeController extends Controller
 
             DB::commit();
             return $this->response(200, 'Pegawai berhasil dihapus.');
-
         } catch (\Throwable $th) {
             DB::rollback();
             Log::warning($th);
             return $this->response(500, 'Pegawai gagal dihapus.');
         }
-
     }
 }
