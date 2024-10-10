@@ -87,6 +87,7 @@ class EmployeeController extends Controller
             'structurals',
             'functionals',
             'technicals',
+            'recognitions',
             'targets',
             'performances',
             'disciplinaries',
