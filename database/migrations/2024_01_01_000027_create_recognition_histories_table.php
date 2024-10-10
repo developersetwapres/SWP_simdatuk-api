@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('recognition_histories', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->tinyInteger('period_month');
-            $table->year('period_year');
+            $table->tinyInteger('period_month')->nullable();
+            $table->year('period_year')->nullable();
             $table->unsignedBigInteger('recognition_id')->nullable();
             $table->string('description')->nullable();
             $table->unsignedBigInteger('type_of_decree')->nullable();

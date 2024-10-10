@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('disciplinaries', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name', 160);
-            $table->string('description');
+            $table->string('name', 160)->nullable();
+            $table->string('description')->nullable();
             $table->float('performance_allowance_deduction')->nullable()->comment('persentase pemontongan tunjangan kinerja');
             $table->unsignedInteger('performance_allowance_duration')->nullable()->comment('jangka waktu pemotongan (dalam bulan)');
             $table->timestamp('created_at');

@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('disciplinary_histories', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name', 160);
-            $table->tinyInteger('period_month');
-            $table->year('period_year');
+            $table->string('name', 160)->nullable();
+            $table->tinyInteger('period_month')->nullable();
+            $table->year('period_year')->nullable();
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
         });

@@ -15,8 +15,8 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->string('position', 160)->nullable();
-            $table->tinyInteger('period')->comment('1=Triwulan 1, 2=Triwulan 2, 3=Triwulan 3, 4=Triwulan 4, 5=Tahunan');
-            $table->year('year');
+            $table->tinyInteger('period')->nullable()->comment('1=Triwulan 1, 2=Triwulan 2, 3=Triwulan 3, 4=Triwulan 4, 5=Tahunan');
+            $table->year('year')->nullable();
             $table->tinyInteger('start_month')->nullable();
             $table->tinyInteger('end_month')->nullable();
             $table->float('score', 5, 2)->nullable();

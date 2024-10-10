@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('recognitions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 160);
-            $table->text('description', 3000);
+            $table->text('description', 3000)->nullable();
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
         });

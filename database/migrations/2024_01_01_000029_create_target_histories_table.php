@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('target_histories', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name', 160);
-            $table->tinyInteger('period_month');
-            $table->year('period_year');
-            $table->enum('appraisal_period', ['Q1', 'Q2', 'Q3', 'Q4', 'Tahunan']);
+            $table->string('name', 160)->nullable();
+            $table->tinyInteger('period_month')->nullable();
+            $table->year('period_year')->nullable();
+            $table->enum('appraisal_period', ['Q1', 'Q2', 'Q3', 'Q4', 'Tahunan'])->nullable();
             $table->year('year')->nullable();
             $table->timestamp('created_at');
-            $table->timestamp('updated_at')->nullable();;
+            $table->timestamp('updated_at')->nullable();
         });
     }
 
