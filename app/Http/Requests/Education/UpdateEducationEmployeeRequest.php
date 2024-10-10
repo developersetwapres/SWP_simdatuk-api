@@ -13,7 +13,7 @@ class UpdateEducationEmployeeRequest
     public static function rules(): array
     {
         return [
-            'educations.*.id'                             => 'nullable|nullable',
+            'educations.*.id'                             => 'nullable|numeric',
             'educations.*.level'                          => 'nullable|numeric|in:1,2,3,4,5,6,7,8',
             'educations.*.name'                           => 'nullable|max:160',
             'educations.*.study_area'                     => 'nullable|numeric|in:1,2',

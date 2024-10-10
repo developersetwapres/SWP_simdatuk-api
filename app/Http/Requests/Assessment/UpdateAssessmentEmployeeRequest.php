@@ -13,11 +13,11 @@ class UpdateAssessmentEmployeeRequest
     public static function rules(): array
     {
         return [
-            'assessments.*.id' => 'numeric|nullable',
-            'assessments.*.event_date' => 'date',
-            'assessments.*.point' => 'nullable|numeric|in:1,2,3',
-            'assessments.*.organizer' => 'nullable|max:512',
-            'assessments.*.assessment_document' => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
+            'assessments.*.id'                         => 'nullable|numeric',
+            'assessments.*.event_date'                 => 'nullable|date',
+            'assessments.*.point'                      => 'nullable|numeric|in:1,2,3',
+            'assessments.*.organizer'                  => 'nullable|max:512',
+            'assessments.*.assessment_document'        => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
             'assessments.*.delete_assessment_document' => 'nullable|boolean',
         ];
     }

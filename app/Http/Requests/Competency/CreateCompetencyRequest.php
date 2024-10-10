@@ -13,7 +13,7 @@ class CreateCompetencyRequest
     public static function rules(): array
     {
         return [
-            'competencies.*.event_date' => 'date',
+            'competencies.*.event_date' => 'nullable|date',
             'competencies.*.point' => 'nullable|numeric|in:1,2',
             'competencies.*.organizer' => 'nullable|max:512',
             'competencies.*.competency_document' => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',

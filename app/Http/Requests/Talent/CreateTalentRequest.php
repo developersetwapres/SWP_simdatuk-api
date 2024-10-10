@@ -13,7 +13,7 @@ class CreateTalentRequest
     public static function rules(): array
     {
         return [
-            'talents.*.event_date'      => 'date',
+            'talents.*.event_date'      => 'nullable|date',
             'talents.*.point'           => 'nullable|numeric|in:1,2,3,4,5,6,7,8,9',
             'talents.*.organizer'       => 'nullable|max:512',
             'talents.*.talent_document' => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',

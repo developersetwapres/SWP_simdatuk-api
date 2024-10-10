@@ -16,15 +16,15 @@ class UpdateDisciplinaryHistoryEmployeeRequest
     {
         return [
             'disciplinaries.*.id' => 'numeric|nullable',
-            'disciplinaries.*.grade' => 'max:160',
-            'disciplinaries.*.position' => 'max:160',
+            'disciplinaries.*.grade' => 'nullable|max:160',
+            'disciplinaries.*.position' => 'nullable|max:160',
             'disciplinaries.*.disciplinary_id' => 'nullable|numeric',
-            'disciplinaries.*.decree_number' => 'max:160',
+            'disciplinaries.*.decree_number' => 'nullable|max:160',
             'disciplinaries.*.date_of_decree' => 'nullable|date',
             'disciplinaries.*.start_date' => 'nullable|date',
             'disciplinaries.*.end_date' => 'nullable|date',
-            'disciplinaries.*.authorizing_officer' => 'max:160',
-            'disciplinaries.*.name_of_authorizing_officer' => 'max:160',
+            'disciplinaries.*.authorizing_officer' => 'nullable|max:160',
+            'disciplinaries.*.name_of_authorizing_officer' => 'nullable|max:160',
             'disciplinaries.*.description' => 'nullable',
         ];
     }

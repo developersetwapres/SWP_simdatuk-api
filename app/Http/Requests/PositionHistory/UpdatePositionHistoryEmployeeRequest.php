@@ -29,7 +29,7 @@ class UpdatePositionHistoryEmployeeRequest
             'positions.*.type_of_termination_decree' => 'numeric|nullable',
             'positions.*.termination_decree_number' => 'max:160|nullable',
             'positions.*.termination_decree_date' => 'date|nullable',
-            'positions.*.status' => 'boolean',
+            'positions.*.status' => 'nullable|boolean',
             'positions.*.delete_decree_document' => 'nullable|boolean',
         ];
     }

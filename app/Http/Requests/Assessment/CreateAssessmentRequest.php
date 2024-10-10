@@ -13,9 +13,9 @@ class CreateAssessmentRequest
     public static function rules(): array
     {
         return [
-            'assessments.*.event_date' => 'date',
-            'assessments.*.point' => 'nullable|numeric|in:1,2,3',
-            'assessments.*.organizer' => 'nullable|max:512',
+            'assessments.*.event_date'          => 'nullable|date',
+            'assessments.*.point'               => 'nullable|numeric|in:1,2,3',
+            'assessments.*.organizer'           => 'nullable|max:512',
             'assessments.*.assessment_document' => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
         ];
     }
