@@ -15,7 +15,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->date('event_date')->nullable();
-            $table->tinyInteger('point')->comment('1=Kotak 1, 2=Kotak 2, 3=Kotak 3, 4=Kotak 4, 5=Kotak 5, 6=Kotak 6, 7=Kotak 7, 8=Kotak 8, 9=Kotak 9');
+            $table->tinyInteger('point')->nullable()->comment('1=Kotak 1, 2=Kotak 2, 3=Kotak 3, 4=Kotak 4, 5=Kotak 5, 6=Kotak 6, 7=Kotak 7, 8=Kotak 8, 9=Kotak 9');
             $table->string('organizer', 512)->nullable();
             $table->string('talent_document')->nullable();
             $table->timestamp('created_at');

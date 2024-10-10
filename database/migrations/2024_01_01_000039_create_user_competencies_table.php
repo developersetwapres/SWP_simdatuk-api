@@ -15,7 +15,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->date('event_date')->nullable();
-            $table->tinyInteger('point')->comment('1=Lulus, 2=Tidak Lulus');
+            $table->tinyInteger('point')->nullable()->comment('1=Lulus, 2=Tidak Lulus');
             $table->string('organizer', 512)->nullable();
             $table->string('competency_document')->nullable();
             $table->timestamp('created_at');

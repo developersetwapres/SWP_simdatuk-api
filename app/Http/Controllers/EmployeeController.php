@@ -1211,7 +1211,7 @@ class EmployeeController extends Controller
         } catch (\Throwable $th) {
             DB::rollback();
             Log::warning($th);
-            return $this->response(500, 'Pegawai gagal ditambah.');
+            return $this->response(500, 'Pegawai gagal diubah.');
         }
     }
 

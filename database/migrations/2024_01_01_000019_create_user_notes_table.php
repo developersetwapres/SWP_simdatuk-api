@@ -15,7 +15,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('giver_id');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->timestamp('created_at');
             $table->timestamp('updated_at')->nullable();
 
