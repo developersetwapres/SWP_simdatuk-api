@@ -30,7 +30,7 @@ class UpdatePositionHistoryEmployeeRequest
             'positions.*.termination_decree_number' => 'max:160|nullable',
             'positions.*.termination_decree_date' => 'date|nullable',
             'positions.*.status' => 'boolean',
-            'positions.*.delete_decree_document' => 'required|boolean',
+            'positions.*.delete_decree_document' => 'nullable|boolean',
         ];
     }
 
@@ -62,7 +62,6 @@ class UpdatePositionHistoryEmployeeRequest
             'positions.*.termination_decree_number.max' => 'Nomor SK SLS tidak boleh lebih dari 160 karakter.',
             'positions.*.termination_decree_date.date' => 'Tanggal SK SLS harus berupa tanggal.',
             'positions.*.status.numeric' => 'Status jabatan harus berupa angka.',
-            'positions.*.delete_decree_document.required' => 'Status delete SK jabatan tidak boleh kosong.',
         ];
     }
 

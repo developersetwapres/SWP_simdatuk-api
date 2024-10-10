@@ -18,7 +18,7 @@ class UpdateCompetencyEmployeeRequest
             'competencies.*.point' => 'nullable|numeric|in:1,2',
             'competencies.*.organizer' => 'nullable|max:512',
             'competencies.*.competency_document' => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
-            'competencies.*.delete_competency_document' => 'required|boolean',
+            'competencies.*.delete_competency_document' => 'nullable|boolean',
         ];
     }
 
@@ -38,7 +38,6 @@ class UpdateCompetencyEmployeeRequest
             'competencies.*.competency_document.file' => 'Sertifikat harus berupa file.',
             'competencies.*.competency_document.extensions' => 'Sertifikat harus berupa jpg, jpeg atau png.',
             'competencies.*.competency_document.max' => 'Ukuran sertifikat tidak boleh lebih dari 2MB.',
-            'competencies.*.delete_competency_document.required' => 'Status delete dokumen tidak boleh kosong.',
         ];
     }
 

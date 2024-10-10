@@ -13,17 +13,17 @@ class UpdateGradeHistoryEmployeeRequest
     public static function rules(): array
     {
         return [
-            'grades.*.id'                     => 'numeric|nullable',
-            'grades.*.grade_id'               => 'required|numeric',
+            'grades.*.id'                     => 'nullable|numeric',
+            'grades.*.grade_id'               => 'nullable|numeric',
             'grades.*.effective_date'         => 'nullable|date',
             'grades.*.decree_name'            => 'nullable',
-            'grades.*.decree_number'          => 'max:160',
+            'grades.*.decree_number'          => 'nullable|max:160',
             'grades.*.type_of_decree'         => 'nullable',
             'grades.*.decree_date'            => 'nullable',
             'grades.*.description'            => 'nullable',
             'grades.*.decree_document'        => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
             'grades.*.status'                 => 'nullable|boolean',
-            'grades.*.delete_decree_document' => 'required|boolean',
+            'grades.*.delete_decree_document' => 'nullable|boolean',
         ];
     }
 
@@ -36,7 +36,6 @@ class UpdateGradeHistoryEmployeeRequest
     {
         return [
             'grades.*.id.numeric' => 'ID harus berupa angka.',
-            'grades.*.grade_id.required' => 'Golongan tidak boleh kosong.',
             'grades.*.grade_id.numeric' => 'Golongan harus berupa angka.',
             'grades.*.effective_date.date' => 'Tanggal efektif golongan harus berupa tanggal.',
             'grades.*.decree_number.max' => 'Nomor SK golongan tidak beloh lebih dari 160 karakter.',
@@ -44,7 +43,6 @@ class UpdateGradeHistoryEmployeeRequest
             'grades.*.decree_document.extensions' => 'SK golongan harus berupa jpg, jpeg atau png.',
             'grades.*.decree_document.max' => 'SK golongan tidak boleh lebih dari 2MB.',
             'grades.*.status.boolean' => 'Status harus berupa boolean.',
-            'grades.*.delete_decree_document.required' => 'Status delete SK golongan tidak boleh kosong.',
         ];
     }
 

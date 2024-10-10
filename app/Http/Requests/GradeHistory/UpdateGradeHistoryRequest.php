@@ -22,15 +22,15 @@ class UpdateGradeHistoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'period_month' => 'nullable|numeric|digits_between:1,12',
-            'period_year' => 'nullable|date_format:Y',
-            'name' => 'nullable|max:160',
-            'users.*.id' => 'numeric|nullable',
-            'users.*.user_id' => 'required|numeric',
-            'users.*.grade_id' => 'required|numeric',
+            'period_month'           => 'nullable|numeric|digits_between:1,12',
+            'period_year'            => 'nullable|date_format:Y',
+            'name'                   => 'nullable|max:160',
+            'users.*.id'             => 'nullable|numeric',
+            'users.*.user_id'        => 'nullable|numeric',
+            'users.*.grade_id'       => 'nullable|numeric',
             'users.*.effective_date' => 'nullable|date',
-            'users.*.decree_number' => 'max:160',
-            'users.*.status' => 'nullable|boolean',
+            'users.*.decree_number'  => 'nullable|max:160',
+            'users.*.status'         => 'nullable|boolean',
         ];
     }
 
@@ -47,9 +47,7 @@ class UpdateGradeHistoryRequest extends FormRequest
             'period_year.date_format' => 'Tahun periode riwayat harus dengan format YYYY.',
             'name.max' => 'Nama riwayat penghargaan tidak boleh lebih dari 160 karakter.',
             'users.*.id.numeric' => 'ID harus berupa angka.',
-            'users.*.user_id.required' => 'User ID tidak boleh kosong.',
             'users.*.user_id.numeric' => 'User ID harus berupa angka.',
-            'users.*.grade_id.required' => 'Golongan tidak boleh kosong.',
             'users.*.grade_id.numeric' => 'Golongan harus berupa angka.',
             'users.*.effective_date.date' => 'Tanggal efektif golongan harus berupa tanggal.',
             'users.*.decree_number.max' => 'Nomor SK golongan tidak beloh lebih dari 160 karakter.',

@@ -23,11 +23,11 @@ class UpdateEducationEmployeeRequest
             'educations.*.year_of_graduation'             => 'nullable|date_format:Y',
             'educations.*.description'                    => 'nullable|max:160',
             'educations.*.degree_document'                => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
-            'educations.*.delete_degree_document'         => 'required|boolean',
+            'educations.*.delete_degree_document'         => 'nullable|boolean',
             'educations.*.study_assignment_letter'        => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
-            'educations.*.delete_study_assignment_letter' => 'required|boolean',
+            'educations.*.delete_study_assignment_letter' => 'nullable|boolean',
             'educations.*.academic_title_letter'          => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
-            'educations.*.delete_academic_title_letter'   => 'required|boolean',
+            'educations.*.delete_academic_title_letter'   => 'nullable|boolean',
         ];
     }
 
@@ -52,15 +52,12 @@ class UpdateEducationEmployeeRequest
             'educations.*.degree_document.file' => 'Ijazah harus berupa file.',
             'educations.*.degree_document.extensions' => 'Ijazah harus berupa jpg, jpeg atau png.',
             'educations.*.degree_document.max' => 'Ukuran ijazah tidak boleh lebih dari 2MB.',
-            'educations.*.delete_degree_document.required' => 'Status hapus ijazah tidak boleh kosong.',
             'educations.*.study_assignment_letter.file' => 'Surat Keterangan Tugas Belajar harus berupa file.',
             'educations.*.study_assignment_letter.extensions' => 'Surat Keterangan Tugas Belajar harus berupa jpg, jpeg atau png.',
             'educations.*.study_assignment_letter.max' => 'Ukuran Surat Keterangan Tugas Belajar tidak boleh lebih dari 2MB.',
-            'educations.*.delete_study_assignment_letter.required' => 'Status hapus Surat Keterangan Tugas Belajar tidak boleh kosong.',
             'educations.*.academic_title_letter.file' => 'SK Pencantuman Gelar harus berupa file.',
             'educations.*.academic_title_letter.extensions' => 'SK Pencantuman Gelar harus berupa jpg, jpeg atau png.',
             'educations.*.academic_title_letter.max' => 'Ukuran SK Pencantuman Gelar tidak boleh lebih dari 2MB.',
-            'educations.*.delete_academic_title_letter.required' => 'Status hapus SK Pencantuman Gelar tidak boleh kosong.',
         ];
     }
 

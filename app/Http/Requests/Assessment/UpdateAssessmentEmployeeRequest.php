@@ -18,7 +18,7 @@ class UpdateAssessmentEmployeeRequest
             'assessments.*.point' => 'nullable|numeric|in:1,2,3',
             'assessments.*.organizer' => 'nullable|max:512',
             'assessments.*.assessment_document' => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
-            'assessments.*.delete_assessment_document' => 'required|boolean',
+            'assessments.*.delete_assessment_document' => 'nullable|boolean',
         ];
     }
 
@@ -38,7 +38,6 @@ class UpdateAssessmentEmployeeRequest
             'assessments.*.assessment_document.file' => 'Sertifikat harus berupa file.',
             'assessments.*.assessment_document.extensions' => 'Sertifikat harus berupa jpg, jpeg atau png.',
             'assessments.*.assessment_document.max' => 'Ukuran sertifikat tidak boleh lebih dari 2MB.',
-            'assessments.*.delete_assessment_document.required' => 'Status delete dokumen tidak boleh kosong.',
         ];
     }
 

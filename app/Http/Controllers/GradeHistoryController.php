@@ -7,6 +7,7 @@ use App\Http\Requests\GradeHistory\UpdateGradeHistoryRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 /**
  * @group History
@@ -14,6 +15,9 @@ use Illuminate\Support\Facades\DB;
  */
 class GradeHistoryController extends Controller
 {
+    protected $request;
+    protected $posted;
+
     public function __construct(Request $request)
     {
         $this->request = $request;
@@ -96,7 +100,7 @@ class GradeHistoryController extends Controller
             DB::commit();
             return $this->response(200, 'Riwayat golongan berhasil ditambah.');
         } catch (\Throwable $th) {
-            \Log::warning($th);
+            Log::warning($th);
             DB::rollback();
             return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
         }
