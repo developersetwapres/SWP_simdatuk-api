@@ -12,8 +12,8 @@ class GradeRepository
     public function getDetail($userId)
     {
         $grades = DB::table('grade_history_users as ghu');
-        $grades->join('grades as g', 'ghu.grade_id', '=', 'g.id');
-        $grades->join('grade_histories as gh', 'ghu.grade_history_id', '=', 'gh.id');
+        $grades->leftJoin('grades as g', 'ghu.grade_id', '=', 'g.id');
+        $grades->leftJoin('grade_histories as gh', 'ghu.grade_history_id', '=', 'gh.id');
         $grades->leftJoin('decrees as d', 'ghu.type_of_decree', '=', 'd.id');
         $grades->where('ghu.user_id', $userId);
         $grades->select(
