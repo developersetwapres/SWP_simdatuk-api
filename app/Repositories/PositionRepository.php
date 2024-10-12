@@ -13,7 +13,7 @@ class PositionRepository
     {
         $positions = DB::table('position_history_users as phu');
         $positions->join('users as u', 'u.id', '=', 'phu.user_id');
-        $positions->join('position_histories as ph', 'phu.position_history_id', '=', 'ph.id');
+        $positions->leftJoin('position_histories as ph', 'phu.position_history_id', '=', 'ph.id');
         $positions->leftjoin('groups as g', 'phu.group_id', '=', 'g.id');
         $positions->leftjoin('echelons as e', 'phu.echelon', '=', 'e.id');
         $positions->leftjoin('decrees as tod', 'phu.type_of_decree', '=', 'tod.id');

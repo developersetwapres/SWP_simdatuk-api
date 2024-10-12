@@ -10,7 +10,7 @@ class DisciplinaryRepository
     {
         $disciplinaries = DB::table('disciplinary_history_users as dhu')
             ->join('disciplinary_histories as dh', 'dhu.disciplinary_history_id', '=', 'dh.id')
-            ->join('disciplinaries as d', 'dhu.disciplinary_id', '=', 'd.id')
+            ->leftJoin('disciplinaries as d', 'dhu.disciplinary_id', '=', 'd.id')
             ->where('dhu.user_id', $userId)
             ->select(
                 'dhu.id',

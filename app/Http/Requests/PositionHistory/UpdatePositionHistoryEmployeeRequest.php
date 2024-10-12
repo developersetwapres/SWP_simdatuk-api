@@ -61,7 +61,8 @@ class UpdatePositionHistoryEmployeeRequest
             'positions.*.type_of_termination_decree.numeric' => 'Jenis SK SLS harus berupa angka.',
             'positions.*.termination_decree_number.max' => 'Nomor SK SLS tidak boleh lebih dari 160 karakter.',
             'positions.*.termination_decree_date.date' => 'Tanggal SK SLS harus berupa tanggal.',
-            'positions.*.status.numeric' => 'Status jabatan harus berupa angka.',
+            'positions.*.status.boolean' => 'Status jabatan harus boolean.',
+            'positions.*.delete_decree_document.boolean' => 'Status hapus file SK Jabatan harus boolean.',
         ];
     }
 
