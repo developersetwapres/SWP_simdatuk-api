@@ -590,7 +590,12 @@ class EmployeeController extends Controller
 
             if (isset($this->posted['photo_profile']) && is_file($this->posted['photo_profile'])) {
                 $this->posted['photo_profile'] = $this->uploadDocument($this->posted['photo_profile'], 'photo_profile', $this->request->employee_id_number);
+                unset($this->posted['delete_photo_profile']);
+            } else if (isset($this->posted['delete_photo_profile']) && $this->posted['delete_photo_profile'] == true) {
+                $this->posted['photo_profile'] = null;
+                unset($this->posted['delete_photo_profile']);
             } else {
+                unset($this->posted['delete_photo_profile']);
                 unset($this->posted['photo_profile']);
             }
 

@@ -85,6 +85,7 @@ class UpdateEmployeeRequest extends FormRequest
             'type'                          => 'required|in:1,2,3',
             'delete_employee_id_card'       => 'required|boolean',
             'quit_date'                     => 'nullable|date',
+            'delete_photo_profile'          => 'nullable|boolean',
         ];
 
         $nonASNRules = [
@@ -134,6 +135,7 @@ class UpdateEmployeeRequest extends FormRequest
             'type'                          => 'required|in:1,2,3',
             'delete_employee_id_card'       => 'required|boolean',
             'quit_date'                     => 'nullable|date',
+            'delete_photo_profile'          => 'nullable|boolean',
         ];
 
         $outsourceRules = [
@@ -171,6 +173,7 @@ class UpdateEmployeeRequest extends FormRequest
             'type'                          => 'required|in:1,2,3',
             'delete_employee_id_card'       => 'required|boolean',
             'quit_date'                     => 'nullable|date',
+            'delete_photo_profile'          => 'nullable|boolean',
         ];
 
         return array_merge(
@@ -505,6 +508,10 @@ class UpdateEmployeeRequest extends FormRequest
             'office_email' => [
                 'description' => 'Refers to the office email / email dinas',
                 'example' => 'padmi@wapresri.go.id',
+            ],
+            'delete_photo_profile' => [
+                'description' => 'Refers to the Status delete employee photo profile.',
+                'example' => false,
             ],
         ];
 
