@@ -164,6 +164,8 @@ class OldUserSeeder extends Seeder
             $asn = DB::select($asn);
             foreach ($asn as $item) {
                 $item->photo_profile = $this->getDocumentExist($item->photo_profile);
+                $item->id_tax = preg_replace("/[^A-Za-z0-9?]/", "", $item->id_tax);
+                $item->karisu_number = preg_replace("/[^A-Za-z0-9?]/", "", $item->karisu_number);
             }
             DB::table('users')->insertTs(json_decode(json_encode($asn), true));
 
