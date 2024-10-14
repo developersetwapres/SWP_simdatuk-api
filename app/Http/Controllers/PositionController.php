@@ -185,8 +185,10 @@ class PositionController extends Controller
 
             if (is_null($this->request->parent_id)) {
                 $this->request->merge(['vertical_order' => $this->request->order]);
+                $this->request->merge(['horizontal_order' => 1]);
                 $this->request->request->remove('order');
             } else {
+                $this->request->merge(['vertical_order' => 1]);
                 $this->request->merge(['horizontal_order' => $this->request->order]);
                 $this->request->request->remove('order');
             }
