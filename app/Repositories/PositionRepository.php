@@ -44,6 +44,9 @@ class PositionRepository
             DB::raw("DATE_FORMAT(phu.termination_decree_date, '%d-%m-%Y') as termination_decree_date"),
             'phu.status'
         );
+        $positions->orderBy('ph.period_year', 'desc');
+        $positions->orderBy('ph.period_month', 'desc');
+        $positions->orderBy('phu.id', 'desc');
         $positions->orderBy('phu.effective_date', 'desc');
         $positions = $positions->get();
 
@@ -89,6 +92,9 @@ class PositionRepository
             DB::raw("DATE_FORMAT(phu.termination_decree_date, '%d-%m-%Y') as termination_decree_date"),
             'phu.status'
         );
+        $positions->orderBy('ph.period_year', 'desc');
+        $positions->orderBy('ph.period_month', 'desc');
+        $positions->orderBy('phu.id', 'desc');
         $positions->orderBy('phu.effective_date', 'desc');
         $positions = $positions->get();
 
