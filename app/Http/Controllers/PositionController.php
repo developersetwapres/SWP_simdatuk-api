@@ -336,6 +336,7 @@ class PositionController extends Controller
                     $countAvailable = DB::table('users as u')
                         ->where('u.position_id', $this->request->id)
                         ->where('u.echelon_id', $value['echelon_id'])
+                        ->where('u.employment_status', 1)
                         ->count();
 
                     if ($countAvailable > $value['available']) {
@@ -351,6 +352,7 @@ class PositionController extends Controller
             } else {
                 $countAvailable = DB::table('users as u')
                     ->where('u.position_id', $this->request->id)
+                    ->where('u.employment_status', 1)
                     ->count();
 
                 if ($countAvailable > $this->request->available) {
