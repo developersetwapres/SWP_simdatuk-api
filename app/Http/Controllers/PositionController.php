@@ -248,7 +248,7 @@ class PositionController extends Controller
                 return $this->response(404, 'Jabatan tidak ditemukan.');
             }
 
-            $position->filled = DB::table('users')->where('position_id', $position->id)->count();
+            $position->filled = DB::table('users')->where('position_id', $position->id)->where('employment_status', 1)->count();
 
             $position->type = [
                 "id" => $position->type,
@@ -358,6 +358,7 @@ class PositionController extends Controller
                 if ($countAvailable > $this->request->available) {
                     $countAvailable = DB::table('users as u')
                         ->where('u.position_id', $this->request->id)
+                        ->where('u.employment_status', 1)
                         ->count();
                     return $this->response(404, 'Posisi sudah terisi ' . $countAvailable . ' orang.');
                 }
