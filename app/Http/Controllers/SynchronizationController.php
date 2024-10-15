@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Http;
 /*
  * @group Employee
  */
+
 class SynchronizationController extends Controller
 {
 
@@ -167,7 +168,7 @@ class SynchronizationController extends Controller
                     DB::table('users')->where('employee_id_number', $item['nipbaru'])->updateTs([
                         'employee_registration_number' => $item['niplama'],
                         'employee_id_card_number' => $item['karpeg'],
-                        'id_tax' => $item['npwp'],
+                        'id_tax' => preg_replace("/[^A-Za-z0-9?]/", "", $item['npwp']),
                         'years_of_service_total' => $item['mkseluruhtahun'],
                         'month_of_service_total' => $item['mkseluruhbulan'],
                         'years_of_service_rank' => $item['mkgoltahun'],
@@ -192,7 +193,7 @@ class SynchronizationController extends Controller
                         'employment_type_id' => $this->employmentTypeList[$item['jenispeg']],
                         'education_level' => $this->educationList[$item['pend_terakhir']],
                         'employee_id_card_number' => $item['karpeg'],
-                        'id_tax' => $item['npwp'],
+                        'id_tax' => preg_replace("/[^A-Za-z0-9?]/", "", $item['npwp']),
                         'employment_status' => ($item['statuspeg'] == 'Aktif') ? 1 : 9,
                         'id_number' => $item['nik'],
                         'current_address' => $item['alamat'],
