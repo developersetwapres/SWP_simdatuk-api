@@ -282,7 +282,7 @@ class PositionController extends Controller
 
             foreach ($positionEchelons as $positionEchelon) {
                 // Exclude employment_type_id = 16 (TNP2K) when count
-                $users = DB::select('SELECT COUNT(1) as count FROM users WHERE echelon_id = ? AND position_id = ? AND employment_status IN (1, 6) AND employement_type_id != 16', [$positionEchelon->echelon_id, $positionEchelon->position_id]);
+                $users = DB::select('SELECT COUNT(1) as count FROM users WHERE echelon_id = ? AND position_id = ? AND employment_status IN (1, 6) AND employment_type_id != 16', [$positionEchelon->echelon_id, $positionEchelon->position_id]);
                 $positionEchelon->filled = $users[0]->count;
                 unset($positionEchelon->position_id);
             }
