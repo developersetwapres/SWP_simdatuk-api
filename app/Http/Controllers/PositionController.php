@@ -339,6 +339,7 @@ class PositionController extends Controller
                         ->where('u.position_id', $this->request->id)
                         ->where('u.echelon_id', $value['echelon_id'])
                         ->whereIn('u.employment_status', [1, 6])
+                        ->whereNot('employment_type_id', 16) // Exclude employment_type_id = 16 (TNP2K) when count
                         ->count();
 
                     if ($countAvailable > $value['available']) {
@@ -355,12 +356,14 @@ class PositionController extends Controller
                 $countAvailable = DB::table('users as u')
                     ->where('u.position_id', $this->request->id)
                     ->whereIn('u.employment_status', [1, 6])
+                    ->whereNot('employment_type_id', 16) // Exclude employment_type_id = 16 (TNP2K) when count
                     ->count();
 
                 if ($countAvailable > $this->request->available) {
                     $countAvailable = DB::table('users as u')
                         ->where('u.position_id', $this->request->id)
                         ->whereIn('u.employment_status', [1, 6])
+                        ->whereNot('employment_type_id', 16) // Exclude employment_type_id = 16 (TNP2K) when count
                         ->count();
                     return $this->response(404, 'Posisi sudah terisi ' . $countAvailable . ' orang.');
                 }
