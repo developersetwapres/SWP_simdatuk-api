@@ -328,17 +328,17 @@ class RecapitulationController extends Controller
             DB::raw('
                 COUNT(
                     CASE
-                        WHEN u.type = 1 AND u.employment_status IN (1, 6) THEN 1
+                        WHEN u.type = 1 AND u.employment_status IN (1, 6, 10) THEN 1
                         WHEN u.type = 1 AND u.employment_status IN (7, 8, 9) THEN 1
-                        WHEN u.type = 2 AND u.employment_status IN (1, 6) AND u.employment_type_id != 16 THEN 1
-                        WHEN u.type = 3 AND u.employment_status IN (1, 6) AND u.employment_type_id = 19 THEN 1
+                        WHEN u.type = 2 AND u.employment_status IN (1, 6, 10) AND u.employment_type_id != 16 THEN 1
+                        WHEN u.type = 3 AND u.employment_status IN (1, 6, 10) AND u.employment_type_id = 19 THEN 1
                     END
                 ) as total
             '),
-            DB::raw('COUNT(CASE WHEN u.type = 1 AND u.employment_status IN (1, 6) THEN 1 END) as asn_active'),
+            DB::raw('COUNT(CASE WHEN u.type = 1 AND u.employment_status IN (1, 6, 10) THEN 1 END) as asn_active'),
             DB::raw('COUNT(CASE WHEN u.type = 1 AND u.employment_status IN (7, 8, 9) THEN 1 END) as asn_nonactive'),
-            DB::raw('COUNT(CASE WHEN u.type = 2 AND u.employment_status IN (1, 6) AND u.employment_type_id != 16 THEN 1 END) as nonasn'),
-            DB::raw('COUNT(CASE WHEN u.type = 3 AND u.employment_status IN (1, 6) AND u.employment_type_id = 19 THEN 1 END) as outsource'),
+            DB::raw('COUNT(CASE WHEN u.type = 2 AND u.employment_status IN (1, 6, 10) AND u.employment_type_id != 16 THEN 1 END) as nonasn'),
+            DB::raw('COUNT(CASE WHEN u.type = 3 AND u.employment_status IN (1, 6, 10) AND u.employment_type_id = 19 THEN 1 END) as outsource'),
         );
         return $users = $users->first();
     }

@@ -196,17 +196,17 @@ class RecapitulationEmployeeController extends Controller
         if ($filter == 'status') {
             $users->where('u.employment_status', $cardId);
         } else {
-            $users->whereIn('u.employment_status', [1, 6]);
+            $users->whereIn('u.employment_status', [1, 6, 10]);
         }
         if ($filter == 'echelon') {
             $cardId = explode(',', $cardId);
             $cardId = array_map('intval', $cardId);
             $users->whereIn('u.echelon_id', $cardId);
         }
-        if($type == 1 && $pppk == true) {
+        if ($type == 1 && $pppk == true) {
             $users->whereIn('u.employment_type_id', [4]);
         } elseif ($type == 1 && $pppk == false) {
-            $users->whereIn('u.employment_type_id', [1,2,3]);
+            $users->whereIn('u.employment_type_id', [1, 2, 3]);
         }
 
         $users->orderBy('e.sequence_number', 'asc');
@@ -418,7 +418,7 @@ class RecapitulationEmployeeController extends Controller
         );
         $users->where('u.type', 1);
         $users->where('u.echelon_id', 9);
-        $users->whereIn('u.employment_status', [1, 6]);
+        $users->whereIn('u.employment_status', [1, 6, 10]);
         if ($cardId != 0) {
             $cardId = explode(',', $cardId);
             $cardId = array_map('intval', $cardId);
@@ -538,11 +538,11 @@ class RecapitulationEmployeeController extends Controller
         $users->where('u.type', 1);
         $users->whereIn('u.position_id', $positions);
         $users->where('u.echelon_id', $echelon);
-        $users->whereIn('u.employment_status', [1, 6]);
-        if($pppk == true) {
+        $users->whereIn('u.employment_status', [1, 6, 10]);
+        if ($pppk == true) {
             $users->whereIn('u.employment_type_id', [4]);
         } elseif ($pppk == false) {
-            $users->whereIn('u.employment_type_id', [1,2,3]);
+            $users->whereIn('u.employment_type_id', [1, 2, 3]);
         }
         $users->orderBy('u.echelon_id', 'asc');
         $users->orderBy('u.grade_id', 'asc');
