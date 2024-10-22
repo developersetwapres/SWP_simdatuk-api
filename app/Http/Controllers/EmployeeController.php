@@ -292,7 +292,7 @@ class EmployeeController extends Controller
 
                 $countExistsPosition = DB::table('users')
                     ->where('position_id', $this->posted['position_id'])
-                    ->whereIn('employment_status', [1, 6])
+                    ->whereIn('employment_status', [1, 6, 10])
                     ->whereNot('employment_type_id', 16) // Exclude employment_type_id = 16 (TNP2K) when count
                     ->where('id', '!=', $this->request->id);
 
@@ -563,7 +563,7 @@ class EmployeeController extends Controller
 
                 $countExistsPosition = DB::table('users')
                     ->where('position_id', $this->posted['position_id'])
-                    ->whereIn('employment_status', [1, 6])
+                    ->whereIn('employment_status', [1, 6, 10])
                     ->whereNot('employment_type_id', 16) // Exclude employment_type_id = 16 (TNP2K) when count
                     ->where('id', '!=', $this->request->id);
 

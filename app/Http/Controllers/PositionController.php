@@ -249,7 +249,7 @@ class PositionController extends Controller
             }
 
             // Exclude employment_type_id = 16 (TNP2K) when count
-            $position->filled = DB::table('users')->where('position_id', $position->id)->whereIn('employment_status', [1, 6])->whereNot('employment_type_id', 16)->count();
+            $position->filled = DB::table('users')->where('position_id', $position->id)->whereIn('employment_status', [1, 6, 10])->whereNot('employment_type_id', 16)->count();
 
             $position->type = [
                 "id" => $position->type,
@@ -282,7 +282,7 @@ class PositionController extends Controller
 
             foreach ($positionEchelons as $positionEchelon) {
                 // Exclude employment_type_id = 16 (TNP2K) when count
-                $users = DB::select('SELECT COUNT(1) as count FROM users WHERE echelon_id = ? AND position_id = ? AND employment_status IN (1, 6) AND employment_type_id != 16', [$positionEchelon->echelon_id, $positionEchelon->position_id]);
+                $users = DB::select('SELECT COUNT(1) as count FROM users WHERE echelon_id = ? AND position_id = ? AND employment_status IN (1, 6, 10) AND employment_type_id != 16', [$positionEchelon->echelon_id, $positionEchelon->position_id]);
                 $positionEchelon->filled = $users[0]->count;
                 unset($positionEchelon->position_id);
             }
@@ -338,7 +338,7 @@ class PositionController extends Controller
                     $countAvailable = DB::table('users as u')
                         ->where('u.position_id', $this->request->id)
                         ->where('u.echelon_id', $value['echelon_id'])
-                        ->whereIn('u.employment_status', [1, 6])
+                        ->whereIn('u.employment_status', [1, 6, 10])
                         ->whereNot('employment_type_id', 16) // Exclude employment_type_id = 16 (TNP2K) when count
                         ->count();
 
@@ -355,14 +355,14 @@ class PositionController extends Controller
             } else {
                 $countAvailable = DB::table('users as u')
                     ->where('u.position_id', $this->request->id)
-                    ->whereIn('u.employment_status', [1, 6])
+                    ->whereIn('u.employment_status', [1, 6, 10])
                     ->whereNot('employment_type_id', 16) // Exclude employment_type_id = 16 (TNP2K) when count
                     ->count();
 
                 if ($countAvailable > $this->request->available) {
                     $countAvailable = DB::table('users as u')
                         ->where('u.position_id', $this->request->id)
-                        ->whereIn('u.employment_status', [1, 6])
+                        ->whereIn('u.employment_status', [1, 6, 10])
                         ->whereNot('employment_type_id', 16) // Exclude employment_type_id = 16 (TNP2K) when count
                         ->count();
                     return $this->response(404, 'Posisi sudah terisi ' . $countAvailable . ' orang.');

@@ -105,7 +105,7 @@ class ComparisonRepository
             $users->where('uco.point', '=', $competencyPoint);
         }
 
-        $users->whereIn('u.employment_status', [1, 6]);
+        $users->whereIn('u.employment_status', [1, 6, 10]);
         $users->where('u.type', 1);
         $users->groupBy('u.id');
         $users->orderBy('u.employment_status', 'asc');
@@ -487,7 +487,7 @@ class ComparisonRepository
             } else {
                 $photoProfile = $this->getDocument($user->photo_profile, true);
             }
-            
+
 
             $returnedData[] = (object) [
                 'id' => $user->user_id,

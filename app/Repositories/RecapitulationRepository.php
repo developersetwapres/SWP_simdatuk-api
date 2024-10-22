@@ -16,21 +16,21 @@ class RecapitulationRepository
     {
         $pejabat = DB::table('users as u');
         $pejabat->select(
-            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6) AND echelon_id IN (1,2,3,4) THEN 1 END) AS total_pejabat_pimpinan'),
-            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6) AND echelon_id IN (1) THEN 1 END) AS echelon1'),
-            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6) AND echelon_id IN (2) THEN 1 END) AS echelon2'),
-            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6) AND echelon_id IN (3) THEN 1 END) AS echelon3'),
-            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6) AND echelon_id IN (4) THEN 1 END) AS echelon4'),
-            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6) AND echelon_id IN (5,6,7,8) THEN 1 END) AS total_pejabat_fungsional_keahlian'),
-            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6) AND echelon_id IN (5) THEN 1 END) AS ahli_utama'),
-            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6) AND echelon_id IN (6) THEN 1 END) AS ahli_madya'),
-            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6) AND echelon_id IN (7) THEN 1 END) AS ahli_muda'),
-            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6) AND echelon_id IN (8) THEN 1 END) AS ahli_pertama'),
-            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6) AND echelon_id IN (10,11,12,13) THEN 1 END) AS total_pejabat_fungsional_keterampilan'),
-            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6) AND echelon_id IN (10) THEN 1 END) AS penyelia'),
-            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6) AND echelon_id IN (11) THEN 1 END) AS mahir'),
-            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6) AND echelon_id IN (12) THEN 1 END) AS terampil'),
-            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6) AND echelon_id IN (13) THEN 1 END) AS pemula'),
+            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6, 10) AND echelon_id IN (1,2,3,4) THEN 1 END) AS total_pejabat_pimpinan'),
+            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6, 10) AND echelon_id IN (1) THEN 1 END) AS echelon1'),
+            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6, 10) AND echelon_id IN (2) THEN 1 END) AS echelon2'),
+            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6, 10) AND echelon_id IN (3) THEN 1 END) AS echelon3'),
+            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6, 10) AND echelon_id IN (4) THEN 1 END) AS echelon4'),
+            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6, 10) AND echelon_id IN (5,6,7,8) THEN 1 END) AS total_pejabat_fungsional_keahlian'),
+            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6, 10) AND echelon_id IN (5) THEN 1 END) AS ahli_utama'),
+            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6, 10) AND echelon_id IN (6) THEN 1 END) AS ahli_madya'),
+            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6, 10) AND echelon_id IN (7) THEN 1 END) AS ahli_muda'),
+            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6, 10) AND echelon_id IN (8) THEN 1 END) AS ahli_pertama'),
+            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6, 10) AND echelon_id IN (10,11,12,13) THEN 1 END) AS total_pejabat_fungsional_keterampilan'),
+            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6, 10) AND echelon_id IN (10) THEN 1 END) AS penyelia'),
+            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6, 10) AND echelon_id IN (11) THEN 1 END) AS mahir'),
+            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6, 10) AND echelon_id IN (12) THEN 1 END) AS terampil'),
+            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6, 10) AND echelon_id IN (13) THEN 1 END) AS pemula'),
         );
         return $pejabat = $pejabat->first();
     }
@@ -42,11 +42,11 @@ class RecapitulationRepository
     {
         $pelaksana = DB::table('users');
         $pelaksana->select(
-            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6) AND echelon_id IN (9) THEN 1 END) AS total'),
-            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6) AND echelon_id IN (9) AND employment_type_id != 1 AND grade_id IN (1,2,3,4,5) THEN 1 END) AS golongan4'),
-            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6) AND echelon_id IN (9) AND employment_type_id != 1 AND grade_id IN (6,7,8,9) THEN 1 END) AS golongan3'),
-            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6) AND echelon_id IN (9) AND employment_type_id != 1 AND grade_id IN (10,11,12,13) THEN 1 END) AS golongan2'),
-            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6) AND echelon_id IN (9) AND employment_type_id = 1 THEN 1 END) AS tnipolri'),
+            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6, 10) AND echelon_id IN (9) THEN 1 END) AS total'),
+            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6, 10) AND echelon_id IN (9) AND employment_type_id != 1 AND grade_id IN (1,2,3,4,5) THEN 1 END) AS golongan4'),
+            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6, 10) AND echelon_id IN (9) AND employment_type_id != 1 AND grade_id IN (6,7,8,9) THEN 1 END) AS golongan3'),
+            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6, 10) AND echelon_id IN (9) AND employment_type_id != 1 AND grade_id IN (10,11,12,13) THEN 1 END) AS golongan2'),
+            DB::raw('COUNT(CASE WHEN type = 1 AND employment_status IN (1, 6, 10) AND echelon_id IN (9) AND employment_type_id = 1 THEN 1 END) AS tnipolri'),
         );
         return $pelaksana = $pelaksana->first();
     }
@@ -60,10 +60,10 @@ class RecapitulationRepository
     {
         $pejabat = DB::table('users as u');
         $pejabat->select(
-            DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND type = 1 AND echelon_id IS NOT NULL THEN 1 END) AS total_pejabat_pimpinan'),
-            DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND type = 1 AND echelon_id IN (1,2) THEN 1 END) AS jabatan_pimpinan_tinggi'),
-            DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND type = 1 AND echelon_id IN (3,4,9) THEN 1 END) AS jabatan_administrasi'),
-            DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND type = 1 AND echelon_id IN (5,6,7,8,10,11,12,13) THEN 1 END) AS jabatan_fungsional'),
+            DB::raw('COUNT(CASE WHEN employment_status IN (1, 6, 10) AND type = 1 AND echelon_id IS NOT NULL THEN 1 END) AS total_pejabat_pimpinan'),
+            DB::raw('COUNT(CASE WHEN employment_status IN (1, 6, 10) AND type = 1 AND echelon_id IN (1,2) THEN 1 END) AS jabatan_pimpinan_tinggi'),
+            DB::raw('COUNT(CASE WHEN employment_status IN (1, 6, 10) AND type = 1 AND echelon_id IN (3,4,9) THEN 1 END) AS jabatan_administrasi'),
+            DB::raw('COUNT(CASE WHEN employment_status IN (1, 6, 10) AND type = 1 AND echelon_id IN (5,6,7,8,10,11,12,13) THEN 1 END) AS jabatan_fungsional'),
         );
         return $pejabat = $pejabat->first();
     }
@@ -84,7 +84,7 @@ class RecapitulationRepository
             DB::raw('COUNT(u.id) as total')
         );
         $grade->where('g.type', $type);
-        $grade->whereIn('u.employment_status', [1, 6]);
+        $grade->whereIn('u.employment_status', [1, 6, 10]);
         $grade->groupBy('u.grade_id');
         $grade->orderBy('g.id', 'asc');
         $grade = $grade->get();
@@ -102,7 +102,7 @@ class RecapitulationRepository
             DB::raw('COUNT(CASE WHEN u.grade_id IN (6,7,8,9) THEN 1 END) as penata'),
             DB::raw('COUNT(CASE WHEN u.grade_id IN (10,11,12,13) THEN 1 END) as pengatur')
         );
-        $grade->whereIn('u.employment_status', [1, 6]);
+        $grade->whereIn('u.employment_status', [1, 6, 10]);
         $grade->where('u.type', 1);
         return $grade = $grade->first();
     }
@@ -142,18 +142,18 @@ class RecapitulationRepository
     {
         $total = DB::table('users as u');
         $total->select(
-            DB::raw('COUNT(CASE WHEN u.employment_status IN (1, 6) AND u.gender IS NOT NULL THEN 1 END) as total_gender'),
-            DB::raw('COUNT(CASE WHEN u.employment_status IN (1, 6) AND u.gender = 0 THEN 1 END) as female'),
-            DB::raw('COUNT(CASE WHEN u.employment_status IN (1, 6) AND u.gender = 1 THEN 1 END) as male'),
-            DB::raw('COUNT(CASE WHEN u.employment_status IN (1, 6) AND u.education_level IS NOT NULL THEN 1 END) as total_education'),
-            DB::raw('COUNT(CASE WHEN u.employment_status IN (1, 6) AND u.education_level = 1 THEN 1 END) as sd'),
-            DB::raw('COUNT(CASE WHEN u.employment_status IN (1, 6) AND u.education_level = 2 THEN 1 END) as smp'),
-            DB::raw('COUNT(CASE WHEN u.employment_status IN (1, 6) AND u.education_level = 3 THEN 1 END) as sma'),
-            DB::raw('COUNT(CASE WHEN u.employment_status IN (1, 6) AND u.education_level = 4 THEN 1 END) as d1'),
-            DB::raw('COUNT(CASE WHEN u.employment_status IN (1, 6) AND u.education_level = 5 THEN 1 END) as d3'),
-            DB::raw('COUNT(CASE WHEN u.employment_status IN (1, 6) AND u.education_level = 6 THEN 1 END) as s1'),
-            DB::raw('COUNT(CASE WHEN u.employment_status IN (1, 6) AND u.education_level = 7 THEN 1 END) as s2'),
-            DB::raw('COUNT(CASE WHEN u.employment_status IN (1, 6) AND u.education_level = 8 THEN 1 END) as s3'),
+            DB::raw('COUNT(CASE WHEN u.employment_status IN (1, 6, 10) AND u.gender IS NOT NULL THEN 1 END) as total_gender'),
+            DB::raw('COUNT(CASE WHEN u.employment_status IN (1, 6, 10) AND u.gender = 0 THEN 1 END) as female'),
+            DB::raw('COUNT(CASE WHEN u.employment_status IN (1, 6, 10) AND u.gender = 1 THEN 1 END) as male'),
+            DB::raw('COUNT(CASE WHEN u.employment_status IN (1, 6, 10) AND u.education_level IS NOT NULL THEN 1 END) as total_education'),
+            DB::raw('COUNT(CASE WHEN u.employment_status IN (1, 6, 10) AND u.education_level = 1 THEN 1 END) as sd'),
+            DB::raw('COUNT(CASE WHEN u.employment_status IN (1, 6, 10) AND u.education_level = 2 THEN 1 END) as smp'),
+            DB::raw('COUNT(CASE WHEN u.employment_status IN (1, 6, 10) AND u.education_level = 3 THEN 1 END) as sma'),
+            DB::raw('COUNT(CASE WHEN u.employment_status IN (1, 6, 10) AND u.education_level = 4 THEN 1 END) as d1'),
+            DB::raw('COUNT(CASE WHEN u.employment_status IN (1, 6, 10) AND u.education_level = 5 THEN 1 END) as d3'),
+            DB::raw('COUNT(CASE WHEN u.employment_status IN (1, 6, 10) AND u.education_level = 6 THEN 1 END) as s1'),
+            DB::raw('COUNT(CASE WHEN u.employment_status IN (1, 6, 10) AND u.education_level = 7 THEN 1 END) as s2'),
+            DB::raw('COUNT(CASE WHEN u.employment_status IN (1, 6, 10) AND u.education_level = 8 THEN 1 END) as s3'),
         );
         $total->leftJoin('positions as p', 'u.position_id', '=', 'p.id');
 
@@ -272,9 +272,9 @@ class RecapitulationRepository
     {
         $pejabat = DB::table('users as u');
         $pejabat->select(
-            DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND type = 1 AND echelon_id IN (1,2) THEN 1 END) AS total_jabatan_pimpinan_tinggi'),
-            DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND type = 1 AND echelon_id IN (1) THEN 1 END) AS jabatan_tinggi_madya'),
-            DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND type = 1 AND echelon_id IN (2) THEN 1 END) AS jabatan_tinggi_pratama'),
+            DB::raw('COUNT(CASE WHEN employment_status IN (1, 6, 10) AND type = 1 AND echelon_id IN (1,2) THEN 1 END) AS total_jabatan_pimpinan_tinggi'),
+            DB::raw('COUNT(CASE WHEN employment_status IN (1, 6, 10) AND type = 1 AND echelon_id IN (1) THEN 1 END) AS jabatan_tinggi_madya'),
+            DB::raw('COUNT(CASE WHEN employment_status IN (1, 6, 10) AND type = 1 AND echelon_id IN (2) THEN 1 END) AS jabatan_tinggi_pratama'),
         );
         return $pejabat = $pejabat->first();
     }
@@ -288,10 +288,10 @@ class RecapitulationRepository
     {
         $pejabat = DB::table('users as u');
         $pejabat->select(
-            DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND type = 1 AND echelon_id IN (3,4,9) THEN 1 END) AS total_jabatan_administrasi'),
-            DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND type = 1 AND echelon_id IN (3) THEN 1 END) AS jabatan_administrasi'),
-            DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND type = 1 AND echelon_id IN (4) THEN 1 END) AS jabatan_pengawas'),
-            DB::raw('COUNT(CASE WHEN employment_status IN (1, 6) AND type = 1 AND echelon_id IN (9) THEN 1 END) AS jabatan_pelaksana'),
+            DB::raw('COUNT(CASE WHEN employment_status IN (1, 6, 10) AND type = 1 AND echelon_id IN (3,4,9) THEN 1 END) AS total_jabatan_administrasi'),
+            DB::raw('COUNT(CASE WHEN employment_status IN (1, 6, 10) AND type = 1 AND echelon_id IN (3) THEN 1 END) AS jabatan_administrasi'),
+            DB::raw('COUNT(CASE WHEN employment_status IN (1, 6, 10) AND type = 1 AND echelon_id IN (4) THEN 1 END) AS jabatan_pengawas'),
+            DB::raw('COUNT(CASE WHEN employment_status IN (1, 6, 10) AND type = 1 AND echelon_id IN (9) THEN 1 END) AS jabatan_pelaksana'),
         );
         return $pejabat = $pejabat->first();
     }
@@ -369,7 +369,7 @@ class RecapitulationRepository
         $positions->where('u.type', 2);
         $positions->where('u.employment_type_id', '!=', 16);
         $positions->where('u.employment_type_id', '!=', 15);
-        $positions->wherein('u.employment_status', [1, 6]);
+        $positions->wherein('u.employment_status', [1, 6, 10]);
         $positions->groupBy('p.name');
         $positions->orderBy('p.id', 'asc');
         $positions = $positions->get();
