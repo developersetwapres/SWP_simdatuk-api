@@ -497,9 +497,10 @@ class ImportEmployeeController extends Controller
         'eseloni' => 1,
         'eselonii' => 2,
         'eseloniii' => 3,
-        'fungsional' => 4,
+        'eseloniv' => 4,
         'pelaksana' => 5,
-        'staf' => 6,
+        'fungsional' => 6,
+        'staf' => 7,
     ];
 
     protected $positionStatus = [

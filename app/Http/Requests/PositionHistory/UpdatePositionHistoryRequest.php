@@ -29,7 +29,7 @@ class UpdatePositionHistoryRequest extends FormRequest
             'users.*.user_id'                    => 'required|numeric',
             'users.*.position'                   => 'nullable',
             'users.*.group_id'                   => 'nullable|numeric',
-            'users.*.echelon'                    => 'nullable|numeric|exists:echelons,id',
+            'users.*.echelon'                    => 'nullable|numeric|exists:position_history_echelons,id',
             'users.*.position_status'            => 'nullable|numeric|in:1,2,3,4',
             'users.*.effective_date'             => 'nullable|date',
             'users.*.decree'                     => 'nullable|max:160',
@@ -119,7 +119,7 @@ class UpdatePositionHistoryRequest extends FormRequest
                 'example' => 1,
             ],
             'users.*.echelon' => [
-                'description' => 'Refers to the ID Echelon of Employee Position on Echelon.',
+                'description' => 'Refers to the ID Echelon of Employee Position on Position History Echelons. (1=Eselon I, 2=Eselon II, 3=Eselon III, 4=Eselon IV, 5=Pelaksana, 6=Fungsional, 7=Staf)',
                 'example' => 1,
             ],
             'users.*.position_status' => [

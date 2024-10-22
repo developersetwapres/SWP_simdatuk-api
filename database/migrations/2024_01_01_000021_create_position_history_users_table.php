@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('position', 1024)->nullable();
             $table->unsignedBigInteger('group_id')->nullable();
-            $table->tinyInteger('echelon')->nullable()->comment('1=Eselon I, 2=Eselon II, 3=Eselon III, 4=Fungsional, 5=Pelaksana, 6=Staf');
+            $table->tinyInteger('echelon')->nullable()->comment('1=Eselon I, 2=Eselon II, 3=Eselon III, 4=Eselon IV, 5=Pelaksana, 6=Fungsional, 7=Staf');
             $table->tinyInteger('position_status')->nullable()->comment('1=Promosi, 2=Mutasi, 3=Inpassing, 4=Konversi');
             $table->date('effective_date')->nullable();
             $table->string('decree')->nullable();

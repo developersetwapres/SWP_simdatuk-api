@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(PositionEchelonSeeder::class);
         $this->call(TrainingLevelsSeeder::class);
+        $this->call(PositionHistoryEchelonsSeeder::class);
 
         // Migrate Old Data to New Database
         $this->call(OldUserSeeder::class);

@@ -56,8 +56,8 @@ class OldPositionSeeder extends Seeder
                         WHEN db_lama_jabatan.ket_eselon = 'Eselon II' THEN 2
                         WHEN db_lama_jabatan.ket_eselon = 'Eselon III' THEN 3
                         WHEN db_lama_jabatan.ket_eselon = 'Eselon IV' THEN 4
-                        WHEN db_lama_jabatan.ket_eselon = 'Fungsional' THEN 5
-                        WHEN db_lama_jabatan.ket_eselon = 'Pelaksana' THEN 6
+                        WHEN db_lama_jabatan.ket_eselon = 'Pelaksana' THEN 5
+                        WHEN db_lama_jabatan.ket_eselon = 'Fungsional' THEN 6
                         WHEN db_lama_jabatan.ket_eselon = 'Staf' THEN 7
                         ELSE NULL
                       END AS echelon,

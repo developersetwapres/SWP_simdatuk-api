@@ -15,7 +15,7 @@ class PositionRepository
         $positions->join('users as u', 'u.id', '=', 'phu.user_id');
         $positions->leftJoin('position_histories as ph', 'phu.position_history_id', '=', 'ph.id');
         $positions->leftjoin('groups as g', 'phu.group_id', '=', 'g.id');
-        $positions->leftjoin('echelons as e', 'phu.echelon', '=', 'e.id');
+        $positions->leftjoin('position_history_echelons as phe', 'phu.echelon', '=', 'phe.id');
         $positions->leftjoin('decrees as tod', 'phu.type_of_decree', '=', 'tod.id');
         $positions->leftjoin('decrees as totd', 'phu.type_of_termination_decree', '=', 'totd.id');
         $positions->where('phu.user_id', $userId);
@@ -27,7 +27,7 @@ class PositionRepository
             'g.id as group_id',
             'g.name as group_name',
             'phu.echelon',
-            'e.name as echelon_name',
+            'phe.name as echelon_name',
             'phu.position_status',
             DB::raw("DATE_FORMAT(phu.effective_date, '%d-%m-%Y') as effective_date"),
             'phu.decree',
@@ -44,9 +44,6 @@ class PositionRepository
             DB::raw("DATE_FORMAT(phu.termination_decree_date, '%d-%m-%Y') as termination_decree_date"),
             'phu.status'
         );
-        $positions->orderBy('ph.period_year', 'desc');
-        $positions->orderBy('ph.period_month', 'desc');
-        $positions->orderBy('phu.id', 'desc');
         $positions->orderBy('phu.effective_date', 'desc');
         $positions = $positions->get();
 
@@ -62,7 +59,7 @@ class PositionRepository
         $positions->join('users as u', 'u.id', '=', 'phu.user_id');
         $positions->join('position_histories as ph', 'phu.position_history_id', '=', 'ph.id');
         $positions->leftjoin('groups as g', 'phu.group_id', '=', 'g.id');
-        $positions->leftjoin('echelons as e', 'phu.echelon', '=', 'e.id');
+        $positions->leftjoin('position_history_echelons as phe', 'phu.echelon', '=', 'phe.id');
         $positions->leftjoin('decrees as tod', 'phu.type_of_decree', '=', 'tod.id');
         $positions->leftjoin('decrees as totd', 'phu.type_of_termination_decree', '=', 'totd.id');
         $positions->whereIn('phu.user_id', $usersID);
@@ -75,7 +72,7 @@ class PositionRepository
             'g.id as group_id',
             'g.name as group_name',
             'phu.echelon',
-            'e.name as echelon_name',
+            'phe.name as echelon_name',
             'phu.position_status',
             DB::raw("DATE_FORMAT(phu.effective_date, '%d-%m-%Y') as effective_date"),
             'phu.decree',
@@ -92,9 +89,6 @@ class PositionRepository
             DB::raw("DATE_FORMAT(phu.termination_decree_date, '%d-%m-%Y') as termination_decree_date"),
             'phu.status'
         );
-        $positions->orderBy('ph.period_year', 'desc');
-        $positions->orderBy('ph.period_month', 'desc');
-        $positions->orderBy('phu.id', 'desc');
         $positions->orderBy('phu.effective_date', 'desc');
         $positions = $positions->get();
 
