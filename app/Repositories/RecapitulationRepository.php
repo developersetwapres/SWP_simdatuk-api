@@ -123,7 +123,7 @@ class RecapitulationRepository
         );
         $positions->join('users as u', 'u.position_id', '=', 'p.id');
         $positions->where('p.type', 3);
-        $positions->where('u.employment_status', 1);
+        $positions->whereIn('u.employment_status', [1, 6, 10]);
         $positions->where('u.employment_type_id', $type);
         $positions->orderBy('p.id', 'asc');
         $positions->groupBy('p.id', 'p.name');
