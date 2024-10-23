@@ -272,7 +272,7 @@ class RecapitulationEmployeeController extends Controller
             WHERE
                 u.employment_status
             IN
-                (1,6)
+                (1,6,10)
             AND
                 u.employment_type_id
             IN
@@ -333,7 +333,7 @@ class RecapitulationEmployeeController extends Controller
             WHERE
                 u.employment_status
             IN
-                (1,6)
+                (1,6,10)
             AND
                 u.employment_type_id
             IN
@@ -370,7 +370,7 @@ class RecapitulationEmployeeController extends Controller
             WHERE
                 u.employment_status
             IN
-                (1,6)
+                (1,6,10)
             AND
                 position_id = 2
             ORDER BY
@@ -495,7 +495,7 @@ class RecapitulationEmployeeController extends Controller
             AND
               u.employment_status
             IN
-              (1,6)
+              (1,6,10)
             ORDER BY
                 u.echelon_id ASC,
                 u.grade_id ASC,

@@ -249,7 +249,7 @@ class RecapitulationRepository
                 WHERE
                     users.employment_status
                 IN
-                    (1,6);
+                    (1,6,10);
             ";
             $total = DB::select($sql);
             $total = $total[0]->total;
@@ -471,7 +471,7 @@ class RecapitulationRepository
             WHERE
                 users.employment_status
             IN
-                (1,6);
+                (1,6,10);
         ";
         $users = DB::select($sql);
         return $users[0];

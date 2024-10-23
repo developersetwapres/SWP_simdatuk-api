@@ -330,8 +330,8 @@ class EmployeeController extends Controller
                 $this->posted['employee_id_card'] = $path;
             }
 
-            // Set position_id null if employment status is not 1 or 6
-            if ($this->posted['employment_status'] != 1 && $this->posted['employment_status'] != 6) {
+            // Set position_id null if employment status is not 1 or 6 or 10
+            if ($this->posted['employment_status'] != 1 && $this->posted['employment_status'] != 6 && $this->posted['employment_status'] != 10) {
                 $this->posted['position_id'] = null;
             }
 
@@ -606,8 +606,8 @@ class EmployeeController extends Controller
             $user = DB::table('users');
             $user->where('id', $this->request->id);
 
-            // Set position_id null if employment status is not 1 or 6
-            if ($this->posted['employment_status'] != 1 && $this->posted['employment_status'] != 6) {
+            // Set position_id null if employment status is not 1 or 6 or 10
+            if ($this->posted['employment_status'] != 1 && $this->posted['employment_status'] != 6 && $this->posted['employment_status'] != 10) {
                 $this->posted['position_id'] = null;
             }
 
@@ -1243,8 +1243,8 @@ class EmployeeController extends Controller
             return $this->response(404, 'Mohon maaf, pegawai tidak ditemukan.');
         }
 
-        // Set position_id null if employment status is not 1 or 6
-        if ($this->posted['employment_status'] != 1 && $this->posted['employment_status'] != 6) {
+        // Set position_id null if employment status is not 1 or 6 or 10
+        if ($this->posted['employment_status'] != 1 && $this->posted['employment_status'] != 6 && $this->posted['employment_status'] != 10) {
             $this->posted['position_id'] = null;
         }
 
