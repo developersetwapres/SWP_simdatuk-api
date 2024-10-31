@@ -344,6 +344,7 @@ class DiagramController extends Controller
             )
             ->leftJoin('echelons', 'position_echelons.echelon_id', '=', 'echelons.id')
             ->where('position_id', $positionId)
+            ->orderBy('echelons.sequence_number')
             ->orderBy('position_echelons.vertical_order')
             ->orderBy('position_echelons.horizontal_order')
             ->get();
