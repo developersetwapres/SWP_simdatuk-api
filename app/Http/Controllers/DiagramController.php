@@ -467,7 +467,7 @@ class DiagramController extends Controller
                 $html .= $this->addCard($hierarchy, false);
 
                 //special case id 4
-                if (isset($parent) && $parent->entity == 2 && $hierarchy->entity == 2) {
+                if (isset($parent) && $parent->entity == 2 && $hierarchy->entity == 2 && sizeof($hierarchy->children) > 0) {
                     $html .= '<ul class="ul-child"><li class="li-single">';
                     $html .= $this->addCard($hierarchy->children->first(), $hierarchy->children->count() > 1);
                     $html .= '</li></ul>';
