@@ -448,7 +448,7 @@ class ExportController extends Controller
         if (isset($request->retirement_age) && isset($request->retirement_year)) { // Age and year
             $user->where(function ($query) use ($request) {
                 foreach ($request->retirement_age as $age) {
-                    $query->orWhere(DB::raw("YEAR(date_of_birth) + $age"), $request->retirement_year);
+                    $query->orWhere(DB::raw("YEAR(DATE_ADD(date_of_birth, INTERVAL 1 MONTH)) + $age"), $request->retirement_year);
                 }
             });
         }
@@ -458,9 +458,9 @@ class ExportController extends Controller
         if (!isset($request->retirement_age) && isset($request->retirement_year)) { // Year only
             $user->whereRaw("
                 CASE
-                    WHEN users.type = 1 AND users.echelon_id IS NOT NULL AND date_of_birth IS NOT NULL THEN YEAR(date_of_birth) + echelons.retirement_age = ?
-                    WHEN users.type = 2 AND users.date_of_birth IS NOT NULL THEN YEAR(date_of_birth) + 58 = ?
-                    WHEN users.type = 3 AND users.date_of_birth IS NOT NULL THEN YEAR(date_of_birth) + 58 = ?
+                    WHEN users.type = 1 AND users.echelon_id IS NOT NULL AND date_of_birth IS NOT NULL THEN YEAR(DATE_ADD(date_of_birth, INTERVAL 1 MONTH)) + echelons.retirement_age = ?
+                    WHEN users.type = 2 AND users.date_of_birth IS NOT NULL THEN YEAR(DATE_ADD(date_of_birth, INTERVAL 1 MONTH)) + 58 = ?
+                    WHEN users.type = 3 AND users.date_of_birth IS NOT NULL THEN YEAR(DATE_ADD(date_of_birth, INTERVAL 1 MONTH)) + 58 = ?
                 END
             ", [$request->retirement_year, $request->retirement_year, $request->retirement_year]);
         }
@@ -971,7 +971,7 @@ class ExportController extends Controller
         if (isset($request->retirement_age) && isset($request->retirement_year)) { // Age and year
             $users->where(function ($query) use ($request) {
                 foreach ($request->retirement_age as $age) {
-                    $query->orWhere(DB::raw("YEAR(date_of_birth) + $age"), $request->retirement_year);
+                    $query->orWhere(DB::raw("YEAR(DATE_ADD(date_of_birth, INTERVAL 1 MONTH)) + $age"), $request->retirement_year);
                 }
             });
         }
@@ -981,9 +981,9 @@ class ExportController extends Controller
         if (!isset($request->retirement_age) && isset($request->retirement_year)) { // Year only
             $users->whereRaw("
             CASE
-                WHEN users.type = 1 AND users.echelon_id IS NOT NULL AND date_of_birth IS NOT NULL THEN YEAR(date_of_birth) + echelons.retirement_age = ?
-                WHEN users.type = 2 AND users.date_of_birth IS NOT NULL THEN YEAR(date_of_birth) + 58 = ?
-                WHEN users.type = 3 AND users.date_of_birth IS NOT NULL THEN YEAR(date_of_birth) + 58 = ?
+                WHEN users.type = 1 AND users.echelon_id IS NOT NULL AND date_of_birth IS NOT NULL THEN YEAR(DATE_ADD(date_of_birth, INTERVAL 1 MONTH)) + echelons.retirement_age = ?
+                WHEN users.type = 2 AND users.date_of_birth IS NOT NULL THEN YEAR(DATE_ADD(date_of_birth, INTERVAL 1 MONTH)) + 58 = ?
+                WHEN users.type = 3 AND users.date_of_birth IS NOT NULL THEN YEAR(DATE_ADD(date_of_birth, INTERVAL 1 MONTH)) + 58 = ?
             END
         ", [$request->retirement_year, $request->retirement_year, $request->retirement_year]);
         }
@@ -1943,7 +1943,7 @@ class ExportController extends Controller
         if (isset($request->retirement_age) && isset($request->retirement_year)) { // Age and year
             $users->where(function ($query) use ($request) {
                 foreach ($request->retirement_age as $age) {
-                    $query->orWhere(DB::raw("YEAR(date_of_birth) + $age"), $request->retirement_year);
+                    $query->orWhere(DB::raw("YEAR(DATE_ADD(date_of_birth, INTERVAL 1 MONTH)) + $age"), $request->retirement_year);
                 }
             });
         }
@@ -1953,9 +1953,9 @@ class ExportController extends Controller
         if (!isset($request->retirement_age) && isset($request->retirement_year)) { // Year only
             $users->whereRaw("
             CASE
-                WHEN users.type = 1 AND users.echelon_id IS NOT NULL AND date_of_birth IS NOT NULL THEN YEAR(date_of_birth) + echelons.retirement_age = ?
-                WHEN users.type = 2 AND users.date_of_birth IS NOT NULL THEN YEAR(date_of_birth) + 58 = ?
-                WHEN users.type = 3 AND users.date_of_birth IS NOT NULL THEN YEAR(date_of_birth) + 58 = ?
+                WHEN users.type = 1 AND users.echelon_id IS NOT NULL AND date_of_birth IS NOT NULL THEN YEAR(DATE_ADD(date_of_birth, INTERVAL 1 MONTH)) + echelons.retirement_age = ?
+                WHEN users.type = 2 AND users.date_of_birth IS NOT NULL THEN YEAR(DATE_ADD(date_of_birth, INTERVAL 1 MONTH)) + 58 = ?
+                WHEN users.type = 3 AND users.date_of_birth IS NOT NULL THEN YEAR(DATE_ADD(date_of_birth, INTERVAL 1 MONTH)) + 58 = ?
             END
         ", [$request->retirement_year, $request->retirement_year, $request->retirement_year]);
         }
