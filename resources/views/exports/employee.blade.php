@@ -528,6 +528,9 @@
                     @case(9)
                     Non Aktif
                     @break
+                    @case(10)
+                    Hukuman Disiplin
+                    @break
                     @default
                     -
                     @endswitch</td>

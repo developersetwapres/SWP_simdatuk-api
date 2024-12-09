@@ -167,6 +167,19 @@ class ExportController extends Controller
             8 => 'Strata III',
             default => '-',
         };
+        $employmentStatus = match ($employee->employment_status) {
+            1 => 'Aktif',
+            2 => 'Pensiun',
+            3 => 'Berhenti',
+            4 => 'Meninggal',
+            5 => 'Alih Status',
+            6 => 'Aktif PS',
+            7 => 'CLTN',
+            8 => 'TBLN',
+            9 => 'Non Aktif',
+            10 => 'Hukuman Disiplin',
+            default => '-',
+        };
 
         // Batas Usia Pensiun
         $indonesianMonth = [
@@ -189,30 +202,30 @@ class ExportController extends Controller
         }
 
         $masaKerjaKeseluruhan = '-';
-        if($employee->years_of_service_total > 0 || $employee->month_of_service_total > 0){
-            $masaKerjaKeseluruhan = (($employee->years_of_service_total > 0) ? $employee->years_of_service_total : 0)." Tahun, ". (($employee->month_of_service_total > 0) ? $employee->month_of_service_total : 0)." Bulan";
+        if ($employee->years_of_service_total > 0 || $employee->month_of_service_total > 0) {
+            $masaKerjaKeseluruhan = (($employee->years_of_service_total > 0) ? $employee->years_of_service_total : 0) . " Tahun, " . (($employee->month_of_service_total > 0) ? $employee->month_of_service_total : 0) . " Bulan";
         }
         $masaKerjaGolongan = '-';
-        if($employee->years_of_service_rank > 0 || $employee->month_of_service_rank > 0){
-            $masaKerjaGolongan = (($employee->years_of_service_rank > 0) ? $employee->years_of_service_rank : 0)." Tahun, ". (($employee->month_of_service_rank > 0) ? $employee->month_of_service_rank : 0)." Bulan";
+        if ($employee->years_of_service_rank > 0 || $employee->month_of_service_rank > 0) {
+            $masaKerjaGolongan = (($employee->years_of_service_rank > 0) ? $employee->years_of_service_rank : 0) . " Tahun, " . (($employee->month_of_service_rank > 0) ? $employee->month_of_service_rank : 0) . " Bulan";
         }
         $retirementAge = '';
-        if(!is_null($employee->retirement_age)){
-            $month = date('n',strtotime($employee->retirement_age));
-            $year = date('Y',strtotime($employee->retirement_age));
-            $retirementAge = $indonesianMonth[$month]. ' '.$year.' ('.$employee->retirement_age_years.' Tahun)';
+        if (!is_null($employee->retirement_age)) {
+            $month = date('n', strtotime($employee->retirement_age));
+            $year = date('Y', strtotime($employee->retirement_age));
+            $retirementAge = $indonesianMonth[$month] . ' ' . $year . ' (' . $employee->retirement_age_years . ' Tahun)';
         }
 
         $exportData = [
             'currentPosition' => ($employee->position_merged ?? '-'),
             'photoProfile' => $employee->photo_profile,
             'userNIP' => $employee->employee_id_number,
-            'userName' => $employee->title_prefix. ' '.$employee->name.' '.$employee->title_suffix,
+            'userName' => $employee->title_prefix . ' ' . $employee->name . ' ' . $employee->title_suffix,
             'userEchelons' => ($employee->echelon_name ?? '') . ', ' . ($employee->echelon_effective_date ?? ' '),
             'userCurrentGrade' => ($employee->grade_name ?? '') . '(' . ($employee->grade_code ?? '') . '), ' . ($employee->grade_effective_date ?? ''),
             'userType' => $employee->type
         ];
-        if($employee->type == 1){
+        if ($employee->type == 1) {
             $userProfile = [
                 'Tempat, Tanggal Lahir' => $employee->place_of_birth . ', ' . $employee->date_of_birth,
                 'Agama' => $religion,
@@ -233,7 +246,7 @@ class ExportController extends Controller
                 'Masa Kerja Keseluruhan' => $masaKerjaKeseluruhan,
                 'Masa Kerja Golongan' => $masaKerjaGolongan,
                 'NPWP' => $employee->id_tax,
-                'Status Pegawai' => ($employee->employment_status ? 'Aktif' : 'Tidak Aktif'),
+                'Status Pegawai' => $employmentStatus,
                 'No NIK' => $employee->id_number,
                 'Komplek' => $employee->residence_name,
                 'Alamat Tempat Tinggal Saat Ini' => $employee->residence_description,
@@ -265,7 +278,7 @@ class ExportController extends Controller
             $exportData['userAssessment'] = $assessments;
             $exportData['userAssessmentCompetency'] = $competencies;
             $exportData['userAssessmentTalent'] = $talents;
-        }else if($employee->type == 2){
+        } else if ($employee->type == 2) {
             $userProfile = [
                 'Tempat, Tanggal Lahir' => $employee->place_of_birth . ', ' . $employee->date_of_birth,
                 'Agama' => $religion,
@@ -279,7 +292,7 @@ class ExportController extends Controller
                 'Nama Sekolah/Universitas' => $employee->education_name,
                 'Tahun Lulus' => $employee->education_year,
                 'NPWP' => $employee->id_tax,
-                'Status Pegawai' => ($employee->employment_status ? 'Aktif' : 'Tidak Aktif'),
+                'Status Pegawai' => $employmentStatus,
                 'No NIK' => $employee->id_number,
                 'Alamat Tempat Tinggal Saat Ini' => $employee->residence_description,
                 'Alamat Sesuai KTP' => $employee->current_address,
@@ -293,7 +306,7 @@ class ExportController extends Controller
             ];
             $exportData['userProfile'] = $userProfile;
             $exportData['userPosition'] = $positions;
-        }else{
+        } else {
             $userProfile = [
                 'Tempat, Tanggal Lahir' => $employee->place_of_birth . ', ' . $employee->date_of_birth,
                 'Agama' => $religion,
@@ -306,7 +319,7 @@ class ExportController extends Controller
                 'Nama Sekolah/Universitas' => $employee->education_name,
                 'Tahun Lulus' => $employee->education_year,
                 'NPWP' => $employee->id_tax,
-                'Status Pegawai' => ($employee->employment_status ? 'Aktif' : 'Tidak Aktif'),
+                'Status Pegawai' => $employmentStatus,
                 'No NIK' => $employee->id_number,
                 'Alamat Tempat Tinggal Saat Ini' => $employee->residence_description,
                 'Alamat Sesuai KTP' => $employee->current_address,
@@ -334,7 +347,7 @@ class ExportController extends Controller
         //     'userName' => $employee->name,
         //     'userEchelons' => ($employee->echelon_name ?? '') . ', ' . ($employee->echelon_effective_date ?? ' '),
         //     'userCurrentGrade' => ($employee->grade_name ?? '') . '(' . ($employee->grade_code ?? '') . '), ' . ($employee->grade_effective_date ?? ''),
-            
+
         // ]);
         $pdf = Pdf::loadview('exports/user', $exportData);
         $pdf->set_option('isHtml5ParserEnabled', true);
@@ -395,11 +408,11 @@ class ExportController extends Controller
         }
         if (isset($request->min_age)) {
             $minAge = $request->input('min_age');
-            $user->where(DB::raw('TIMESTAMPDIFF(YEAR, users.date_of_birth, NOW())'),'>=',$minAge);
+            $user->where(DB::raw('TIMESTAMPDIFF(YEAR, users.date_of_birth, NOW())'), '>=', $minAge);
         }
         if (isset($request->max_age)) {
-            $maxAge = $request->input('max_age'); 
-            $user->where(DB::raw('TIMESTAMPDIFF(YEAR, users.date_of_birth, NOW())'),'<=',$maxAge);
+            $maxAge = $request->input('max_age');
+            $user->where(DB::raw('TIMESTAMPDIFF(YEAR, users.date_of_birth, NOW())'), '<=', $maxAge);
         }
         if (isset($request->marital_status)) {
             $user->whereIn('users.marital_status', $request->marital_status);
@@ -411,19 +424,19 @@ class ExportController extends Controller
                 foreach ($gradeRanges as $range) {
                     [$minYears, $maxYears] = explode('-', $range);
 
-                    if($minYears == "0"){
+                    if ($minYears == "0") {
                         $query->whereRaw(DB::raw("
                         (
                             ((years_of_service_rank = 0 OR years_of_service_rank IS NULL) AND month_of_service_rank > 0)
-                            OR (years_of_service_rank = ".$maxYears." AND (month_of_service_rank IS NULL OR month_of_service_rank = 0))
-                            OR (years_of_service_rank > 0 AND years_of_service_rank < ".$maxYears.")
+                            OR (years_of_service_rank = " . $maxYears . " AND (month_of_service_rank IS NULL OR month_of_service_rank = 0))
+                            OR (years_of_service_rank > 0 AND years_of_service_rank < " . $maxYears . ")
                          )"));
-                    }else{
+                    } else {
                         $query->whereRaw(DB::raw("
                         (
-                            years_of_service_rank = ".$minYears." AND month_of_service_rank > 0
-                            OR (years_of_service_rank = ".$maxYears." AND (month_of_service_rank IS NULL OR month_of_service_rank = 0))
-                            OR (years_of_service_rank > ".$minYears." AND years_of_service_rank < ".$maxYears.")
+                            years_of_service_rank = " . $minYears . " AND month_of_service_rank > 0
+                            OR (years_of_service_rank = " . $maxYears . " AND (month_of_service_rank IS NULL OR month_of_service_rank = 0))
+                            OR (years_of_service_rank > " . $minYears . " AND years_of_service_rank < " . $maxYears . ")
                          )"));
                     }
                 }
@@ -458,19 +471,19 @@ class ExportController extends Controller
                 foreach ($gradeRanges as $range) {
                     [$minYears, $maxYears] = explode('-', $range);
 
-                    if($minYears == "0"){
+                    if ($minYears == "0") {
                         $query->whereRaw(DB::raw("
                         (
                             ((years_of_service_total = 0 OR years_of_service_total IS NULL) AND month_of_service_total > 0)
-                            OR (years_of_service_total = ".$maxYears." AND (month_of_service_total IS NULL OR month_of_service_total = 0))
-                            OR (years_of_service_total > 0 AND years_of_service_total < ".$maxYears.")
+                            OR (years_of_service_total = " . $maxYears . " AND (month_of_service_total IS NULL OR month_of_service_total = 0))
+                            OR (years_of_service_total > 0 AND years_of_service_total < " . $maxYears . ")
                          )"));
-                    }else{
+                    } else {
                         $query->whereRaw(DB::raw("
                         (
-                            years_of_service_total = ".$minYears." AND month_of_service_total > 0
-                            OR (years_of_service_total = ".$maxYears." AND (month_of_service_total IS NULL OR month_of_service_total = 0))
-                            OR (years_of_service_total > ".$minYears." AND years_of_service_total < ".$maxYears.")
+                            years_of_service_total = " . $minYears . " AND month_of_service_total > 0
+                            OR (years_of_service_total = " . $maxYears . " AND (month_of_service_total IS NULL OR month_of_service_total = 0))
+                            OR (years_of_service_total > " . $minYears . " AND years_of_service_total < " . $maxYears . ")
                          )"));
                     }
                 }
@@ -487,7 +500,7 @@ class ExportController extends Controller
                     FROM
                         positions po
                     WHERE
-                        po.id IN (".implode(',',$request->deputy).") -- Replace ? with the specific parent id
+                        po.id IN (" . implode(',', $request->deputy) . ") -- Replace ? with the specific parent id
 
                     UNION DISTINCT
 
@@ -581,6 +594,19 @@ class ExportController extends Controller
                 8 => 'Strata III',
                 default => '-',
             };
+            $employmentStatus = match ($employee[$employeeId]->employment_status) {
+                1 => 'Aktif',
+                2 => 'Pensiun',
+                3 => 'Berhenti',
+                4 => 'Meninggal',
+                5 => 'Alih Status',
+                6 => 'Aktif PS',
+                7 => 'CLTN',
+                8 => 'TBLN',
+                9 => 'Non Aktif',
+                10 => 'Hukuman Disiplin',
+                default => '-',
+            };
 
             // Batas Usia Pensiun
             $indonesianMonth = [
@@ -605,21 +631,21 @@ class ExportController extends Controller
             }
 
             $masaKerjaKeseluruhan = '-';
-            if($employee[$employeeId]->years_of_service_total > 0 || $employee[$employeeId]->month_of_service_total > 0){
-                $masaKerjaKeseluruhan = (($employee[$employeeId]->years_of_service_total > 0) ? $employee[$employeeId]->years_of_service_total : 0)." Tahun, ". (($employee[$employeeId]->month_of_service_total > 0) ? $employee[$employeeId]->month_of_service_total : 0)." Bulan";
+            if ($employee[$employeeId]->years_of_service_total > 0 || $employee[$employeeId]->month_of_service_total > 0) {
+                $masaKerjaKeseluruhan = (($employee[$employeeId]->years_of_service_total > 0) ? $employee[$employeeId]->years_of_service_total : 0) . " Tahun, " . (($employee[$employeeId]->month_of_service_total > 0) ? $employee[$employeeId]->month_of_service_total : 0) . " Bulan";
             }
             $masaKerjaGolongan = '-';
-            if($employee[$employeeId]->years_of_service_rank > 0 || $employee[$employeeId]->month_of_service_rank > 0){
-                $masaKerjaGolongan = (($employee[$employeeId]->years_of_service_rank > 0) ? $employee[$employeeId]->years_of_service_rank : 0)." Tahun, ". (($employee[$employeeId]->month_of_service_rank > 0) ? $employee[$employeeId]->month_of_service_rank : 0)." Bulan";
+            if ($employee[$employeeId]->years_of_service_rank > 0 || $employee[$employeeId]->month_of_service_rank > 0) {
+                $masaKerjaGolongan = (($employee[$employeeId]->years_of_service_rank > 0) ? $employee[$employeeId]->years_of_service_rank : 0) . " Tahun, " . (($employee[$employeeId]->month_of_service_rank > 0) ? $employee[$employeeId]->month_of_service_rank : 0) . " Bulan";
             }
             $retirementAge = '';
-            if(!is_null($employee[$employeeId]->retirement_age)){
-                $month = date('n',strtotime($employee[$employeeId]->retirement_age));
-                $year = date('Y',strtotime($employee[$employeeId]->retirement_age));
-                $retirementAge = $indonesianMonth[$month]. ' '.$year.' ('.$employee[$employeeId]->retirement_age_years.' Tahun)';
+            if (!is_null($employee[$employeeId]->retirement_age)) {
+                $month = date('n', strtotime($employee[$employeeId]->retirement_age));
+                $year = date('Y', strtotime($employee[$employeeId]->retirement_age));
+                $retirementAge = $indonesianMonth[$month] . ' ' . $year . ' (' . $employee[$employeeId]->retirement_age_years . ' Tahun)';
             }
 
-            if($employee[$employeeId]->type == 1){
+            if ($employee[$employeeId]->type == 1) {
                 $userProfile = [
                     'Tempat, Tanggal Lahir' => $employee[$employeeId]->place_of_birth . ', ' . $employee[$employeeId]->date_of_birth,
                     'Agama' => $religion,
@@ -640,7 +666,7 @@ class ExportController extends Controller
                     'Masa Kerja Keseluruhan' => $masaKerjaKeseluruhan,
                     'Masa Kerja Golongan' => $masaKerjaGolongan,
                     'NPWP' => $employee[$employeeId]->id_tax,
-                    'Status Pegawai' => ($employee[$employeeId]->employment_status ? 'Aktif' : 'Tidak Aktif'),
+                    'Status Pegawai' => $employmentStatus,
                     'No NIK' => $employee[$employeeId]->id_number,
                     'Komplek' => $employee[$employeeId]->residence_name,
                     'Alamat Tempat Tinggal Saat Ini' => $employee[$employeeId]->residence_description,
@@ -654,7 +680,7 @@ class ExportController extends Controller
                     'Kontak Darurat' => $employee[$employeeId]->emergency_contact,
                     'Batas Usia Pensiun' => $retirementAge,
                 ];
-            }else if($employee[$employeeId]->type == 2){
+            } else if ($employee[$employeeId]->type == 2) {
                 $userProfile = [
                     'Tempat, Tanggal Lahir' => $employee[$employeeId]->place_of_birth . ', ' . $employee[$employeeId]->date_of_birth,
                     'Agama' => $religion,
@@ -666,9 +692,9 @@ class ExportController extends Controller
                     'Instansi Induk' => ($employee[$employeeId]->institution_name ?? '-'),
                     'Tingkat Pedidikan Akhir' => $educationLevel,
                     'Nama Sekolah/Universitas' => $employee[$employeeId]->education_name,
-                    'Tahun Lulus' => $employee[$employeeId]->education_year,                   
+                    'Tahun Lulus' => $employee[$employeeId]->education_year,
                     'NPWP' => $employee[$employeeId]->id_tax,
-                    'Status Pegawai' => ($employee[$employeeId]->employment_status ? 'Aktif' : 'Tidak Aktif'),
+                    'Status Pegawai' => $employmentStatus,
                     'No NIK' => $employee[$employeeId]->id_number,
                     'Alamat Tempat Tinggal Saat Ini' => $employee[$employeeId]->residence_description,
                     'Alamat Sesuai KTP' => $employee[$employeeId]->current_address,
@@ -680,7 +706,7 @@ class ExportController extends Controller
                     'Email Dinas' => $employee[$employeeId]->office_email,
                     'Kontak Darurat' => $employee[$employeeId]->emergency_contact,
                 ];
-            }else{
+            } else {
                 $userProfile = [
                     'Tempat, Tanggal Lahir' => $employee[$employeeId]->place_of_birth . ', ' . $employee[$employeeId]->date_of_birth,
                     'Agama' => $religion,
@@ -694,7 +720,7 @@ class ExportController extends Controller
                     'Nama Sekolah/Universitas' => $employee[$employeeId]->education_name,
                     'Tahun Lulus' => $employee[$employeeId]->education_year,
                     'NPWP' => $employee[$employeeId]->id_tax,
-                    'Status Pegawai' => ($employee[$employeeId]->employment_status ? 'Aktif' : 'Tidak Aktif'),
+                    'Status Pegawai' => $employmentStatus,
                     'No NIK' => $employee[$employeeId]->id_number,
                     'Alamat Tempat Tinggal Saat Ini' => $employee[$employeeId]->residence_description,
                     'Alamat Sesuai KTP' => $employee[$employeeId]->current_address,
@@ -714,7 +740,7 @@ class ExportController extends Controller
                 'currentPosition' => ($employee[$employeeId]->position_merged ?? '-'),
                 'photoProfile' => $employee[$employeeId]->photo_profile,
                 'userNIP' => $employee[$employeeId]->employee_id_number,
-                'userName' => $employee[$employeeId]->title_prefix. ' ' .$employee[$employeeId]->name. ' '.$employee[$employeeId]->title_suffix,
+                'userName' => $employee[$employeeId]->title_prefix . ' ' . $employee[$employeeId]->name . ' ' . $employee[$employeeId]->title_suffix,
                 'userEchelons' => ($employee[$employeeId]->echelon_name ?? '') . ', ' . ($employee[$employeeId]->echelon_effective_date ?? ' '),
                 'userCurrentGrade' => ($employee[$employeeId]->grade_name ?? '') . '(' . ($employee[$employeeId]->grade_code ?? '') . '), ' . ($employee[$employeeId]->grade_effective_date ?? ''),
                 'userType' => $employee[$employeeId]->type,
@@ -744,7 +770,7 @@ class ExportController extends Controller
             $pdf->set_option('tempDir', $tmp);
             $pdfContent = $pdf->download($employee[$employeeId]->name . ' - ' . $employee[$employeeId]->employee_id_number . '.pdf');
 
-            $pdfFileName = $employee[$employeeId]->name.'_' . $employee[$employeeId]->employee_id_number . '.pdf';
+            $pdfFileName = $employee[$employeeId]->name . '_' . $employee[$employeeId]->employee_id_number . '.pdf';
             $pdfFilePath = 'public/document/' . $pdfFileName;
             Storage::put($pdfFilePath, $pdfContent);
             $pdfFiles[] = $pdfFilePath;
@@ -888,7 +914,7 @@ class ExportController extends Controller
                     FROM
                         positions po
                     WHERE
-                        po.id IN (".implode(',',$request->deputy).") -- Replace ? with the specific parent id
+                        po.id IN (" . implode(',', $request->deputy) . ") -- Replace ? with the specific parent id
 
                     UNION DISTINCT
 
@@ -933,11 +959,11 @@ class ExportController extends Controller
         }
         if (isset($request->min_age)) {
             $minAge = $request->input('min_age');
-            $users->where(DB::raw('TIMESTAMPDIFF(YEAR, users.date_of_birth, NOW())'),'>=',$minAge);
+            $users->where(DB::raw('TIMESTAMPDIFF(YEAR, users.date_of_birth, NOW())'), '>=', $minAge);
         }
         if (isset($request->max_age)) {
             $maxAge = $request->input('max_age');
-            $users->where(DB::raw('TIMESTAMPDIFF(YEAR, users.date_of_birth, NOW())'),'<=',$maxAge);
+            $users->where(DB::raw('TIMESTAMPDIFF(YEAR, users.date_of_birth, NOW())'), '<=', $maxAge);
         }
         if (isset($request->marital_status)) {
             $users->whereIn('users.marital_status', $request->marital_status);
@@ -968,19 +994,19 @@ class ExportController extends Controller
                 foreach ($gradeRanges as $range) {
                     [$minYears, $maxYears] = explode('-', $range);
 
-                    if($minYears == "0"){
+                    if ($minYears == "0") {
                         $query->whereRaw(DB::raw("
                         (
                             ((years_of_service_rank = 0 OR years_of_service_rank IS NULL) AND month_of_service_rank > 0)
-                            OR (years_of_service_rank = ".$maxYears." AND (month_of_service_rank IS NULL OR month_of_service_rank = 0))
-                            OR (years_of_service_rank > 0 AND years_of_service_rank < ".$maxYears.")
+                            OR (years_of_service_rank = " . $maxYears . " AND (month_of_service_rank IS NULL OR month_of_service_rank = 0))
+                            OR (years_of_service_rank > 0 AND years_of_service_rank < " . $maxYears . ")
                          )"));
-                    }else{
+                    } else {
                         $query->whereRaw(DB::raw("
                         (
-                            years_of_service_rank = ".$minYears." AND month_of_service_rank > 0
-                            OR (years_of_service_rank = ".$maxYears." AND (month_of_service_rank IS NULL OR month_of_service_rank = 0))
-                            OR (years_of_service_rank > ".$minYears." AND years_of_service_rank < ".$maxYears.")
+                            years_of_service_rank = " . $minYears . " AND month_of_service_rank > 0
+                            OR (years_of_service_rank = " . $maxYears . " AND (month_of_service_rank IS NULL OR month_of_service_rank = 0))
+                            OR (years_of_service_rank > " . $minYears . " AND years_of_service_rank < " . $maxYears . ")
                          )"));
                     }
                 }
@@ -996,19 +1022,19 @@ class ExportController extends Controller
                 foreach ($gradeRanges as $range) {
                     [$minYears, $maxYears] = explode('-', $range);
 
-                    if($minYears == "0"){
+                    if ($minYears == "0") {
                         $query->whereRaw(DB::raw("
                         (
                             ((years_of_service_total = 0 OR years_of_service_total IS NULL) AND month_of_service_total > 0)
-                            OR (years_of_service_total = ".$maxYears." AND (month_of_service_total IS NULL OR month_of_service_total = 0))
-                            OR (years_of_service_total > 0 AND years_of_service_total < ".$maxYears.")
+                            OR (years_of_service_total = " . $maxYears . " AND (month_of_service_total IS NULL OR month_of_service_total = 0))
+                            OR (years_of_service_total > 0 AND years_of_service_total < " . $maxYears . ")
                          )"));
-                    }else{
+                    } else {
                         $query->whereRaw(DB::raw("
                         (
-                            years_of_service_total = ".$minYears." AND month_of_service_total > 0
-                            OR (years_of_service_total = ".$maxYears." AND (month_of_service_total IS NULL OR month_of_service_total = 0))
-                            OR (years_of_service_total > ".$minYears." AND years_of_service_total < ".$maxYears.")
+                            years_of_service_total = " . $minYears . " AND month_of_service_total > 0
+                            OR (years_of_service_total = " . $maxYears . " AND (month_of_service_total IS NULL OR month_of_service_total = 0))
+                            OR (years_of_service_total > " . $minYears . " AND years_of_service_total < " . $maxYears . ")
                          )"));
                     }
                 }
@@ -1171,16 +1197,16 @@ class ExportController extends Controller
                 }
                 if ($toggleFieldBio['isEchelons']) {
                     if ($toggleFieldBio['isPosition'] != 1) { // if isPosition not checked
-                        $usersData->addSelect('users.position_id','positions.name as position_name', 'positions.type as position_type'); // Get position id to be used in get hierarchy below
+                        $usersData->addSelect('users.position_id', 'positions.name as position_name', 'positions.type as position_type'); // Get position id to be used in get hierarchy below
                     }
                     $usersData->addSelect('echelons.name as echelons_name');
                 }
                 if ($toggleFieldBio['isFullPosition']) {
                     if ($toggleFieldBio['isPosition'] != 1) { // if isPosition not checked
-                        $usersData->addSelect('users.position_id','positions.name as position_name', 'positions.type as position_type'); // Get position id to be used in get hierarchy below
+                        $usersData->addSelect('users.position_id', 'positions.name as position_name', 'positions.type as position_type'); // Get position id to be used in get hierarchy below
                     }
                     if ($toggleFieldBio['isEchelons'] != 1) { // if isEchelons not checked
-                        $usersData->addSelect('echelons.name as echelons_name');// Get echelons to be used in get hierarchy below
+                        $usersData->addSelect('echelons.name as echelons_name'); // Get echelons to be used in get hierarchy below
                     }
                 }
                 if ($toggleFieldBio['isGrade']) {
@@ -1706,7 +1732,7 @@ class ExportController extends Controller
                             hierarchy WHERE id != '" . $item->position_id . "' ORDER BY id ASC;";
 
                         $hierarchy = DB::select($sql);
-                        $add=[];
+                        $add = [];
                         if (count($hierarchy) > 0) {
                             foreach ($hierarchy as $key => $value) {
                                 $name = str_replace('Kepala ', '', $value->name);
@@ -1716,12 +1742,12 @@ class ExportController extends Controller
                             }
                         }
 
-                        if($item->position_type == 2){
+                        if ($item->position_type == 2) {
                             $add[] = $item->position_name . ' ' . $item->echelons_name;
-                        }else{
+                        } else {
                             $add[] = $item->position_name;
                         }
-                        $item->full_position = implode(', ',array_reverse($add));
+                        $item->full_position = implode(', ', array_reverse($add));
                     }
                     return (array) $item;
                 })->toArray();
@@ -1864,7 +1890,7 @@ class ExportController extends Controller
                     FROM
                         positions po
                     WHERE
-                        po.id IN (".implode(',',$request->deputy).") -- Replace ? with the specific parent id
+                        po.id IN (" . implode(',', $request->deputy) . ") -- Replace ? with the specific parent id
 
                     UNION DISTINCT
 
@@ -1905,12 +1931,11 @@ class ExportController extends Controller
         }
         if (isset($request->min_age)) {
             $minAge = $request->input('min_age');
-            $users->where(DB::raw('TIMESTAMPDIFF(YEAR, users.date_of_birth, NOW())'),'>=',$minAge);
-
+            $users->where(DB::raw('TIMESTAMPDIFF(YEAR, users.date_of_birth, NOW())'), '>=', $minAge);
         }
         if (isset($request->max_age)) {
             $maxAge = $request->input('max_age');
-            $users->where(DB::raw('TIMESTAMPDIFF(YEAR, users.date_of_birth, NOW())'),'<=',$maxAge);
+            $users->where(DB::raw('TIMESTAMPDIFF(YEAR, users.date_of_birth, NOW())'), '<=', $maxAge);
         }
         if (isset($request->marital_status)) {
             $users->whereIn('users.marital_status', $request->marital_status);
@@ -1942,19 +1967,19 @@ class ExportController extends Controller
                 foreach ($gradeRanges as $range) {
                     [$minYears, $maxYears] = explode('-', $range);
 
-                    if($minYears == "0"){
+                    if ($minYears == "0") {
                         $query->whereRaw(DB::raw("
                         (
                             ((years_of_service_rank = 0 OR years_of_service_rank IS NULL) AND month_of_service_rank > 0)
-                            OR (years_of_service_rank = ".$maxYears." AND (month_of_service_rank IS NULL OR month_of_service_rank = 0))
-                            OR (years_of_service_rank > 0 AND years_of_service_rank < ".$maxYears.")
+                            OR (years_of_service_rank = " . $maxYears . " AND (month_of_service_rank IS NULL OR month_of_service_rank = 0))
+                            OR (years_of_service_rank > 0 AND years_of_service_rank < " . $maxYears . ")
                          )"));
-                    }else{
+                    } else {
                         $query->whereRaw(DB::raw("
                         (
-                            years_of_service_rank = ".$minYears." AND month_of_service_rank > 0
-                            OR (years_of_service_rank = ".$maxYears." AND (month_of_service_rank IS NULL OR month_of_service_rank = 0))
-                            OR (years_of_service_rank > ".$minYears." AND years_of_service_rank < ".$maxYears.")
+                            years_of_service_rank = " . $minYears . " AND month_of_service_rank > 0
+                            OR (years_of_service_rank = " . $maxYears . " AND (month_of_service_rank IS NULL OR month_of_service_rank = 0))
+                            OR (years_of_service_rank > " . $minYears . " AND years_of_service_rank < " . $maxYears . ")
                          )"));
                     }
                 }
@@ -1971,19 +1996,19 @@ class ExportController extends Controller
                 foreach ($gradeRanges as $range) {
                     [$minYears, $maxYears] = explode('-', $range);
 
-                    if($minYears == "0"){
+                    if ($minYears == "0") {
                         $query->whereRaw(DB::raw("
                         (
                             ((years_of_service_total = 0 OR years_of_service_total IS NULL) AND month_of_service_total > 0)
-                            OR (years_of_service_total = ".$maxYears." AND (month_of_service_total IS NULL OR month_of_service_total = 0))
-                            OR (years_of_service_total > 0 AND years_of_service_total < ".$maxYears.")
+                            OR (years_of_service_total = " . $maxYears . " AND (month_of_service_total IS NULL OR month_of_service_total = 0))
+                            OR (years_of_service_total > 0 AND years_of_service_total < " . $maxYears . ")
                          )"));
-                    }else{
+                    } else {
                         $query->whereRaw(DB::raw("
                         (
-                            years_of_service_total = ".$minYears." AND month_of_service_total > 0
-                            OR (years_of_service_total = ".$maxYears." AND (month_of_service_total IS NULL OR month_of_service_total = 0))
-                            OR (years_of_service_total > ".$minYears." AND years_of_service_total < ".$maxYears.")
+                            years_of_service_total = " . $minYears . " AND month_of_service_total > 0
+                            OR (years_of_service_total = " . $maxYears . " AND (month_of_service_total IS NULL OR month_of_service_total = 0))
+                            OR (years_of_service_total > " . $minYears . " AND years_of_service_total < " . $maxYears . ")
                          )"));
                     }
                 }
@@ -2574,7 +2599,7 @@ class ExportController extends Controller
         $usersPreview = $usersPreview->paginate($this->request->limit ?? 10);
         if ($this->request->isFullPosition == 1) {
             $usersPreview->getCollection()->transform(function ($value) {
-                if(!is_null($value->position_id)){
+                if (!is_null($value->position_id)) {
                     // Your code here
                     $sql =
                         "WITH RECURSIVE hierarchy AS (
@@ -2586,7 +2611,7 @@ class ExportController extends Controller
                         FROM
                             positions
                         WHERE
-                            id = ".$value->position_id." -- Replace ? with the specific child employee_id
+                            id = " . $value->position_id . " -- Replace ? with the specific child employee_id
 
                         UNION DISTINCT
 
@@ -2605,7 +2630,7 @@ class ExportController extends Controller
                     SELECT
                         *
                     FROM
-                        hierarchy WHERE id != ".$value->position_id." AND parent_id IS NOT NULL;";
+                        hierarchy WHERE id != " . $value->position_id . " AND parent_id IS NOT NULL;";
 
                     $position = DB::select($sql);
                     $names = array_column($position, 'name');
@@ -2615,8 +2640,8 @@ class ExportController extends Controller
                         $names[$index] = str_replace("Kepala ", "", $name);
                     }
                     $parents = implode(', ', $names);
-                    if(!empty($parents)){
-                        $value->full_position = $value->full_position.', '.$parents;
+                    if (!empty($parents)) {
+                        $value->full_position = $value->full_position . ', ' . $parents;
                     }
                 }
                 unset($value->position_id);
