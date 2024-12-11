@@ -319,7 +319,7 @@
     </table>
     @endif
 
-    @if(isset($userPosition))
+    @if(isset($userPosition) && isset($permission[11]) && $permission[11] == 1)
     @if(!isset($userCollege))
     <div class="title-profile page_break">Riwayat Jabatan</div>
     @else
@@ -379,7 +379,7 @@
     </table>
     @endif
 
-    @if(isset($userGrade))
+    @if(isset($userGrade) && isset($permission[12]) && $permission[12] == 1)
     <div class="title-profile">Riwayat Golongan</div>
 
     <table class="table-section-3">
@@ -422,7 +422,7 @@
     </table>
     @endif
 
-    @if(isset($userTrainingStructural))
+    @if(isset($userTrainingStructural) && isset($permission[13]) && $permission[13] == 1)
     <div class="title-profile">Riwayat Pelatihan Struktural</div>
 
     <table class="table-section-3">
@@ -459,7 +459,7 @@
     </table>
     @endif
 
-    @if(isset($userTrainingFunctional))
+    @if(isset($userTrainingFunctional) && isset($permission[14]) && $permission[14] == 1)
     <div class="title-profile">Riwayat Pelatihan Fungsional</div>
 
     <table class="table-section-3">
@@ -494,7 +494,7 @@
     </table>
     @endif
 
-    @if(isset($userTrainingTechnical))
+    @if(isset($userTrainingTechnical) && isset($permission[15]) && $permission[15] == 1)
     <div class="title-profile">Riwayat Pelatihan Teknis</div>
 
     <table class="table-section-3">
@@ -529,7 +529,7 @@
     </table>
     @endif
 
-    @if(isset($userAward))
+    @if(isset($userAward) && isset($permission[16]) && $permission[16] == 1)
     <div class="title-profile">Riwayat Penghargaan</div>
 
     <table class="table-section-3">
@@ -554,7 +554,7 @@
     </table>
     @endif
 
-    @if(isset($userSKP))
+    @if(isset($userSKP) && isset($permission[17]) && $permission[17] == 1)
     <div class="title-profile">Riwayat SKP</div>
 
     <table class="table-section-3">
@@ -677,7 +677,7 @@
     </table>
     @endif
 
-    @if(isset($userPerformance))
+    @if(isset($userPerformance) && isset($permission[18]) && $permission[18] == 1)
     <div class="title-profile">Riwayat Penilaian Prestasi Kerja</div>
 
     <table class="table-section-3">
@@ -721,7 +721,7 @@
     </table>
     @endif
 
-    @if(isset($userPunishment))
+    @if(isset($userPunishment) && isset($permission[19]) && $permission[19] == 1)
     <div class="title-profile">Riwayat Hukuman Disiplin</div>
 
     <table class="table-section-3">
@@ -877,7 +877,7 @@
     </table>
     @endif
 
-    @if(isset($userNotes))
+    @if(isset($userNotes) && isset($permission[27]) && $permission[27] == 1)
     <div class="title-profile">Catatan</div>
 
     <table class="table-section-3">
@@ -1006,7 +1006,7 @@
     </table>
     @endif
 
-    @if(isset($userAssessmentTalent))
+    @if(isset($userAssessmentTalent) && isset($permission[28]) && $permission[28] == 1)
     <div class="title-profile">Hasil Talent Pool</div>
 
     <table class="table-section-3">

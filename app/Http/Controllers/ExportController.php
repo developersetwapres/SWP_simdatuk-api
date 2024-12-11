@@ -349,6 +349,9 @@ class ExportController extends Controller
         //     'userCurrentGrade' => ($employee->grade_name ?? '') . '(' . ($employee->grade_code ?? '') . '), ' . ($employee->grade_effective_date ?? ''),
 
         // ]);
+
+        $exportData['permissions'] = $this->getUserViewPermissions();
+
         $pdf = Pdf::loadview('exports/user', $exportData);
         $pdf->set_option('isHtml5ParserEnabled', true);
         $pdf->set_paper("A4", "portrait");
@@ -761,6 +764,7 @@ class ExportController extends Controller
                 'userAssessment' => $assessments[$employeeId] ?? [],
                 'userAssessmentCompetency' => $competencies[$employeeId] ?? [],
                 'userAssessmentTalent' => $talents[$employeeId] ?? [],
+                'permissions' => $this->getUserViewPermissions()
             ]);
             $pdf->set_option('isHtml5ParserEnabled', true);
             $pdf->set_paper("A4", "portrait");
@@ -2652,5 +2656,25 @@ class ExportController extends Controller
 
         $message = ($usersPreview->isEmpty()) ? 'Mohon maaf, data tidak ditemukan.' : 'success';
         return $this->paginateResponse(200, $message, $usersPreview);
+    }
+
+    private function getUserViewPermissions()
+    {
+        $userRoleID = \Auth::user()->role_id;
+        $permissions = DB::table('permissions as p');
+        $permissions->join('role_permissions as rp', 'p.id', 'rp.permission_id');
+        $permissions->join('roles as r', 'rp.role_id', 'r.id');
+        $permissions->where('rp.role_id', $userRoleID);
+        $permissions->select('p.id', 'p.name', 'rp.create', 'rp.read', 'rp.update', 'rp.delete');
+        $permissions = $permissions->get();
+
+        $userViewPermissions = [];
+        if (!$permissions->isEmpty()) {
+            foreach ($permissions as $key => $value) {
+                $userViewPermissions[$value->id] = $value->read;
+            }
+        }
+
+        return $userViewPermissions;
     }
 }
