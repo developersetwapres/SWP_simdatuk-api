@@ -18,7 +18,7 @@ class UpdateLeaveEmployeeRequest
             'leaves.*.end_date'      => 'nullable|date',
             'leaves.*.type'          => 'nullable|in:1,2,3,4,5,6',
             'leaves.*.number'        => 'nullable|max:160',
-            'leaves.*.description'   => 'nullable|max:160',
+            'leaves.*.description'   => 'nullable',
             'leaves.*.letter'        => 'nullable|file|extensions:jpg,jpeg,png,pdf|max:2048',
             'leaves.*.delete_letter' => 'nullable|boolean',
         ];
