@@ -17,7 +17,7 @@ class UpdateDisciplinaryHistoryEmployeeRequest
         return [
             'disciplinaries.*.id' => 'numeric|nullable',
             'disciplinaries.*.grade' => 'nullable|max:160',
-            'disciplinaries.*.position' => 'nullable|max:160',
+            'disciplinaries.*.position' => 'nullable',
             'disciplinaries.*.disciplinary_id' => 'nullable|numeric',
             'disciplinaries.*.decree_number' => 'nullable|max:160',
             'disciplinaries.*.date_of_decree' => 'nullable|date',
@@ -39,7 +39,6 @@ class UpdateDisciplinaryHistoryEmployeeRequest
         return [
             'disciplinaries.*.id.numeric' => 'ID harus berupa angka.',
             'disciplinaries.*.grade.max' => 'Golongan tidak boleh lebih dari 160 karakter.',
-            'disciplinaries.*.position.max' => 'Jabatan tidak boleh lebih dari 160 karakter.',
             'disciplinaries.*.disciplinary_id.numeric' => 'Jenis hukuman harus berupa angka.',
             'disciplinaries.*.decree_number.max' => 'No SK hukuman tidak boleh lebih dari 160 karakter.',
             'disciplinaries.*.date_of_decree.date' => 'Tanggal SK harus berupa tanggal.',
