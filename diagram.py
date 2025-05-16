@@ -10,11 +10,15 @@ graph_attr = {
 }
 
 with Diagram(name="", filename="infrastructure", direction="RL", outformat="jpg", show=False, graph_attr=graph_attr):
-    with Cluster("Application in Server"):
-        apps = Server("Application")
-        website = Server("Website")
-    website >> Edge(color="darkgreen") << Nginx("Web server with NGINX")
-    apps >> Edge(color="orange") << MySQL("Database with MySQL")
-    apps >> Edge(color="pink") >> CephOsd("Object Storage with MinIO")
-    apps >> Edge(color="darkblue") >> SimpleEmailServiceSesEmail('SMTP Mail')
-    website >> Edge(label="API", color="darkblue") << apps
+    apps = Server("API")
+    website = Server("Website")
+    webserver = Nginx("Web server")
+    database = MySQL("Database with MySQL")
+    objectstorage = CephOsd("Object Storage with MinIO")
+    email = SimpleEmailServiceSesEmail('SMTP Mail')
+    apps >> Edge(color="darkblue") << webserver
+    website >> Edge(color="darkblue") << webserver
+    objectstorage >> Edge(color="darkblue") << webserver
+    apps >> Edge(color="darkblue") << database
+    apps >> Edge(color="darkblue") << objectstorage
+    apps >> Edge(color="darkblue") << email
