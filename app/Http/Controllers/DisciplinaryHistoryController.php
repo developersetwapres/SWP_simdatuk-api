@@ -1,0 +1,215 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Requests\DisciplinaryHistory\CreateDisciplinaryHistoryRequest;
+use App\Http\Requests\DisciplinaryHistory\UpdateDisciplinaryHistoryRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
+
+/**
+ * @group History
+ * @subgroupDescription These endpoints allow you to perform CRUD operations on disciplinary history data, enabling the retrieval, creation, and updating of disciplinary history records as needed.
+ */
+class DisciplinaryHistoryController extends Controller
+{
+    public function __construct(Request $request)
+    {
+        $this->request = $request;
+        $this->posted = $request->except('_token', '_method');
+    }
+
+    /**
+     * Get List of Disciplinary Histories
+     *
+     * Retrieve the disciplinary histories.
+     * @subgroup Disciplinary
+     * @authenticated
+     * @queryParam page integer Refers to the current page of results being displayed. Default is '1'. Example: 1
+     * @queryParam limit integer Refers to the maximum number of items to be displayed per page. Defaults is '10'. Example: 10
+     * @queryParam search string The keyword search field for the name. Example: Hukuman Disiplin
+     * @response 200 {"code": 200,"message": "success","data": [{"id": 1,"created_at": "2024-05-14 08:51:39","name": "Hukuman Disiplin Desember 2024","period_month": 3,"period_year": "2020","total": 1}],"pagination": {"total": 1,"count": 1,"per_page": 10,"current_page": 1,"total_pages": 1,"links": {"first_page": "http://localhost/api/disciplinaries?page=1","last_page": "http://localhost/api/disciplinaries?page=1","next_page": null,"prev_page": null}}}
+     */
+    public function index()
+    {
+        $messages = [
+            'page.numeric' => 'Page harus berupa angka.',
+            'page.min' => 'Page minimal harus 1 atau lebih.',
+            'limit.numeric' => 'Limit harus berupa angka.',
+            'limit.min' => 'Limit minimal harus 1 atau lebih.',
+        ];
+
+        $validatedData = $this->request->validate([
+            'page' => 'nullable|numeric|min:1',
+            'limit' => 'nullable|numeric|min:1',
+        ], $messages);
+        $this->request->limit = ($this->request->limit) ? $this->request->limit : 10;
+
+        $disciplinaryHistories = DB::table('disciplinary_histories as d');
+        $disciplinaryHistories->leftjoin('disciplinary_history_users as ud', 'd.id', '=', 'ud.disciplinary_history_id');
+        $disciplinaryHistories->select('d.id', 'd.created_at', 'd.name', 'd.period_month', 'd.period_year', DB::raw("COUNT(ud.id) AS total"));
+        $disciplinaryHistories->where('d.name', 'like', '%' . $this->request->search . '%');
+        $disciplinaryHistories->orderBy('d.updated_at', 'desc');
+        $disciplinaryHistories->orderBy('d.created_at', 'desc');
+        $disciplinaryHistories->groupby('d.id');
+        $disciplinaryHistories = $disciplinaryHistories->paginate($this->request->limit);
+        if ($disciplinaryHistories->isEmpty()) {
+            return $this->paginateResponse(200, 'Mohon maaf, data tidak ditemukan.', $disciplinaryHistories);
+        }
+        return $this->paginateResponse(200, 'success', $disciplinaryHistories);
+    }
+
+    /**
+     * Create a New Disciplinary History
+     *
+     * Add a new disciplinary history entry.
+     * @subgroup Disciplinary
+     * @authenticated
+     * @response 200 {"code": 200,"message": "Hukuman disiplin berhasil ditambah.","data": null}
+     */
+    public function create(CreateDisciplinaryHistoryRequest $request)
+    {
+        try {
+            DB::beginTransaction();
+            $disciplinaryHistoryId = DB::table('disciplinary_histories')->insertGetIdTs($this->request->except('users'));
+            if (isset($this->request->users)) {
+                $users = array();
+                foreach ($this->request->users as $user) {
+                    $user['disciplinary_history_id'] = $disciplinaryHistoryId;
+                    array_push($users, $user);
+                }
+                DB::table('disciplinary_history_users')->insertTs($users);
+            }
+            DB::commit();
+            return $this->response(200, 'Hukuman disiplin berhasil ditambah.');
+        } catch (\Throwable $th) {
+            \Log::warning($th);
+            DB::rollback();
+            return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
+        }
+    }
+
+    /**
+     * Get Detail Disciplinary History by ID
+     *
+     * Retrieve disciplinary history for specific ID.
+     * @subgroup Disciplinary
+     * @authenticated
+     * @urlParam id Refers to the ID of Disciplinary. Example: 1
+     * @response 404 {"code": 404,"message": "Hukuman disiplin tidak ditemukan.","data": null}
+     * @response 200 {"code": 200,"message": "success","data": {"id": 1,"period_month": 4,"period_year": "2020","name": "Hukuman Disiplin Desember 2024","created_at": "2024-05-14 08:51:39","users": [{"id": 2,"user_id": 1,"name": "administrator","employee_id_number": "0000000000000","grade": "Penata (III/c)","position": "Kepala Subbagian Administrasi","disciplinary_type_id": 1,"disciplinary_type_name": "Teguran Lisan","disciplinary_type_description": "Hukuman Disiplin Tingkat Ringan 1","performance_allowance_deduction": 0.25,"performance_allowance_duration": 2,"decree_number": "Nomor 112 Tahun 2023","date_of_decree": "2023-10-22","start_date": "2023-10-22","end_date": "2024-10-22","authorizing_officer": "Deputi Bidang Administrasi","name_of_authorizing_officer": "Sapto Harjono Wahjoe Sedjati, S.Sos., M.A.","description": "Tidak masuk ke kantor selama 10 hari","created_at": "2024-05-14 11:05:51"}]}}
+     */
+    public function show()
+    {
+        $disciplinaryHistory = DB::table('disciplinary_histories');
+        $disciplinaryHistory->where('id', $this->request->id);
+        $disciplinaryHistory->select('id', 'period_month', 'period_year', 'name', 'created_at');
+        $disciplinaryHistory = $disciplinaryHistory->first();
+
+        if (!$disciplinaryHistory) {
+            return $this->response(404, 'Hukuman disiplin tidak ditemukan.');
+        }
+
+        $users = DB::table('disciplinary_history_users as ud');
+        $users->join('users as u', 'u.id', '=', 'ud.user_id');
+        $users->leftjoin('disciplinaries as dt', 'ud.disciplinary_id', '=', 'dt.id');
+        $users->where('ud.disciplinary_history_id', $disciplinaryHistory->id);
+        $users->select('ud.id', 'ud.user_id', 'u.name', 'u.employee_id_number', 'ud.grade', 'ud.position', 'dt.id as disciplinary_type_id', 'dt.name as disciplinary_type_name', 'dt.description as disciplinary_type_description', 'dt.performance_allowance_deduction', 'dt.performance_allowance_duration', 'ud.decree_number', 'ud.date_of_decree', 'ud.start_date', 'ud.end_date', 'ud.authorizing_officer', 'ud.name_of_authorizing_officer', 'ud.description', 'ud.created_at');
+        $users = $users->get();
+
+        $disciplinaryHistory->users = $users;
+
+        return $this->response(200, 'success', $disciplinaryHistory);
+    }
+
+    /**
+     * Update Disciplinary History by ID
+     *
+     * Update an existing disciplinary history entry.
+     * @subgroup Disciplinary
+     * @authenticated
+     * @urlParam id Refers to the ID of Disciplinary. Example: 1
+     * @response 404 {"code": 404,"message": "Hukuman disiplin tidak ditemukan.","data": null}
+     * @response 200 {"code": 200,"message": "Hukuman disiplin berhasil diupdate.","data": null}
+     */
+    public function update(UpdateDisciplinaryHistoryRequest $request)
+    {
+        $disciplinaryHistory = DB::table('disciplinary_histories');
+        $disciplinaryHistory->where('id', $this->request->id);
+        $disciplinaryHistory->select('id');
+        $disciplinaryHistory = $disciplinaryHistory->first();
+
+        if (!$disciplinaryHistory) {
+            return $this->response(404, 'Hukuman disiplin tidak ditemukan.');
+        }
+
+        $disciplinaryHistory = DB::table('disciplinary_histories');
+        $disciplinaryHistory->where('id', $this->request->id);
+        $disciplinaryHistory = $disciplinaryHistory->updateTs($this->request->except('users'));
+
+        $users = array();
+
+        if (isset($this->request->users)) {
+
+            // Get existing data
+            $disciplinaryHistoryUsers = DB::table('disciplinary_history_users');
+            $disciplinaryHistoryUsers->where('disciplinary_history_id', $this->request->id);
+            $disciplinaryHistoryUsers->select('id');
+            $disciplinaryHistoryUsers = $disciplinaryHistoryUsers->get();
+
+            // Delete data
+            $array1 = Arr::pluck($disciplinaryHistoryUsers, 'id');
+            $array2 = Arr::pluck($this->request->users, 'id');
+            $result = array_diff($array1, $array2);
+            DB::table('disciplinary_history_users')->whereIn('id', $result)->delete();
+
+            foreach ($this->request->users as $user) {
+                if (!is_null($user['id'])) {
+                    // Update existing data
+                    DB::table('disciplinary_history_users')->where('id', $user['id'])->updateTs($user);
+                } else {
+                    // Insert new item
+                    $user['disciplinary_history_id'] = $this->request->id;
+                    array_push($users, $user);
+                }
+            }
+            if (count($users) > 0) {
+                DB::table('disciplinary_history_users')->insertTs($users);
+            }
+        }
+        return $this->response(200, 'Hukuman disiplin berhasil diupdate.');
+    }
+
+    /**
+     * Delete Disciplinary History by ID
+     *
+     * Delete a specific Disciplinary History.
+     * @subgroup Disciplinary
+     * @authenticated
+     * @urlParam id Refers to the ID of Disciplinary History. Example: 1
+     * @response 404 {"code": 404,"message": "Mohon maaf, riwayat hukuman disiplin tidak ditemukan.","data": null}
+     * @response 200 {"code": 200,"message": "Riwayat hukuman disiplin berhasil dihapus.","data": null}
+     */
+    public function delete()
+    {
+        $histories = DB::table('disciplinary_histories')->select('id')->where('id', $this->request->id)->first();
+        if (!$histories) {
+            return $this->response(404, 'Riwayat hukuman disiplin tidak ditemukan.');
+        }
+
+        try {
+            DB::beginTransaction();
+
+            // Delete Disciplinary History
+            DB::table('disciplinary_histories')->where('id', $histories->id)->delete();
+
+            DB::commit();
+            return $this->response(200, 'Riwayat hukuman disiplin berhasil dihapus.');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            Log::warning($th);
+            return $this->response(500, 'Riwayat jabatan gagal dihapus.');
+        }
+    }
+}

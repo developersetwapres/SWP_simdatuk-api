@@ -1,0 +1,71 @@
+image: docker:latest
+services:
+  - docker:dind
+
+stages:
+  - build
+  - release
+  - deploy
+  - cleanup
+
+variables:
+  CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
+
+before_script:
+  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+
+build:
+  stage: build
+  rules:
+    - if: $CI_COMMIT_TAG && $CI_COMMIT_TAG =~ /build-[0-9]/
+      when: on_success
+    - when: never
+  tags:
+    - build
+  script:
+    - cp $ENV .env
+    - docker build --pull -t $CONTAINER_RELEASE_IMAGE .
+    - docker push $CONTAINER_RELEASE_IMAGE
+
+release-image:
+  stage: release
+  rules:
+    - if: $CI_COMMIT_TAG && $CI_COMMIT_TAG =~ /build-[0-9]/
+      when: on_success
+    - when: never
+  tags:
+    - build
+  script:
+    - docker tag $CONTAINER_RELEASE_IMAGE $CONTAINER_RELEASE_IMAGE
+    - docker push $CONTAINER_RELEASE_IMAGE
+
+deploy:
+  stage: deploy
+  image: kroniak/ssh-client
+  rules:
+    - if: $CI_COMMIT_TAG && $CI_COMMIT_TAG =~ /build-[0-9]/
+      when: on_success
+    - when: never
+  tags:
+    - build
+  before_script:
+    - echo "Start deploying to server"
+  script:
+    - chmod 400 $SSH_SERVER_PROJECTS_PRIVATE_KEY
+    - ssh -o StrictHostKeyChecking=no -i $SSH_SERVER_PROJECTS_PRIVATE_KEY root@$IP_PROJECTS_SERVER "docker pull registry.ekuator.id/project/setneg/simdatuk/api:latest"
+    - ssh -o StrictHostKeyChecking=no -i $SSH_SERVER_PROJECTS_PRIVATE_KEY root@$IP_PROJECTS_SERVER "docker stop simdatuk-api || true && docker rm simdatuk-api || true"
+    - ssh -o StrictHostKeyChecking=no -i $SSH_SERVER_PROJECTS_PRIVATE_KEY root@$IP_PROJECTS_SERVER "docker run --network=project_network -p 3003:80 -d --name simdatuk-api --restart=always registry.ekuator.id/project/setneg/simdatuk/api:latest"
+    - ssh -o StrictHostKeyChecking=no -i $SSH_SERVER_PROJECTS_PRIVATE_KEY root@$IP_PROJECTS_SERVER "docker image prune -af || true"
+
+cleanup:
+  stage: cleanup
+  rules:
+    - if: $CI_COMMIT_TAG && $CI_COMMIT_TAG =~ /build-[0-9]/
+      when: on_success
+    - when: never
+  tags:
+    - build
+  before_script:
+    - echo "Start cleanup unused images"
+  script:
+    - docker image prune -af

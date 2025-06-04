@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('target_history_users', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('target_history_id');
+            $table->unsignedBigInteger('user_id');
+            $table->tinyInteger('work_behavior_rating')->nullable()->comment('1=Diatas Ekspektasi, 2=Sesuai Ekspektasi, 3=Dibawah Ekspektasi');
+            $table->tinyInteger('employee_performance_predicate')->nullable()->comment('1=Sangat Baik, 2=Baik, 3=Butuh Perbaikan, 4=Kurang, 5=Sangat Kurang');
+            $table->tinyInteger('organizational_performance_achievement')->nullable()->comment('1=Sangat Baik, 2=Baik, 3=Cukup');
+            $table->timestamp('created_at');
+            $table->timestamp('updated_at')->nullable();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('target_history_id')->references('id')->on('target_histories')->onDelete('cascade');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('target_history_users');
+    }
+};
