@@ -70,8 +70,8 @@ COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 # Start Supervisord
 CMD ["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
 
-# Expose port 80 for Nginx
-EXPOSE 80
+# Expose port 8080 for Nginx
+EXPOSE 8080
 
 # Health check command
 HEALTHCHECK --interval=300s --timeout=60s CMD curl -f http://127.0.0.1/api || exit 1
