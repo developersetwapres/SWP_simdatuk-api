@@ -38,7 +38,7 @@ RUN curl -sSL https://github.com/mlocati/docker-php-extension-installer/releases
 COPY . .
 
 # Copy .env file
-COPY .env .env
+# COPY .env .env
 
 # Change ownership for application code
 RUN chown -R www-data:www-data /app
