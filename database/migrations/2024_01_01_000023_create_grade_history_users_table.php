@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('grade_id')->nullable();
             $table->date('effective_date')->nullable();
-            $table->string('decree_name', 160)->nullable();
+            $table->string('decree_name', 512)->nullable();
             $table->string('decree_document')->nullable();
             $table->unsignedBigInteger('type_of_decree')->nullable();
             $table->string('decree_number', 160)->nullable();
