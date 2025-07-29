@@ -48,7 +48,7 @@ class TargetHistoryController extends Controller
 
         $targetHistories = DB::table('target_histories as th');
         $targetHistories->leftjoin('target_history_users as thu', 'th.id', '=', 'thu.target_history_id');
-        $targetHistories->select('th.id', 'th.created_at', 'th.name', 'th.period_month', 'th.period_year', 'th.appraisal_period', DB::raw("COUNT(thu.id) AS total"));
+        $targetHistories->select('th.id', DB::raw("DATE_FORMAT(th.created_at, '%d-%m-%Y %H:%i:%s') as created_at"), 'th.name', 'th.period_month', 'th.period_year', 'th.appraisal_period', DB::raw("COUNT(thu.id) AS total"));
         $targetHistories->where('th.name', 'like', '%' . $this->request->search . '%');
         $targetHistories->orderBy('th.updated_at', 'desc');
         $targetHistories->orderBy('th.created_at', 'desc');

@@ -59,7 +59,7 @@ class TrainingHistoryController extends Controller
         $trainingHistories->leftjoin('training_history_users as thu', 'th.id', '=', 'thu.training_history_id');
         $trainingHistories->select(
             'th.id',
-            'th.created_at',
+            DB::raw("DATE_FORMAT(th.created_at, '%d-%m-%Y %H:%i:%s') as created_at"),
             'th.name',
             'th.period_month',
             'th.period_year',

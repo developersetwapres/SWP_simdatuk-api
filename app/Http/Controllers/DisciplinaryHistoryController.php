@@ -48,7 +48,7 @@ class DisciplinaryHistoryController extends Controller
 
         $disciplinaryHistories = DB::table('disciplinary_histories as d');
         $disciplinaryHistories->leftjoin('disciplinary_history_users as ud', 'd.id', '=', 'ud.disciplinary_history_id');
-        $disciplinaryHistories->select('d.id', 'd.created_at', 'd.name', 'd.period_month', 'd.period_year', DB::raw("COUNT(ud.id) AS total"));
+        $disciplinaryHistories->select('d.id', DB::raw("DATE_FORMAT(d.created_at, '%d-%m-%Y %H:%i:%s') as created_at"), 'd.name', 'd.period_month', 'd.period_year', DB::raw("COUNT(ud.id) AS total"));
         $disciplinaryHistories->where('d.name', 'like', '%' . $this->request->search . '%');
         $disciplinaryHistories->orderBy('d.updated_at', 'desc');
         $disciplinaryHistories->orderBy('d.created_at', 'desc');

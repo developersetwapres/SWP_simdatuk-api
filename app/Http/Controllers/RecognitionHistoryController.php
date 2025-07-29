@@ -49,7 +49,7 @@ class RecognitionHistoryController extends Controller
         $recognitionHistories = DB::table('recognition_histories as rh');
         $recognitionHistories->leftjoin('recognition_history_users as rhu', 'rh.id', '=', 'rhu.recognition_history_id');
         $recognitionHistories->leftjoin('recognitions as r', 'rh.recognition_id', '=', 'r.id');
-        $recognitionHistories->select('rh.id', 'rh.created_at', 'r.name', 'rh.period_month', 'rh.period_year', 'rh.awarding_institution', DB::raw("COUNT(rhu.id) AS total"));
+        $recognitionHistories->select('rh.id', DB::raw("DATE_FORMAT(rh.created_at, '%d-%m-%Y %H:%i:%s') as created_at"), 'r.name', 'rh.period_month', 'rh.period_year', 'rh.awarding_institution', DB::raw("COUNT(rhu.id) AS total"));
         $recognitionHistories->where('r.name', 'like', '%' . $this->request->search . '%');
         $recognitionHistories->orderBy('rh.updated_at', 'desc');
         $recognitionHistories->orderBy('rh.created_at', 'desc');
