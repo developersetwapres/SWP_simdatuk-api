@@ -255,7 +255,7 @@ class RecapitulationRepository
             $total = $total[0]->total;
             array_push($data, ['id' => $position->id, 'name' => $position->name, 'total' => $total]);
         }
-        array_unshift($data, ['id' => 2, 'name' => 'Kepala Sekretariat Wakil Presiden', 'total' => 1]);
+        array_unshift($data, ['id' => 2, 'name' => 'Sekretaris Wakil Presiden', 'total' => 1]);
         $totalSum = array_reduce($data, function ($carry, $item) {
             return $carry + $item['total'];
         }, 0);

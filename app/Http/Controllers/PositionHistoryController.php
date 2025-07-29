@@ -52,7 +52,7 @@ class PositionHistoryController extends Controller
 
         $positionHistories = DB::table('position_histories as ph');
         $positionHistories->leftjoin('position_history_users as phu', 'ph.id', '=', 'phu.position_history_id');
-        $positionHistories->select('ph.id', 'ph.name', 'ph.period_month', 'ph.period_year', 'ph.created_at', DB::raw("COUNT(phu.id) AS total"));
+        $positionHistories->select('ph.id', 'ph.name', 'ph.period_month', 'ph.period_year', DB::raw("DATE_FORMAT(ph.created_at, '%d-%m-%Y %H:%i:%s') as created_at"), DB::raw("COUNT(phu.id) AS total"));
         $positionHistories->where('ph.name', 'like', '%' . $this->request->search . '%');
         $positionHistories->orderBy('ph.updated_at', 'desc');
         $positionHistories->orderBy('ph.created_at', 'desc');
@@ -138,7 +138,7 @@ class PositionHistoryController extends Controller
             'g.name as group_name',
             'phu.echelon',
             'phu.position_status',
-            'phu.effective_date',
+            DB::raw("DATE_FORMAT(phu.effective_date, '%d-%m-%Y') as effective_date"),
             'phu.decree',
             'phu.decree_document',
             'phu.decree_number',
@@ -146,11 +146,11 @@ class PositionHistoryController extends Controller
             'tod.name as type_decree_name',
             'totd.id as type_termination_decree_id',
             'totd.name as type_termination_decree_name',
-            'phu.decree_date',
-            'phu.termination_date',
+            DB::raw("DATE_FORMAT(phu.decree_date, '%d-%m-%Y') as decree_date"),
+            DB::raw("DATE_FORMAT(phu.termination_date, '%d-%m-%Y') as termination_date"),
             'phu.termination_decree',
             'phu.termination_decree_number',
-            'phu.termination_decree_date',
+            DB::raw("DATE_FORMAT(phu.termination_decree_date, '%d-%m-%Y') as termination_decree_date"),
             'phu.status'
         );
         $users = $users->get();

@@ -49,7 +49,7 @@ class PerformanceHistoryController extends Controller
 
         $performanceHistories = DB::table('performance_histories as ph');
         $performanceHistories->leftjoin('performance_history_users as phu', 'ph.id', '=', 'phu.performance_history_id');
-        $performanceHistories->select('ph.id', 'ph.created_at', 'ph.name', 'ph.period_month', 'ph.period_year', 'ph.performance_period', DB::raw("COUNT(phu.id) AS total"));
+        $performanceHistories->select('ph.id', DB::raw("DATE_FORMAT(ph.created_at, '%d-%m-%Y %H:%i:%s') as created_at"), 'ph.name', 'ph.period_month', 'ph.period_year', 'ph.performance_period', DB::raw("COUNT(phu.id) AS total"));
         $performanceHistories->where('ph.name', 'like', '%' . $this->request->search . '%');
         $performanceHistories->orderBy('ph.updated_at', 'desc');
         $performanceHistories->orderBy('ph.created_at', 'desc');

@@ -52,7 +52,7 @@ class GradeHistoryController extends Controller
 
         $gradeHistories = DB::table('grade_histories as gh');
         $gradeHistories->leftjoin('grade_history_users as ghu', 'gh.id', '=', 'ghu.grade_history_id');
-        $gradeHistories->select('gh.id', 'gh.created_at', 'gh.name', 'gh.period_month', 'gh.period_year', DB::raw("COUNT(ghu.id) AS total"));
+        $gradeHistories->select('gh.id', DB::raw("DATE_FORMAT(gh.created_at, '%d-%m-%Y %H:%i:%s') as created_at"), 'gh.name', 'gh.period_month', 'gh.period_year', DB::raw("COUNT(ghu.id) AS total"));
         $gradeHistories->where('gh.name', 'like', '%' . $this->request->search . '%');
         $gradeHistories->orderBy('gh.updated_at', 'desc');
         $gradeHistories->orderBy('gh.created_at', 'desc');
@@ -139,7 +139,7 @@ class GradeHistoryController extends Controller
             'g.id as grade_id',
             'g.name as grade_name',
             'g.code as grade_code',
-            'ghu.effective_date',
+            DB::raw("DATE_FORMAT(ghu.effective_date, '%d-%m-%Y') as effective_date"),
             'ghu.decree_number',
             'ghu.status',
             'ghu.created_at'
