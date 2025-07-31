@@ -1267,6 +1267,16 @@ class ImportEmployeeController extends Controller
                 }
             }
 
+
+            if ($this->type != 3) {
+                if (strlen($personalInfoRow[$personalInfoPos['id_tax']]) > 16) {
+                    $this->skippedRow('Data Pegawai', $personalInfoKey, 'NPWP Pegawai ' . $personalInfoRow[$personalInfoPos['id_tax']] . ' melebihi limit 16 digit');
+                }
+                if (strlen($personalInfoRow[$personalInfoPos['mobile_phone']]) > 20) {
+                    $this->skippedRow('Data Pegawai', $personalInfoKey, 'No. HP Pegawai ' . $personalInfoRow[$personalInfoPos['mobile_phone']] . ' melebihi limit 20 digit');
+                }
+            }
+
             // Get ID
             $employmentTypeID = $this->findInArray($personalInfoRow[$personalInfoPos['employment_type']], $this->employmentTypes, 'Data Pegawai', $personalInfoKey, $personalInfo[0][$personalInfoPos['employment_type']]);
             $positionID = $this->getPositionID($personalInfoRow[$personalInfoPos['position']], $personalInfoKey);
