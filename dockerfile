@@ -38,7 +38,7 @@ RUN curl -sSL https://github.com/mlocati/docker-php-extension-installer/releases
 COPY . .
 
 # Copy .env file
-COPY ./config/.env .env
+COPY ./config-simdatuk/.env .env
 
 # Install PHP extensions
 RUN docker-php-ext-install pdo pdo_mysql
