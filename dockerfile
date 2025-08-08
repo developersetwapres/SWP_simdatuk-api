@@ -50,7 +50,7 @@ RUN composer install --no-scripts --no-autoloader
 RUN composer clear-cache && composer dump-autoload --no-scripts --optimize
 
 # Generate api documentation
-RUN php artisan scribe:generate
+# RUN php artisan scribe:generate
 RUN chown -R www-data:www-data /app/storage/app/scribe
 RUN chmod -R 777 /app/storage/app/scribe
 
