@@ -51,8 +51,8 @@ RUN composer clear-cache && composer dump-autoload --no-scripts --optimize
 
 # Generate api documentation
 # RUN php artisan scribe:generate
-RUN chown -R www-data:www-data /app/storage/app/scribe
-RUN chmod -R 777 /app/storage/app/scribe
+# RUN chown -R www-data:www-data /app/storage/app/scribe
+# RUN chmod -R 777 /app/storage/app/scribe
 
 # Make symlink to from storage path to public path
 RUN php artisan storage:link
