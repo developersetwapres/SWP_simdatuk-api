@@ -40,9 +40,6 @@ COPY . .
 # Copy .env file
 COPY ./config/.env .env
 
-# Change ownership for application code
-RUN chown -R www-data:www-data /app
-
 # Install PHP extensions
 RUN docker-php-ext-install pdo pdo_mysql
 
@@ -66,6 +63,9 @@ COPY docker/local.conf /etc/nginx/conf.d
 
 # Supervisor configuration
 COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# Change ownership for application code
+RUN chown -R www-data:www-data /app
 
 # Start Supervisord
 CMD ["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
