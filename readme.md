@@ -1,111 +1,133 @@
-## About Simdatuk
+![Logo](/public/img/logo.svg)
 
-![Simdatuk](/public/img/logo.svg)
+# Application Programming Interface (API)
 
-SIMDATUK is an acronym for Aplikasi Sistem Informasi Manajemen Data Dukungan Kepegawaian. This application serves as a tool for profiling employee data, ensuring efficiency, measurability, and comprehensiveness.
+This is the backend API for SIMDATUK (Sistem Informasi Manajemen Data Dukungan Kepegawaian) - Indonesian Government Human Resource Management System. It is built with Laravel and provides comprehensive server-side functionality for employee data management, organizational structure, reporting, and administrative operations for ASN, Non-ASN, and Outsourced personnel.
 
 ## Table of Contents
-
 [[_TOC_]]
 
-## Prerequisites
+## Features
 
--   GIT [download here](https://git-scm.com/)
--   Docker [download here](https://www.docker.com/products/docker-desktop/)
+*   **Employee Management:** Complete CRUD operations for ASN, Non-ASN, and Outsourced employees with comprehensive profile data.
+*   **Authentication & Authorization:** Secure JWT-based authentication with role-based access control (RBAC) and granular permissions.
+*   **Position Management:** Hierarchical organizational structure with position availability tracking and echelon compatibility.
+*   **Historical Data Tracking:** Complete audit trail for positions, grades, training, performance, recognition, and disciplinary records.
+*   **Advanced Reporting:** Statistical summaries, recapitulations, employee comparisons, and organizational diagrams with export capabilities.
+*   **Bulk Import/Export:** Excel-based bulk employee import with error handling and multiple export formats (Excel, PDF, CSV).
+*   **Document Management:** Secure file uploads and management using AWS S3 integration.
+*   **Training Management:** Comprehensive tracking for structural, functional, and technical training programs.
+*   **Performance Evaluation:** SKP (Sasaran Kinerja Pegawai) and performance assessment management.
+*   **API Documentation:** Automatically generated documentation using Scribe.
 
-## How to Setup
+## Technology Stack
 
-1. Clone this source code to your directory with command:
+*   **Language:** PHP 8.1+
+*   **Framework:** Laravel 10.x
+*   **Database:** MySQL with custom query extensions
+*   **Authentication:** Laravel Sanctum (JWT)
+*   **File Storage:** AWS S3 with Flysystem
+*   **PDF Generation:** DomPDF
+*   **Excel Processing:** Maatwebsite Excel
+*   **API Documentation:** Scribe
+*   **Containerization:** Docker with multi-service setup
+*   **Web Server:** Nginx with PHP-FPM
 
-```bash
-git clone http://git.ekuator.id/project/setneg/simdatuk/api.git
+## Project Structure
+
+The project follows Laravel's MVC architecture with repository pattern and helper traits for better organization and scalability.
+
+```
+.
+├── app/
+│   ├── Console/           # Artisan commands
+│   ├── Exceptions/        # Custom exception handlers
+│   ├── Exports/           # Excel export classes
+│   ├── Helpers/           # Utility traits (Document, Responser)
+│   ├── Http/
+│   │   ├── Controllers/   # API controllers with comprehensive business logic
+│   │   ├── Middleware/    # Authentication and authorization middleware
+│   │   └── Requests/      # Form request validation classes
+│   ├── Imports/           # Excel import processing
+│   ├── Mail/              # Email notification classes
+│   ├── Models/            # Eloquent models
+│   ├── Providers/         # Service providers
+│   └── Repositories/      # Data access layer with business logic
+├── config/                # Laravel configuration files
+├── database/
+│   ├── migrations/        # Database schema migrations (40+ tables)
+│   └── seeders/          # Database seeding scripts
+├── docker/               # Docker configuration files
+├── public/               # Web accessible files and assets
+├── resources/            # Views, assets, and language files
+├── routes/               # API route definitions (50+ endpoints)
+├── storage/              # File storage and logs
+└── tests/                # PHPUnit test suites
 ```
 
-2. Navigate to your source code directory.
-3. Copy the **.env.example** file with the following command:
+## Getting Started
 
-```bash
-cp .env.example .env
-```
+### Prerequisites
 
-4. Edit and configure file **.env** file to match the environment you will be using, especially updating the website and database configurations.
-5. Open your Docker application.
-6. Run the following command in your source code directory to start the application:
+*   PHP 8.1 or higher
+*   Composer
+*   Docker & Docker Compose
+*   MySQL
+*   AWS S3 account (for file storage)
 
-```bash
-docker-compose up -d
-```
+### Installation
 
-7. Access PhpMyAdmin at [http://localhost:8080](http://localhost:8080).
-8. Create a database with the same name as specified in the **.env** file.
-9. Your local SIMDATUK application is now ready to use on [http://localhost](http://localhost).
-10. Happy coding! 🎉🎉🎉 and keep up the great work! 🚀
-11. Note: for access webmail visit this link [http://localhost:1080](http://localhost:1080).
+1.  **Clone the repository:**
+    ```bash
+    git clone http://git.ekuator.id/project/setneg/simdatuk/api.git
+    cd api
+    ```
 
-## API Collection
+2.  **Set up environment variables:**
+    ```bash
+    cp .env.example .env
+    ```
+    *   Configure database credentials, AWS S3 settings, and other environment-specific values.
 
-For a list of used endpoints, you can use this api documentation [here](https://localhost/docs).
+3.  **Install dependencies:**
+    ```bash
+    composer install
+    ```
 
-## Database Diagram
+4.  **Start Docker services:**
+    ```bash
+    docker-compose up -d
+    ```
 
-To see database diagram, copy data on [**diagram.txt**](/dbdiagram.txt) file and paste on [https://dbdiagram.io](https://dbdiagram.io)
+5.  **Access PHPMyAdmin at [http://localhost:8080](http://localhost:8080) and create the database.**
 
-## Infrastructure
+6.  **Run database migrations:**
+    ```bash
+    docker exec -it simdatuk-api php artisan migrate
+    ```
 
-The following is the recommendation infrastructure used in constructing in production
-![SIMDATUK](/infrastructure.jpg)
+7.  **Seed the database:**
+    ```bash
+    docker exec -it simdatuk-api php artisan db:seed
+    ```
 
-## Specification
+8.  **Generate application key:**
+    ```bash
+    docker exec -it simdatuk-api php artisan key:generate
+    ```
 
-| Item             | Staging        | Production     |
-| ---------------- | -------------- | -------------- |
-| Processor        | 2vCPU          | 2vCPU          |
-| RAM              | 2GB            | 4GB            |
-| Storage          | 10GB           | 10GB           |
-| Operating System | Ubuntu 12.04   | Ubuntu 12.04   |
-| Docker           | Latest version | Latest version |
+The application will be available at `http://localhost` and webmail at `http://localhost:1080`.
 
-## How to Deploy to Production
+## API Documentation
 
-```bash
-cd /var/www/api
-git pull origin main
-```
+The API provides 50+ endpoints organized into the following groups:
 
-Update .env file
+*   **Authentication:** `/api/login`, `/api/logout`, `/api/forgot-password`
+*   **Employee Management:** `/api/employees/*` (CRUD with advanced filtering)
+*   **Reporting & Analytics:** `/api/summaries`, `/api/recapitulations/*`
+*   **Historical Data:** `/api/*-histories` (position, grade, training, etc.)
+*   **Master Data:** `/api/positions`, `/api/grades`, `/api/institutions`
+*   **Export Operations:** `/api/export/*` (Excel, PDF formats)
+*   **User Management:** `/api/users/*`, `/api/roles/*`
 
-Build sourcecode
-
-```bash
-docker build -t simdatuk-api --no-cache .
-```
-
-Run Container
-
-```bash
-docker rm simdatuk-api --force && docker run -d -p 8080:80 --name simdatuk-api --network simdatuk_network --restart always simdatuk-api && docker image prune -f
-```
-
-Run migration
-
-```bash
-docker exec -it /bin/bash simsdatuk-api
-php artisan migrate
-```
-
-## Code Style
-
-To adhere to good coding standards, follow the references below:
-
--   [PSR-12](https://www.php-fig.org/psr/psr-12/)
--   [Laravel best practices](https://github.com/alexeymezenin/laravel-best-practices)
-
-## GIT Style
-
-For naming branches and adhering to the Git style guide, please refer to the following documentation [here](https://www.conventionalcommits.org/en/v1.0.0/).
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://git.ekuator.id/project/setneg/simdatuk/api/-/tags).
-
-[Table of Contents](#table-of-contents)
+Access the interactive API documentation at `http://localhost/docs`.
