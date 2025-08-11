@@ -331,7 +331,7 @@
             <td class="table-section-3-title">Jabatan</td>
             <td class="table-section-3-title">Jenjang Jabatan</td>
             <td class="table-section-3-title">Keterangan Jabatan</td>
-            <td class="table-section-3-title">TMT Menjabat</td>
+            <td class="table-section-3-title">TMT Jabatan</td>
             <td class="table-section-3-title">SK Menjabat</td>
             <td class="table-section-3-title">SK Jabatan</td>
             <td class="table-section-3-title">No SK Jabatan</td>

@@ -178,7 +178,7 @@ class ImportEmployeeController extends Controller
         'group' => 6, // Rumpun
         'echelon' => 7, // Jenjang Jabatan
         'position_status' => 8, // Keterangan Jabatan
-        'effective_date' => 9, // TMT Menjabat
+        'effective_date' => 9, // TMT Jabatan
         'decree' => 10, // SK Jabatan
         'type_of_decree' => 11, //Jenis SK Jabatan
         'decree_number' => 12, // No SK Jabatan
