@@ -1152,7 +1152,6 @@ class ImportEmployeeController extends Controller
                     'employment_type',
                     'education_level',
                     'employment_status',
-                    'email',
                     'emergency_contact'
                 ];
             } else if ($this->type == 2) { // NON ASN
@@ -1168,7 +1167,6 @@ class ImportEmployeeController extends Controller
                     'employment_type',
                     'education_level',
                     'employment_status',
-                    'email',
                     'emergency_contact'
                 ];
             } else { // ASN
