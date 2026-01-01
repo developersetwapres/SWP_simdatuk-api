@@ -38,9 +38,6 @@ RUN curl -sSL https://github.com/mlocati/docker-php-extension-installer/releases
 # Copy the rest of the application code to the container
 COPY . .
 
-# Copy .env file
-COPY ./config-simdatuk/.env .env
-
 # Install PHP extensions
 RUN docker-php-ext-install pdo pdo_mysql
 
@@ -49,11 +46,6 @@ RUN composer install --no-scripts --no-autoloader
 
 # Generate the optimized autoload files
 RUN composer clear-cache && composer dump-autoload --no-scripts --optimize
-
-# Generate api documentation
-# RUN php artisan scribe:generate
-# RUN chown -R www-data:www-data /app/storage/app/scribe
-# RUN chmod -R 777 /app/storage/app/scribe
 
 # Make symlink to from storage path to public path
 RUN php artisan storage:link
