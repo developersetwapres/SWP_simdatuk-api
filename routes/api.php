@@ -12,7 +12,6 @@ use App\Http\Controllers\EmploymentTypeController;
 use App\Http\Controllers\ExportComparisonController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\ExportRecapitulationController;
-use App\Http\Controllers\FileController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\GradeHistoryController;
 use App\Http\Controllers\GroupController;
@@ -56,7 +55,6 @@ Route::get('/', function () {
     return 'api enabled!';
 });
 
-Route::get('file', [FileController::class, 'file']);
 Route::post('login', [AuthController::class, 'login']);
 Route::post('forgot-password', [AuthController::class, 'forgotPassword']);
 Route::post('reset-password', [AuthController::class, 'resetPassword']);
