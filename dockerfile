@@ -38,6 +38,9 @@ RUN curl -sSL https://github.com/mlocati/docker-php-extension-installer/releases
 # Copy the rest of the application code to the container
 COPY . .
 
+# Copy custom PHP configuration for security hardening
+COPY docker/php.ini /usr/local/etc/php/conf.d/99-simdatuk-security.ini
+
 # Install PHP extensions
 RUN docker-php-ext-install pdo pdo_mysql
 
