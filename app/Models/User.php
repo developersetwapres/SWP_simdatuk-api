@@ -12,6 +12,81 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    
+    /**
+     * The attributes that are mass assignable.
+     */
+    protected $fillable = [
+        'name',
+        'email', 
+        'username',
+        'password',
+        'role_id',
+    ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    /**
+     * Relationship: User belongs to Role
+     */
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    /**
+     * Get user permissions through role
+     */
+    public function permissions()
+    {
+        return $this->hasManyThrough(
+            Permission::class,
+            Role::class,
+            'id', // Foreign key on roles table
+            'id', // Foreign key on permissions table  
+            'role_id', // Local key on users table
+            'id' // Local key on roles table
+        )->through('role_permissions');
+    }
+
+    /**
+     * Check if user has specific permission with action
+     */
+    public function hasPermission(string $permissionName, string $action = 'read'): bool
+    {
+        if (!$this->role_id) {
+            return false;
+        }
+
+        return DB::table('permissions as p')
+            ->join('role_permissions as rp', 'p.id', '=', 'rp.permission_id')
+            ->where('rp.role_id', $this->role_id)
+            ->where('p.name', $permissionName)
+            ->where("rp.{$action}", true)
+            ->exists();
+    }
+
+    /**
+     * Get all user permissions with CRUD flags
+     */
+    public function getAllPermissions()
+    {
+        if (!$this->role_id) {
+            return collect();
+        }
+
+        return DB::table('permissions as p')
+            ->join('role_permissions as rp', 'p.id', '=', 'rp.permission_id')
+            ->where('rp.role_id', $this->role_id)
+            ->select('p.id', 'p.name', 'rp.create', 'rp.read', 'rp.update', 'rp.delete')
+            ->get();
+    }
 
     /**
      * Generate Token

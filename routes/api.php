@@ -69,7 +69,7 @@ Route::middleware(['auth:sanctum', 'api.rate.limit:100,1'])->group(function () {
     Route::prefix('summaries')->group(function () {
         Route::get('/', [SummaryController::class, 'index']);
     });
-
+ 
     Route::prefix('recapitulations')->group(function () {
         Route::get('/', [RecapitulationController::class, 'index']);
         Route::get('/{category}', [RecapitulationController::class, 'show']);
