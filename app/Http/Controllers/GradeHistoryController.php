@@ -102,7 +102,7 @@ class GradeHistoryController extends Controller
         } catch (\Throwable $th) {
             Log::warning($th);
             DB::rollback();
-            return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
+            return $this->response(400, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
         }
     }
 
@@ -255,7 +255,7 @@ class GradeHistoryController extends Controller
         } catch (\Throwable $th) {
             DB::rollback();
             Log::warning($th);
-            return $this->response(500, 'Riwayat golongan gagal dihapus.');
+            return $this->response(400, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
         }
     }
 }

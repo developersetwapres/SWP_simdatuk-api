@@ -119,7 +119,7 @@ class UserController extends Controller
             return $this->response(200, 'Pengguna berhasil ditambah.');
         } catch (\Throwable $th) {
             DB::rollback();
-            return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
+            return $this->response(400, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
         }
     }
 
@@ -221,7 +221,7 @@ class UserController extends Controller
         } catch (\Throwable $th) {
             \Log::warning($th);
             DB::rollback();
-            return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
+            return $this->response(400, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
         }
     }
 

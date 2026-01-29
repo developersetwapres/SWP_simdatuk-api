@@ -444,7 +444,7 @@ class EmployeeController extends Controller
         } catch (\Throwable $th) {
             DB::rollback();
             Log::warning($th);
-            return $this->response(500, 'Pegawai gagal ditambah.');
+            return $this->response(400, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
         }
     }
 
@@ -1221,7 +1221,7 @@ class EmployeeController extends Controller
         } catch (\Throwable $th) {
             DB::rollback();
             Log::warning($th);
-            return $this->response(500, 'Pegawai gagal diubah.');
+            return $this->response(400, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
         }
     }
 
@@ -1304,7 +1304,7 @@ class EmployeeController extends Controller
         } catch (\Throwable $th) {
             DB::rollback();
             Log::warning($th);
-            return $this->response(500, 'Pegawai gagal dihapus.');
+            return $this->response(400, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
         }
     }
 }

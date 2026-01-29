@@ -1053,7 +1053,7 @@ class ImportEmployeeController extends Controller
                 DB::rollback();
 
                 Log::warning($th);
-                return $this->response(500, 'Import pegawai gagal');
+                return $this->response(400, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
             }
         }
 

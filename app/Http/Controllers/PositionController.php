@@ -161,7 +161,7 @@ class PositionController extends Controller
         } catch (\Throwable $th) {
             Log::warning($th);
             DB::rollback();
-            return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
+            return $this->response(400, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
         }
     }
 
@@ -212,7 +212,7 @@ class PositionController extends Controller
         } catch (\Throwable $th) {
             Log::warning($th);
             DB::rollback();
-            return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
+            return $this->response(400, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
         }
     }
 
@@ -303,7 +303,7 @@ class PositionController extends Controller
             return $this->response(200, 'success', $position);
         } catch (\Throwable $th) {
             Log::warning($th);
-            return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
+            return $this->response(400, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
         }
     }
 
@@ -411,7 +411,7 @@ class PositionController extends Controller
         } catch (\Throwable $th) {
             Log::warning($th);
             DB::rollback();
-            return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
+            return $this->response(400, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
         }
     }
 
@@ -452,7 +452,7 @@ class PositionController extends Controller
             return $this->response(200, 'Jabatan berhasil dihapus.');
         } catch (\Throwable $th) {
             Log::warning($th);
-            return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
+            return $this->response(400, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
         }
     }
 
@@ -489,7 +489,7 @@ class PositionController extends Controller
             return $this->response(200, 'success', array_values($availableOrder));
         } catch (\Throwable $th) {
             Log::warning($th);
-            return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
+            return $this->response(400, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
         }
     }
 }
