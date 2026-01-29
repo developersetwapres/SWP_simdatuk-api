@@ -36,7 +36,7 @@ class ForgotPasswordRequest extends FormRequest
         return [
             'email.required' => 'Email tidak boleh kosong.',
             'email.email' => 'Format email tidak sesuai.',
-            'email.exists' => 'Email anda tidak terdaftar.',
+            'email.exists' => 'Terjadi kesalahan, silakan coba lagi.',
         ];
     }
 

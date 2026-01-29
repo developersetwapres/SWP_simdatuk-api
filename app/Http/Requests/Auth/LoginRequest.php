@@ -44,7 +44,7 @@ class LoginRequest extends FormRequest
     {
         return [
             'username.required' => 'Username tidak boleh kosong.',
-            'username.exists' => 'Username anda tidak terdaftar.',
+            'username.exists' => 'Terjadi kesalahan, silakan coba lagi.',
             'password.required' => 'Kata sandi tidak boleh kosong.',
             'recaptcha_token.required' => 'Token recaptcha tidak boleh kosong.',
         ];

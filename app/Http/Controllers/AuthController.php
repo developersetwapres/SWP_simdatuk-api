@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Auth\ForgotPasswordRequest;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\OtpVerifyRequest;
 use App\Http\Requests\Auth\ResetPasswordRequest;
 use App\Mail\ForgotPassword;
 use App\Models\User;
@@ -40,13 +41,11 @@ class AuthController extends Controller
         $user = User::where('username', $this->request->username)->first();
 
         if (!$user || !Hash::check($this->request->password, $user->password)) {
-            return $this->response(401, 'Password yang anda masukkan salah.');
+            return $this->response(401, 'Terjadi kesalahan, silakan coba lagi.');
         } else if (is_null($user->role_id)) {
-            return $this->response(401, 'Anda tidak terdaftar sebagai pengguna, silakan hubungi tim IT.');
+            return $this->response(401, 'Terjadi kesalahan, silakan coba lagi.');
         } else if ($user->status != true) {
-            return $this->response(401, 'Status pengguna tidak aktif.');
-        } else if (!is_null($user->verification_code)) {
-            return $this->response(401, 'Email belum terverifikasi.');
+            return $this->response(401, 'Terjadi kesalahan, silakan coba lagi.');
         } else {
             $token = $user->createToken('web')->plainTextToken;
         }
@@ -104,24 +103,25 @@ class AuthController extends Controller
         $user->where('email', $this->request->email);
         $user = $user->first();
         if (is_null($user->role_id)) {
-            return $this->response(404, 'Email tidak terdaftar sebagai pengguna.');
+            return $this->response(404, 'Terjadi kesalahan, silakan coba lagi.');
         }
 
         // Generete Token
         $token = new User();
-        $this->request->verification_code = $token->generateToken(false);
+        $this->request->verification_code = $token->generateOtp();
 
-        DB::table('password_reset_tokens')->insert([
+        DB::table('otps')->insert([
             'email' => $this->request->email,
-            'verification_code' => $this->request->verification_code,
-            'expire_at' => date('Y-m-d', strtotime('+7 days', strtotime(date('Y-m-d')))),
+            'code' => $this->request->verification_code,
+            'expire_at' => date('Y-m-d H:i:s', strtotime('+5 minutes')),
+            'created_at' => date('Y-m-d H:i:s'),
         ]);
 
         // Send Email
         try {
             Mail::to($this->request->email)->send(new ForgotPassword($this->request));
         } catch (\Exception $e) {
-            return $this->response(200, config('app.fe_url') . '/auth/reset-password/' . $this->request->verification_code);
+            return $this->response(404, 'Gagal mengirimkan email, silakan hubungi admin.');
         }
 
         return $this->response(200, 'Email sudah dikirim.');
@@ -135,56 +135,27 @@ class AuthController extends Controller
      */
     public function resetPassword(ResetPasswordRequest $request)
     {
-        $codeValidation = $this->codeValidation(false);
-        if ($codeValidation->getStatusCode() !== 200) {
-            return $codeValidation;
-        }
-
         $user = DB::table('password_reset_tokens');
-        $user->where('verification_code', $this->request->code);
-        $user->select('email');
+        $user->where('verification_code', $this->request->reset_token);
+        $user->select('email', 'expire_at');
         $user = $user->first();
 
-        try {
-            $query = DB::table('users');
-            $query->where('email', $user->email);
-            $query->update([
-                'password' => Hash::make($this->request->password),
-            ]);
+        if ($user) {
+            if ($user->expire_at >= date('Y-m-d H:i:s')) {
+                $query = DB::table('users');
+                $query->where('email', $user->email);
+                $query->update([
+                    'password' => Hash::make($this->request->password),
+                ]);
 
-            $user = DB::table('password_reset_tokens');
-            $user->where('verification_code', $this->request->code);
-            $user->delete();
-            return $this->response(200, 'Reset password berhasil disimpan.');
-        } catch (\Throwable $th) {
-            return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
-        }
-    }
-
-    /**
-     * New Password
-     *
-     * Below are the endpoints designed for setting new password.
-     * @response 200 {"code": 200,"message": "Password baru berhasil disimpan.","data": null}
-     */
-    public function newPassword(ResetPasswordRequest $request)
-    {
-        $codeValidation = $this->codeValidation(true);
-        if ($codeValidation->getStatusCode() !== 200) {
-            return $codeValidation;
-        }
-
-        try {
-            $user = DB::table('users');
-            $user->where('verification_code', $this->request->code);
-            $user->update([
-                'password' => Hash::make($this->request->password),
-                'verification_code' => null,
-                'expire_at' => null,
-            ]);
-            return $this->response(200, 'Password baru berhasil disimpan.');
-        } catch (\Throwable $th) {
-            return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
+                DB::table('password_reset_tokens')->where('verification_code', $this->request->reset_token)->delete();
+                return $this->response(200, 'Reset password berhasil disimpan.');
+            } else {
+                DB::table('password_reset_tokens')->where('expire_at', '<', date('Y-m-d H:i:s'))->delete();
+                return $this->response(404, 'Reset token sudah kadaluarsa.');
+            }
+        } else {
+            return $this->response(404, 'Terjadi kesalahan, silakan coba lagi.');
         }
     }
 
@@ -199,32 +170,49 @@ class AuthController extends Controller
     public function logout()
     {
         $user = $this->request->user();
-        $user->tokens()->where('id', auth()->id())->delete();
+        $user->currentAccessToken()->delete();
         return $this->response(200, 'Pengguna berhasil logout.');
     }
 
     /**
-     * Valdation for code token
+     * Verify OTP
      *
-     * @return void
+     * Below are the endpoints designed for setting new password.
+     * @response 200 {"code": 200,"message": "Kode OTP berhasil diverifikasi.","reset_token": "HJ7xKpi0z4wpSas306CTuRNjULb7dNve8qPDMTxK65ded5a7"}
      */
-    public function codeValidation($status)
+    public function verifyOtp(OtpVerifyRequest $request)
     {
-        if ($status == true) {
-            $user = DB::table("users");
-        } else {
-            $user = DB::table("password_reset_tokens");
-        }
-        $user->where('verification_code', $this->request->code);
-        $user->select('verification_code', 'expire_at');
-        $user = $user->first();
+        $otp = DB::table('otps');
+        $otp->where('email', $this->request->email);
+        $otp->where('code', $this->request->otp);
+        $otp->select('email', 'expire_at');
+        $otp = $otp->first();
+        
+        if ($otp) {
+            if ($otp->expire_at >= date('Y-m-d H:i:s')) {
+                $token = new User();
+                $this->request->token = $token->generateToken(false);
+                
+                DB::table('password_reset_tokens')->insert([
+                    'email' => $otp->email,
+                    'verification_code' => $this->request->token,
+                    'expire_at' => date('Y-m-d H:i:s', strtotime('+5 minutes')),
+                    'created_at' => date('Y-m-d H:i:s'),
+                ]);
 
-        if (!$user) {
-            return $this->response(404, 'Verifikasi kode tidak tersedia.');
-        } else if ($user->expire_at < date('Y-m-d')) {
-            return $this->response(404, 'Verifikasi kode sudah kadaluarsa.');
+                DB::table('otps')->where('code', $this->request->otp)->delete();
+
+                return response()->json([
+                    'code' => 200,
+                    "message" => "Kode OTP berhasil diverifikasi.",
+                    "reset_token" => $this->request->token,
+                ], 200);
+            } else {
+                DB::table('otps')->where('expire_at', '<', date('Y-m-d H:i:s'))->delete();
+                return $this->response(404, 'Kode OTP sudah kadaluarsa.');
+            }
         } else {
-            return $this->response(200, 'Verifikasi kode berhasil.');
+            return $this->response(404, 'Kode OTP tidak ditemukan.');
         }
     }
 

@@ -9,6 +9,8 @@ use App\Mail\RegisterVerification;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 
 /**
@@ -92,9 +94,8 @@ class UserController extends Controller
             return $this->response(422, 'Role tidak ditemukan.');
         }
 
-        $token = new User();
-        $this->request->verification_code = $token->generateToken(true);
         $this->request->name = $user->name;
+        $this->request->password = Str::password(8);
 
         try {
             DB::beginTransaction();
@@ -102,9 +103,8 @@ class UserController extends Controller
             DB::table('users')->where('id', $this->request->user_id)->updateTs([
                 'username' => $this->request->username,
                 'email' => $this->request->email,
+                'password' => Hash::make($this->request->password),
                 'role_id' => $this->request->role_id,
-                'verification_code' => $this->request->verification_code,
-                'expire_at' => date('Y-m-d', strtotime('+7 days', strtotime(date('Y-m-d')))),
                 'status' => true,
             ]);
 
@@ -113,7 +113,7 @@ class UserController extends Controller
             try {
                 Mail::to($this->request->email)->send(new RegisterVerification($this->request));
             } catch (\Exception $e) {
-                return $this->response(200, config('app.fe_url') . '/auth/new-password/' . $this->request->verification_code);
+                return $this->response(404, 'Gagal mengirimkan email, silakan hubungi admin.');
             }
 
             return $this->response(200, 'Pengguna berhasil ditambah.');

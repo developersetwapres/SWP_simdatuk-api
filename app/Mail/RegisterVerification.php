@@ -40,7 +40,8 @@ class RegisterVerification extends Mailable
             view: 'auth.register-verification',
             with: [
                 'name' => $this->request->name,
-                'redirectUrl' => config('app.fe_url') . '/auth/new-password/' . $this->request->verification_code,
+                'username' => $this->request->username,
+                'password' => $this->request->password,
             ]
         );
     }

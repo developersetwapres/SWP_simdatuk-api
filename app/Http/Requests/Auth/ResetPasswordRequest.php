@@ -22,8 +22,8 @@ class ResetPasswordRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'code' => 'required',
-            'password' => 'required|min:6|confirmed',
+            'reset_token' => 'required',
+            'password' => 'required|min:8|confirmed|regex:/[a-z]/|regex:/[A-Z]/|regex:/[@$!%*#?&]/',
             'password_confirmation' => 'required',
         ];
     }
@@ -36,9 +36,10 @@ class ResetPasswordRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'code.required' => 'Kode tidak boleh kosong.',
+            'reset_token.required' => 'Reset token tidak boleh kosong.',
             'password.required' => 'Password tidak boleh kosong.',
-            'password.min' => 'Password minimal memiliki 6 karakter.',
+            'password.min' => 'Password minimal memiliki 8 karakter.',
+            'password.regex' => 'Password harus mengandung huruf besar, kecil, dan spesial karakter.',
             'password.confirmed' => 'Konfirmasi password harus sama.',
             'password_confirmation.required' => 'Konfirmasi password tidak boleh kosong.',
         ];
@@ -52,8 +53,8 @@ class ResetPasswordRequest extends FormRequest
     public function bodyParameters(): array
     {
         return [
-            'code' => [
-                'description' => 'Verification code from email.',
+            'reset_token' => [
+                'description' => 'Verification code from verify otp.',
                 'example' => 'HJ7xKpi0z4wpSas306CTuRNjULb7dNve8qPDMTxK65ded5a7',
             ],
             'password' => [

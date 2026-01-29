@@ -14,7 +14,7 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
-     * Generate token for verification at register and forgot password
+     * Generate Token
      *
      * @param boolean $status
      * @return void
@@ -32,6 +32,21 @@ class User extends Authenticatable
             return $code;
         } else {
             return $this->generateToken($status);
+        }
+    }
+
+    /**
+     * Generate OTP
+     */
+    public function generateOtp()
+    {
+        $code = str_pad(random_int(0, 999999), 6, '0', STR_PAD_LEFT);
+        $verificationCode = DB::table('otps')->where('code', '=', $code)->first();
+
+        if (!$verificationCode) {
+            return $code;
+        } else {
+            return $this->generateOtp();
         }
     }
 }
