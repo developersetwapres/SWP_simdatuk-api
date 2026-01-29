@@ -26,8 +26,8 @@ class UpdateProfileRequest extends FormRequest
             'username' => 'required|min:5|max:30|unique:users,username,' . $this->user()?->id,
             'email' => 'required|email|unique:users,email,' . $this->user()?->id,
             'old_password' => 'required_with:password',
-            'password' => 'nullable|min:6|confirmed',
-            'password_confirmation' => 'nullable|required_with:password|min:6',
+            'password' => 'nullable|min:8|confirmed|regex:/[a-z]/|regex:/[A-Z]/|regex:/[@$!%*#?&]/',
+            'password_confirmation' => 'nullable|required_with:password|min:8|confirmed|regex:/[a-z]/|regex:/[A-Z]/|regex:/[@$!%*#?&]/',
         ];
     }
 
@@ -48,7 +48,8 @@ class UpdateProfileRequest extends FormRequest
             'email.required' => 'Email tidak boleh kosong',
             'email.email' => 'Format email tidak sesuai.',
             'email.unique' => 'Email sudah digunakan.',
-            'password.min' => 'Minimal password baru harus 6 karakter atau lebih.',
+            'password.min' => 'Minimal password baru harus 8 karakter atau lebih.',
+            'password.regex' => 'Password harus mengandung huruf besar, kecil, dan spesial karakter.',
             'password.confirmed' => 'Konfirmasi password baru harus sama.',
             'password_confirmation.required_with' => 'Konfirmasi password baru tidak boleh kosong.',
             'password_confirmation.min' => 'Minimal konfirmasi password baru harus 6 karakter atau lebih.',
