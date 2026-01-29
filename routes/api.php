@@ -55,12 +55,15 @@ Route::get('/', function () {
     return 'api enabled!';
 });
 
-Route::post('login', [AuthController::class, 'login']);
-Route::post('forgot-password', [AuthController::class, 'forgotPassword']);
-Route::post('reset-password', [AuthController::class, 'resetPassword']);
-Route::post('verify-otp', [AuthController::class, 'verifyOtp']);
+// Authentication endpoints with stricter rate limiting
+Route::middleware(['api.rate.limit:5,1'])->group(function () {
+    Route::post('login', [AuthController::class, 'login']);
+    Route::post('forgot-password', [AuthController::class, 'forgotPassword']);
+    Route::post('reset-password', [AuthController::class, 'resetPassword']);
+    Route::post('verify-otp', [AuthController::class, 'verifyOtp']);
+});
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware(['auth:sanctum', 'api.rate.limit:100,1'])->group(function () {
     Route::delete('logout', [AuthController::class, 'logout']);
 
     Route::prefix('summaries')->group(function () {
