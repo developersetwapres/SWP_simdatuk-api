@@ -41,6 +41,36 @@ class User extends Authenticatable
     }
 
     /**
+     * Relationship: User has many device sessions
+     */
+    public function deviceSessions()
+    {
+        return $this->hasMany(UserDeviceSession::class);
+    }
+
+    /**
+     * Revoke all tokens and device sessions except current
+     */
+    public function revokeOtherDeviceSessions($currentTokenId = null)
+    {
+        // Revoke all Sanctum tokens except current
+        $tokensQuery = $this->tokens();
+        if ($currentTokenId) {
+            $tokensQuery->where('id', '!=', $currentTokenId);
+        }
+        $tokensQuery->delete();
+
+        // Remove device sessions except current
+        $sessionsQuery = $this->deviceSessions();
+        if ($currentTokenId) {
+            $sessionsQuery->where('sanctum_token_id', '!=', $currentTokenId);
+        }
+        $sessionsQuery->delete();
+
+        return true;
+    }
+
+    /**
      * Get user permissions through role
      */
     public function permissions()

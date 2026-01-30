@@ -8,6 +8,8 @@ use App\Http\Requests\Auth\OtpVerifyRequest;
 use App\Http\Requests\Auth\ResetPasswordRequest;
 use App\Mail\ForgotPassword;
 use App\Models\User;
+use App\Models\UserDeviceSession;
+use App\Traits\SingleDeviceLogin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -21,6 +23,8 @@ use Illuminate\Support\Facades\Mail;
  */
 class AuthController extends Controller
 {
+    use SingleDeviceLogin;
+    
     public function __construct(Request $request)
     {
         $this->request = $request;
@@ -37,7 +41,6 @@ class AuthController extends Controller
      */
     public function login(LoginRequest $request)
     {
-
         $user = User::where('username', $this->request->username)->first();
 
         if (!$user || !Hash::check($this->request->password, $user->password)) {
@@ -46,10 +49,9 @@ class AuthController extends Controller
             return $this->response(401, 'Terjadi kesalahan, silakan coba lagi.');
         } else if ($user->status != true) {
             return $this->response(401, 'Terjadi kesalahan, silakan coba lagi.');
-        } else {
-            $token = $user->createToken('web')->plainTextToken;
         }
 
+        // Validate reCAPTCHA in production
         if (config('app.env') == 'production') {
             $recaptchaValidation = $this->recaptchaValidation($this->request->recaptcha_token);
             if ($recaptchaValidation->getStatusCode() !== 200) {
@@ -57,9 +59,34 @@ class AuthController extends Controller
             }
         }
 
+        // Handle single device login - revoke other sessions and create new token
+        $tokenResult = $this->handleSingleDeviceLogin($user, $this->request);
+        $token = $tokenResult->plainTextToken;
+
+        // Get user data with role and permissions
+        $userData = $this->getUserData($user->id);
+
+        return response()->json([
+            'code' => 200,
+            "message" => "Pengguna berhasil login.",
+            "token" => $token,
+            "user" => $userData,
+            "device_info" => [
+                "device_type" => $this->getDeviceName($this->request),
+                "login_time" => now()->toISOString(),
+                "previous_sessions_revoked" => true
+            ]
+        ], 200);
+    }
+
+    /**
+     * Get formatted user data with role and permissions
+     */
+    private function getUserData($userId)
+    {
         $user = DB::table('users');
         $user->select('users.id', 'users.email', 'users.username', 'users.photo_profile', 'users.employee_id_number', 'users.employee_registration_number');
-        $user->where('username', $this->request->username);
+        $user->where('users.id', $userId);
         $user = $user->first();
         $user->photo_profile = $this->getDocument($user->photo_profile, true);
 
@@ -80,12 +107,7 @@ class AuthController extends Controller
 
         $user->permissions = $permissions;
 
-        return response()->json([
-            'code' => 200,
-            "message" => "Pengguna berhasil login.",
-            "token" => $token,
-            "user" => $user,
-        ], 200);
+        return $user;
     }
 
     /**
@@ -170,8 +192,52 @@ class AuthController extends Controller
     public function logout()
     {
         $user = $this->request->user();
-        $user->currentAccessToken()->delete();
+        $currentToken = $user->currentAccessToken();
+        
+        // Remove device session record
+        UserDeviceSession::where('sanctum_token_id', $currentToken->id)->delete();
+        
+        // Delete the current token
+        $currentToken->delete();
+        
         return $this->response(200, 'Pengguna berhasil logout.');
+    }
+
+    /**
+     * Logout from all devices
+     *
+     * Force logout from all devices for current user
+     * @authenticated  
+     */
+    public function logoutAllDevices()
+    {
+        $user = $this->request->user();
+        
+        // Revoke all tokens and device sessions
+        $user->revokeOtherDeviceSessions();
+        
+        return $this->response(200, 'Berhasil logout dari semua perangkat.');
+    }
+
+    /**
+     * Get active device sessions
+     *
+     * Get list of active device sessions for current user
+     * @authenticated
+     */
+    public function getActiveSessions()
+    {
+        $user = $this->request->user();
+        
+        $sessions = UserDeviceSession::where('user_id', $user->id)
+            ->orderBy('last_activity_at', 'desc')
+            ->get(['device_name', 'ip_address', 'last_activity_at', 'created_at']);
+        
+        return response()->json([
+            'code' => 200,
+            'message' => 'Berhasil mengambil data sesi aktif.',
+            'data' => $sessions
+        ], 200);
     }
 
     /**

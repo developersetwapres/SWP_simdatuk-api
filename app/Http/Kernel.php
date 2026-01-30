@@ -68,5 +68,6 @@ class Kernel extends HttpKernel
         'permission' => \App\Http\Middleware\CheckPermission::class,
         'role.access' => \App\Http\Middleware\RoleBasedAccess::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'device.session' => \App\Http\Middleware\ValidateDeviceSession::class,
     ];
 }
