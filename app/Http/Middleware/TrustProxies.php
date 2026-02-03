@@ -9,10 +9,17 @@ class TrustProxies extends Middleware
 {
     /**
      * The trusted proxies for this application.
+     * Trust all proxies since we're behind Cloudflare + nginx global + nginx docker
      *
      * @var array<int, string>|string|null
      */
-    protected $proxies = '*'; // Trust all proxies in Docker environment
+    protected $proxies = [
+        '*', // Trust all proxies for multi-layer proxy setup
+        // Alternative: specify ranges if needed
+        // '10.0.0.0/8',
+        // '172.16.0.0/12', 
+        // '192.168.0.0/16',
+    ];
 
     /**
      * The headers that should be used to detect proxies.
@@ -24,5 +31,6 @@ class TrustProxies extends Middleware
         Request::HEADER_X_FORWARDED_HOST |
         Request::HEADER_X_FORWARDED_PORT |
         Request::HEADER_X_FORWARDED_PROTO |
-        Request::HEADER_X_FORWARDED_AWS_ELB;
+        Request::HEADER_X_FORWARDED_AWS_ELB |
+        Request::HEADER_X_REAL_IP;
 }
