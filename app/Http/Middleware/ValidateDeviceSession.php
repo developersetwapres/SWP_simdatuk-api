@@ -40,7 +40,7 @@ class ValidateDeviceSession
             
             return response()->json([
                 'code' => 401,
-                'message' => 'Sesi tidak valid. Silakan login kembali.',
+                'message' => 'Anda login di perangkat lain. Silakan login kembali.',
                 'data' => null,
                 'error_code' => 'SESSION_INVALID'
             ], 401);
@@ -55,7 +55,7 @@ class ValidateDeviceSession
             
             return response()->json([
                 'code' => 401,
-                'message' => 'Perangkat tidak dikenali. Silakan login kembali.',
+                'message' => 'Anda login di perangkat lain. Silakan login kembali.',
                 'data' => null,
                 'error_code' => 'DEVICE_MISMATCH'
             ], 401);
