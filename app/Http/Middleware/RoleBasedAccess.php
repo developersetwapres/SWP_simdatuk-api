@@ -72,7 +72,6 @@ class RoleBasedAccess
         // Route mapping untuk endpoint permissions
         $routePermissionMap = [
             // Rekapitulasi endpoints
-            'api/summaries' => 'Rekapitulasi - Komposisi Pegawai',
             'api/recapitulations' => 'Rekapitulasi - Komposisi Pegawai',
             'api/recapitulations-asn' => 'Rekapitulasi - Pegawai ASN', 
             'api/recapitulations-nonasn' => 'Rekapitulasi - Pegawai Non ASN',
