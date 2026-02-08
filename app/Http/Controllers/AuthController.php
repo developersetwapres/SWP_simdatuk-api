@@ -99,10 +99,17 @@ class AuthController extends Controller
         $user->role = $role;
 
         $permissions = DB::table('permissions as p');
-        $permissions->join('role_permissions as rp', 'p.id', 'rp.permission_id');
-        $permissions->join('roles as r', 'rp.role_id', 'r.id');
-        $permissions->where('rp.role_id', $role->id);
-        $permissions->select('p.id', 'p.name', 'rp.create', 'rp.read', 'rp.update', 'rp.delete');
+        $permissions->leftJoin('role_permissions as rp', function($join) use ($role) {
+            $join->on('p.id', '=', 'rp.permission_id')
+                 ->where('rp.role_id', '=', $role->id);
+        });
+        $permissions->select('p.id', 'p.name', 
+            DB::raw('COALESCE(rp.`create`, 0) as `create`'),
+            DB::raw('COALESCE(rp.`read`, 0) as `read`'),
+            DB::raw('COALESCE(rp.`update`, 0) as `update`'),
+            DB::raw('COALESCE(rp.`delete`, 0) as `delete`')
+        );
+        $permissions->orderBy('p.id');
         $permissions = $permissions->get();
 
         $user->permissions = $permissions;
