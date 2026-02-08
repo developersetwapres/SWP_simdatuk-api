@@ -63,7 +63,7 @@ Route::middleware(['api.rate.limit:5,1'])->group(function () {
     Route::post('verify-otp', [AuthController::class, 'verifyOtp']);
 });
 
-Route::middleware(['auth:sanctum', 'device.session', 'api.rate.limit:100,1'])->group(function () {
+Route::middleware(['auth:sanctum', 'device.session', 'role.access', 'api.rate.limit:100,1'])->group(function () {
     Route::delete('logout', [AuthController::class, 'logout']);
     Route::delete('logout-all-devices', [AuthController::class, 'logoutAllDevices']);
     Route::get('active-sessions', [AuthController::class, 'getActiveSessions']);

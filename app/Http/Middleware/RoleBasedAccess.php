@@ -37,13 +37,6 @@ class RoleBasedAccess
         $requiredAction = $this->getRequiredAction($request);
 
         if (!$permissionName) {
-            // Log untuk debugging
-            Log::warning('No permission mapping found for route', [
-                'route' => $request->route()->getName(),
-                'uri' => $request->getRequestUri(),
-                'method' => $request->getMethod()
-            ]);
-            
             return $next($request); // Allow if no specific permission required
         }
 
@@ -69,48 +62,58 @@ class RoleBasedAccess
         $uri = $request->getRequestUri();
         $path = parse_url($uri, PHP_URL_PATH);
         
+        // Handle special case for employees endpoint based on type parameter
+        if ($path === '/api/employees' || str_starts_with($path, '/api/employees/')) {
+            return $this->getEmployeePermissionByType($request);
+        }
+        
+        // Handle import employees based on type parameter
+        if ($path === '/api/import-employees') {
+            return $this->getEmployeePermissionByType($request);
+        }
+        
+        // Handle training histories based on type parameter
+        if ($path === '/api/training-histories' || str_starts_with($path, '/api/training-histories/')) {
+            return $this->getTrainingPermissionByType($request);
+        }
+        
         // Route mapping untuk endpoint permissions
         $routePermissionMap = [
             // Rekapitulasi endpoints
-            'api/recapitulations' => 'Rekapitulasi - Komposisi Pegawai',
-            'api/recapitulations-asn' => 'Rekapitulasi - Pegawai ASN', 
-            'api/recapitulations-nonasn' => 'Rekapitulasi - Pegawai Non ASN',
-            'api/recapitulations-outsource' => 'Rekapitulasi - Pegawai Outsourcing',
-            'api/recapitulations-employee' => 'Rekapitulasi - Komposisi Pegawai',
-            'api/diagrams' => 'Rekapitulasi - Peta Jabatan',
-            'api/comparisons' => 'Rekapitulasi - Bandingkan Pegawai',
-            'api/promotions' => 'Rekapitulasi - Promosi Pegawai',
-            
-            // Data Pegawai endpoints
-            'api/employees' => 'Data Pegawai - ASN', // Default to ASN, can be refined
-            'api/import-employees' => 'Data Pegawai - ASN',
-            
-            // Master Data endpoints
-            'api/users' => 'Master Data - Data Pengguna',
-            'api/roles' => 'Master Data - Data Role Pengguna', 
-            'api/permissions' => 'Master Data - Data Role Pengguna',
-            'api/positions' => 'Master Data - Data Jabatan',
-            'api/institutions' => 'Master Data - Data Instansi',
-            'api/grades' => 'Master Data - Data Golongan',
-            'api/employment-types' => 'Master Data - Jenis Pegawai',
+            '/api/recapitulations' => 'Rekapitulasi - Komposisi Pegawai',
+            '/api/recapitulations-asn' => 'Rekapitulasi - Pegawai ASN', 
+            '/api/recapitulations-nonasn' => 'Rekapitulasi - Pegawai Non ASN',
+            '/api/recapitulations-outsource' => 'Rekapitulasi - Pegawai Outsourcing',
+            '/api/recapitulations-employee' => 'Rekapitulasi - Komposisi Pegawai',
+            '/api/diagrams' => 'Rekapitulasi - Peta Jabatan',
+            '/api/comparisons' => 'Rekapitulasi - Bandingkan Pegawai',
+            '/api/promotions' => 'Rekapitulasi - Promosi Pegawai',
             
             // Riwayat endpoints
-            'api/position-histories' => 'Data Riwayat - Jabatan',
-            'api/grade-histories' => 'Data Riwayat - Golongan', 
-            'api/training-histories' => 'Data Riwayat - Pelatihan Struktural', // Default
-            'api/recognition-histories' => 'Data Riwayat - Penghargaan',
-            'api/target-histories' => 'Data Riwayat - SKP',
-            'api/performance-histories' => 'Data Riwayat - Penilaian Prestasi Kerja',
-            'api/disciplinary-histories' => 'Data Riwayat - Hukuman Disiplin',
+            '/api/position-histories' => 'Data Riwayat - Jabatan',
+            '/api/grade-histories' => 'Data Riwayat - Golongan',
+            '/api/recognition-histories' => 'Data Riwayat - Penghargaan',
+            '/api/target-histories' => 'Data Riwayat - SKP',
+            '/api/performance-histories' => 'Data Riwayat - Penilaian Prestasi Kerja',
+            '/api/disciplinary-histories' => 'Data Riwayat - Hukuman Disiplin',
+
+            // Master Data endpoints
+            '/api/users' => 'Master Data - Data Pengguna',
+            '/api/roles' => 'Master Data - Data Role Pengguna', 
+            '/api/permissions' => 'Master Data - Data Role Pengguna',
+            '/api/positions' => 'Master Data - Data Jabatan',
+            '/api/institutions' => 'Master Data - Data Instansi',
+            '/api/grades' => 'Master Data - Data Golongan',
+            '/api/employment-types' => 'Master Data - Jenis Pegawai',
             
             // Export endpoints
-            'api/exports' => 'Export',
-            'api/export-comparisons' => 'Export',
-            'api/export-recapitulations' => 'Export',
+            '/api/exports' => 'Export',
+            '/api/export-comparisons' => 'Export',
+            '/api/export-recapitulations' => 'Export',
             
             // Notes and Talent Pool
-            'api/notes' => 'Catatan',
-            'api/talents' => 'Hasil Talent Pool',
+            '/api/notes' => 'Catatan',
+            '/api/talents' => 'Hasil Talent Pool',
         ];
 
         // Check for exact match first
@@ -154,5 +157,39 @@ class RoleBasedAccess
             ->where('p.name', $permissionName)
             ->where("rp.{$action}", true)
             ->exists();
+    }
+
+    /**
+     * Get employee permission based on type parameter
+     */
+    private function getEmployeePermissionByType(Request $request): string
+    {
+        $type = $request->query('type') ?? $request->input('type') ?? '1';
+        
+        $permission = match($type) {
+            '1' => 'Data Pegawai - ASN',
+            '2' => 'Data Pegawai - Non ASN', 
+            '3' => 'Data Pegawai - Outsourcing',
+            default => 'Data Pegawai - ASN' // Default to ASN if type is invalid
+        };
+        
+        return $permission;
+    }
+
+    /**
+     * Get training permission based on type parameter
+     */
+    private function getTrainingPermissionByType(Request $request): string
+    {
+        $type = $request->query('type') ?? $request->input('type') ?? '1';
+        
+        $permission = match($type) {
+            '1' => 'Data Riwayat - Pelatihan Struktural',
+            '2' => 'Data Riwayat - Pelatihan Fungsional', 
+            '3' => 'Data Riwayat - Pelatihan Teknis',
+            default => 'Data Riwayat - Pelatihan Struktural' // Default to Struktural if type is invalid
+        };
+        
+        return $permission;
     }
 }
