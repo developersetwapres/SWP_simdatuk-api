@@ -189,14 +189,14 @@ class UserController extends Controller
             DB::beginTransaction();
 
             $token = new User();
-            $this->request->verification_code = $token->generateToken(true);
             $this->request->name = $user->name;
 
             if ($user->email !== $this->request->email) {
+                $this->request->password = Str::password(8);
                 DB::table('users')->where('id', $this->request->id)->updateTs([
                     'email' => $this->request->email,
-                    'verification_code' => $this->request->verification_code,
-                    'expire_at' => date('Y-m-d', strtotime('+7 days', strtotime(date('Y-m-d')))),
+                    'password' => Hash::make($this->request->password),
+                    'status' => true,
                 ]);
             }
 
@@ -213,7 +213,7 @@ class UserController extends Controller
                 try {
                     Mail::to($this->request->email)->send(new RegisterVerification($this->request));
                 } catch (\Exception $e) {
-                    return $this->response(200, config('app.fe_url') . '/auth/new-password/' . $this->request->verification_code);
+                    return $this->response(404, 'Gagal mengirimkan email, silakan hubungi admin.');
                 }
             }
 

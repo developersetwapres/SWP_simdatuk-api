@@ -121,22 +121,17 @@ class User extends Authenticatable
     /**
      * Generate Token
      *
-     * @param boolean $status
      * @return void
      */
-    public function generateToken($status = true)
+    public function generateToken()
     {
         $code = Str::random(40);
-        if ($status == true) {
-            $verificationCode = DB::table('users')->where('verification_code', '=', $code)->first();
-        } else {
-            $verificationCode = DB::table('password_reset_tokens')->where('verification_code', '=', $code)->first();
-        }
+        $verificationCode = DB::table('password_reset_tokens')->where('verification_code', '=', $code)->first();
 
         if (!$verificationCode) {
             return $code;
         } else {
-            return $this->generateToken($status);
+            return $this->generateToken();
         }
     }
 

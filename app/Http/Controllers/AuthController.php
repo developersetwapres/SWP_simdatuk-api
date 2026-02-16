@@ -264,7 +264,7 @@ class AuthController extends Controller
         if ($otp) {
             if ($otp->expire_at >= date('Y-m-d H:i:s')) {
                 $token = new User();
-                $this->request->token = $token->generateToken(false);
+                $this->request->token = $token->generateToken();
                 
                 DB::table('password_reset_tokens')->insert([
                     'email' => $otp->email,
