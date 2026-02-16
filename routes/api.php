@@ -99,8 +99,8 @@ Route::middleware(['auth:sanctum', 'device.session', 'role.access', 'api.rate.li
 
     Route::prefix('comparisons')->group(function () {
         Route::get('/', [ComparisonController::class, 'index']);
-        Route::post('/detail', [ComparisonController::class, 'comparison']);
-        Route::post('/detail-promotions', [ComparisonController::class, 'comparisonPromotion']);
+        Route::get('/detail', [ComparisonController::class, 'comparison']);
+        Route::get('/detail-promotions', [ComparisonController::class, 'comparisonPromotion']);
     });
 
     Route::prefix('notes')->group(function () {
