@@ -1,71 +1,197 @@
 image: docker:latest
+
 services:
-  - docker:dind
+  - docker:24.0.5-dind
+
+variables:
+  # Docker Configuration
+  DOCKER_TLS_CERTDIR: ""
+  DOCKER_IMAGE_NAME: $CI_REGISTRY_IMAGE
+  DOCKER_NETWORK: "project-network"
+  
+  # Deployment Configuration
+  DEPLOY_HOST: $PROJECT_SERVER_IP
+  DEPLOY_USER: $PROJECT_SERVER_USER
+  VIRTUAL_PORT: "8080"
+  ENABLE_HTTPS: "false"
+  LETSENCRYPT_EMAIL: "admin@ekuator.id"
+  
+  # Git Configuration
+  GIT_DEPTH: 0
 
 stages:
   - build
-  - release
   - deploy
-  - cleanup
+  - release
 
-variables:
-  CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
+# ==============================================================================
+# REUSABLE TEMPLATES
+# ==============================================================================
 
-before_script:
-  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+.ssh_setup: &ssh_setup
+  - apk add --no-cache openssh-client git
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
+  - echo "$SSH_PRIVATE_KEY_DEPLOYER" | tr -d '\r' > ~/.ssh/id_rsa
+  - chmod 600 ~/.ssh/id_rsa
+  - ssh-keyscan -H $DEPLOY_HOST >> ~/.ssh/known_hosts
 
-build:
+.build_template:
   stage: build
-  rules:
-    - if: $CI_COMMIT_TAG && $CI_COMMIT_TAG =~ /build-[0-9]/
-      when: on_success
-    - when: never
   tags:
     - build
   script:
-    - cp $ENV .env
-    - docker build --pull -t $CONTAINER_RELEASE_IMAGE .
-    - docker push $CONTAINER_RELEASE_IMAGE
+    - |
+      echo "Building $BUILD_ENV Image: $BUILD_TAG"
+      docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+      docker build -t $DOCKER_IMAGE_NAME:$BUILD_TAG .
+      docker push $DOCKER_IMAGE_NAME:$BUILD_TAG
 
-release-image:
-  stage: release
-  rules:
-    - if: $CI_COMMIT_TAG && $CI_COMMIT_TAG =~ /build-[0-9]/
-      when: on_success
-    - when: never
-  tags:
-    - build
-  script:
-    - docker tag $CONTAINER_RELEASE_IMAGE $CONTAINER_RELEASE_IMAGE
-    - docker push $CONTAINER_RELEASE_IMAGE
-
-deploy:
+.deploy_template:
   stage: deploy
-  image: kroniak/ssh-client
-  rules:
-    - if: $CI_COMMIT_TAG && $CI_COMMIT_TAG =~ /build-[0-9]/
-      when: on_success
-    - when: never
+  image: alpine:latest
   tags:
     - build
-  before_script:
-    - echo "Start deploying to server"
+  before_script: *ssh_setup
   script:
-    - chmod 400 $SSH_SERVER_PROJECTS_PRIVATE_KEY
-    - ssh -o StrictHostKeyChecking=no -i $SSH_SERVER_PROJECTS_PRIVATE_KEY root@$IP_PROJECTS_SERVER "docker pull registry.ekuator.id/project/setneg/simdatuk/api:latest"
-    - ssh -o StrictHostKeyChecking=no -i $SSH_SERVER_PROJECTS_PRIVATE_KEY root@$IP_PROJECTS_SERVER "docker stop simdatuk-api || true && docker rm simdatuk-api || true"
-    - ssh -o StrictHostKeyChecking=no -i $SSH_SERVER_PROJECTS_PRIVATE_KEY root@$IP_PROJECTS_SERVER "docker run --network=project_network -p 3003:80 -d --name simdatuk-api --restart=always registry.ekuator.id/project/setneg/simdatuk/api:latest"
-    - ssh -o StrictHostKeyChecking=no -i $SSH_SERVER_PROJECTS_PRIVATE_KEY root@$IP_PROJECTS_SERVER "docker image prune -af || true"
+    - |
+      echo "Deploying $CONTAINER_NAME to $ENV_TYPE..."
+      
+      # Validate production deployment (only for production)
+      if [ "$VALIDATE_GIT_ANCESTRY" = "true" ]; then
+        echo "🔒 Validating Git Ancestry..."
+        git fetch origin main
+        if git merge-base --is-ancestor $CI_COMMIT_SHA origin/main; then
+          echo "✅ VALID: Tag originates from main branch"
+        else
+          echo "⛔ CRITICAL ERROR: Tag not from main branch!"
+          exit 1
+        fi
+      fi
+      
+      # Prepare deployment variables
+      ENV_CONTENT=$(cat $APP_ENV_VAR)
+      HTTPS_VARS=""
+      if [ "$ENABLE_HTTPS" = "true" ]; then
+        HTTPS_VARS="-e LETSENCRYPT_HOST=$DOMAIN_NAME -e LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL"
+      fi
+      
+      # Execute deployment
+      ssh $DEPLOY_USER@$DEPLOY_HOST "
+        set -e
+        docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+        docker network inspect $DOCKER_NETWORK >/dev/null 2>&1 || docker network create $DOCKER_NETWORK
+        docker pull $DOCKER_IMAGE_NAME:$IMAGE_TAG
+        docker stop $CONTAINER_NAME 2>/dev/null || true
+        docker rm $CONTAINER_NAME 2>/dev/null || true
+        echo \"$ENV_CONTENT\" > /home/$DEPLOY_USER/.$CONTAINER_NAME.env
+        docker run -d \
+          --name $CONTAINER_NAME \
+          --network $DOCKER_NETWORK \
+          --restart always \
+          --env-file /home/$DEPLOY_USER/.$CONTAINER_NAME.env \
+          -e VIRTUAL_HOST=$DOMAIN_NAME \
+          -e VIRTUAL_PORT=$VIRTUAL_PORT \
+          $HTTPS_VARS \
+          $DOCKER_IMAGE_NAME:$IMAGE_TAG
+        rm /home/$DEPLOY_USER/.$CONTAINER_NAME.env
+        docker image prune -af
+        
+        # Wait for container to be healthy
+        echo '⏳ Waiting for container to be ready...'
+        for i in {1..30}; do
+          if docker exec $CONTAINER_NAME php artisan db:show > /dev/null 2>&1; then
+            echo '✅ Container is ready!'
+            break
+          fi
+          echo \"Attempt \$i/30 - Waiting for database...\"
+          sleep 2
+        done
+        
+        # Run post-deploy tasks
+        echo '🔧 Running post-deploy tasks...'
+        docker exec $CONTAINER_NAME php artisan scribe:generate
+        docker exec $CONTAINER_NAME chown -R www-data:www-data /app/storage/app/scribe
+        docker exec $CONTAINER_NAME chmod -R 777 /app/storage/app/scribe
+        echo '✅ Post-deploy tasks completed!'
+      "
+      echo "✅ Deployment completed successfully!"
 
-cleanup:
-  stage: cleanup
+# ==============================================================================
+# BUILD JOBS
+# ==============================================================================
+
+build-dev:
+  extends: .build_template
+  environment:
+    name: development
   rules:
-    - if: $CI_COMMIT_TAG && $CI_COMMIT_TAG =~ /build-[0-9]/
-      when: on_success
-    - when: never
+    - if: $CI_COMMIT_BRANCH == "development"
+  variables:
+    BUILD_ENV: "Development"
+    BUILD_TAG: "dev-$CI_COMMIT_SHORT_SHA"
+    ENV_FILE: $ENV_DEV
+
+build-prod:
+  extends: .build_template
+  environment:
+    name: production
+  rules:
+    - if: '$CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+$/'
+  variables:
+    BUILD_ENV: "Production"
+    BUILD_TAG: $CI_COMMIT_TAG
+    ENV_FILE: $ENV_PROD
+
+# ==============================================================================
+# DEPLOYMENT JOBS
+# ==============================================================================
+
+deploy-dev:
+  extends: .deploy_template
+  environment:
+    name: development
+    url: https://simdatuk-api.ekuator.id
+  rules:
+    - if: $CI_COMMIT_BRANCH == "development"
+  variables:
+    ENV_TYPE: "Development"
+    APP_ENV_VAR: "$ENV_DEV"
+    IMAGE_TAG: "dev-$CI_COMMIT_SHORT_SHA"
+    CONTAINER_NAME: "simdatuk-api-dev"
+    DOMAIN_NAME: "simdatuk-api.ekuator.id"
+    VALIDATE_GIT_ANCESTRY: "false"
+
+deploy-prod:
+  extends: .deploy_template
+  environment:
+    name: production
+    url: https://api.simdatuk.com
+  rules:
+    - if: '$CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+$/'
+      when: manual
+  variables:
+    ENV_TYPE: "Production"
+    APP_ENV_VAR: "$ENV_PROD"
+    IMAGE_TAG: $CI_COMMIT_TAG
+    CONTAINER_NAME: "simdatuk-api"
+    DOMAIN_NAME: "api.simdatuk.com"
+    VALIDATE_GIT_ANCESTRY: "true"
+
+# ==============================================================================
+# RELEASE JOB
+# ==============================================================================
+
+create-release:
+  stage: release
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
   tags:
     - build
-  before_script:
-    - echo "Start cleanup unused images"
+  rules:
+    - if: '$CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+$/'
   script:
-    - docker image prune -af
+    - echo "Creating release for tag $CI_COMMIT_TAG"
+  release:
+    tag_name: '$CI_COMMIT_TAG'
+    name: 'Release $CI_COMMIT_TAG'
+    description: '🚀 Production Deployment Successful. Docker Image: $DOCKER_IMAGE_NAME:$CI_COMMIT_TAG'

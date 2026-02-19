@@ -56,19 +56,23 @@ Route::get('/', function () {
     return 'api enabled!';
 });
 
-Route::get('file', [FileController::class, 'file']);
-Route::post('login', [AuthController::class, 'login']);
-Route::post('forgot-password', [AuthController::class, 'forgotPassword']);
-Route::post('reset-password', [AuthController::class, 'resetPassword']);
-Route::post('new-password', [AuthController::class, 'newPassword']);
+// Authentication endpoints with stricter rate limiting
+Route::middleware(['api.rate.limit:5,1'])->group(function () {
+    Route::post('login', [AuthController::class, 'login']);
+    Route::post('forgot-password', [AuthController::class, 'forgotPassword']);
+    Route::post('reset-password', [AuthController::class, 'resetPassword']);
+    Route::post('verify-otp', [AuthController::class, 'verifyOtp']);
+});
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware(['auth:sanctum', 'device.session', 'role.access', 'api.rate.limit:100,1'])->group(function () {
     Route::delete('logout', [AuthController::class, 'logout']);
+    Route::delete('logout-all-devices', [AuthController::class, 'logoutAllDevices']);
+    Route::get('active-sessions', [AuthController::class, 'getActiveSessions']);
 
     Route::prefix('summaries')->group(function () {
         Route::get('/', [SummaryController::class, 'index']);
     });
-
+ 
     Route::prefix('recapitulations')->group(function () {
         Route::get('/', [RecapitulationController::class, 'index']);
         Route::get('/{category}', [RecapitulationController::class, 'show']);
@@ -96,8 +100,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix('comparisons')->group(function () {
         Route::get('/', [ComparisonController::class, 'index']);
-        Route::post('/detail', [ComparisonController::class, 'comparison']);
-        Route::post('/detail-promotions', [ComparisonController::class, 'comparisonPromotion']);
+        Route::get('/detail', [ComparisonController::class, 'comparison']);
+        Route::get('/detail-promotions', [ComparisonController::class, 'comparisonPromotion']);
     });
 
     Route::prefix('notes')->group(function () {

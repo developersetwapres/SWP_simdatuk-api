@@ -86,7 +86,16 @@ return [
      */
 
     'locale' => 'en',
+    /*
+    |--------------------------------------------------------------------------
+    | Rate Limiting Configuration
+    |--------------------------------------------------------------------------
+    */
 
+    'rate_limit_auth_attempts' => env('RATE_LIMIT_AUTH_ATTEMPTS', 5),
+    'rate_limit_auth_decay_minutes' => env('RATE_LIMIT_AUTH_DECAY_MINUTES', 1),
+    'rate_limit_api_attempts' => env('RATE_LIMIT_API_ATTEMPTS', 100),
+    'rate_limit_api_decay_minutes' => env('RATE_LIMIT_API_DECAY_MINUTES', 1),
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale

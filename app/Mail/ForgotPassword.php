@@ -39,7 +39,7 @@ class ForgotPassword extends Mailable
         return new Content(
             view: 'auth.forgot-password',
             with: [
-                'redirectUrl' => config('app.fe_url') . '/auth/reset-password/' . $this->request->verification_code,
+                'code' => $this->request->verification_code,
             ]
         );
     }

@@ -4,7 +4,7 @@ namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CodeVerificationRequest extends FormRequest
+class OtpVerifyRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,8 @@ class CodeVerificationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'code' => 'required',
-            'status' => 'required|boolean',
+            'email' => 'required',
+            'otp' => 'required',
         ];
     }
 
@@ -35,9 +35,8 @@ class CodeVerificationRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'code.required' => 'Kode tidak boleh kosong.',
-            'status.required' => 'Status tidak boleh kosong.',
-            'status.boolean' => 'Status harus berupa boolean.',
+            'email.required' => 'Email tidak boleh kosong.',
+            'otp.required' => 'OTP tidak boleh kosong.',
         ];
     }
 
@@ -49,13 +48,13 @@ class CodeVerificationRequest extends FormRequest
     public function bodyParameters(): array
     {
         return [
-            'code' => [
-                'description' => 'Verification code from email.',
-                'example' => 'HJ7xKpi0z4wpSas306CTuRNjULb7dNve8qPDMTxK65ded5a7',
+            'email' => [
+                'description' => 'Email tidak boleh kosong.',
+                'example' => "admin@simdatuk.com",
             ],
-            'status' => [
-                'description' => 'Status of code, true for register and false for forgot password.',
-                'example' => true,
+            'otp' => [
+                'description' => 'Verification OTP from email.',
+                'example' => '361738',
             ],
         ];
     }

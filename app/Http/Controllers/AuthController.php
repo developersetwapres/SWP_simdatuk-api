@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Auth\ForgotPasswordRequest;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\OtpVerifyRequest;
 use App\Http\Requests\Auth\ResetPasswordRequest;
 use App\Mail\ForgotPassword;
 use App\Models\User;
+use App\Models\UserDeviceSession;
+use App\Traits\SingleDeviceLogin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -20,6 +23,8 @@ use Illuminate\Support\Facades\Mail;
  */
 class AuthController extends Controller
 {
+    use SingleDeviceLogin;
+    
     public function __construct(Request $request)
     {
         $this->request = $request;
@@ -36,21 +41,17 @@ class AuthController extends Controller
      */
     public function login(LoginRequest $request)
     {
-
         $user = User::where('username', $this->request->username)->first();
 
         if (!$user || !Hash::check($this->request->password, $user->password)) {
-            return $this->response(401, 'Password yang anda masukkan salah.');
+            return $this->response(401, 'Terjadi kesalahan, silakan coba lagi.');
         } else if (is_null($user->role_id)) {
-            return $this->response(401, 'Anda tidak terdaftar sebagai pengguna, silakan hubungi tim IT.');
+            return $this->response(401, 'Terjadi kesalahan, silakan coba lagi.');
         } else if ($user->status != true) {
-            return $this->response(401, 'Status pengguna tidak aktif.');
-        } else if (!is_null($user->verification_code)) {
-            return $this->response(401, 'Email belum terverifikasi.');
-        } else {
-            $token = $user->createToken('web')->plainTextToken;
+            return $this->response(401, 'Terjadi kesalahan, silakan coba lagi.');
         }
 
+        // Validate reCAPTCHA in production
         if (config('app.env') == 'production') {
             $recaptchaValidation = $this->recaptchaValidation($this->request->recaptcha_token);
             if ($recaptchaValidation->getStatusCode() !== 200) {
@@ -58,9 +59,34 @@ class AuthController extends Controller
             }
         }
 
+        // Handle single device login - revoke other sessions and create new token
+        $tokenResult = $this->handleSingleDeviceLogin($user, $this->request);
+        $token = $tokenResult->plainTextToken;
+
+        // Get user data with role and permissions
+        $userData = $this->getUserData($user->id);
+
+        return response()->json([
+            'code' => 200,
+            "message" => "Pengguna berhasil login.",
+            "token" => $token,
+            "user" => $userData,
+            "device_info" => [
+                "device_type" => $this->getDeviceName($this->request),
+                "login_time" => now()->toISOString(),
+                "previous_sessions_revoked" => true
+            ]
+        ], 200);
+    }
+
+    /**
+     * Get formatted user data with role and permissions
+     */
+    private function getUserData($userId)
+    {
         $user = DB::table('users');
         $user->select('users.id', 'users.email', 'users.username', 'users.photo_profile', 'users.employee_id_number', 'users.employee_registration_number');
-        $user->where('username', $this->request->username);
+        $user->where('users.id', $userId);
         $user = $user->first();
         $user->photo_profile = $this->getDocument($user->photo_profile, true);
 
@@ -73,20 +99,22 @@ class AuthController extends Controller
         $user->role = $role;
 
         $permissions = DB::table('permissions as p');
-        $permissions->join('role_permissions as rp', 'p.id', 'rp.permission_id');
-        $permissions->join('roles as r', 'rp.role_id', 'r.id');
-        $permissions->where('rp.role_id', $role->id);
-        $permissions->select('p.id', 'p.name', 'rp.create', 'rp.read', 'rp.update', 'rp.delete');
+        $permissions->leftJoin('role_permissions as rp', function($join) use ($role) {
+            $join->on('p.id', '=', 'rp.permission_id')
+                 ->where('rp.role_id', '=', $role->id);
+        });
+        $permissions->select('p.id', 'p.name', 
+            DB::raw('COALESCE(rp.`create`, 0) as `create`'),
+            DB::raw('COALESCE(rp.`read`, 0) as `read`'),
+            DB::raw('COALESCE(rp.`update`, 0) as `update`'),
+            DB::raw('COALESCE(rp.`delete`, 0) as `delete`')
+        );
+        $permissions->orderBy('p.id');
         $permissions = $permissions->get();
 
         $user->permissions = $permissions;
 
-        return response()->json([
-            'code' => 200,
-            "message" => "Pengguna berhasil login.",
-            "token" => $token,
-            "user" => $user,
-        ], 200);
+        return $user;
     }
 
     /**
@@ -104,24 +132,25 @@ class AuthController extends Controller
         $user->where('email', $this->request->email);
         $user = $user->first();
         if (is_null($user->role_id)) {
-            return $this->response(404, 'Email tidak terdaftar sebagai pengguna.');
+            return $this->response(404, 'Terjadi kesalahan, silakan coba lagi.');
         }
 
         // Generete Token
         $token = new User();
-        $this->request->verification_code = $token->generateToken(false);
+        $this->request->verification_code = $token->generateOtp();
 
-        DB::table('password_reset_tokens')->insert([
+        DB::table('otps')->insert([
             'email' => $this->request->email,
-            'verification_code' => $this->request->verification_code,
-            'expire_at' => date('Y-m-d', strtotime('+7 days', strtotime(date('Y-m-d')))),
+            'code' => $this->request->verification_code,
+            'expire_at' => date('Y-m-d H:i:s', strtotime('+5 minutes')),
+            'created_at' => date('Y-m-d H:i:s'),
         ]);
 
         // Send Email
         try {
             Mail::to($this->request->email)->send(new ForgotPassword($this->request));
         } catch (\Exception $e) {
-            return $this->response(200, config('app.fe_url') . '/auth/reset-password/' . $this->request->verification_code);
+            return $this->response(404, 'Gagal mengirimkan email, silakan hubungi admin.');
         }
 
         return $this->response(200, 'Email sudah dikirim.');
@@ -135,56 +164,27 @@ class AuthController extends Controller
      */
     public function resetPassword(ResetPasswordRequest $request)
     {
-        $codeValidation = $this->codeValidation(false);
-        if ($codeValidation->getStatusCode() !== 200) {
-            return $codeValidation;
-        }
-
         $user = DB::table('password_reset_tokens');
-        $user->where('verification_code', $this->request->code);
-        $user->select('email');
+        $user->where('verification_code', $this->request->reset_token);
+        $user->select('email', 'expire_at');
         $user = $user->first();
 
-        try {
-            $query = DB::table('users');
-            $query->where('email', $user->email);
-            $query->update([
-                'password' => Hash::make($this->request->password),
-            ]);
+        if ($user) {
+            if ($user->expire_at >= date('Y-m-d H:i:s')) {
+                $query = DB::table('users');
+                $query->where('email', $user->email);
+                $query->update([
+                    'password' => Hash::make($this->request->password),
+                ]);
 
-            $user = DB::table('password_reset_tokens');
-            $user->where('verification_code', $this->request->code);
-            $user->delete();
-            return $this->response(200, 'Reset password berhasil disimpan.');
-        } catch (\Throwable $th) {
-            return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
-        }
-    }
-
-    /**
-     * New Password
-     *
-     * Below are the endpoints designed for setting new password.
-     * @response 200 {"code": 200,"message": "Password baru berhasil disimpan.","data": null}
-     */
-    public function newPassword(ResetPasswordRequest $request)
-    {
-        $codeValidation = $this->codeValidation(true);
-        if ($codeValidation->getStatusCode() !== 200) {
-            return $codeValidation;
-        }
-
-        try {
-            $user = DB::table('users');
-            $user->where('verification_code', $this->request->code);
-            $user->update([
-                'password' => Hash::make($this->request->password),
-                'verification_code' => null,
-                'expire_at' => null,
-            ]);
-            return $this->response(200, 'Password baru berhasil disimpan.');
-        } catch (\Throwable $th) {
-            return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
+                DB::table('password_reset_tokens')->where('verification_code', $this->request->reset_token)->delete();
+                return $this->response(200, 'Reset password berhasil disimpan.');
+            } else {
+                DB::table('password_reset_tokens')->where('expire_at', '<', date('Y-m-d H:i:s'))->delete();
+                return $this->response(404, 'Reset token sudah kadaluarsa.');
+            }
+        } else {
+            return $this->response(404, 'Terjadi kesalahan, silakan coba lagi.');
         }
     }
 
@@ -199,32 +199,93 @@ class AuthController extends Controller
     public function logout()
     {
         $user = $this->request->user();
-        $user->tokens()->where('id', auth()->id())->delete();
+        $currentToken = $user->currentAccessToken();
+        
+        // Remove device session record
+        UserDeviceSession::where('sanctum_token_id', $currentToken->id)->delete();
+        
+        // Delete the current token
+        $currentToken->delete();
+        
         return $this->response(200, 'Pengguna berhasil logout.');
     }
 
     /**
-     * Valdation for code token
+     * Logout from all devices
      *
-     * @return void
+     * Force logout from all devices for current user
+     * @authenticated  
      */
-    public function codeValidation($status)
+    public function logoutAllDevices()
     {
-        if ($status == true) {
-            $user = DB::table("users");
-        } else {
-            $user = DB::table("password_reset_tokens");
-        }
-        $user->where('verification_code', $this->request->code);
-        $user->select('verification_code', 'expire_at');
-        $user = $user->first();
+        $user = $this->request->user();
+        
+        // Revoke all tokens and device sessions
+        $user->revokeOtherDeviceSessions();
+        
+        return $this->response(200, 'Berhasil logout dari semua perangkat.');
+    }
 
-        if (!$user) {
-            return $this->response(404, 'Verifikasi kode tidak tersedia.');
-        } else if ($user->expire_at < date('Y-m-d')) {
-            return $this->response(404, 'Verifikasi kode sudah kadaluarsa.');
+    /**
+     * Get active device sessions
+     *
+     * Get list of active device sessions for current user
+     * @authenticated
+     */
+    public function getActiveSessions()
+    {
+        $user = $this->request->user();
+        
+        $sessions = UserDeviceSession::where('user_id', $user->id)
+            ->orderBy('last_activity_at', 'desc')
+            ->get(['device_name', 'ip_address', 'last_activity_at', 'created_at']);
+        
+        return response()->json([
+            'code' => 200,
+            'message' => 'Berhasil mengambil data sesi aktif.',
+            'data' => $sessions
+        ], 200);
+    }
+
+    /**
+     * Verify OTP
+     *
+     * Below are the endpoints designed for setting new password.
+     * @response 200 {"code": 200,"message": "Kode OTP berhasil diverifikasi.","reset_token": "HJ7xKpi0z4wpSas306CTuRNjULb7dNve8qPDMTxK65ded5a7"}
+     */
+    public function verifyOtp(OtpVerifyRequest $request)
+    {
+        $otp = DB::table('otps');
+        $otp->where('email', $this->request->email);
+        $otp->where('code', $this->request->otp);
+        $otp->select('email', 'expire_at');
+        $otp = $otp->first();
+        
+        if ($otp) {
+            if ($otp->expire_at >= date('Y-m-d H:i:s')) {
+                $token = new User();
+                $this->request->token = $token->generateToken();
+                
+                DB::table('password_reset_tokens')->insert([
+                    'email' => $otp->email,
+                    'verification_code' => $this->request->token,
+                    'expire_at' => date('Y-m-d H:i:s', strtotime('+5 minutes')),
+                    'created_at' => date('Y-m-d H:i:s'),
+                ]);
+
+                DB::table('otps')->where('code', $this->request->otp)->delete();
+
+                return response()->json([
+                    'code' => 200,
+                    "message" => "Kode OTP berhasil diverifikasi.",
+                    "reset_token" => $this->request->token,
+                ], 200);
+            } else {
+                DB::table('otps')->where('expire_at', '<', date('Y-m-d H:i:s'))->delete();
+                return $this->response(404, 'Kode OTP sudah kadaluarsa.');
+            }
         } else {
-            return $this->response(200, 'Verifikasi kode berhasil.');
+            return $this->response(404, 'Kode OTP tidak ditemukan.');
         }
     }
 

@@ -54,7 +54,7 @@ class Handler extends ExceptionHandler
             }
 
             if ($e instanceof QueryException) {
-                return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
+                return $this->response(400, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
             } else if ($e instanceof ValidationException) {
                 $messages = $e->validator->errors()->all();
                 return $this->response(422, $messages[0], $e->validator->errors());
@@ -67,7 +67,7 @@ class Handler extends ExceptionHandler
             } else if ($e instanceof MethodNotAllowedHttpException) {
                 return $this->response(405, 'Method yang digunakan salah!');
             } else {
-                return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
+                return $this->response(400, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
             }
         }
 

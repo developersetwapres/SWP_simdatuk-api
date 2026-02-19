@@ -87,7 +87,7 @@ class PerformanceHistoryController extends Controller
         } catch (\Throwable $th) {
             \Log::warning($th);
             DB::rollBack();
-            return $this->response(500, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
+            return $this->response(400, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
         }
     }
 
@@ -214,7 +214,7 @@ class PerformanceHistoryController extends Controller
         } catch (\Throwable $th) {
             DB::rollback();
             Log::warning($th);
-            return $this->response(500, 'Riwayat jabatan gagal dihapus.');
+            return $this->response(400, 'Mohon maaf, fitur dalam kendala harap hubungi Tim IT!');
         }
     }
 }
