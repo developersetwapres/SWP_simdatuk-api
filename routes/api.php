@@ -72,7 +72,7 @@ Route::middleware(['auth:sanctum', 'device.session', 'role.access', 'api.rate.li
     Route::prefix('summaries')->group(function () {
         Route::get('/', [SummaryController::class, 'index']);
     });
- 
+
     Route::prefix('recapitulations')->group(function () {
         Route::get('/', [RecapitulationController::class, 'index']);
         Route::get('/{category}', [RecapitulationController::class, 'show']);

@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Mail;
 class AuthController extends Controller
 {
     use SingleDeviceLogin;
-    
+
     public function __construct(Request $request)
     {
         $this->request = $request;
@@ -44,11 +44,11 @@ class AuthController extends Controller
         $user = User::where('username', $this->request->username)->first();
 
         if (!$user || !Hash::check($this->request->password, $user->password)) {
-            return $this->response(401, 'Terjadi kesalahan, silakan coba lagi.');
+            return $this->response(401, 'Terjadi kesalahan, silakan coba lagi A.');
         } else if (is_null($user->role_id)) {
-            return $this->response(401, 'Terjadi kesalahan, silakan coba lagi.');
+            return $this->response(401, 'Terjadi kesalahan, silakan coba lagi B.');
         } else if ($user->status != true) {
-            return $this->response(401, 'Terjadi kesalahan, silakan coba lagi.');
+            return $this->response(401, 'Terjadi kesalahan, silakan coba lagi C.');
         }
 
         // Validate reCAPTCHA in production
@@ -99,11 +99,13 @@ class AuthController extends Controller
         $user->role = $role;
 
         $permissions = DB::table('permissions as p');
-        $permissions->leftJoin('role_permissions as rp', function($join) use ($role) {
+        $permissions->leftJoin('role_permissions as rp', function ($join) use ($role) {
             $join->on('p.id', '=', 'rp.permission_id')
-                 ->where('rp.role_id', '=', $role->id);
+                ->where('rp.role_id', '=', $role->id);
         });
-        $permissions->select('p.id', 'p.name', 
+        $permissions->select(
+            'p.id',
+            'p.name',
             DB::raw('COALESCE(rp.`create`, 0) as `create`'),
             DB::raw('COALESCE(rp.`read`, 0) as `read`'),
             DB::raw('COALESCE(rp.`update`, 0) as `update`'),
@@ -200,13 +202,13 @@ class AuthController extends Controller
     {
         $user = $this->request->user();
         $currentToken = $user->currentAccessToken();
-        
+
         // Remove device session record
         UserDeviceSession::where('sanctum_token_id', $currentToken->id)->delete();
-        
+
         // Delete the current token
         $currentToken->delete();
-        
+
         return $this->response(200, 'Pengguna berhasil logout.');
     }
 
@@ -214,15 +216,15 @@ class AuthController extends Controller
      * Logout from all devices
      *
      * Force logout from all devices for current user
-     * @authenticated  
+     * @authenticated
      */
     public function logoutAllDevices()
     {
         $user = $this->request->user();
-        
+
         // Revoke all tokens and device sessions
         $user->revokeOtherDeviceSessions();
-        
+
         return $this->response(200, 'Berhasil logout dari semua perangkat.');
     }
 
@@ -235,11 +237,11 @@ class AuthController extends Controller
     public function getActiveSessions()
     {
         $user = $this->request->user();
-        
+
         $sessions = UserDeviceSession::where('user_id', $user->id)
             ->orderBy('last_activity_at', 'desc')
             ->get(['device_name', 'ip_address', 'last_activity_at', 'created_at']);
-        
+
         return response()->json([
             'code' => 200,
             'message' => 'Berhasil mengambil data sesi aktif.',
@@ -260,12 +262,12 @@ class AuthController extends Controller
         $otp->where('code', $this->request->otp);
         $otp->select('email', 'expire_at');
         $otp = $otp->first();
-        
+
         if ($otp) {
             if ($otp->expire_at >= date('Y-m-d H:i:s')) {
                 $token = new User();
                 $this->request->token = $token->generateToken();
-                
+
                 DB::table('password_reset_tokens')->insert([
                     'email' => $otp->email,
                     'verification_code' => $this->request->token,

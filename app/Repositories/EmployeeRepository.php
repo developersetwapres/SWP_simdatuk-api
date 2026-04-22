@@ -142,8 +142,8 @@ class EmployeeRepository
             DB::raw("
                 CASE
                     WHEN u.type = 1 THEN e.retirement_age
-                    WHEN u.type = 2 THEN 58 
-                    WHEN u.type = 3 THEN 58 
+                    WHEN u.type = 2 THEN 58
+                    WHEN u.type = 3 THEN 58
                     ELSE NULL
                 END AS retirement_age_years
             "),
@@ -163,7 +163,7 @@ class EmployeeRepository
                 $user->employee_id_card = $this->getDocument($user->employee_id_card, true, true);
             } else {
                 $user->employee_id_card = $this->getDocument($user->employee_id_card, true);
-            }   
+            }
         }
         if (isset($user->position_id)) {
             $user->position_merged = $this->getRecursivePosition($user->position_id, $user->position_type, $user->echelon_name);
@@ -304,8 +304,8 @@ class EmployeeRepository
             DB::raw("
                 CASE
                     WHEN u.type = 1 THEN e.retirement_age
-                    WHEN u.type = 2 THEN 58 
-                    WHEN u.type = 3 THEN 58 
+                    WHEN u.type = 2 THEN 58
+                    WHEN u.type = 3 THEN 58
                     ELSE NULL
                 END AS retirement_age_years
             "),
@@ -321,7 +321,6 @@ class EmployeeRepository
                 } else {
                     $user->photo_profile = $this->getDocument($user->photo_profile, true);
                 }
-                
             }
             if (isset($user->employee_id_card)) {
                 if ($export == true) {

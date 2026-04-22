@@ -57,6 +57,8 @@ class DiagramController extends Controller
 
     private function getPositionWithChildren($positionId)
     {
+        $this->getPositions($positionId, 2, true, false, true, false);
+        die;
         $positions = $this->getPositions($positionId, 1, false, false, true, false);
 
         if ($positions) {
@@ -71,7 +73,6 @@ class DiagramController extends Controller
             } else {
                 $positions->childs = $this->getNestedJafung([], $positionId);
             }
-
             $positions->children = sizeof($positions->childs);
 
             foreach ($positions->childs as $childPosition) {
@@ -125,6 +126,7 @@ class DiagramController extends Controller
                 }
             }
         }
+
 
         return $this->response(200, 'success', $positions);
     }
@@ -205,8 +207,12 @@ class DiagramController extends Controller
         if ($idType == 1) {
             $positions->where('positions.id', $id);
         } else {
-            $positions->where('positions.parent_id', $id);
+            $positions->where('positions.parent_id', $id)
+                ->orWhere('positions.status', 2);
         }
+
+
+        dd($positions->get());
 
         if ($allData === true) {
             if ($withUser != true) {
