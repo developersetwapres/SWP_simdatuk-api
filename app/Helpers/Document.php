@@ -29,17 +29,27 @@ trait Document
      * @param string $path
      * @return void
      */
-    public function getDocument($path, $status = false, $export = false)
+    public function getDocumentX($path, $status = false, $export = false) //nonaktifkan oleh KMZ, karena pakai enpoint di bawah
     {
         if ($status) {
             if ($export ==  true) {
-                return (is_null($path)) ? asset('img/profile.jpg') : env('AWS_URL_BY_IP'). '/'. $path;
+                return (is_null($path)) ? asset('img/profile.jpg') : env('AWS_URL_BY_IP') . '/' . $path;
             } else {
-                return (is_null($path)) ? asset('img/profile.jpg') : Storage::disk('s3')->url($path);
+                return (is_null($path)) ? asset('img/profile.jpg') : Storage::disk('s3')->get($path);
             }
         } else {
             return (is_null($path)) ? null : Storage::disk('s3')->url($path);
         }
+    }
+
+    public function getDocument($path, $status = false, $export = false)
+    {
+        if (is_null($path)) {
+            return asset('img/profile.jpg');
+        }
+
+        // arahkan ke endpoint BE sendiri
+        return url('/api/image' . $path);
     }
 
     /**

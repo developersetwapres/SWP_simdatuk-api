@@ -57,9 +57,12 @@ class DiagramController extends Controller
 
     private function getPositionWithChildren($positionId)
     {
-        $this->getPositions($positionId, 2, true, false, true, false);
-        die;
+        // $this->getPositions($positionId, 2, true, false, true, false);
+        // die;
         $positions = $this->getPositions($positionId, 1, false, false, true, false);
+
+
+
 
         if ($positions) {
             $positions->users = [];
@@ -212,7 +215,7 @@ class DiagramController extends Controller
         }
 
 
-        dd($positions->get());
+        // dd($positions->get());
 
         if ($allData === true) {
             if ($withUser != true) {

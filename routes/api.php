@@ -277,3 +277,5 @@ Route::middleware(['auth:sanctum', 'device.session', 'role.access', 'api.rate.li
         Route::post('/preview', [ExportController::class, 'exportExcelsPreview']);
     });
 });
+
+Route::get('/image/{path}', [EmployeeController::class, 'image'])->where('path', '.*');

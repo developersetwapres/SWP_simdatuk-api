@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Hash;
 
+use Illuminate\Support\Facades\Storage;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,5 +17,8 @@ use Illuminate\Support\Facades\Hash;
 
 Route::get('/', function () {
     // dd(Hash::make('Passw0rd_'));
+    // Storage::disk('s3')->put('test.txt', 'Hello MinIO');
+
+    // dd(Storage::disk('s3')->url('test.txt'));
     return view('welcome');
 });

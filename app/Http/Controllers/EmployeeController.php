@@ -6,6 +6,7 @@ use App\Http\Requests\Employee\CreateEmployeeRequest;
 use App\Http\Requests\Employee\UpdateEmployeeRequest;
 use App\Http\Requests\Employee\UpdateStatusRequest;
 use App\Repositories\AssessmentRepository;
+use Illuminate\Support\Facades\Storage;
 use App\Repositories\CompetencyRepository;
 use App\Repositories\CreditRepository;
 use App\Repositories\DisciplinaryRepository;
@@ -504,6 +505,19 @@ class EmployeeController extends Controller
         $employee->talents = $talents;
 
         return $this->response(200, 'success', $employee);
+    }
+
+    public function image($path = null)
+    {
+        if (!Storage::disk('s3')->exists($path)) {
+            abort(404);
+        }
+
+        $content = Storage::disk('s3')->get($path);
+        $mime = Storage::disk('s3')->mimeType($path);
+
+        return response($content)
+            ->header('Content-Type', $mime);
     }
 
     /**
