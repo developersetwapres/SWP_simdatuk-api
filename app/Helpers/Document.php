@@ -42,14 +42,14 @@ trait Document
         }
     }
 
-    public function getDocument($path, $status = false, $export = false)
+    public function getDocument($path = null, $status = false, $export = false)
     {
         if (is_null($path)) {
             return asset('img/profile.jpg');
         }
 
         // arahkan ke endpoint BE sendiri
-        return url('/api/image' . $path);
+        return url('/api/image/' . ltrim($path, '/'));
     }
 
     /**

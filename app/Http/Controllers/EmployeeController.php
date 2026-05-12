@@ -509,15 +509,37 @@ class EmployeeController extends Controller
 
     public function image($path = null)
     {
-        if (!Storage::disk('s3')->exists($path)) {
-            abort(404);
-        }
 
-        $content = Storage::disk('s3')->get($path);
-        $mime = Storage::disk('s3')->mimeType($path);
+        echo 'ok';
+        die;
+        abort_if(
+            !$path || !Storage::disk('s3')->exists($path),
+            404
+        );
 
-        return response($content)
-            ->header('Content-Type', $mime);
+        $stream = Storage::disk('s3')->readStream($path);
+
+        abort_if(!$stream, 404);
+
+        dd([
+            'exists' => Storage::disk('s3')->exists($path),
+            'mime' => Storage::disk('s3')->mimeType($path),
+            'size' => Storage::disk('s3')->size($path),
+        ]);
+
+        return response()->stream(
+            function () use ($stream) {
+                fpassthru($stream);
+
+                if (is_resource($stream)) {
+                    fclose($stream);
+                }
+            },
+            200,
+            [
+                'Content-Type' => Storage::disk('s3')->mimeType($path),
+            ]
+        );
     }
 
     /**
