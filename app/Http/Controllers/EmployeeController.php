@@ -518,12 +518,6 @@ class EmployeeController extends Controller
 
         abort_if(!$stream, 404);
 
-        dd([
-            'exists' => Storage::disk('s3')->exists($path),
-            'mime' => Storage::disk('s3')->mimeType($path),
-            'size' => Storage::disk('s3')->size($path),
-        ]);
-
         return response()->stream(
             function () use ($stream) {
                 fpassthru($stream);
