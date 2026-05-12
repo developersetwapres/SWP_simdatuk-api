@@ -509,9 +509,6 @@ class EmployeeController extends Controller
 
     public function image($path = null)
     {
-
-        echo 'ok';
-        die;
         abort_if(
             !$path || !Storage::disk('s3')->exists($path),
             404
