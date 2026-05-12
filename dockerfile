@@ -1,5 +1,5 @@
 # Use an official PHP 8.3 FPM with Alpine Linux as a parent image
-FROM php:8.3-fpm
+FROM php:8.4-fpm
 
 # Set the working directory to /var/www/html
 WORKDIR /app
