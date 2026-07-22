@@ -253,7 +253,9 @@ class EmployeeController extends Controller
         $employmentType->where('id', $this->request->employment_type_id);
         $employmentType->where('status', true);
         $employmentType->where('type', $this->request->type);
+
         $employmentType = $employmentType->first();
+
         if (!$employmentType) {
             return $this->response(404, 'Jenis pegawai tidak ditemukan.');
         }

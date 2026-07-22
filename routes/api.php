@@ -40,6 +40,7 @@ use App\Http\Controllers\TargetHistoryController;
 use App\Http\Controllers\TrainingHistoryController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -114,12 +115,13 @@ Route::middleware(['auth:sanctum', 'device.session', 'role.access', 'api.rate.li
         Route::get('/detail', [PromotionController::class, 'show']);
     });
 
+    //data-pegawai
     Route::prefix('employees')->group(function () {
         Route::post('/import', [ImportEmployeeController::class, 'import']); // Put this on top, to ensure the import route is defined before the "create" route to avoid conflicts
-        Route::get('/', [EmployeeController::class, 'index']);
-        Route::post('/', [EmployeeController::class, 'create']);
+        Route::get('/', [EmployeeController::class, 'index']); //✅
+        Route::post('/', [EmployeeController::class, 'create']); //✅
         Route::get('/synchronization', [SynchronizationController::class, 'index']); // Put this on top, to ensure the synchronization route is defined before the "show" route to avoid conflicts
-        Route::get('/{id}', [EmployeeController::class, 'show']);
+        Route::get('/{id}', [EmployeeController::class, 'show']); //✅
         Route::post('/{id}', [EmployeeController::class, 'update']);
         Route::delete('/{id}', [EmployeeController::class, 'delete']);
         Route::put('/status', [EmployeeController::class, 'status']);
@@ -128,6 +130,7 @@ Route::middleware(['auth:sanctum', 'device.session', 'role.access', 'api.rate.li
         Route::get('/import/download-failed-import/{id}', [ImportEmployeeController::class, 'downloadImportErrorLog']);
     });
 
+    //data-riwayat/jabatan
     Route::prefix('position-histories')->group(function () {
         Route::get('/', [PositionHistoryController::class, 'index']);
         Route::post('/', [PositionHistoryController::class, 'create']);
@@ -136,6 +139,7 @@ Route::middleware(['auth:sanctum', 'device.session', 'role.access', 'api.rate.li
         Route::delete('/{id}', [PositionHistoryController::class, 'delete']);
     });
 
+    //data-riwayat/golongan
     Route::prefix('grade-histories')->group(function () {
         Route::get('/', [GradeHistoryController::class, 'index']);
         Route::post('/', [GradeHistoryController::class, 'create']);
@@ -144,6 +148,7 @@ Route::middleware(['auth:sanctum', 'device.session', 'role.access', 'api.rate.li
         Route::delete('/{id}', [GradeHistoryController::class, 'delete']);
     });
 
+    //data-riwayat/pelatihan-struktural || data-riwayat/pelatihan-fungsional || data-riwayat/pelatihan-teknis
     Route::prefix('training-histories')->group(function () {
         Route::get('/', [TrainingHistoryController::class, 'index']);
         Route::get('/groups', [TrainingHistoryController::class, 'technicalGroups']);
@@ -158,6 +163,7 @@ Route::middleware(['auth:sanctum', 'device.session', 'role.access', 'api.rate.li
         });
     });
 
+    //data-riwayat/penghargaan
     Route::prefix('recognition-histories')->group(function () {
         Route::get('/', [RecognitionHistoryController::class, 'index']);
         Route::post('/', [RecognitionHistoryController::class, 'create']);
@@ -166,6 +172,7 @@ Route::middleware(['auth:sanctum', 'device.session', 'role.access', 'api.rate.li
         Route::delete('/{id}', [RecognitionHistoryController::class, 'delete']);
     });
 
+    //data-riwayat/skp
     Route::prefix('target-histories')->group(function () {
         Route::get('/', [TargetHistoryController::class, 'index']);
         Route::post('/', [TargetHistoryController::class, 'create']);
@@ -174,6 +181,7 @@ Route::middleware(['auth:sanctum', 'device.session', 'role.access', 'api.rate.li
         Route::delete('/{id}', [TargetHistoryController::class, 'delete']);
     });
 
+    //data-riwayat/ppk
     Route::prefix('performance-histories')->group(function () {
         Route::get('/', [PerformanceHistoryController::class, 'index']);
         Route::post('/', [PerformanceHistoryController::class, 'create']);
@@ -182,6 +190,7 @@ Route::middleware(['auth:sanctum', 'device.session', 'role.access', 'api.rate.li
         Route::delete('/{id}', [PerformanceHistoryController::class, 'delete']);
     });
 
+    //data-riwayat/hukuman-disiplin
     Route::prefix('disciplinary-histories')->group(function () {
         Route::get('/', [DisciplinaryHistoryController::class, 'index']);
         Route::post('/', [DisciplinaryHistoryController::class, 'create']);
@@ -279,3 +288,19 @@ Route::middleware(['auth:sanctum', 'device.session', 'role.access', 'api.rate.li
 });
 
 Route::get('/image/{path}', [EmployeeController::class, 'image'])->where('path', '.*');
+
+Route::get('/test-s3', function () {
+    try {
+        Storage::disk('s3')->files();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'S3 connected',
+        ]);
+    } catch (\Throwable $e) {
+        return response()->json([
+            'status' => false,
+            'message' => $e->getMessage(),
+        ], 500);
+    }
+});
