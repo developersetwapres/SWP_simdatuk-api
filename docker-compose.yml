@@ -11,20 +11,30 @@ services:
 
         restart: unless-stopped
 
-        networks:
-            - app-network
-
         environment:
             APP_ENV: local
             APP_DEBUG: true
             APP_URL: http://10.1.53.220:8008
             APP_KEY: base64:Q9vB4vM3Lh5dRp7Kj2Nx8Yw1Fz6GtUc0Pm3JqVe5AsI=
+
             DB_CONNECTION: mysql
             DB_HOST: mysql
             DB_PORT: 3306
             DB_DATABASE: SWP_simdatuk
             DB_USERNAME: UserSwp001
             DB_PASSWORD: "PassSwp2026#"
+
+            AWS_ACCESS_KEY_ID: minio
+            AWS_SECRET_ACCESS_KEY: minio123
+            AWS_BUCKET: simdatuk-laravel-10
+            AWS_DEFAULT_REGION: us-east-1
+            AWS_USE_PATH_STYLE_ENDPOINT: "true"
+            AWS_ENDPOINT: http://minio:9000
+            AWS_URL: http://10.1.53.220:9000/simdatuk-laravel-10
+
+        networks:
+            - s3minio-network
+
 networks:
-    app-network:
+    s3minio-network:
         external: true
