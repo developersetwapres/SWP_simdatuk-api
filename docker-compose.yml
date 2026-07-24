@@ -34,7 +34,11 @@ services:
 
         networks:
             - s3minio-network
+            - nginx-network
 
 networks:
     s3minio-network:
+        external: true
+
+    nginx-network:
         external: true
