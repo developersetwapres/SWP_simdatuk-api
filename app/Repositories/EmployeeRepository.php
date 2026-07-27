@@ -376,6 +376,7 @@ class EmployeeRepository
             *
         FROM
             hierarchy;";
+
         $position = DB::select($sql);
         $names = array_column($position, 'name');
 
@@ -393,7 +394,9 @@ class EmployeeRepository
             }
         }
 
-        if (!empty($names)) {
+        // Ubah elemen terakhir hanya jika jumlah elemen lebih dari satu
+        if (count($names) > 1) {
+
             $names[array_key_last($names)] = 'Sekretariat Wakil Presiden';
         }
 
