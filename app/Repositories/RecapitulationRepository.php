@@ -84,8 +84,15 @@ class RecapitulationRepository
             DB::raw('COUNT(u.id) as total')
         );
         $grade->where('g.type', $type);
+
+        // Make filters consistent with getUsers for ASN: only users with type=1
+        // and employment_type in ASN/PPPK groups so counts match the listing endpoints.
+        $grade->where('u.type', 1);
+        $grade->whereIn('u.employment_type_id', [1, 2, 3, 4]);
+
         $grade->whereIn('u.employment_status', [1, 6, 10]);
-        $grade->groupBy('u.grade_id');
+        // Group by grade columns to avoid ONLY_FULL_GROUP_BY issues
+        $grade->groupBy('g.id', 'g.name', 'g.code');
         $grade->orderBy('g.id', 'asc');
         $grade = $grade->get();
         $total = $grade->sum('total');
