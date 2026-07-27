@@ -393,6 +393,10 @@ class EmployeeRepository
             }
         }
 
+        if (!empty($names)) {
+            $names[array_key_last($names)] = 'Sekretariat Wakil Presiden';
+        }
+
         return implode(', ', $names);
     }
 }
