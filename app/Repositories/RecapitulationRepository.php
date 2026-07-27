@@ -394,17 +394,24 @@ class RecapitulationRepository
         }
         $data = array();
         foreach ($positions as $index => $item) {
-            if (str_starts_with($item->name, 'Staf Khusus Wakil Presiden')) {
+            $normalizedName = $this->normalizeNonAsnPositionName($item->name);
+            $item->name = $normalizedName;
+
+            if (str_starts_with($normalizedName, 'Staf Khusus Wakil Presiden')) {
                 $this->addOrUpdateGroupData($data, $item, 'Staf Khusus Wakil Presiden');
-            } elseif (str_contains($item->name, 'Pembantu Asisten Staf Khusus Wakil Presiden')) {
+            } elseif (str_contains($normalizedName, 'Pembantu Asisten Staf Khusus Wakil Presiden')) {
                 $this->addOrUpdateGroupData($data, $item, 'Pembantu Asisten Staf Khusus Wakil Presiden');
-            } elseif (str_contains($item->name, 'Asisten Staf Khusus Wakil Presiden')) {
+            } elseif (str_contains($normalizedName, 'Asisten Staf Khusus Wakil Presiden')) {
                 $this->addOrUpdateGroupData($data, $item, 'Asisten Staf Khusus Wakil Presiden');
-            } elseif (str_contains($item->name, 'Pengemudi')) {
+            } elseif (str_contains($normalizedName, 'Asisten Sekretaris Pribadi Wakil Presiden')) {
+                $this->addOrUpdateGroupData($data, $item, 'Asisten Sekretaris Pribadi Wakil Presiden');
+            } elseif (str_contains($normalizedName, 'Pembantu Asisten Sekretaris Pribadi Wakil Presiden')) {
+                $this->addOrUpdateGroupData($data, $item, 'Pembantu Asisten Sekretaris Pribadi Wakil Presiden');
+            } elseif (str_contains($normalizedName, 'Pengemudi')) {
                 $this->addOrUpdateGroupData($data, $item, 'Pengemudi VVIP');
-            } elseif (str_contains($item->name, "Mudi Wapres RI KH. Ma'ruf Amin, Ba Mudi-2 VVIP Unit Mudi Tim Pampri Don 1 Grup B Paspamres")) {
+            } elseif (str_contains($normalizedName, "Mudi Wapres RI KH. Ma'ruf Amin, Ba Mudi-2 VVIP Unit Mudi Tim Pampri Don 1 Grup B Paspamres")) {
                 $this->addOrUpdateGroupData($data, $item, 'Pengemudi VVIP');
-            } elseif (str_contains($item->name, "Sekretariat Staf Khusus Wakil Presiden")) {
+            } elseif (str_contains($normalizedName, "Sekretariat Staf Khusus Wakil Presiden")) {
                 $this->addOrUpdateGroupData($data, $item, 'Sekretariat Staf Khusus Wakil Presiden');
             } else {
                 array_push($data, $item);
@@ -432,6 +439,29 @@ class RecapitulationRepository
             $data[$newIndex]['id'] = $data[$newIndex]['id'] . ',' . $item->id;
             $data[$newIndex]['total'] += $item->total;
         }
+    }
+
+    private function normalizeNonAsnPositionName($name)
+    {
+        // Remove trailing parenthetical suffixes like "(9A)", "(9B)", etc.
+        $normalized = preg_replace('/\s*\([^)]*\)$/u', '', $name);
+
+        // Specific normalization rules for known titles.
+        $patterns = [
+            '/^Asisten Sekretaris Pribadi Wakil Presiden\s*\(.*\)$/iu' => 'Asisten Sekretaris Pribadi Wakil Presiden',
+            '/^Pembantu Asisten Sekretaris Pribadi Wakil Presiden\s*\(.*\)$/iu' => 'Pembantu Asisten Sekretaris Pribadi Wakil Presiden',
+            '/^Pembantu Asisten Staf Khusus Wakil Presiden\s*\(.*\)$/iu' => 'Pembantu Asisten Staf Khusus Wakil Presiden',
+            '/^Staf Khusus Wakil Presiden\s*\(.*\)$/iu' => 'Staf Khusus Wakil Presiden',
+            '/^Asisten Staf Khusus Wakil Presiden\s*\(.*\)$/iu' => 'Asisten Staf Khusus Wakil Presiden',
+        ];
+
+        foreach ($patterns as $pattern => $replacement) {
+            if (preg_match($pattern, $name)) {
+                return $replacement;
+            }
+        }
+
+        return trim($normalized);
     }
 
     /**
