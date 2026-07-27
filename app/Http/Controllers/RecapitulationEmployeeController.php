@@ -79,6 +79,7 @@ class RecapitulationEmployeeController extends Controller
             if ($this->request->section_id == 1) {
                 $data = $this->getUsersByUnitKerja($this->request->card_id);
             } elseif ($this->request->section_id == 3 || $this->request->section_id == 4) {
+
                 $data = $this->getUsers(1, 'grade', $this->request->card_id);
                 $data2 = $this->getUsers(1, 'grade', $this->request->card_id, true);
                 $data = array_merge($data['items']->toArray(), $data2['items']->toArray());
