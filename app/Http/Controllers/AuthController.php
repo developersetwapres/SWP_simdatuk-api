@@ -44,11 +44,11 @@ class AuthController extends Controller
         $user = User::where('username', $this->request->username)->first();
 
         if (!$user || !Hash::check($this->request->password, $user->password)) {
-            return $this->response(401, 'Terjadi kesalahan, silakan coba lagi A.');
+            return $this->response(401, 'Username atau password yang anda masukkan salah.');
         } else if (is_null($user->role_id)) {
-            return $this->response(401, 'Terjadi kesalahan, silakan coba lagi B.');
+            return $this->response(401, 'Akun anda tidak memiliki peran yang valid, silakan hubungi admin.');
         } else if ($user->status != true) {
-            return $this->response(401, 'Terjadi kesalahan, silakan coba lagi C.');
+            return $this->response(401, 'Akun anda tidak aktif, silakan hubungi admin.');
         }
 
         // Validate reCAPTCHA in production
