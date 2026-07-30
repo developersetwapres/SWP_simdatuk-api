@@ -507,6 +507,11 @@ class ExportRecapitulationController extends Controller
                 'type' => 2,
             ],
             [
+                'title' => 'SD/Sederajat',
+                'body' => $educationAndGender->sd,
+                'type' => 2,
+            ],
+            [
                 'title' => 'Pendidikan',
                 'body' => 'Total : ' . $educationAndGender->total_education,
                 'type' => 3,
@@ -609,6 +614,11 @@ class ExportRecapitulationController extends Controller
                 'type' => 2,
             ],
             [
+                'title' => 'SD/Sederajat',
+                'body' => $educationAndGender->sd,
+                'type' => 2,
+            ],
+            [
                 'title' => 'Pendidikan',
                 'body' => 'Total : ' . $educationAndGender->total_education,
                 'type' => 3,
@@ -698,6 +708,11 @@ class ExportRecapitulationController extends Controller
             [
                 'title' => 'SLTP/Sederajat',
                 'body' => $educationAndGender->smp,
+                'type' => 2,
+            ],
+            [
+                'title' => 'SD/Sederajat',
+                'body' => $educationAndGender->sd,
                 'type' => 2,
             ],
             [

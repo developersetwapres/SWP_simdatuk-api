@@ -187,7 +187,7 @@
     "Tanggal Mulai Menjabat" => $toggleField['isDatePosition'],
     "Eselon" => $toggleField['isEchelons'],
     "TMT Eselon" => $toggleField['isEchelonDate'],
-    "Golongan" => $toggleField['isGrade'],
+    "Pangkat/ Golongan" => $toggleField['isGrade'],
     "TMT Golongan" => $toggleField['isGradeDate'],
     "Instansi" => $toggleField['isAgency'],
     "No. Karpeg" => $toggleField['isNoWorker'],
@@ -379,7 +379,7 @@
                     @case("TMT Eselon")
                     {{ $value['echelon_effective_date'] }}
                     @break
-                    @case("Golongan")
+                    @case("Pangkat/ Golongan")
                     {{ $value['grade_name'] }}
                     @break
                     @case("TMT Golongan")

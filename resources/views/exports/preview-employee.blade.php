@@ -184,7 +184,7 @@
                 <th class="section-header-color">TMT Eselon</th>
                 @endif
                 @if($toggleField['isGrade'])
-                <th class="section-header-color">Golongan</th>
+                <th class="section-header-color">Pangkat/ Golongan</th>
                 @endif
                 @if($toggleField['isGradeDate'])
                 <th class="section-header-color">TMT Golongan</th>

@@ -180,7 +180,7 @@ class employee implements FromView, WithDrawings, WithEvents
             }
             if (isset($this->toggleField['isGrade'])) {
                 $users->leftJoin('grades as g', 'users.grade_id', '=', 'g.id');
-                $users->addSelect('g.name as grade_name');
+                $users->addSelect(DB::raw("CONCAT(g.name, ' ', g.code) as grade_name"));
             }
             if (isset($this->toggleField['isEmployeeStatus'])) {
                 $users->addSelect('users.employment_status');

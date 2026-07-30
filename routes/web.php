@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Storage;
 */
 
 Route::get('/', function () {
-    // dd(Hash::make('Passw0rd_'));
+    // dd(Hash::make('Password9!k'));
     // Storage::disk('s3')->put('test.txt', 'Hello MinIO');
 
     // dd(Storage::disk('s3')->url('test.txt'));

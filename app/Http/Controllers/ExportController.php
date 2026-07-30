@@ -367,7 +367,7 @@ class ExportController extends Controller
      * Export detail of multiple employees DRH data to .PDF inside a zip file.
      * @group Export
      * @authenticated
-     * 
+     *
      * @bodyParam employee_type int[] Refers to IDs of type of employee (1: ASN, 2: Non ASN, 3: Outsourcing). Example: [1, 3]
      * @bodyParam deputy int[] List of employee's deputy. Example: [1, 3]
      * @bodyParam echelons int[] Refers to IDs of employee echelons. Example: [1, 3]
@@ -991,6 +991,7 @@ class ExportController extends Controller
             END
         ", [$request->retirement_year, $request->retirement_year, $request->retirement_year]);
         }
+
         if (isset($request->grade_range)) {
             $gradeRanges = $request->input('grade_range', []);
 
@@ -1138,6 +1139,7 @@ class ExportController extends Controller
         $toggleFieldBio['isAssessment'] = $request->isAssessment == 1;
         $toggleFieldBio['isCompetency'] = $request->isCompetency == 1;
         $toggleFieldBio['isTalentPool'] = $request->isTalentPool == 1;
+
         if ($request->type == "csv") {
             return Excel::download(new employee($toggleFieldBio, $userIds), 'Employees-' . Carbon::now() . '.csv', \Maatwebsite\Excel\Excel::CSV);
         } else if ($request->type == "xlsx") {
@@ -1215,7 +1217,7 @@ class ExportController extends Controller
                 }
                 if ($toggleFieldBio['isGrade']) {
                     $usersData->leftJoin('grades as g', 'users.grade_id', '=', 'g.id');
-                    $usersData->addSelect('g.name as grade_name');
+                    $usersData->addSelect(DB::raw("CONCAT(g.name, ' ', g.code) as grade_name"));
                 }
                 if ($toggleFieldBio['isEmployeeStatus']) {
                     $usersData->addSelect('users.employment_status');
@@ -1229,12 +1231,12 @@ class ExportController extends Controller
                 }
                 if ($toggleFieldBio['isGradeDuration']) {
                     $usersData->addSelect(DB::raw("
-                    CASE 
-                        WHEN users.years_of_service_rank > 0 OR users.month_of_service_rank > 0 
+                    CASE
+                        WHEN users.years_of_service_rank > 0 OR users.month_of_service_rank > 0
                         THEN CONCAT(
                             IF(users.years_of_service_rank > 0, users.years_of_service_rank, 0), ' Tahun, ',
-                            IF(users.month_of_service_rank > 0, users.month_of_service_rank, 0), ' Bulan' 
-                        ) 
+                            IF(users.month_of_service_rank > 0, users.month_of_service_rank, 0), ' Bulan'
+                        )
                         ELSE '-'
                     END as grade_duration
                 "));
@@ -1687,12 +1689,12 @@ class ExportController extends Controller
                 }
                 if ($toggleFieldBio['isWorkDuration']) {
                     $usersData->addSelect(DB::raw("
-                    CASE 
-                        WHEN users.years_of_service_total > 0 OR users.month_of_service_total > 0 
+                    CASE
+                        WHEN users.years_of_service_total > 0 OR users.month_of_service_total > 0
                         THEN CONCAT(
                             IF(users.years_of_service_total > 0, users.years_of_service_total, 0), ' Tahun, ',
-                            IF(users.month_of_service_total > 0, users.month_of_service_total, 0), ' Bulan' 
-                        ) 
+                            IF(users.month_of_service_total > 0, users.month_of_service_total, 0), ' Bulan'
+                        )
                         ELSE '-'
                     END as work_duration
                 "));
@@ -1714,9 +1716,9 @@ class ExportController extends Controller
                                 positions
                             WHERE
                                 id = '" . $item->position_id . "' -- Replace ? with the specific child employee_id
-                                
+
                             UNION DISTINCT
-                
+
                             -- Recursive member: Select the parent row
                             SELECT
                                 p.id,
@@ -1771,6 +1773,7 @@ class ExportController extends Controller
             $pdf->set_option('tempDir', $tmp);
             return $pdf->download('Employees-' . Carbon::now() . '.pdf');
         }
+
         return $this->response('400', 'File type provided is incorrect');
     }
 
@@ -2114,7 +2117,7 @@ class ExportController extends Controller
         }
         if ($this->request->isGrade == 1) {
             $usersPreview->leftJoin('grades as g', 'users.grade_id', '=', 'g.id');
-            $usersPreview->addSelect('g.name as grade_name');
+            $usersPreview->addSelect(DB::raw("CONCAT(g.name, ' ', g.code) as grade_name"));
         }
         if ($this->request->isEmployeeStatus == 1) {
             $usersPreview->addSelect('users.employment_status');
@@ -2128,12 +2131,12 @@ class ExportController extends Controller
         }
         if ($this->request->isGradeDuration == 1) {
             $usersPreview->addSelect(DB::raw("
-            CASE 
-                WHEN users.years_of_service_rank > 0 OR users.month_of_service_rank > 0 
+            CASE
+                WHEN users.years_of_service_rank > 0 OR users.month_of_service_rank > 0
                 THEN CONCAT(
                     IF(users.years_of_service_rank > 0, users.years_of_service_rank, 0), ' Tahun, ',
-                    IF(users.month_of_service_rank > 0, users.month_of_service_rank, 0), ' Bulan' 
-                ) 
+                    IF(users.month_of_service_rank > 0, users.month_of_service_rank, 0), ' Bulan'
+                )
                 ELSE '-'
             END as grade_duration
         "));
@@ -2587,12 +2590,12 @@ class ExportController extends Controller
         }
         if ($this->request->isWorkDuration == 1) {
             $usersPreview->addSelect(DB::raw("
-            CASE 
-                WHEN users.years_of_service_total > 0 OR users.month_of_service_total > 0 
+            CASE
+                WHEN users.years_of_service_total > 0 OR users.month_of_service_total > 0
                 THEN CONCAT(
                     IF(users.years_of_service_total > 0, users.years_of_service_total, 0), ' Tahun, ',
-                    IF(users.month_of_service_total > 0, users.month_of_service_total, 0), ' Bulan' 
-                ) 
+                    IF(users.month_of_service_total > 0, users.month_of_service_total, 0), ' Bulan'
+                )
                 ELSE '-'
             END as work_duration
         "));
