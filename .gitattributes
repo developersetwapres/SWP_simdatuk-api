@@ -9,12 +9,3 @@
 /.github export-ignore
 CHANGELOG.md export-ignore
 .styleci.yml export-ignore
-
-
-Dockerfile merge=ours
-docker-compose.yml merge=ours
-Jenkinsfile merge=ours
-docker/nginx.conf merge=ours
-docker/php.ini merge=ours
-docker/local.conf merge=ours
-docker/supervisord.conf merge=ours
