@@ -158,24 +158,24 @@ class employee implements FromView, WithDrawings, WithEvents
             //     $users->addSelect('users.marriage_other_notes');
             // }
             if (isset($this->toggleField['isPosition'])) {
-                $users->addSelect('users.position_id', 'positions.name as position_name','positions.type as position_type'); // position id to be used in get hierarchy below
+                $users->addSelect('users.position_id', 'positions.name as position_name', 'positions.type as position_type'); // position id to be used in get hierarchy below
             }
             if (isset($this->toggleField['isPositionDescription'])) {
                 $users->addSelect('users.description');
             }
             if (isset($this->toggleField['isEchelons'])) {
                 if ($this->toggleField['isPosition'] != 1) { // if isPosition not checked
-                    $users->addSelect('users.position_id','positions.name as position_name','positions.type as position_type'); // Get position id to be used in get hierarchy below
+                    $users->addSelect('users.position_id', 'positions.name as position_name', 'positions.type as position_type'); // Get position id to be used in get hierarchy below
                 }
                 $users->leftJoin('echelons', 'users.echelon_id', '=', 'echelons.id');
                 $users->addSelect('echelons.name as echelons_name');
             }
             if (isset($this->toggleFieldBio['isFullPosition'])) {
                 if ($this->toggleFieldBio['isPosition'] != 1) { // if isPosition not checked
-                    $users->addSelect('users.position_id','positions.name as position_name','positions.type as position_type'); // Get position id to be used in get hierarchy below
+                    $users->addSelect('users.position_id', 'positions.name as position_name', 'positions.type as position_type'); // Get position id to be used in get hierarchy below
                 }
                 if ($this->toggleFieldBio['isEchelons'] != 1) { // if isEchelons not checked
-                    $users->addSelect('echelons.name as echelons_name');// Get echelons to be used in get hierarchy below
+                    $users->addSelect('echelons.name as echelons_name'); // Get echelons to be used in get hierarchy below
                 }
             }
             if (isset($this->toggleField['isGrade'])) {
@@ -194,12 +194,12 @@ class employee implements FromView, WithDrawings, WithEvents
             }
             if (isset($this->toggleField['isGradeDuration'])) {
                 $users->addSelect(DB::raw("
-                CASE 
-                    WHEN users.years_of_service_rank > 0 OR users.month_of_service_rank > 0 
+                CASE
+                    WHEN users.years_of_service_rank > 0 OR users.month_of_service_rank > 0
                     THEN CONCAT(
                         IF(users.years_of_service_rank > 0, users.years_of_service_rank, 0), ' Tahun, ',
-                        IF(users.month_of_service_rank > 0, users.month_of_service_rank, 0), ' Bulan' 
-                    ) 
+                        IF(users.month_of_service_rank > 0, users.month_of_service_rank, 0), ' Bulan'
+                    )
                     ELSE '-'
                 END as grade_duration
             "));
@@ -661,12 +661,12 @@ class employee implements FromView, WithDrawings, WithEvents
             }
             if (isset($this->toggleField['isWorkDuration'])) {
                 $users->addSelect(DB::raw("
-                CASE 
-                    WHEN users.years_of_service_total > 0 OR users.month_of_service_total > 0 
+                CASE
+                    WHEN users.years_of_service_total > 0 OR users.month_of_service_total > 0
                     THEN CONCAT(
                         IF(users.years_of_service_total > 0, users.years_of_service_total, 0), ' Tahun, ',
-                        IF(users.month_of_service_total > 0, users.month_of_service_total, 0), ' Bulan' 
-                    ) 
+                        IF(users.month_of_service_total > 0, users.month_of_service_total, 0), ' Bulan'
+                    )
                     ELSE '-'
                 END as work_duration
             "));
@@ -687,9 +687,9 @@ class employee implements FromView, WithDrawings, WithEvents
                                 positions
                             WHERE
                                 id = '" . $item->position_id . "' -- Replace ? with the specific child employee_id
-                                
+
                             UNION DISTINCT
-                
+
                             -- Recursive member: Select the parent row
                             SELECT
                                 p.id,
@@ -709,7 +709,7 @@ class employee implements FromView, WithDrawings, WithEvents
                             hierarchy WHERE id != '" . $item->position_id . "' ORDER BY id ASC;";
 
                     $hierarchy = DB::select($sql);
-                    $add=[];
+                    $add = [];
                     if (count($hierarchy) > 0) {
                         foreach ($hierarchy as $key => $value) {
                             $name = str_replace('Kepala ', '', $value->name);
@@ -718,12 +718,12 @@ class employee implements FromView, WithDrawings, WithEvents
                             $add[] = $name;
                         }
                     }
-                     if($item->position_type == 2){
-                            $add[] = $item->position_name . ' ' . $item->echelons_name;
-                        }else{
-                            $add[] = $item->position_name;
-                        }
-                        $item->full_position = implode(', ',array_reverse($add));
+                    if ($item->position_type == 2) {
+                        $add[] = $item->position_name . ' ' . $item->echelons_name;
+                    } else {
+                        $add[] = $item->position_name;
+                    }
+                    $item->full_position = implode(', ', array_reverse($add));
                 }
                 return (array) $item;
             })->toArray();
