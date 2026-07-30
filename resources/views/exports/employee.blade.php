@@ -508,7 +508,11 @@
                                     8 => 'Strata III',
                                 ];
                                 $educationLabel = $levels[$value['education_level']] ?? '-';
-                                $educationLabel = trim($educationLabel . ($value['education_name'] ? ' - ' . $value['education_name'] : '') . ($value['education_year'] ? ' (' . $value['education_year'] . ')' : ''));
+                                $educationLabel = trim(
+                                    $educationLabel .
+                                        ($value['education_name'] ? ' - ' . $value['education_name'] : '') .
+                                        ($value['education_year'] ? ' (' . $value['education_year'] . ')' : ''),
+                                );
                             @endphp
                             {{ $educationLabel }}
                         </td>
@@ -635,10 +639,10 @@
                                 @foreach (explode('<li>', $value['education_history']) as $key => $v)
                                     @if ($key == 0)
                                         @phpcontinue;
-                                        @endphp
+                                                                                @endphp ?>
                                     @endif
                                     {!! '
-                                                            <li>' .
+                                                                                                <li>' .
                                         $key .
                                         '. ' .
                                         str_replace('&', '&amp;', $v) !!}
@@ -652,10 +656,10 @@
                                 @foreach (explode('<li>', $value['position_history']) as $key => $v)
                                     @if ($key == 0)
                                         @phpcontinue;
-                                        @endphp
+                                                                                @endphp ?>
                                     @endif
                                     {!! '
-                                                            <li>' .
+                                                                                                <li>' .
                                         $key .
                                         '. ' .
                                         str_replace('&', '&amp;', $v) !!}
@@ -669,10 +673,10 @@
                                 @foreach (explode('<li>', $value['grade_history']) as $key => $v)
                                     @if ($key == 0)
                                         @phpcontinue;
-                                        @endphp
+                                                                                @endphp ?>
                                     @endif
                                     {!! '
-                                                            <li>' .
+                                                                                                <li>' .
                                         $key .
                                         '. ' .
                                         str_replace('&', '&amp;', $v) !!}
@@ -686,10 +690,10 @@
                                 @foreach (explode('<li>', $value['structural_training_history']) as $key => $v)
                                     @if ($key == 0)
                                         @phpcontinue;
-                                        @endphp
+                                                                                @endphp ?>
                                     @endif
                                     {!! '
-                                                            <li>' .
+                                                                                                <li>' .
                                         $key .
                                         '. ' .
                                         str_replace('&', '&amp;', $v) !!}
@@ -703,10 +707,10 @@
                                 @foreach (explode('<li>', $value['functional_training_history']) as $key => $v)
                                     @if ($key == 0)
                                         @phpcontinue;
-                                        @endphp
+                                                                                @endphp ?>
                                     @endif
                                     {!! '
-                                                            <li>' .
+                                                                                                <li>' .
                                         $key .
                                         '. ' .
                                         str_replace('&', '&amp;', $v) !!}
@@ -720,10 +724,10 @@
                                 @foreach (explode('<li>', $value['technique_training_history']) as $key => $v)
                                     @if ($key == 0)
                                         @phpcontinue;
-                                        @endphp
+                                                                                @endphp ?>
                                     @endif
                                     {!! '
-                                                            <li>' .
+                                                                                                <li>' .
                                         $key .
                                         '. ' .
                                         str_replace('&', '&amp;', $v) !!}
@@ -737,10 +741,10 @@
                                 @foreach (explode('<li>', $value['recognition_history']) as $key => $v)
                                     @if ($key == 0)
                                         @phpcontinue;
-                                        @endphp
+                                                                                @endphp ?>
                                     @endif
                                     {!! '
-                                                            <li>' .
+                                                                                                <li>' .
                                         $key .
                                         '. ' .
                                         str_replace('&', '&amp;', $v) !!}
@@ -754,10 +758,10 @@
                                 @foreach (explode('<li>', $value['skp_history']) as $key => $v)
                                     @if ($key == 0)
                                         @phpcontinue;
-                                        @endphp
+                                                                                @endphp ?>
                                     @endif
                                     {!! '
-                                                            <li>' .
+                                                                                                <li>' .
                                         $key .
                                         '. ' .
                                         str_replace('&', '&amp;', $v) !!}
@@ -771,10 +775,10 @@
                                 @foreach (explode('<li>', $value['credit_history']) as $key => $v)
                                     @if ($key == 0)
                                         @phpcontinue;
-                                        @endphp
+                                                                                @endphp ?>
                                     @endif
                                     {!! '
-                                                            <li>' .
+                                                                                                <li>' .
                                         $key .
                                         '. ' .
                                         str_replace('&', '&amp;', $v) !!}
@@ -788,10 +792,10 @@
                                 @foreach (explode('<li>', $value['performance_history']) as $key => $v)
                                     @if ($key == 0)
                                         @phpcontinue;
-                                        @endphp
+                                                                                @endphp ?>
                                     @endif
                                     {!! '
-                                                            <li>' .
+                                                                                                <li>' .
                                         $key .
                                         '. ' .
                                         str_replace('&', '&amp;', $v) !!}
@@ -805,10 +809,10 @@
                                 @foreach (explode('<li>', $value['disciplinary_history']) as $key => $v)
                                     @if ($key == 0)
                                         @phpcontinue;
-                                        @endphp
+                                                                                @endphp ?>
                                     @endif
                                     {!! '
-                                                            <li>' .
+                                                                                                <li>' .
                                         $key .
                                         '. ' .
                                         str_replace('&', '&amp;', $v) !!}
@@ -822,10 +826,10 @@
                                 @foreach (explode('<li>', $value['family_history']) as $key => $v)
                                     @if ($key == 0)
                                         @phpcontinue;
-                                        @endphp
+                                                                                @endphp ?>
                                     @endif
                                     {!! '
-                                                            <li>' .
+                                                                                                <li>' .
                                         $key .
                                         '. ' .
                                         str_replace('&', '&amp;', $v) !!}
@@ -839,10 +843,10 @@
                                 @foreach (explode('<li>', $value['leave_history']) as $key => $v)
                                     @if ($key == 0)
                                         @phpcontinue;
-                                        @endphp
+                                                                                @endphp ?>
                                     @endif
                                     {!! '
-                                                            <li>' .
+                                                                                                <li>' .
                                         $key .
                                         '. ' .
                                         str_replace('&', '&amp;', $v) !!}
@@ -856,10 +860,10 @@
                                 @foreach (explode('<li>', $value['notes']) as $key => $v)
                                     @if ($key == 0)
                                         @phpcontinue;
-                                        @endphp
+                                                                                @endphp ?>
                                     @endif
                                     {!! '
-                                                            <li>' .
+                                                                                                <li>' .
                                         $key .
                                         '. ' .
                                         str_replace('&', '&amp;', $v) !!}
@@ -873,10 +877,10 @@
                                 @foreach (explode('<li>', $value['assessment_history']) as $key => $v)
                                     @if ($key == 0)
                                         @phpcontinue;
-                                        @endphp
+                                                                                @endphp ?>
                                     @endif
                                     {!! '
-                                                            <li>' .
+                                                                                                <li>' .
                                         $key .
                                         '. ' .
                                         str_replace('&', '&amp;', $v) !!}
@@ -890,10 +894,10 @@
                                 @foreach (explode('<li>', $value['competency_history']) as $key => $v)
                                     @if ($key == 0)
                                         @phpcontinue;
-                                        @endphp
+                                                                                @endphp ?>
                                     @endif
                                     {!! '
-                                                            <li>' .
+                                                                                                <li>' .
                                         $key .
                                         '. ' .
                                         str_replace('&', '&amp;', $v) !!}
@@ -907,10 +911,10 @@
                                 @foreach (explode('<li>', $value['talent_pool_history']) as $key => $v)
                                     @if ($key == 0)
                                         @phpcontinue;
-                                        @endphp
+                                                                                @endphp ?>
                                     @endif
                                     {!! '
-                                                            <li>' .
+                                                                                                <li>' .
                                         $key .
                                         '. ' .
                                         str_replace('&', '&amp;', $v) !!}

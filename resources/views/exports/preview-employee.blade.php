@@ -439,7 +439,11 @@
                                     8 => 'Strata III',
                                 ];
                                 $educationLabel = $levels[$value['education_level']] ?? '-';
-                                $educationLabel = trim($educationLabel . ($value['education_name'] ? ' - ' . $value['education_name'] : '') . ($value['education_year'] ? ' (' . $value['education_year'] . ')' : ''));
+                                $educationLabel = trim(
+                                    $educationLabel .
+                                        ($value['education_name'] ? ' - ' . $value['education_name'] : '') .
+                                        ($value['education_year'] ? ' (' . $value['education_year'] . ')' : ''),
+                                );
                             @endphp
                             {{ $educationLabel }}
                         </td>
