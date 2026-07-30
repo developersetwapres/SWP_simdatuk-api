@@ -188,6 +188,7 @@
             'Eselon' => $toggleField['isEchelons'],
             'TMT Eselon' => $toggleField['isEchelonDate'],
             'Pangkat/ Golongan' => $toggleField['isGrade'],
+            'Pendidikan Terakhir' => $toggleField['isEducation'],
             'TMT Golongan' => $toggleField['isGradeDate'],
             'Instansi' => $toggleField['isAgency'],
             'No. Karpeg' => $toggleField['isNoWorker'],
@@ -422,6 +423,24 @@
 
                                     @case('Pangkat/ Golongan')
                                         {{ $value['grade_name'] }}
+                                    @break
+
+                                    @case('Pendidikan Terakhir')
+                                        @php
+                                            $levels = [
+                                                1 => 'SD/Sederajat',
+                                                2 => 'SLTP/Sederajat',
+                                                3 => 'SLTA/Sederajat',
+                                                4 => 'Diploma I/II',
+                                                5 => 'Akademik/D3/S.Muda',
+                                                6 => 'Diploma IV/Strata I',
+                                                7 => 'Strata II',
+                                                8 => 'Strata III',
+                                            ];
+                                            $educationLabel = $levels[$value['education_level']] ?? '-';
+                                            $educationLabel = trim($educationLabel . ($value['education_name'] ? ' - ' . $value['education_name'] : '') . ($value['education_year'] ? ' (' . $value['education_year'] . ')' : ''));
+                                        @endphp
+                                        {{ $educationLabel }}
                                     @break
 
                                     @case('TMT Golongan')

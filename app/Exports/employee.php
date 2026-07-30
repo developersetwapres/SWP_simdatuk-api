@@ -182,6 +182,9 @@ class employee implements FromView, WithDrawings, WithEvents
                 $users->leftJoin('grades as g', 'users.grade_id', '=', 'g.id');
                 $users->addSelect(DB::raw("CONCAT(g.name, ' ', g.code) as grade_name"));
             }
+            if (isset($this->toggleField['isEducation'])) {
+                $users->addSelect('users.education_level', 'users.education_name', 'users.education_year');
+            }
             if (isset($this->toggleField['isEmployeeStatus'])) {
                 $users->addSelect('users.employment_status');
             }

@@ -1104,6 +1104,7 @@ class ExportController extends Controller
         $toggleFieldBio['isPositionDescription'] = $request->isPositionDescription == 1; //keterangan
         $toggleFieldBio['isGrade'] = $request->isGrade == 1;
         $toggleFieldBio['isGradeDate'] = $request->isGradeDate == 1;
+        $toggleFieldBio['isEducation'] = $request->isEducation == 1;
         $toggleFieldBio['isAgency'] = $request->isAgency == 1;
         $toggleFieldBio['isNoWorker'] = $request->isNoWorker == 1;
         $toggleFieldBio['isKarisu'] = $request->isKarisu == 1;
@@ -1218,6 +1219,9 @@ class ExportController extends Controller
                 if ($toggleFieldBio['isGrade']) {
                     $usersData->leftJoin('grades as g', 'users.grade_id', '=', 'g.id');
                     $usersData->addSelect(DB::raw("CONCAT(g.name, ' ', g.code) as grade_name"));
+                }
+                if ($toggleFieldBio['isEducation']) {
+                    $usersData->addSelect('users.education_level', 'users.education_name', 'users.education_year');
                 }
                 if ($toggleFieldBio['isEmployeeStatus']) {
                     $usersData->addSelect('users.employment_status');
@@ -2118,6 +2122,9 @@ class ExportController extends Controller
         if ($this->request->isGrade == 1) {
             $usersPreview->leftJoin('grades as g', 'users.grade_id', '=', 'g.id');
             $usersPreview->addSelect(DB::raw("CONCAT(g.name, ' ', g.code) as grade_name"));
+        }
+        if ($this->request->isEducation == 1) {
+            $usersPreview->addSelect('users.education_level', 'users.education_name', 'users.education_year');
         }
         if ($this->request->isEmployeeStatus == 1) {
             $usersPreview->addSelect('users.employment_status');

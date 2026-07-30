@@ -78,6 +78,7 @@ class PreviewExportEmployeesRequest extends FormRequest
             'isEchelonDate' => 'nullable|numeric|min:0|max:1',
             'isGrade' => 'nullable|numeric|min:0|max:1',
             'isGradeDate' => 'nullable|numeric|min:0|max:1',
+            'isEducation' => 'nullable|numeric|min:0|max:1',
             'isAgency' => 'nullable|numeric|min:0|max:1',
             'isNoWorker' => 'nullable|numeric|min:0|max:1',
             'isKarisu' => 'nullable|numeric|min:0|max:1',

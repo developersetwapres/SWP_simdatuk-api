@@ -219,6 +219,9 @@
                 @if ($toggleField['isGrade'])
                     <th class="section-header-color">Pangkat/ Golongan</th>
                 @endif
+                @if ($toggleField['isEducation'])
+                    <th class="section-header-color">Pendidikan Terakhir</th>
+                @endif
                 @if ($toggleField['isGradeDate'])
                     <th class="section-header-color">TMT Golongan</th>
                 @endif
@@ -490,6 +493,25 @@
                     @endif
                     @if ($toggleField['isGrade'])
                         <td>{{ $value['grade_name'] }}</td>
+                    @endif
+                    @if ($toggleField['isEducation'])
+                        <td>
+                            @php
+                                $levels = [
+                                    1 => 'SD/Sederajat',
+                                    2 => 'SLTP/Sederajat',
+                                    3 => 'SLTA/Sederajat',
+                                    4 => 'Diploma I/II',
+                                    5 => 'Akademik/D3/S.Muda',
+                                    6 => 'Diploma IV/Strata I',
+                                    7 => 'Strata II',
+                                    8 => 'Strata III',
+                                ];
+                                $educationLabel = $levels[$value['education_level']] ?? '-';
+                                $educationLabel = trim($educationLabel . ($value['education_name'] ? ' - ' . $value['education_name'] : '') . ($value['education_year'] ? ' (' . $value['education_year'] . ')' : ''));
+                            @endphp
+                            {{ $educationLabel }}
+                        </td>
                     @endif
                     @if ($toggleField['isGradeDate'])
                         <td>
