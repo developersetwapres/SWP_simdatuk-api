@@ -1,149 +1,78 @@
-FROM php:8.4-fpm-alpine AS build
+# Use an official PHP 8.3 FPM with Alpine Linux as a parent image
+FROM php:8.4-fpm
 
-RUN apk add --no-cache \
-    bash \
-    git \
-    curl \
-    libpng-dev \
-    libjpeg-turbo-dev \
-    freetype-dev \
-    oniguruma-dev \
-    icu-dev \
-    openldap-dev \
-    libzip-dev \
-    zip \
-    unzip
+# Set the working directory to /var/www/html
+WORKDIR /app
 
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install \
-        pdo \
-        pdo_mysql \
-        mbstring \
-        gd \
-        intl \
-        ldap \
-        zip
+RUN apt-get update && apt-get install -y \
+  bash \
+  libzip-dev \
+  unzip \
+  git \
+  curl \
+  nginx \
+  supervisor \
+  vim \
+  && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /var/www
+# Install PHP extensions
+RUN curl -sSL https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions -o - | sh -s \
+  ctype \
+  curl \
+  dom \
+  fileinfo \
+  filter \
+  hash \
+  mbstring \
+  openssl \
+  pcre \
+  pdo \
+  pdo_mysql \
+  session \
+  tokenizer \
+  xml \
+  gd \
+  zip \
+  @composer
 
-COPY composer.json composer.lock ./
-
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
-
-RUN composer install \
-    --no-dev \
-    --optimize-autoloader \
-    --no-interaction \
-    --no-scripts
-
+# Copy the rest of the application code to the container
 COPY . .
 
-RUN php artisan package:discover --ansi
+# Copy .env file
+COPY ./config-simdatuk/.env .env
 
-FROM php:8.4-fpm-alpine
+# Install PHP extensions
+RUN docker-php-ext-install pdo pdo_mysql
 
-RUN apk add --no-cache \
-    bash \
-    curl \
-    libpng \
-    libjpeg-turbo \
-    freetype \
-    oniguruma \
-    icu \
-    openldap \
-    libzip \
-    zip \
-    unzip \
-    mysql-client
+# Install application dependencies
+RUN composer install --no-scripts --no-autoloader
 
-WORKDIR /var/www
+# Generate the optimized autoload files
+RUN composer clear-cache && composer dump-autoload --no-scripts --optimize
 
-# Salin extension PHP yang sudah dikompilasi
-COPY --from=build /usr/local/lib/php/extensions/ /usr/local/lib/php/extensions/
-COPY --from=build /usr/local/etc/php/conf.d/ /usr/local/etc/php/conf.d/
+# Generate api documentation
+# RUN php artisan scribe:generate
+# RUN chown -R www-data:www-data /app/storage/app/scribe
+# RUN chmod -R 777 /app/storage/app/scribe
 
-# Salin aplikasi
-COPY --from=build /var/www /var/www
+# Make symlink to from storage path to public path
+RUN php artisan storage:link
 
-RUN chown -R www-data:www-data /var/www \
-    && chmod -R 755 /var/www \
-    && chmod -R 775 /var/www/storage \
-    && chmod -R 775 /var/www/bootstrap/cache
+# Nginx configuration
+COPY docker/nginx.conf /etc/nginx/nginx.conf
+COPY docker/local.conf /etc/nginx/conf.d
 
-EXPOSE 9000
+# Supervisor configuration
+COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-CMD ["php-fpm"]FROM php:8.4-fpm-alpine AS build
+# Change ownership for application code
+RUN chown -R www-data:www-data /app
 
-RUN apk add --no-cache \
-    bash \
-    git \
-    curl \
-    libpng-dev \
-    libjpeg-turbo-dev \
-    freetype-dev \
-    oniguruma-dev \
-    icu-dev \
-    openldap-dev \
-    libzip-dev \
-    zip \
-    unzip
+# Start Supervisord
+CMD ["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
 
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install \
-        pdo \
-        pdo_mysql \
-        mbstring \
-        gd \
-        intl \
-        ldap \
-        zip
+# Expose port 8080 for Nginx
+EXPOSE 8080
 
-WORKDIR /var/www
-
-COPY composer.json composer.lock ./
-
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
-
-RUN composer install \
-    --no-dev \
-    --optimize-autoloader \
-    --no-interaction \
-    --no-scripts
-
-COPY . .
-
-RUN php artisan package:discover --ansi
-
-FROM php:8.4-fpm-alpine
-
-RUN apk add --no-cache \
-    bash \
-    curl \
-    libpng \
-    libjpeg-turbo \
-    freetype \
-    oniguruma \
-    icu \
-    openldap \
-    libzip \
-    zip \
-    unzip \
-    mysql-client
-
-WORKDIR /var/www
-
-# Salin extension PHP yang sudah dikompilasi
-COPY --from=build /usr/local/lib/php/extensions/ /usr/local/lib/php/extensions/
-COPY --from=build /usr/local/etc/php/conf.d/ /usr/local/etc/php/conf.d/
-
-# Salin aplikasi
-COPY --from=build /var/www /var/www
-
-RUN chown -R www-data:www-data /var/www \
-    && chmod -R 755 /var/www \
-    && chmod -R 775 /var/www/storage \
-    && chmod -R 775 /var/www/bootstrap/cache
-
-EXPOSE 9000
-
-CMD ["php-fpm"]
+# Health check command
+HEALTHCHECK --interval=300s --timeout=60s CMD curl -f http://127.0.0.1/api || exit 1

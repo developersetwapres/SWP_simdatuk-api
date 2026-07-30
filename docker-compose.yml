@@ -1,48 +1,60 @@
-version: "3.9"
-
 services:
-    simdatuk-api_app:
-        build:
-            context: .
-            dockerfile: Dockerfile
-
-        image: simdatuk-api:latest
-        container_name: swp_simdatuk-api
-
-        restart: unless-stopped
-
-        environment:
-            APP_ENV: local
-            APP_DEBUG: true
-            APP_URL: http://10.1.53.220:8008
-            APP_KEY: base64:Q9vB4vM3Lh5dRp7Kj2Nx8Yw1Fz6GtUc0Pm3JqVe5AsI=
-
-            DB_CONNECTION: mysql
-            DB_HOST: mysql
-            DB_PORT: 3306
-            DB_DATABASE: SWP_simdatuk
-            DB_USERNAME: UserSwp001
-            DB_PASSWORD: "PassSwp2026#"
-
-            AWS_ACCESS_KEY_ID: minio
-            AWS_SECRET_ACCESS_KEY: minio123
-            AWS_BUCKET: simdatuk-laravel-10
-            AWS_DEFAULT_REGION: us-east-1
-            AWS_USE_PATH_STYLE_ENDPOINT: "true"
-            AWS_ENDPOINT: http://minio:9000
-            AWS_URL: http://10.1.53.220:9000/simdatuk-laravel-10
-
+    simdatuk-api:
+        build: .
+        container_name: simdatuk-api
+        restart: always
+        ports:
+            - 80:8080
+        volumes:
+            - ${APP_VOLUME}:/app
         networks:
-            - s3minio-network
-            - nginx-network
-            - dbmysql-network
-
+            - simdatuk_network
+    mysql:
+        image: mysql:latest
+        container_name: mysql
+        restart: always
+        ports:
+            - 3306:3306
+        command: --default-authentication-plugin=caching_sha2_password
+        environment:
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_USER: ${DB_USERNAME}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            TZ: Asia/Jakarta
+        volumes:
+            - ${DB_VOLUME}:/var/lib/mysql
+        depends_on:
+            - simdatuk-api
+        networks:
+            - simdatuk_network
+    phpmyadmin:
+        image: phpmyadmin:latest
+        container_name: phpmyadmin
+        restart: always
+        ports:
+            - 8080:80
+        environment:
+            PMA_HOST: mysql
+            PMA_PORT: 3306
+            UPLOAD_LIMIT: 300M
+            MEMORY_LIMIT: 512M
+            MAX_EXECUTION_TIME: 60000
+        depends_on:
+            - mysql
+        networks:
+            - simdatuk_network
+    maildev:
+        image: maildev/maildev:latest
+        container_name: maildev
+        restart: always
+        ports:
+            - 1025:1025
+            - 1080:1080
+        environment:
+            - MAILDEV_SMTP_PORT=1025
+            - MAILDEV_WEB_PORT=1080
+        networks:
+            - simdatuk_network
 networks:
-    s3minio-network:
-        external: true
-
-    nginx-network:
-        external: true
-
-    dbmysql-network:
-        external: true
+    simdatuk_network:
+        name: simdatuk_network
